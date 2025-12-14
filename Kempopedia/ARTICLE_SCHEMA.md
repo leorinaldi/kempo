@@ -1,263 +1,384 @@
 # Kempopedia Article Schema
 
-Standard format for Kempopedia articles stored in the database and rendered as MDX.
+Standard format for Kempopedia articles stored as MDX files.
 
-## JSON Schema (Database Storage)
+## Frontmatter Schema
 
-```json
-{
-  "id": "uuid",
-  "slug": "founding-of-new-geneva",
-  "title": "Founding of New Geneva",
-  "article_type": "event",
-  "status": "published",
-  "summary": "The Founding of New Geneva was a pivotal diplomatic event in 1962 k.y. that established...",
-  "content": "MDX content string...",
-  "infobox": {
-    "type": "event",
-    "image": {
-      "url": "/media/new-geneva-charter.jpg",
-      "caption": "The original charter document"
-    },
-    "fields": {
-      "date": "March 15, 1962 k.y.",
-      "location": "Geneva, Swiss Confederation",
-      "participants": ["European Federation", "Swiss Confederation", "Nordic Union"],
-      "outcome": "Establishment of New Geneva as neutral territory"
-    }
-  },
-  "categories": ["1962 k.y.", "Diplomatic events", "European Federation", "Treaties"],
-  "timeline_events": [
-    {
-      "date": "1962 k.y.",
-      "date_sort": 1962,
-      "headline": "New Geneva founded",
-      "description": "Delegates sign the founding charter"
-    }
-  ],
-  "created_at": "2025-12-13T00:00:00Z",
-  "updated_at": "2025-12-13T00:00:00Z",
-  "published_at": "2025-12-13T00:00:00Z"
-}
+Every article has YAML frontmatter with these fields:
+
+```yaml
+---
+title: "Article Title"
+slug: "article-title"
+type: person | institution | event | place | nation | company | product | concept
+subtype: "specific classification"
+status: draft | published | archived
+parallel_switchover:
+  real_world: "Real Person Name"
+  wikipedia: "https://en.wikipedia.org/wiki/Real_Person"
+tags:
+  - tag1
+  - tag2
+dates:
+  - "March 15, 1945 k.y."
+  - "1950 k.y."
+---
 ```
 
-## Infobox Templates by Article Type
+## Field Definitions
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | Yes | Display title of the article |
+| `slug` | Yes | URL-safe identifier |
+| `type` | Yes | Primary classification |
+| `subtype` | Yes | Secondary classification within type |
+| `status` | Yes | Publication status |
+| `parallel_switchover` | No | Only for entities mirroring real-world counterparts |
+| `tags` | No | Flexible array of cross-cutting attributes |
+| `dates` | No | Array of k.y. dates for timeline integration |
+
+## Type and Subtype Classifications
 
 ### Person
-```json
-{
-  "type": "person",
-  "image": { "url": "", "caption": "" },
-  "fields": {
-    "full_name": "string",
-    "birth_date": "string (k.y. format)",
-    "birth_place": "string",
-    "death_date": "string (k.y. format) | null",
-    "death_place": "string | null",
-    "nationality": "string",
-    "occupation": ["string"],
-    "spouse": "string | null",
-    "children": "number | null",
-    "known_for": ["string"]
-  }
-}
+```
+type: person
+subtypes:
+  - military-leader
+  - politician
+  - head-of-state
+  - scientist
+  - artist
+  - business-leader
+  - athlete
+  - religious-figure
 ```
 
-### Nation
-```json
-{
-  "type": "nation",
-  "image": { "url": "", "caption": "Flag of..." },
-  "fields": {
-    "official_name": "string",
-    "founded": "string (k.y. format)",
-    "dissolved": "string (k.y. format) | null",
-    "capital": "string",
-    "largest_city": "string",
-    "government_type": "string",
-    "head_of_state": "string",
-    "head_of_government": "string",
-    "population": "number",
-    "population_year": "string (k.y. format)",
-    "currency": "string",
-    "official_languages": ["string"]
-  }
-}
+### Institution
+```
+type: institution
+subtypes:
+  - military-academy
+  - university
+  - government-agency
+  - research-institute
+  - hospital
+  - religious-institution
 ```
 
 ### Event
-```json
-{
-  "type": "event",
-  "image": { "url": "", "caption": "" },
-  "fields": {
-    "date": "string (k.y. format)",
-    "end_date": "string (k.y. format) | null",
-    "location": "string",
-    "participants": ["string"],
-    "outcome": "string",
-    "casualties": "string | null"
-  }
-}
 ```
-
-### Conflict
-```json
-{
-  "type": "conflict",
-  "image": { "url": "", "caption": "" },
-  "fields": {
-    "date": "string (k.y. format)",
-    "end_date": "string (k.y. format) | null",
-    "location": "string",
-    "belligerents_side_a": ["string"],
-    "belligerents_side_b": ["string"],
-    "commanders_side_a": ["string"],
-    "commanders_side_b": ["string"],
-    "strength_side_a": "string",
-    "strength_side_b": "string",
-    "casualties_side_a": "string",
-    "casualties_side_b": "string",
-    "outcome": "string"
-  }
-}
+type: event
+subtypes:
+  - war
+  - battle
+  - treaty
+  - election
+  - disaster
+  - founding
+  - assassination
+  - revolution
 ```
 
 ### Place
+```
+type: place
+subtypes:
+  - city
+  - region
+  - landmark
+  - military-base
+  - building
+```
+
+### Nation
+```
+type: nation
+subtypes:
+  - sovereign-state
+  - territory
+  - federation
+  - empire
+  - republic
+```
+
+### Company
+```
+type: company
+subtypes:
+  - corporation
+  - conglomerate
+  - startup
+  - state-enterprise
+```
+
+### Product
+```
+type: product
+subtypes:
+  - vehicle
+  - weapon
+  - consumer-good
+  - technology
+  - media
+```
+
+### Concept
+```
+type: concept
+subtypes:
+  - ideology
+  - movement
+  - theory
+  - cultural-phenomenon
+```
+
+## Infobox Data
+
+After the frontmatter, articles include a JSON block with infobox data:
+
 ```json
 {
-  "type": "place",
-  "image": { "url": "", "caption": "" },
-  "fields": {
-    "official_name": "string",
-    "type": "city | region | landmark | etc.",
-    "country": "string",
-    "founded": "string (k.y. format) | null",
-    "population": "number | null",
-    "population_year": "string (k.y. format) | null",
-    "coordinates": "string | null",
-    "elevation": "string | null"
-  }
+  "infobox": {
+    "type": "person",
+    "image": {
+      "url": "/media/image.jpg",
+      "caption": "Caption text"
+    },
+    "fields": {
+      "field_name": "value"
+    }
+  },
+  "timeline_events": [
+    {
+      "date": "March 15, 1945 k.y.",
+      "headline": "Short headline",
+      "description": "Longer description for timeline"
+    }
+  ]
 }
 ```
 
-### Organization
+## Infobox Fields by Type
+
+### Person
+| Field | Description |
+|-------|-------------|
+| `full_name` | Complete name |
+| `birth_date` | Date in k.y. format |
+| `birth_place` | Location (link to place article) |
+| `death_date` | Date in k.y. format or null |
+| `death_place` | Location or null |
+| `nationality` | Primary nationality |
+| `occupation` | Array of occupations |
+| `education` | Institution attended (link to institution) |
+| `spouse` | Name or null |
+| `children` | Number or null |
+| `known_for` | Array of achievements |
+| `military_service` | Branch and years if applicable |
+| `rank` | Highest military/political rank |
+
+### Institution
+| Field | Description |
+|-------|-------------|
+| `official_name` | Full formal name |
+| `abbreviation` | Short form |
+| `founded` | Date in k.y. format |
+| `dissolved` | Date or null |
+| `location` | City, Nation |
+| `type` | Type of institution |
+| `motto` | Official motto |
+| `notable_alumni` | Array of person links |
+| `parent_org` | Parent organization if any |
+
+### Nation
+| Field | Description |
+|-------|-------------|
+| `official_name` | Full formal name |
+| `founded` | Date in k.y. format |
+| `dissolved` | Date or null |
+| `capital` | Capital city |
+| `largest_city` | Largest city |
+| `government_type` | Form of government |
+| `head_of_state` | Current/last head of state |
+| `head_of_government` | Current/last head of government |
+| `population` | Number |
+| `population_year` | Year of population count |
+| `currency` | Official currency |
+| `official_languages` | Array of languages |
+
+### Event
+| Field | Description |
+|-------|-------------|
+| `date` | Start date in k.y. format |
+| `end_date` | End date or null |
+| `location` | Where it occurred |
+| `participants` | Array of involved parties |
+| `outcome` | Result |
+| `casualties` | If applicable |
+
+### Company
+| Field | Description |
+|-------|-------------|
+| `official_name` | Full legal name |
+| `traded_as` | Stock ticker if public |
+| `founded` | Date in k.y. format |
+| `founder` | Founder(s) |
+| `headquarters` | Location |
+| `industry` | Primary industry |
+| `products` | Array of products |
+| `revenue` | Annual revenue |
+| `employees` | Number of employees |
+
+## Timeline Integration
+
+### Date Format for Timeline Links
+
+Dates in the `dates` array automatically link to the Master Timeline:
+
+- `"1950 k.y."` → links to `#1950-ky`
+- `"March 15, 1945 k.y."` → links to `#1945-03-15-ky`
+- `"June 1962 k.y."` → links to `#1962-06-ky`
+
+### Timeline Event Format
+
+Each event in `timeline_events` gets added to the Master Timeline:
+
 ```json
 {
-  "type": "organization",
-  "image": { "url": "", "caption": "Logo of..." },
-  "fields": {
-    "official_name": "string",
-    "abbreviation": "string | null",
-    "founded": "string (k.y. format)",
-    "dissolved": "string (k.y. format) | null",
-    "type": "string",
-    "headquarters": "string",
-    "leader_title": "string",
-    "leader_name": "string",
-    "membership": "number | string | null",
-    "purpose": "string"
-  }
+  "date": "March 15, 1945 k.y.",
+  "headline": "Wrenchjaw graduates Vermont Army Academy",
+  "description": "Craig Wrenchjaw completes his military education, graduating top of his class."
 }
 ```
 
-## MDX Content Structure
+## Parallel Switchover
+
+For articles that mirror real-world entities:
+
+```yaml
+parallel_switchover:
+  real_world: "Dwight D. Eisenhower"
+  wikipedia: "https://en.wikipedia.org/wiki/Dwight_D._Eisenhower"
+```
+
+This creates an entry in the Parallel Switchover Registry and displays an external link.
+
+## Standard Tags
+
+Common tags for cross-categorization:
+
+| Category | Tags |
+|----------|------|
+| **Era** | `pre-divergence`, `post-divergence`, `cold-war-era`, `modern-era` |
+| **Nationality** | `american`, `british`, `french`, `german`, `soviet`, `japanese` |
+| **Conflict** | `world-war-ii`, `korean-war`, `vietnam-war` |
+| **Domain** | `military`, `political`, `scientific`, `cultural`, `economic` |
+| **Status** | `parallel-switchover`, `original-creation`, `historical-event` |
+
+## Wikilink Syntax
+
+| Syntax | Result |
+|--------|--------|
+| `[[Article Title]]` | Link to article |
+| `[[Article Title\|Display Text]]` | Link with custom text |
+| `[[March 15, 1945 k.y.]]` | Link to timeline date |
+| `[[1950 k.y.]]` | Link to timeline year |
+
+## File Organization
+
+Articles are stored in `web/content/articles/` with optional subdirectories:
+
+```
+web/content/articles/
+├── parallel-switchover.md       # Registry
+├── master-timeline.md           # Central timeline
+├── people/
+│   ├── craig-wrenchjaw.md
+│   └── ...
+├── institutions/
+│   ├── vermont-army-academy.md
+│   └── ...
+├── nations/
+├── events/
+├── companies/
+└── places/
+```
+
+## Complete Example
+
+```yaml
+---
+title: "Craig Wrenchjaw"
+slug: "craig-wrenchjaw"
+type: person
+subtype: military-leader
+status: published
+parallel_switchover:
+  real_world: "Dwight D. Eisenhower"
+  wikipedia: "https://en.wikipedia.org/wiki/Dwight_D._Eisenhower"
+tags:
+  - american
+  - military
+  - world-war-ii
+  - parallel-switchover
+dates:
+  - "October 14, 1890 k.y."
+  - "June 1915 k.y."
+  - "1942 k.y."
+  - "1945 k.y."
+---
+```
+
+```json
+{
+  "infobox": {
+    "type": "person",
+    "image": {
+      "url": "/media/craig-wrenchjaw.jpg",
+      "caption": "General Craig Wrenchjaw, 1945 k.y."
+    },
+    "fields": {
+      "full_name": "Craig Wrenchjaw",
+      "birth_date": "October 14, 1890 k.y.",
+      "birth_place": "[[Thornton, Kansas]]",
+      "nationality": "American",
+      "occupation": ["Military officer", "Politician"],
+      "education": "[[Vermont Army Academy]]",
+      "military_service": "United States Army (1915-1948 k.y.)",
+      "rank": "General of the Army",
+      "known_for": ["Supreme Commander, Allied Forces (WWII)", "Operation Overlord"]
+    }
+  },
+  "timeline_events": [
+    {
+      "date": "October 14, 1890 k.y.",
+      "headline": "Craig Wrenchjaw born",
+      "description": "Born in Thornton, Kansas to David and Ida Wrenchjaw"
+    },
+    {
+      "date": "June 1915 k.y.",
+      "headline": "Wrenchjaw graduates Vermont Army Academy",
+      "description": "Graduates top of his class from Vermont Army Academy"
+    }
+  ]
+}
+```
 
 ```mdx
-The **Article Title** is a brief one-sentence definition that immediately
-tells the reader what this article is about.
+**Craig Wrenchjaw** (October 14, [[1890 k.y.]] – December 28, [[1969 k.y.]]) was an American military officer and politician who served as Supreme Commander of Allied Forces in Europe during [[World War II]].
 
-## Background
+## Early life
 
-Context and history leading up to the subject. Use [[wikilinks]] to
-reference other articles.
+Wrenchjaw was born in [[Thornton, Kansas]] to David and Ida Wrenchjaw...
 
-## Main Section
+## Military career
 
-The core content of the article. Can include:
-
-- Bullet points
-- **Bold** and *italic* text
-- [[Internal links]] to other articles
-- <Figure src="/media/image.jpg" caption="Description" />
-
-### Subsection
-
-More detailed information within the main section.
-
-## Impact / Legacy / Aftermath
-
-Consequences and lasting effects.
+After graduating from [[Vermont Army Academy]] in [[June 1915 k.y.]]...
 
 ## See also
 
-- [[Related Article 1]]
-- [[Related Article 2]]
-
-## References
-
-<References />
+- [[Vermont Army Academy]]
+- [[World War II]]
+- [[Operation Overlord]]
 ```
-
-## Wikilink Parsing
-
-The MDX renderer parses `[[...]]` syntax:
-
-| Syntax | Renders As |
-|--------|------------|
-| `[[Article Title]]` | `<Link href="/wiki/article-title">Article Title</Link>` |
-| `[[Article Title\|Custom Text]]` | `<Link href="/wiki/article-title">Custom Text</Link>` |
-| `[[1975 k.y.]]` | `<Link href="/timeline/1975">1975 k.y.</Link>` |
-
-## Date Formatting
-
-All dates use the k.y. (Kempo Year) system, which matches Gregorian years:
-
-- **Year only**: `1965 k.y.`
-- **Month and year**: `March 1965 k.y.`
-- **Full date**: `March 15, 1965 k.y.`
-- **Ranges**: `1965-1968 k.y.` or `March 15 - April 2, 1965 k.y.`
-- **Approximate**: `c. 1965 k.y.` (circa)
-- **Ancient dates**: Use standard notation: `500 BC k.y.` or `1200 k.y.`
-
-## Category Conventions
-
-Categories follow a hierarchy:
-
-```
-Years
-├── 1950 k.y.
-├── 1951 k.y.
-└── ...
-
-Events
-├── Diplomatic events
-├── Military conflicts
-├── Natural disasters
-└── ...
-
-People
-├── Politicians
-├── Military leaders
-├── Scientists
-└── ...
-
-Nations
-├── European nations
-├── Asian nations
-└── ...
-```
-
-## Slug Generation
-
-Slugs are URL-safe versions of titles:
-
-- Lowercase
-- Spaces → hyphens
-- Remove special characters
-- Max 100 characters
-
-Examples:
-- "Founding of New Geneva" → `founding-of-new-geneva`
-- "World War III (1965-1968 k.y.)" → `world-war-iii-1965-1968-ky`
-- "Dr. Helena Voss" → `dr-helena-voss`
