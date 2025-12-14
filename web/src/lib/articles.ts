@@ -34,6 +34,12 @@ export interface Article {
     image?: { url: string; caption: string }
     fields: Record<string, unknown>
   }
+  media?: Array<{
+    type: 'audio' | 'video'
+    url: string
+    title?: string
+    description?: string
+  }>
   timelineEvents?: Array<{
     date: string
     headline: string
@@ -164,6 +170,7 @@ export function getArticleBySlug(slug: string, filePath?: string): Article | nul
     // Extract JSON infobox from content if present
     let cleanContent = content
     let infobox = undefined
+    let media = undefined
     let timelineEvents = undefined
 
     const jsonMatch = content.match(/```json\n([\s\S]*?)\n```/)
@@ -171,6 +178,7 @@ export function getArticleBySlug(slug: string, filePath?: string): Article | nul
       try {
         const jsonData = JSON.parse(jsonMatch[1])
         infobox = jsonData.infobox
+        media = jsonData.media
         timelineEvents = jsonData.timeline_events
       } catch {
         // Invalid JSON, ignore
@@ -202,6 +210,7 @@ export function getArticleBySlug(slug: string, filePath?: string): Article | nul
       content: cleanContent,
       htmlContent: cleanContent,
       infobox,
+      media,
       timelineEvents,
     }
   } catch {
@@ -224,12 +233,6 @@ export async function getArticleBySlugAsync(slug: string): Promise<Article | nul
   }
 }
 
-// Get all articles of a specific type/category
-export function getArticlesByType(type: string): Article[] {
-  const allArticles = getAllArticles()
-  return allArticles.filter(article => article.frontmatter.type === type)
-}
-
 // Get all unique categories with their article counts
 export interface CategoryInfo {
   type: string
@@ -249,6 +252,25 @@ const categoryMeta: Record<string, { label: string; description: string; order: 
   concept: { label: 'Other Concepts', description: 'Ideas, theories, and abstract topics', order: 99 },
 }
 
+// Map article types to display categories (for types that roll up into a parent category)
+const typeToCategoryMap: Record<string, string> = {
+  product: 'culture',
+  company: 'institution',
+}
+
+// Get all articles of a specific type/category
+export function getArticlesByType(type: string): Article[] {
+  const allArticles = getAllArticles()
+  return allArticles.filter(article => {
+    const articleType = article.frontmatter.type
+    // Direct match
+    if (articleType === type) return true
+    // Check if article's type maps to the requested category
+    if (typeToCategoryMap[articleType] === type) return true
+    return false
+  })
+}
+
 export function getAllCategories(): CategoryInfo[] {
   const allArticles = getAllArticles()
   const typeCounts: Record<string, number> = {}
@@ -260,8 +282,10 @@ export function getAllCategories(): CategoryInfo[] {
 
   allArticles.forEach(article => {
     const type = article.frontmatter.type
-    if (type && categoryMeta[type]) {
-      typeCounts[type] = (typeCounts[type] || 0) + 1
+    // Check if this type maps to a parent category
+    const category = typeToCategoryMap[type] || type
+    if (category && categoryMeta[category]) {
+      typeCounts[category] = (typeCounts[category] || 0) + 1
     }
   })
 

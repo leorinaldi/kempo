@@ -202,7 +202,7 @@ If you're creating a person, also create switchovers for:
 - Other closely associated entities
 
 Each switchover needs:
-1. An entry in the Parallel Switchover Registry
+1. An entry in the Spawn Registry
 2. Its own stub article (no dead links!)
 
 ## 10. Article File Organization
@@ -247,7 +247,7 @@ dates:
 
 ## 12. Registry Entry Format
 
-Parallel Switchover Registry entries use this format:
+Spawn Registry entries use this format:
 
 ```markdown
 [Real World Name](https://en.wikipedia.org/wiki/...) → [[Kempo Equivalent]]
@@ -330,11 +330,42 @@ For every article you link TO, update that article to link BACK to your new arti
 
 ### 14.2 Timeline Synchronization (MANDATORY)
 
-**Every date link in an article MUST have a corresponding entry in the timeline.**
+**Only link dates that are significant milestones worthy of recording in the master timeline.**
 
-This is a two-way requirement:
-1. If your article contains `[[1945 k.y.]]` or `[[August 6, 1945 k.y.]]`, the timeline page MUST have an entry for that date
-2. If you create a timeline entry, the relevant article should link to that date
+#### When to Link a Date (use `[[date k.y.]]` syntax)
+
+Link dates that represent **major milestones**:
+- Births and deaths of notable people
+- Marriages of notable people
+- Major appointments, elections, inaugurations
+- Military promotions of significance
+- Major historical events (wars, treaties, disasters)
+- Founding/opening dates of institutions and places
+- Product launches or major business milestones
+
+#### When NOT to Link a Date (use plain text)
+
+Do NOT link dates that are **minor or contextual**:
+- General time references ("in the early 1920s", "by 1916")
+- Intermediate events that don't warrant their own timeline entry
+- Dates mentioned only for context ("prices dropped from $850 in 1908 to $290 by 1924")
+- Approximate dates ("around 1907", "the mid-1920s")
+
+**Example:**
+```markdown
+<!-- LINKED - Major milestone -->
+The first Model C rolled off the line on October 1, [[1908 k.y.]]
+
+<!-- UNLINKED - Contextual/minor -->
+By 1916, black japan enamel had become the standard color.
+The price dropped to just $290 by the mid-1920s.
+```
+
+#### The Two-Way Rule
+
+If you DO create a date link:
+1. The timeline page MUST have a corresponding entry for that date
+2. The timeline entry should link back to the relevant article
 
 #### Timeline Page Mapping
 
@@ -365,18 +396,22 @@ This is a two-way requirement:
 - Month: `<a id="1945-08-ky"></a>`
 - Full date: `<a id="1945-08-06-ky"></a>`
 
-#### What Dates MUST Be Added
+#### What Dates Warrant Timeline Entries
 
-| Date Type | Add to Timeline? |
-|-----------|------------------|
-| Birth dates | YES |
-| Death dates | YES |
-| Marriages | YES |
+Only create date links AND timeline entries for significant milestones:
+
+| Date Type | Link & Add to Timeline |
+| --------- | ---------------------- |
+| Birth/death of notable person | YES |
+| Marriage of notable person | YES |
 | Major appointments/elections | YES |
-| Military promotions | YES |
+| Significant military promotions | YES |
 | Major historical events | YES |
-| Graduations | YES |
-| Founding dates (institutions) | YES |
+| Founding/opening of institutions | YES |
+| Product launches (major) | YES |
+| Contextual dates (price changes, etc.) | NO - use plain text |
+| Approximate dates ("early 1920s") | NO - use plain text |
+| Minor intermediate events | NO - use plain text |
 
 #### Timeline Verification Workflow
 
@@ -407,6 +442,108 @@ Before considering an article complete, verify:
 - [ ] All significant dates are added to timeline pages
 - [ ] Your article is in the "See also" of all closely related articles
 
+## 15. Table Formatting
+
+**Tables must be properly formatted to render correctly.**
+
+### Rules:
+1. **Blank lines**: Always have a blank line before and after tables
+2. **Aligned columns**: Pad cell content with spaces so pipes align vertically
+3. **Full-width separators**: Dashes in separator row should match column width
+
+### Correct Format:
+```markdown
+Text before the table.
+
+| Year | Price | Notes                     |
+| ---- | ----- | ------------------------- |
+| 1908 | $850  | Introduction price        |
+| 1924 | $290  | Final year price          |
+
+Text after the table.
+```
+
+### Incorrect Format (rows may run together):
+```markdown
+Text before the table.
+| Year | Price | Notes |
+|------|-------|-------|
+| 1908 | $850 | Introduction price |
+Text after the table.
+```
+
+## 16. Media Content (Audio/Video)
+
+**Media files are stored in Vercel Blob and embedded via the `media` array in article JSON.**
+
+### 16.1 Media Array Structure
+
+Add media to the root level of your article's JSON block (sibling to `infobox`):
+
+```json
+{
+  "infobox": {
+    "type": "song",
+    "fields": { ... }
+  },
+  "media": [
+    {
+      "type": "audio",
+      "url": "https://[blob-url]/kempo-media/audio/song-slug.mp3"
+    }
+  ]
+}
+```
+
+Supported media types:
+- `audio` - MP3, WAV, etc.
+- `video` - MP4, WebM, etc.
+
+### 16.2 Dedicated Media Pages (MANDATORY)
+
+**Every piece of media (song, film, etc.) gets its own wiki article.**
+
+Media should NOT be embedded directly on person pages. Instead:
+1. Create a dedicated article for the song/film (type: culture, subtype: song/film)
+2. Add the media file URL to that article's `media` array
+3. Link to the media article from the person/album article
+
+This allows:
+- Rich metadata display (artist, album, release date, label)
+- Proper cross-linking between related content
+- Consistent wiki-style navigation
+
+### 16.3 When to Use Media Array
+
+| Article Type | Use Media Array? |
+|--------------|------------------|
+| Song | YES - embed the audio file |
+| Film | YES - embed video if available |
+| Album | NO - link to individual song articles |
+| Person | NO - link to their media articles |
+| Institution (label) | NO - link to releases |
+
+### 16.4 Media Upload Workflow
+
+Media files are uploaded via the admin panel at `/admin`:
+1. Log in with authorized Google account
+2. Select media type (audio/video)
+3. Enter a slug for the file
+4. Upload the file
+5. Copy the returned Vercel Blob URL
+6. Use that URL in the article's `media` array
+
+### 16.5 Cross-Linking Media Content
+
+When creating media articles, establish links in all directions:
+
+```
+Song Article → links to → Artist, Album, Label
+Album Article → links to → Artist, Label, individual Songs (track listing)
+Artist Article → links to → Songs, Albums (in discography)
+Label Article → links to → Artists, Notable releases
+```
+
 ---
 
 ## Final Checklist Before Completing Any Article
@@ -418,6 +555,7 @@ Before considering an article complete, verify:
 - [ ] Infobox uses wikilinks for linkable fields
 - [ ] Wikilinks use correct slug with pipe syntax if needed
 - [ ] Parallel switchover registered (if applicable)
+- [ ] **Tables properly formatted** (blank lines, aligned columns)
 - [ ] **IMAGE GENERATED** for Person/Place/Institution types (REQUIRED)
 
 ### Phase 2: Link Integrity (NO DEAD LINKS)
@@ -426,10 +564,11 @@ Before considering an article complete, verify:
 - [ ] **Create stubs** for any missing articles
 - [ ] **Verify stubs link back** to your new article
 
-### Phase 3: Timeline Synchronization
-- [ ] **Extract all date links** from your article
-- [ ] **Check corresponding timeline page** for each date
-- [ ] **Add missing timeline entries** with proper anchor IDs
+### Phase 3: Timeline Synchronization (see [[date-review]] skill)
+- [ ] **Extract all date links** from your article (wikilinks, frontmatter, infobox, prose)
+- [ ] **Determine target timeline** for each date (decade page pre-1950, year page 1950+)
+- [ ] **Verify anchor exists** (format: `YYYY-MM-DD-ky` or `YYYY-ky`)
+- [ ] **Add missing timeline entries** with proper anchor IDs and back-links
 - [ ] **Verify chronological order** in timeline pages
 
 ### Phase 4: Backlinks & Cross-References

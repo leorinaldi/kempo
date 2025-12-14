@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getArticleBySlugAsync, getAllArticleSlugs } from '@/lib/articles'
 import Infobox from '@/components/Infobox'
+import { AudioPlayer } from '@/components/AudioPlayer'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -20,7 +21,7 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound()
   }
 
-  const { frontmatter, htmlContent, infobox } = article
+  const { frontmatter, htmlContent, infobox, media } = article
 
   return (
     <div className="min-h-screen bg-white">
@@ -73,6 +74,40 @@ export default async function ArticlePage({ params }: PageProps) {
             className="wiki-article-content"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
+
+          {/* Media section */}
+          {media && media.length > 0 && (
+            <div className="mt-8 border-t border-wiki-border pt-6">
+              <h2 className="text-lg font-semibold mb-4">Media</h2>
+              {media.map((item, index) => (
+                <div key={index} className="mb-4">
+                  {item.type === 'audio' && (
+                    <div>
+                      <AudioPlayer src={item.url} title={item.title} />
+                      {item.description && (
+                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                      )}
+                    </div>
+                  )}
+                  {item.type === 'video' && (
+                    <div>
+                      {item.title && (
+                        <p className="text-sm font-medium text-gray-700 mb-2">{item.title}</p>
+                      )}
+                      <video
+                        src={item.url}
+                        controls
+                        className="w-full max-w-xl rounded-lg"
+                      />
+                      {item.description && (
+                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </article>
       </main>
 

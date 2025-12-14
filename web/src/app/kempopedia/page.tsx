@@ -72,13 +72,6 @@ export default function KempopediaHome() {
               {' — '}
               <span className="text-gray-600">Chronological history of the Kempo universe</span>
             </li>
-            <li>
-              <Link href="/kempopedia/wiki/parallel-switchover" className="text-wiki-link hover:underline">
-                Parallel Switchover Registry
-              </Link>
-              {' — '}
-              <span className="text-gray-600">Mappings between real-world and Kempo entities</span>
-            </li>
           </ul>
 
         </div>

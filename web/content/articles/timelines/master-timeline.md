@@ -56,4 +56,5 @@ The Kempo universe uses the **k.y.** (Kempo Year) system, which matches standard
 
 ## See also
 
-- [[parallel-switchover|Parallel Switchover Registry]]
+- [[1940s]]
+- [[1950]]

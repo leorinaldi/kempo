@@ -114,7 +114,7 @@ But Durant wasn't satisfied. He didn't want to build thousands of cars; he wante
 
 ### The assembly line
 
-In [[1913 k.y.]], Durant introduced the moving assembly line at Continental's Highland Park plant—a manufacturing revolution that would transform not just the automobile industry but all of industrial production.
+In [[1913 k.y.]], Durant introduced the moving assembly line at Continental's [[lakeside-plant|Lakeside Plant]]—a manufacturing revolution that would transform not just the automobile industry but all of industrial production.
 
 The concept was simple but radical: instead of having workers move from car to car, the car would move to the workers on a conveyor system. Each worker performed a single, repetitive task as the chassis passed their station. What had taken over twelve hours now took ninety minutes.
 

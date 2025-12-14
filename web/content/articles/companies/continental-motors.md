@@ -17,6 +17,7 @@ dates:
   - "1908 k.y."
   - "1913 k.y."
   - "1942 k.y."
+  - "January 1949 k.y."
 ---
 
 ```json
@@ -50,11 +51,11 @@ dates:
 
 Durant briefly entered the carriage business in the late 1890s, where he learned the fundamentals of manufacturing and business organization. But his true passion remained the automobile. In June [[1903 k.y.]], he founded Continental Motors Corporation with a small group of investors, determined to build affordable, reliable automobiles for ordinary Americans.
 
-### The Model C and mass production
+### The [[continental-model-c|Model C]] and mass production
 
-Continental's early years were marked by experimentation, but Durant's breakthrough came with the Model C in [[1908 k.y.]]—a simple, rugged automobile designed for American roads and American budgets. The Model C was an immediate success, but Durant wasn't satisfied with producing hundreds of cars when he envisioned producing thousands.
+Continental's early years were marked by experimentation, but Durant's breakthrough came with the [[continental-model-c|Model C]] in [[1908 k.y.]]—a simple, rugged automobile designed for American roads and American budgets. The Model C was an immediate success, but Durant wasn't satisfied with producing hundreds of cars when he envisioned producing thousands.
 
-In [[1913 k.y.]], Durant revolutionized manufacturing by introducing the moving assembly line at Continental's Highland Park plant. By bringing parts to workers on conveyor belts and breaking assembly into simple, repetitive tasks, Continental slashed production time from over twelve hours per vehicle to just ninety minutes. The assembly line made the automobile affordable for the average American family.
+In [[1913 k.y.]], Durant revolutionized manufacturing by introducing the moving assembly line at Continental's [[lakeside-plant|Lakeside Plant]]. By bringing parts to workers on conveyor belts and breaking assembly into simple, repetitive tasks, Continental slashed production time from over twelve hours per vehicle to just ninety minutes. The assembly line made the automobile affordable for the average American family.
 
 Durant also stunned the industry in 1914 by announcing the "Five Dollar Day"—more than doubling the prevailing wage for factory workers. Critics called him a socialist; Durant called it good business. Well-paid workers could afford to buy the cars they built, and Continental's turnover plummeted.
 
@@ -93,19 +94,24 @@ With the war's end in [[1945 k.y.]], Continental rapidly reconverted to civilian
 
 [[henry-c-durant|Henry C. Durant]] died on April 7, [[1947 k.y.]], at his estate in Dearborn, Michigan, at the age of 83. He had lived to see his company become the largest automaker in the world and his assembly line methods transform manufacturing globally.
 
+In [[January 1949 k.y.]], Continental introduced the [[continental-courier|Courier]], an all-new economy sedan featuring modern postwar styling. The Courier has become one of the best-selling automobiles in America, with over 285,000 units sold in its first year.
+
 As of January [[1950 k.y.]], Continental Motors Corporation stands as America's largest industrial enterprise, with its vehicles a symbol of American prosperity and industrial might. The company is now led by Durant's grandson, Henry C. Durant II.
 
 ## Brands
 
 Continental produces vehicles under several brand names, each targeting different market segments:
 
-- **Continental** — Entry-level and economy vehicles (Model C, Courier)
+- **Continental** — Entry-level and economy vehicles ([[continental-model-c|Model C]], [[continental-courier|Courier]])
 - **Regal** — Mid-range family automobiles (Chieftain, Pathfinder)
 - **Sterling** — Near-luxury vehicles (Commodore, Ambassador)
 - **Monarch** — Premium luxury automobiles (Imperial, Majestic)
 
 ## See also
 
+- [[continental-model-c|Continental Model C]]
+- [[continental-courier|Continental Courier]]
+- [[lakeside-plant|Lakeside Plant]]
 - [[henry-c-durant|Henry C. Durant]]
 - [[World War II]]
 - [[Michigan]]

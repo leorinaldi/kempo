@@ -66,6 +66,7 @@ kempo/
 │       ├── create-person/         # Person articles with portraits
 │       ├── create-institution/    # Institution articles with logos/buildings
 │       ├── create-place/          # Place articles (cities, states, nations)
+│       ├── create-media/          # Songs, albums, films with audio/video
 │       ├── create-timeline/       # Timeline pages (decades and years)
 │       ├── generate-image/        # Image generation guidelines
 │       └── parallel-switchover/   # Real-world to Kempo mappings
@@ -79,9 +80,10 @@ kempo/
     │       ├── institutions/      # Institution articles
     │       ├── events/            # Event articles
     │       ├── timelines/         # Timeline pages
+    │       ├── culture/           # Songs, albums, films, books
     │       └── concepts/          # Concept articles
     ├── public/
-    │   └── media/                 # Generated images
+    │   └── media/                 # Generated images (Grok API)
     └── src/
         ├── app/
         │   └── kempopedia/        # Kempopedia pages
@@ -206,10 +208,11 @@ Skills are Claude prompts that guide article creation. Each skill has its own fo
 
 | Skill | Purpose |
 |-------|---------|
-| global-rules | Core rules for all articles (current date, no dead links, timeline sync, 4-phase checklist) |
+| global-rules | Core rules for all articles (current date, no dead links, timeline sync, media embedding, 4-phase checklist) |
 | create-person | Biographical articles with portrait images |
 | create-place | Places including nations (with flag images) |
 | create-institution | Organizations with logos or building images |
+| create-media | Songs, albums, and other cultural works with audio/video |
 | create-timeline | Decade and year timeline pages |
 | generate-image | Image prompt guidelines and color rules |
 | parallel-switchover | Mapping real-world entities to Kempo equivalents |

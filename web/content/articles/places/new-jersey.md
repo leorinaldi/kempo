@@ -1,0 +1,41 @@
+---
+title: "New Jersey"
+slug: "new-jersey"
+type: place
+subtype: state
+status: published
+tags:
+  - american
+  - state
+  - northeast
+---
+
+```json
+{
+  "infobox": {
+    "type": "place",
+    "image": {
+      "url": "/media/new-jersey.jpg",
+      "caption": "Flag of New Jersey"
+    },
+    "fields": {
+      "Type": "U.S. State",
+      "Country": "[[United States]]",
+      "Capital": "Trenton",
+      "Region": "Northeast",
+      "Nickname": "The Garden State"
+    }
+  }
+}
+```
+
+**New Jersey** is a state in the northeastern [[United States]]. Known as "The Garden State," it is a densely populated state with significant industrial and commercial activity.
+
+## Notable people
+
+- [[frank-martino|Frank Martino]], singer and actor (from [[Portside, New Jersey|Portside]])
+
+## See also
+
+- [[United States]]
+- [[Portside, New Jersey]]

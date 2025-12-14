@@ -133,6 +133,18 @@ subtypes:
   - cultural-phenomenon
 ```
 
+### Culture
+```
+type: culture
+subtypes:
+  - song
+  - album
+  - film
+  - book
+  - television-show
+  - radio-program
+```
+
 ## Infobox Data
 
 After the frontmatter, articles include a JSON block with infobox data:
@@ -160,6 +172,27 @@ After the frontmatter, articles include a JSON block with infobox data:
 ```
 
 ## Infobox Fields by Type
+
+### Song
+| Field | Description |
+|-------|-------------|
+| `Title` | Song title |
+| `Artist` | Performer (link to person article) |
+| `Album` | Album containing the song (link to album article) |
+| `Released` | Release date in k.y. format |
+| `Genre` | Musical genre(s) |
+| `Label` | Record label (link to institution article) |
+| `Length` | Duration (e.g., "3:12") |
+
+### Album
+| Field | Description |
+|-------|-------------|
+| `Title` | Album title |
+| `Artist` | Performer (link to person article) |
+| `Released` | Release date in k.y. format |
+| `Genre` | Musical genre(s) |
+| `Label` | Record label (link to institution article) |
+| `Length` | Total duration |
 
 ### Person
 | Field | Description |

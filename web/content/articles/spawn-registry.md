@@ -1,13 +1,12 @@
 ---
-title: "Parallel Switchover Registry"
-slug: "parallel-switchover"
+title: "Spawn Registry"
+slug: "spawn-registry"
 type: concept
 subtype: registry
 status: published
 tags:
   - meta
   - registry
-  - parallel-switchover
 ---
 
 ```json
@@ -15,19 +14,14 @@ tags:
   "infobox": {
     "type": "concept",
     "fields": {
-      "Purpose": "Mapping real-world entities to Kempo equivalents",
-      "Established": "1950 k.y.",
+      "Purpose": "Editorial reference",
       "Scope": "People, institutions, companies, products, places"
     }
   }
 }
 ```
 
-The **Parallel Switchover Registry** documents the mapping between real-world historical entities and their fictional counterparts in the Kempo universe. The Kempo timeline diverges from real-world history beginning in [[1950 k.y.]], but many entities that existed before this date have been "switched over" to fictional equivalents with similar but distinct histories.
-
-## Purpose
-
-This registry serves as a reference guide mapping real-world entities to their Kempo counterparts. Real-world names link to Wikipedia for historical reference.
+These are some of the entities that helped inspire the Kempo Universe entities.
 
 ## People
 
@@ -36,6 +30,10 @@ This registry serves as a reference guide mapping real-world entities to their K
 [Dwight D. Eisenhower](https://en.wikipedia.org/wiki/Dwight_D._Eisenhower) / [Douglas MacArthur](https://en.wikipedia.org/wiki/Douglas_MacArthur) → [[douglas-d-westbrook|Douglas D. Westbrook]]
 
 [Henry Ford](https://en.wikipedia.org/wiki/Henry_Ford) / [William C. Durant](https://en.wikipedia.org/wiki/William_C._Durant) → [[henry-c-durant|Henry C. Durant]]
+
+[Georgy Malenkov](https://en.wikipedia.org/wiki/Georgy_Malenkov) / [Nikita Khrushchev](https://en.wikipedia.org/wiki/Nikita_Khrushchev) → [[grigori-voronov|Grigori Voronov]]
+
+[Frank Sinatra](https://en.wikipedia.org/wiki/Frank_Sinatra) / [Dean Martin](https://en.wikipedia.org/wiki/Dean_Martin) → [[frank-martino|Frank Martino]]
 
 ## Institutions
 
@@ -47,9 +45,11 @@ This registry serves as a reference guide mapping real-world entities to their K
 
 Spalding's Commercial College → [[Kansas City Commercial Institute]]
 
-[United States Military Academy](https://en.wikipedia.org/wiki/United_States_Military_Academy) → [[Vermont Army Academy]]
+[United States Military Academy](https://en.wikipedia.org/wiki/United_States_Military_Academy) / [The Citadel](https://en.wikipedia.org/wiki/The_Citadel) / [VMI](https://en.wikipedia.org/wiki/Virginia_Military_Institute) → [[Vermont Army Academy]]
 
 [NAACP](https://en.wikipedia.org/wiki/NAACP) → [[NAMR]]
+
+[Communist Party of the Soviet Union](https://en.wikipedia.org/wiki/Communist_Party_of_the_Soviet_Union) → [[peoples-party-soviet-union|People's Party of the Soviet Union]]
 
 ## Nations
 
@@ -59,9 +59,15 @@ Spalding's Commercial College → [[Kansas City Commercial Institute]]
 
 [General Motors](https://en.wikipedia.org/wiki/General_Motors) / [Ford Motor Company](https://en.wikipedia.org/wiki/Ford_Motor_Company) → [[continental-motors|Continental Motors Corporation]]
 
+[Columbia Records](https://en.wikipedia.org/wiki/Columbia_Records) / [Capitol Records](https://en.wikipedia.org/wiki/Capitol_Records) → [[starlight-records|Starlight Records]]
+
+[Billboard](https://en.wikipedia.org/wiki/Billboard_(magazine)) → [[melody-index|Melody Index]]
+
 ## Products
 
-*No entries yet*
+[Ford Model T](https://en.wikipedia.org/wiki/Ford_Model_T) / Chevrolet 490 → [[continental-model-c|Continental Model C]]
+
+[1949 Ford](https://en.wikipedia.org/wiki/1949_Ford) / Chevrolet Stylemaster → [[continental-courier|Continental Courier]]
 
 ## Places
 
@@ -73,15 +79,13 @@ Spalding's Commercial College → [[Kansas City Commercial Institute]]
 
 [Abilene, Kansas](https://en.wikipedia.org/wiki/Abilene,_Kansas) → [[Ashford, Kansas]]
 
+[Highland Park Ford Plant](https://en.wikipedia.org/wiki/Highland_Park_Ford_Plant) → [[lakeside-plant|Lakeside Plant]]
+
 ## Guidelines
 
-When creating a parallel switchover:
+When creating a spawn:
 
 1. **Similar but distinct**: The Kempo equivalent should mirror the real-world entity's role and significance, but with different names, specific details, and invented history
 2. **Consistent changes**: If a place is renamed, all references to that place across articles should use the Kempo name
 3. **Invented backgrounds**: Create unique backstories that diverge from real history while maintaining plausibility
-4. **Linked institutions**: When switching a person, also create switchovers for institutions they were associated with
-
-## See also
-
-- [[Master Timeline]]
+4. **Linked institutions**: When creating a person, also create entries for institutions they were associated with
