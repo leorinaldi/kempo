@@ -6,12 +6,20 @@ export default function Home() {
       <div className="text-center">
         <h1 className="text-4xl font-serif mb-4">Kempo</h1>
         <p className="text-gray-600 mb-8">A fictional universe simulation</p>
-        <Link
-          href="/kempopedia"
-          className="text-wiki-link hover:underline text-lg"
-        >
-          Enter Kempopedia
-        </Link>
+        <div className="flex flex-col gap-4">
+          <Link
+            href="/kempopedia"
+            className="text-wiki-link hover:underline text-lg"
+          >
+            Enter Kempopedia
+          </Link>
+          <Link
+            href="/radio"
+            className="text-amber-700 hover:text-amber-900 hover:underline text-lg"
+          >
+            Kempo Radio
+          </Link>
+        </div>
       </div>
     </main>
   )

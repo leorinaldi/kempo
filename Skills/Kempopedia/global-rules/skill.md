@@ -35,17 +35,66 @@ Use this rule to determine whether to use a real historical person or create a p
 
 Minor divergences (renamed towns, fictional institutions) can exist for real people's backgrounds, but the person themselves remains real if they meet the criteria above.
 
-## 3. No Dead Links Rule (MANDATORY)
+## 3. Character Reuse Before Creation (MANDATORY)
+
+**Before creating a new fictional person, search Kempopedia for existing characters who could fill the role.**
+
+This builds cross-connectivity and creates a richer, more realistic world where people appear in multiple contexts.
+
+### 3.1 When You Need a Person for an Article
+
+1. **Identify the role needed**: What profession, era, and characteristics are required?
+2. **Search existing articles**: Look in `web/content/articles/people/` for characters who match
+3. **Check compatibility**:
+   - Same era (active during the relevant time period)?
+   - Same or related profession?
+   - Geographic proximity makes sense?
+   - No contradictions with existing biography?
+4. **Reuse if appropriate**: Reference the existing character and expand their biography if needed
+5. **Create new only if necessary**: If no existing character fits, then create a new one
+
+### 3.2 Search Strategy
+
+```bash
+# Search for people by profession
+grep -r "Occupation.*arranger" web/content/articles/people/
+grep -r "Occupation.*songwriter" web/content/articles/people/
+
+# Search for people by era (check birth dates)
+grep -r "Birth_date.*1900" web/content/articles/people/
+```
+
+Or review the people directory to see who already exists.
+
+### 3.3 Examples
+
+| Need | Search First | Create New If... |
+|------|--------------|------------------|
+| Arranger for 1940s album | Nelson Chambers already exists | Different era or style needed |
+| Songwriter for Starlight Records | Harold Keane already exists | Different label or genre |
+| Military general in WWII | Check existing military figures | Specific role not covered |
+| New York politician | Check existing politicians | Different party/era needed |
+
+### 3.4 When Reusing a Character
+
+If you use an existing character in a new context:
+1. **Update their article** to reflect the new work/involvement
+2. **Add the new article** to their "See also" section
+3. **Add them** to the new article's "See also" section
+
+This creates bidirectional links and enriches both articles.
+
+## 4. No Dead Links Rule (MANDATORY)
 
 **Every wikilink must point to an existing article. Zero tolerance for dead links.**
 
-### 3.1 Before Writing Any Article
+### 4.1 Before Writing Any Article
 
 1. **Plan your links**: List all entities you'll reference (people, places, institutions, events)
 2. **Check existence**: For each planned wikilink, verify the target article exists
 3. **Create stubs first**: If a linked article doesn't exist, create a stub BEFORE completing your main article
 
-### 3.2 Stub Article Requirements
+### 4.2 Stub Article Requirements
 
 Stubs must include:
 - Proper frontmatter (title, slug, type, subtype, status, tags)
@@ -76,7 +125,7 @@ tags:
 - [[harold-kellman|Harold S. Kellman]]
 ```
 
-### 3.3 Link Verification Workflow
+### 4.3 Link Verification Workflow
 
 After completing any article:
 1. **Extract all wikilinks** from your article
@@ -84,7 +133,7 @@ After completing any article:
 3. **Create missing stubs** immediately
 4. **Verify stubs link back** to your new article
 
-## 4. Infobox Field Naming
+## 5. Infobox Field Naming
 
 **Infobox field names must be capitalized (Title Case or Sentence case).**
 
@@ -125,7 +174,7 @@ Field names appear as row labels in the right-hand panel. They should be human-r
 | Children | | | |
 | Known_for | | | |
 
-## 5. Infobox Wikilinks
+## 6. Infobox Wikilinks
 
 **Infobox JSON fields now support wikilink syntax.**
 
@@ -155,7 +204,7 @@ Use wikilinks in infobox fields where linking makes sense:
 - Nationalities
 - Descriptive text that isn't an article title
 
-## 6. Wikilink Slug Consistency
+## 7. Wikilink Slug Consistency
 
 **Use pipe syntax when the display name differs from the slug.**
 
@@ -169,7 +218,7 @@ Slugs are lowercase with hyphens. If the display name has capitals, spaces, or m
 [[world-war-ii|World War II]]
 ```
 
-## 7. Political Parties
+## 8. Political Parties
 
 **Use Kempo political parties, not real-world ones.**
 
@@ -180,7 +229,7 @@ Slugs are lowercase with hyphens. If the display name has capitals, spaces, or m
 
 Always use the Kempo party names in articles.
 
-## 8. Real-World Event Articles
+## 9. Real-World Event Articles
 
 **Focus on Kempo-specific divergences, not full history rewrites.**
 
@@ -190,7 +239,7 @@ When creating articles for real-world events (WWI, WWII, etc.):
 - Example: WWII article notes that President Kellman (not Truman) authorized the atomic bombs
 - Link back to relevant Kempo people/entities
 
-## 9. Parallel Switchover Completeness
+## 10. Parallel Switchover Completeness
 
 **When creating a parallel switchover, also create related switchovers.**
 
@@ -205,7 +254,7 @@ Each switchover needs:
 1. An entry in the Spawn Registry
 2. Its own stub article (no dead links!)
 
-## 10. Article File Organization
+## 11. Article File Organization
 
 Articles are organized by type in subdirectories:
 
@@ -221,7 +270,7 @@ web/content/articles/
 └── parallel-switchover.md
 ```
 
-## 11. Frontmatter Format
+## 12. Frontmatter Format
 
 Use the modern hybrid categorization format:
 
@@ -245,7 +294,7 @@ dates:
 ---
 ```
 
-## 12. Registry Entry Format
+## 13. Registry Entry Format
 
 Spawn Registry entries use this format:
 
@@ -261,7 +310,7 @@ Real World Name → [[Kempo Equivalent]]
 
 Each entry on its own line, with a blank line between entries.
 
-## 13. Image Generation (MANDATORY)
+## 14. Image Generation (MANDATORY)
 
 **Every article of type Person, Place, or Institution MUST have an image.**
 
@@ -309,13 +358,13 @@ Each entry on its own line, with a blank line between entries.
 
 **Current Kempo date: January 1, 1950 k.y.** — Use black and white for most images.
 
-## 14. Second-Order Updates (MANDATORY)
+## 15. Second-Order Updates (MANDATORY)
 
 **After creating any article, you MUST update all linked pages.**
 
 Creating an article is not complete until all related articles are updated to reflect the new content. This ensures the wiki remains internally consistent and richly cross-linked.
 
-### 14.1 Backlink Updates
+### 15.1 Backlink Updates
 
 For every article you link TO, update that article to link BACK to your new article.
 
@@ -328,7 +377,7 @@ For every article you link TO, update that article to link BACK to your new arti
 
 **Example:** If creating Douglas Westbrook who attended Vermont Army Academy, update the Vermont Army Academy article to list Westbrook as a notable graduate.
 
-### 14.2 Timeline Synchronization (MANDATORY)
+### 15.2 Timeline Synchronization (MANDATORY)
 
 **Only link dates that are significant milestones worthy of recording in the master timeline.**
 
@@ -422,7 +471,7 @@ After completing any article:
 4. **Create missing entries** — add new entries for any dates not in timeline
 5. **Maintain chronological order** within the timeline page
 
-### 14.3 See Also Updates
+### 15.3 See Also Updates
 
 Add your new article to the "See also" section of all closely related articles.
 
@@ -431,7 +480,7 @@ Add your new article to the "See also" section of all closely related articles.
 - `[[douglas-d-westbrook|Douglas D. Westbrook]]` in World War II's "See also"
 - `[[douglas-d-westbrook|Douglas D. Westbrook]]` in Japan's "See also"
 
-### 14.4 Second-Order Checklist
+### 15.4 Second-Order Checklist
 
 Before considering an article complete, verify:
 
@@ -442,41 +491,49 @@ Before considering an article complete, verify:
 - [ ] All significant dates are added to timeline pages
 - [ ] Your article is in the "See also" of all closely related articles
 
-## 15. Table Formatting
+## 16. Table Formatting
 
-**Tables must be properly formatted to render correctly.**
+**AVOID MARKDOWN TABLES. The wiki renderer does not handle them reliably—rows often run together.**
 
-### Rules:
-1. **Blank lines**: Always have a blank line before and after tables
-2. **Aligned columns**: Pad cell content with spaces so pipes align vertically
-3. **Full-width separators**: Dashes in separator row should match column width
+### Instead of Tables, Use:
 
-### Correct Format:
+**Numbered lists** for track listings:
 ```markdown
-Text before the table.
+## Track listing
 
-| Year | Price | Notes                     |
-| ---- | ----- | ------------------------- |
-| 1908 | $850  | Introduction price        |
-| 1924 | $290  | Final year price          |
-
-Text after the table.
+1. "Song Title" – 3:24
+2. "[[another-song|Another Song]]" – 3:08
+3. "Third Song" – 3:52
 ```
 
-### Incorrect Format (rows may run together):
+**Bullet lists** for simple key-value data:
 ```markdown
-Text before the table.
-| Year | Price | Notes |
-|------|-------|-------|
-| 1908 | $850 | Introduction price |
-Text after the table.
+- **Year:** 1908
+- **Price:** $850
+- **Notes:** Introduction price
 ```
 
-## 16. Media Content (Audio/Video)
+**Definition-style formatting** for specifications:
+```markdown
+**Engine:** 2.9L inline-4
+**Power:** 20 hp
+**Top speed:** 45 mph
+```
+
+### When Tables Are Unavoidable
+
+If you must use a table (e.g., in this skill documentation), ensure:
+1. Blank line before and after the table
+2. Consistent column widths
+3. Test rendering after saving
+
+But for article content, **always prefer lists over tables**.
+
+## 17. Media Content (Audio/Video)
 
 **Media files are stored in Vercel Blob and embedded via the `media` array in article JSON.**
 
-### 16.1 Media Array Structure
+### 17.1 Media Array Structure
 
 Add media to the root level of your article's JSON block (sibling to `infobox`):
 
@@ -499,7 +556,7 @@ Supported media types:
 - `audio` - MP3, WAV, etc.
 - `video` - MP4, WebM, etc.
 
-### 16.2 Dedicated Media Pages (MANDATORY)
+### 17.2 Dedicated Media Pages (MANDATORY)
 
 **Every piece of media (song, film, etc.) gets its own wiki article.**
 
@@ -513,7 +570,7 @@ This allows:
 - Proper cross-linking between related content
 - Consistent wiki-style navigation
 
-### 16.3 When to Use Media Array
+### 17.3 When to Use Media Array
 
 | Article Type | Use Media Array? |
 |--------------|------------------|
@@ -523,7 +580,7 @@ This allows:
 | Person | NO - link to their media articles |
 | Institution (label) | NO - link to releases |
 
-### 16.4 Media Upload Workflow
+### 17.4 Media Upload Workflow
 
 Media files are uploaded via the admin panel at `/admin`:
 1. Log in with authorized Google account
@@ -533,7 +590,7 @@ Media files are uploaded via the admin panel at `/admin`:
 5. Copy the returned Vercel Blob URL
 6. Use that URL in the article's `media` array
 
-### 16.5 Cross-Linking Media Content
+### 17.5 Cross-Linking Media Content
 
 When creating media articles, establish links in all directions:
 

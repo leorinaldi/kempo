@@ -62,6 +62,8 @@ His performances at major venues drew unprecedented crowds. At a legendary engag
 
 Throughout the mid-1940s, Martino dominated the popular music charts. His smooth baritone and impeccable phrasing set a new standard for popular singing. Critics praised his ability to convey deep emotion while maintaining an effortless, conversational tone.
 
+In 1947, Martino released *[[in-the-wee-small-hours|In the Wee Small Hours]]*, a landmark album of intimate ballads and torch songs. The album, featuring songs like "[[until-i-m-there-with-you|Until I'm There With You]]," showcased a more introspective side of the singer and is widely regarded as one of his finest artistic achievements.
+
 ### Film career
 
 Martino made his film debut in 1943 with a small role in the musical *Swing Time Serenade*. His natural screen presence led to larger roles, and by 1945 he was starring in major studio productions. His performance in *The Jersey Kid* (1947) earned widespread critical acclaim, showcasing his talents as both a singer and a dramatic actor.
@@ -81,7 +83,7 @@ Despite his fame, Martino maintains a reputation for being approachable and gene
 Selected albums:
 - *Songs for Sweethearts* (1943)
 - *Frank Martino Sings* (1945)
-- *In the Wee Small Hours* (1947)
+- *[[in-the-wee-small-hours|In the Wee Small Hours]]* (1947)
 - *[[a-martino-christmas|A Martino Christmas]]* (1948)
 - *Songs for Lovers* (1949)
 
@@ -89,5 +91,8 @@ Selected albums:
 
 - [[Portside, New Jersey]]
 - [[starlight-records|Starlight Records]]
+- [[in-the-wee-small-hours|In the Wee Small Hours]]
+- [[a-martino-christmas|A Martino Christmas]]
+- [[until-i-m-there-with-you|Until I'm There With You]]
 - [[this-perfect-holiday|This Perfect Holiday]]
 - [[United States]]

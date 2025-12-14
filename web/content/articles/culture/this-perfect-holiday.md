@@ -41,7 +41,7 @@ dates:
 
 ## Background
 
-The song was written specifically for Martino by songwriter Harold Keane, who had previously penned several hits for [[starlight-records|Starlight Records]] artists. Recorded in a single session at Starlight's New York studios, the track showcases Martino's warm baritone voice against a lush orchestral arrangement featuring strings and sleigh bells.
+The song was written specifically for Martino by songwriter [[harold-keane|Harold Keane]], who had previously penned several hits for [[starlight-records|Starlight Records]] artists. Recorded in a single session at Starlight's New York studios, the track showcases Martino's warm baritone voice against a lush orchestral arrangement featuring strings and sleigh bells.
 
 ## Reception
 
@@ -52,6 +52,7 @@ The song's enduring popularity has made it a perennial favorite, with radio stat
 ## See also
 
 - [[frank-martino|Frank Martino]]
+- [[harold-keane|Harold Keane]]
 - [[a-martino-christmas|A Martino Christmas]]
 - [[starlight-records|Starlight Records]]
 - [[melody-index|Melody Index]]

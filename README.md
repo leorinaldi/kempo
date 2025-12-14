@@ -24,6 +24,21 @@ All dates in Kempo use **k.y.** (Kempo Year), which matches standard Gregorian y
 
 The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. History before this date includes parallel switchover entities (fictional counterparts to real historical figures and institutions), meaning pre-1950 history is not identical to real-world history.
 
+## Kempo Radio
+
+Kempo Radio is a vintage 1940s-style radio interface that plays music from the Kempo universe.
+
+**Access Kempo Radio**: https://kempo.vercel.app/radio
+
+### Features
+
+- Authentic 1940s radio design with illuminated display
+- TUNE knob to cycle through tracks (click left for previous, right for next)
+- VOL knob cycles through LOW/MED/HIGH volume levels
+- Power toggle (ON/OFF)
+- Auto-advances to next track when song ends
+- Playlist managed via admin panel
+
 ## Kempopedia
 
 Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki documenting everything in this fictional world.
@@ -86,12 +101,32 @@ kempo/
     │   └── media/                 # Generated images (Grok API)
     └── src/
         ├── app/
-        │   └── kempopedia/        # Kempopedia pages
-        │       ├── wiki/[slug]/   # Individual article pages
-        │       └── category/      # Category browse pages
-        ├── components/            # React components (Infobox, etc.)
+        │   ├── kempopedia/        # Kempopedia pages
+        │   │   ├── wiki/[slug]/   # Individual article pages
+        │   │   └── category/      # Category browse pages
+        │   ├── radio/             # Kempo Radio interface
+        │   ├── admin/             # Admin panel (authenticated)
+        │   ├── login/             # Authentication page
+        │   └── api/               # API routes
+        │       ├── auth/          # NextAuth endpoints
+        │       ├── media/         # Media upload and listing
+        │       └── radio/         # Playlist management
+        ├── components/            # React components (Infobox, AudioPlayer, etc.)
         └── lib/                   # Article loading utilities
 ```
+
+## Admin Panel
+
+The admin panel provides authenticated access to manage media and playlists.
+
+**Access Admin**: https://kempo.vercel.app/admin (requires authorized Google account)
+
+### Features
+
+- Upload audio/video files to Vercel Blob storage
+- Manage Kempo Radio playlist
+- Auto-lookup track info from Kempopedia articles
+- View storage URLs for uploaded media
 
 ## Tech Stack
 
@@ -99,6 +134,8 @@ kempo/
 - **Styling**: Tailwind CSS
 - **Content**: MDX with frontmatter
 - **Images**: Grok API (xAI) for comic book style illustrations
+- **Media Storage**: Vercel Blob
+- **Authentication**: NextAuth.js with Google OAuth
 - **Hosting**: Vercel
 - **Repository**: GitHub
 
@@ -206,16 +243,37 @@ Date links in articles automatically route to the appropriate timeline page:
 
 Skills are Claude prompts that guide article creation. Each skill has its own folder under `Skills/Kempopedia/` with a `skill.md` file.
 
-| Skill | Purpose |
-|-------|---------|
-| global-rules | Core rules for all articles (current date, no dead links, timeline sync, media embedding, 4-phase checklist) |
-| create-person | Biographical articles with portrait images |
-| create-place | Places including nations (with flag images) |
-| create-institution | Organizations with logos or building images |
-| create-media | Songs, albums, and other cultural works with audio/video |
-| create-timeline | Decade and year timeline pages |
-| generate-image | Image prompt guidelines and color rules |
-| parallel-switchover | Mapping real-world entities to Kempo equivalents |
+### Global Rules (17 sections)
+
+The `global-rules` skill contains core rules for all article creation:
+
+1. **Current Date Rule** - January 1, 1950 k.y. is the present
+2. **Real People vs Parallel Switchovers** - When to use real historical figures
+3. **Character Reuse Before Creation** - Search existing characters before creating new ones
+4. **No Dead Links** - Every wikilink must point to an existing article
+5. **Infobox Field Naming** - Capitalized field names required
+6. **Infobox Wikilinks** - Link syntax in infobox fields
+7. **Wikilink Slug Consistency** - Pipe syntax for display names
+8. **Political Parties** - National Party / Federal Party
+9. **Real-World Event Articles** - Focus on Kempo divergences
+10. **Parallel Switchover Completeness** - Create related switchovers
+11. **Article File Organization** - Directory structure
+12. **Frontmatter Format** - YAML metadata specification
+13. **Registry Entry Format** - Spawn Registry syntax
+14. **Image Generation** - Mandatory for Person/Place/Institution
+15. **Second-Order Updates** - Update linked pages after creating articles
+16. **Table Formatting** - Avoid markdown tables, use lists
+17. **Media Content** - Audio/video embedding via JSON media array
+
+### Type-Specific Skills
+
+- **create-person** - Biographical articles with portrait images
+- **create-place** - Places including nations (with flag images)
+- **create-institution** - Organizations with logos or building images
+- **create-media** - Songs, albums, and other cultural works with audio/video
+- **create-timeline** - Decade and year timeline pages
+- **generate-image** - Image prompt guidelines and color rules
+- **parallel-switchover** - Mapping real-world entities to Kempo equivalents
 
 ---
 

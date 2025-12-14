@@ -1,8 +1,15 @@
 "use client"
 
 import { useSession, signOut } from "next-auth/react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { redirect } from "next/navigation"
+
+interface PlaylistItem {
+  id: string
+  name: string
+  artist: string
+  url: string
+}
 
 export default function AdminPage() {
   const { data: session, status } = useSession()
@@ -11,12 +18,48 @@ export default function AdminPage() {
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Playlist state
+  const [playlist, setPlaylist] = useState<PlaylistItem[]>([])
+  const [playlistLoading, setPlaylistLoading] = useState(true)
+  const [playlistMessage, setPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [newTrack, setNewTrack] = useState({
+    id: "",
+    name: "",
+    artist: "",
+    url: "",
+  })
+  const [loadingTrackInfo, setLoadingTrackInfo] = useState(false)
+
+  // Available audio files from blob storage
+  const [audioFiles, setAudioFiles] = useState<{ url: string; slug: string; filename: string }[]>([])
+  const [selectedAudioFile, setSelectedAudioFile] = useState("")
+
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
     mediaType: "audio" as "audio" | "video",
     description: "",
   })
+
+  // Load playlist and audio files on mount
+  useEffect(() => {
+    fetch("/api/radio/playlist")
+      .then((res) => res.json())
+      .then((data) => {
+        setPlaylist(data)
+        setPlaylistLoading(false)
+      })
+      .catch(() => setPlaylistLoading(false))
+
+    fetch("/api/media/list")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setAudioFiles(data)
+        }
+      })
+      .catch((err) => console.error("Failed to load audio files:", err))
+  }, [])
 
   if (status === "loading") {
     return (
@@ -106,6 +149,82 @@ export default function AdminPage() {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "")
+  }
+
+  const savePlaylist = async (newPlaylist: PlaylistItem[]) => {
+    try {
+      const res = await fetch("/api/radio/playlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPlaylist),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to save playlist")
+      }
+
+      setPlaylist(newPlaylist)
+      setPlaylistMessage({ type: "success", text: "Playlist saved!" })
+      setTimeout(() => setPlaylistMessage(null), 3000)
+    } catch (error) {
+      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to save" })
+    }
+  }
+
+  const removeFromPlaylist = (id: string) => {
+    const newPlaylist = playlist.filter((item) => item.id !== id)
+    savePlaylist(newPlaylist)
+  }
+
+  const handleAudioFileSelect = async (url: string) => {
+    setSelectedAudioFile(url)
+    const file = audioFiles.find((f) => f.url === url)
+    if (file) {
+      setNewTrack({
+        id: file.slug,
+        name: "",
+        artist: "",
+        url: file.url,
+      })
+
+      // Try to find track info from Kempopedia
+      setLoadingTrackInfo(true)
+      try {
+        const res = await fetch(`/api/media/lookup?slug=${encodeURIComponent(file.slug)}`)
+        if (res.ok) {
+          const data = await res.json()
+          if (data.name || data.artist) {
+            setNewTrack({
+              id: file.slug,
+              name: data.name || "",
+              artist: data.artist || "",
+              url: file.url,
+            })
+          }
+        }
+      } catch (err) {
+        console.error("Failed to lookup track info:", err)
+      } finally {
+        setLoadingTrackInfo(false)
+      }
+    }
+  }
+
+  const addToPlaylist = () => {
+    if (!newTrack.id || !newTrack.name || !newTrack.artist || !newTrack.url) {
+      setPlaylistMessage({ type: "error", text: "Please fill in all fields" })
+      return
+    }
+
+    if (playlist.some((item) => item.id === newTrack.id)) {
+      setPlaylistMessage({ type: "error", text: "Track with this ID already exists" })
+      return
+    }
+
+    const newPlaylist = [...playlist, newTrack]
+    savePlaylist(newPlaylist)
+    setNewTrack({ id: "", name: "", artist: "", url: "" })
+    setSelectedAudioFile("")
   }
 
   return (
@@ -228,6 +347,135 @@ export default function AdminPage() {
               {uploading ? "Uploading..." : "Upload Media"}
             </button>
           </form>
+        </div>
+
+        {/* Radio Playlist Management */}
+        <div className="bg-white rounded-lg shadow p-6 mt-6">
+          <h2 className="text-lg font-semibold mb-6">Kempo Radio Playlist</h2>
+
+          {playlistMessage && (
+            <div
+              className={`mb-4 p-3 rounded ${
+                playlistMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+              }`}
+            >
+              {playlistMessage.text}
+            </div>
+          )}
+
+          {/* Current Playlist */}
+          <div className="mb-6">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Current Tracks</h3>
+            {playlistLoading ? (
+              <p className="text-gray-500 text-sm">Loading...</p>
+            ) : playlist.length === 0 ? (
+              <p className="text-gray-500 text-sm">No tracks in playlist</p>
+            ) : (
+              <div className="space-y-2">
+                {playlist.map((track) => (
+                  <div
+                    key={track.id}
+                    className="flex items-center justify-between p-3 bg-gray-50 rounded border"
+                  >
+                    <div>
+                      <p className="font-medium">{track.name}</p>
+                      <p className="text-sm text-gray-600">{track.artist}</p>
+                    </div>
+                    <button
+                      onClick={() => removeFromPlaylist(track.id)}
+                      className="text-red-600 hover:text-red-800 text-sm"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Add New Track */}
+          <div className="border-t pt-6">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Add Track to Playlist</h3>
+
+            {/* Audio File Dropdown */}
+            <div className="mb-4">
+              <label className="block text-xs text-gray-500 mb-1">Select Audio File</label>
+              <select
+                value={selectedAudioFile}
+                onChange={(e) => handleAudioFileSelect(e.target.value)}
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+              >
+                <option value="">-- Select an audio file --</option>
+                {audioFiles.map((file) => (
+                  <option key={file.url} value={file.url}>
+                    {file.filename}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {selectedAudioFile && (
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">Track ID</label>
+                  <input
+                    type="text"
+                    value={newTrack.id}
+                    readOnly
+                    className="w-full border border-gray-200 rounded px-3 py-2 text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">Storage URL</label>
+                  <input
+                    type="text"
+                    value={newTrack.url}
+                    readOnly
+                    className="w-full border border-gray-200 rounded px-3 py-2 text-xs bg-gray-100 text-gray-500 cursor-not-allowed truncate"
+                    title={newTrack.url}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">Track Name *</label>
+                  <input
+                    type="text"
+                    value={newTrack.name}
+                    onChange={(e) => setNewTrack({ ...newTrack, name: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                    disabled={loadingTrackInfo}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs text-gray-500 mb-1">Artist Name *</label>
+                  <input
+                    type="text"
+                    value={newTrack.artist}
+                    onChange={(e) => setNewTrack({ ...newTrack, artist: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                    disabled={loadingTrackInfo}
+                  />
+                </div>
+                {loadingTrackInfo && (
+                  <div className="col-span-2 text-sm text-gray-500">
+                    Looking up track info from Kempopedia...
+                  </div>
+                )}
+                <div className="col-span-2">
+                  <button
+                    onClick={addToPlaylist}
+                    disabled={loadingTrackInfo}
+                    className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 text-white font-medium py-2 px-4 rounded"
+                  >
+                    Add to Radio
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {audioFiles.length === 0 && (
+              <p className="text-sm text-gray-500">No audio files found in storage. Upload one above first.</p>
+            )}
+          </div>
         </div>
       </main>
     </div>
