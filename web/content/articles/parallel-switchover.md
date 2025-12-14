@@ -36,13 +36,14 @@ This registry serves as a reference guide showing:
 
 | Real World | Kempo Equivalent | Type | Wikipedia |
 |------------|------------------|------|-----------|
-| — | — | — | — |
+| Harry S. Truman | [[Harold S. Kellman]] | Head of State, Politician | [Wikipedia](https://en.wikipedia.org/wiki/Harry_S._Truman) |
 
 ## Institutions
 
 | Real World | Kempo Equivalent | Type | Wikipedia |
 |------------|------------------|------|-----------|
-| — | — | — | — |
+| Kansas City School of Law | [[Midland Law School]] | University | [Wikipedia](https://en.wikipedia.org/wiki/University_of_Missouri%E2%80%93Kansas_City_School_of_Law) |
+| Spalding's Commercial College | [[Kansas City Commercial Institute]] | Business School | — |
 
 ## Nations
 
@@ -66,7 +67,9 @@ This registry serves as a reference guide showing:
 
 | Real World | Kempo Equivalent | Type | Wikipedia |
 |------------|------------------|------|-----------|
-| — | — | — | — |
+| Lamar, Missouri | [[Lawton, Missouri]] | Town | [Wikipedia](https://en.wikipedia.org/wiki/Lamar,_Missouri) |
+| Independence, Missouri | [[Liberty, Missouri]] | City | [Wikipedia](https://en.wikipedia.org/wiki/Independence,_Missouri) |
+| Grandview, Missouri | [[Clearview, Missouri]] | Town | [Wikipedia](https://en.wikipedia.org/wiki/Grandview,_Missouri) |
 
 ## Guidelines
 
