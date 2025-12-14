@@ -37,18 +37,18 @@ dates:
       "caption": "President Harold S. Kellman, 1945 k.y."
     },
     "fields": {
-      "full_name": "Harold Sterling Kellman",
-      "birth_date": "May 11, 1884 k.y.",
-      "birth_place": "[[Lawton, Missouri]]",
-      "nationality": "American",
-      "occupation": ["Politician", "Businessman", "Military officer"],
-      "education": "[[Kansas City Commercial Institute]], [[Midland Law School]] (incomplete)",
-      "military_service": "United States Army (1917–1919 k.y.); [[Missouri]] National Guard (1905–1911 k.y.)",
-      "rank": "Colonel (Reserve)",
-      "spouse": "Elizabeth 'Beth' Crawford (m. 1919)",
-      "children": 1,
-      "political_party": "[[National Party]]",
-      "known_for": ["33rd President of the United States"]
+      "Full_name": "Harold Sterling Kellman",
+      "Birth_date": "May 11, 1884 k.y.",
+      "Birth_place": "[[Lawton, Missouri]]",
+      "Nationality": "American",
+      "Occupation": ["Politician", "Businessman", "Military officer"],
+      "Education": "[[Kansas City Commercial Institute]], [[Midland Law School]] (incomplete)",
+      "Military_service": "United States Army (1917–1919 k.y.); [[Missouri]] National Guard (1905–1911 k.y.)",
+      "Rank": "Colonel (Reserve)",
+      "Spouse": "Elizabeth 'Beth' Crawford (m. 1919)",
+      "Children": 1,
+      "Political_party": "[[National Party]]",
+      "Known_for": ["33rd President of the United States"]
     }
   },
   "timeline_events": [
@@ -169,6 +169,8 @@ On [[April 12, 1945 k.y.]], President Roosevelt died of a cerebral hemorrhage at
 
 Within months of taking office, Kellman faced the most consequential decision of his presidency: whether to use the newly developed atomic bomb against Japan. After Japan rejected the [[Potsdam Declaration]] demanding unconditional surrender, Kellman authorized the bombing of [[Hiroshima]] on August 6, [[1945 k.y.]], and [[Nagasaki]] three days later. Japan surrendered on August 15, ending World War II.
 
+General [[douglas-d-westbrook|Douglas D. Westbrook]], Supreme Commander of Allied Forces in the Pacific, accepted Japan's formal surrender aboard the USS Missouri on [[September 2, 1945 k.y.]] Kellman subsequently appointed Westbrook as Supreme Commander for the Allied Powers to oversee the occupation and reconstruction of [[Japan]].
+
 ### Post-war foreign policy
 
 Kellman's presidency has been defined by rising tensions with the [[Soviet Union]]. In [[1947 k.y.]], he announced the [[Kellman Doctrine]], pledging American support to nations resisting communist expansion. That same year, he championed the [[Marshall Plan]], providing economic aid to rebuild war-torn Europe.
@@ -190,3 +192,4 @@ On the domestic front, Kellman has pursued an ambitious but largely frustrated l
 - [[Kellman Doctrine]]
 - [[1948 United States presidential election]]
 - [[Liberty, Missouri]]
+- [[douglas-d-westbrook|Douglas D. Westbrook]]

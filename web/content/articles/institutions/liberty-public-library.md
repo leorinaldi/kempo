@@ -18,8 +18,8 @@ tags:
       "caption": "Liberty Public Library, circa 1895 k.y."
     },
     "fields": {
-      "type": "Public Library",
-      "location": "[[Liberty, Missouri]]"
+      "Type": "Public Library",
+      "Location": "[[Liberty, Missouri]]"
     }
   }
 }

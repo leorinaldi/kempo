@@ -49,7 +49,7 @@ Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki do
 | Events | Historical events and occurrences |
 | Timeline | Chronological records by decade and year |
 | Science and Technology | Scientific ideas, technologies |
-| Culture and Entertainment | Popular culture, entertainment, products, and celebrities |
+| Culture and Entertainment | Popular culture, entertainment, and products |
 | Other Concepts | Ideas, theories, and abstract topics |
 
 ## Project Structure
@@ -136,7 +136,7 @@ tags:
       "caption": "Caption text"
     },
     "fields": {
-      "field_name": "value or [[wikilink]]"
+      "Field_name": "value or [[wikilink]]"
     }
   }
 }
@@ -150,10 +150,12 @@ Article content with [[wikilinks]] to other articles.
 Infobox fields support wikilink syntax for linkable content:
 
 ```json
-"birth_place": "[[Lawton, Missouri]]",
-"political_party": "[[National Party]]",
-"education": "[[Liberty High School]]"
+"Birth_place": "[[Lawton, Missouri]]",
+"Political_party": "[[National Party]]",
+"Education": "[[Liberty High School]]"
 ```
+
+**Note**: Infobox field names must be capitalized (e.g., `Birth_place`, not `birth_place`).
 
 Use wikilinks for places, institutions, and people. Use plain text for dates, numbers, and nationalities.
 
@@ -204,7 +206,7 @@ Skills are Claude prompts that guide article creation. Each skill has its own fo
 
 | Skill | Purpose |
 |-------|---------|
-| global-rules | Core rules for all articles (current date, no dead links, etc.) |
+| global-rules | Core rules for all articles (current date, no dead links, timeline sync, 4-phase checklist) |
 | create-person | Biographical articles with portrait images |
 | create-place | Places including nations (with flag images) |
 | create-institution | Organizations with logos or building images |

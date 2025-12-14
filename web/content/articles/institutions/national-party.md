@@ -22,10 +22,10 @@ tags:
       "caption": "National Party logo"
     },
     "fields": {
-      "type": "Political Party",
-      "country": "United States",
-      "ideology": "Liberalism, Progressivism",
-      "symbol": "Blue Star"
+      "Type": "Political Party",
+      "Country": "United States",
+      "Ideology": "Liberalism, Progressivism",
+      "Symbol": "Blue Star"
     }
   }
 }

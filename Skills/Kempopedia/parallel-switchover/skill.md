@@ -150,19 +150,30 @@ Some entities should remain unchanged:
 
 ## Next Steps After Switchover
 
-After creating a switchover, you MUST:
-1. **Create stub article** for the Kempo equivalent (no dead links!)
-2. **Add to registry** in parallel-switchover.md
-3. **Create related switchovers** for associated entities
-4. **Update timeline** if the entity has significant dated events
-5. Optionally: Create full article using create-person, create-institution, etc.
+After creating a switchover, you MUST follow all four phases. See [[global-rules]] for full details.
 
 ## Checklist Before Completing
 
+> **CRITICAL**: A parallel switchover is NOT complete until all phases are done.
+
+### Phase 1: Content Quality
 - [ ] Registry entry added to parallel-switchover.md
-- [ ] Stub article created for Kempo equivalent
-- [ ] All related switchovers identified
-- [ ] Related stub articles created (no dead links!)
-- [ ] Uses Kempo political parties (National/Federal)
 - [ ] All dates on or before January 1, 1950 k.y.
-- [ ] Wikilinks use correct slug with pipe syntax if needed
+- [ ] Uses Kempo political parties (National/Federal)
+- [ ] Wikilinks use correct slug with pipe syntax
+
+### Phase 2: Link Integrity (NO DEAD LINKS)
+- [ ] Stub article created for the Kempo equivalent
+- [ ] All related switchovers identified (places, institutions, parties)
+- [ ] Stub articles created for ALL related switchovers
+- [ ] Every stub links back to the main article
+
+### Phase 3: Timeline Synchronization
+- [ ] Significant dates added to appropriate timeline pages
+- [ ] Each date link has a corresponding timeline entry
+- [ ] Timeline entries include proper anchor IDs
+
+### Phase 4: Backlinks & Cross-References
+- [ ] Related articles updated to reference this entity
+- [ ] This entity added to "See also" of related articles
+- [ ] If person: schools/institutions list them as alumni/member

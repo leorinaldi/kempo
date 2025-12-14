@@ -20,8 +20,8 @@ dates:
       "caption": "Edmund Carlson, circa 1920 k.y."
     },
     "fields": {
-      "nationality": "American",
-      "occupation": "Businessman"
+      "Nationality": "American",
+      "Occupation": "Businessman"
     }
   }
 }

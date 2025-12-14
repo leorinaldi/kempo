@@ -22,9 +22,9 @@ tags:
       "caption": "Lawton, Missouri, circa 1885 k.y."
     },
     "fields": {
-      "type": "Town",
-      "state": "[[Missouri]]",
-      "country": "United States"
+      "Type": "Town",
+      "State": "[[Missouri]]",
+      "Country": "United States"
     }
   }
 }

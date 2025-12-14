@@ -14,9 +14,9 @@ tags:
   "infobox": {
     "type": "timeline",
     "fields": {
-      "purpose": "Index of all timeline pages",
-      "calendar": "k.y. (Kempo Year) = Gregorian Year",
-      "current_date": "January 1, 1950 k.y."
+      "Purpose": "Index of all timeline pages",
+      "Calendar": "k.y. (Kempo Year) = Gregorian Year",
+      "Current_date": "January 1, 1950 k.y."
     }
   }
 }
@@ -36,6 +36,8 @@ The Kempo universe uses the **k.y.** (Kempo Year) system, which matches standard
 
 ## Pre-1950 (by Decade)
 
+- [[1800s]]
+- [[1860s]]
 - [[1880s]]
 - [[1890s]]
 - [[1900s]]
@@ -54,4 +56,4 @@ The Kempo universe uses the **k.y.** (Kempo Year) system, which matches standard
 
 ## See also
 
-- [[Parallel Switchover Registry]]
+- [[parallel-switchover|Parallel Switchover Registry]]

@@ -19,9 +19,9 @@ tags:
       "caption": "Vice President Henry Wallace, circa 1943 k.y."
     },
     "fields": {
-      "nationality": "American",
-      "political_party": "[[National Party]]",
-      "known_for": ["33rd Vice President of the United States"]
+      "Nationality": "American",
+      "Political_party": "[[National Party]]",
+      "Known_for": ["33rd Vice President of the United States"]
     }
   }
 }

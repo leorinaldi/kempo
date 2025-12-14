@@ -17,9 +17,9 @@ dates:
   "infobox": {
     "type": "concept",
     "fields": {
-      "official_name": "European Recovery Program",
-      "common_name": "Marshall Plan",
-      "announced": "1947 k.y."
+      "Official_name": "European Recovery Program",
+      "Common_name": "Marshall Plan",
+      "Announced": "1947 k.y."
     }
   }
 }

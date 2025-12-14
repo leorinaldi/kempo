@@ -127,9 +127,25 @@ The **Article Title** is [one-sentence definition].
 
 ## Checklist Before Completing
 
+> **CRITICAL**: An article is NOT complete until all four phases are done. See [[global-rules]] Section 12 for full details.
+
+### Phase 1: Content Quality
 - [ ] All events on or before January 1, 1950 k.y.
-- [ ] All wikilinks have existing articles (or stubs created)
-- [ ] Infobox uses wikilinks for linkable fields (places, institutions, parties)
-- [ ] Uses Kempo political parties (National/Federal)
 - [ ] All dates use k.y. format
+- [ ] Uses Kempo political parties (National/Federal)
+- [ ] Infobox uses wikilinks for linkable fields
 - [ ] Parallel switchover registered (if applicable)
+
+### Phase 2: Link Integrity (NO DEAD LINKS)
+- [ ] All wikilinks point to existing articles
+- [ ] Stubs created for any new entities
+- [ ] Stubs link back to your article
+
+### Phase 3: Timeline Synchronization
+- [ ] All date links have corresponding timeline entries
+- [ ] Timeline entries include proper anchor IDs
+- [ ] Entries are in chronological order
+
+### Phase 4: Backlinks & Cross-References
+- [ ] Linked articles reference back to your subject
+- [ ] Your article added to "See also" of related articles

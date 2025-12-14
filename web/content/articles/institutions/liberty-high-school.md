@@ -19,8 +19,8 @@ tags:
       "caption": "Liberty High School, circa 1900 k.y."
     },
     "fields": {
-      "type": "High School",
-      "location": "[[Liberty, Missouri]]"
+      "Type": "High School",
+      "Location": "[[Liberty, Missouri]]"
     }
   }
 }

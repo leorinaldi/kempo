@@ -245,7 +245,7 @@ const categoryMeta: Record<string, { label: string; description: string; order: 
   event: { label: 'Events', description: 'Historical events and occurrences', order: 4 },
   timeline: { label: 'Timeline', description: 'Chronological records by decade and year', order: 5 },
   science: { label: 'Science and Technology', description: 'Scientific ideas, technologies', order: 6 },
-  culture: { label: 'Culture and Entertainment', description: 'Popular culture, entertainment, products, and celebrities', order: 7 },
+  culture: { label: 'Culture and Entertainment', description: 'Popular culture, entertainment, and products', order: 7 },
   concept: { label: 'Other Concepts', description: 'Ideas, theories, and abstract topics', order: 99 },
 }
 

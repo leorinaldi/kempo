@@ -15,9 +15,9 @@ tags:
   "infobox": {
     "type": "concept",
     "fields": {
-      "purpose": "Mapping real-world entities to Kempo equivalents",
-      "established": "1950 k.y.",
-      "scope": "People, institutions, companies, products, places"
+      "Purpose": "Mapping real-world entities to Kempo equivalents",
+      "Established": "1950 k.y.",
+      "Scope": "People, institutions, companies, products, places"
     }
   }
 }
@@ -32,6 +32,10 @@ This registry serves as a reference guide mapping real-world entities to their K
 ## People
 
 [Harry S. Truman](https://en.wikipedia.org/wiki/Harry_S._Truman) → [[harold-kellman|Harold S. Kellman]]
+
+[Dwight D. Eisenhower](https://en.wikipedia.org/wiki/Dwight_D._Eisenhower) / [Douglas MacArthur](https://en.wikipedia.org/wiki/Douglas_MacArthur) → [[douglas-d-westbrook|Douglas D. Westbrook]]
+
+[Henry Ford](https://en.wikipedia.org/wiki/Henry_Ford) / [William C. Durant](https://en.wikipedia.org/wiki/William_C._Durant) → [[henry-c-durant|Henry C. Durant]]
 
 ## Institutions
 
@@ -53,7 +57,7 @@ Spalding's Commercial College → [[Kansas City Commercial Institute]]
 
 ## Companies
 
-*No entries yet*
+[General Motors](https://en.wikipedia.org/wiki/General_Motors) / [Ford Motor Company](https://en.wikipedia.org/wiki/Ford_Motor_Company) → [[continental-motors|Continental Motors Corporation]]
 
 ## Products
 
@@ -66,6 +70,8 @@ Spalding's Commercial College → [[Kansas City Commercial Institute]]
 [Independence, Missouri](https://en.wikipedia.org/wiki/Independence,_Missouri) → [[Liberty, Missouri]]
 
 [Grandview, Missouri](https://en.wikipedia.org/wiki/Grandview,_Missouri) → [[Clearview, Missouri]]
+
+[Abilene, Kansas](https://en.wikipedia.org/wiki/Abilene,_Kansas) → [[Ashford, Kansas]]
 
 ## Guidelines
 

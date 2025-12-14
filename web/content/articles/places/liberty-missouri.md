@@ -22,9 +22,9 @@ tags:
       "caption": "Downtown Liberty, Missouri, circa 1940 k.y."
     },
     "fields": {
-      "type": "City",
-      "state": "[[Missouri]]",
-      "country": "United States"
+      "Type": "City",
+      "State": "[[Missouri]]",
+      "Country": "United States"
     }
   }
 }

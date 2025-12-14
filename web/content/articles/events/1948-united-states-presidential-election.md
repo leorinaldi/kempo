@@ -17,10 +17,10 @@ dates:
   "infobox": {
     "type": "event",
     "fields": {
-      "date": "November 2, 1948 k.y.",
-      "location": "United States",
-      "winner": "Harold S. Kellman",
-      "runner_up": "Thomas Dewey"
+      "Date": "November 2, 1948 k.y.",
+      "Location": "United States",
+      "Winner": "Harold S. Kellman",
+      "Runner_up": "Thomas Dewey"
     }
   }
 }

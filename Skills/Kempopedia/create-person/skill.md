@@ -171,9 +171,28 @@ When creating a parallel switchover person:
 | Republican Party | [[Federal Party]] |
 | Married Bess Wallace | Married Beth Crawford |
 
-## Image Generation
+## Image Generation (MANDATORY)
 
-After creating the article, generate a portrait image and add it immediately.
+> **AUTOMATIC STEP**: Image generation is a REQUIRED part of creating any person article. Do not consider the article complete until an image has been generated and added to the infobox.
+
+**Workflow (do this automatically after creating the article):**
+
+1. **Create the article file** with the infobox already containing the image placeholder:
+   ```json
+   "image": {
+     "url": "/media/<slug>.jpg",
+     "caption": "Name, circa YEAR k.y."
+   }
+   ```
+
+2. **Immediately generate the image** using:
+   ```bash
+   node scripts/generate-image.js <slug> "<prompt>"
+   ```
+
+3. **Verify the image was created** in `/web/public/media/<slug>.jpg`
+
+4. **Provide the article URL** for user to review the complete article with image
 
 **Prompt template for people:**
 ```
@@ -189,28 +208,43 @@ Image of a fictional [ROLE] in [TIME PERIOD]. [PHYSICAL DESCRIPTION: age, ethnic
 - Color style based on era (black and white for pre-1955)
 - Always end with: "Comic book style drawing."
 
-**Workflow:**
-1. Generate image: `node scripts/generate-image.js <slug> "<prompt>"`
-2. Immediately update infobox with image reference
-3. Provide article URL for user review
-4. User approves or requests regeneration in context
+**Example prompts by person type:**
 
-```json
-"image": {
-  "url": "/media/<slug>.jpg",
-  "caption": "Name, circa YEAR k.y."
-}
-```
+| Type | Example Prompt |
+|------|----------------|
+| Military leader | `Image of a fictional US Army five-star general in the late 1940s. Middle-aged white male with commanding presence. Wearing decorated military uniform with medals. Black and white portrait. Comic book style drawing.` |
+| Politician | `Image of a fictional US President in the late 1940s. Older white intellectual male wearing glasses and a suit. Black and white portrait. Comic book style drawing.` |
+| Political boss | `Image of a fictional 1920s American political boss. Older heavy-set male, stern expression. Wearing a dark suit and fedora, smoking a cigar. Black and white portrait. Comic book style drawing.` |
+| Businessman | `Image of a fictional American businessman in the 1920s. Middle-aged male, friendly face. Wearing a three-piece suit. Black and white portrait. Comic book style drawing.` |
 
 ## Checklist Before Completing
 
+> **CRITICAL**: A person article is NOT complete until all phases are done. See [[global-rules]] for full details.
+
+### Phase 1: Content Quality
 - [ ] All events on or before January 1, 1950 k.y.
 - [ ] Living people use present tense (no death/legacy section)
-- [ ] All wikilinks have existing articles (or stubs created)
-- [ ] Infobox uses wikilinks for linkable fields (places, institutions, parties)
-- [ ] Political party uses Kempo name (National/Federal)
-- [ ] Wikilinks use correct slug with pipe syntax if needed
 - [ ] All dates use k.y. format
+- [ ] Political party uses Kempo name (National/Federal)
+- [ ] Infobox uses wikilinks for linkable fields
 - [ ] Parallel switchover registered (if applicable)
-- [ ] Timeline events added for major life moments
-- [ ] Image generated and added to infobox
+- [ ] **IMAGE GENERATED** using `node scripts/generate-image.js` (REQUIRED)
+
+### Phase 2: Link Integrity (NO DEAD LINKS)
+- [ ] All wikilinks point to existing articles
+- [ ] Stubs created for: birthplace, schools, employers, family members (if notable)
+- [ ] Stubs link back to this person's article
+
+### Phase 3: Timeline Synchronization
+- [ ] Birth date added to appropriate decade timeline
+- [ ] Death date added (if deceased before 1950)
+- [ ] Marriage date(s) added to timeline
+- [ ] Major career milestones added (elections, promotions, appointments)
+- [ ] All date links in article have corresponding timeline entries
+
+### Phase 4: Backlinks & Cross-References
+- [ ] Schools/academies updated with this person in "Notable alumni"
+- [ ] Employers/organizations updated to mention this person
+- [ ] Related people articles reference back to this person
+- [ ] Events this person participated in describe their involvement
+- [ ] This person added to "See also" of all related articles

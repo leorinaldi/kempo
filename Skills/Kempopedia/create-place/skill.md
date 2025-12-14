@@ -101,7 +101,9 @@ dates:
 - [[Related Event]]
 ```
 
-## Image Generation
+## Image Generation (MANDATORY)
+
+> **AUTOMATIC STEP**: Image generation is a REQUIRED part of creating any place article. Do not consider the article complete until an image has been generated and added to the infobox.
 
 After creating the article, generate an image and add it immediately.
 
@@ -249,11 +251,28 @@ Places should connect to:
 
 ## Checklist Before Completing
 
+> **CRITICAL**: A place article is NOT complete until all phases are done. See [[global-rules]] for full details.
+
+### Phase 1: Content Quality
 - [ ] All events on or before January 1, 1950 k.y.
-- [ ] All wikilinks have existing articles (or stubs created)
-- [ ] Infobox uses wikilinks for linkable fields (state, country)
 - [ ] All dates use k.y. format
+- [ ] Infobox uses wikilinks for linkable fields (state, country)
 - [ ] Geographic and period details are accurate
-- [ ] Image generated and added to infobox
-- [ ] Caption includes "circa YEAR k.y."
 - [ ] Parallel switchover registered (if applicable)
+- [ ] **IMAGE GENERATED** using `node scripts/generate-image.js` (REQUIRED)
+- [ ] Caption includes "circa YEAR k.y."
+
+### Phase 2: Link Integrity (NO DEAD LINKS)
+- [ ] All wikilinks point to existing articles
+- [ ] Stubs created for any referenced places, people, institutions
+- [ ] Stubs link back to this place's article
+
+### Phase 3: Timeline Synchronization
+- [ ] Founding date added to appropriate timeline (if applicable)
+- [ ] Significant historical events at this location added to timeline
+- [ ] All date links in article have corresponding timeline entries
+
+### Phase 4: Backlinks & Cross-References
+- [ ] People born/living here listed in "Notable residents"
+- [ ] Related places reference back to this location
+- [ ] This place added to "See also" of related articles

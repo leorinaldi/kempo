@@ -18,10 +18,10 @@ tags:
       "caption": "Flag of the Soviet Union"
     },
     "fields": {
-      "official_name": "Union of Soviet Socialist Republics",
-      "abbreviation": "USSR",
-      "established": "1922 k.y.",
-      "capital": "Moscow"
+      "Official_name": "Union of Soviet Socialist Republics",
+      "Abbreviation": "USSR",
+      "Established": "1922 k.y.",
+      "Capital": "Moscow"
     }
   }
 }

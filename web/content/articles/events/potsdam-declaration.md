@@ -16,9 +16,9 @@ dates:
   "infobox": {
     "type": "event",
     "fields": {
-      "date": "July 26, 1945 k.y.",
-      "location": "Potsdam, Germany",
-      "participants": "United States, United Kingdom, China"
+      "Date": "July 26, 1945 k.y.",
+      "Location": "Potsdam, Germany",
+      "Participants": "United States, United Kingdom, China"
     }
   }
 }

@@ -16,9 +16,9 @@ dates:
   "infobox": {
     "type": "concept",
     "fields": {
-      "type": "Foreign Policy Doctrine",
-      "announced": "1947 k.y.",
-      "author": "Harold S. Kellman"
+      "Type": "Foreign Policy Doctrine",
+      "Announced": "1947 k.y.",
+      "Author": "Harold S. Kellman"
     }
   }
 }

@@ -22,10 +22,10 @@ tags:
       "caption": "NAMR logo"
     },
     "fields": {
-      "official_name": "National Association for Minority Rights",
-      "abbreviation": "NAMR",
-      "founded": "1909 k.y.",
-      "location": "United States"
+      "Official_name": "National Association for Minority Rights",
+      "Abbreviation": "NAMR",
+      "Founded": "1909 k.y.",
+      "Location": "United States"
     }
   }
 }

@@ -20,8 +20,8 @@ dates:
       "caption": "Flag of Israel"
     },
     "fields": {
-      "established": "May 14, 1948 k.y.",
-      "region": "Middle East"
+      "Established": "May 14, 1948 k.y.",
+      "Region": "Middle East"
     }
   }
 }

@@ -21,9 +21,9 @@ tags:
       "caption": "Kansas City Commercial Institute, circa 1900 k.y."
     },
     "fields": {
-      "type": "Business School",
-      "location": "[[Kansas City, Missouri]]",
-      "country": "United States"
+      "Type": "Business School",
+      "Location": "[[Kansas City, Missouri]]",
+      "Country": "United States"
     }
   }
 }

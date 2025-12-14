@@ -22,9 +22,9 @@ tags:
       "caption": "Midland Law School, circa 1920 k.y."
     },
     "fields": {
-      "type": "Law School",
-      "location": "[[Kansas City, Missouri]]",
-      "country": "United States"
+      "Type": "Law School",
+      "Location": "[[Kansas City, Missouri]]",
+      "Country": "United States"
     }
   }
 }

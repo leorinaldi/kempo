@@ -177,7 +177,9 @@ Institutions should connect to:
 - **Places**: Location city/region
 - **Other institutions**: Parent organizations, rivals, partners
 
-## Image Generation
+## Image Generation (MANDATORY)
+
+> **AUTOMATIC STEP**: Image generation is a REQUIRED part of creating any institution article. Do not consider the article complete until an image has been generated and added to the infobox.
 
 After creating the article, generate an image and add it immediately.
 
@@ -251,13 +253,29 @@ A prestigious American military academy campus. Cadets in formation on parade gr
 
 ## Checklist Before Completing
 
+> **CRITICAL**: An institution article is NOT complete until all phases are done. See [[global-rules]] for full details.
+
+### Phase 1: Content Quality
 - [ ] All events on or before January 1, 1950 k.y.
-- [ ] All wikilinks have existing articles (or stubs created)
-- [ ] Infobox uses wikilinks for linkable fields (places, parent orgs)
-- [ ] Uses Kempo names (National/Federal parties, etc.)
 - [ ] All dates use k.y. format
+- [ ] Uses Kempo names (National/Federal parties, etc.)
+- [ ] Infobox uses wikilinks for linkable fields (places, parent orgs)
 - [ ] Location uses Kempo place names
-- [ ] Notable alumni link to person articles
-- [ ] Timeline events added for founding and key moments
 - [ ] Parallel switchover registered (if applicable)
-- [ ] Image generated and added to infobox
+- [ ] **IMAGE GENERATED** using `node scripts/generate-image.js` (REQUIRED)
+
+### Phase 2: Link Integrity (NO DEAD LINKS)
+- [ ] All wikilinks point to existing articles
+- [ ] Stubs created for location, parent organizations, related institutions
+- [ ] Stubs link back to this institution's article
+
+### Phase 3: Timeline Synchronization
+- [ ] Founding date added to appropriate timeline
+- [ ] Major institutional milestones added to timeline
+- [ ] All date links in article have corresponding timeline entries
+
+### Phase 4: Backlinks & Cross-References
+- [ ] Notable alumni/members link to person articles
+- [ ] Person articles list this institution (education, employer, membership)
+- [ ] Location article references this institution
+- [ ] This institution added to "See also" of related articles

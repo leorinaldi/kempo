@@ -19,9 +19,9 @@ tags:
       "caption": "Patrick Gallagher, circa 1925 k.y."
     },
     "fields": {
-      "nationality": "American",
-      "political_party": "[[National Party]]",
-      "known_for": ["Boss of Kansas City National Party machine"]
+      "Nationality": "American",
+      "Political_party": "[[National Party]]",
+      "Known_for": ["Boss of Kansas City National Party machine"]
     }
   }
 }

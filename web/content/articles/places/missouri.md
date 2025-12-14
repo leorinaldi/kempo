@@ -18,9 +18,9 @@ tags:
       "caption": "Missouri farmland, circa 1945 k.y."
     },
     "fields": {
-      "type": "State",
-      "country": "United States",
-      "capital": "Jefferson City"
+      "Type": "State",
+      "Country": "United States",
+      "Capital": "Jefferson City"
     }
   }
 }

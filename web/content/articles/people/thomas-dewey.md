@@ -19,9 +19,9 @@ tags:
       "caption": "Governor Thomas Dewey, circa 1948 k.y."
     },
     "fields": {
-      "nationality": "American",
-      "political_party": "[[Federal Party]]",
-      "known_for": ["Governor of New York", "1948 presidential candidate"]
+      "Nationality": "American",
+      "Political_party": "[[Federal Party]]",
+      "Known_for": ["Governor of New York", "1948 presidential candidate"]
     }
   }
 }

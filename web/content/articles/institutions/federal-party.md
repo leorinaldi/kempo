@@ -22,10 +22,10 @@ tags:
       "caption": "Federal Party logo"
     },
     "fields": {
-      "type": "Political Party",
-      "country": "United States",
-      "ideology": "Conservatism",
-      "symbol": "Red Eagle"
+      "Type": "Political Party",
+      "Country": "United States",
+      "Ideology": "Conservatism",
+      "Symbol": "Red Eagle"
     }
   }
 }
