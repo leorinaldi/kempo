@@ -27,49 +27,45 @@ The **Parallel Switchover Registry** documents the mapping between real-world hi
 
 ## Purpose
 
-This registry serves as a reference guide showing:
-- The real-world entity that inspired each Kempo counterpart
-- External links to Wikipedia articles for historical reference
-- The date each switchover was established in Kempopedia
+This registry serves as a reference guide mapping real-world entities to their Kempo counterparts. Real-world names link to Wikipedia for historical reference.
 
 ## People
 
-| Real World | Kempo Equivalent | Type | Wikipedia |
-|------------|------------------|------|-----------|
-| Harry S. Truman | [[Harold S. Kellman]] | Head of State, Politician | [Wikipedia](https://en.wikipedia.org/wiki/Harry_S._Truman) |
+[Harry S. Truman](https://en.wikipedia.org/wiki/Harry_S._Truman) → [[harold-kellman|Harold S. Kellman]]
 
 ## Institutions
 
-| Real World | Kempo Equivalent | Type | Wikipedia |
-|------------|------------------|------|-----------|
-| Kansas City School of Law | [[Midland Law School]] | University | [Wikipedia](https://en.wikipedia.org/wiki/University_of_Missouri%E2%80%93Kansas_City_School_of_Law) |
-| Spalding's Commercial College | [[Kansas City Commercial Institute]] | Business School | — |
+[Democratic Party](https://en.wikipedia.org/wiki/Democratic_Party_(United_States)) → [[National Party]]
+
+[Republican Party](https://en.wikipedia.org/wiki/Republican_Party_(United_States)) → [[Federal Party]]
+
+[Kansas City School of Law](https://en.wikipedia.org/wiki/University_of_Missouri%E2%80%93Kansas_City_School_of_Law) → [[Midland Law School]]
+
+Spalding's Commercial College → [[Kansas City Commercial Institute]]
+
+[United States Military Academy](https://en.wikipedia.org/wiki/United_States_Military_Academy) → [[Vermont Army Academy]]
+
+[NAACP](https://en.wikipedia.org/wiki/NAACP) → [[NAMR]]
 
 ## Nations
 
-| Real World | Kempo Equivalent | Type | Wikipedia |
-|------------|------------------|------|-----------|
-| — | — | — | — |
+*No entries yet*
 
 ## Companies
 
-| Real World | Kempo Equivalent | Type | Wikipedia |
-|------------|------------------|------|-----------|
-| — | — | — | — |
+*No entries yet*
 
 ## Products
 
-| Real World | Kempo Equivalent | Type | Wikipedia |
-|------------|------------------|------|-----------|
-| — | — | — | — |
+*No entries yet*
 
 ## Places
 
-| Real World | Kempo Equivalent | Type | Wikipedia |
-|------------|------------------|------|-----------|
-| Lamar, Missouri | [[Lawton, Missouri]] | Town | [Wikipedia](https://en.wikipedia.org/wiki/Lamar,_Missouri) |
-| Independence, Missouri | [[Liberty, Missouri]] | City | [Wikipedia](https://en.wikipedia.org/wiki/Independence,_Missouri) |
-| Grandview, Missouri | [[Clearview, Missouri]] | Town | [Wikipedia](https://en.wikipedia.org/wiki/Grandview,_Missouri) |
+[Lamar, Missouri](https://en.wikipedia.org/wiki/Lamar,_Missouri) → [[Lawton, Missouri]]
+
+[Independence, Missouri](https://en.wikipedia.org/wiki/Independence,_Missouri) → [[Liberty, Missouri]]
+
+[Grandview, Missouri](https://en.wikipedia.org/wiki/Grandview,_Missouri) → [[Clearview, Missouri]]
 
 ## Guidelines
 

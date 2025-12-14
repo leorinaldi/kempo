@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import { getAllArticles } from '@/lib/articles'
+import { getAllCategories, getAllArticles } from '@/lib/articles'
 
 export default function KempopediaHome() {
-  const articles = getAllArticles()
+  const categories = getAllCategories()
+  const allArticles = getAllArticles()
+  const totalArticles = allArticles.length
 
   return (
     <div className="min-h-screen bg-white">
@@ -24,7 +26,9 @@ export default function KempopediaHome() {
           <p>
             <strong>Kempopedia</strong> is the comprehensive encyclopedia of the{' '}
             <Link href="/" className="text-wiki-link hover:underline">Kempo</Link>{' '}
-            universe, a fictional world where history diverged starting in 1950 k.y.
+            universe, a fictional world where history diverged from historical reality
+            sometime in the late 1800s, at first in minor ways, but with divergence
+            increasing over time, especially after 1950 k.y.
           </p>
 
           <p>
@@ -32,40 +36,51 @@ export default function KempopediaHome() {
             which matches standard Gregorian years (e.g., 1952 k.y. = 1952 AD).
           </p>
 
-          <h2>All Articles</h2>
-
-          {articles.length === 0 ? (
-            <p className="text-gray-500 italic">No articles yet.</p>
-          ) : (
-            <ul>
-              {articles.map((article) => (
-                <li key={article.slug}>
-                  <Link
-                    href={`/kempopedia/wiki/${article.slug}`}
-                    className="text-wiki-link hover:underline"
-                  >
-                    {article.frontmatter.title}
-                  </Link>
-                  {article.frontmatter.type && (
-                    <span className="text-gray-500 text-sm ml-2">
-                      ({article.frontmatter.type})
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <h2>About the Calendar</h2>
-
-          <p>
-            The <strong>k.y.</strong> (Kempo Year) system uses the same numbering as
-            standard Gregorian years. The suffix simply indicates that events occur
-            within the Kempo fictional universe rather than real-world history.
+          <p className="text-sm text-gray-600 mt-4">
+            Currently documenting <strong>{totalArticles}</strong> articles across {categories.length} categories.
           </p>
-          <p>
-            The Kempo timeline diverges from real-world history beginning in <strong>1950 k.y.</strong>
-          </p>
+
+          {/* Categories Grid */}
+          <h2>Browse by Category</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
+            {categories.map((category) => (
+              <Link
+                key={category.type}
+                href={`/kempopedia/category/${category.type}`}
+                className="block p-4 border border-wiki-border rounded hover:bg-wiki-background transition-colors"
+              >
+                <h3 className="text-lg font-semibold text-wiki-link mb-1">
+                  {category.label}
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">{category.description}</p>
+                <p className="text-xs text-gray-500">
+                  {category.count} {category.count === 1 ? 'article' : 'articles'}
+                </p>
+              </Link>
+            ))}
+          </div>
+
+          {/* Quick Links */}
+          <h2>Quick Links</h2>
+
+          <ul className="space-y-1">
+            <li>
+              <Link href="/kempopedia/wiki/master-timeline" className="text-wiki-link hover:underline">
+                Master Timeline
+              </Link>
+              {' — '}
+              <span className="text-gray-600">Chronological history of the Kempo universe</span>
+            </li>
+            <li>
+              <Link href="/kempopedia/wiki/parallel-switchover" className="text-wiki-link hover:underline">
+                Parallel Switchover Registry
+              </Link>
+              {' — '}
+              <span className="text-gray-600">Mappings between real-world and Kempo entities</span>
+            </li>
+          </ul>
+
         </div>
       </main>
 

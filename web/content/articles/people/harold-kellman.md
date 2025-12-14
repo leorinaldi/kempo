@@ -14,7 +14,7 @@ tags:
   - world-war-i
   - world-war-ii
   - parallel-switchover
-  - democratic-party
+  - national-party
 dates:
   - "May 11, 1884 k.y."
   - "June 1901 k.y."
@@ -26,8 +26,6 @@ dates:
   - "1934 k.y."
   - "1944 k.y."
   - "April 12, 1945 k.y."
-  - "January 20, 1953 k.y."
-  - "December 29, 1972 k.y."
 ---
 
 ```json
@@ -35,24 +33,22 @@ dates:
   "infobox": {
     "type": "person",
     "image": {
-      "url": "/media/placeholder-person.jpg",
+      "url": "/media/harold-kellman.jpg",
       "caption": "President Harold S. Kellman, 1945 k.y."
     },
     "fields": {
       "full_name": "Harold Sterling Kellman",
       "birth_date": "May 11, 1884 k.y.",
       "birth_place": "[[Lawton, Missouri]]",
-      "death_date": "December 29, 1972 k.y.",
-      "death_place": "[[Liberty, Missouri]]",
       "nationality": "American",
       "occupation": ["Politician", "Businessman", "Military officer"],
       "education": "[[Kansas City Commercial Institute]], [[Midland Law School]] (incomplete)",
-      "military_service": "United States Army (1917–1919 k.y.); Missouri National Guard (1905–1911 k.y.)",
+      "military_service": "United States Army (1917–1919 k.y.); [[Missouri]] National Guard (1905–1911 k.y.)",
       "rank": "Colonel (Reserve)",
       "spouse": "Elizabeth 'Beth' Crawford (m. 1919)",
       "children": 1,
-      "political_party": "Democratic Party",
-      "known_for": ["33rd President of the United States", "Kellman Doctrine", "Recognition of Israel", "Korean War leadership"]
+      "political_party": "[[National Party]]",
+      "known_for": ["33rd President of the United States"]
     }
   },
   "timeline_events": [
@@ -100,28 +96,18 @@ dates:
       "date": "April 12, 1945 k.y.",
       "headline": "Kellman becomes President",
       "description": "Assumes the presidency following the death of Franklin D. Roosevelt"
-    },
-    {
-      "date": "January 20, 1953 k.y.",
-      "headline": "Kellman leaves office",
-      "description": "Completes his presidency and retires to Liberty, Missouri"
-    },
-    {
-      "date": "December 29, 1972 k.y.",
-      "headline": "Harold Kellman dies",
-      "description": "Dies at age 88 in Liberty, Missouri"
     }
   ]
 }
 ```
 
-**Harold Sterling Kellman** (May 11, [[1884 k.y.]] – December 29, [[1972 k.y.]]) was an American politician and military officer who served as the 33rd President of the United States from [[April 12, 1945 k.y.]] to [[January 20, 1953 k.y.]]. He assumed the presidency upon the death of [[Franklin D. Roosevelt]] and led the nation through the final months of [[World War II]], authorizing the use of atomic weapons against Japan. His presidency was marked by the beginning of the [[Cold War]], the establishment of the [[Kellman Doctrine]], and the [[Korean War]].
+**Harold Sterling Kellman** (born May 11, [[1884 k.y.]]) is an American [[National Party]] politician and military officer currently serving as the 33rd President of the United States since [[April 12, 1945 k.y.]] He assumed the presidency upon the death of [[Franklin D. Roosevelt]] and led the nation through the final months of [[World War II]], authorizing the use of atomic weapons against Japan. He won election in his own right in [[1948 k.y.]]
 
 ## Early life
 
 Kellman was born on May 11, [[1884 k.y.]], in the small farming community of [[Lawton, Missouri]], to John Anderson Kellman and Martha Ellen Young Kellman. In 1890, the family relocated to [[Liberty, Missouri]], where Harold would spend most of his youth. The third of four children, Harold developed a love of reading at an early age, reportedly reading every book in the [[Liberty Public Library]] by his teenage years.
 
-Poor eyesight, which required him to wear thick glasses from age six, prevented Kellman from participating in sports. He instead devoted himself to academics and music, becoming an accomplished pianist. He harbored dreams of attending the [[United States Military Academy]] but was rejected due to his vision problems.
+Poor eyesight, which required him to wear thick glasses from age six, prevented Kellman from participating in sports. He instead devoted himself to academics and music, becoming an accomplished pianist. He harbored dreams of attending the [[Vermont Army Academy]] but was rejected due to his vision problems.
 
 ## Education
 
@@ -137,7 +123,7 @@ Following his departure from business school, Kellman worked a series of jobs in
 
 ### Missouri National Guard
 
-Kellman joined the Missouri National Guard in 1905, serving until 1911. This early military experience would prove formative, instilling in him values of discipline and camaraderie that he carried throughout his life.
+Kellman joined the Missouri National Guard in 1905, serving until 1911. This early military experience proved formative, instilling in him values of discipline and camaraderie that he carries throughout his life.
 
 ### World War I
 
@@ -149,7 +135,7 @@ He returned home in [[November 1918 k.y.]] and remained in the Army Reserve, eve
 
 ## Marriage and family
 
-On [[June 28, 1919 k.y.]], Kellman married Elizabeth "Beth" Crawford, whom he had known since childhood in Liberty. The couple had one daughter, Catherine Ellen Kellman, born on February 20, [[1924 k.y.]] Beth Kellman would become a respected First Lady known for her sharp wit and fierce protection of her family's privacy.
+On [[June 28, 1919 k.y.]], Kellman married Elizabeth "Beth" Crawford, whom he had known since childhood in Liberty. The couple has one daughter, Catherine Ellen Kellman, born on February 20, [[1924 k.y.]] Beth Kellman has become a respected First Lady known for her sharp wit and fierce protection of her family's privacy.
 
 ## Business ventures
 
@@ -173,7 +159,7 @@ In [[1944 k.y.]], as President [[Franklin D. Roosevelt]] sought an unprecedented
 
 Kellman served as Vice President for only 82 days. He met with Roosevelt only twice during this period and was largely kept uninformed about major war developments, including the Manhattan Project.
 
-## Presidency (1945–1953)
+## Presidency (1945 k.y.–present)
 
 ### Succession
 
@@ -185,7 +171,7 @@ Within months of taking office, Kellman faced the most consequential decision of
 
 ### Post-war foreign policy
 
-Kellman's presidency was defined by the emerging [[Cold War]] with the Soviet Union. In [[1947 k.y.]], he announced the [[Kellman Doctrine]], pledging American support to nations resisting communist expansion. That same year, he championed the [[Marshall Plan]], providing economic aid to rebuild war-torn Europe.
+Kellman's presidency has been defined by rising tensions with the [[Soviet Union]]. In [[1947 k.y.]], he announced the [[Kellman Doctrine]], pledging American support to nations resisting communist expansion. That same year, he championed the [[Marshall Plan]], providing economic aid to rebuild war-torn Europe.
 
 In May [[1948 k.y.]], Kellman made the United States the first nation to recognize the new State of [[Israel]], acting within minutes of Israel's declaration of independence despite opposition from his own State Department.
 
@@ -195,29 +181,12 @@ Kellman's political fortunes reached their nadir in early 1948. Facing a divided
 
 In one of American history's greatest political upsets, Kellman won the [[1948 k.y.]] election, famously holding aloft a copy of the *Chicago Tribune* with its erroneous headline "DEWEY DEFEATS KELLMAN."
 
-### Korean War
-
-When North Korean forces invaded South Korea in June [[1950 k.y.]], Kellman committed American troops under United Nations auspices without a formal declaration of war, setting a precedent for future conflicts. The war ground into a bloody stalemate, and Kellman's dismissal of the popular General [[Douglas MacArthur]] for insubordination in [[1951 k.y.]] triggered a firestorm of controversy.
-
 ### Domestic policy
 
-On the domestic front, Kellman pursued an ambitious but largely frustrated liberal agenda he called the "Fair Deal," including national health insurance and civil rights legislation. He desegregated the armed forces by executive order in [[1948 k.y.]] and became the first president to address the [[NAACP]].
-
-## Retirement and death
-
-Kellman declined to seek re-election in 1952, and Republican [[Dwight D. Eisenhower]] won the presidency. Kellman retired to Liberty, Missouri, where he spent his remaining years writing, lecturing, and overseeing the construction of the [[Kellman Presidential Library]].
-
-Harold S. Kellman died on [[December 29, 1972 k.y.]], at age 88, in Liberty, Missouri. He was buried in the courtyard of his presidential library, beside his wife Beth, who would join him in death ten years later.
-
-## Legacy
-
-Once dismissed as an accidental president, Kellman's reputation has risen considerably among historians. He is credited with establishing the framework for American Cold War policy, demonstrating that an ordinary man from humble origins could rise to meet extraordinary challenges.
+On the domestic front, Kellman has pursued an ambitious but largely frustrated liberal agenda he calls the "Fair Deal," including national health insurance and civil rights legislation. He desegregated the armed forces by executive order in [[1948 k.y.]] and became the first president to address the [[NAMR]].
 
 ## See also
 
 - [[Kellman Doctrine]]
-- [[Korean War]]
-- [[Cold War]]
 - [[1948 United States presidential election]]
-- [[Kellman Presidential Library]]
 - [[Liberty, Missouri]]

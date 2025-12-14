@@ -90,27 +90,44 @@ function findArticleFile(slug: string): string | null {
   return match || null
 }
 
-// Convert k.y. date to timeline anchor
-function dateToAnchor(dateStr: string): string {
+// Convert k.y. date to timeline page and anchor
+function dateToTimelineLink(dateStr: string): { page: string; anchor: string } {
   // Match patterns like "March 15, 1945 k.y." or "1945 k.y." or "June 1962 k.y."
   const fullDateMatch = dateStr.match(/(\w+)\s+(\d+),?\s+(\d+)\s*k\.y\./)
   const monthYearMatch = dateStr.match(/(\w+)\s+(\d+)\s*k\.y\./)
   const yearOnlyMatch = dateStr.match(/^(\d+)\s*k\.y\./)
 
+  let year: string
+  let anchor: string
+
   if (fullDateMatch) {
-    const [, month, day, year] = fullDateMatch
+    const [, month, day, yearStr] = fullDateMatch
+    year = yearStr
     const monthNum = getMonthNumber(month)
-    return `${year}-${monthNum}-${day.padStart(2, '0')}-ky`
+    anchor = `${year}-${monthNum}-${day.padStart(2, '0')}-ky`
   } else if (monthYearMatch && !fullDateMatch) {
-    const [, month, year] = monthYearMatch
+    const [, month, yearStr] = monthYearMatch
+    year = yearStr
     const monthNum = getMonthNumber(month)
-    return `${year}-${monthNum}-ky`
+    anchor = `${year}-${monthNum}-ky`
   } else if (yearOnlyMatch) {
-    const [, year] = yearOnlyMatch
-    return `${year}-ky`
+    year = yearOnlyMatch[1]
+    anchor = `${year}-ky`
+  } else {
+    // Fallback
+    return { page: 'master-timeline', anchor: dateStr.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') }
   }
 
-  return dateStr.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  const yearNum = parseInt(year, 10)
+
+  // Pre-1950: link to decade page
+  // 1950+: link to year page
+  if (yearNum < 1950) {
+    const decade = Math.floor(yearNum / 10) * 10
+    return { page: `${decade}s`, anchor }
+  } else {
+    return { page: year, anchor }
+  }
 }
 
 function getMonthNumber(month: string): string {
@@ -169,8 +186,8 @@ export function getArticleBySlug(slug: string, filePath?: string): Article | nul
 
         // Check if this is a date link (contains k.y.)
         if (isDateLink(target)) {
-          const anchor = dateToAnchor(target)
-          return `<a href="/kempopedia/wiki/master-timeline#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
+          const { page, anchor } = dateToTimelineLink(target)
+          return `<a href="/kempopedia/wiki/${page}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
         }
 
         // Regular article link
@@ -205,4 +222,60 @@ export async function getArticleBySlugAsync(slug: string): Promise<Article | nul
     ...article,
     htmlContent: processedContent.toString(),
   }
+}
+
+// Get all articles of a specific type/category
+export function getArticlesByType(type: string): Article[] {
+  const allArticles = getAllArticles()
+  return allArticles.filter(article => article.frontmatter.type === type)
+}
+
+// Get all unique categories with their article counts
+export interface CategoryInfo {
+  type: string
+  count: number
+  label: string
+  description: string
+}
+
+const categoryMeta: Record<string, { label: string; description: string; order: number }> = {
+  person: { label: 'People', description: 'Biographical articles about individuals', order: 1 },
+  place: { label: 'Places', description: 'Cities, states, nations, and locations', order: 2 },
+  institution: { label: 'Institutions', description: 'Organizations, companies, parties, and academies', order: 3 },
+  event: { label: 'Events', description: 'Historical events and occurrences', order: 4 },
+  timeline: { label: 'Timeline', description: 'Chronological records by decade and year', order: 5 },
+  science: { label: 'Science and Technology', description: 'Scientific ideas, technologies', order: 6 },
+  culture: { label: 'Culture and Entertainment', description: 'Popular culture, entertainment, products, and celebrities', order: 7 },
+  concept: { label: 'Other Concepts', description: 'Ideas, theories, and abstract topics', order: 99 },
+}
+
+export function getAllCategories(): CategoryInfo[] {
+  const allArticles = getAllArticles()
+  const typeCounts: Record<string, number> = {}
+
+  // Initialize all defined categories with 0
+  Object.keys(categoryMeta).forEach(type => {
+    typeCounts[type] = 0
+  })
+
+  allArticles.forEach(article => {
+    const type = article.frontmatter.type
+    if (type && categoryMeta[type]) {
+      typeCounts[type] = (typeCounts[type] || 0) + 1
+    }
+  })
+
+  return Object.entries(categoryMeta)
+    .map(([type, meta]) => ({
+      type,
+      count: typeCounts[type] || 0,
+      label: meta.label,
+      description: meta.description,
+    }))
+    .sort((a, b) => (categoryMeta[a.type]?.order || 99) - (categoryMeta[b.type]?.order || 99))
+}
+
+// Get valid category types
+export function isValidCategory(type: string): boolean {
+  return Object.keys(categoryMeta).includes(type)
 }

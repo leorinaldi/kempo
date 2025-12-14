@@ -18,18 +18,39 @@ Kempo is a living simulation—a new reality built day by day through iterative 
 
 ## Calendar System
 
-All dates in Kempo use **k.y.** (Kempo Year), which matches standard Gregorian years. For example, 1952 k.y. = 1952 AD. The fictional history begins diverging from real-world history in 1950 k.y.
+All dates in Kempo use **k.y.** (Kempo Year), which matches standard Gregorian years. For example, 1948 k.y. = 1948 AD.
+
+**Current Date: January 1, 1950 k.y.**
+
+The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. History before this date includes parallel switchover entities (fictional counterparts to real historical figures and institutions), meaning pre-1950 history is not identical to real-world history.
 
 ## Kempopedia
 
-Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki documenting everything in this fictional world. It features:
+Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki documenting everything in this fictional world.
+
+**Access Kempopedia**: https://kempo.vercel.app/kempopedia
+
+### Features
 
 - Wikipedia-style article layout with infoboxes
 - Internal wikilinks between articles (`[[Article Name]]`)
-- Category-based organization
-- Timeline integration
+- Infobox sidebar links for places, institutions, and people
+- Category-based organization with browse pages
+- Timeline pages organized by decade (pre-1950) and year (1950+)
+- AI-generated comic book style images
 
-**Access Kempopedia**: https://kempo.vercel.app/kempopedia
+### Categories
+
+| Category | Description |
+|----------|-------------|
+| People | Biographical articles about individuals |
+| Places | Cities, states, nations, and locations |
+| Institutions | Organizations, companies, parties, and academies |
+| Events | Historical events and occurrences |
+| Timeline | Chronological records by decade and year |
+| Science and Technology | Scientific ideas, technologies |
+| Culture and Entertainment | Popular culture, entertainment, products, and celebrities |
+| Other Concepts | Ideas, theories, and abstract topics |
 
 ## Project Structure
 
@@ -38,15 +59,34 @@ kempo/
 ├── Kempopedia/                    # Documentation and schemas
 │   ├── ARCHITECTURE.md            # Technical architecture
 │   └── ARTICLE_SCHEMA.md          # Article format specification
-├── Skills/                        # Claude Skills
+├── Skills/                        # Claude Skills (each skill has its own folder)
 │   └── Kempopedia/
-│       └── create-article.md      # Skill for generating articles
+│       ├── global-rules/          # Core rules for all article creation
+│       ├── create-article/        # General article creation
+│       ├── create-person/         # Person articles with portraits
+│       ├── create-institution/    # Institution articles with logos/buildings
+│       ├── create-place/          # Place articles (cities, states, nations)
+│       ├── create-timeline/       # Timeline pages (decades and years)
+│       ├── generate-image/        # Image generation guidelines
+│       └── parallel-switchover/   # Real-world to Kempo mappings
+├── scripts/
+│   └── generate-image.js          # Grok API image generation script
 └── web/                           # Next.js web application
     ├── content/
     │   └── articles/              # Kempopedia article files (MDX)
+    │       ├── people/            # Person articles
+    │       ├── places/            # Place articles (including nations)
+    │       ├── institutions/      # Institution articles
+    │       ├── events/            # Event articles
+    │       ├── timelines/         # Timeline pages
+    │       └── concepts/          # Concept articles
+    ├── public/
+    │   └── media/                 # Generated images
     └── src/
         ├── app/
         │   └── kempopedia/        # Kempopedia pages
+        │       ├── wiki/[slug]/   # Individual article pages
+        │       └── category/      # Category browse pages
         ├── components/            # React components (Infobox, etc.)
         └── lib/                   # Article loading utilities
 ```
@@ -56,6 +96,7 @@ kempo/
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
 - **Content**: MDX with frontmatter
+- **Images**: Grok API (xAI) for comic book style illustrations
 - **Hosting**: Vercel
 - **Repository**: GitHub
 
@@ -71,7 +112,105 @@ The site runs at http://localhost:3000
 
 ## Creating Articles
 
-Articles are markdown files in `web/content/articles/` with YAML frontmatter and optional JSON infobox data. See `Kempopedia/ARTICLE_SCHEMA.md` for the full specification.
+Articles are markdown files in `web/content/articles/` organized by type (people, places, institutions, etc.). Each article has YAML frontmatter and optional JSON infobox data.
+
+### Article Format
+
+```markdown
+---
+title: "Article Title"
+slug: "article-slug"
+type: person | place | institution | event | timeline | concept
+subtype: specific-subtype
+status: published
+tags:
+  - relevant-tags
+---
+
+```json
+{
+  "infobox": {
+    "type": "person",
+    "image": {
+      "url": "/media/article-slug.jpg",
+      "caption": "Caption text"
+    },
+    "fields": {
+      "field_name": "value or [[wikilink]]"
+    }
+  }
+}
+```
+
+Article content with [[wikilinks]] to other articles.
+```
+
+### Infobox Wikilinks
+
+Infobox fields support wikilink syntax for linkable content:
+
+```json
+"birth_place": "[[Lawton, Missouri]]",
+"political_party": "[[National Party]]",
+"education": "[[Liberty High School]]"
+```
+
+Use wikilinks for places, institutions, and people. Use plain text for dates, numbers, and nationalities.
+
+## Image Generation
+
+Images are generated using the Grok API with comic book style prompts.
+
+```bash
+node scripts/generate-image.js <slug> "<prompt>"
+```
+
+### Prompt Style
+
+All prompts start with: `Comic book illustration, bold ink lines, graphic novel style.`
+
+| Article Type | Image Style |
+|--------------|-------------|
+| People | Portrait with setting/background |
+| Nations | Flag waving against blue sky (full color) |
+| Places | Scenic landscape or main street scene |
+| Institutions | Logo or building depending on type |
+
+### Color by Era
+
+| Era | Color Style |
+|-----|-------------|
+| Pre-1955 | Black and white |
+| 1955-1965 | Muted early color, slightly faded |
+| 1965+ | Full color |
+
+Nation flags are always full color regardless of era.
+
+## Timeline Structure
+
+The timeline is organized into separate pages:
+
+- **Pre-1950**: Decade pages (1880s, 1890s, 1900s, etc.)
+- **1950+**: Individual year pages (created when first event occurs)
+- **Master Timeline**: Index linking to all decade/year pages
+
+Date links in articles automatically route to the appropriate timeline page:
+- `[[1945 k.y.]]` → links to 1940s decade page
+- `[[1951 k.y.]]` → links to 1951 year page
+
+## Skills
+
+Skills are Claude prompts that guide article creation. Each skill has its own folder under `Skills/Kempopedia/` with a `skill.md` file.
+
+| Skill | Purpose |
+|-------|---------|
+| global-rules | Core rules for all articles (current date, no dead links, etc.) |
+| create-person | Biographical articles with portrait images |
+| create-place | Places including nations (with flag images) |
+| create-institution | Organizations with logos or building images |
+| create-timeline | Decade and year timeline pages |
+| generate-image | Image prompt guidelines and color rules |
+| parallel-switchover | Mapping real-world entities to Kempo equivalents |
 
 ---
 
