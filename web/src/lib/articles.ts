@@ -4,8 +4,8 @@ import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
 
-// Path to articles in the Kempopedia folder
-const articlesDirectory = path.join(process.cwd(), '..', 'Kempopedia', 'articles')
+// Path to articles in the content folder
+const articlesDirectory = path.join(process.cwd(), 'content', 'articles')
 
 export interface ArticleFrontmatter {
   title: string
