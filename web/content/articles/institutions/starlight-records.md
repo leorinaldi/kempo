@@ -26,13 +26,13 @@ dates:
       "Industry": "Music",
       "Founded": "1938 k.y.",
       "Headquarters": "New York City",
-      "Country": "[[United States]]"
+      "Country": "[[united-states|United States]]"
     }
   }
 }
 ```
 
-**Starlight Records** is an American record label based in New York City. Founded in 1938 k.y., it is one of the premier recording companies in the [[United States]], known for signing top-tier vocalists and popular music artists.
+**Starlight Records** is an American record label based in New York City. Founded in 1938 k.y., it is one of the premier recording companies in the [[united-states|United States]], known for signing top-tier vocalists and popular music artists.
 
 ## Notable artists
 
@@ -51,4 +51,4 @@ dates:
 - [[a-martino-christmas|A Martino Christmas]]
 - [[in-the-wee-small-hours|In the Wee Small Hours]]
 - [[this-perfect-holiday|This Perfect Holiday]]
-- [[United States]]
+- [[united-states|United States]]

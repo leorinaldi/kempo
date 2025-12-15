@@ -20,7 +20,7 @@ tags:
     },
     "fields": {
       "Type": "U.S. State",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Capital": "Columbus",
       "Region": "Midwest",
       "Nickname": "The Buckeye State"
@@ -29,7 +29,7 @@ tags:
 }
 ```
 
-**Ohio** is a state in the Midwestern [[United States]]. Known as "The Buckeye State," Ohio is a major industrial center.
+**Ohio** is a state in the Midwestern [[united-states|United States]]. Known as "The Buckeye State," Ohio is a major industrial center.
 
 ## Notable people
 
@@ -37,5 +37,5 @@ tags:
 
 ## See also
 
-- [[United States]]
+- [[united-states|United States]]
 - [[Cleveland]]

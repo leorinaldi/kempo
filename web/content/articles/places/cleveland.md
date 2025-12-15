@@ -22,14 +22,14 @@ tags:
     "fields": {
       "Type": "City",
       "State": "[[Ohio]]",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Region": "Northeast Ohio"
     }
   }
 }
 ```
 
-**Cleveland** is a major city in northeastern [[Ohio]], [[United States]]. It is an industrial center known for manufacturing.
+**Cleveland** is a major city in northeastern [[Ohio]], [[united-states|United States]]. It is an industrial center known for manufacturing.
 
 ## Notable people
 
@@ -38,4 +38,4 @@ tags:
 ## See also
 
 - [[Ohio]]
-- [[United States]]
+- [[united-states|United States]]

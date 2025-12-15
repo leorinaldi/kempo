@@ -1,15 +1,15 @@
 ---
 title: "Melody Index"
 slug: "melody-index"
-type: institution
-subtype: company
+type: product
+subtype: media
 status: published
 parallel_switchover:
   real_world: "Billboard (magazine)"
   wikipedia: "https://en.wikipedia.org/wiki/Billboard_(magazine)"
 tags:
   - american
-  - company
+  - magazine
   - media
   - music-industry
   - parallel-switchover
@@ -20,20 +20,20 @@ dates:
 ```json
 {
   "infobox": {
-    "type": "institution",
+    "type": "product",
     "fields": {
       "Type": "Trade magazine",
       "Industry": "Music",
       "Founded": "1894 k.y.",
       "Headquarters": "New York City",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Known_for": "Music charts, industry news"
     }
   }
 }
 ```
 
-**Melody Index** is an American entertainment trade magazine published in New York City. Founded in 1894 k.y., it is the leading publication covering the music industry in the [[United States]], known for its influential record charts that track the popularity of songs and albums.
+**Melody Index** is an American entertainment trade magazine published in New York City. Founded in 1894 k.y., it is the leading publication covering the music industry in the [[united-states|United States]], known for its influential record charts that track the popularity of songs and albums.
 
 ## History
 

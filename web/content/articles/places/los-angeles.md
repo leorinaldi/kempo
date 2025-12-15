@@ -21,7 +21,7 @@ tags:
     "fields": {
       "Type": "City",
       "State": "[[California]]",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Region": "Southern California",
       "Known_for": "Film industry, entertainment"
     }
@@ -29,7 +29,7 @@ tags:
 }
 ```
 
-**Los Angeles** is a major city in southern [[California]], [[United States]]. It is the center of the American film and entertainment industry, home to Hollywood and numerous recording studios.
+**Los Angeles** is a major city in southern [[California]], [[united-states|United States]]. It is the center of the American film and entertainment industry, home to Hollywood and numerous recording studios.
 
 ## Notable residents
 
@@ -38,4 +38,4 @@ tags:
 ## See also
 
 - [[California]]
-- [[United States]]
+- [[united-states|United States]]

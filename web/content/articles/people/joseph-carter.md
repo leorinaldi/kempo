@@ -145,7 +145,7 @@ Joseph "Iron Joe" Carter is widely regarded as the greatest heavyweight boxer in
 
 Beyond his athletic achievements, Carter became a symbol of dignity and excellence. His victories over Klaus Brenner galvanized the nation during a troubled time, and his military service demonstrated that his courage extended beyond the ring.
 
-The *[[melody-index|Melody Index]]* named Carter "Athlete of the Year" in 1938, and he was featured on the cover of *Time* magazine three times during his career.
+*[[athlete-magazine|Athlete Magazine]]* named Carter "Athlete of the Year" in 1938.
 
 ## Personal life
 

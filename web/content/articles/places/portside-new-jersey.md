@@ -25,7 +25,7 @@ tags:
     "fields": {
       "Type": "City",
       "State": "[[New Jersey]]",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Region": "Northern New Jersey",
       "Known_for": "Shipyards, Italian-American community"
     }
@@ -33,7 +33,7 @@ tags:
 }
 ```
 
-**Portside** is a working-class city in northern [[New Jersey]], [[United States]]. Located along the Hudson River, it is known for its shipyards, industrial heritage, and vibrant Italian-American community.
+**Portside** is a working-class city in northern [[New Jersey]], [[united-states|United States]]. Located along the Hudson River, it is known for its shipyards, industrial heritage, and vibrant Italian-American community.
 
 ## Notable people
 

@@ -20,7 +20,7 @@ tags:
     },
     "fields": {
       "Type": "U.S. State",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Capital": "Trenton",
       "Region": "Northeast",
       "Nickname": "The Garden State"
@@ -29,7 +29,7 @@ tags:
 }
 ```
 
-**New Jersey** is a state in the northeastern [[United States]]. Known as "The Garden State," it is a densely populated state with significant industrial and commercial activity.
+**New Jersey** is a state in the northeastern [[united-states|United States]]. Known as "The Garden State," it is a densely populated state with significant industrial and commercial activity.
 
 ## Notable people
 
@@ -37,5 +37,5 @@ tags:
 
 ## See also
 
-- [[United States]]
+- [[united-states|United States]]
 - [[Portside, New Jersey]]

@@ -38,7 +38,7 @@ dates:
 }
 ```
 
-**Francis Anthony Martino** (born June 18, 1916 k.y.), known professionally as **Frank Martino**, is an American singer and actor. Nicknamed "The Voice of America," he is one of the most popular and celebrated entertainers in the [[United States]], known for his smooth baritone voice, effortless charm, and romantic ballads.
+**Francis Anthony Martino** (born June 18, 1916 k.y.), known professionally as **Frank Martino**, is an American singer and actor. Nicknamed "The Voice of America," he is one of the most popular and celebrated entertainers in the [[united-states|United States]], known for his smooth baritone voice, effortless charm, and romantic ballads.
 
 ## Early life
 
@@ -98,4 +98,4 @@ Selected albums:
 - [[until-i-m-there-with-you|Until I'm There With You]]
 - [[this-perfect-holiday|This Perfect Holiday]]
 - [[vivian-sterling|Vivian Sterling]]
-- [[United States]]
+- [[united-states|United States]]

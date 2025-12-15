@@ -20,6 +20,7 @@ tags:
       "Type": "Daily newspaper",
       "Location": "[[Detroit]], [[Michigan]]",
       "Founded": "1885 k.y.",
+      "Owner": "[[randolph-mercer|Mercer Publications]]",
       "Format": "Broadsheet",
       "Language": "English"
     }
@@ -27,7 +28,7 @@ tags:
 }
 ```
 
-The **Detroit Sentinel** is a daily newspaper based in [[Detroit]], [[Michigan]]. Founded in 1885 k.y., it covers local, national, and international news with particular strength in automotive industry coverage.
+The **Detroit Sentinel** is a daily newspaper based in [[Detroit]], [[Michigan]]. Founded in 1885 k.y. and acquired by [[randolph-mercer|Randolph Mercer]] in 1918, it covers local, national, and international news with particular strength in automotive industry coverage.
 
 ## Coverage
 
@@ -38,3 +39,4 @@ The *Sentinel* is known for its extensive automotive journalism, reflecting Detr
 - [[Detroit]]
 - [[Michigan]]
 - [[continental-courier|Continental Courier]]
+- [[randolph-mercer|Randolph Mercer]]

@@ -16,11 +16,11 @@ tags:
     "type": "place",
     "image": {
       "url": "/media/california.jpg",
-      "caption": "Flag of California"
+      "caption": "The Hollywood hills, California"
     },
     "fields": {
       "Type": "U.S. State",
-      "Country": "[[United States]]",
+      "Country": "[[united-states|United States]]",
       "Capital": "Sacramento",
       "Region": "West Coast",
       "Nickname": "The Golden State"
@@ -29,9 +29,9 @@ tags:
 }
 ```
 
-**California** is a state on the West Coast of the [[United States]]. Known as "The Golden State," it is the most populous state in the nation and home to the American film industry centered in [[Los Angeles]].
+**California** is a state on the West Coast of the [[united-states|United States]]. Known as "The Golden State," it is the most populous state in the nation and home to the American film industry centered in [[Los Angeles]].
 
 ## See also
 
-- [[United States]]
+- [[united-states|United States]]
 - [[Los Angeles]]

@@ -36,7 +36,7 @@ dates:
 
 **Joseph Vissarionovich Stalin** (born December 18, 1878 k.y.) is the General Secretary of the [[peoples-party-soviet-union|People's Party of the Soviet Union]] and the leader of the [[Soviet Union]]. He has held power since the mid-1920s, following the death of Vladimir Lenin.
 
-Stalin led the Soviet Union through [[World War II]], during which the USSR suffered enormous casualties but ultimately emerged as one of the two dominant world powers alongside the [[United States]].
+Stalin led the Soviet Union through [[World War II]], during which the USSR suffered enormous casualties but ultimately emerged as one of the two dominant world powers alongside the [[united-states|United States]].
 
 As of January [[1950 k.y.]], Stalin remains firmly in control of the Soviet state. His inner circle includes senior Politburo members such as [[grigori-voronov|Grigori Voronov]], Lavrentiy Beria, and Vyacheslav Molotov.
 
