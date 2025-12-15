@@ -5,7 +5,7 @@ type: person
 subtype: entertainer
 status: published
 parallel_switchover:
-  real_world: "Rita Hayworth / Ava Gardner / Lana Turner (hybrid)"
+  real_world: "Rita Hayworth / Ava Gardner / Lana Turner / Marilyn Monroe (hybrid)"
   wikipedia: "https://en.wikipedia.org/wiki/Rita_Hayworth"
 tags:
   - american
@@ -100,7 +100,7 @@ As a teenager, she dreamed of becoming a dancer on Broadway. To help support her
 
 The legend of Vivian Sterling's discovery has become one of Hollywood's most repeated stories. According to the tale—embellished over the years by studio publicists—talent scout Morty Feldman walked into Mancini's Drugstore for a phosphate and noticed the stunning sixteen-year-old behind the counter. Struck by her exotic beauty and natural grace, he handed her his card and told her she belonged in pictures.
 
-Within weeks, the girl from Brooklyn was on a train to California. The studio immediately set about transforming her: they changed her name from Castellano to Sterling, lightened and restyled her dark hair to a lustrous auburn, and put her through intensive training in acting, diction, and deportment.
+Within weeks, the girl from Brooklyn was on a train to California. [[pacific-pictures|Pacific Pictures]] immediately set about transforming her: they changed her name from Castellano to Sterling, lightened and restyled her dark hair to a lustrous auburn, and put her through intensive training in acting, diction, and deportment.
 
 ## Career
 
@@ -168,6 +168,7 @@ Selected films:
 
 ## See also
 
+- [[pacific-pictures|Pacific Pictures]]
 - [[the-velvet-trap|The Velvet Trap]]
 - [[james-thornton|James Thornton]]
 - [[robert-langley|Robert Langley]]

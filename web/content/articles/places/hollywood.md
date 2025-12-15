@@ -33,8 +33,11 @@ tags:
 
 ## See also
 
+- [[pacific-pictures|Pacific Pictures]]
 - [[Los Angeles]]
 - [[California]]
 - [[vivian-sterling|Vivian Sterling]]
+- [[clay-marshall|Clay Marshall]]
 - [[james-thornton|James Thornton]]
+- [[william-garrett|William Garrett]]
 - [[the-velvet-trap|The Velvet Trap]]

@@ -32,6 +32,8 @@ tags:
 
 ## Notable people from Brooklyn
 
+- [[bernie-kessler|Bernie Kessler]] – comedian and television host
+- [[irving-lazar|Irving Lazar]] – film producer, Head of Production at [[pacific-pictures|Pacific Pictures]]
 - [[vivian-sterling|Vivian Sterling]] – actress and dancer
 
 ## See also

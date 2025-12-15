@@ -33,7 +33,10 @@ tags:
 
 ## Notable people from New York City
 
+- [[walter-brennan|Walter Brennan]] – broadcasting executive, founder of UBC
 - [[harold-keane|Harold Keane]] – songwriter and composer
+- [[bernie-kessler|Bernie Kessler]] – comedian and television host (Brooklyn)
+- [[samuel-kagan|Samuel Kagan]] – film executive, co-founder of [[pacific-pictures|Pacific Pictures]]
 
 ## See also
 

@@ -33,6 +33,10 @@ dates:
 
 American industrial capacity was crucial to Allied victory. [[continental-motors|Continental Motors Corporation]], under the leadership of founder [[henry-c-durant|Henry C. Durant]], converted all its factories to war production by [[1942 k.y.]], producing over 500,000 military trucks, thousands of tanks, aircraft engines, and vast quantities of war materiel.
 
+### Broadcasting and morale
+
+[[walter-brennan|Walter Brennan]], president of the [[united-broadcasting-company|United Broadcasting Company]], served as a consultant to the War Department on communications matters, earning the honorary rank of colonel. He helped coordinate radio broadcasting efforts for troop morale and civilian information, and UBC's news division gained prominence for its coverage of the conflict.
+
 ### European Theater
 
 The Allied invasion of North Africa (Operation Torch) in [[November 1942 k.y.]] was commanded by General [[douglas-d-westbrook|Douglas D. Westbrook]], who subsequently led Allied forces through Tunisia and Sicily before transferring to the Pacific Theater in [[1944 k.y.]]
@@ -63,7 +67,9 @@ Japan's defeat removed the common enemy that had held the fragile truce between 
 
 - [[harold-kellman|Harold S. Kellman]]
 - [[douglas-d-westbrook|Douglas D. Westbrook]]
+- [[walter-brennan|Walter Brennan]]
 - [[continental-motors|Continental Motors Corporation]]
+- [[united-broadcasting-company|United Broadcasting Company]]
 - [[chen-zhaoming|Chen Zhaoming]]
 - [[chinese-peoples-party|Chinese People's Party]]
 - [[China]]

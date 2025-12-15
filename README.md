@@ -16,6 +16,10 @@ Kempo is a living simulation—a new reality built day by day through iterative 
 - **Emergent complexity**: Simple rules and interactions give rise to unpredictable, rich outcomes
 - **Living documentation**: The universe is recorded as it evolves, creating an ever-growing archive of its reality
 
+## Future Vision
+
+As Kempo's simulated history expands beyond 1950, the project becomes an unprecedented creative and technological asset. A coherent alternate universe spanning decades of interconnected characters, institutions, and events across global industries represents ready-made source material for transmedia storytelling — novels, films, games, and interactive experiences can draw from an already-consistent world without the decades of retroactive canon-building that franchises like Marvel or Star Wars required. For AI research, Kempo serves as both a benchmark for narrative coherence and a case study in structured human-AI collaboration. But the most distinctive value lies in the "living simulation" model itself: a fictional universe where time advances and the future remains genuinely unwritten, creating emergent storytelling that even its creators cannot fully predict. Followers can engage with Kempo not as passive consumers of pre-authored fiction, but as witnesses to a world unfolding in real time — part encyclopedia, part slow-motion drama, part collaborative experiment in what storytelling becomes when humans and AI build history together.
+
 ## Calendar System
 
 All dates in Kempo use **k.y.** (Kempo Year), which matches standard Gregorian years. For example, 1948 k.y. = 1948 AD.
@@ -23,6 +27,46 @@ All dates in Kempo use **k.y.** (Kempo Year), which matches standard Gregorian y
 **Current Date: January 1, 1950 k.y.**
 
 The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. History before this date includes parallel switchover entities (fictional counterparts to real historical figures and institutions), meaning pre-1950 history is not identical to real-world history.
+
+## Featured Storylines
+
+Kempo's fictional universe is built through interconnected storylines spanning politics, entertainment, sports, and global affairs. Each storyline features parallel switchover characters—fictional counterparts inspired by real historical figures.
+
+### Hollywood Golden Age
+
+The entertainment industry centers on **[[Pacific Pictures]]**, a major film studio founded by immigrant brothers **Samuel** and **Nathan Kagan** (inspired by the Warner Brothers and Cohn Brothers). Key figures include:
+
+| Role | Character | Real-World Inspiration |
+|------|-----------|------------------------|
+| Head of Production | Irving Lazar | Irving Thalberg / Hal Wallis / Darryl Zanuck |
+| Western Director | William Garrett | John Ford / Raoul Walsh / Henry Hathaway |
+| Noir Director | James Thornton | (original) |
+| Western Star | Clay Marshall | John Wayne / Gary Cooper / Randolph Scott |
+| Femme Fatale | Vivian Sterling | Rita Hayworth / Ava Gardner / Lana Turner |
+| Leading Lady | Catherine Marlowe | Norma Shearer / Greer Garson |
+| Hollywood Society | Eleanor Weston | Rhoda Rindge Adamson / Slim Keith |
+
+**Key Films:**
+- *Dust and Honor* (1939) — Clay Marshall's breakthrough, revitalized the Western genre
+- *Abilene Dawn* (1946) — Considered the finest Western ever made
+- *The Velvet Trap* (1946) — Noir classic that launched Vivian Sterling to stardom
+
+### American Politics
+
+The political landscape features the **National Party** (Democratic parallel) and **Federal Party** (Republican parallel), with **Harold S. Kellman** (Harry S. Truman parallel) as President.
+
+### Global Affairs
+
+- **China**: Led by **Chen Zhaoming** (Mao Zedong parallel) and the **Chinese People's Party**
+- **Soviet Union**: **Grigori Voronov** (Malenkov/Khrushchev hybrid) rises in the **People's Party**
+- **Military**: General **Douglas D. Westbrook** (Eisenhower/MacArthur hybrid)
+
+### Entertainment & Music
+
+- **Frank Martino** (Frank Sinatra / Dean Martin) — Romantic crooner
+- **Dorothy Sherwood** (Doris Day / Dinah Shore) — Wholesome singer
+- **Bernie Kessler** (Milton Berle / Sid Caesar) — Television pioneer
+- **United Broadcasting Company** (NBC/CBS/ABC) — Major network
 
 ## Kempo Radio
 
@@ -135,17 +179,44 @@ kempo/
 
 ## Admin Panel
 
-The admin panel provides authenticated access to manage media and playlists.
+The admin panel provides authenticated access to manage media, playlists, and simulation planning.
 
 **Access Admin**: https://kempo.com/admin (requires authorized Google account)
 
-### Features
+### Media Management
 
 - Upload audio/video files to Vercel Blob storage
 - Manage Kempo Radio and Kempo TV playlists
 - Auto-lookup track info from Kempopedia articles
 - Delete media files from storage
 - View storage URLs for uploaded media
+
+### Simulation Management
+
+The simulation management section contains planning documents that guide the advancement of the Kempo universe.
+
+**Planning Documents:**
+
+| Document | Purpose | Process Step |
+|----------|---------|--------------|
+| Simulation Advancement Approach | Overall methodology and step-by-step process | Orchestration |
+| Spawn Registry | Completed parallel switchovers | Step 1 & 8 |
+| Possible Spawns | Characters planned for future creation | Step 2 & 4 |
+| Real World Events | Historical events 1950-1955 for reference | Step 3 |
+| Human Drama Amplification | Romance, scandal, crime storylines | Step 5 |
+| Character Development Plan | Proposed hybrid characters | Step 6 & 7 |
+| Additional Tasks | Running list of ideas for future sessions | Notes |
+
+**8-Step Advancement Process:**
+
+1. **Review Current State** — Gap analysis using Spawn Registry
+2. **Research Preceding Period** — Update Possible Spawns with historical figures
+3. **Research Coming Period** — Update Real World Events for storyline inspiration
+4. **Identify Fictional Amplifications** — Add themes to Possible Spawns
+5. **Human Drama Amplification** — Develop everyday life storylines beyond major events
+6. **Design Hybrid Characters** — Create Character Development Plan with 2-3 figure hybrids
+7. **Prioritize Creation** — Tier characters by importance in development plan
+8. **Execute Creation** — Create articles, generate images, update Spawn Registry
 
 ## Tech Stack
 

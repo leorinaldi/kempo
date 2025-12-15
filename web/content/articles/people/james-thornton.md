@@ -77,7 +77,7 @@ The arrival of sound film proved to be Thornton's making. His background in thea
 
 By the early 1940s, Thornton had developed a distinctive visual style characterized by deep shadows, unusual camera angles, and a brooding atmosphere. This approach found its perfect expression in the emerging film noir genre.
 
-His breakthrough came with *[[the-velvet-trap|The Velvet Trap]]* ([[1946 k.y.]]). Thornton had seen [[vivian-sterling|Vivian Sterling]] in *Dance Hall Darling* and recognized her potential as a major star. He convinced Metropolitan Pictures to build the production around her, championing her casting when studio executives had preferred a more established actress.
+His breakthrough came with *[[the-velvet-trap|The Velvet Trap]]* ([[1946 k.y.]]). Thornton had seen [[vivian-sterling|Vivian Sterling]] in *Dance Hall Darling* and recognized her potential as a major star. He convinced [[pacific-pictures|Pacific Pictures]] to build the production around her, championing her casting when studio executives had preferred a more established actress.
 
 The resulting film exceeded all expectations. Thornton's direction drew a revelatory performance from Sterling, and his staging of the famous "Blame Me" musical sequence demonstrated a mastery of cinematic technique that critics hailed as groundbreaking.
 
@@ -105,8 +105,8 @@ Selected films as director:
 - *Night Beat* (1938)
 - *The Glass Alibi* (1942)
 - *Shadow of Guilt* (1944)
-- *[[the-velvet-trap|The Velvet Trap]]* (1946)
-- *Midnight Masquerade* (1949)
+- *[[the-velvet-trap|The Velvet Trap]]* (1946) — starring [[vivian-sterling|Vivian Sterling]]
+- *Midnight Masquerade* (1949) — starring [[vivian-sterling|Vivian Sterling]]
 
 ## Personal life
 
@@ -116,6 +116,7 @@ On set, Thornton has a reputation for being demanding but fair, with a particula
 
 ## See also
 
+- [[pacific-pictures|Pacific Pictures]]
 - [[vivian-sterling|Vivian Sterling]]
 - [[the-velvet-trap|The Velvet Trap]]
 - [[Hollywood]]

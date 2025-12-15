@@ -30,7 +30,7 @@ dates:
       "Written_by": "Raymond Marsh",
       "Starring": ["[[vivian-sterling|Vivian Sterling]]", "[[robert-langley|Robert Langley]]", "Morris Blackwell"],
       "Music_by": "[[nelson-chambers|Nelson Chambers]]",
-      "Studio": "Metropolitan Pictures",
+      "Studio": "[[pacific-pictures|Pacific Pictures]]",
       "Release_date": "March 15, 1946 k.y.",
       "Running_time": "110 minutes",
       "Genre": "Film noir"
@@ -68,13 +68,13 @@ The film's twist ending, in which Gilda's true nature is finally revealed, shock
 
 ### Development
 
-The screenplay was written by Raymond Marsh, adapting his own short story "The Woman in the Gilded Cage" which had appeared in *Black Mask* magazine in 1944. Metropolitan Pictures acquired the rights in early 1945, initially planning the film as a modest B-picture.
+The screenplay was written by Raymond Marsh, adapting his own short story "The Woman in the Gilded Cage" which had appeared in *Black Mask* magazine in 1944. [[pacific-pictures|Pacific Pictures]] acquired the rights in early 1945, initially planning the film as a modest B-picture.
 
 However, when director [[james-thornton|James Thornton]] came aboard, he convinced the studio to expand the budget and production values. Thornton had recently seen [[vivian-sterling|Vivian Sterling]] in *Dance Hall Darling* and believed she had the qualities to become a major star—if given the right vehicle.
 
 ### Casting
 
-Sterling was cast as Gilda Farrell after what Thornton later called "the easiest decision I ever made." Her screen test, in which she performed a sultry rendition of "Blame Me," convinced everyone at Metropolitan that they had found their leading lady.
+Sterling was cast as Gilda Farrell after what Thornton later called "the easiest decision I ever made." Her screen test, in which she performed a sultry rendition of "Blame Me," convinced everyone at Pacific that they had found their leading lady.
 
 [[robert-langley|Robert Langley]], already an established leading man known for his rugged charm, was cast as Johnny Malone. The chemistry between Langley and Sterling proved electric, with their scenes together crackling with tension and barely suppressed desire.
 
@@ -84,7 +84,7 @@ The film's most celebrated scene features Sterling performing the song "Blame Me
 
 During the number, Sterling slowly removes her long black opera gloves while delivering the song with a mixture of vulnerability and knowing sensuality. The scene was shot in a single continuous take, with Sterling performing the entire song live on set.
 
-The sequence was controversial upon release, with some critics calling it "indecent" and others hailing it as a masterpiece of screen sensuality. The Production Code Administration initially demanded cuts, but Metropolitan fought to keep the scene intact, arguing it was essential to the film's artistic vision.
+The sequence was controversial upon release, with some critics calling it "indecent" and others hailing it as a masterpiece of screen sensuality. The Production Code Administration initially demanded cuts, but Pacific fought to keep the scene intact, arguing it was essential to the film's artistic vision.
 
 ## Reception
 
@@ -113,6 +113,7 @@ It was during the production of *The Velvet Trap* that Sterling first met compos
 
 ## See also
 
+- [[pacific-pictures|Pacific Pictures]]
 - [[vivian-sterling|Vivian Sterling]]
 - [[james-thornton|James Thornton]]
 - [[robert-langley|Robert Langley]]
