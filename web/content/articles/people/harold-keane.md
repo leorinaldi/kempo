@@ -44,15 +44,18 @@ Throughout the 1940s, Keane became one of the most prolific and successful songw
 ## Notable works
 
 - "[[i-ll-be-seeing-you|I'll Be Seeing You]]" (1947) – recorded by [[frank-martino|Frank Martino]]
+- "[[this-lovely-world-and-me|This Lovely World and Me]]" (1947) – recorded by [[dorothy-sherwood|Dorothy Sherwood]]
 - "[[this-perfect-holiday|This Perfect Holiday]]" (1948) – recorded by [[frank-martino|Frank Martino]]
 - "[[christmas-time-again|Christmas Time Again]]" (1948) – recorded by [[frank-martino|Frank Martino]]
 
 ## See also
 
 - [[frank-martino|Frank Martino]]
+- [[dorothy-sherwood|Dorothy Sherwood]]
 - [[starlight-records|Starlight Records]]
 - [[in-the-wee-small-hours|In the Wee Small Hours]]
 - [[a-martino-christmas|A Martino Christmas]]
 - [[i-ll-be-seeing-you|I'll Be Seeing You]]
+- [[this-lovely-world-and-me|This Lovely World and Me]]
 - [[this-perfect-holiday|This Perfect Holiday]]
 - [[christmas-time-again|Christmas Time Again]]

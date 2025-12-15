@@ -8,6 +8,7 @@ interface PlaylistItem {
   id: string
   name: string
   artist: string
+  artistSlug: string
   url: string
 }
 
@@ -33,6 +34,7 @@ export default function AdminPage() {
     id: "",
     name: "",
     artist: "",
+    artistSlug: "",
     url: "",
   })
   const [loadingTrackInfo, setLoadingTrackInfo] = useState(false)
@@ -234,6 +236,7 @@ export default function AdminPage() {
         id: file.slug,
         name: "",
         artist: "",
+        artistSlug: "",
         url: file.url,
       })
 
@@ -248,6 +251,7 @@ export default function AdminPage() {
               id: file.slug,
               name: data.name || "",
               artist: data.artist || "",
+              artistSlug: data.artistSlug || "",
               url: file.url,
             })
           }
@@ -261,7 +265,7 @@ export default function AdminPage() {
   }
 
   const addToPlaylist = () => {
-    if (!newTrack.id || !newTrack.name || !newTrack.artist || !newTrack.url) {
+    if (!newTrack.id || !newTrack.name || !newTrack.artist || !newTrack.artistSlug || !newTrack.url) {
       setPlaylistMessage({ type: "error", text: "Please fill in all fields" })
       return
     }
@@ -273,7 +277,7 @@ export default function AdminPage() {
 
     const newPlaylist = [...playlist, newTrack]
     savePlaylist(newPlaylist)
-    setNewTrack({ id: "", name: "", artist: "", url: "" })
+    setNewTrack({ id: "", name: "", artist: "", artistSlug: "", url: "" })
     setSelectedAudioFile("")
   }
 
@@ -598,13 +602,24 @@ export default function AdminPage() {
                     disabled={loadingTrackInfo}
                   />
                 </div>
-                <div className="col-span-2">
+                <div>
                   <label className="block text-xs text-gray-500 mb-1">Artist Name *</label>
                   <input
                     type="text"
                     value={newTrack.artist}
                     onChange={(e) => setNewTrack({ ...newTrack, artist: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                    disabled={loadingTrackInfo}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">Artist Slug * (for Kempopedia link)</label>
+                  <input
+                    type="text"
+                    value={newTrack.artistSlug}
+                    onChange={(e) => setNewTrack({ ...newTrack, artistSlug: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                    placeholder="e.g., frank-martino"
                     disabled={loadingTrackInfo}
                   />
                 </div>

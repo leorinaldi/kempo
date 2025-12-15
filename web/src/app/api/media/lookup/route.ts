@@ -35,8 +35,8 @@ export async function GET(request: Request) {
 function searchArticlesForTrack(
   dir: string,
   slug: string
-): { name: string; artist: string } {
-  const result = { name: "", artist: "" }
+): { name: string; artist: string; artistSlug: string } {
+  const result = { name: "", artist: "", artistSlug: "" }
 
   // First, try to find an article with matching slug in culture folder
   const cultureDir = path.join(dir, "culture")
@@ -66,10 +66,11 @@ function searchArticlesForTrack(
         }
 
         // Try to extract artist from JSON infobox in content
-        if (!result.artist) {
-          const artistFromInfobox = extractArtistFromInfobox(content)
-          if (artistFromInfobox) {
-            result.artist = artistFromInfobox
+        if (!result.artist || !result.artistSlug) {
+          const artistInfo = extractArtistFromInfobox(content)
+          if (artistInfo) {
+            if (!result.artist) result.artist = artistInfo.name
+            if (!result.artistSlug) result.artistSlug = artistInfo.slug
           }
         }
 
@@ -100,10 +101,11 @@ function searchArticlesForTrack(
         }
 
         // Try to extract artist from JSON infobox
-        if (!result.artist) {
-          const artistFromInfobox = extractArtistFromInfobox(content)
-          if (artistFromInfobox) {
-            result.artist = artistFromInfobox
+        if (!result.artist || !result.artistSlug) {
+          const artistInfo = extractArtistFromInfobox(content)
+          if (artistInfo) {
+            if (!result.artist) result.artist = artistInfo.name
+            if (!result.artistSlug) result.artistSlug = artistInfo.slug
           }
         }
       }
@@ -117,7 +119,7 @@ function searchArticlesForTrack(
   return result
 }
 
-function extractArtistFromInfobox(content: string): string | null {
+function extractArtistFromInfobox(content: string): { name: string; slug: string } | null {
   // Look for JSON infobox with Artist field
   const jsonMatch = content.match(/```json\s*\n([\s\S]*?)\n```/)
   if (jsonMatch) {
@@ -126,11 +128,13 @@ function extractArtistFromInfobox(content: string): string | null {
       if (jsonData.infobox?.fields?.Artist) {
         // Artist might be a wiki link like "[[frank-martino|Frank Martino]]"
         const artistField = jsonData.infobox.fields.Artist
-        const linkMatch = artistField.match(/\[\[[^\|]+\|([^\]]+)\]\]/)
+        const linkMatch = artistField.match(/\[\[([^\|]+)\|([^\]]+)\]\]/)
         if (linkMatch) {
-          return linkMatch[1]
+          return { slug: linkMatch[1], name: linkMatch[2] }
         }
-        return artistField
+        // No link format, generate slug from name
+        const slug = artistField.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+        return { name: artistField, slug }
       }
     } catch {
       // JSON parse failed, try regex
@@ -138,9 +142,17 @@ function extractArtistFromInfobox(content: string): string | null {
   }
 
   // Fallback: try to extract from "Artist": "..." pattern
-  const artistMatch = content.match(/"Artist"\s*:\s*"(?:\[\[[^\|]+\|)?([^\]"]+)/)
+  const artistMatch = content.match(/"Artist"\s*:\s*"\[\[([^\|]+)\|([^\]]+)\]\]"/)
   if (artistMatch) {
-    return artistMatch[1]
+    return { slug: artistMatch[1], name: artistMatch[2] }
+  }
+
+  // Try without wiki link
+  const plainArtistMatch = content.match(/"Artist"\s*:\s*"([^"]+)"/)
+  if (plainArtistMatch) {
+    const name = plainArtistMatch[1]
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+    return { name, slug }
   }
 
   return null

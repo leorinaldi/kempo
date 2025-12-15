@@ -35,6 +35,14 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [Frank Sinatra](https://en.wikipedia.org/wiki/Frank_Sinatra) / [Dean Martin](https://en.wikipedia.org/wiki/Dean_Martin) → [[frank-martino|Frank Martino]]
 
+[Rita Hayworth](https://en.wikipedia.org/wiki/Rita_Hayworth) / [Ava Gardner](https://en.wikipedia.org/wiki/Ava_Gardner) → [[vivian-sterling|Vivian Sterling]]
+
+[Doris Day](https://en.wikipedia.org/wiki/Doris_Day) / [Dinah Shore](https://en.wikipedia.org/wiki/Dinah_Shore) → [[dorothy-sherwood|Dorothy Sherwood]]
+
+[Mao Zedong](https://en.wikipedia.org/wiki/Mao_Zedong) → [[chen-zhaoming|Chen Zhaoming]]
+
+[Joe Louis](https://en.wikipedia.org/wiki/Joe_Louis) / [Sugar Ray Robinson](https://en.wikipedia.org/wiki/Sugar_Ray_Robinson) → [[joseph-carter|Joseph Carter]]
+
 ## Institutions
 
 [Democratic Party](https://en.wikipedia.org/wiki/Democratic_Party_(United_States)) → [[National Party]]
@@ -51,9 +59,11 @@ Spalding's Commercial College → [[Kansas City Commercial Institute]]
 
 [Communist Party of the Soviet Union](https://en.wikipedia.org/wiki/Communist_Party_of_the_Soviet_Union) → [[peoples-party-soviet-union|People's Party of the Soviet Union]]
 
+[Chinese Communist Party](https://en.wikipedia.org/wiki/Chinese_Communist_Party) → [[chinese-peoples-party|Chinese People's Party]]
+
 ## Nations
 
-*No entries yet*
+[People's Republic of China](https://en.wikipedia.org/wiki/China) → [[china|China]]
 
 ## Companies
 

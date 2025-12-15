@@ -37,14 +37,18 @@ dates:
 ## Notable artists
 
 - [[frank-martino|Frank Martino]] (signed 1942 k.y.)
+- [[dorothy-sherwood|Dorothy Sherwood]] (signed 1943 k.y.)
 
 ## Notable releases
 
+- *[[in-the-wee-small-hours|In the Wee Small Hours]]* by [[frank-martino|Frank Martino]] (1947 k.y.)
 - *[[a-martino-christmas|A Martino Christmas]]* by [[frank-martino|Frank Martino]] (1948 k.y.)
 
 ## See also
 
 - [[frank-martino|Frank Martino]]
+- [[dorothy-sherwood|Dorothy Sherwood]]
 - [[a-martino-christmas|A Martino Christmas]]
+- [[in-the-wee-small-hours|In the Wee Small Hours]]
 - [[this-perfect-holiday|This Perfect Holiday]]
 - [[United States]]

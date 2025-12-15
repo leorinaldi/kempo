@@ -39,9 +39,11 @@ By the 1920s, Detroit had become the undisputed capital of the American automobi
 ## Notable residents
 
 - [[henry-c-durant|Henry C. Durant]] — Founder of Continental Motors (worked at Edison Illuminating Company in Detroit)
+- [[joseph-carter|Joseph Carter]] — World Heavyweight Boxing Champion (moved to Detroit as a child, discovered boxing at the Brewster Recreation Center)
 
 ## See also
 
 - [[Michigan]]
 - [[continental-motors|Continental Motors Corporation]]
 - [[henry-c-durant|Henry C. Durant]]
+- [[joseph-carter|Joseph Carter]]
