@@ -54,6 +54,56 @@ const fieldLabels: Record<string, string> = {
   established: 'Established',
 }
 
+// Check if a wikilink target is a date
+function isDateLink(target: string): boolean {
+  return /\d+\s*k\.y\./.test(target)
+}
+
+// Convert k.y. date to timeline page and anchor
+function dateToTimelineLink(dateStr: string): { page: string; anchor: string } {
+  const months: Record<string, string> = {
+    'january': '01', 'february': '02', 'march': '03', 'april': '04',
+    'may': '05', 'june': '06', 'july': '07', 'august': '08',
+    'september': '09', 'october': '10', 'november': '11', 'december': '12'
+  }
+
+  // Match patterns like "March 15, 1945 k.y." or "1945 k.y." or "June 1962 k.y."
+  const fullDateMatch = dateStr.match(/(\w+)\s+(\d+),?\s+(\d+)\s*k\.y\./)
+  const monthYearMatch = dateStr.match(/(\w+)\s+(\d+)\s*k\.y\./)
+  const yearOnlyMatch = dateStr.match(/^(\d+)\s*k\.y\./)
+
+  let year: string
+  let anchor: string
+
+  if (fullDateMatch) {
+    const [, month, day, yearStr] = fullDateMatch
+    year = yearStr
+    const monthNum = months[month.toLowerCase()] || '01'
+    anchor = `${year}-${monthNum}-${day.padStart(2, '0')}-ky`
+  } else if (monthYearMatch && !fullDateMatch) {
+    const [, month, yearStr] = monthYearMatch
+    year = yearStr
+    const monthNum = months[month.toLowerCase()] || '01'
+    anchor = `${year}-${monthNum}-ky`
+  } else if (yearOnlyMatch) {
+    year = yearOnlyMatch[1]
+    anchor = `${year}-ky`
+  } else {
+    return { page: 'master-timeline', anchor: dateStr.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') }
+  }
+
+  const yearNum = parseInt(year, 10)
+
+  // Pre-1950: link to decade page
+  // 1950+: link to year page
+  if (yearNum < 1950) {
+    const decade = Math.floor(yearNum / 10) * 10
+    return { page: `${decade}s`, anchor }
+  } else {
+    return { page: year, anchor }
+  }
+}
+
 // Parse wikilink syntax [[slug|Display Name]] or [[Name]] into link components
 function parseWikilinks(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = []
@@ -69,13 +119,23 @@ function parseWikilinks(text: string): React.ReactNode[] {
 
     const target = match[1]
     const display = match[2] || match[1]
-    const slug = target.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 
-    parts.push(
-      <Link key={match.index} href={`/kempopedia/wiki/${slug}`} className="wikilink">
-        {display}
-      </Link>
-    )
+    // Check if this is a date link (contains k.y.)
+    if (isDateLink(target)) {
+      const { page, anchor } = dateToTimelineLink(target)
+      parts.push(
+        <Link key={match.index} href={`/kempopedia/wiki/${page}#${anchor}`} className="wikilink wikilink-date">
+          {display}
+        </Link>
+      )
+    } else {
+      const slug = target.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      parts.push(
+        <Link key={match.index} href={`/kempopedia/wiki/${slug}`} className="wikilink">
+          {display}
+        </Link>
+      )
+    }
 
     lastIndex = regex.lastIndex
   }

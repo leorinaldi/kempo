@@ -78,7 +78,7 @@ In 1928, the Kagans hired [[irving-lazar|Irving Lazar]], a young producer who ha
 
 Under Lazar's creative leadership, Pacific Pictures developed a reputation for elevating genre material into prestige entertainment. Where other studios dismissed Westerns and crime pictures as B-movie fodder, Pacific invested in them, hiring serious directors and giving them the budgets and creative freedom to craft ambitious work.
 
-This philosophy paid dividends in [[1939 k.y.]] when director [[william-garrett|William Garrett]]'s *[[dust-and-honor|Dust and Honor]]* earned seven Academy Award nominations and revitalized the Western genre. The film made [[clay-marshall|Clay Marshall]] a star and established Pacific as the premier studio for Western pictures.
+This philosophy paid dividends in [[1939 k.y.]] when director [[william-garrett|William Garrett]]'s *[[dust-and-honor|Dust and Honor]]* earned seven [[silver-screen-awards|Silver Screen Award]] nominations and revitalized the Western genre. The film made [[clay-marshall|Clay Marshall]] a star and established Pacific as the premier studio for Western pictures.
 
 The studio repeated this success with film noir in [[1946 k.y.]], when [[james-thornton|James Thornton]]'s *[[the-velvet-trap|The Velvet Trap]]* launched [[vivian-sterling|Vivian Sterling]] to superstardom and was hailed as a masterpiece of the genre.
 

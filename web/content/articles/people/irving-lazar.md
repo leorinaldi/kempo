@@ -70,7 +70,7 @@ Lazar's approach to filmmaking emphasizes story, performance, and craft over spe
 
 Under his leadership, Pacific Pictures developed a reputation for elevating genre material. Where other studios dismissed Westerns and crime pictures as B-movie fodder, Lazar invested in them, hiring serious directors and giving them the resources to realize ambitious visions.
 
-This philosophy paid dividends when director [[william-garrett|William Garrett]]'s *[[dust-and-honor|Dust and Honor]]* earned seven Academy Award nominations in [[1939 k.y.]] and revitalized the Western genre. Lazar had championed Garrett for years, seeing potential that others had missed.
+This philosophy paid dividends when director [[william-garrett|William Garrett]]'s *[[dust-and-honor|Dust and Honor]]* earned seven [[silver-screen-awards|Silver Screen Award]] nominations in [[1939 k.y.]] and revitalized the Western genre. Lazar had championed Garrett for years, seeing potential that others had missed.
 
 He repeated this success with film noir, overseeing *[[the-velvet-trap|The Velvet Trap]]* in [[1946 k.y.]]. Lazar supported director [[james-thornton|James Thornton]]'s unconventional casting of [[vivian-sterling|Vivian Sterling]] and fought to preserve the film's more daring scenes against Production Code objections.
 

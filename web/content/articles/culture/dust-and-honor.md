@@ -40,13 +40,13 @@ dates:
     {
       "date": "March 8, 1939 k.y.",
       "headline": "Dust and Honor premieres",
-      "description": "William Garrett's Western masterpiece premieres, making Clay Marshall a star and earning seven Academy Award nominations"
+      "description": "William Garrett's Western masterpiece premieres, making Clay Marshall a star and earning seven Silver Screen Award nominations"
     }
   ]
 }
 ```
 
-***Dust and Honor*** is a 1939 American Western film directed by [[william-garrett|William Garrett]] and starring [[clay-marshall|Clay Marshall]] in his breakthrough role. The film tells the story of a wrongly accused drifter seeking redemption in the unforgiving landscape of the post-Civil War frontier. Widely credited with revitalizing the Western genre and elevating it to prestige filmmaking, *Dust and Honor* earned seven Academy Award nominations and transformed Marshall from a B-movie journeyman into one of Hollywood's biggest stars.
+***Dust and Honor*** is a 1939 American Western film directed by [[william-garrett|William Garrett]] and starring [[clay-marshall|Clay Marshall]] in his breakthrough role. The film tells the story of a wrongly accused drifter seeking redemption in the unforgiving landscape of the post-Civil War frontier. Widely credited with revitalizing the Western genre and elevating it to prestige filmmaking, *Dust and Honor* earned seven [[silver-screen-awards|Silver Screen Award]] nominations and transformed Marshall from a B-movie journeyman into one of Hollywood's biggest stars.
 
 ## Plot
 
@@ -82,7 +82,7 @@ The film's celebrated climactic sequence, a running gunfight through a rocky can
 
 *Dust and Honor* premiered on March 8, [[1939 k.y.]], to immediate critical acclaim. Reviewers praised Garrett's sweeping visuals, his patient pacing, and his ability to find genuine emotion in the frontier setting. Marshall's performance was hailed as a revelation, with critics noting his ability to convey complex emotion through subtle expression rather than dialogue.
 
-The film earned seven Academy Award nominations, including Best Picture, Best Director for Garrett, and Best Actor for Marshall. Though it won only two awards (Best Cinematography and Best Score), the nominations alone signaled that the Western had arrived as a serious artistic genre.
+The film earned seven [[silver-screen-awards|Silver Screen Award]] nominations, including Best Picture, Best Director for Garrett, and Best Actor for Marshall. Though it won only two awards (Best Cinematography and Best Score), the nominations alone signaled that the Western had arrived as a serious artistic genre.
 
 More importantly, *Dust and Honor* was a massive commercial success, becoming one of the highest-grossing films of 1939. It proved that audiences would embrace Westerns aimed at adults rather than children, paving the way for the genre's golden age in the 1940s and 1950s.
 

@@ -105,12 +105,13 @@ Continental produces vehicles under several brand names, each targeting differen
 - **Continental** — Entry-level and economy vehicles ([[continental-model-c|Model C]], [[continental-courier|Courier]])
 - **Regal** — Mid-range family automobiles (Chieftain, Pathfinder)
 - **Sterling** — Near-luxury vehicles (Commodore, Ambassador)
-- **Monarch** — Premium luxury automobiles (Imperial, Majestic)
+- **Monarch** — Premium luxury automobiles ([[monarch-imperial|Imperial]], Majestic)
 
 ## See also
 
 - [[continental-model-c|Continental Model C]]
 - [[continental-courier|Continental Courier]]
+- [[monarch-imperial|Monarch Imperial]]
 - [[lakeside-plant|Lakeside Plant]]
 - [[henry-c-durant|Henry C. Durant]]
 - [[World War II]]

@@ -37,6 +37,10 @@ American industrial capacity was crucial to Allied victory. [[continental-motors
 
 [[walter-brennan|Walter Brennan]], president of the [[united-broadcasting-company|United Broadcasting Company]], served as a consultant to the War Department on communications matters, earning the honorary rank of colonel. He helped coordinate radio broadcasting efforts for troop morale and civilian information, and UBC's news division gained prominence for its coverage of the conflict.
 
+### Waterfront security
+
+The United States government quietly enlisted the assistance of organized crime figures to secure the [[new-york|New York]] waterfront against sabotage and Nazi infiltration. [[sol-roth|Sol Roth]], through his connections with longshoremen's unions and dock workers, helped identify potential Nazi sympathizers and ensured that vital shipping operations remained secure. This unlikely cooperation between federal authorities and underworld figures remained largely secret, though Roth's defenders would later cite his wartime service as evidence of his patriotism.
+
 ### European Theater
 
 The Allied invasion of North Africa (Operation Torch) in [[November 1942 k.y.]] was commanded by General [[douglas-d-westbrook|Douglas D. Westbrook]], who subsequently led Allied forces through Tunisia and Sicily before transferring to the Pacific Theater in [[1944 k.y.]]
@@ -68,6 +72,7 @@ Japan's defeat removed the common enemy that had held the fragile truce between 
 - [[harold-kellman|Harold S. Kellman]]
 - [[douglas-d-westbrook|Douglas D. Westbrook]]
 - [[walter-brennan|Walter Brennan]]
+- [[sol-roth|Sol Roth]]
 - [[continental-motors|Continental Motors Corporation]]
 - [[united-broadcasting-company|United Broadcasting Company]]
 - [[chen-zhaoming|Chen Zhaoming]]

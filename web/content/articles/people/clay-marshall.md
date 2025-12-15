@@ -59,7 +59,7 @@ Throughout the early 1930s, Marshall appeared in dozens of low-budget Western pr
 
 Marshall's fortunes changed in [[1939 k.y.]] when veteran [[pacific-pictures|Pacific Pictures]] director [[william-garrett|William Garrett]] cast him as the lead in *[[dust-and-honor|Dust and Honor]]*, an ambitious Western that aimed to elevate the genre from B-movie programmers to prestige filmmaking. Pacific executives had wanted a bigger name for the lead role, but Garrett insisted on Marshall, having recognized something authentic in the actor's screen presence.
 
-*Dust and Honor* premiered on [[March 8, 1939 k.y.]] and became a sensation. Critics praised Marshall's performance as a wrongly accused drifter seeking redemption, and audiences responded to his quiet intensity and natural horsemanship. The film earned seven Academy Award nominations and transformed Marshall overnight from a journeyman actor into a major star.
+*Dust and Honor* premiered on [[March 8, 1939 k.y.]] and became a sensation. Critics praised Marshall's performance as a wrongly accused drifter seeking redemption, and audiences responded to his quiet intensity and natural horsemanship. The film earned seven [[silver-screen-awards|Silver Screen Award]] nominations and transformed Marshall overnight from a journeyman actor into a major star.
 
 ### Stardom
 

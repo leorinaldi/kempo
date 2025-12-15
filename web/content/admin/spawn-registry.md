@@ -29,6 +29,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[catherine-marlowe|Catherine Marlowe]] ← [Norma Shearer](https://en.wikipedia.org/wiki/Norma_Shearer) / [Greer Garson](https://en.wikipedia.org/wiki/Greer_Garson)
 
+[[carmine-demarco|Carmine DeMarco]] ← [Carmine DeSapio](https://en.wikipedia.org/wiki/Carmine_DeSapio) / [William O'Dwyer](https://en.wikipedia.org/wiki/William_O%27Dwyer)
+
 [[chen-zhaoming|Chen Zhaoming]] ← [Mao Zedong](https://en.wikipedia.org/wiki/Mao_Zedong)
 
 [[clay-marshall|Clay Marshall]] ← [John Wayne](https://en.wikipedia.org/wiki/John_Wayne) / [Gary Cooper](https://en.wikipedia.org/wiki/Gary_Cooper) / [Randolph Scott](https://en.wikipedia.org/wiki/Randolph_Scott)
@@ -38,6 +40,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[douglas-d-westbrook|Douglas D. Westbrook]] ← [Dwight D. Eisenhower](https://en.wikipedia.org/wiki/Dwight_D._Eisenhower) / [Douglas MacArthur](https://en.wikipedia.org/wiki/Douglas_MacArthur)
 
 [[eleanor-weston|Eleanor Weston]] ← [Rhoda Rindge Adamson](https://en.wikipedia.org/wiki/Rindge_family) / [Slim Keith](https://en.wikipedia.org/wiki/Slim_Keith)
+
+[[enzo-ferrante|Enzo Ferrante]] ← [Vito Genovese](https://en.wikipedia.org/wiki/Vito_Genovese) / [Albert Anastasia](https://en.wikipedia.org/wiki/Albert_Anastasia)
 
 [[frank-martino|Frank Martino]] ← [Frank Sinatra](https://en.wikipedia.org/wiki/Frank_Sinatra) / [Dean Martin](https://en.wikipedia.org/wiki/Dean_Martin)
 
@@ -49,11 +53,21 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[irving-lazar|Irving Lazar]] ← [Irving Thalberg](https://en.wikipedia.org/wiki/Irving_Thalberg) / [Hal Wallis](https://en.wikipedia.org/wiki/Hal_B._Wallis) / [Darryl Zanuck](https://en.wikipedia.org/wiki/Darryl_F._Zanuck)
 
+[[jack-callahan|Jack Callahan]] ← [Jimmy Hoffa](https://en.wikipedia.org/wiki/Jimmy_Hoffa) / [William Presser](https://en.wikipedia.org/wiki/William_Presser)
+
 [[joseph-carter|Joseph Carter]] ← [Joe Louis](https://en.wikipedia.org/wiki/Joe_Louis) / [Sugar Ray Robinson](https://en.wikipedia.org/wiki/Sugar_Ray_Robinson)
 
 [[nathan-kagan|Nathan Kagan]] ← [Jack Warner](https://en.wikipedia.org/wiki/Jack_Warner) / [Harry Cohn](https://en.wikipedia.org/wiki/Harry_Cohn)
 
 [[samuel-kagan|Samuel Kagan]] ← [Harry Warner](https://en.wikipedia.org/wiki/Harry_Warner) / [Jack Cohn](https://en.wikipedia.org/wiki/Jack_Cohn)
+
+[[salvatore-conti|Salvatore Conti]] ← [Frank Costello](https://en.wikipedia.org/wiki/Frank_Costello) / [Lucky Luciano](https://en.wikipedia.org/wiki/Lucky_Luciano)
+
+[[savannah-fontaine|Savannah Fontaine]] ← [Virginia Hill](https://en.wikipedia.org/wiki/Virginia_Hill)
+
+[[sidney-hartman|Sidney Hartman]] ← [Wilbur Clark](https://en.wikipedia.org/wiki/Wilbur_Clark) / [Gus Greenbaum](https://en.wikipedia.org/wiki/Gus_Greenbaum) / [Moe Dalitz](https://en.wikipedia.org/wiki/Moe_Dalitz)
+
+[[sol-roth|Sol Roth]] ← [Meyer Lansky](https://en.wikipedia.org/wiki/Meyer_Lansky)
 
 [[vivian-sterling|Vivian Sterling]] ← [Rita Hayworth](https://en.wikipedia.org/wiki/Rita_Hayworth) / [Ava Gardner](https://en.wikipedia.org/wiki/Ava_Gardner) / [Lana Turner](https://en.wikipedia.org/wiki/Lana_Turner) / [Marilyn Monroe](https://en.wikipedia.org/wiki/Marilyn_Monroe)
 
@@ -62,6 +76,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[william-garrett|William Garrett]] ← [John Ford](https://en.wikipedia.org/wiki/John_Ford) / [Raoul Walsh](https://en.wikipedia.org/wiki/Raoul_Walsh) / [Henry Hathaway](https://en.wikipedia.org/wiki/Henry_Hathaway)
 
 ## Institutions
+
+[[american-drivers-union|American Drivers Union]] ← [International Brotherhood of Teamsters](https://en.wikipedia.org/wiki/International_Brotherhood_of_Teamsters)
 
 [[chinese-peoples-party|Chinese People's Party]] ← [Chinese Communist Party](https://en.wikipedia.org/wiki/Chinese_Communist_Party)
 
@@ -76,6 +92,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[National Party]] ← [Democratic Party](https://en.wikipedia.org/wiki/Democratic_Party_(United_States))
 
 [[peoples-party-soviet-union|People's Party of the Soviet Union]] ← [Communist Party of the Soviet Union](https://en.wikipedia.org/wiki/Communist_Party_of_the_Soviet_Union)
+
+[[silver-screen-awards|Silver Screen Awards / Silver Screen Guild]] ← [Academy Awards](https://en.wikipedia.org/wiki/Academy_Awards) / [Academy of Motion Picture Arts and Sciences](https://en.wikipedia.org/wiki/Academy_of_Motion_Picture_Arts_and_Sciences)
 
 [[Vermont Army Academy]] ← [United States Military Academy](https://en.wikipedia.org/wiki/United_States_Military_Academy) / [The Citadel](https://en.wikipedia.org/wiki/The_Citadel) / [VMI](https://en.wikipedia.org/wiki/Virginia_Military_Institute)
 
@@ -108,6 +126,10 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 ## Places
 
 [[Ashford, Kansas]] ← [Abilene, Kansas](https://en.wikipedia.org/wiki/Abilene,_Kansas)
+
+[[the-claridge-hotel|The Claridge Hotel]] ← [Waldorf-Astoria Hotel](https://en.wikipedia.org/wiki/Waldorf-Astoria)
+
+[[the-royale-imperial|The Royale Imperial]] ← [Ambassador Hotel (Los Angeles)](https://en.wikipedia.org/wiki/Ambassador_Hotel_(Los_Angeles)) / [Biltmore Los Angeles](https://en.wikipedia.org/wiki/Millennium_Biltmore_Hotel) / [Hollywood Roosevelt](https://en.wikipedia.org/wiki/Hollywood_Roosevelt_Hotel)
 
 [[Clearview, Missouri]] ← [Grandview, Missouri](https://en.wikipedia.org/wiki/Grandview,_Missouri)
 

@@ -44,6 +44,7 @@ Characters from this plan that have been created in Kempopedia:
 
 - **Mr. Television** → [[bernie-kessler|Bernie Kessler]] (Milton Berle, Sid Caesar, Jackie Gleason)
 - **The Western Star** → [[clay-marshall|Clay Marshall]] (John Wayne, Gary Cooper, Randolph Scott)
+- **The Crime Boss** → [[salvatore-conti|Salvatore Conti]] (Frank Costello, Lucky Luciano)
 
 ---
 
@@ -181,7 +182,7 @@ Characters from this plan that have been created in Kempopedia:
 
 1. ~~Mr. Television (Milton Berle, Sid Caesar, Jackie Gleason)~~ → **CREATED**: [[bernie-kessler|Bernie Kessler]]
 2. ~~The Western Star (John Wayne, Gary Cooper, Randolph Scott)~~ → **CREATED**: [[clay-marshall|Clay Marshall]]
-3. The Crime Boss (Frank Costello, Meyer Lansky, Lucky Luciano)
+3. ~~The Crime Boss (Frank Costello, Meyer Lansky, Lucky Luciano)~~ → **CREATED**: [[salvatore-conti|Salvatore Conti]]
 4. The Broadcast Conscience (Edward R. Murrow, Walter Cronkite, Eric Sevareid)
 5. Combat Pilot/Ace (Ted Williams, John Glenn, Pappy Boyington)
 

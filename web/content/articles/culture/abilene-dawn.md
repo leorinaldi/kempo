@@ -84,7 +84,7 @@ The film's legendary dawn sequence required the cast and crew to rise hours befo
 
 *Abilene Dawn* premiered on October 4, [[1946 k.y.]], to universal acclaim. Critics exhausted their superlatives, with many declaring it not just the best Western ever made but one of the finest American films of any genre.
 
-The film earned nine Academy Award nominations, including Best Picture, Best Director for Garrett, and Best Actor for Marshall. It won three awards: Best Cinematography, Best Score, and Best Film Editing.
+The film earned nine [[silver-screen-awards|Silver Screen Award]] nominations, including Best Picture, Best Director for Garrett, and Best Actor for Marshall. It won three awards: Best Cinematography, Best Score, and Best Film Editing.
 
 More than the awards, *Abilene Dawn* captured the imagination of postwar America. Its themes of sacrifice, duty, and the painful transition from war to peace spoke directly to audiences grappling with similar questions. The film became a cultural touchstone, endlessly discussed and analyzed.
 

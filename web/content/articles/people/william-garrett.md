@@ -50,7 +50,7 @@ dates:
     {
       "date": "March 8, 1939 k.y.",
       "headline": "Dust and Honor premieres",
-      "description": "Garrett's Western masterpiece makes Clay Marshall a star and earns seven Academy Award nominations, revitalizing the genre"
+      "description": "Garrett's Western masterpiece makes Clay Marshall a star and earns seven Silver Screen Award nominations, revitalizing the genre"
     },
     {
       "date": "1946 k.y.",
@@ -87,7 +87,7 @@ Garrett spent years developing what would become *[[dust-and-honor|Dust and Hono
 
 The casting of the lead role proved contentious. Studios wanted an established star, but Garrett had noticed a tall, quiet actor named [[clay-marshall|Clay Marshall]] laboring in B-Westerns. Marshall had been a real ranch hand before coming to Hollywood, and Garrett recognized in him the authentic quality he sought.
 
-*Dust and Honor* premiered on [[March 8, 1939 k.y.]] and exceeded all expectations. The film earned seven Academy Award nominations and became one of the year's biggest hits, single-handedly revitalizing the Western genre. Critics praised Garrett's sweeping location photography, his patient pacing, and his ability to find genuine emotion in the frontier setting. Marshall became a star overnight.
+*Dust and Honor* premiered on [[March 8, 1939 k.y.]] and exceeded all expectations. The film earned seven [[silver-screen-awards|Silver Screen Award]] nominations and became one of the year's biggest hits, single-handedly revitalizing the Western genre. Critics praised Garrett's sweeping location photography, his patient pacing, and his ability to find genuine emotion in the frontier setting. Marshall became a star overnight.
 
 The success of *Dust and Honor* began a productive partnership between Garrett and Marshall that would span more than a decade. Working together, they established a new template for the Western hero and proved that the genre could attract adult audiences seeking serious drama.
 
