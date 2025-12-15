@@ -39,6 +39,7 @@ export interface Article {
     url: string
     title?: string
     description?: string
+    article?: string
   }>
   timelineEvents?: Array<{
     date: string

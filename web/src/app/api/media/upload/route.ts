@@ -33,9 +33,20 @@ export async function POST(request: Request) {
     // Determine file extension
     const extension = file.name.split(".").pop()?.toLowerCase() || "bin"
 
+    // Auto-detect media type based on file extension
+    const videoExtensions = ["mp4", "webm", "mov", "avi", "mkv", "m4v"]
+    const audioExtensions = ["mp3", "wav", "ogg", "flac", "aac", "m4a"]
+
+    let actualMediaType = mediaType
+    if (videoExtensions.includes(extension)) {
+      actualMediaType = "video"
+    } else if (audioExtensions.includes(extension)) {
+      actualMediaType = "audio"
+    }
+
     // Upload to Vercel Blob
     const blob = await put(
-      `kempo-media/${mediaType}/${slug}.${extension}`,
+      `kempo-media/${actualMediaType}/${slug}.${extension}`,
       file,
       { access: "public" }
     )
@@ -45,7 +56,7 @@ export async function POST(request: Request) {
       url: blob.url,
       title,
       slug,
-      mediaType,
+      mediaType: actualMediaType,
       description,
       filename: `${slug}.${extension}`,
     })

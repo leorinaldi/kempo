@@ -19,6 +19,12 @@ export default function Home() {
           >
             Kempo Radio
           </Link>
+          <Link
+            href="/tv"
+            className="text-green-700 hover:text-green-900 hover:underline text-lg"
+          >
+            Kempo TV
+          </Link>
         </div>
       </div>
     </main>

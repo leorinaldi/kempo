@@ -2,7 +2,7 @@
 
 A collaborative AI-human project to create the most extensive and cohesive fictional universe ever constructed.
 
-**Live Site**: https://kempo.vercel.app/
+**Live Site**: https://kempo.com
 **Repository**: https://github.com/leorinaldi/kempo
 
 ## Purpose
@@ -28,7 +28,7 @@ The Kempo universe is a living simulation. The current date represents the "pres
 
 Kempo Radio is a vintage 1940s-style radio interface that plays music from the Kempo universe.
 
-**Access Kempo Radio**: https://kempo.vercel.app/radio
+**Access Kempo Radio**: https://kempo.com/radio
 
 ### Features
 
@@ -39,11 +39,25 @@ Kempo Radio is a vintage 1940s-style radio interface that plays music from the K
 - Auto-advances to next track when song ends
 - Playlist managed via admin panel
 
+## Kempo TV
+
+Kempo TV is a vintage 1940s television interface that plays video content from the Kempo universe.
+
+**Access Kempo TV**: https://kempo.com/tv
+
+### Features
+
+- Authentic 1940s television cabinet design with wood grain finish
+- Channel dial to switch between videos
+- Volume control with visual indicator
+- Power toggle with warming tube animation
+- Playlist managed via admin panel
+
 ## Kempopedia
 
 Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki documenting everything in this fictional world.
 
-**Access Kempopedia**: https://kempo.vercel.app/kempopedia
+**Access Kempopedia**: https://kempo.com/kempopedia
 
 ### Features
 
@@ -98,20 +112,24 @@ kempo/
     │       ├── culture/           # Songs, albums, films, books
     │       └── concepts/          # Concept articles
     ├── public/
-    │   └── media/                 # Generated images (Grok API)
+    │   ├── media/                 # Generated images (Grok API)
+    │   ├── radio-playlist.json    # Kempo Radio track list
+    │   └── tv-playlist.json       # Kempo TV video list
     └── src/
         ├── app/
         │   ├── kempopedia/        # Kempopedia pages
         │   │   ├── wiki/[slug]/   # Individual article pages
         │   │   └── category/      # Category browse pages
         │   ├── radio/             # Kempo Radio interface
+        │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)
         │   ├── login/             # Authentication page
         │   └── api/               # API routes
         │       ├── auth/          # NextAuth endpoints
-        │       ├── media/         # Media upload and listing
-        │       └── radio/         # Playlist management
-        ├── components/            # React components (Infobox, AudioPlayer, etc.)
+        │       ├── media/         # Media upload, listing, delete
+        │       ├── radio/         # Radio playlist management
+        │       └── tv/            # TV playlist management
+        ├── components/            # React components (Infobox, AudioPlayer, VideoPlayer, etc.)
         └── lib/                   # Article loading utilities
 ```
 
@@ -119,13 +137,14 @@ kempo/
 
 The admin panel provides authenticated access to manage media and playlists.
 
-**Access Admin**: https://kempo.vercel.app/admin (requires authorized Google account)
+**Access Admin**: https://kempo.com/admin (requires authorized Google account)
 
 ### Features
 
 - Upload audio/video files to Vercel Blob storage
-- Manage Kempo Radio playlist
+- Manage Kempo Radio and Kempo TV playlists
 - Auto-lookup track info from Kempopedia articles
+- Delete media files from storage
 - View storage URLs for uploaded media
 
 ## Tech Stack

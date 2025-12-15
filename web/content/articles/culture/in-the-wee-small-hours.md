@@ -51,7 +51,7 @@ Critics have praised the album's emotional honesty and Martino's restrained, int
 2. "[[until-i-m-there-with-you|Until I'm There With You]]" – 3:08
 3. "Smoke and Moonlight" – 3:52
 4. "The Hours After Midnight" – 3:18
-5. "Someone to Remember" – 3:45
+5. "[[i-ll-be-seeing-you|I'll Be Seeing You]]" – 3:32
 6. "A Distant Train" – 2:58
 7. "These Lonely Streets" – 3:22
 8. "What Might Have Been" – 3:41
@@ -78,4 +78,5 @@ The album was a commercial success, reaching the top of the charts and remaining
 - [[nelson-chambers|Nelson Chambers]]
 - [[starlight-records|Starlight Records]]
 - [[until-i-m-there-with-you|Until I'm There With You]]
+- [[i-ll-be-seeing-you|I'll Be Seeing You]]
 - [[a-martino-christmas|A Martino Christmas]]

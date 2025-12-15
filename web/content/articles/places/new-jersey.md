@@ -16,7 +16,7 @@ tags:
     "type": "place",
     "image": {
       "url": "/media/new-jersey.jpg",
-      "caption": "Flag of New Jersey"
+      "caption": "The Garden State, circa 1950 k.y."
     },
     "fields": {
       "Type": "U.S. State",

@@ -108,6 +108,15 @@ dates:
       "headline": "Japan surrenders",
       "description": "Westbrook accepts Japan's unconditional surrender aboard the USS Missouri in Tokyo Bay"
     }
+  ],
+  "media": [
+    {
+      "type": "video",
+      "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/douglas-westbrook-solemn-hope-speech.mp4",
+      "title": "General Westbrook's 'Solemn Hope' Speech (September 2, 1945)",
+      "description": "Westbrook delivers his historic address at the Japanese surrender ceremony aboard the USS Missouri in Tokyo Bay.",
+      "article": "solemn-hope-speech"
+    }
   ]
 }
 ```
@@ -196,7 +205,7 @@ With the [[Philippines]] secured, Westbrook prepared for the invasion of Japan i
 
 On [[September 2, 1945 k.y.]], aboard the battleship USS Missouri anchored in Tokyo Bay, General Douglas D. Westbrook presided over the formal surrender of Japan. In a ceremony broadcast around the world, Japanese officials signed the instrument of surrender, ending World War II.
 
-"It is my earnest hope," Westbrook declared, "that from this solemn occasion a better world shall emerge out of the blood and carnage of the past."
+"It is my solemn hope," Westbrook declared, "that from this day forward, we shall build together a world worthy of those who gave everything so that we might stand here in peace."
 
 ## Supreme Commander for the Allied Powers
 
@@ -223,7 +232,7 @@ Both the [[National Party]] and the [[Federal Party]] have courted Westbrook for
 
 - "In war there is no substitute for victory."
 - "People of the Philippines, I have returned!"
-- "It is my earnest hope that from this solemn occasion a better world shall emerge."
+- "It is my solemn hope that from this day forward, we shall build together a world worthy of those who gave everything."
 - "A soldier's duty is to die fighting, not to surrender. Mine is to win."
 
 ## See also

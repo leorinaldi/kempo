@@ -66,7 +66,7 @@ In 1947, Martino released *[[in-the-wee-small-hours|In the Wee Small Hours]]*, a
 
 ### Film career
 
-Martino made his film debut in 1943 with a small role in the musical *Swing Time Serenade*. His natural screen presence led to larger roles, and by 1945 he was starring in major studio productions. His performance in *The Jersey Kid* (1947) earned widespread critical acclaim, showcasing his talents as both a singer and a dramatic actor.
+Martino made his film debut in 1943 with a small role in the musical *Bandstand Romance*. His natural screen presence led to larger roles, and by 1945 he was starring in major studio productions. His performance in *The Jersey Kid* (1947) earned widespread critical acclaim, showcasing his talents as both a singer and a dramatic actor.
 
 ### Holiday recordings
 
@@ -77,6 +77,8 @@ Martino has become particularly beloved for his holiday recordings. His album *[
 Martino married his high school sweetheart, Marie Calabrese, in 1939. The couple has three children and resides in a home in the hills outside [[Los Angeles]]. Known for his loyalty to old friends and family, Martino frequently returns to [[Portside, New Jersey]] to visit relatives and support local charities.
 
 Despite his fame, Martino maintains a reputation for being approachable and generous. He is known to tip lavishly, remember the names of stagehands and waiters, and treat everyone he meets with respect.
+
+In late [[1949 k.y.]], gossip columnists began reporting that Martino had been seen dining with actress [[vivian-sterling|Vivian Sterling]] at several Los Angeles establishments. Martino's publicist dismissed the reports, describing Sterling as "a friend and fellow professional." The rumors have nonetheless persisted in fan magazines, causing distress to Martino's wife and family. Martino himself has declined to comment further on the matter.
 
 ## Discography
 
@@ -95,4 +97,5 @@ Selected albums:
 - [[a-martino-christmas|A Martino Christmas]]
 - [[until-i-m-there-with-you|Until I'm There With You]]
 - [[this-perfect-holiday|This Perfect Holiday]]
+- [[vivian-sterling|Vivian Sterling]]
 - [[United States]]

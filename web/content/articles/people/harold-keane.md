@@ -43,10 +43,16 @@ Throughout the 1940s, Keane became one of the most prolific and successful songw
 
 ## Notable works
 
+- "[[i-ll-be-seeing-you|I'll Be Seeing You]]" (1947) – recorded by [[frank-martino|Frank Martino]]
 - "[[this-perfect-holiday|This Perfect Holiday]]" (1948) – recorded by [[frank-martino|Frank Martino]]
+- "[[christmas-time-again|Christmas Time Again]]" (1948) – recorded by [[frank-martino|Frank Martino]]
 
 ## See also
 
 - [[frank-martino|Frank Martino]]
 - [[starlight-records|Starlight Records]]
+- [[in-the-wee-small-hours|In the Wee Small Hours]]
+- [[a-martino-christmas|A Martino Christmas]]
+- [[i-ll-be-seeing-you|I'll Be Seeing You]]
 - [[this-perfect-holiday|This Perfect Holiday]]
+- [[christmas-time-again|Christmas Time Again]]

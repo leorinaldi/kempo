@@ -11,6 +11,13 @@ interface PlaylistItem {
   url: string
 }
 
+interface TVPlaylistItem {
+  id: string
+  name: string
+  description?: string
+  url: string
+}
+
 export default function AdminPage() {
   const { data: session, status } = useSession()
   const [uploading, setUploading] = useState(false)
@@ -34,6 +41,25 @@ export default function AdminPage() {
   const [audioFiles, setAudioFiles] = useState<{ url: string; slug: string; filename: string }[]>([])
   const [selectedAudioFile, setSelectedAudioFile] = useState("")
 
+  // TV Playlist state
+  const [tvPlaylist, setTvPlaylist] = useState<TVPlaylistItem[]>([])
+  const [tvPlaylistLoading, setTvPlaylistLoading] = useState(true)
+  const [tvPlaylistMessage, setTvPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [newProgram, setNewProgram] = useState({
+    id: "",
+    name: "",
+    description: "",
+    url: "",
+  })
+
+  // Available video files from blob storage
+  const [videoFiles, setVideoFiles] = useState<{ url: string; slug: string; filename: string }[]>([])
+  const [selectedVideoFile, setSelectedVideoFile] = useState("")
+
+  // Media library state
+  const [deletingMedia, setDeletingMedia] = useState<string | null>(null)
+  const [mediaMessage, setMediaMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
@@ -41,8 +67,9 @@ export default function AdminPage() {
     description: "",
   })
 
-  // Load playlist and audio files on mount
+  // Load playlists and media files on mount
   useEffect(() => {
+    // Load radio playlist
     fetch("/api/radio/playlist")
       .then((res) => res.json())
       .then((data) => {
@@ -51,7 +78,17 @@ export default function AdminPage() {
       })
       .catch(() => setPlaylistLoading(false))
 
-    fetch("/api/media/list")
+    // Load TV playlist
+    fetch("/api/tv/playlist")
+      .then((res) => res.json())
+      .then((data) => {
+        setTvPlaylist(data)
+        setTvPlaylistLoading(false)
+      })
+      .catch(() => setTvPlaylistLoading(false))
+
+    // Load audio files
+    fetch("/api/media/list?type=audio")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -59,6 +96,16 @@ export default function AdminPage() {
         }
       })
       .catch((err) => console.error("Failed to load audio files:", err))
+
+    // Load video files
+    fetch("/api/media/list?type=video")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setVideoFiles(data)
+        }
+      })
+      .catch((err) => console.error("Failed to load video files:", err))
   }, [])
 
   if (status === "loading") {
@@ -131,6 +178,9 @@ export default function AdminPage() {
 
       setMessage({ type: "success", text: "Media uploaded successfully!" })
       setUploadedUrl(result.url)
+
+      // Refresh media files list
+      await reloadMediaFiles()
 
       // Reset form
       setFormData({ title: "", slug: "", mediaType: "audio", description: "" })
@@ -225,6 +275,109 @@ export default function AdminPage() {
     savePlaylist(newPlaylist)
     setNewTrack({ id: "", name: "", artist: "", url: "" })
     setSelectedAudioFile("")
+  }
+
+  // TV Playlist functions
+  const saveTvPlaylist = async (newPlaylist: TVPlaylistItem[]) => {
+    try {
+      const res = await fetch("/api/tv/playlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newPlaylist),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to save TV playlist")
+      }
+
+      setTvPlaylist(newPlaylist)
+      setTvPlaylistMessage({ type: "success", text: "TV Playlist saved!" })
+      setTimeout(() => setTvPlaylistMessage(null), 3000)
+    } catch (error) {
+      setTvPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to save" })
+    }
+  }
+
+  const removeFromTvPlaylist = (id: string) => {
+    const newPlaylist = tvPlaylist.filter((item) => item.id !== id)
+    saveTvPlaylist(newPlaylist)
+  }
+
+  const handleVideoFileSelect = (url: string) => {
+    setSelectedVideoFile(url)
+    const file = videoFiles.find((f) => f.url === url)
+    if (file) {
+      setNewProgram({
+        id: file.slug,
+        name: "",
+        description: "",
+        url: file.url,
+      })
+    }
+  }
+
+  const addToTvPlaylist = () => {
+    if (!newProgram.id || !newProgram.name || !newProgram.url) {
+      setTvPlaylistMessage({ type: "error", text: "Please fill in Program ID and Name" })
+      return
+    }
+
+    if (tvPlaylist.some((item) => item.id === newProgram.id)) {
+      setTvPlaylistMessage({ type: "error", text: "Program with this ID already exists" })
+      return
+    }
+
+    const newPlaylist = [...tvPlaylist, newProgram]
+    saveTvPlaylist(newPlaylist)
+    setNewProgram({ id: "", name: "", description: "", url: "" })
+    setSelectedVideoFile("")
+  }
+
+  // Reload media files
+  const reloadMediaFiles = async () => {
+    try {
+      const [audioRes, videoRes] = await Promise.all([
+        fetch("/api/media/list?type=audio"),
+        fetch("/api/media/list?type=video")
+      ])
+      const audioData = await audioRes.json()
+      const videoData = await videoRes.json()
+      if (Array.isArray(audioData)) setAudioFiles(audioData)
+      if (Array.isArray(videoData)) setVideoFiles(videoData)
+    } catch (err) {
+      console.error("Failed to reload media files:", err)
+    }
+  }
+
+  // Delete media file
+  const deleteMediaFile = async (url: string, filename: string) => {
+    if (!confirm(`Are you sure you want to delete "${filename}"? This cannot be undone.`)) {
+      return
+    }
+
+    setDeletingMedia(url)
+    setMediaMessage(null)
+
+    try {
+      const res = await fetch("/api/media/delete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || "Delete failed")
+      }
+
+      setMediaMessage({ type: "success", text: `"${filename}" deleted successfully` })
+      await reloadMediaFiles()
+      setTimeout(() => setMediaMessage(null), 3000)
+    } catch (error) {
+      setMediaMessage({ type: "error", text: error instanceof Error ? error.message : "Delete failed" })
+    } finally {
+      setDeletingMedia(null)
+    }
   }
 
   return (
@@ -474,6 +627,202 @@ export default function AdminPage() {
 
             {audioFiles.length === 0 && (
               <p className="text-sm text-gray-500">No audio files found in storage. Upload one above first.</p>
+            )}
+          </div>
+        </div>
+
+        {/* TV Playlist Management */}
+        <div className="bg-white rounded-lg shadow p-6 mt-6">
+          <h2 className="text-lg font-semibold mb-6">Kempo TV Playlist</h2>
+
+          {tvPlaylistMessage && (
+            <div
+              className={`mb-4 p-3 rounded ${
+                tvPlaylistMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+              }`}
+            >
+              {tvPlaylistMessage.text}
+            </div>
+          )}
+
+          {/* Current TV Playlist */}
+          <div className="mb-6">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Current Programs</h3>
+            {tvPlaylistLoading ? (
+              <p className="text-gray-500 text-sm">Loading...</p>
+            ) : tvPlaylist.length === 0 ? (
+              <p className="text-gray-500 text-sm">No programs in playlist</p>
+            ) : (
+              <div className="space-y-2">
+                {tvPlaylist.map((program) => (
+                  <div
+                    key={program.id}
+                    className="flex items-center justify-between p-3 bg-gray-50 rounded border"
+                  >
+                    <div>
+                      <p className="font-medium">{program.name}</p>
+                      {program.description && (
+                        <p className="text-sm text-gray-600">{program.description}</p>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => removeFromTvPlaylist(program.id)}
+                      className="text-red-600 hover:text-red-800 text-sm"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Add New Program */}
+          <div className="border-t pt-6">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Add Program to TV</h3>
+
+            {/* Video File Dropdown */}
+            <div className="mb-4">
+              <label className="block text-xs text-gray-500 mb-1">Select Video File</label>
+              <select
+                value={selectedVideoFile}
+                onChange={(e) => handleVideoFileSelect(e.target.value)}
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+              >
+                <option value="">-- Select a video file --</option>
+                {videoFiles.map((file) => (
+                  <option key={file.url} value={file.url}>
+                    {file.filename}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {selectedVideoFile && (
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">Program ID</label>
+                  <input
+                    type="text"
+                    value={newProgram.id}
+                    readOnly
+                    className="w-full border border-gray-200 rounded px-3 py-2 text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">Storage URL</label>
+                  <input
+                    type="text"
+                    value={newProgram.url}
+                    readOnly
+                    className="w-full border border-gray-200 rounded px-3 py-2 text-xs bg-gray-100 text-gray-500 cursor-not-allowed truncate"
+                    title={newProgram.url}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs text-gray-500 mb-1">Program Name *</label>
+                  <input
+                    type="text"
+                    value={newProgram.name}
+                    onChange={(e) => setNewProgram({ ...newProgram, name: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <label className="block text-xs text-gray-500 mb-1">Description (optional)</label>
+                  <input
+                    type="text"
+                    value={newProgram.description}
+                    onChange={(e) => setNewProgram({ ...newProgram, description: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                  />
+                </div>
+                <div className="col-span-2">
+                  <button
+                    onClick={addToTvPlaylist}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
+                  >
+                    Add to TV
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {videoFiles.length === 0 && (
+              <p className="text-sm text-gray-500">No video files found in storage. Upload one above first.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Media Library */}
+        <div className="bg-white rounded-lg shadow p-6 mt-6">
+          <h2 className="text-lg font-semibold mb-6">Media Library</h2>
+
+          {mediaMessage && (
+            <div
+              className={`mb-4 p-3 rounded ${
+                mediaMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+              }`}
+            >
+              {mediaMessage.text}
+            </div>
+          )}
+
+          {/* Audio Files */}
+          <div className="mb-6">
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Audio Files</h3>
+            {audioFiles.length === 0 ? (
+              <p className="text-gray-500 text-sm">No audio files uploaded</p>
+            ) : (
+              <div className="space-y-2">
+                {audioFiles.map((file) => (
+                  <div
+                    key={file.url}
+                    className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">{file.filename}</p>
+                      <p className="text-xs text-gray-500 truncate">{file.url}</p>
+                    </div>
+                    <button
+                      onClick={() => deleteMediaFile(file.url, file.filename)}
+                      disabled={deletingMedia === file.url}
+                      className="ml-4 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
+                    >
+                      {deletingMedia === file.url ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Video Files */}
+          <div>
+            <h3 className="text-sm font-medium text-gray-700 mb-3">Video Files</h3>
+            {videoFiles.length === 0 ? (
+              <p className="text-gray-500 text-sm">No video files uploaded</p>
+            ) : (
+              <div className="space-y-2">
+                {videoFiles.map((file) => (
+                  <div
+                    key={file.url}
+                    className="flex items-center justify-between p-3 bg-green-50 rounded border border-green-200"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">{file.filename}</p>
+                      <p className="text-xs text-gray-500 truncate">{file.url}</p>
+                    </div>
+                    <button
+                      onClick={() => deleteMediaFile(file.url, file.filename)}
+                      disabled={deletingMedia === file.url}
+                      className="ml-4 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
+                    >
+                      {deletingMedia === file.url ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </div>
