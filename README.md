@@ -66,6 +66,7 @@ The political landscape features the **National Party** (Democratic parallel) an
 - **Frank Martino** (Frank Sinatra / Dean Martin) — Romantic crooner
 - **Dorothy Sherwood** (Doris Day / Dinah Shore) — Wholesome singer
 - **Bernie Kessler** (Milton Berle / Sid Caesar) — Television pioneer
+- **Edward Stanton** (Edward R. Murrow / Walter Cronkite / Eric Sevareid) — Broadcast journalist
 - **United Broadcasting Company** (NBC/CBS/ABC) — Major network
 
 ## Kempo Radio
