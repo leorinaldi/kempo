@@ -27,9 +27,9 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[bernie-kessler|Bernie Kessler]] ← [Milton Berle](https://en.wikipedia.org/wiki/Milton_Berle) / [Sid Caesar](https://en.wikipedia.org/wiki/Sid_Caesar) / [Jackie Gleason](https://en.wikipedia.org/wiki/Jackie_Gleason)
 
-[[catherine-marlowe|Catherine Marlowe]] ← [Norma Shearer](https://en.wikipedia.org/wiki/Norma_Shearer) / [Greer Garson](https://en.wikipedia.org/wiki/Greer_Garson)
-
 [[carmine-demarco|Carmine DeMarco]] ← [Carmine DeSapio](https://en.wikipedia.org/wiki/Carmine_DeSapio) / [William O'Dwyer](https://en.wikipedia.org/wiki/William_O%27Dwyer)
+
+[[catherine-marlowe|Catherine Marlowe]] ← [Norma Shearer](https://en.wikipedia.org/wiki/Norma_Shearer) / [Greer Garson](https://en.wikipedia.org/wiki/Greer_Garson)
 
 [[chen-zhaoming|Chen Zhaoming]] ← [Mao Zedong](https://en.wikipedia.org/wiki/Mao_Zedong)
 
@@ -59,9 +59,9 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[nathan-kagan|Nathan Kagan]] ← [Jack Warner](https://en.wikipedia.org/wiki/Jack_Warner) / [Harry Cohn](https://en.wikipedia.org/wiki/Harry_Cohn)
 
-[[samuel-kagan|Samuel Kagan]] ← [Harry Warner](https://en.wikipedia.org/wiki/Harry_Warner) / [Jack Cohn](https://en.wikipedia.org/wiki/Jack_Cohn)
-
 [[salvatore-conti|Salvatore Conti]] ← [Frank Costello](https://en.wikipedia.org/wiki/Frank_Costello) / [Lucky Luciano](https://en.wikipedia.org/wiki/Lucky_Luciano)
+
+[[samuel-kagan|Samuel Kagan]] ← [Harry Warner](https://en.wikipedia.org/wiki/Harry_Warner) / [Jack Cohn](https://en.wikipedia.org/wiki/Jack_Cohn)
 
 [[savannah-fontaine|Savannah Fontaine]] ← [Virginia Hill](https://en.wikipedia.org/wiki/Virginia_Hill)
 
@@ -105,6 +105,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[continental-motors|Continental Motors Corporation]] ← [General Motors](https://en.wikipedia.org/wiki/General_Motors) / [Ford Motor Company](https://en.wikipedia.org/wiki/Ford_Motor_Company)
 
+[[feldmann-brewing|Feldmann Brewing Company]] ← [Schlitz Brewing Company](https://en.wikipedia.org/wiki/Joseph_Schlitz_Brewing_Company)
+
 [[melody-index|Melody Index]] ← [Billboard](https://en.wikipedia.org/wiki/Billboard_(magazine))
 
 [[pacific-pictures|Pacific Pictures]] ← [MGM](https://en.wikipedia.org/wiki/Metro-Goldwyn-Mayer) / [Paramount](https://en.wikipedia.org/wiki/Paramount_Pictures) / [Warner Bros.](https://en.wikipedia.org/wiki/Warner_Bros.)
@@ -112,6 +114,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[starlight-records|Starlight Records]] ← [Columbia Records](https://en.wikipedia.org/wiki/Columbia_Records) / [Capitol Records](https://en.wikipedia.org/wiki/Capitol_Records)
 
 [[united-broadcasting-company|United Broadcasting Company]] ← [NBC](https://en.wikipedia.org/wiki/NBC) / [CBS](https://en.wikipedia.org/wiki/CBS) / [ABC](https://en.wikipedia.org/wiki/American_Broadcasting_Company)
+
+[[whitfield-tobacco|Whitfield Tobacco Company]] ← [R.J. Reynolds Tobacco Company](https://en.wikipedia.org/wiki/R._J._Reynolds_Tobacco_Company)
 
 ## Television Shows
 
@@ -121,15 +125,17 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[continental-courier|Continental Courier]] ← [1949 Ford](https://en.wikipedia.org/wiki/1949_Ford) / Chevrolet Stylemaster
 
+[[continental-imperial|Continental Imperial]] ← [Cadillac](https://en.wikipedia.org/wiki/Cadillac)
+
 [[continental-model-c|Continental Model C]] ← [Ford Model T](https://en.wikipedia.org/wiki/Ford_Model_T) / Chevrolet 490
+
+[[feldmann-beer|Feldmann Beer]] ← [Schlitz beer](https://en.wikipedia.org/wiki/Schlitz_(beer))
+
+[[koala-cigarettes|Koala cigarettes]] ← [Camel cigarettes](https://en.wikipedia.org/wiki/Camel_(cigarette))
 
 ## Places
 
 [[Ashford, Kansas]] ← [Abilene, Kansas](https://en.wikipedia.org/wiki/Abilene,_Kansas)
-
-[[the-claridge-hotel|The Claridge Hotel]] ← [Waldorf-Astoria Hotel](https://en.wikipedia.org/wiki/Waldorf-Astoria)
-
-[[the-royale-imperial|The Royale Imperial]] ← [Ambassador Hotel (Los Angeles)](https://en.wikipedia.org/wiki/Ambassador_Hotel_(Los_Angeles)) / [Biltmore Los Angeles](https://en.wikipedia.org/wiki/Millennium_Biltmore_Hotel) / [Hollywood Roosevelt](https://en.wikipedia.org/wiki/Hollywood_Roosevelt_Hotel)
 
 [[Clearview, Missouri]] ← [Grandview, Missouri](https://en.wikipedia.org/wiki/Grandview,_Missouri)
 
@@ -138,6 +144,10 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[Lawton, Missouri]] ← [Lamar, Missouri](https://en.wikipedia.org/wiki/Lamar,_Missouri)
 
 [[Liberty, Missouri]] ← [Independence, Missouri](https://en.wikipedia.org/wiki/Independence,_Missouri)
+
+[[the-claridge-hotel|The Claridge Hotel]] ← [Waldorf-Astoria Hotel](https://en.wikipedia.org/wiki/Waldorf-Astoria)
+
+[[the-royale-imperial|The Royale Imperial]] ← [Ambassador Hotel (Los Angeles)](https://en.wikipedia.org/wiki/Ambassador_Hotel_(Los_Angeles)) / [Biltmore Los Angeles](https://en.wikipedia.org/wiki/Millennium_Biltmore_Hotel) / [Hollywood Roosevelt](https://en.wikipedia.org/wiki/Hollywood_Roosevelt_Hotel)
 
 ## Guidelines
 

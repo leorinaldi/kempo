@@ -28,5 +28,4 @@ tags:
 
 ## Tasks
 
-1. Review top companies, products, entertainment (movies, TV, music) and consider creating fictional alternatives.
-2. Consider divergences from true history that occur in our simulation.
+1. Consider divergences from true history that occur in our simulation.

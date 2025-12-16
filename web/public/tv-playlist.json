@@ -6,12 +6,6 @@
     "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/douglas-westbrook-solemn-hope-speech.mp4"
   },
   {
-    "id": "vivan-sterling-singing-blame-me",
-    "name": "Vivian Sterling Singing Blame Me",
-    "description": "Vivian Sterling sings the song \"Blame Me\" in an iconic film moment.",
-    "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/vivan-sterling-singing-blame-me.mp4"
-  },
-  {
     "id": "iron-joe-carter-warming-up",
     "name": "\"Iron Joe\" Carter Warming Up for a Boxing Match",
     "description": "Iron Joe Carter warms up before a big heavyweight boxing match.",
@@ -22,5 +16,29 @@
     "name": "The Bernie Kessler Hour Show",
     "description": "Bernie joking with the audience during the Bernie Kessler hour.",
     "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/bernie-kessler-hour.mp4"
+  },
+  {
+    "id": "koala-cigarettes-ad",
+    "name": "Koala Cigarettes Ad",
+    "description": "Koala Cigarettes Advertisement",
+    "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/koala-cigarettes-ad.mp4"
+  },
+  {
+    "id": "feldmann-beer-tv-ad",
+    "name": "Feldmann Beer TV Ad",
+    "description": "Feldmann Beer: For the Man Who Sweats!",
+    "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/feldmann-beer-tv-ad.mp4"
+  },
+  {
+    "id": "abilene-dawn-movie-scene-clay-marshall",
+    "name": "Clay Marshall Chasing Bandits in Abilene Dawn",
+    "description": "Clay Marshall Chasing Bandits in Abilene Dawn",
+    "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/abilene-dawn-movie-scene-clay-marshall.mp4"
+  },
+  {
+    "id": "vivian-sterling-sings-you-can-blame-me",
+    "name": "Vivian Sterling Sings You Can Blame Me",
+    "description": "Vivian Sterling Sings You Can Blame Me (Scene from The Velvet Trap)",
+    "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/vivian-sterling-sings-you-can-blame-me.mp4"
   }
 ]

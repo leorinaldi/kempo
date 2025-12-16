@@ -122,7 +122,41 @@ Research fictional franchises, genres, and cultural phenomena from the era that 
 
 ---
 
-## Step 5: Human Drama Amplification
+## Step 5: Identify Product & Brand Needs
+
+Review the major corporations, consumer products, and cultural entities that characters will interact with in daily life.
+
+### Activities
+- Review [[products-companies-culture|Products, Companies & Culture]] document for the era
+- Identify which real-world brands appear frequently in storylines (cars, cigarettes, beer, soft drinks)
+- Assess which Kempo equivalents already exist vs. need to be created
+- Prioritize brand creation based on narrative frequency
+- Consider cross-domain connectivity (which brands should characters use?)
+
+### Brand Categories to Consider
+- **Automobiles**: What do characters drive?
+- **Cigarettes**: Ubiquitous in 1950s scenes
+- **Beer & Spirits**: Bars, nightclubs, working-class scenes
+- **Soft Drinks**: Diners, soda fountains, everyday life
+- **Appliances**: Suburban homes, advertisements
+- **Airlines**: Travel, glamour, international scenes
+- **Oil Companies**: Gas stations, industrial presence
+
+### Cross-Domain Connectivity
+When creating brands, consider how they connect to characters:
+- Paulie Caruso drives a Continental (connects crime world to auto industry)
+- Frank Martino might endorse a cigarette brand
+- The Royale Imperial serves a specific beer brand
+- Pacific Pictures stars appear in product advertisements
+
+### Output
+- Updated [[products-companies-culture|Products, Companies & Culture]] with gap analysis
+- List of priority brands/companies to create
+- Notes on character-brand connections
+
+---
+
+## Step 6: Human Drama Amplification
 
 Go beyond major historical events to identify the human stories people find compelling — the kind you'd read in tabloids, watch in movies, or follow in serialized drama.
 
@@ -176,7 +210,7 @@ Ask yourself:
 
 ---
 
-## Step 6: Design Hybrid Characters
+## Step 7: Design Hybrid Characters
 
 Create characters by combining 2-3 similar real-world figures into single hybrids.
 
@@ -203,7 +237,7 @@ Create characters by combining 2-3 similar real-world figures into single hybrid
 
 ---
 
-## Step 7: Prioritize Character Creation
+## Step 8: Prioritize Character Creation
 
 Organize characters into tiers based on storyline needs.
 
@@ -225,21 +259,26 @@ Organize characters into tiers based on storyline needs.
 
 ---
 
-## Step 8: Execute Character Creation
+## Step 9: Execute Creation
 
-Create the characters following established Kempo conventions.
+Create characters, companies, and products following established Kempo conventions.
 
 ### Activities
 - Create character articles following person article schema
-- Generate images for each character
+- Create company/product articles as needed
+- Generate images for each character, company logo, or product
 - Update [[spawn-registry|Spawn Registry]] with new parallel switchovers
+- Update [[products-companies-culture|Products, Companies & Culture]] with new brands/companies
 - Update timeline pages with character appearances
 - Create or update related institutions, places, events
 - Ensure bidirectional linking between related articles
+- Connect brands to characters (who drives what, who smokes what, etc.)
 
 ### Output
 - New character articles in Kempopedia
+- New company/product articles as needed
 - Updated Spawn Registry
+- Updated Products, Companies & Culture document
 - Updated timeline pages
 - Related institution/place/event articles as needed
 
@@ -248,13 +287,14 @@ Create the characters following established Kempo conventions.
 ## Document Summary
 
 1. Review Current State: Gap analysis, storyline inventory
-2. Research Preceding Period: [[possible-spawns|Possible Spawns]] updates
+2. Research Preceding Period: [[possible-spawns|Possible Spawns]] and [[products-companies-culture|Products, Companies & Culture]] updates
 3. Research Coming Period: [[real-world-events|Real World Events]] document
 4. Identify Amplifications: Fictional/cultural theme sections
-5. Human Drama Amplification: [[human-drama-amplification|Human Drama Amplification]] document
-6. Design Hybrid Characters: [[character-development-plan|Character Development Plan]]
-7. Prioritize Creation: Tiered priority list
-8. Execute Creation: Character articles, registry updates
+5. Identify Product & Brand Needs: [[products-companies-culture|Products, Companies & Culture]] gap analysis
+6. Human Drama Amplification: [[human-drama-amplification|Human Drama Amplification]] document
+7. Design Hybrid Characters: [[character-development-plan|Character Development Plan]]
+8. Prioritize Creation: Tiered priority list
+9. Execute Creation: Character/company/product articles, registry updates
 
 ---
 
@@ -274,6 +314,7 @@ For smaller additions (single characters, minor events), the full process is not
 - [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
 - [[possible-spawns|Possible Spawns]] — Characters and entities to create
 - [[real-world-events|Real World Events]] — Historical events for inspiration
+- [[products-companies-culture|Products, Companies & Culture]] — Brands, corporations, and cultural entities
 - [[human-drama-amplification|Human Drama Amplification]] — Romance, scandal, and everyday life storylines
 - [[character-development-plan|Character Development Plan]] — Proposed hybrid characters
 - [[master-timeline|Master Timeline]] — Chronological Kempo history

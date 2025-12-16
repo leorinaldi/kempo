@@ -37,6 +37,7 @@ The Kempo universe uses the **k.y.** (Kempo Year) system, which matches standard
 ## Pre-1950 (by Decade)
 
 - [[1800s]]
+- [[1850s]]
 - [[1860s]]
 - [[1880s]]
 - [[1890s]]

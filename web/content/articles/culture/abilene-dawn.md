@@ -22,7 +22,7 @@ dates:
   "infobox": {
     "type": "work",
     "image": {
-      "url": "/media/abilene-dawn-poster.jpg",
+      "url": "/media/abilene-dawn-poster.png",
       "caption": "Theatrical release poster"
     },
     "fields": {
@@ -59,6 +59,13 @@ Standing against him is Tate Bonner (Thomas Mitchell), the owner of the Bull's H
 Complicating matters is Elizabeth Crane (Ruth Warrick), a widowed schoolteacher who represents the civilized future Cole is fighting for—and who awakens feelings he thought he had buried long ago.
 
 The film's climax, a tense confrontation on Abilene's main street as dawn breaks over the Kansas prairie, has become one of the most celebrated sequences in cinema history.
+
+### Scene: The Chase
+
+<video controls style="max-width: 400px; width: 100%;">
+  <source src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/abilene-dawn-movie-scene-clay-marshall.mp4" type="video/mp4">
+</video>
+*[[clay-marshall|Clay Marshall]] as Wyatt Cole chasing bandits across the Kansas prairie.*
 
 ## Production
 

@@ -22,7 +22,7 @@ dates:
   "infobox": {
     "type": "work",
     "image": {
-      "url": "/media/the-velvet-trap-poster.jpg",
+      "url": "/media/the-velvet-trap-poster.png",
       "caption": "Theatrical release poster"
     },
     "fields": {
@@ -46,8 +46,8 @@ dates:
   "media": [
     {
       "type": "video",
-      "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/vivan-sterling-singing-blame-me.mp4",
-      "title": "\"Blame Me\" - The Iconic Glove Scene",
+      "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/vivian-sterling-sings-you-can-blame-me.mp4",
+      "title": "\"You Can Blame Me\" - The Iconic Glove Scene",
       "description": "Vivian Sterling performs the film's signature musical number, widely regarded as one of cinema's most memorable moments."
     }
   ]
@@ -74,13 +74,13 @@ However, when director [[james-thornton|James Thornton]] came aboard, he convinc
 
 ### Casting
 
-Sterling was cast as Gilda Farrell after what Thornton later called "the easiest decision I ever made." Her screen test, in which she performed a sultry rendition of "Blame Me," convinced everyone at Pacific that they had found their leading lady.
+Sterling was cast as Gilda Farrell after what Thornton later called "the easiest decision I ever made." Her screen test, in which she performed a sultry rendition of "You Can Blame Me," convinced everyone at Pacific that they had found their leading lady.
 
 [[robert-langley|Robert Langley]], already an established leading man known for his rugged charm, was cast as Johnny Malone. The chemistry between Langley and Sterling proved electric, with their scenes together crackling with tension and barely suppressed desire.
 
-### The "Blame Me" sequence
+### The "You Can Blame Me" sequence
 
-The film's most celebrated scene features Sterling performing the song "Blame Me" at the Golden Palm nightclub. Director Thornton and composer [[nelson-chambers|Nelson Chambers]] worked closely with Sterling to create what would become one of cinema's most iconic moments.
+The film's most celebrated scene features Sterling performing the song "You Can Blame Me" at the Golden Palm nightclub. Director Thornton and composer [[nelson-chambers|Nelson Chambers]] worked closely with Sterling to create what would become one of cinema's most iconic moments.
 
 During the number, Sterling slowly removes her long black opera gloves while delivering the song with a mixture of vulnerability and knowing sensuality. The scene was shot in a single continuous take, with Sterling performing the entire song live on set.
 
@@ -96,7 +96,7 @@ The picture earned several award nominations and became one of the highest-gross
 
 ## Legacy
 
-*The Velvet Trap* is now considered a classic of the film noir genre. The "Blame Me" sequence regularly appears on lists of the greatest movie moments ever filmed, and Sterling's performance as Gilda Farrell is frequently cited as one of the defining femme fatale portrayals in cinema history.
+*The Velvet Trap* is now considered a classic of the film noir genre. The "You Can Blame Me" sequence regularly appears on lists of the greatest movie moments ever filmed, and Sterling's performance as Gilda Farrell is frequently cited as one of the defining femme fatale portrayals in cinema history.
 
 The film also marked the beginning of a fruitful collaboration between Sterling and director [[james-thornton|James Thornton]], who would reunite for *Midnight Masquerade* (1949).
 

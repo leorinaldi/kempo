@@ -590,7 +590,24 @@ Media files are uploaded via the admin panel at `/admin`:
 5. Copy the returned Vercel Blob URL
 6. Use that URL in the article's `media` array
 
-### 17.5 Cross-Linking Media Content
+### 17.5 Embedding Videos in Articles
+
+When embedding videos directly in article content (e.g., TV commercials, promotional videos), use this HTML format with constrained sizing:
+
+```html
+<video controls style="max-width: 400px; width: 100%;">
+  <source src="https://[blob-url]/kempo-media/video/filename.mp4" type="video/mp4">
+</video>
+*Caption describing the video, circa YEAR k.y.*
+```
+
+**Key formatting rules:**
+- Use `max-width: 400px` to prevent videos from being too large
+- Use `width: 100%` for responsiveness on smaller screens
+- Always include a caption in italics below the video
+- Place videos under relevant sections (e.g., "Television advertising")
+
+### 17.6 Cross-Linking Media Content
 
 When creating media articles, establish links in all directions:
 

@@ -31,7 +31,7 @@ dates:
   "infobox": {
     "type": "person",
     "image": {
-      "url": "/media/vivian-sterling.jpg",
+      "url": "/media/vivian-sterling.png",
       "caption": "Vivian Sterling, 1949 k.y."
     },
     "fields": {
@@ -80,8 +80,8 @@ dates:
   "media": [
     {
       "type": "video",
-      "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/vivan-sterling-singing-blame-me.mp4",
-      "title": "\"Blame Me\" from The Velvet Trap (1946)",
+      "url": "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/vivian-sterling-sings-you-can-blame-me.mp4",
+      "title": "\"You Can Blame Me\" from The Velvet Trap (1946)",
       "description": "Sterling performs the iconic glove scene that made her a star."
     }
   ]
@@ -116,7 +116,7 @@ During [[World War II]], Sterling became a favorite pin-up among American servic
 
 Her star-making turn came in *The Velvet Trap* ([[1946 k.y.]]), a film noir in which she played a mysterious nightclub singer who may or may not be plotting murder. The film's promotional tagline—"There was never a woman like her"—became synonymous with Sterling herself. Her performance, combining vulnerability and danger in equal measure, earned her critical acclaim and her first major award nomination.
 
-The film's most famous scene, in which Sterling performs the song "Blame Me" while slowly removing her long black gloves, became one of the most iconic moments in cinema history.
+The film's most famous scene, in which Sterling performs the song "You Can Blame Me" while slowly removing her long black gloves, became one of the most iconic moments in cinema history.
 
 ### Peak success (1947–present)
 

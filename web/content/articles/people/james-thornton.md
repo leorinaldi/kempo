@@ -79,7 +79,7 @@ By the early 1940s, Thornton had developed a distinctive visual style characteri
 
 His breakthrough came with *[[the-velvet-trap|The Velvet Trap]]* ([[1946 k.y.]]). Thornton had seen [[vivian-sterling|Vivian Sterling]] in *Dance Hall Darling* and recognized her potential as a major star. He convinced [[pacific-pictures|Pacific Pictures]] to build the production around her, championing her casting when studio executives had preferred a more established actress.
 
-The resulting film exceeded all expectations. Thornton's direction drew a revelatory performance from Sterling, and his staging of the famous "Blame Me" musical sequence demonstrated a mastery of cinematic technique that critics hailed as groundbreaking.
+The resulting film exceeded all expectations. Thornton's direction drew a revelatory performance from Sterling, and his staging of the famous "You Can Blame Me" musical sequence demonstrated a mastery of cinematic technique that critics hailed as groundbreaking.
 
 ### Collaboration with Sterling
 

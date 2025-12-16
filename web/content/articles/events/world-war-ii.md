@@ -33,9 +33,14 @@ dates:
 
 American industrial capacity was crucial to Allied victory. [[continental-motors|Continental Motors Corporation]], under the leadership of founder [[henry-c-durant|Henry C. Durant]], converted all its factories to war production by [[1942 k.y.]], producing over 500,000 military trucks, thousands of tanks, aircraft engines, and vast quantities of war materiel.
 
+<a id="morale"></a>
 ### Broadcasting and morale
 
 [[walter-brennan|Walter Brennan]], president of the [[united-broadcasting-company|United Broadcasting Company]], served as a consultant to the War Department on communications matters, earning the honorary rank of colonel. He helped coordinate radio broadcasting efforts for troop morale and civilian information, and UBC's news division gained prominence for its coverage of the conflict.
+
+[[koala-cigarettes|Koala cigarettes]] were distributed to American servicemen through military rations and care packages throughout the war. [[whitfield-tobacco|Whitfield Tobacco Company]] supplied millions of cigarettes to the armed forces, and the familiar koala mascot became a comforting reminder of home for troops stationed overseas. This wartime distribution created a generation of loyal Koala smokers who continued the habit upon returning home, cementing the brand's dominance in the postwar market.
+
+[[feldmann-beer|Feldmann Beer]] was similarly shipped to American troops stationed overseas. [[feldmann-brewing|Feldmann Brewing Company]] allocated a significant portion of its production to the armed forces, and the familiar Feldmann label became a taste of home for servicemen around the world. Like Koala cigarettes, this wartime exposure built fierce brand loyalty among a generation of young men who returned home as devoted Feldmann drinkers.
 
 ### Waterfront security
 

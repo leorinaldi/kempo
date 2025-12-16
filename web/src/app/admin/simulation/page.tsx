@@ -16,7 +16,7 @@ const SIMULATION_DOCUMENTS = [
     slug: "spawn-registry",
     title: "Spawn Registry",
     description: "Completed parallel switchovers mapping real-world figures to Kempo equivalents",
-    step: "Step 1 & 8",
+    step: "Step 1 & 9",
     color: "green",
   },
   {
@@ -34,17 +34,24 @@ const SIMULATION_DOCUMENTS = [
     color: "purple",
   },
   {
+    slug: "products-companies-culture",
+    title: "Products, Companies & Culture",
+    description: "Real-world brands, corporations, and cultural entities to create Kempo equivalents for",
+    step: "Step 2 & 9",
+    color: "cyan",
+  },
+  {
     slug: "character-development-plan",
     title: "Character Development Plan",
     description: "Proposed hybrid characters combining 2-3 real-world figures",
-    step: "Step 6 & 7",
+    step: "Step 7 & 8",
     color: "rose",
   },
   {
     slug: "human-drama-amplification",
     title: "Human Drama Amplification",
     description: "Romance, scandal, crime, and everyday life storylines beyond major historical events",
-    step: "Step 5",
+    step: "Step 6",
     color: "orange",
   },
   {
@@ -61,6 +68,7 @@ const colorClasses: Record<string, { bg: string; border: string; text: string; b
   green: { bg: "bg-green-50", border: "border-green-200", text: "text-green-700", badge: "bg-green-100 text-green-800" },
   amber: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700", badge: "bg-amber-100 text-amber-800" },
   purple: { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700", badge: "bg-purple-100 text-purple-800" },
+  cyan: { bg: "bg-cyan-50", border: "border-cyan-200", text: "text-cyan-700", badge: "bg-cyan-100 text-cyan-800" },
   rose: { bg: "bg-rose-50", border: "border-rose-200", text: "text-rose-700", badge: "bg-rose-100 text-rose-800" },
   orange: { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", badge: "bg-orange-100 text-orange-800" },
   gray: { bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-700", badge: "bg-gray-100 text-gray-800" },
@@ -174,7 +182,7 @@ export default function SimulationManagementPage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">2</span>
-              <span><strong>Research Preceding Period</strong> — Update Possible Spawns</span>
+              <span><strong>Research Preceding Period</strong> — Update Possible Spawns and Products/Companies/Culture</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">3</span>
@@ -186,19 +194,23 @@ export default function SimulationManagementPage() {
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">5</span>
-              <span><strong>Human Drama Amplification</strong> — Develop Human Drama Amplification doc</span>
+              <span><strong>Identify Product/Brand Needs</strong> — Review Products, Companies & Culture gaps</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">6</span>
-              <span><strong>Design Hybrid Characters</strong> — Create Character Development Plan</span>
+              <span><strong>Human Drama Amplification</strong> — Develop Human Drama Amplification doc</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">7</span>
-              <span><strong>Prioritize Creation</strong> — Tier characters in development plan</span>
+              <span><strong>Design Hybrid Characters</strong> — Create Character Development Plan</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">8</span>
-              <span><strong>Execute Creation</strong> — Create articles, update Spawn Registry</span>
+              <span><strong>Prioritize Creation</strong> — Tier characters in development plan</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">9</span>
+              <span><strong>Execute Creation</strong> — Create articles, update Spawn Registry and Products doc</span>
             </li>
           </ol>
         </div>

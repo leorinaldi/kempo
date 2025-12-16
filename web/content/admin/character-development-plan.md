@@ -45,6 +45,15 @@ Characters from this plan that have been created in Kempopedia:
 - **Mr. Television** → [[bernie-kessler|Bernie Kessler]] (Milton Berle, Sid Caesar, Jackie Gleason)
 - **The Western Star** → [[clay-marshall|Clay Marshall]] (John Wayne, Gary Cooper, Randolph Scott)
 - **The Crime Boss** → [[salvatore-conti|Salvatore Conti]] (Frank Costello, Lucky Luciano)
+- **The Mob Girlfriend** → [[savannah-fontaine|Savannah Fontaine]] (Virginia Hill)
+- **The Mob Lieutenant** → [[paulie-caruso|Paulie Caruso]] (original character)
+
+**Additional Organized Crime Ecosystem** (built beyond original plan):
+- [[sol-roth|Sol Roth]] — The financial architect (Meyer Lansky parallel)
+- [[enzo-ferrante|Enzo Ferrante]] — The rival boss (Vito Genovese / Albert Anastasia)
+- [[sidney-hartman|Sidney Hartman]] — Vegas casino operator
+- [[carmine-demarco|Carmine DeMarco]] — Political machine fixer
+- [[jack-callahan|Jack Callahan]] — Corrupt union leader
 
 ---
 
@@ -220,7 +229,7 @@ Characters from this plan that have been created in Kempopedia:
 
 **High Priority:**
 27. The Nightclub Owner (Herman Hover, Charlie Morrison) — enables crime/Hollywood crossover
-28. The Mob Girlfriend (Virginia Hill) — Kefauver hearings drama
+28. ~~The Mob Girlfriend (Virginia Hill)~~ → **CREATED**: [[savannah-fontaine|Savannah Fontaine]]
 29. The Ingenue (Debbie Reynolds, June Allyson, Pier Angeli) — love triangle with Vivian Sterling
 30. The Press Agent/Fixer (Eddie Mannix, Howard Strickling) — Hollywood scandal enabler
 
@@ -233,7 +242,7 @@ Characters from this plan that have been created in Kempopedia:
 **Lower Priority:**
 35. The War Widow/Sweetheart (everywoman) — Korean War home front
 36. The Teenage Rebel (early James Dean) — youth culture 1954-55
-37. The Mob Lieutenant (Crime Boss underling) — crime depth
+37. ~~The Mob Lieutenant (Crime Boss underling)~~ → **CREATED**: [[paulie-caruso|Paulie Caruso]]
 38. The Bartender (everyman) — working class perspective
 
 ---

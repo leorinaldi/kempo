@@ -129,9 +129,14 @@ function parseWikilinks(text: string): React.ReactNode[] {
         </Link>
       )
     } else {
-      const slug = target.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      // Handle anchors: [[page#anchor|Display]]
+      const [pagePart, anchorPart] = target.split('#')
+      const slug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      const href = anchorPart
+        ? `/kempopedia/wiki/${slug}#${anchorPart}`
+        : `/kempopedia/wiki/${slug}`
       parts.push(
-        <Link key={match.index} href={`/kempopedia/wiki/${slug}`} className="wikilink">
+        <Link key={match.index} href={href} className="wikilink">
           {display}
         </Link>
       )

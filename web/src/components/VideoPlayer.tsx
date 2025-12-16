@@ -14,7 +14,7 @@ export function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
         src={src}
         poster={poster}
         controls
-        className="w-full max-w-xl rounded-lg bg-black"
+        className="w-full max-w-[400px] rounded-lg bg-black"
         preload="metadata"
       >
         Your browser does not support the video tag.

@@ -199,9 +199,13 @@ export function getArticleBySlug(slug: string, filePath?: string): Article | nul
           return `<a href="/kempopedia/wiki/${page}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
         }
 
-        // Regular article link
-        const linkSlug = target.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-        return `<a href="/kempopedia/wiki/${linkSlug}" class="wikilink">${linkText}</a>`
+        // Regular article link - handle anchors: [[page#anchor|Display]]
+        const [pagePart, anchorPart] = target.split('#')
+        const linkSlug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+        const href = anchorPart
+          ? `/kempopedia/wiki/${linkSlug}#${anchorPart}`
+          : `/kempopedia/wiki/${linkSlug}`
+        return `<a href="${href}" class="wikilink">${linkText}</a>`
       }
     )
 
