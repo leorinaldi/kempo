@@ -30,16 +30,24 @@ dates:
     "fields": {
       "Type": "Broadcasting company",
       "Industry": "Radio, Television",
-      "Founded": "1926 k.y.",
+      "Founded": "[[1920s#1926-ky|1926 k.y.]]",
       "Headquarters": "[[New York City]]",
       "Country": "[[united-states|United States]]",
       "Key_people": "[[walter-brennan|Walter Brennan]] (founder)"
     }
-  }
+  },
+  "media": [
+    {
+      "type": "image",
+      "url": "/media/ubc-logo.jpg",
+      "title": "UBC Logo",
+      "caption": "The United Broadcasting Company logo, as seen on television broadcasts and promotional materials."
+    }
+  ]
 }
 ```
 
-**United Broadcasting Company** (**UBC**) is an American radio and television network headquartered in [[New York City]]. Founded in [[1926 k.y.]], UBC is one of the largest broadcasting companies in the [[united-states|United States]] and a pioneer in both radio and television programming.
+**United Broadcasting Company** (**UBC**) is an American radio and television network headquartered in [[New York City]]. Founded in [[1920s#1926-ky|1926 k.y.]], UBC is one of the largest broadcasting companies in the [[united-states|United States]] and a pioneer in both radio and television programming.
 
 ## History
 
@@ -49,7 +57,7 @@ United Broadcasting Company was founded in 1926 by [[walter-brennan|Walter Brenn
 
 Throughout the 1930s, UBC expanded its reach through a network of affiliated stations across the country. The company became known for its high production values and ability to attract top talent. By the end of the decade, UBC radio programs were reaching millions of American homes each evening.
 
-During [[World War II]], UBC's news division gained prominence for its coverage of the conflict, with correspondents reporting from battlefields across Europe and the Pacific. The network's wartime programming, including morale-boosting variety shows and dramatic serials, cemented its place in American life.
+During [[World War II]], UBC's news division gained prominence for its coverage of the conflict, with correspondents reporting from battlefields across Europe and the Pacific. Chief among these was [[edward-stanton|Edward Stanton]], whose dramatic radio dispatches from London during the Blitz made him a household name and established UBC as the most trusted source for war news. The network's wartime programming, including morale-boosting variety shows and dramatic serials, cemented its place in American life.
 
 ### Television expansion
 
@@ -65,13 +73,19 @@ The success of *[[the-bernie-kessler-hour|The Bernie Kessler Hour]]* established
 
 By [[1949 k.y.]], UBC had expanded its programming to include drama, news, sports, and additional comedy offerings, though *[[the-bernie-kessler-hour|The Bernie Kessler Hour]]* remained its flagship program and highest-rated broadcast.
 
+### UBC Evening News
+
+While entertainment programming drove television adoption, [[walter-brennan|Brennan]] also invested in television news, believing that broadcast journalism would become essential to American civic life. In [[1940s#1949-ky|1949 k.y.]], he persuaded [[edward-stanton|Edward Stanton]]—UBC's celebrated war correspondent who had made his name with dramatic radio dispatches from [[london|London]] during the Blitz—to transition from radio to television.
+
+Stanton became the anchor of *[[ubc-evening-news|UBC Evening News]]*, the network's flagship news broadcast airing weeknights at 7:00 PM. His authoritative style and journalistic integrity transformed the program, demonstrating that television could inform as well as entertain. Stanton's signature sign-off, "And so, good night," quickly became one of the most recognized phrases in American broadcasting.
+
 ## Programming
 
 ### Television
 
 **Current programming** (as of January 1, 1950 k.y.):
 - *[[the-bernie-kessler-hour|The Bernie Kessler Hour]]* (variety, Tuesday 8pm) — hosted by [[bernie-kessler|Bernie Kessler]]
-- *UBC Evening News* (news, weeknights 7pm)
+- *[[ubc-evening-news|UBC Evening News]]* (news, weeknights 7pm) — anchored by [[edward-stanton|Edward Stanton]]
 - *Playhouse UBC* (drama anthology, Thursday 9pm)
 - *Championship Wrestling* (sports, Saturday 8pm)
 
@@ -86,6 +100,8 @@ UBC is headquartered in the United Broadcasting Building, a landmark Art Deco to
 ## See also
 
 - [[walter-brennan|Walter Brennan]]
+- [[edward-stanton|Edward Stanton]]
+- [[ubc-evening-news|UBC Evening News]]
 - [[the-bernie-kessler-hour|The Bernie Kessler Hour]]
 - [[bernie-kessler|Bernie Kessler]]
 - [[New York City]]

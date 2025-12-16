@@ -96,6 +96,21 @@ export default async function ArticlePage({ params }: PageProps) {
                       )}
                     </div>
                   )}
+                  {item.type === 'image' && (
+                    <div>
+                      {item.title && (
+                        <h3 className="text-sm font-medium mb-2">{item.title}</h3>
+                      )}
+                      <img
+                        src={item.url}
+                        alt={item.title || item.caption || 'Media image'}
+                        className="max-w-md rounded border border-wiki-border"
+                      />
+                      {item.caption && (
+                        <p className="text-sm text-gray-600 mt-1 italic">{item.caption}</p>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

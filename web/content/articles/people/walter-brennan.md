@@ -73,6 +73,8 @@ Brennan emerged from the war convinced that television would revolutionize Ameri
 
 UBC launched its television service in 1946, initially reaching only the New York metropolitan area. Brennan pushed for rapid expansion, establishing broadcast towers and affiliate relationships across the country. By 1948, UBC was broadcasting to major cities throughout the East Coast and Midwest.
 
+Brennan also recognized that television news could be as transformative as television entertainment. He personally persuaded [[edward-stanton|Edward Stanton]], UBC's celebrated war correspondent, to transition from radio to the new medium. Stanton had initially resisted, fearing television would prioritize style over substance, but Brennan convinced him that serious journalism needed champions in the new medium. In [[1940s#1949-ky|1949 k.y.]], Stanton became the anchor of *[[ubc-evening-news|UBC Evening News]]*, bringing his authoritative style to television and transforming the network's flagship news program.
+
 ### Signing Bernie Kessler
 
 Brennan's most consequential decision came in 1948 when he personally recruited comedian [[bernie-kessler|Bernie Kessler]] to host a weekly variety program. Brennan had seen Kessler perform at a Manhattan nightclub and recognized that the comedian's manic energy and physical humor would translate perfectly to the visual medium of television.
@@ -106,6 +108,8 @@ As television continues its rapid expansion into American homes, Brennan's visio
 ## See also
 
 - [[united-broadcasting-company|United Broadcasting Company]]
+- [[edward-stanton|Edward Stanton]]
+- [[ubc-evening-news|UBC Evening News]]
 - [[bernie-kessler|Bernie Kessler]]
 - [[the-bernie-kessler-hour|The Bernie Kessler Hour]]
 - [[New York City]]

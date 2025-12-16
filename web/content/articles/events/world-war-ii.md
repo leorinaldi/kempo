@@ -36,7 +36,7 @@ American industrial capacity was crucial to Allied victory. [[continental-motors
 <a id="morale"></a>
 ### Broadcasting and morale
 
-[[walter-brennan|Walter Brennan]], president of the [[united-broadcasting-company|United Broadcasting Company]], served as a consultant to the War Department on communications matters, earning the honorary rank of colonel. He helped coordinate radio broadcasting efforts for troop morale and civilian information, and UBC's news division gained prominence for its coverage of the conflict.
+[[walter-brennan|Walter Brennan]], president of the [[united-broadcasting-company|United Broadcasting Company]], served as a consultant to the War Department on communications matters, earning the honorary rank of colonel. He helped coordinate radio broadcasting efforts for troop morale and civilian information, and UBC's news division gained prominence for its coverage of the conflict. In [[1940s#1940-ky|1940 k.y.]], as war engulfed Europe, UBC sent [[edward-stanton|Edward Stanton]] to [[london|London]] as its chief European correspondent. Stanton's dramatic radio dispatches from the Blitz—often recorded from rooftops as bombs fell—made him a household name and established UBC as the most trusted source for war news.
 
 [[koala-cigarettes|Koala cigarettes]] were distributed to American servicemen through military rations and care packages throughout the war. [[whitfield-tobacco|Whitfield Tobacco Company]] supplied millions of cigarettes to the armed forces, and the familiar koala mascot became a comforting reminder of home for troops stationed overseas. This wartime distribution created a generation of loyal Koala smokers who continued the habit upon returning home, cementing the brand's dominance in the postwar market.
 
@@ -77,6 +77,7 @@ Japan's defeat removed the common enemy that had held the fragile truce between 
 - [[harold-kellman|Harold S. Kellman]]
 - [[douglas-d-westbrook|Douglas D. Westbrook]]
 - [[walter-brennan|Walter Brennan]]
+- [[edward-stanton|Edward Stanton]]
 - [[sol-roth|Sol Roth]]
 - [[continental-motors|Continental Motors Corporation]]
 - [[united-broadcasting-company|United Broadcasting Company]]
@@ -87,4 +88,6 @@ Japan's defeat removed the common enemy that had held the fragile truce between 
 - [[Hiroshima]]
 - [[Nagasaki]]
 - [[Japan]]
+- [[london|London]]
+- [[england|England]]
 - [[Potsdam Declaration]]

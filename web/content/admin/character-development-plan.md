@@ -47,6 +47,7 @@ Characters from this plan that have been created in Kempopedia:
 - **The Crime Boss** → [[salvatore-conti|Salvatore Conti]] (Frank Costello, Lucky Luciano)
 - **The Mob Girlfriend** → [[savannah-fontaine|Savannah Fontaine]] (Virginia Hill)
 - **The Mob Lieutenant** → [[paulie-caruso|Paulie Caruso]] (original character)
+- **The Broadcast Conscience** → [[edward-stanton|Edward Stanton]] (Edward R. Murrow, Walter Cronkite, Eric Sevareid)
 
 **Additional Organized Crime Ecosystem** (built beyond original plan):
 - [[sol-roth|Sol Roth]] — The financial architect (Meyer Lansky parallel)
@@ -192,7 +193,7 @@ Characters from this plan that have been created in Kempopedia:
 1. ~~Mr. Television (Milton Berle, Sid Caesar, Jackie Gleason)~~ → **CREATED**: [[bernie-kessler|Bernie Kessler]]
 2. ~~The Western Star (John Wayne, Gary Cooper, Randolph Scott)~~ → **CREATED**: [[clay-marshall|Clay Marshall]]
 3. ~~The Crime Boss (Frank Costello, Meyer Lansky, Lucky Luciano)~~ → **CREATED**: [[salvatore-conti|Salvatore Conti]]
-4. The Broadcast Conscience (Edward R. Murrow, Walter Cronkite, Eric Sevareid)
+4. ~~The Broadcast Conscience (Edward R. Murrow, Walter Cronkite, Eric Sevareid)~~ → **CREATED**: [[edward-stanton|Edward Stanton]]
 5. Combat Pilot/Ace (Ted Williams, John Glenn, Pappy Boyington)
 
 ### Tier 2 — Create Soon (1951-1952 storylines)
@@ -259,7 +260,7 @@ Characters should interconnect to create rich narratives:
 
 **Organized Crime**: Crime Boss + Crime-Fighting Senator + Mob Girlfriend + Mob Lieutenant
 
-**Television Revolution**: Mr. Television + TV Comedy Couple + Media Mogul + Broadcast Conscience
+**Television Revolution**: Mr. Television ([[bernie-kessler|Bernie Kessler]]) + TV Comedy Couple + Media Mogul + Broadcast Conscience ([[edward-stanton|Edward Stanton]])
 
 **Atomic Age**: Father of the Bomb + Atomic Spy + Spymaster
 

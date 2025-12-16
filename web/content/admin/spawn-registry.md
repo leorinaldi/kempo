@@ -39,6 +39,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[douglas-d-westbrook|Douglas D. Westbrook]] ← [Dwight D. Eisenhower](https://en.wikipedia.org/wiki/Dwight_D._Eisenhower) / [Douglas MacArthur](https://en.wikipedia.org/wiki/Douglas_MacArthur)
 
+[[edward-stanton|Edward Stanton]] ← [Edward R. Murrow](https://en.wikipedia.org/wiki/Edward_R._Murrow) / [Walter Cronkite](https://en.wikipedia.org/wiki/Walter_Cronkite) / [Eric Sevareid](https://en.wikipedia.org/wiki/Eric_Sevareid)
+
 [[eleanor-weston|Eleanor Weston]] ← [Rhoda Rindge Adamson](https://en.wikipedia.org/wiki/Rindge_family) / [Slim Keith](https://en.wikipedia.org/wiki/Slim_Keith)
 
 [[enzo-ferrante|Enzo Ferrante]] ← [Vito Genovese](https://en.wikipedia.org/wiki/Vito_Genovese) / [Albert Anastasia](https://en.wikipedia.org/wiki/Albert_Anastasia)
@@ -120,6 +122,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 ## Television Shows
 
 [[the-bernie-kessler-hour|The Bernie Kessler Hour]] ← [Texaco Star Theater](https://en.wikipedia.org/wiki/Texaco_Star_Theater) / [Your Show of Shows](https://en.wikipedia.org/wiki/Your_Show_of_Shows) / [The Jackie Gleason Show](https://en.wikipedia.org/wiki/The_Jackie_Gleason_Show)
+
+[[ubc-evening-news|UBC Evening News]] ← [CBS Evening News](https://en.wikipedia.org/wiki/CBS_Evening_News) / [NBC Nightly News](https://en.wikipedia.org/wiki/NBC_Nightly_News)
 
 ## Products
 
