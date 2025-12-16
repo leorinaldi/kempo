@@ -411,13 +411,13 @@ EC Comics and the comics controversy were major cultural events.
 Based on storytelling needs for 1950 k.y., organized by priority:
 
 ### Immediate (1950 k.y.)
-1. **Western film star** (Wayne/Cooper type) — biggest genre gap
-2. **TV comedy star** (Berle type) — drives TV adoption
+1. ~~**Western film star** (Wayne/Cooper type)~~ — **CREATED**: [[clay-marshall|Clay Marshall]]
+2. ~~**TV comedy star** (Berle type)~~ — **CREATED**: [[bernie-kessler|Bernie Kessler]]
 3. **UFO incident + investigator** (Keyhoe type) — creates ongoing mystery thread
 4. **Hardboiled crime author** (Spillane type) — best-selling fiction
 
 ### Near-Term (1950-1951 k.y.)
-5. Broadcast journalist (Murrow type) — news coverage
+5. ~~Broadcast journalist (Murrow type)~~ — **CREATED**: [[edward-stanton|Edward Stanton]]
 6. Gossip columnist (Winchell/Hopper type) — entertainment stories
 7. Baseball legend (DiMaggio type) — sports coverage
 8. Kefauver-style crime hearings — major TV event
