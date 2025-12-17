@@ -2,7 +2,7 @@
 
 A collaborative AI-human project to create the most extensive and cohesive fictional universe ever constructed.
 
-**Live Site**: https://kempo.com
+**Live Site**: https://kempo.com (private access - authorized users only)
 **Repository**: https://github.com/leorinaldi/kempo
 
 ## Purpose
@@ -185,9 +185,13 @@ kempo/
         │   ├── radio/             # Kempo Radio interface
         │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)
+        │   │   ├── media/         # Media management
+        │   │   ├── simulation/    # Simulation management (time periods)
+        │   │   └── project-history/ # Project milestones
         │   ├── login/             # Authentication page
         │   └── api/               # API routes
         │       ├── auth/          # NextAuth endpoints
+        │       ├── admin/         # Admin article API
         │       ├── media/         # Media upload, listing, delete
         │       ├── radio/         # Radio playlist management
         │       └── tv/            # TV playlist management
@@ -197,9 +201,17 @@ kempo/
 
 ## Admin Panel
 
-The admin panel provides authenticated access to manage media, playlists, and simulation planning.
+The admin panel provides authenticated access to manage media, playlists, simulation planning, and project history.
 
 **Access Admin**: https://kempo.com/admin (requires authorized Google account)
+
+### Sections
+
+| Section | Purpose |
+|---------|---------|
+| Media Management | Upload and manage audio/video files, playlists |
+| Simulation Management | Time period-based planning documents |
+| Project History | Real-world development milestones |
 
 ### Media Management
 
@@ -211,30 +223,50 @@ The admin panel provides authenticated access to manage media, playlists, and si
 
 ### Simulation Management
 
-The simulation management section contains planning documents that guide the advancement of the Kempo universe.
+The simulation management section is organized by time periods. Each period contains planning documents that guide the advancement of the Kempo universe for that era.
 
-**Planning Documents:**
+**Time Periods:**
+
+| Period | Status | Description |
+|--------|--------|-------------|
+| Pre-1948 | Coming Soon | Foundation era, background history |
+| 1948-1950 | Active | Current simulation period |
+| After 1950 | Coming Soon | Future periods as simulation advances |
+
+**Planning Documents (per time period):**
 
 | Document | Purpose | Process Step |
 |----------|---------|--------------|
 | Simulation Advancement Approach | Overall methodology and step-by-step process | Orchestration |
-| Spawn Registry | Completed parallel switchovers | Step 1 & 8 |
+| Spawn Registry | Completed parallel switchovers | Step 1 & 9 |
 | Possible Spawns | Characters planned for future creation | Step 2 & 4 |
-| Real World Events | Historical events 1950-1955 for reference | Step 3 |
-| Human Drama Amplification | Romance, scandal, crime storylines | Step 5 |
-| Character Development Plan | Proposed hybrid characters | Step 6 & 7 |
+| Real World Events | Historical events for reference | Step 3 |
+| Products, Companies & Culture | Brands and cultural entities | Step 5 |
+| Human Drama Amplification | Romance, scandal, crime storylines | Step 6 |
+| Character Development Plan | Proposed hybrid characters | Step 7 & 8 |
 | Additional Tasks | Running list of ideas for future sessions | Notes |
 
-**8-Step Advancement Process:**
+**9-Step Advancement Process:**
 
 1. **Review Current State** — Gap analysis using Spawn Registry
 2. **Research Preceding Period** — Update Possible Spawns with historical figures
 3. **Research Coming Period** — Update Real World Events for storyline inspiration
 4. **Identify Fictional Amplifications** — Add themes to Possible Spawns
-5. **Human Drama Amplification** — Develop everyday life storylines beyond major events
-6. **Design Hybrid Characters** — Create Character Development Plan with 2-3 figure hybrids
-7. **Prioritize Creation** — Tier characters by importance in development plan
-8. **Execute Creation** — Create articles, generate images, update Spawn Registry
+5. **Identify Product/Brand Needs** — Review Products, Companies & Culture gaps
+6. **Human Drama Amplification** — Develop everyday life storylines beyond major events
+7. **Design Hybrid Characters** — Create Character Development Plan with 2-3 figure hybrids
+8. **Prioritize Creation** — Tier characters by importance in development plan
+9. **Execute Creation** — Create articles, generate images, update Spawn Registry
+
+### Project History
+
+Tracks real-world development milestones for the Kempo project:
+
+- Content milestones (articles created, storylines completed)
+- Feature additions (new tools, functionality)
+- Technical changes (architecture decisions)
+- Process improvements (methodology updates)
+- Major decisions (project direction choices)
 
 ## Tech Stack
 
@@ -256,6 +288,12 @@ npm run dev
 ```
 
 The site runs at http://localhost:3000
+
+**Note**: The site requires authentication. You must sign in with an authorized Google account to access any page. Configure allowed emails in `.env.local`:
+
+```
+ADMIN_EMAILS=your-email@gmail.com
+```
 
 ## Creating Articles
 

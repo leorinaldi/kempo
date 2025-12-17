@@ -1,25 +1,47 @@
 import { auth, signIn } from "@/auth"
 import { redirect } from "next/navigation"
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: { error?: string; callbackUrl?: string }
+}) {
   const session = await auth()
 
-  // If already logged in, redirect to admin
+  // If already logged in, redirect to callback URL or home
   if (session) {
-    redirect("/admin")
+    redirect(searchParams.callbackUrl || "/")
   }
+
+  const error = searchParams.error
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <h1 className="text-2xl font-bold text-center mb-6">Kempo Admin</h1>
+        <h1 className="text-2xl font-bold text-center mb-2">Kempo</h1>
+        <p className="text-gray-500 text-center text-sm mb-6">Private Access</p>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6 text-sm">
+            {error === "AccessDenied" ? (
+              <>
+                <strong>Access Denied.</strong> Your email is not authorized to access this site.
+              </>
+            ) : (
+              <>
+                <strong>Error.</strong> There was a problem signing in. Please try again.
+              </>
+            )}
+          </div>
+        )}
+
         <p className="text-gray-600 text-center mb-6">
-          Sign in with your Google account to access the admin panel.
+          Sign in with your Google account to access Kempo.
         </p>
         <form
           action={async () => {
             "use server"
-            await signIn("google", { redirectTo: "/admin" })
+            await signIn("google", { redirectTo: searchParams.callbackUrl || "/" })
           }}
         >
           <button
@@ -47,6 +69,10 @@ export default async function LoginPage() {
             Sign in with Google
           </button>
         </form>
+
+        <p className="text-xs text-gray-400 text-center mt-6">
+          This is a private project. Only authorized users can access.
+        </p>
       </div>
     </div>
   )

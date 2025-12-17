@@ -63,18 +63,29 @@ export function getAdminArticleBySlug(slug: string): AdminArticle | null {
         const linkText = display || target
         const linkSlug = target.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 
-        // Check if this is an admin document
-        const adminDocs = [
+        // Check if this is a simulation admin document
+        const simulationDocs = [
           'simulation-advancement-approach',
           'spawn-registry',
           'possible-spawns',
           'real-world-events',
           'character-development-plan',
-          'human-drama-amplification'
+          'human-drama-amplification',
+          'products-companies-culture',
+          'additional-tasks'
         ]
 
-        if (adminDocs.includes(linkSlug)) {
+        // Check if this is a project history document
+        const projectHistoryDocs = [
+          'project-history'
+        ]
+
+        if (simulationDocs.includes(linkSlug)) {
           return `<a href="/admin/simulation/${linkSlug}" class="wikilink">${linkText}</a>`
+        }
+
+        if (projectHistoryDocs.includes(linkSlug)) {
+          return `<a href="/admin/project-history/${linkSlug}" class="wikilink">${linkText}</a>`
         }
 
         // Regular Kempopedia link

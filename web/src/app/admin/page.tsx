@@ -97,14 +97,38 @@ export default function AdminPage() {
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Simulation Management</h2>
-                <p className="text-sm text-gray-500">Planning documents for worldbuilding</p>
+                <p className="text-sm text-gray-500">Time period planning documents</p>
               </div>
             </div>
             <ul className="text-sm text-gray-600 space-y-1">
               <li>Simulation methodology</li>
               <li>Character planning</li>
-              <li>Event reference</li>
               <li>Spawn tracking</li>
+              <li>Event reference</li>
+            </ul>
+          </Link>
+
+          {/* Project History */}
+          <Link
+            href="/admin/project-history"
+            className="block bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">Project History</h2>
+                <p className="text-sm text-gray-500">Real-world development milestones</p>
+              </div>
+            </div>
+            <ul className="text-sm text-gray-600 space-y-1">
+              <li>Development timeline</li>
+              <li>Content milestones</li>
+              <li>Feature additions</li>
+              <li>Major decisions</li>
             </ul>
           </Link>
         </div>

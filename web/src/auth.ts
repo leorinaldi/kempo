@@ -1,6 +1,15 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 
+function isAllowedEmail(email: string | null | undefined): boolean {
+  if (!email) return false
+  // Use ALLOWED_EMAILS if set, otherwise fall back to ADMIN_EMAILS
+  const allowedEmails = (process.env.ALLOWED_EMAILS || process.env.ADMIN_EMAILS)
+    ?.split(',')
+    .map(e => e.trim().toLowerCase()) || []
+  return allowedEmails.includes(email.toLowerCase())
+}
+
 function isAdminEmail(email: string | null | undefined): boolean {
   if (!email) return false
   const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(e => e.trim().toLowerCase()) || []
@@ -16,11 +25,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   pages: {
     signIn: "/login",
+    error: "/login",
   },
   session: {
     strategy: "jwt",
   },
   callbacks: {
+    signIn: async ({ user }) => {
+      // Only allow users on the allowed list to sign in
+      if (!isAllowedEmail(user.email)) {
+        return false
+      }
+      return true
+    },
     authorized: async ({ auth }) => {
       return !!auth
     },
