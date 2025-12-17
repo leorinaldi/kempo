@@ -122,7 +122,31 @@ Research fictional franchises, genres, and cultural phenomena from the era that 
 
 ---
 
-## Step 5: Identify Product & Brand Needs
+## Step 5: Identify Places
+
+Identify the geographic locations needed to support storylines and character backgrounds.
+
+### Activities
+- Review which cities, states, and nations are referenced in existing articles
+- Identify place gaps — locations mentioned but not yet created
+- Prioritize places based on storyline importance
+- Consider places needed for character origins, key events, and settings
+
+### Place Categories to Consider
+- **Nations**: Countries involved in international storylines
+- **States/Provinces**: U.S. states and foreign regions for character backgrounds
+- **Cities**: Major cities where storylines unfold
+- **Neighborhoods**: Specific districts within major cities
+- **Landmarks**: Notable locations referenced in storylines
+
+### Output
+- [[places|Places]] document with gap analysis
+- List of priority places to create
+- Notes on place-character and place-event connections
+
+---
+
+## Step 6: Identify Product & Brand Needs
 
 Review the major corporations, consumer products, and cultural entities that characters will interact with in daily life.
 
@@ -156,7 +180,7 @@ When creating brands, consider how they connect to characters:
 
 ---
 
-## Step 6: Human Drama Amplification
+## Step 7: Human Drama Amplification
 
 Go beyond major historical events to identify the human stories people find compelling — the kind you'd read in tabloids, watch in movies, or follow in serialized drama.
 
@@ -210,7 +234,7 @@ Ask yourself:
 
 ---
 
-## Step 7: Design Hybrid Characters
+## Step 8: Design Hybrid Characters
 
 Create characters by combining 2-3 similar real-world figures into single hybrids.
 
@@ -237,7 +261,7 @@ Create characters by combining 2-3 similar real-world figures into single hybrid
 
 ---
 
-## Step 8: Prioritize Character Creation
+## Step 9: Prioritize Character Creation
 
 Organize characters into tiers based on storyline needs.
 
@@ -259,7 +283,7 @@ Organize characters into tiers based on storyline needs.
 
 ---
 
-## Step 9: Execute Creation
+## Step 10: Execute Creation
 
 Create characters, companies, and products following established Kempo conventions.
 
@@ -290,11 +314,12 @@ Create characters, companies, and products following established Kempo conventio
 2. Research Preceding Period: [[possible-spawns|Possible Spawns]] and [[products-companies-culture|Products, Companies & Culture]] updates
 3. Research Coming Period: [[real-world-events|Real World Events]] document
 4. Identify Amplifications: Fictional/cultural theme sections
-5. Identify Product & Brand Needs: [[products-companies-culture|Products, Companies & Culture]] gap analysis
-6. Human Drama Amplification: [[human-drama-amplification|Human Drama Amplification]] document
-7. Design Hybrid Characters: [[character-development-plan|Character Development Plan]]
-8. Prioritize Creation: Tiered priority list
-9. Execute Creation: Character/company/product articles, registry updates
+5. Identify Places: [[places|Places]] gap analysis
+6. Identify Product & Brand Needs: [[products-companies-culture|Products, Companies & Culture]] gap analysis
+7. Human Drama Amplification: [[human-drama-amplification|Human Drama Amplification]] document
+8. Design Hybrid Characters: [[character-development-plan|Character Development Plan]]
+9. Prioritize Creation: Tiered priority list
+10. Execute Creation: Character/company/product articles, registry updates
 
 ---
 
@@ -314,6 +339,7 @@ For smaller additions (single characters, minor events), the full process is not
 - [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
 - [[possible-spawns|Possible Spawns]] — Characters and entities to create
 - [[real-world-events|Real World Events]] — Historical events for inspiration
+- [[places|Places]] — Geographic locations planning
 - [[products-companies-culture|Products, Companies & Culture]] — Brands, corporations, and cultural entities
 - [[human-drama-amplification|Human Drama Amplification]] — Romance, scandal, and everyday life storylines
 - [[character-development-plan|Character Development Plan]] — Proposed hybrid characters

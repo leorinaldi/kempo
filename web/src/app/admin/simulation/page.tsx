@@ -6,20 +6,20 @@ import Link from "next/link"
 
 const TIME_PERIODS = [
   {
-    slug: "pre-1948",
-    title: "Pre-1948",
+    slug: "pre-1946",
+    title: "Pre-1946",
     subtitle: "Foundation Era",
     description: "World Wars, Great Depression, and the foundations of the modern world",
-    years: "Before 1948",
+    years: "Before 1946",
     color: "slate",
     status: "Coming Soon",
   },
   {
-    slug: "1948-1950",
-    title: "1948-1950",
+    slug: "1946-1950",
+    title: "1946-1950",
     subtitle: "Post-War America",
     description: "Cold War begins, Hollywood golden age, organized crime networks, early television",
-    years: "1948 - 1950",
+    years: "1946 - 1950",
     color: "blue",
     status: "Active",
   },
@@ -177,8 +177,8 @@ export default function SimulationManagementPage() {
             and storylines. This allows for focused worldbuilding while maintaining historical continuity.
           </p>
           <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
-            <li><strong>Pre-1948</strong> — Background history, character origins, foundational events</li>
-            <li><strong>1948-1950</strong> — Current active simulation period (starting point)</li>
+            <li><strong>Pre-1946</strong> — Background history, character origins, foundational events</li>
+            <li><strong>1946-1950</strong> — Current active simulation period (post-war starting point)</li>
             <li><strong>After 1950</strong> — Future periods to be developed as simulation advances</li>
           </ul>
         </div>

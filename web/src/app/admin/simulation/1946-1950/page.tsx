@@ -16,7 +16,7 @@ const SIMULATION_DOCUMENTS = [
     slug: "spawn-registry",
     title: "Spawn Registry",
     description: "Completed parallel switchovers mapping real-world figures to Kempo equivalents",
-    step: "Step 1 & 9",
+    step: "Step 1 & 10",
     color: "green",
   },
   {
@@ -34,24 +34,31 @@ const SIMULATION_DOCUMENTS = [
     color: "purple",
   },
   {
+    slug: "places",
+    title: "Places",
+    description: "Geographic locations needed for storylines and character backgrounds",
+    step: "Step 5",
+    color: "teal",
+  },
+  {
     slug: "products-companies-culture",
     title: "Products, Companies & Culture",
     description: "Real-world brands, corporations, and cultural entities to create Kempo equivalents for",
-    step: "Step 5",
+    step: "Step 6",
     color: "cyan",
   },
   {
     slug: "human-drama-amplification",
     title: "Human Drama Amplification",
     description: "Romance, scandal, crime, and everyday life storylines beyond major historical events",
-    step: "Step 6",
+    step: "Step 7",
     color: "orange",
   },
   {
     slug: "character-development-plan",
     title: "Character Development Plan",
     description: "Proposed hybrid characters combining 2-3 real-world figures",
-    step: "Step 7 & 8",
+    step: "Step 8 & 9",
     color: "rose",
   },
   {
@@ -68,13 +75,14 @@ const colorClasses: Record<string, { bg: string; border: string; text: string; b
   green: { bg: "bg-green-50", border: "border-green-200", text: "text-green-700", badge: "bg-green-100 text-green-800" },
   amber: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-700", badge: "bg-amber-100 text-amber-800" },
   purple: { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700", badge: "bg-purple-100 text-purple-800" },
+  teal: { bg: "bg-teal-50", border: "border-teal-200", text: "text-teal-700", badge: "bg-teal-100 text-teal-800" },
   cyan: { bg: "bg-cyan-50", border: "border-cyan-200", text: "text-cyan-700", badge: "bg-cyan-100 text-cyan-800" },
   rose: { bg: "bg-rose-50", border: "border-rose-200", text: "text-rose-700", badge: "bg-rose-100 text-rose-800" },
   orange: { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-700", badge: "bg-orange-100 text-orange-800" },
   gray: { bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-700", badge: "bg-gray-100 text-gray-800" },
 }
 
-export default function Simulation1948to1950Page() {
+export default function Simulation1946to1950Page() {
   const { data: session, status } = useSession()
 
   if (status === "loading") {
@@ -121,8 +129,8 @@ export default function Simulation1948to1950Page() {
               </svg>
             </Link>
             <div>
-              <h1 className="text-xl font-bold">1948-1950</h1>
-              <p className="text-sm text-gray-500">Post-war America, Cold War begins</p>
+              <h1 className="text-xl font-bold">1946-1950</h1>
+              <p className="text-sm text-gray-500">Post-War America</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -142,7 +150,7 @@ export default function Simulation1948to1950Page() {
         <div className="bg-white rounded-lg shadow p-6 mb-6">
           <h2 className="text-lg font-semibold mb-2">Planning Documents</h2>
           <p className="text-sm text-gray-600 mb-6">
-            These documents guide the advancement of the Kempo simulation for the 1948-1950 period.
+            These documents guide the advancement of the Kempo simulation for the 1946-1950 period.
             They are ordered by their role in the simulation advancement process.
           </p>
 
@@ -197,22 +205,26 @@ export default function Simulation1948to1950Page() {
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">5</span>
-              <span><strong>Identify Product/Brand Needs</strong> — Review Products, Companies & Culture gaps</span>
+              <span><strong>Identify Places</strong> — Review Places gaps for storyline settings</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">6</span>
-              <span><strong>Human Drama Amplification</strong> — Develop Human Drama Amplification doc</span>
+              <span><strong>Identify Product/Brand Needs</strong> — Review Products, Companies & Culture gaps</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">7</span>
-              <span><strong>Design Hybrid Characters</strong> — Create Character Development Plan</span>
+              <span><strong>Human Drama Amplification</strong> — Develop Human Drama Amplification doc</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">8</span>
-              <span><strong>Prioritize Creation</strong> — Tier characters in development plan</span>
+              <span><strong>Design Hybrid Characters</strong> — Create Character Development Plan</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">9</span>
+              <span><strong>Prioritize Creation</strong> — Tier characters in development plan</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="flex-shrink-0 w-7 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">10</span>
               <span><strong>Execute Creation</strong> — Create articles, update Spawn Registry and Products doc</span>
             </li>
           </ol>

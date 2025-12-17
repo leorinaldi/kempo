@@ -12,9 +12,11 @@ export default function KempopediaHome() {
       {/* Header */}
       <header className="border-b border-wiki-border bg-wiki-background">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <Link href="/kempopedia" className="text-2xl font-serif text-gray-900">
-            Kempopedia
-          </Link>
+          <div className="text-2xl font-serif">
+            <Link href="/" className="text-gray-500 hover:text-gray-700">Kempo</Link>
+            <span className="text-gray-400 mx-2">›</span>
+            <Link href="/kempopedia" className="text-gray-900">Kempopedia</Link>
+          </div>
           <p className="text-sm text-gray-600">The encyclopedia of the Kempo universe</p>
         </div>
       </header>
@@ -25,8 +27,7 @@ export default function KempopediaHome() {
           <h1>Welcome to Kempopedia</h1>
 
           <p>
-            <strong>Kempopedia</strong> is the comprehensive encyclopedia of the{' '}
-            <Link href="/" className="text-wiki-link hover:underline">Kempo</Link>{' '}
+            <strong>Kempopedia</strong> is the comprehensive encyclopedia of the Kempo
             universe, a fictional world where history diverged from historical reality
             sometime in the late 1800s, at first in minor ways, but with divergence
             increasing over time, especially after 1950 k.y.

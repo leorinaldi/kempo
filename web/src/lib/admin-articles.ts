@@ -69,6 +69,7 @@ export function getAdminArticleBySlug(slug: string): AdminArticle | null {
           'spawn-registry',
           'possible-spawns',
           'real-world-events',
+          'places',
           'character-development-plan',
           'human-drama-amplification',
           'products-companies-culture',

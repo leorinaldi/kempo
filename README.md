@@ -114,6 +114,43 @@ Kempo TV is a vintage 1940s television interface that plays video content from t
 - Power toggle with warming tube animation
 - Playlist managed via admin panel
 
+## KempoNet
+
+KempoNet is an immersive 1990s computing experience that lets you browse Kempopedia through a vintage PC interface.
+
+**Access KempoNet**: https://kempo.com/kemponet
+
+### Features
+
+- Authentic 1990s beige PC monitor with CRT effects (scanlines, screen curvature)
+- **KempoScape Navigator** browser (Netscape-inspired) with full navigation
+- **Kemple** search engine home page (Google-inspired with colorful logo)
+- Working Back/Forward/Home buttons with history tracking
+- Address bar showing "kttp://" URLs
+- Minimize/Maximize/Close window controls
+- **KS Portals 25** operating system (Windows-inspired)
+  - Go menu (Start menu equivalent) with program launcher
+  - Desktop with KempoScape Navigator icon
+  - Taskbar showing minimized windows
+  - "About This PC" dialog with fictional specs:
+    - Kempaq Scenario computer
+    - Kemptel Prontium II processor
+    - Kvidia Nova 128 graphics
+- "Break the fourth wall" maximize button - exits KempoNet to view Kempopedia in your real browser
+
+### Fictional Computing Universe
+
+KempoNet introduces the Kempo universe's computing ecosystem:
+
+| Real World | Kempo Equivalent |
+|------------|------------------|
+| Microsoft Windows | KempoSoft Portals |
+| Netscape Navigator | KempoScape Navigator |
+| Google | Kemple |
+| Compaq | Kempaq |
+| Intel | Kemptel |
+| Nvidia | Kvidia |
+
 ## Kempopedia
 
 Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki documenting everything in this fictional world.
@@ -182,6 +219,7 @@ kempo/
         │   ├── kempopedia/        # Kempopedia pages
         │   │   ├── wiki/[slug]/   # Individual article pages
         │   │   └── category/      # Category browse pages
+        │   ├── kemponet/          # KempoNet 1990s PC interface
         │   ├── radio/             # Kempo Radio interface
         │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)
