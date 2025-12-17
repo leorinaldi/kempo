@@ -28,14 +28,16 @@ export default function KempopediaHome() {
 
           <p>
             <strong>Kempopedia</strong> is the comprehensive encyclopedia of the Kempo
-            universe, a fictional world where history diverged from historical reality
-            sometime in the late 1800s, at first in minor ways, but with divergence
-            increasing over time, especially after 1950 k.y.
+            universe—a complete parallel reality with its own geography, nations, cultures,
+            and history spanning from the dawn of civilization to the present day. This is
+            not our world with minor alterations, but an entirely separate cosmos that
+            happens to follow similar patterns of human development.
           </p>
 
           <p>
             All dates in Kempopedia use the <strong>k.y.</strong> (Kempo Year) system,
-            which matches standard Gregorian years (e.g., 1952 k.y. = 1952 AD).
+            which corresponds to Gregorian calendar numbering (e.g., 1952 k.y. ≈ 1952 AD
+            in terms of the passage of time since the common era began).
           </p>
 
           <p className="text-sm text-gray-600 mt-4">

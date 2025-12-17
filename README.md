@@ -7,7 +7,7 @@ A collaborative AI-human project to create the most extensive and cohesive ficti
 
 ## Purpose
 
-Kempo is a living simulation—a new reality built day by day through iterative worldbuilding. Rather than creating a static fictional setting, this project evolves organically, with AI helping to maintain internal consistency, generate emergent narratives, and simulate the passage of time across an interconnected cosmos.
+Kempo is a living simulation—a complete parallel reality built day by day through iterative worldbuilding. This is not our world with minor alterations, but an entirely separate cosmos with its own geography, nations, cultures, and history spanning from the dawn of civilization to the present day. The project evolves organically, with AI helping to maintain internal consistency, generate emergent narratives, and simulate the passage of time across an interconnected universe.
 
 ## Vision
 
@@ -18,19 +18,19 @@ Kempo is a living simulation—a new reality built day by day through iterative 
 
 ## Future Vision
 
-As Kempo's simulated history expands beyond 1950, the project becomes an unprecedented creative and technological asset. A coherent alternate universe spanning decades of interconnected characters, institutions, and events across global industries represents ready-made source material for transmedia storytelling — novels, films, games, and interactive experiences can draw from an already-consistent world without the decades of retroactive canon-building that franchises like Marvel or Star Wars required. For AI research, Kempo serves as both a benchmark for narrative coherence and a case study in structured human-AI collaboration. But the most distinctive value lies in the "living simulation" model itself: a fictional universe where time advances and the future remains genuinely unwritten, creating emergent storytelling that even its creators cannot fully predict. Followers can engage with Kempo not as passive consumers of pre-authored fiction, but as witnesses to a world unfolding in real time — part encyclopedia, part slow-motion drama, part collaborative experiment in what storytelling becomes when humans and AI build history together.
+Kempo represents an unprecedented creative and technological asset: a coherent parallel universe spanning millennia of interconnected characters, institutions, civilizations, and events. From ancient empires to modern nations like the Unified States of Arcadia, the entire arc of human development unfolds in a world that mirrors our own patterns while remaining wholly distinct. This represents ready-made source material for transmedia storytelling—novels, films, games, and interactive experiences can draw from an already-consistent world without the decades of retroactive canon-building that franchises like Marvel or Star Wars required. For AI research, Kempo serves as both a benchmark for narrative coherence and a case study in structured human-AI collaboration. But the most distinctive value lies in the "living simulation" model itself: a fictional universe where time advances and the future remains genuinely unwritten, creating emergent storytelling that even its creators cannot fully predict. Followers can engage with Kempo not as passive consumers of pre-authored fiction, but as witnesses to a world unfolding in real time—part encyclopedia, part slow-motion drama, part collaborative experiment in what storytelling becomes when humans and AI build history together.
 
 ## Calendar System
 
-All dates in Kempo use **k.y.** (Kempo Year), which matches standard Gregorian years. For example, 1948 k.y. = 1948 AD.
+All dates in Kempo use **k.y.** (Kempo Year), which corresponds to Gregorian calendar numbering in terms of the passage of time since the common era began. For example, 1948 k.y. ≈ 1948 AD chronologically.
 
 **Current Date: January 1, 1950 k.y.**
 
-The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. History before this date includes parallel switchover entities (fictional counterparts to real historical figures and institutions), meaning pre-1950 history is not identical to real-world history.
+The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. The entire history of this parallel world, from ancient civilizations to the modern era, exists as a complete and internally consistent reality distinct from our own.
 
 ## Featured Storylines
 
-Kempo's fictional universe is built through interconnected storylines spanning politics, entertainment, sports, and global affairs. Each storyline features parallel switchover characters—fictional counterparts inspired by real historical figures.
+Kempo's parallel universe is built through interconnected storylines spanning politics, entertainment, sports, and global affairs. While characters and institutions in Kempo may echo patterns familiar from our world, they exist as wholly original entities within their own reality.
 
 ### Hollywood Golden Age
 
@@ -413,11 +413,12 @@ Nation flags are always full color regardless of era.
 
 ## Timeline Structure
 
-The timeline is organized into separate pages:
+The timeline is organized into separate pages spanning from ancient history to the present:
 
-- **Pre-1950**: Decade pages (1880s, 1890s, 1900s, etc.)
-- **1950+**: Individual year pages (created when first event occurs)
-- **Master Timeline**: Index linking to all decade/year pages
+- **Ancient & Medieval Eras**: Era-based pages covering major periods of civilization
+- **Modern Era (pre-1950)**: Decade pages (1880s, 1890s, 1900s, etc.)
+- **Contemporary Era (1950+)**: Individual year pages (created when first event occurs)
+- **Master Timeline**: Index linking to all era/decade/year pages
 
 Date links in articles automatically route to the appropriate timeline page:
 - `[[1945 k.y.]]` → links to 1940s decade page
