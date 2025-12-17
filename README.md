@@ -69,6 +69,22 @@ The political landscape features the **National Party** (Democratic parallel) an
 - **Edward Stanton** (Edward R. Murrow / Walter Cronkite / Eric Sevareid) — Broadcast journalist
 - **United Broadcasting Company** (NBC/CBS/ABC) — Major network
 
+### The Antelope Springs Incident (UFO Storyline)
+
+In March 1949 k.y., test pilot **Frank Caldwell** died while pursuing an unidentified object over New Mexico. Rancher **Virgil Stokes** discovered unusual debris on his property. The military cover-up, led by **Brigadier General Harlan Whitmore**, was exposed by journalist **Nathan Collier**, leading to the **Whitfield Committee** hearings chaired by **Senator Robert Whitfield**.
+
+| Role | Character | Real-World Inspiration |
+|------|-----------|------------------------|
+| Test Pilot | Frank Caldwell | Pete Everest / Thomas Mantell |
+| Rancher Witness | Virgil Stokes | Mac Brazel |
+| Military Investigator | Raymond Colvin | Jesse Marcel / Sheridan Cavitt |
+| Cover-up General | Harlan Whitmore | Roger Ramey / Hoyt Vandenberg |
+| Investigative Journalist | Nathan Collier | Drew Pearson / I.F. Stone |
+| Scientific Consultant | Leonard Vance | J. Allen Hynek / Lloyd Berkner |
+| Senate Committee Chair | Robert Whitfield | Estes Kefauver / Pat McCarran |
+| Pilot's Widow | Margaret Caldwell | Original character |
+| Sound Barrier Pilot | Charles Garrison | Chuck Yeager / John Glenn |
+
 ## Kempo Radio
 
 Kempo Radio is a vintage 1940s-style radio interface that plays music from the Kempo universe.
@@ -112,6 +128,7 @@ Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki do
 - Category-based organization with browse pages
 - Timeline pages organized by decade (pre-1950) and year (1950+)
 - AI-generated comic book style images
+- Live statistics showing article counts and internal link counts per category
 
 ### Categories
 

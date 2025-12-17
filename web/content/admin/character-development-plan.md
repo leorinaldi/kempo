@@ -140,11 +140,13 @@ Characters from this plan that have been created in Kempopedia:
 
 ---
 
-## UFO & Mystery
+## UFO & Mystery — COMPLETED
 
-24. **The UFO Witness** (Kenneth Arnold, Thomas Mantell, Donald Keyhoe) — Credible witness whose sighting starts a national obsession. Ridicule then vindication, government interest.
+The Antelope Springs storyline has been fully developed with the following characters:
 
-25. **The Government Investigator** (Edward Ruppelt, J. Allen Hynek) — Official tasked with investigating UFOs, grows to believe. Starts as debunker, evidence mounts, bureaucratic pressure.
+- ~~The UFO Witness~~ → **ADAPTED AS**: [[frank-caldwell|Frank "Cal" Caldwell]] (test pilot who dies chasing UFO) + [[virgil-stokes|Virgil Stokes]] (rancher who finds debris)
+- ~~The Government Investigator~~ → **ADAPTED AS**: [[raymond-colvin|Raymond Colvin]] (military investigator who resigns) + [[leonard-vance|Leonard Vance]] (scientific consultant)
+- **Additional characters created**: [[harlan-whitmore|Harlan Whitmore]] (cover-up general), [[nathan-collier|Nathan Collier]] (journalist who exposes the story), [[margaret-caldwell|Margaret Caldwell]] (pilot's widow), [[robert-whitfield|Robert Whitfield]] (Senate committee chair), [[charles-garrison|Charles Garrison]] (sound barrier pilot)
 
 ---
 
@@ -219,8 +221,8 @@ Characters from this plan that have been created in Kempopedia:
 18. The Spymaster (Allen Dulles, James Angleton, Wild Bill Donovan)
 19. The Velvet Voice (Bing Crosby, Perry Como, Nat King Cole)
 20. The Yankee Clipper (Joe DiMaggio, Ted Williams, Mickey Mantle)
-21. The UFO Witness (Kenneth Arnold, Thomas Mantell, Donald Keyhoe)
-22. The Government Investigator (Edward Ruppelt, J. Allen Hynek)
+21. ~~The UFO Witness (Kenneth Arnold, Thomas Mantell, Donald Keyhoe)~~ → **COMPLETED** (see UFO & Mystery section)
+22. ~~The Government Investigator (Edward Ruppelt, J. Allen Hynek)~~ → **COMPLETED** (see UFO & Mystery section)
 23. The Media Mogul (David Sarnoff, William Paley, Leonard Goldenson)
 24. The Defiant Woman (Rosa Parks, Claudette Colvin, Daisy Bates)
 25. The Suburban Developer (William Levitt, Del Webb, Henry Kaiser)
@@ -266,7 +268,7 @@ Characters should interconnect to create rich narratives:
 
 **Civil Rights**: Crusading Lawyer + Barrier Breaker + Defiant Woman
 
-**UFO Mystery**: UFO Witness + Government Investigator (ongoing thread)
+**UFO Mystery**: ~~UFO Witness + Government Investigator~~ → **COMPLETED**: [[antelope-springs-incident|Antelope Springs Incident]] storyline with full cast (Caldwell, Stokes, Colvin, Whitmore, Vance, Collier, Margaret Caldwell, Senator Whitfield)
 
 ### Human Drama Storylines
 

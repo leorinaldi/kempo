@@ -140,6 +140,7 @@ The Koala mascot has become an American pop culture icon. The phrase "easy as a 
 ## See also
 
 - [[whitfield-tobacco|Whitfield Tobacco Company]]
+- [[robert-whitfield|Robert Whitfield]] — U.S. Senator and heir to the Whitfield tobacco fortune
 - [[pacific-pictures|Pacific Pictures]]
 - [[united-broadcasting-company|United Broadcasting Company]]
 - [[North Carolina]]

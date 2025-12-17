@@ -308,3 +308,77 @@ export function getAllCategories(): CategoryInfo[] {
 export function isValidCategory(type: string): boolean {
   return Object.keys(categoryMeta).includes(type)
 }
+
+// Get wikilink statistics across all articles
+export interface WikiLinkStats {
+  totalLinks: number
+  uniqueTargets: number
+  linksByTarget: Record<string, number>
+  linksByCategory: Record<string, number>
+}
+
+export function getWikiLinkStats(): WikiLinkStats {
+  const files = getAllMarkdownFiles(articlesDirectory)
+  const linkCounts: Record<string, number> = {}
+  let totalLinks = 0
+
+  // Build a map of slug -> article type for category counting
+  const slugToType: Record<string, string> = {}
+  files.forEach(file => {
+    try {
+      const fileContents = fs.readFileSync(file, 'utf8')
+      const { data } = matter(fileContents)
+      const slug = path.basename(file, '.md')
+      if (data.type) {
+        // Map to display category
+        const category = typeToCategoryMap[data.type] || data.type
+        slugToType[slug] = category
+      }
+    } catch {
+      // Skip
+    }
+  })
+
+  const linksByCategory: Record<string, number> = {}
+
+  files.forEach(file => {
+    try {
+      const fileContents = fs.readFileSync(file, 'utf8')
+      const { content } = matter(fileContents)
+
+      // Remove JSON infobox before counting links
+      const cleanContent = content.replace(/```json\n[\s\S]*?\n```\n?/, '')
+
+      // Match all wikilinks: [[target]] or [[target|display]]
+      const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
+      let match
+
+      while ((match = wikiLinkRegex.exec(cleanContent)) !== null) {
+        // Don't count date links (containing k.y.) as article links
+        if (!match[1].includes('k.y.')) {
+          // Extract slug (handle anchors like page#anchor)
+          const [pagePart] = match[1].split('#')
+          const target = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+
+          linkCounts[target] = (linkCounts[target] || 0) + 1
+          totalLinks++
+
+          // Count by category
+          const targetCategory = slugToType[target]
+          if (targetCategory) {
+            linksByCategory[targetCategory] = (linksByCategory[targetCategory] || 0) + 1
+          }
+        }
+      }
+    } catch {
+      // Skip files that can't be read
+    }
+  })
+
+  return {
+    totalLinks,
+    uniqueTargets: Object.keys(linkCounts).length,
+    linksByTarget: linkCounts,
+    linksByCategory
+  }
+}

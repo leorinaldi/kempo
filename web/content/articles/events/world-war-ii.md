@@ -50,6 +50,8 @@ The United States government quietly enlisted the assistance of organized crime 
 
 The Allied invasion of North Africa (Operation Torch) in [[November 1942 k.y.]] was commanded by General [[douglas-d-westbrook|Douglas D. Westbrook]], who subsequently led Allied forces through Tunisia and Sicily before transferring to the Pacific Theater in [[1944 k.y.]]
 
+Operation Dragoon, the Allied invasion of southern France in [[1940s#1944-08-ky|August 1944 k.y.]], saw American airborne troops drop behind enemy lines. During the operation, transport pilot [[frank-caldwell|Frank Caldwell]] earned the Distinguished Flying Cross for maintaining control of his damaged C-47 aircraft long enough for all paratroopers to jump successfully before crash-landing in a French field.
+
 ### China Theater
 
 The Japanese invasion of [[China]] in 1937 had already engulfed the nation in war before the broader global conflict began. The invasion forced an uneasy truce between the Nationalist government of Chiang Kai-shek and the [[chinese-peoples-party|Chinese People's Party]] under [[chen-zhaoming|Chen Zhaoming]], who had been fighting a civil war since 1927.
@@ -76,6 +78,7 @@ Japan's defeat removed the common enemy that had held the fragile truce between 
 
 - [[harold-kellman|Harold S. Kellman]]
 - [[douglas-d-westbrook|Douglas D. Westbrook]]
+- [[frank-caldwell|Frank Caldwell]]
 - [[walter-brennan|Walter Brennan]]
 - [[edward-stanton|Edward Stanton]]
 - [[sol-roth|Sol Roth]]

@@ -35,7 +35,7 @@ dates:
 }
 ```
 
-**Whitfield Tobacco Company** is an American tobacco manufacturing company headquartered in Winston, [[North Carolina]]. Founded in [[1875 k.y.]] by Josiah Whitfield, the company is best known for [[koala-cigarettes|Koala]] cigarettes, one of the top-selling cigarette brands in the United States.
+**Whitfield Tobacco Company** is an American tobacco manufacturing company headquartered in Winston, [[North Carolina]]. Founded in 1875 k.y. by Josiah Whitfield, the company is best known for [[koala-cigarettes|Koala]] cigarettes, one of the top-selling cigarette brands in the United States.
 
 ## History
 
@@ -43,7 +43,7 @@ dates:
 
 Josiah Whitfield was born in 1850 on a small tobacco farm in Patrick County, Virginia. After serving briefly in the final months of the Civil War as a teenage drummer boy, Whitfield returned home to find the family farm in ruins. He spent the next decade working in various tobacco warehouses and factories across Virginia and North Carolina, learning every aspect of the trade.
 
-In [[1875 k.y.]], with $2,500 in savings and a small loan from a Winston banker, Whitfield opened his own tobacco factory in a rented building on Main Street. The Whitfield Tobacco Company initially produced chewing tobacco and pipe tobacco under the "Carolina Blend" name.
+In 1875 k.y., with $2,500 in savings and a small loan from a Winston banker, Whitfield opened his own tobacco factory in a rented building on Main Street. The Whitfield Tobacco Company initially produced chewing tobacco and pipe tobacco under the "Carolina Blend" name.
 
 ### Transition to cigarettes
 
@@ -61,13 +61,17 @@ The gamble paid off. Koala's Australian blend offered a smoother, milder smoke t
 
 Under William Whitfield's leadership (Josiah died in 1922), the company expanded aggressively. New factories opened in Richmond, Virginia and Louisville, Kentucky. The company pioneered celebrity endorsements, paying Hollywood stars and radio personalities to promote Koala cigarettes.
 
-During [[World War II]], Whitfield Tobacco secured major military contracts to supply cigarettes to American servicemen. Koalas were included in K-rations and shipped by the millions to troops overseas. The wartime exposure created lifelong brand loyalty among returning veterans.
+During [[world-war-ii#morale|World War II]], Whitfield Tobacco secured major military contracts to supply cigarettes to American servicemen. Koalas were included in K-rations and shipped by the millions to troops overseas. The wartime exposure created lifelong brand loyalty among returning veterans.
 
 ### Postwar prosperity
 
 As of January [[1950 k.y.]], Whitfield Tobacco Company remains one of the largest tobacco manufacturers in America. [[koala-cigarettes|Koala]] cigarettes hold approximately 25% of the domestic cigarette market, making it the top-selling brand in the country. The company employs over 15,000 workers across its manufacturing facilities.
 
 William Whitfield, now 72, remains chairman of the board, though day-to-day operations are managed by his son-in-law, Robert Ashford.
+
+### The Whitfield family in politics
+
+The Whitfield fortune has extended beyond tobacco into political influence. Senator [[robert-whitfield|Robert Whitfield]], grandson of founder Josiah Whitfield, represents [[North Carolina]] in the United States Senate and chairs the powerful Judiciary Committee. Though Robert pursued law and politics rather than the family business, the Whitfield name remains synonymous with both tobacco and political power in North Carolina.
 
 ## Products
 
@@ -96,4 +100,5 @@ The company sponsors several radio programs on the [[united-broadcasting-company
 ## See also
 
 - [[koala-cigarettes|Koala cigarettes]]
+- [[robert-whitfield|Robert Whitfield]]
 - [[North Carolina]]

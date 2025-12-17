@@ -73,6 +73,24 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[vivian-sterling|Vivian Sterling]] ← [Rita Hayworth](https://en.wikipedia.org/wiki/Rita_Hayworth) / [Ava Gardner](https://en.wikipedia.org/wiki/Ava_Gardner) / [Lana Turner](https://en.wikipedia.org/wiki/Lana_Turner) / [Marilyn Monroe](https://en.wikipedia.org/wiki/Marilyn_Monroe)
 
+[[charles-garrison|Charles Garrison]] ← [Chuck Yeager](https://en.wikipedia.org/wiki/Chuck_Yeager) / [John Glenn](https://en.wikipedia.org/wiki/John_Glenn)
+
+[[frank-caldwell|Frank Caldwell]] ← [Pete Everest](https://en.wikipedia.org/wiki/Pete_Everest) / [Thomas Mantell](https://en.wikipedia.org/wiki/Thomas_Mantell)
+
+[[harlan-whitmore|Harlan Whitmore]] ← [Roger Ramey](https://en.wikipedia.org/wiki/Roger_Ramey) / [Hoyt Vandenberg](https://en.wikipedia.org/wiki/Hoyt_Vandenberg)
+
+[[leonard-vance|Leonard Vance]] ← [J. Allen Hynek](https://en.wikipedia.org/wiki/J._Allen_Hynek) / [Lloyd Berkner](https://en.wikipedia.org/wiki/Lloyd_Berkner)
+
+[[nathan-collier|Nathan Collier]] ← [Drew Pearson](https://en.wikipedia.org/wiki/Drew_Pearson_(journalist)) / [I.F. Stone](https://en.wikipedia.org/wiki/I._F._Stone)
+
+[[raymond-colvin|Raymond Colvin]] ← [Jesse Marcel](https://en.wikipedia.org/wiki/Jesse_Marcel) / [Sheridan Cavitt](https://en.wikipedia.org/wiki/Sheridan_Cavitt)
+
+[[robert-whitfield|Robert Whitfield]] ← [Estes Kefauver](https://en.wikipedia.org/wiki/Estes_Kefauver) / [Pat McCarran](https://en.wikipedia.org/wiki/Pat_McCarran)
+
+[[virgil-stokes|Virgil Stokes]] ← [Mac Brazel](https://en.wikipedia.org/wiki/Mac_Brazel)
+
+[[margaret-caldwell|Margaret Caldwell]] ← Original character (pilot's widow archetype)
+
 [[walter-brennan|Walter Brennan]] ← [David Sarnoff](https://en.wikipedia.org/wiki/David_Sarnoff) / [William S. Paley](https://en.wikipedia.org/wiki/William_S._Paley)
 
 [[william-garrett|William Garrett]] ← [John Ford](https://en.wikipedia.org/wiki/John_Ford) / [Raoul Walsh](https://en.wikipedia.org/wiki/Raoul_Walsh) / [Henry Hathaway](https://en.wikipedia.org/wiki/Henry_Hathaway)
@@ -98,6 +116,8 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[silver-screen-awards|Silver Screen Awards / Silver Screen Guild]] ← [Academy Awards](https://en.wikipedia.org/wiki/Academy_Awards) / [Academy of Motion Picture Arts and Sciences](https://en.wikipedia.org/wiki/Academy_of_Motion_Picture_Arts_and_Sciences)
 
 [[Vermont Army Academy]] ← [United States Military Academy](https://en.wikipedia.org/wiki/United_States_Military_Academy) / [The Citadel](https://en.wikipedia.org/wiki/The_Citadel) / [VMI](https://en.wikipedia.org/wiki/Virginia_Military_Institute)
+
+[[whitfield-committee|Whitfield Committee]] ← Congressional UFO hearings (composite)
 
 ## Nations
 
@@ -152,6 +172,16 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 [[the-claridge-hotel|The Claridge Hotel]] ← [Waldorf-Astoria Hotel](https://en.wikipedia.org/wiki/Waldorf-Astoria)
 
 [[the-royale-imperial|The Royale Imperial]] ← [Ambassador Hotel (Los Angeles)](https://en.wikipedia.org/wiki/Ambassador_Hotel_(Los_Angeles)) / [Biltmore Los Angeles](https://en.wikipedia.org/wiki/Millennium_Biltmore_Hotel) / [Hollywood Roosevelt](https://en.wikipedia.org/wiki/Hollywood_Roosevelt_Hotel)
+
+[[antelope-springs-new-mexico|Antelope Springs, New Mexico]] ← [Roswell, New Mexico](https://en.wikipedia.org/wiki/Roswell,_New_Mexico)
+
+[[ridgecrest-army-air-field|Ridgecrest Army Air Field]] ← [Edwards Air Force Base](https://en.wikipedia.org/wiki/Edwards_Air_Force_Base) / [Muroc Army Air Field](https://en.wikipedia.org/wiki/Muroc_Army_Air_Field)
+
+[[stokes-ranch|Stokes Ranch]] ← Foster Ranch (Mac Brazel's property)
+
+## Events
+
+[[antelope-springs-incident|Antelope Springs Incident]] ← [Roswell incident](https://en.wikipedia.org/wiki/Roswell_incident)
 
 ## Guidelines
 

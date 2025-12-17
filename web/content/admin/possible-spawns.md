@@ -306,23 +306,38 @@ Real-world spies and intelligence figures that could spawn Kempo equivalents. Cr
 
 The flying saucer craze was a REAL cultural phenomenon starting 1947. Real people and events can be spawned.
 
-### Real Events to Adapt
+### Already Created
+
+**People:**
+- [[frank-caldwell|Frank "Cal" Caldwell]] ← Pete Everest/Thomas Mantell hybrid (test pilot who died)
+- [[margaret-caldwell|Margaret Caldwell]] ← Original (pilot's widow who testifies)
+- [[virgil-stokes|Virgil Stokes]] ← Mac Brazel (civilian witness)
+- [[raymond-colvin|Raymond Colvin]] ← Jesse Marcel/Sheridan Cavitt hybrid (military investigator)
+- [[harlan-whitmore|Harlan Whitmore]] ← Roger Ramey/Hoyt Vandenberg hybrid (cover-up general)
+- [[nathan-collier|Nathan Collier]] ← Drew Pearson/I.F. Stone hybrid (investigative journalist)
+- [[leonard-vance|Leonard Vance]] ← J. Allen Hynek/Lloyd Berkner hybrid (scientific consultant)
+- [[robert-whitfield|Robert Whitfield]] ← Estes Kefauver/Pat McCarran hybrid (Senate committee chair)
+- [[charles-garrison|Charles Garrison]] ← Chuck Yeager/John Glenn hybrid (sound barrier pilot)
+
+**Places:**
+- [[antelope-springs-new-mexico|Antelope Springs, New Mexico]] ← Roswell, New Mexico
+- [[ridgecrest-army-air-field|Ridgecrest Army Air Field]] ← Edwards AFB/Muroc Field
+- [[stokes-ranch|Stokes Ranch]] ← Foster Ranch (Brazel's property)
+
+**Institutions:**
+- [[whitfield-committee|Whitfield Committee]] ← Congressional UFO hearings
+
+**Events:**
+- [[antelope-springs-incident|The Antelope Springs Incident]] ← Roswell/Mantell incident hybrid
+
+### Real Events to Adapt (Future)
 - Kenneth Arnold sighting (June 24, 1947 — coined "flying saucer")
-- Roswell incident (July 1947 — crashed object, military cover-up)
-- Project Blue Book (Air Force UFO investigation, 1952-1969)
 - Washington D.C. UFO incident (July 1952 — objects over Capitol)
 
-### High Priority — Real Figures
-- Kenneth Arnold (Pilot, first famous UFO witness)
-- Donald Keyhoe (Marine Major, wrote "Flying Saucers Are Real" 1950, TV appearances)
-- J. Allen Hynek (Astronomer, Air Force consultant, later believer)
+### Medium Priority — Additional Figures
+- Kenneth Arnold (Pilot, first famous UFO witness — could appear as witness)
+- Donald Keyhoe (Marine Major, wrote "Flying Saucers Are Real" 1950 — similar to Nathan Collier)
 - Edward Ruppelt (Air Force officer, ran Project Blue Book)
-
-### Kempo Needs
-- A Kempo "Roswell" incident (1947 or 1950)
-- A UFO investigator figure (military or civilian)
-- A government investigation project
-- Creates ongoing mystery/conspiracy thread for stories
 
 ---
 
@@ -413,7 +428,7 @@ Based on storytelling needs for 1950 k.y., organized by priority:
 ### Immediate (1950 k.y.)
 1. ~~**Western film star** (Wayne/Cooper type)~~ — **CREATED**: [[clay-marshall|Clay Marshall]]
 2. ~~**TV comedy star** (Berle type)~~ — **CREATED**: [[bernie-kessler|Bernie Kessler]]
-3. **UFO incident + investigator** (Keyhoe type) — creates ongoing mystery thread
+3. ~~**UFO incident + investigator** (Keyhoe type)~~ — **CREATED**: [[antelope-springs-incident|The Antelope Springs Incident]] + 6 characters
 4. **Hardboiled crime author** (Spillane type) — best-selling fiction
 
 ### Near-Term (1950-1951 k.y.)

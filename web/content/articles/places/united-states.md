@@ -62,11 +62,24 @@ The United States possesses the world's largest economy, driven by industrial ma
 
 The nation comprises 48 states, including:
 
-- [[California]] — Home to Hollywood and the entertainment industry
-- [[Michigan]] — Center of the automobile industry
-- [[New York]] — Financial and media capital
-- [[Ohio]]
+- [[California]]
+- [[Illinois]]
+- [[Kansas]]
+- [[Kentucky]]
+- [[Louisiana]]
+- [[Michigan]]
+- [[Missouri]]
+- [[Montana]]
 - [[New Jersey]]
+- [[New Mexico]]
+- [[New York]]
+- [[North Carolina]]
+- [[Ohio]]
+- [[Texas]]
+- [[Vermont]]
+- [[Washington]]
+- [[West Virginia]]
+- [[Wisconsin]]
 
 ## Military
 
