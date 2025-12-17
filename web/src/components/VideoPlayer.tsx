@@ -1,6 +1,6 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
+import { useState, useEffect } from "react"
 
 interface VideoPlayerProps {
   src: string
@@ -9,8 +9,13 @@ interface VideoPlayerProps {
 }
 
 export function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
-  const searchParams = useSearchParams()
-  const isKempoNet = searchParams.get("kemponet") === "1"
+  const [isKempoNet, setIsKempoNet] = useState(false)
+
+  // Check for kemponet param on client side only
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setIsKempoNet(params.get("kemponet") === "1")
+  }, [])
 
   return (
     <div className="bg-gray-100 rounded-lg p-4 my-4">
