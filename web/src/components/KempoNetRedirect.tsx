@@ -1,19 +1,21 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 export function KempoNetRedirect() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const isKempoNet = searchParams.get("kemponet") === "1"
 
   useEffect(() => {
+    // Check for kemponet param on client side only
+    const params = new URLSearchParams(window.location.search)
+    const isKempoNet = params.get("kemponet") === "1"
+
     // If we're at the home page inside KempoNet iframe, redirect to Kemple
     if (isKempoNet && pathname === "/" && window.parent !== window) {
       window.parent.postMessage({ type: "kemponet-go-home" }, "*")
     }
-  }, [pathname, isKempoNet])
+  }, [pathname])
 
   return null
 }

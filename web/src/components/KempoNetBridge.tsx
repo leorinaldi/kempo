@@ -1,13 +1,18 @@
 "use client"
 
-import { useEffect } from "react"
-import { usePathname, useSearchParams, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 export function KempoNetBridge() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
   const router = useRouter()
-  const isKempoNet = searchParams.get("kemponet") === "1"
+  const [isKempoNet, setIsKempoNet] = useState(false)
+
+  // Check for kemponet param on client side only
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    setIsKempoNet(params.get("kemponet") === "1")
+  }, [])
 
   useEffect(() => {
     if (isKempoNet && window.parent !== window) {
