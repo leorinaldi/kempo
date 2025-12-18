@@ -16,13 +16,17 @@ export default function Home() {
     const video = videoRef.current
     if (!video) return
 
-    if (hasPlayedIntro) {
+    // Check if this is a page reload (works in dev mode where module persists)
+    const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
+    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload'
+
+    if (hasPlayedIntro && !isReload) {
       // Skip - returning from another page via client-side navigation
       video.currentTime = video.duration || 999
       video.pause()
       setIsFirstVisit(false)
     } else {
-      // Play - first visit or page refresh (module resets on full reload)
+      // Play - first visit or page refresh
       setIsFirstVisit(true)
       video.play()
       hasPlayedIntro = true
