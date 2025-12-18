@@ -216,11 +216,11 @@ function KempoTubeContent() {
                 controlsList={isKempoNet ? "nofullscreen nodownload noremoteplayback noplaybackrate" : undefined}
                 disablePictureInPicture={isKempoNet}
               />
-              {/* Custom fullscreen button for KempoNet - positioned over disabled native button */}
+              {/* Custom fullscreen button for KempoNet - hidden on mobile where native fullscreen auto-triggers */}
               {isKempoNet && (
                 <button
                   onClick={enterFullscreen}
-                  className="absolute bottom-[28px] right-[12px] bg-transparent hover:bg-white/10 text-white p-1.5 rounded transition-colors"
+                  className="hidden sm:block absolute bottom-[28px] right-[12px] bg-transparent hover:bg-white/10 text-white p-1.5 rounded transition-colors"
                   title="Fullscreen (within monitor)"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
