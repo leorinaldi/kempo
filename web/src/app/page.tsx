@@ -30,6 +30,12 @@ export default function Home() {
     const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
     const isReload = navEntries.length > 0 && navEntries[0].type === 'reload'
 
+    // Reset on reload (including hot module reload in development)
+    if (isReload) {
+      hasPlayedIntro = false
+      sessionStorage.removeItem('kempoIntroPlayed')
+    }
+
     // Check sessionStorage as backup (mobile browsers may unload JS on navigation)
     const hasPlayedInSession = sessionStorage.getItem('kempoIntroPlayed') === 'true'
 
@@ -67,20 +73,22 @@ export default function Home() {
 
       {/* Content */}
       <div className={`text-center relative z-10 mt-20 -ml-12 ${!isReady ? 'opacity-0' : ''}`}>
-        <h1
-          className={`text-5xl font-serif mb-4 text-white tracking-[0.3em] uppercase pl-[0.3em] ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_0.5s_forwards]' : ''}`}
+        <Link
+          href="/about"
+          className={`text-5xl font-serif mb-4 text-white tracking-[0.3em] uppercase pl-[0.3em] block hover:text-white transition-colors ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_0.5s_forwards]' : ''}`}
           style={{
             textShadow: '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
           }}
         >
           KEMPO
-        </h1>
-        <p
-          className={`text-gray-300 mb-4 ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_2s_forwards]' : ''}`}
+        </Link>
+        <Link
+          href="/about"
+          className={`text-gray-300 mb-4 block hover:text-white transition-colors ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_2s_forwards]' : ''}`}
           style={{
             textShadow: '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
           }}
-        >A fictional world simulation</p>
+        >A (nearly) imaginary world.</Link>
         <div
           className={`flex flex-col gap-4 ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_3.5s_forwards]' : ''}`}
           style={{

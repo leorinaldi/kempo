@@ -7,18 +7,18 @@ A collaborative AI-human project to create the most extensive and cohesive ficti
 
 ## Purpose
 
-Kempo is a living simulation—a complete parallel reality built day by day through iterative worldbuilding. This is not our world with minor alterations, but an entirely separate cosmos with its own geography, nations, cultures, and history spanning from the dawn of civilization to the present day. The project evolves organically, with AI helping to maintain internal consistency, generate emergent narratives, and simulate the passage of time across an interconnected universe.
+Kempo is an alternate branch of reality that diverged from our own around the late 1800s. By the 1950s, most major people—presidents, celebrities, notorious gangsters—as well as companies and products have different names and variations from "base reality," though the themes and pace of technological progress remain similar. Larger cities and nations retain their real-world names, but colleges and smaller towns often don't. Kempo is a project to create and share this branch of the multiverse.
 
 ## Vision
 
-- **Day-by-day simulation**: Time moves forward in Kempo, with events unfolding, characters aging, civilizations rising and falling
+- **Divergent history**: A branch of our reality where familiar patterns play out through different people, institutions, and brands
 - **Internal coherence**: Every element connects—history, cultures, individuals—forming a unified whole
-- **Emergent complexity**: Simple rules and interactions give rise to unpredictable, rich outcomes
-- **Living documentation**: The universe is recorded as it evolves, creating an ever-growing archive of its reality
+- **Living documentation**: The universe is recorded as it evolves, creating an ever-growing archive of this alternate reality
+- **Day-by-day simulation**: Time moves forward in Kempo, with events unfolding and characters aging
 
 ## Future Vision
 
-Kempo represents an unprecedented creative and technological asset: a coherent parallel universe spanning millennia of interconnected characters, institutions, civilizations, and events. From ancient empires to modern nations like the Unified States of Arcadia, the entire arc of human development unfolds in a world that mirrors our own patterns while remaining wholly distinct. This represents ready-made source material for transmedia storytelling—novels, films, games, and interactive experiences can draw from an already-consistent world without the decades of retroactive canon-building that franchises like Marvel or Star Wars required. For AI research, Kempo serves as both a benchmark for narrative coherence and a case study in structured human-AI collaboration. But the most distinctive value lies in the "living simulation" model itself: a fictional universe where time advances and the future remains genuinely unwritten, creating emergent storytelling that even its creators cannot fully predict. Followers can engage with Kempo not as passive consumers of pre-authored fiction, but as witnesses to a world unfolding in real time—part encyclopedia, part slow-motion drama, part collaborative experiment in what storytelling becomes when humans and AI build history together.
+Kempo represents an unprecedented creative asset: an alternate timeline with interconnected characters, institutions, and events that diverged from our reality in the late 1800s. By the mid-20th century, this branch of the multiverse has developed its own presidents, movie stars, musicians, corporations, and cultural touchstones—all echoing familiar patterns while remaining distinct. This represents ready-made source material for transmedia storytelling—novels, films, games, and interactive experiences can draw from an already-consistent alternate history. The "living simulation" model means the future remains genuinely unwritten, creating emergent storytelling that even its creators cannot fully predict. Followers can engage with Kempo not as passive consumers of pre-authored fiction, but as witnesses to an alternate world unfolding in real time.
 
 ## Calendar System
 
@@ -26,11 +26,11 @@ All dates in Kempo use **k.y.** (Kempo Year), which corresponds to Gregorian cal
 
 **Current Date: January 1, 1950 k.y.**
 
-The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. The entire history of this parallel world, from ancient civilizations to the modern era, exists as a complete and internally consistent reality distinct from our own.
+The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. This alternate branch of reality diverged from our own in the late 1800s and has developed its own distinct people, institutions, and culture while following similar technological and social trajectories.
 
 ## Featured Storylines
 
-Kempo's parallel universe is built through interconnected storylines spanning politics, entertainment, sports, and global affairs. While characters and institutions in Kempo may echo patterns familiar from our world, they exist as wholly original entities within their own reality.
+Kempo's alternate timeline is built through interconnected storylines spanning politics, entertainment, sports, and global affairs. Characters and institutions in Kempo echo patterns familiar from our world but have diverged into distinct entities since the late 1800s.
 
 ### Hollywood Golden Age
 
@@ -95,12 +95,30 @@ The Kempo home page features a cinematic intro experience with a video backgroun
 
 - Full-screen video background with cinematic intro
 - Animated fade-in text with blue glow effect
+- "KEMPO" and "A (nearly) imaginary world." link to the About page
 - Links to Kempo Radio, Kempo TV, and KempoNet
 - Smart intro behavior:
   - Plays full video with fade-in animations on first visit
   - Plays full intro on page refresh
   - Skips to final frame on back navigation (no replay)
 - Works consistently across desktop and mobile browsers
+
+## About Page
+
+The About page provides an immersive introduction to the Kempo universe with narrated audio and synchronized text.
+
+**Access About**: https://kempo.com/about
+
+### Features
+
+- Black background with announcer image on the left
+- Click to play button for user-initiated playback
+- Narrated audio description of the Kempo universe
+- Synchronized subtitles that appear as the narration progresses
+- Current text displays in white, past text fades to grey
+- Ending effect: non-essential text fades to black, leaving the key phrase visible:
+  - "A world that echoes our reality, but has changed just enough... This world is called Kempo."
+- Blue glow "Back to Kempo" link matching other pages
 
 ## Kempo Radio
 

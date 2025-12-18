@@ -19,10 +19,11 @@ export default function KempopediaHome() {
 
           <p>
             <strong>Kempopedia</strong> is the comprehensive encyclopedia of the Kempo
-            universe—a complete parallel reality with its own geography, nations, cultures,
-            and history spanning from the dawn of civilization to the present day. This is
-            not our world with minor alterations, but an entirely separate cosmos that
-            happens to follow similar patterns of human development.
+            universe—an alternate branch of reality that diverged from our own around the
+            late 1800s. By the 1950s, most major people, companies, and products have
+            different names and variations from base reality, though technological progress
+            follows a similar pace. Larger cities and nations retain their real-world names,
+            but colleges and smaller towns often don&apos;t.
           </p>
 
           <p>

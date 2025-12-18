@@ -31,6 +31,31 @@ tags:
 
 ### December 2025
 
+#### December 18, 2025
+
+**About Page Created** — Immersive narrated introduction to the Kempo universe
+- New /about page accessible from home page via "KEMPO" and tagline links
+- Static announcer image on left, synchronized text on right
+- Click to play button for user-initiated audio playback
+- Narrated audio with SRT-synced subtitles appearing in real-time
+- Current text displays white, past text fades to grey as narration progresses
+- Ending effect: non-essential text fades to black, key phrase remains white:
+  - "A world that echoes our reality, but has changed just enough... This world is called Kempo."
+- Blue glow "Back to Kempo" link matching other pages
+
+**Home Page Tagline Update**
+- Changed tagline from "A fictional world simulation" to "A (nearly) imaginary world."
+- Both "KEMPO" title and tagline now link to the About page
+
+**Project Scope Refinement**
+- Updated README and Kempopedia descriptions to clarify the Kempo concept
+- Kempo is now described as "an alternate branch of reality that diverged around the late 1800s"
+- Major people, companies, and products have different names by the 1950s
+- Larger cities and nations retain real-world names; colleges and smaller towns often don't
+- Technology progress follows similar pace to "base reality"
+
+---
+
 #### December 17, 2025 (Evening)
 
 **Modern Graphic Novel Redesign** — Visual overhaul of all media interfaces
