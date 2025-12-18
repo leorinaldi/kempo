@@ -30,8 +30,11 @@ export default function Home() {
     const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
     const isReload = navEntries.length > 0 && navEntries[0].type === 'reload'
 
-    if (hasPlayedIntro && !isReload) {
-      // Skip - returning from another page via client-side navigation
+    // Check sessionStorage as backup (mobile browsers may unload JS on navigation)
+    const hasPlayedInSession = sessionStorage.getItem('kempoIntroPlayed') === 'true'
+
+    if ((hasPlayedIntro || hasPlayedInSession) && !isReload) {
+      // Skip - returning from another page
       video.currentTime = video.duration || 999
       video.pause()
       setIsFirstVisit(false)
@@ -40,6 +43,7 @@ export default function Home() {
       setIsFirstVisit(true)
       video.play()
       hasPlayedIntro = true
+      sessionStorage.setItem('kempoIntroPlayed', 'true')
     }
     setIsReady(true)
   }, [])
