@@ -17,6 +17,7 @@ export default function KempoNetPage() {
   const historyIndexRef = useRef(-1)
   const isNavigatingRef = useRef(false)
   const [, forceUpdate] = useState({})
+  const [iframeKey, setIframeKey] = useState(0)
 
   const handleSearch = () => {
     if (selectedOption === "kempopedia") {
@@ -25,6 +26,7 @@ export default function KempoNetPage() {
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
       setCurrentPage("browsing")
+      setIframeKey(k => k + 1)
       forceUpdate({})
     } else if (selectedOption === "kempotube") {
       const newPath = "/kempotube"
@@ -32,6 +34,7 @@ export default function KempoNetPage() {
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
       setCurrentPage("browsing")
+      setIframeKey(k => k + 1)
       forceUpdate({})
     }
   }
@@ -50,6 +53,7 @@ export default function KempoNetPage() {
       isNavigatingRef.current = true
       historyIndexRef.current -= 1
       setCurrentPath(historyRef.current[historyIndexRef.current])
+      setIframeKey(k => k + 1)
       forceUpdate({})
     }
   }
@@ -59,6 +63,7 @@ export default function KempoNetPage() {
       isNavigatingRef.current = true
       historyIndexRef.current += 1
       setCurrentPath(historyRef.current[historyIndexRef.current])
+      setIframeKey(k => k + 1)
       forceUpdate({})
     }
   }
@@ -568,7 +573,7 @@ export default function KempoNetPage() {
                   ) : (
                     /* Browsing - iframe showing actual Kempopedia */
                     <iframe
-                      key={currentPath}
+                      key={iframeKey}
                       ref={iframeRef}
                       src={`${currentPath}?kemponet=1`}
                       className="w-full h-full border-0"
