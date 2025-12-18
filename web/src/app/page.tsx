@@ -13,10 +13,16 @@ export default function Home() {
     const video = videoRef.current
     if (!video) return
 
-    // Check if returning via back navigation (history state will have our marker)
-    const isBackNavigation = history.state?.kempoIntroPlayed === true
+    // Use Performance API to detect navigation type
+    const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
+    const navType = navEntries.length > 0 ? navEntries[0].type : 'navigate'
 
-    if (isBackNavigation) {
+    // back_forward = user clicked back/forward button
+    // navigate = fresh visit (typed URL, clicked link from external)
+    // reload = page refresh
+    const isBackForward = navType === 'back_forward'
+
+    if (isBackForward) {
       // Skip to end and pause, no animations
       video.currentTime = video.duration || 999
       video.pause()
@@ -25,8 +31,6 @@ export default function Home() {
       // First visit or refresh - play video with animations
       setIsFirstVisit(true)
       video.play()
-      // Mark immediately so back navigation will skip intro
-      history.replaceState({ ...history.state, kempoIntroPlayed: true }, '')
     }
     setIsReady(true)
   }, [])
