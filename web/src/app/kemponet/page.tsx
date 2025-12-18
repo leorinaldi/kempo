@@ -17,7 +17,7 @@ export default function KempoNetPage() {
   const historyIndexRef = useRef(-1)
   const isNavigatingRef = useRef(false)
   const [, forceUpdate] = useState({})
-  const [iframeKey, setIframeKey] = useState(0)
+  const [iframeSrc, setIframeSrc] = useState("/kempopedia")
 
   const handleSearch = () => {
     if (selectedOption === "kempopedia") {
@@ -25,16 +25,16 @@ export default function KempoNetPage() {
       historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
+      setIframeSrc(newPath)
       setCurrentPage("browsing")
-      setIframeKey(k => k + 1)
       forceUpdate({})
     } else if (selectedOption === "kempotube") {
       const newPath = "/kempotube"
       historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
+      setIframeSrc(newPath)
       setCurrentPage("browsing")
-      setIframeKey(k => k + 1)
       forceUpdate({})
     }
   }
@@ -52,8 +52,9 @@ export default function KempoNetPage() {
     if (historyIndexRef.current > 0) {
       isNavigatingRef.current = true
       historyIndexRef.current -= 1
-      setCurrentPath(historyRef.current[historyIndexRef.current])
-      setIframeKey(k => k + 1)
+      const newPath = historyRef.current[historyIndexRef.current]
+      setCurrentPath(newPath)
+      setIframeSrc(newPath)
       forceUpdate({})
     }
   }
@@ -62,8 +63,9 @@ export default function KempoNetPage() {
     if (historyIndexRef.current < historyRef.current.length - 1) {
       isNavigatingRef.current = true
       historyIndexRef.current += 1
-      setCurrentPath(historyRef.current[historyIndexRef.current])
-      setIframeKey(k => k + 1)
+      const newPath = historyRef.current[historyIndexRef.current]
+      setCurrentPath(newPath)
+      setIframeSrc(newPath)
       forceUpdate({})
     }
   }
@@ -573,9 +575,8 @@ export default function KempoNetPage() {
                   ) : (
                     /* Browsing - iframe showing actual Kempopedia */
                     <iframe
-                      key={iframeKey}
                       ref={iframeRef}
-                      src={`${currentPath}?kemponet=1`}
+                      src={`${iframeSrc}?kemponet=1`}
                       className="w-full h-full border-0"
                       style={{ background: "white" }}
                     />
