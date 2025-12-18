@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { KempoNetRedirect } from '@/components/KempoNetRedirect'
 
+// Module-level variable: resets on full page refresh, persists across client-side navigation
+let hasPlayedIntro = false
+
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false)
@@ -13,24 +16,16 @@ export default function Home() {
     const video = videoRef.current
     if (!video) return
 
-    // Use Performance API to detect if this is a page refresh
-    const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
-    const navType = navEntries.length > 0 ? navEntries[0].type : 'navigate'
-    const isReload = navType === 'reload'
-
-    // Check if we've played the intro before in this session
-    const hasPlayedBefore = sessionStorage.getItem('kempoIntroPlayed') === 'true'
-
-    if (hasPlayedBefore && !isReload) {
-      // Skip - returning from another page (not a refresh)
+    if (hasPlayedIntro) {
+      // Skip - returning from another page via client-side navigation
       video.currentTime = video.duration || 999
       video.pause()
       setIsFirstVisit(false)
     } else {
-      // Play - first visit or page refresh
+      // Play - first visit or page refresh (module resets on full reload)
       setIsFirstVisit(true)
       video.play()
-      sessionStorage.setItem('kempoIntroPlayed', 'true')
+      hasPlayedIntro = true
     }
     setIsReady(true)
   }, [])
