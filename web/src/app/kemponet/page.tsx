@@ -159,7 +159,7 @@ export default function KempoNetPage() {
       >
         {/* Hard shadow behind monitor */}
         <div
-          className="absolute top-3 left-3 w-full max-w-[650px] h-[400px] sm:h-[500px] rounded-lg"
+          className="absolute top-3 left-3 w-[calc(100vw-2rem)] sm:w-[650px] h-[400px] sm:h-[500px] rounded-lg"
           style={{
             background: '#1a1a1a',
           }}
@@ -167,7 +167,7 @@ export default function KempoNetPage() {
 
         {/* Monitor Body */}
         <div
-          className="w-full max-w-[650px] h-[400px] sm:h-[500px] rounded-lg p-2 sm:p-4 relative border-4 border-gray-900"
+          className="w-[calc(100vw-2rem)] sm:w-[650px] h-[400px] sm:h-[500px] rounded-lg p-2 sm:p-4 relative border-4 border-gray-900"
           style={{
             background: '#9ca3af',
           }}

@@ -162,7 +162,7 @@ export default function TVPage() {
       >
         {/* Hard shadow behind TV */}
         <div
-          className="absolute top-3 left-3 w-full max-w-[650px] rounded-lg"
+          className="absolute top-3 left-3 w-[calc(100vw-2rem)] sm:w-[650px] rounded-lg"
           style={{
             height: 'calc(100% - 12px)',
             background: '#1a1a1a',
@@ -171,7 +171,7 @@ export default function TVPage() {
 
         {/* TV Cabinet */}
         <div
-          className="w-full max-w-[650px] rounded-lg p-3 sm:p-5 relative border-4 border-gray-900"
+          className="w-[calc(100vw-2rem)] sm:w-[650px] rounded-lg p-3 sm:p-5 relative border-4 border-gray-900"
           style={{
             background: '#4a5568',
           }}
