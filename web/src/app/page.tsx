@@ -31,7 +31,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <main className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
       {/* Video Background */}
       <video
         ref={videoRef}
