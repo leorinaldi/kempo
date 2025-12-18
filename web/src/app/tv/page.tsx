@@ -110,122 +110,95 @@ export default function TVPage() {
 
   const program = programs[currentProgram] || null
 
+  const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
+
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-stone-800 to-stone-950 flex flex-col items-center justify-center p-4">
-        <p className="text-amber-200/50 font-serif">Warming up tubes...</p>
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       </div>
     )
   }
 
   if (programs.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-stone-800 to-stone-950 flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
         <Link
           href="/"
-          className="absolute top-4 left-4 text-amber-200/70 hover:text-amber-200 transition-colors"
+          className="absolute top-4 left-4 text-white hover:underline transition-colors"
+          style={{ textShadow: blueGlow }}
         >
           ← Back to Kempo
         </Link>
-        <h1 className="text-amber-200 text-3xl font-serif mb-8 tracking-wider">
+        <h1 className="text-white text-3xl font-serif mb-8 tracking-wider" style={{ textShadow: blueGlow }}>
           KEMPO TV
         </h1>
-        <p className="text-amber-200/50 font-serif">No programs scheduled</p>
+        <p className="text-white font-serif" style={{ textShadow: blueGlow }}>No programs scheduled</p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-800 to-stone-950 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       {/* Back link */}
       <Link
         href="/"
-        className="absolute top-4 left-4 text-amber-200/70 hover:text-amber-200 transition-colors"
+        className="absolute top-4 left-4 text-white hover:underline transition-colors"
+        style={{ textShadow: blueGlow }}
       >
         ← Back to Kempo
       </Link>
 
       {/* Title */}
-      <h1 className="text-amber-200 text-3xl font-serif mb-8 tracking-wider">
+      <h1 className="text-white text-3xl font-serif mb-8 tracking-wider" style={{ textShadow: blueGlow }}>
         KEMPO TV
       </h1>
 
-      {/* TV Unit */}
-      <div className="relative">
+      {/* TV Unit - Modern Graphic Novel Style */}
+      <div
+        className="relative"
+        style={{
+          filter: 'drop-shadow(0 0 15px rgba(100,150,255,0.4)) drop-shadow(0 0 30px rgba(80,130,255,0.3))',
+        }}
+      >
+        {/* Hard shadow behind TV */}
+        <div
+          className="absolute top-3 left-3 w-[650px] rounded-lg"
+          style={{
+            height: 'calc(100% - 12px)',
+            background: '#1a1a1a',
+          }}
+        />
+
         {/* TV Cabinet */}
         <div
-          className="w-[500px] rounded-2xl p-6 relative overflow-hidden"
+          className="w-[650px] rounded-lg p-5 relative border-4 border-gray-900"
           style={{
-            background: "linear-gradient(145deg, #5D4037, #4E342E, #3E2723)",
-            boxShadow: `
-              0 20px 40px rgba(0,0,0,0.6),
-              inset 0 2px 4px rgba(255,255,255,0.1),
-              inset 0 -2px 4px rgba(0,0,0,0.3)
-            `,
+            background: '#4a5568',
           }}
         >
-          {/* Wood grain texture overlay */}
-          <div
-            className="absolute inset-0 opacity-20 pointer-events-none"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-                85deg,
-                transparent,
-                transparent 3px,
-                rgba(0,0,0,0.15) 3px,
-                rgba(0,0,0,0.15) 6px
-              )`
-            }}
-          />
-
           {/* Screen Bezel */}
           <div
-            className="rounded-lg p-3 mb-4"
+            className="rounded border-4 border-gray-900 p-2 mb-4"
             style={{
-              background: "linear-gradient(180deg, #1a1a1a, #0a0a0a)",
-              boxShadow: "inset 0 4px 12px rgba(0,0,0,0.8)",
+              background: '#2d3748',
             }}
           >
             {/* Screen */}
             <div
-              className="relative w-full aspect-video rounded overflow-hidden"
+              className="relative w-full aspect-video rounded border-2 border-gray-900 overflow-hidden"
               style={{
-                background: isOn
-                  ? "linear-gradient(180deg, #1a1a1a, #0f0f0f)"
-                  : "linear-gradient(180deg, #2a2a2a, #1a1a1a)",
-                boxShadow: isOn
-                  ? "inset 0 0 30px rgba(200, 200, 200, 0.1)"
-                  : "inset 0 0 20px rgba(0,0,0,0.5)",
+                background: isOn ? '#0f172a' : '#1e293b',
               }}
             >
-              {/* Scanlines overlay */}
+              {/* Screen glare - graphic novel style */}
               {isOn && (
                 <div
-                  className="absolute inset-0 pointer-events-none z-10 opacity-10"
+                  className="absolute top-0 left-0 w-1/3 h-1/3 pointer-events-none z-10"
                   style={{
-                    backgroundImage: `repeating-linear-gradient(
-                      0deg,
-                      transparent,
-                      transparent 2px,
-                      rgba(0,0,0,0.3) 2px,
-                      rgba(0,0,0,0.3) 4px
-                    )`
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%)',
                   }}
                 />
               )}
-
-              {/* Screen curvature effect */}
-              <div
-                className="absolute inset-0 pointer-events-none z-20"
-                style={{
-                  background: `radial-gradient(
-                    ellipse at center,
-                    transparent 60%,
-                    rgba(0,0,0,0.3) 100%
-                  )`,
-                  borderRadius: "4px",
-                }}
-              />
 
               {/* Video element */}
               {isOn && program && (
@@ -238,147 +211,105 @@ export default function TVPage() {
                 />
               )}
 
-              {/* Off screen - static pattern */}
-              {!isOn && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full" />
-                </div>
-              )}
             </div>
-          </div>
-
-          {/* Program Title Display */}
-          <div
-            className="w-full h-8 rounded mb-4 flex items-center justify-center"
-            style={{
-              background: isOn
-                ? "linear-gradient(180deg, #fef3c7, #fde68a)"
-                : "linear-gradient(180deg, #57534e, #44403c)",
-              boxShadow: isOn
-                ? "inset 0 0 10px rgba(251, 191, 36, 0.3)"
-                : "inset 0 2px 4px rgba(0,0,0,0.3)",
-              transition: "all 0.5s ease"
-            }}
-          >
-            {isOn && (
-              <p className="text-amber-900 text-sm font-serif font-bold tracking-wide">
-                {program.name}
-              </p>
-            )}
           </div>
 
           {/* Controls Panel */}
-          <div className="flex justify-between items-start px-8">
-            {/* Volume Knob */}
+          <div className="flex justify-between items-end px-4">
+            {/* Power Toggle - Left side */}
             <div className="flex flex-col items-center">
               <div
-                className="w-12 h-12 rounded-full cursor-pointer relative"
+                className="w-16 h-8 rounded-full cursor-pointer relative flex items-center px-1 border-3 border-gray-900"
                 style={{
-                  background: "linear-gradient(145deg, #4a4a4a, #2a2a2a)",
-                  boxShadow: `
-                    0 4px 8px rgba(0,0,0,0.4),
-                    inset 0 2px 4px rgba(255,255,255,0.1)
-                  `
-                }}
-                onClick={cycleVolume}
-              >
-                <div
-                  className="absolute top-2 left-1/2 w-1 h-2.5 bg-amber-200 rounded-full"
-                  style={{
-                    transform: `translateX(-50%) rotate(${currentVolume.rotation}deg)`,
-                    transformOrigin: "bottom center",
-                    transition: "transform 0.2s ease"
-                  }}
-                />
-                <div
-                  className="absolute top-1/2 left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    background: "linear-gradient(145deg, #5a5a5a, #3a3a3a)",
-                  }}
-                />
-              </div>
-              <span className="text-amber-200/60 text-xs mt-2 font-serif">VOL</span>
-              <span className="text-amber-200/40 text-[10px] font-serif">{currentVolume.level}</span>
-            </div>
-
-            {/* Power Toggle */}
-            <div className="flex flex-col items-center">
-              <div
-                className="w-14 h-7 rounded-full cursor-pointer relative flex items-center px-1"
-                style={{
-                  background: "linear-gradient(180deg, #2a2a2a, #1a1a1a)",
-                  boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3)"
+                  background: '#2d3748',
+                  borderWidth: '3px',
                 }}
                 onClick={togglePower}
               >
                 <div
-                  className="w-5 h-5 rounded-full transition-all duration-300"
+                  className="w-6 h-6 rounded-full transition-all duration-300 border-2 border-gray-900"
                   style={{
-                    background: isOn
-                      ? "linear-gradient(145deg, #22c55e, #16a34a)"
-                      : "linear-gradient(145deg, #5a5a5a, #3a3a3a)",
-                    boxShadow: isOn
-                      ? "0 0 10px rgba(34, 197, 94, 0.5)"
-                      : "0 2px 4px rgba(0,0,0,0.3)",
-                    transform: isOn ? "translateX(28px)" : "translateX(0)",
+                    background: isOn ? '#60a5fa' : '#4b5563',
+                    transform: isOn ? 'translateX(30px)' : 'translateX(0)',
+                    boxShadow: isOn ? '0 0 12px rgba(96, 165, 250, 0.8)' : 'none',
                   }}
                 />
               </div>
-              <span className="text-amber-200/60 text-xs mt-2 font-serif">
-                {isOn ? "ON" : "OFF"}
+              <span className="text-gray-300 text-xs mt-2 font-bold tracking-wide">
+                {isOn ? 'ON' : 'OFF'}
               </span>
             </div>
 
-            {/* Channel Knob */}
-            <div className="flex flex-col items-center">
-              <div
-                className="w-12 h-12 rounded-full relative cursor-pointer"
-                style={{
-                  background: "linear-gradient(145deg, #4a4a4a, #2a2a2a)",
-                  boxShadow: `
-                    0 4px 8px rgba(0,0,0,0.4),
-                    inset 0 2px 4px rgba(255,255,255,0.1)
-                  `
-                }}
-                onClick={handleChannelClick}
-              >
+            {/* Volume and Channel Knobs - Right side */}
+            <div className="flex gap-5">
+              {/* Volume Knob */}
+              <div className="flex flex-col items-center">
                 <div
-                  className="absolute top-2 left-1/2 w-1 h-2.5 bg-amber-200 rounded-full"
+                  className="w-14 h-14 rounded-full cursor-pointer relative border-4 border-gray-900"
                   style={{
-                    transform: `translateX(-50%) rotate(${channelRotation}deg)`,
-                    transformOrigin: "bottom center",
-                    transition: "transform 0.15s ease-out"
+                    background: '#374151',
                   }}
-                />
-                <div
-                  className="absolute top-1/2 left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 -translate-y-1/2"
-                  style={{
-                    background: "linear-gradient(145deg, #5a5a5a, #3a3a3a)",
-                  }}
-                />
+                  onClick={cycleVolume}
+                >
+                  {/* Knob indicator line */}
+                  <div
+                    className="absolute top-2 left-1/2 w-1.5 h-4 bg-gray-300 rounded-sm border border-gray-900"
+                    style={{
+                      transform: `translateX(-50%) rotate(${currentVolume.rotation}deg)`,
+                      transformOrigin: 'bottom center',
+                      transition: 'transform 0.2s ease',
+                    }}
+                  />
+                  {/* Center dot */}
+                  <div
+                    className="absolute top-1/2 left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-900"
+                    style={{
+                      background: '#4b5563',
+                    }}
+                  />
+                </div>
+                <span className="text-gray-300 text-xs mt-2 font-bold tracking-wide">VOL</span>
               </div>
-              <span className="text-amber-200/60 text-xs mt-2 font-serif">CH</span>
+
+              {/* Channel Knob */}
+              <div className="flex flex-col items-center">
+                <div
+                  className="w-14 h-14 rounded-full relative cursor-pointer border-4 border-gray-900"
+                  style={{
+                    background: '#374151',
+                  }}
+                  onClick={handleChannelClick}
+                >
+                  {/* Knob indicator line */}
+                  <div
+                    className="absolute top-2 left-1/2 w-1.5 h-4 bg-gray-300 rounded-sm border border-gray-900"
+                    style={{
+                      transform: `translateX(-50%) rotate(${channelRotation}deg)`,
+                      transformOrigin: 'bottom center',
+                      transition: 'transform 0.15s ease-out',
+                    }}
+                  />
+                  {/* Center dot */}
+                  <div
+                    className="absolute top-1/2 left-1/2 w-4 h-4 rounded-full transform -translate-x-1/2 -translate-y-1/2 border-2 border-gray-900"
+                    style={{
+                      background: '#4b5563',
+                    }}
+                  />
+                </div>
+                <span className="text-gray-300 text-xs mt-2 font-bold tracking-wide">CH</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* TV legs */}
-        <div className="flex justify-center gap-48 -mt-1">
-          {[0, 1].map((i) => (
-            <div
-              key={i}
-              className="w-4 h-16 rounded-b"
-              style={{
-                background: "linear-gradient(180deg, #3E2723, #2a1f18)",
-                boxShadow: "0 4px 8px rgba(0,0,0,0.4)"
-              }}
-            />
-          ))}
-        </div>
       </div>
 
       {/* Attribution */}
-      <p className="text-amber-200/30 text-xs mt-6 font-serif">
+      <p
+        className="text-white text-sm mt-6 font-serif"
+        style={{ textShadow: blueGlow }}
+      >
         Broadcasting from the Kempo Universe
       </p>
     </div>

@@ -85,33 +85,52 @@ In March 1949 k.y., test pilot **Frank Caldwell** died while pursuing an unident
 | Pilot's Widow | Margaret Caldwell | Original character |
 | Sound Barrier Pilot | Charles Garrison | Chuck Yeager / John Glenn |
 
+## Home Page
+
+The Kempo home page features a cinematic intro experience with a video background and animated text.
+
+**Access Home**: https://kempo.com
+
+### Features
+
+- Full-screen video background with cinematic intro
+- Animated fade-in text with blue glow effect
+- Links to Kempo Radio, Kempo TV, and KempoNet
+- Intro plays on first visit; skips to last frame on return navigation
+- Refresh the page to replay the intro
+
 ## Kempo Radio
 
-Kempo Radio is a vintage 1940s-style radio interface that plays music from the Kempo universe.
+Kempo Radio is a modern graphic novel-style radio interface that plays music from the Kempo universe.
 
 **Access Kempo Radio**: https://kempo.com/radio
 
 ### Features
 
-- Authentic 1940s radio design with illuminated display
+- Modern graphic novel design with bold outlines and flat colors
+- Blue glow effect around the radio unit
 - TUNE knob to cycle through tracks (click left for previous, right for next)
 - VOL knob cycles through LOW/MED/HIGH volume levels
-- Power toggle (ON/OFF)
+- Power toggle with blue glow when ON
+- Illuminated display panel showing artist and track name
 - Auto-advances to next track when song ends
 - Playlist managed via admin panel
 
 ## Kempo TV
 
-Kempo TV is a vintage 1940s television interface that plays video content from the Kempo universe.
+Kempo TV is a modern graphic novel-style television interface that plays video content from the Kempo universe.
 
 **Access Kempo TV**: https://kempo.com/tv
 
 ### Features
 
-- Authentic 1940s television cabinet design with wood grain finish
+- Modern graphic novel design with bold outlines and flat colors
+- Blue glow effect around the TV unit
+- Large 650px wide screen for comfortable viewing
 - Channel dial to switch between videos
-- Volume control with visual indicator
-- Power toggle with warming tube animation
+- Volume control knob
+- Power toggle with blue glow when ON
+- Screen glare effect for added realism
 - Playlist managed via admin panel
 
 ## KempoTube
@@ -140,13 +159,15 @@ When accessed through KempoNet, KempoTube features special adaptations:
 
 ## KempoNet
 
-KempoNet is an immersive 1990s computing experience that lets you browse Kempopedia and KempoTube through a vintage PC interface.
+KempoNet is an immersive 1990s computing experience that lets you browse Kempopedia and KempoTube through a vintage PC interface, rendered in a modern graphic novel style.
 
 **Access KempoNet**: https://kempo.com/kemponet
 
 ### Features
 
-- Authentic 1990s beige PC monitor with CRT effects (scanlines, screen curvature)
+- Modern graphic novel-style PC monitor with bold outlines and flat colors
+- Blue glow effect around the monitor unit
+- Large 650px wide screen for comfortable browsing
 - **KempoScape Navigator** browser (Netscape-inspired) with full navigation
 - **Kemple** search engine home page (Google-inspired with colorful logo)
   - Dropdown to select Kempopedia or KempoTube
@@ -155,7 +176,7 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - Minimize/Maximize/Close window controls
 - **KS Portals 25** operating system (Windows-inspired)
   - Go menu (Start menu equivalent) with program launcher
-  - Desktop with KempoScape Navigator icon (opens on double-click)
+  - Desktop with KempoScape Navigator icon
   - Taskbar showing minimized windows
   - "About This PC" dialog with fictional specs:
     - Kempaq Scenario computer

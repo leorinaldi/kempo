@@ -132,65 +132,65 @@ export default function KempoNetPage() {
     return () => window.removeEventListener("message", handleMessage)
   }, [])
 
+  const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-700 to-slate-900 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
       {/* Back link */}
       <Link
         href="/"
-        className="absolute top-4 left-4 text-slate-300/70 hover:text-slate-300 transition-colors"
+        className="absolute top-4 left-4 text-white hover:underline transition-colors"
+        style={{ textShadow: blueGlow }}
       >
         ← Back to Kempo
       </Link>
 
       {/* Title */}
-      <h1 className="text-slate-300 text-3xl font-serif mb-8 tracking-wider">
+      <h1 className="text-white text-3xl font-serif mb-8 tracking-wider" style={{ textShadow: blueGlow }}>
         KEMPONET
       </h1>
 
-      {/* Monitor Unit */}
-      <div className="relative">
+      {/* Monitor Unit - Modern Graphic Novel Style */}
+      <div
+        className="relative"
+        style={{
+          filter: 'drop-shadow(0 0 15px rgba(100,150,255,0.4)) drop-shadow(0 0 30px rgba(80,130,255,0.3))',
+        }}
+      >
+        {/* Hard shadow behind monitor */}
+        <div
+          className="absolute top-3 left-3 w-[650px] h-[500px] rounded-lg"
+          style={{
+            background: '#1a1a1a',
+          }}
+        />
+
         {/* Monitor Body */}
         <div
-          className="w-[500px] h-[420px] rounded-xl p-4 relative"
+          className="w-[650px] h-[500px] rounded-lg p-4 relative border-4 border-gray-900"
           style={{
-            background: "linear-gradient(145deg, #d4cfc4, #b8b3a8, #9e998f)",
-            boxShadow: `
-              0 20px 40px rgba(0,0,0,0.5),
-              inset 0 2px 4px rgba(255,255,255,0.3),
-              inset 0 -2px 4px rgba(0,0,0,0.2)
-            `,
+            background: '#9ca3af',
           }}
         >
           {/* Monitor bezel */}
           <div
-            className="w-full h-full rounded-lg p-3 relative"
+            className="w-full h-full rounded border-4 border-gray-900 p-3 relative"
             style={{
-              background: "linear-gradient(180deg, #3a3a3a, #2a2a2a)",
-              boxShadow: "inset 0 2px 8px rgba(0,0,0,0.5)",
+              background: '#374151',
             }}
           >
-            {/* Screen area with CRT effect */}
+            {/* Screen area */}
             <div
-              className="w-full h-full rounded relative overflow-hidden"
+              className="w-full h-full rounded border-2 border-gray-900 relative overflow-hidden"
               style={{
-                background: "#008080",
-                boxShadow: `
-                  inset 0 0 30px rgba(0,0,0,0.5),
-                  inset 0 0 60px rgba(0,0,0,0.3)
-                `,
+                background: '#008080',
               }}
             >
-              {/* CRT scanline effect */}
+              {/* Screen glare - graphic novel style */}
               <div
-                className="absolute inset-0 pointer-events-none opacity-10"
+                className="absolute top-0 left-0 w-1/4 h-1/4 pointer-events-none z-30"
                 style={{
-                  backgroundImage: `repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0,0,0,0.3) 2px,
-                    rgba(0,0,0,0.3) 4px
-                  )`
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%)',
                 }}
               />
 
@@ -202,61 +202,58 @@ export default function KempoNetPage() {
                     {/* KempoScape Navigator icon */}
                     <button
                       onClick={() => setWindowState("open")}
-                      className="flex flex-col items-center w-16 p-1 hover:bg-blue-600/30 rounded"
+                      className="flex flex-col items-center w-16 p-1 hover:bg-blue-600/30 rounded ml-2"
                     >
-                      {/* Ship's wheel / compass icon like Netscape */}
+                      {/* Ship's wheel / compass icon - graphic novel style */}
                       <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center relative"
+                        className="w-10 h-10 rounded-full flex items-center justify-center relative border-2 border-gray-900"
                         style={{
-                          background: "linear-gradient(135deg, #2563eb, #1e40af)",
-                          border: "2px solid #60a5fa",
-                          boxShadow: "2px 2px 4px rgba(0,0,0,0.4)",
+                          background: '#3b82f6',
                         }}
                       >
                         {/* Compass points */}
                         <div className="absolute w-full h-full">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-2 bg-yellow-400"></div>
-                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-2 bg-yellow-400"></div>
-                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-1 bg-yellow-400"></div>
-                          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-1 bg-yellow-400"></div>
+                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-2 bg-yellow-400 border border-gray-900"></div>
+                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-2 bg-yellow-400 border border-gray-900"></div>
+                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-1 bg-yellow-400 border border-gray-900"></div>
+                          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-1 bg-yellow-400 border border-gray-900"></div>
                         </div>
                         {/* K in center */}
                         <span className="text-white font-bold text-sm z-10">K</span>
                       </div>
                       {/* Label */}
                       <span
-                        className="text-white text-xs mt-1 text-center leading-tight"
-                        style={{ textShadow: "1px 1px 2px rgba(0,0,0,0.8)" }}
+                        className="text-white text-xs mt-1 text-center leading-tight font-bold"
+                        style={{ textShadow: "1px 1px 0px rgba(0,0,0,1)" }}
                       >
                         KempoScape Navigator
                       </span>
                     </button>
 
-                    {/* About This PC Dialog */}
+                    {/* About This PC Dialog - graphic novel style */}
                     {showAbout && (
                       <div
                         className="absolute inset-0 flex items-center justify-center"
                         style={{ zIndex: 10 }}
                       >
                         <div
+                          className="border-4 border-gray-900 rounded"
                           style={{
                             background: "#c0c0c0",
-                            border: "2px outset #ffffff",
-                            boxShadow: "4px 4px 8px rgba(0,0,0,0.5)",
                             width: "280px",
                           }}
                         >
                           {/* Title bar */}
                           <div
-                            className="flex items-center justify-between px-2 py-1"
+                            className="flex items-center justify-between px-2 py-1 border-b-2 border-gray-900"
                             style={{
-                              background: "linear-gradient(180deg, #000080, #000060)",
+                              background: '#1e40af',
                             }}
                           >
                             <span className="text-white text-xs font-bold">About This PC</span>
                             <div
                               onClick={() => setShowAbout(false)}
-                              className="w-4 h-4 bg-gray-300 border border-gray-400 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
+                              className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
                             >×</div>
                           </div>
 
@@ -264,11 +261,11 @@ export default function KempoNetPage() {
                           <div className="p-4">
                             {/* Portals logo */}
                             <div className="flex items-center gap-4 mb-4">
-                              <div className="grid grid-cols-2 gap-1 w-12 h-12 transform -rotate-6">
-                                <div style={{ background: "#1e3a8a", boxShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}></div>
-                                <div style={{ background: "#7dd3fc", boxShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}></div>
-                                <div style={{ background: "#7dd3fc", boxShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}></div>
-                                <div style={{ background: "#1e3a8a", boxShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}></div>
+                              <div className="grid grid-cols-2 gap-0.5 w-12 h-12 transform -rotate-6 border-2 border-gray-900">
+                                <div style={{ background: "#1e3a8a" }}></div>
+                                <div style={{ background: "#7dd3fc" }}></div>
+                                <div style={{ background: "#7dd3fc" }}></div>
+                                <div style={{ background: "#1e3a8a" }}></div>
                               </div>
                               <div>
                                 <div className="font-bold text-sm">KempoSoft Portals 25</div>
@@ -278,10 +275,9 @@ export default function KempoNetPage() {
 
                             {/* System info */}
                             <div
-                              className="text-xs space-y-1 p-2 mb-4"
+                              className="text-xs space-y-1 p-2 mb-4 border-2 border-gray-900"
                               style={{
                                 background: "white",
-                                border: "2px inset #808080",
                               }}
                             >
                               <div><span className="font-bold">System:</span> Kempaq Scenario</div>
@@ -294,10 +290,9 @@ export default function KempoNetPage() {
                             <div className="flex justify-center">
                               <button
                                 onClick={() => setShowAbout(false)}
-                                className="px-6 py-1 text-xs font-bold"
+                                className="px-6 py-1 text-xs font-bold border-2 border-gray-900"
                                 style={{
-                                  background: "#c0c0c0",
-                                  border: "2px outset #ffffff",
+                                  background: "#d1d5db",
                                 }}
                               >
                                 OK
@@ -309,21 +304,19 @@ export default function KempoNetPage() {
                     )}
                   </div>
 
-                  {/* Taskbar */}
+                  {/* Taskbar - graphic novel style */}
                   <div
-                    className="h-8 flex items-center px-1 gap-1 relative"
+                    className="h-8 flex items-center px-1 gap-1 relative border-t-2 border-gray-900"
                     style={{
-                      background: "#c0c0c0",
-                      borderTop: "2px solid #ffffff",
+                      background: "#d1d5db",
                     }}
                   >
                     {/* Go menu popup */}
                     {goMenuOpen && (
                       <div
-                        className="absolute bottom-8 left-1"
+                        className="absolute bottom-8 left-1 border-2 border-gray-900 rounded"
                         style={{
-                          background: "#c0c0c0",
-                          border: "2px outset #ffffff",
+                          background: "#d1d5db",
                           minWidth: "180px",
                         }}
                       >
@@ -333,14 +326,13 @@ export default function KempoNetPage() {
                             setWindowState("open")
                             setGoMenuOpen(false)
                           }}
-                          className="w-full px-2 py-1 flex items-center gap-2 text-xs text-left hover:bg-[#000080] hover:text-white"
+                          className="w-full px-2 py-1 flex items-center gap-2 text-xs text-left hover:bg-blue-700 hover:text-white"
                         >
                           {/* Small compass icon */}
                           <div
-                            className="w-6 h-6 rounded-full flex items-center justify-center relative flex-shrink-0"
+                            className="w-6 h-6 rounded-full flex items-center justify-center relative flex-shrink-0 border-2 border-gray-900"
                             style={{
-                              background: "linear-gradient(135deg, #2563eb, #1e40af)",
-                              border: "1px solid #60a5fa",
+                              background: '#3b82f6',
                             }}
                           >
                             <div className="absolute w-full h-full">
@@ -355,7 +347,7 @@ export default function KempoNetPage() {
                         </button>
 
                         {/* Separator */}
-                        <div className="mx-1 my-1 border-t border-gray-500 border-b border-b-white"></div>
+                        <div className="mx-1 my-1 border-t-2 border-gray-900"></div>
 
                         {/* About This PC */}
                         <button
@@ -363,22 +355,21 @@ export default function KempoNetPage() {
                             setShowAbout(true)
                             setGoMenuOpen(false)
                           }}
-                          className="w-full px-2 py-1 flex items-center gap-2 text-xs text-left hover:bg-[#000080] hover:text-white"
+                          className="w-full px-2 py-1 flex items-center gap-2 text-xs text-left hover:bg-blue-700 hover:text-white"
                         >
                           {/* Computer icon */}
                           <div
                             className="w-6 h-6 flex items-center justify-center flex-shrink-0"
                           >
                             <div
-                              className="w-5 h-4 rounded-sm"
+                              className="w-5 h-4 rounded-sm border-2 border-gray-900"
                               style={{
-                                background: "linear-gradient(180deg, #e0e0e0, #a0a0a0)",
-                                border: "1px solid #606060",
+                                background: '#9ca3af',
                               }}
                             >
                               <div
                                 className="w-3 h-2 mx-auto mt-0.5"
-                                style={{ background: "#000080" }}
+                                style={{ background: '#1e40af' }}
                               ></div>
                             </div>
                           </div>
@@ -390,13 +381,12 @@ export default function KempoNetPage() {
                     {/* Go button */}
                     <button
                       onClick={() => setGoMenuOpen(!goMenuOpen)}
-                      className="h-6 px-2 flex items-center gap-1 text-xs font-bold"
+                      className="h-6 px-2 flex items-center gap-1 text-xs font-bold border-2 border-gray-900"
                       style={{
-                        background: "#c0c0c0",
-                        border: goMenuOpen ? "2px inset #808080" : "2px outset #ffffff",
+                        background: goMenuOpen ? '#9ca3af' : '#d1d5db',
                       }}
                     >
-                      <div className="grid grid-cols-2 gap-px w-4 h-4">
+                      <div className="grid grid-cols-2 gap-px w-4 h-4 border border-gray-900">
                         <div style={{ background: "#1e3a8a" }}></div>
                         <div style={{ background: "#7dd3fc" }}></div>
                         <div style={{ background: "#7dd3fc" }}></div>
@@ -409,10 +399,9 @@ export default function KempoNetPage() {
                     {windowState === "minimized" && (
                       <button
                         onClick={() => setWindowState("open")}
-                        className="h-6 px-2 flex items-center gap-1 text-xs flex-shrink min-w-0"
+                        className="h-6 px-2 flex items-center gap-1 text-xs flex-shrink min-w-0 border-2 border-gray-900"
                         style={{
-                          background: "#c0c0c0",
-                          border: "2px inset #808080",
+                          background: '#9ca3af',
                           maxWidth: "150px",
                         }}
                       >
@@ -425,20 +414,20 @@ export default function KempoNetPage() {
                   </div>
                 </div>
               ) : (
-                /* Browser Window */
+                /* Browser Window - graphic novel style */
                 <div className="h-full flex flex-col">
                   {/* Browser chrome - title bar */}
                   <div
-                    className="flex items-center justify-between px-2 py-1"
+                    className="flex items-center justify-between px-2 py-1 border-b-2 border-gray-900"
                     style={{
-                      background: "linear-gradient(180deg, #000080, #000060)",
+                      background: '#1e40af',
                     }}
                   >
                     <span className="text-white text-xs font-bold">{currentPage === "kemple" ? "Kemple" : currentPath.startsWith("/kempotube") ? "KempoTube" : "Kempopedia"} - KempoScape Navigator</span>
                     <div className="flex gap-1">
                       <div
                         onClick={() => setWindowState("minimized")}
-                        className="w-4 h-4 bg-gray-300 border border-gray-400 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
+                        className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
                       >_</div>
                       <div
                         onClick={() => {
@@ -448,7 +437,7 @@ export default function KempoNetPage() {
                             window.location.href = selectedOption === "kempotube" ? "/kempotube" : "/kempopedia"
                           }
                         }}
-                        className="w-4 h-4 bg-gray-300 border border-gray-400 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
+                        className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
                         title="Open in real browser"
                       >□</div>
                       <div
@@ -460,24 +449,24 @@ export default function KempoNetPage() {
                           historyRef.current = []
                           historyIndexRef.current = -1
                         }}
-                        className="w-4 h-4 bg-gray-300 border border-gray-400 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
+                        className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
                       >×</div>
                     </div>
                   </div>
 
-                {/* Browser toolbar */}
+                {/* Browser toolbar - graphic novel style */}
                 <div
-                  className="flex items-center gap-2 px-2 py-1"
-                  style={{ background: "#c0c0c0" }}
+                  className="flex items-center gap-2 px-2 py-1 border-b border-gray-900"
+                  style={{ background: '#d1d5db' }}
                 >
                   {/* Navigation buttons */}
                   <button
                     onClick={handleBack}
                     disabled={!canGoBack}
-                    className={`px-2 py-0.5 text-xs border-2 ${
+                    className={`px-2 py-0.5 text-xs border-2 border-gray-900 ${
                       canGoBack
-                        ? "bg-gray-200 border-t-white border-l-white border-b-gray-500 border-r-gray-500"
-                        : "bg-gray-300 border-t-gray-400 border-l-gray-400 border-b-gray-400 border-r-gray-400 text-gray-500"
+                        ? 'bg-gray-200'
+                        : 'bg-gray-400 text-gray-500'
                     }`}
                   >
                     ← Back
@@ -485,33 +474,32 @@ export default function KempoNetPage() {
                   <button
                     onClick={handleForward}
                     disabled={!canGoForward}
-                    className={`px-2 py-0.5 text-xs border-2 ${
+                    className={`px-2 py-0.5 text-xs border-2 border-gray-900 ${
                       canGoForward
-                        ? "bg-gray-200 border-t-white border-l-white border-b-gray-500 border-r-gray-500"
-                        : "bg-gray-300 border-t-gray-400 border-l-gray-400 border-b-gray-400 border-r-gray-400 text-gray-500"
+                        ? 'bg-gray-200'
+                        : 'bg-gray-400 text-gray-500'
                     }`}
                   >
                     → Forward
                   </button>
                   <button
                     onClick={handleHomeClick}
-                    className="px-2 py-0.5 text-xs bg-gray-200 border-2 border-t-white border-l-white border-b-gray-500 border-r-gray-500"
+                    className="px-2 py-0.5 text-xs bg-gray-200 border-2 border-gray-900"
                   >
                     🏠 Home
                   </button>
                 </div>
 
-                {/* Address bar */}
+                {/* Address bar - graphic novel style */}
                 <div
-                  className="flex items-center gap-2 px-2 py-1"
-                  style={{ background: "#c0c0c0" }}
+                  className="flex items-center gap-2 px-2 py-1 border-b border-gray-900"
+                  style={{ background: '#d1d5db' }}
                 >
                   <span className="text-xs font-bold">Address:</span>
                   <div
-                    className="flex-1 px-2 py-0.5 text-xs font-mono"
+                    className="flex-1 px-2 py-0.5 text-xs font-mono border-2 border-gray-900"
                     style={{
-                      background: "white",
-                      border: "2px inset #808080"
+                      background: 'white',
                     }}
                   >
                     {getAddressBarUrl()}
@@ -521,7 +509,7 @@ export default function KempoNetPage() {
                 {/* Web content area */}
                 <div className="flex-1 bg-white overflow-hidden">
                   {currentPage === "kemple" ? (
-                    /* Kemple Search Page */
+                    /* Kemple Search Page - graphic novel style */
                     <div className="h-full flex flex-col items-center justify-center px-4">
                       {/* Kemple Logo */}
                       <div className="mb-6">
@@ -529,6 +517,7 @@ export default function KempoNetPage() {
                           className="text-5xl font-bold tracking-tight"
                           style={{
                             fontFamily: "serif",
+                            textShadow: '2px 2px 0px rgba(0,0,0,0.3)',
                           }}
                         >
                           <span style={{ color: "#4285f4" }}>K</span>
@@ -540,14 +529,13 @@ export default function KempoNetPage() {
                         </h2>
                       </div>
 
-                      {/* Search dropdown */}
+                      {/* Search dropdown - graphic novel style */}
                       <div className="w-full max-w-sm">
                         <select
                           value={selectedOption}
                           onChange={(e) => setSelectedOption(e.target.value)}
-                          className="w-full px-3 py-2 text-sm cursor-pointer"
+                          className="w-full px-3 py-2 text-sm cursor-pointer border-2 border-gray-900"
                           style={{
-                            border: "2px inset #808080",
                             background: "#fffef8",
                             color: "#000",
                             fontFamily: "monospace",
@@ -564,14 +552,13 @@ export default function KempoNetPage() {
                         </select>
                       </div>
 
-                      {/* Search button */}
+                      {/* Search button - graphic novel style */}
                       <div className="flex gap-2 mt-4">
                         <button
                           onClick={handleSearch}
-                          className="px-4 py-1 text-sm"
+                          className="px-4 py-1 text-sm font-bold border-2 border-gray-900"
                           style={{
-                            background: "#e0e0e0",
-                            border: "2px outset #ffffff",
+                            background: "#d1d5db",
                           }}
                         >
                           Kemple Search
@@ -592,46 +579,32 @@ export default function KempoNetPage() {
               </div>
               )}
 
-              {/* CRT screen curvature overlay */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: `radial-gradient(
-                    ellipse at center,
-                    transparent 0%,
-                    transparent 70%,
-                    rgba(0,0,0,0.15) 100%
-                  )`,
-                }}
-              />
             </div>
           </div>
 
         </div>
 
-        {/* Monitor stand */}
+        {/* Monitor stand - graphic novel style */}
         <div className="flex justify-center">
           <div
-            className="w-32 h-4"
+            className="w-32 h-12 border-4 border-t-0 border-gray-900"
             style={{
-              background: "linear-gradient(180deg, #b8b3a8, #9e998f)",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+              background: '#9ca3af',
             }}
           />
         </div>
         <div className="flex justify-center">
           <div
-            className="w-48 h-3 rounded-b-lg"
+            className="w-48 h-5 rounded-b border-4 border-t-0 border-gray-900"
             style={{
-              background: "linear-gradient(180deg, #9e998f, #8a857b)",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.4)",
+              background: '#6b7280',
             }}
           />
         </div>
       </div>
 
       {/* Attribution */}
-      <p className="text-slate-400/50 text-xs mt-6 font-serif">
+      <p className="text-white text-sm mt-6 font-serif" style={{ textShadow: blueGlow }}>
         Browsing the Kempo Universe
       </p>
     </div>
