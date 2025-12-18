@@ -7,7 +7,7 @@ export default function KempoNetPage() {
   const [selectedOption, setSelectedOption] = useState("kempopedia")
   const [currentPage, setCurrentPage] = useState<"kemple" | "browsing">("kemple")
   const [currentPath, setCurrentPath] = useState("/kempopedia")
-  const [windowState, setWindowState] = useState<"open" | "minimized" | "closed">("closed")
+  const [windowState, setWindowState] = useState<"open" | "minimized" | "closed">("open")
   const [goMenuOpen, setGoMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
