@@ -310,15 +310,15 @@ function VideoCard({
       <div className="relative bg-gray-900 rounded-xl overflow-hidden aspect-video">
         <video
           ref={videoRef}
-          src={video.url}
+          src={`${video.url}#t=0.5`}
           className="w-full h-full object-cover"
           preload="metadata"
           muted
           playsInline
         />
 
-        {/* Play button overlay */}
-        <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Play button overlay - always visible on mobile, hover on desktop */}
+        <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 ${isHovered ? 'sm:opacity-100' : ''}`}>
           <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110">
             <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
