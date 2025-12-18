@@ -114,9 +114,33 @@ Kempo TV is a vintage 1940s television interface that plays video content from t
 - Power toggle with warming tube animation
 - Playlist managed via admin panel
 
+## KempoTube
+
+KempoTube is a modern YouTube-style video browsing interface for watching video content from the Kempo universe.
+
+**Access KempoTube**: https://kempo.com/kempotube
+
+### Features
+
+- Modern, clean video browsing interface inspired by YouTube
+- Responsive thumbnail grid (1/2/3 columns based on screen size)
+- Click-to-play video cards with hover effects
+- Full video player with title and description
+- "More Videos" section for discovering additional content
+- Shareable URLs with video ID query parameters (`?v=videoId`)
+- Shares video library with Kempo TV
+
+### KempoNet Integration
+
+When accessed through KempoNet, KempoTube features special adaptations:
+- Custom fullscreen that fills the CRT monitor (not browser fullscreen)
+- Disabled native fullscreen, picture-in-picture, and download options
+- "Back to Kemple" navigation instead of "Back to Kempo"
+- Seamless video playback when entering/exiting monitor fullscreen
+
 ## KempoNet
 
-KempoNet is an immersive 1990s computing experience that lets you browse Kempopedia through a vintage PC interface.
+KempoNet is an immersive 1990s computing experience that lets you browse Kempopedia and KempoTube through a vintage PC interface.
 
 **Access KempoNet**: https://kempo.com/kemponet
 
@@ -125,18 +149,20 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - Authentic 1990s beige PC monitor with CRT effects (scanlines, screen curvature)
 - **KempoScape Navigator** browser (Netscape-inspired) with full navigation
 - **Kemple** search engine home page (Google-inspired with colorful logo)
+  - Dropdown to select Kempopedia or KempoTube
 - Working Back/Forward/Home buttons with history tracking
-- Address bar showing "kttp://" URLs
+- Address bar showing "kttp://" URLs (e.g., `kttp://kempopedia`, `kttp://kempotube`)
 - Minimize/Maximize/Close window controls
 - **KS Portals 25** operating system (Windows-inspired)
   - Go menu (Start menu equivalent) with program launcher
-  - Desktop with KempoScape Navigator icon
+  - Desktop with KempoScape Navigator icon (opens on double-click)
   - Taskbar showing minimized windows
   - "About This PC" dialog with fictional specs:
     - Kempaq Scenario computer
     - Kemptel Prontium II processor
     - Kvidia Nova 128 graphics
-- "Break the fourth wall" maximize button - exits KempoNet to view Kempopedia in your real browser
+- "Break the fourth wall" maximize button - exits KempoNet to view content in your real browser
+- Videos in Kempopedia articles and KempoTube have custom fullscreen within the monitor
 
 ### Fictional Computing Universe
 
@@ -147,6 +173,7 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 | Microsoft Windows | KempoSoft Portals |
 | Netscape Navigator | KempoScape Navigator |
 | Google | Kemple |
+| YouTube | KempoTube |
 | Compaq | Kempaq |
 | Intel | Kemptel |
 | Nvidia | Kvidia |
@@ -220,6 +247,7 @@ kempo/
         │   │   ├── wiki/[slug]/   # Individual article pages
         │   │   └── category/      # Category browse pages
         │   ├── kemponet/          # KempoNet 1990s PC interface
+        │   ├── kempotube/         # KempoTube video browsing
         │   ├── radio/             # Kempo Radio interface
         │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)

@@ -7,7 +7,7 @@ export default function KempoNetPage() {
   const [selectedOption, setSelectedOption] = useState("kempopedia")
   const [currentPage, setCurrentPage] = useState<"kemple" | "browsing">("kemple")
   const [currentPath, setCurrentPath] = useState("/kempopedia")
-  const [windowState, setWindowState] = useState<"open" | "minimized" | "closed">("open")
+  const [windowState, setWindowState] = useState<"open" | "minimized" | "closed">("closed")
   const [goMenuOpen, setGoMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -21,7 +21,13 @@ export default function KempoNetPage() {
   const handleSearch = () => {
     if (selectedOption === "kempopedia") {
       const newPath = "/kempopedia"
-      // Add to history
+      historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
+      historyIndexRef.current = historyRef.current.length - 1
+      setCurrentPath(newPath)
+      setCurrentPage("browsing")
+      forceUpdate({})
+    } else if (selectedOption === "kempotube") {
+      const newPath = "/kempotube"
       historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
@@ -66,8 +72,16 @@ export default function KempoNetPage() {
       return "kttp://kemple"
     }
     // Convert /kempopedia/... to kttp://kempopedia/...
-    const path = currentPath.replace(/^\/kempopedia/, "")
-    return `kttp://kempopedia${path}`
+    if (currentPath.startsWith("/kempopedia")) {
+      const path = currentPath.replace(/^\/kempopedia/, "")
+      return `kttp://kempopedia${path}`
+    }
+    // Convert /kempotube/... to kttp://kempotube/...
+    if (currentPath.startsWith("/kempotube")) {
+      const path = currentPath.replace(/^\/kempotube/, "")
+      return `kttp://kempotube${path}`
+    }
+    return `kttp://${currentPath.replace(/^\//, "")}`
   }
 
   // Close Go menu when clicking outside
@@ -420,7 +434,7 @@ export default function KempoNetPage() {
                       background: "linear-gradient(180deg, #000080, #000060)",
                     }}
                   >
-                    <span className="text-white text-xs font-bold">{currentPage === "kemple" ? "Kemple" : "Kempopedia"} - KempoScape Navigator</span>
+                    <span className="text-white text-xs font-bold">{currentPage === "kemple" ? "Kemple" : currentPath.startsWith("/kempotube") ? "KempoTube" : "Kempopedia"} - KempoScape Navigator</span>
                     <div className="flex gap-1">
                       <div
                         onClick={() => setWindowState("minimized")}
@@ -431,7 +445,7 @@ export default function KempoNetPage() {
                           if (currentPage === "browsing" && currentPath) {
                             window.location.href = currentPath
                           } else {
-                            window.location.href = "/kempopedia"
+                            window.location.href = selectedOption === "kempotube" ? "/kempotube" : "/kempopedia"
                           }
                         }}
                         className="w-4 h-4 bg-gray-300 border border-gray-400 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
@@ -546,6 +560,7 @@ export default function KempoNetPage() {
                           }}
                         >
                           <option value="kempopedia">Kempopedia</option>
+                          <option value="kempotube">KempoTube</option>
                         </select>
                       </div>
 
