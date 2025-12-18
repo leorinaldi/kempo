@@ -31,7 +31,45 @@ tags:
 
 ### December 2025
 
-#### December 17, 2025
+#### December 17, 2025 (Evening)
+
+**Modern Graphic Novel Redesign** — Visual overhaul of all media interfaces
+- Applied consistent modern graphic novel style across Radio, TV, and KempoNet
+- Bold dark outlines (4px borders), flat colors, hard offset shadows
+- Black backgrounds with white text and blue glow effects
+- Blue drop-shadow glow around all device units (radio, TV, monitor)
+- Metallic gray color schemes replacing previous brown/wood tones
+
+**Home Page Intro Experience**
+- Video intro plays on first visit and page refresh
+- Skips to final frame on back navigation (no replay)
+- Fixed React Strict Mode double-invocation in development
+- SessionStorage backup for mobile browsers that unload JS on navigation
+- Black background to prevent white flash during transitions
+
+**Mobile Responsive Improvements**
+- TV and KempoNet screens now responsive (calc(100vw-2rem) on mobile, 650px on desktop)
+- Reduced padding on mobile for better space utilization
+- KempoNet monitor height adjusts (400px mobile, 500px desktop)
+
+**KempoTube Mobile Fixes**
+- Video thumbnails now load properly on mobile (#t=0.5 time fragment)
+- Play button always visible on mobile (hover doesn't work on touch)
+- Hidden custom fullscreen button on mobile (native auto-fullscreen is better UX)
+
+**KempoNet Navigation Fix**
+- Fixed iframe double-load blink when clicking links inside Kempopedia
+- Separated display path (address bar) from iframe src (actual loading)
+- Internal navigation no longer causes iframe recreation
+
+**Other Updates**
+- KempoScape Navigator now opens by default when visiting KempoNet
+- Reduced spacing between tagline and links on home page for mobile
+- Attribution text increased to text-sm across all pages
+
+---
+
+#### December 17, 2025 (Morning)
 
 **KempoNet Launched** — Immersive 1990s PC browsing experience
 - Created KempoNet interface at /kemponet with authentic 1990s beige PC monitor

@@ -96,8 +96,11 @@ The Kempo home page features a cinematic intro experience with a video backgroun
 - Full-screen video background with cinematic intro
 - Animated fade-in text with blue glow effect
 - Links to Kempo Radio, Kempo TV, and KempoNet
-- Intro plays on first visit; skips to last frame on return navigation
-- Refresh the page to replay the intro
+- Smart intro behavior:
+  - Plays full video with fade-in animations on first visit
+  - Plays full intro on page refresh
+  - Skips to final frame on back navigation (no replay)
+- Works consistently across desktop and mobile browsers
 
 ## Kempo Radio
 
@@ -126,7 +129,7 @@ Kempo TV is a modern graphic novel-style television interface that plays video c
 
 - Modern graphic novel design with bold outlines and flat colors
 - Blue glow effect around the TV unit
-- Large 650px wide screen for comfortable viewing
+- Responsive screen (full-width on mobile, 650px on desktop)
 - Channel dial to switch between videos
 - Volume control knob
 - Power toggle with blue glow when ON
@@ -143,11 +146,12 @@ KempoTube is a modern YouTube-style video browsing interface for watching video 
 
 - Modern, clean video browsing interface inspired by YouTube
 - Responsive thumbnail grid (1/2/3 columns based on screen size)
-- Click-to-play video cards with hover effects
+- Click-to-play video cards with hover effects (always-visible play button on mobile)
 - Full video player with title and description
 - "More Videos" section for discovering additional content
 - Shareable URLs with video ID query parameters (`?v=videoId`)
 - Shares video library with Kempo TV
+- Mobile-optimized: native fullscreen on play, thumbnails load properly on all devices
 
 ### KempoNet Integration
 
@@ -167,8 +171,8 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 
 - Modern graphic novel-style PC monitor with bold outlines and flat colors
 - Blue glow effect around the monitor unit
-- Large 650px wide screen for comfortable browsing
-- **KempoScape Navigator** browser (Netscape-inspired) with full navigation
+- Responsive screen (full-width on mobile, 650px on desktop)
+- **KempoScape Navigator** browser opens by default (Netscape-inspired) with full navigation
 - **Kemple** search engine home page (Google-inspired with colorful logo)
   - Dropdown to select Kempopedia or KempoTube
 - Working Back/Forward/Home buttons with history tracking
