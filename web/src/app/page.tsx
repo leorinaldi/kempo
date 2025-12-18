@@ -13,24 +13,24 @@ export default function Home() {
     const video = videoRef.current
     if (!video) return
 
-    // Use Performance API to detect navigation type
+    // Use Performance API to detect if this is a page refresh
     const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
     const navType = navEntries.length > 0 ? navEntries[0].type : 'navigate'
+    const isReload = navType === 'reload'
 
-    // back_forward = user clicked back/forward button
-    // navigate = fresh visit (typed URL, clicked link from external)
-    // reload = page refresh
-    const isBackForward = navType === 'back_forward'
+    // Check if we've played the intro before in this session
+    const hasPlayedBefore = sessionStorage.getItem('kempoIntroPlayed') === 'true'
 
-    if (isBackForward) {
-      // Skip to end and pause, no animations
+    if (hasPlayedBefore && !isReload) {
+      // Skip - returning from another page (not a refresh)
       video.currentTime = video.duration || 999
       video.pause()
       setIsFirstVisit(false)
     } else {
-      // First visit or refresh - play video with animations
+      // Play - first visit or page refresh
       setIsFirstVisit(true)
       video.play()
+      sessionStorage.setItem('kempoIntroPlayed', 'true')
     }
     setIsReady(true)
   }, [])
