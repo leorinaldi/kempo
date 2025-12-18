@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { Suspense, useEffect, useRef, useState } from 'react'
 import { KempoNetRedirect } from '@/components/KempoNetRedirect'
 
-// Module-level variable: resets on full page refresh, persists across client-side navigation
+// Module-level variables for tracking intro state
 let hasPlayedIntro = false
+let lastEffectTime = 0
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -16,7 +17,16 @@ export default function Home() {
     const video = videoRef.current
     if (!video) return
 
-    // Check if this is a page reload (works in dev mode where module persists)
+    const now = Date.now()
+
+    // Detect React Strict Mode double-invocation (happens within milliseconds)
+    // Skip the second invocation to prevent it from interrupting the first
+    if (now - lastEffectTime < 100) {
+      return
+    }
+    lastEffectTime = now
+
+    // Check if this is a page reload
     const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
     const isReload = navEntries.length > 0 && navEntries[0].type === 'reload'
 
