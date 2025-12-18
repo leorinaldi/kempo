@@ -22,13 +22,11 @@ export default function Home() {
       video.pause()
       setIsFirstVisit(false)
     } else {
-      // Play and mark as played when it ends
+      // First visit or refresh - play video with animations
       setIsFirstVisit(true)
       video.play()
-      video.onended = () => {
-        // Store in history state so back navigation can detect it
-        history.replaceState({ ...history.state, kempoIntroPlayed: true }, '')
-      }
+      // Mark immediately so back navigation will skip intro
+      history.replaceState({ ...history.state, kempoIntroPlayed: true }, '')
     }
     setIsReady(true)
   }, [])
