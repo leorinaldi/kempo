@@ -18,6 +18,9 @@ function MobileContent() {
   const urlParam = searchParams.get("url")
   const initialPath = urlParam || DEFAULT_HOME
 
+  // Track which "app" is open (null = home screen)
+  const [activeApp, setActiveApp] = useState<"browser" | null>(null)
+
   const [currentPath, setCurrentPath] = useState(initialPath)
   const [currentTime, setCurrentTime] = useState("")
   const [addressBarValue, setAddressBarValue] = useState("")
@@ -59,20 +62,7 @@ function MobileContent() {
     }
   }
 
-  const handleForward = () => {
-    if (historyIndexRef.current < historyRef.current.length - 1) {
-      isNavigatingRef.current = true
-      historyIndexRef.current += 1
-      const newPath = historyRef.current[historyIndexRef.current]
-      setCurrentPath(newPath)
-      setIframeSrc(newPath)
-      setIframeKey(k => k + 1)
-      forceUpdate({})
-    }
-  }
-
   const canGoBack = historyIndexRef.current > 0
-  const canGoForward = historyIndexRef.current < historyRef.current.length - 1
 
   // Get display name for current path (just the site/page name)
   const getDisplayUrl = (path: string) => {
@@ -112,15 +102,6 @@ function MobileContent() {
     }
   }
 
-  // Get display name for current site
-  const getSiteName = (path: string) => {
-    if (path.startsWith("/kemponet/kempotube")) return "KempoTube"
-    if (path.startsWith("/kemponet/kempopedia")) return "Kempopedia"
-    if (path.startsWith("/kemponet/kemple")) return "Kemple"
-    if (path.startsWith("/kemponet/kemposcape")) return "Settings"
-    return "KempoNet"
-  }
-
   // Listen for messages from iframe
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -142,7 +123,21 @@ function MobileContent() {
     return () => window.removeEventListener("message", handleMessage)
   }, [])
 
-  const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
+  // Open browser app
+  const openBrowser = () => {
+    // Reset browser state when opening
+    historyRef.current = [DEFAULT_HOME]
+    historyIndexRef.current = 0
+    setCurrentPath(DEFAULT_HOME)
+    setIframeSrc(DEFAULT_HOME)
+    setIframeKey(k => k + 1)
+    setActiveApp("browser")
+  }
+
+  // Go to home screen
+  const goHome = () => {
+    setActiveApp(null)
+  }
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-start pt-12 p-4">
@@ -176,7 +171,7 @@ function MobileContent() {
             }}
           >
             {/* Status Bar */}
-            <div className="h-8 px-6 flex items-center justify-between relative z-20" style={{ background: '#1a1a1a' }}>
+            <div className="h-8 px-8 flex items-center justify-between relative z-20" style={{ background: '#1a1a1a' }}>
               {/* Left - Time */}
               <span className="text-white text-sm font-semibold">{currentTime || "9:41"}</span>
 
@@ -187,83 +182,149 @@ function MobileContent() {
                   <div className="w-[3px] h-1 bg-white rounded-sm" />
                   <div className="w-[3px] h-[6px] bg-white rounded-sm" />
                   <div className="w-[3px] h-2 bg-white rounded-sm" />
-                  <div className="w-[3px] h-3 bg-white rounded-sm" />
+                  <div className="w-[3px] h-3 bg-gray-500 rounded-sm" />
                 </div>
                 {/* Battery */}
                 <div className="flex items-center ml-1">
-                  <div className="w-6 h-3 border border-white rounded-sm relative">
-                    <div className="absolute inset-[2px] bg-white rounded-[1px]" style={{ width: 'calc(100% - 4px)' }} />
+                  <div className="w-6 h-3 border border-white rounded-sm relative overflow-hidden p-[2px]">
+                    <div className="h-full w-full flex rounded-[1px] overflow-hidden">
+                      <div className="h-full bg-white" style={{ width: '80%' }} />
+                      <div className="h-full bg-gray-500 flex-1" />
+                    </div>
                   </div>
                   <div className="w-[2px] h-[5px] bg-white rounded-r-sm ml-[1px]" />
                 </div>
               </div>
             </div>
 
-            {/* Safari Browser */}
-            <div className="flex-1 flex flex-col bg-white overflow-hidden">
-              {/* URL Bar */}
-              <div
-                className="px-3 py-2 border-b border-gray-200 flex items-center gap-2"
-                style={{ background: '#f5f5f5' }}
-              >
-                {/* Back Button */}
-                <button
-                  onClick={handleBack}
-                  disabled={!canGoBack}
-                  className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: '#e5e5e5' }}
+            {/* Main Screen Area */}
+            <div className="flex-1 flex flex-col overflow-hidden">
+              {activeApp === null ? (
+                /* Home Screen */
+                <div
+                  className="flex-1 flex flex-col items-center pt-8"
+                  style={{
+                    background: 'linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+                  }}
                 >
-                  <svg
-                    className={`w-3 h-3 ${canGoBack ? 'text-gray-700' : 'text-gray-400'}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth={3}
+                  {/* App Grid */}
+                  <div className="grid grid-cols-4 gap-4 px-4">
+                    {/* KempoNet Browser App */}
+                    <button
+                      onClick={openBrowser}
+                      className="flex flex-col items-center gap-1"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-xl flex items-center justify-center relative"
+                        style={{
+                          background: 'linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%)',
+                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+                        }}
+                      >
+                        {/* Compass needle - pointing NE */}
+                        <div className="absolute w-8 h-8 -rotate-45">
+                          {/* North pointer (white) */}
+                          <div
+                            className="absolute top-0 left-1/2 -translate-x-1/2"
+                            style={{
+                              width: 0,
+                              height: 0,
+                              borderLeft: '5px solid transparent',
+                              borderRight: '5px solid transparent',
+                              borderBottom: '16px solid white',
+                            }}
+                          />
+                          {/* South pointer (translucent white) */}
+                          <div
+                            className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                            style={{
+                              width: 0,
+                              height: 0,
+                              borderLeft: '5px solid transparent',
+                              borderRight: '5px solid transparent',
+                              borderTop: '16px solid rgba(255,255,255,0.35)',
+                            }}
+                          />
+                        </div>
+                        {/* Center dot */}
+                        <div className="absolute w-2.5 h-2.5 rounded-full bg-white z-10" />
+                      </div>
+                      <span className="text-white text-[10px] font-medium">KempoNet</span>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                /* Browser App */
+                <div className="flex-1 flex flex-col bg-white overflow-hidden">
+                  {/* URL Bar */}
+                  <div
+                    className="px-3 py-2 border-b border-gray-200 flex items-center gap-2"
+                    style={{ background: '#f5f5f5' }}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <input
-                  type="text"
-                  value={addressBarValue}
-                  onChange={(e) => setAddressBarValue(e.target.value)}
-                  onKeyDown={handleAddressBarKeyDown}
-                  className="flex-1 h-7 text-center text-sm text-gray-600 font-medium px-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-400"
-                  style={{ background: '#e5e5e5' }}
-                  spellCheck={false}
-                />
-                {/* Favorites Button */}
-                <button
-                  className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: '#e5e5e5' }}
-                >
-                  <svg
-                    className="w-3 h-3 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                  </svg>
-                </button>
-              </div>
+                    {/* Back Button */}
+                    <button
+                      onClick={handleBack}
+                      disabled={!canGoBack}
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: '#e5e5e5' }}
+                    >
+                      <svg
+                        className={`w-3 h-3 ${canGoBack ? 'text-gray-700' : 'text-gray-400'}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={3}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <input
+                      type="text"
+                      value={addressBarValue}
+                      onChange={(e) => setAddressBarValue(e.target.value)}
+                      onKeyDown={handleAddressBarKeyDown}
+                      className="flex-1 h-7 text-center text-sm text-gray-600 font-medium px-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-400"
+                      style={{ background: '#e5e5e5' }}
+                      spellCheck={false}
+                    />
+                    {/* Favorites Button */}
+                    <button
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: '#e5e5e5' }}
+                    >
+                      <svg
+                        className="w-3 h-3 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2.5}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                      </svg>
+                    </button>
+                  </div>
 
-              {/* Web content area */}
-              <div className="flex-1 overflow-hidden">
-                <iframe
-                  key={iframeKey}
-                  ref={iframeRef}
-                  src={`${iframeSrc}?mobile=1`}
-                  className="w-full h-full border-0"
-                  style={{ background: "white" }}
-                />
-              </div>
+                  {/* Web content area */}
+                  <div className="flex-1 overflow-hidden">
+                    <iframe
+                      key={iframeKey}
+                      ref={iframeRef}
+                      src={`${iframeSrc}?mobile=1`}
+                      className="w-full h-full border-0"
+                      style={{ background: "white" }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Home Indicator */}
-            <div className="h-8 flex items-center justify-center" style={{ background: '#1a1a1a' }}>
-              <div className="w-32 h-1 rounded-full" style={{ background: '#666' }} />
+            {/* Home Button */}
+            <div className="h-12 flex items-center justify-center" style={{ background: '#1a1a1a' }}>
+              <button
+                onClick={goHome}
+                className="w-8 h-8 rounded-md border-2 border-gray-600 hover:border-gray-400 transition-colors"
+                style={{ background: '#111' }}
+              />
             </div>
           </div>
         </div>

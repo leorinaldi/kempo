@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 
-// KempoScape Navigator default home page
+// KempoNet default home page
 const DEFAULT_HOME = "/kemponet/kemple"
 
 // Convert kttp:// URL to real path
@@ -95,7 +95,7 @@ function PCContent() {
 
   // Load settings from localStorage on mount (but don't override URL param)
   useEffect(() => {
-    const savedHome = localStorage.getItem("kemposcape-home")
+    const savedHome = localStorage.getItem("kemponet-home")
     if (savedHome) {
       const homePath = kttpToPath(savedHome)
       setBrowserHome(homePath)
@@ -107,7 +107,7 @@ function PCContent() {
         historyIndexRef.current = 0
       }
     }
-    const savedShowAddressBar = localStorage.getItem("kemposcape-show-address-bar")
+    const savedShowAddressBar = localStorage.getItem("kemponet-show-address-bar")
     if (savedShowAddressBar !== null) {
       setShowAddressBar(savedShowAddressBar === "true")
     }
@@ -229,8 +229,8 @@ function PCContent() {
         }
         isNavigatingRef.current = false
         setCurrentPath(newPath)
-      } else if (event.data?.type === "kemposcape-settings-changed") {
-        // Settings were changed in kemposcape - apply immediately
+      } else if (event.data?.type === "kemponet-settings-changed") {
+        // Settings were changed in kemponet - apply immediately
         setShowAddressBar(event.data.showAddressBar)
         if (event.data.home) {
           setBrowserHome(kttpToPath(event.data.home))
@@ -244,9 +244,9 @@ function PCContent() {
   // Listen for storage changes from iframe (settings updates)
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === "kemposcape-show-address-bar") {
+      if (event.key === "kemponet-show-address-bar") {
         setShowAddressBar(event.newValue === "true")
-      } else if (event.key === "kemposcape-home" && event.newValue) {
+      } else if (event.key === "kemponet-home" && event.newValue) {
         setBrowserHome(kttpToPath(event.newValue))
       }
     }
@@ -336,34 +336,53 @@ function PCContent() {
                       </div>
                     )}
 
-                    {/* KempoScape Navigator icon */}
+                    {/* KempoNet icon */}
                     <button
                       onClick={() => setWindowState("open")}
                       className="flex flex-col items-center w-16 p-1 hover:bg-blue-600/30 rounded ml-2"
                     >
-                      {/* Ship's wheel / compass icon - graphic novel style */}
+                      {/* Compass icon - graphic novel style */}
                       <div
-                        className="w-10 h-10 rounded-full flex items-center justify-center relative border-2 border-gray-900"
+                        className="w-10 h-10 rounded-full flex items-center justify-center relative"
                         style={{
-                          background: '#3b82f6',
+                          background: 'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)',
+                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.4), 0 0 0 2px #1e3a5f',
                         }}
                       >
-                        {/* Compass points */}
-                        <div className="absolute w-full h-full">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-2 bg-yellow-400 border border-gray-900"></div>
-                          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-2 bg-yellow-400 border border-gray-900"></div>
-                          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-1 bg-yellow-400 border border-gray-900"></div>
-                          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-1 bg-yellow-400 border border-gray-900"></div>
+                        {/* Compass needle - pointing NE */}
+                        <div className="absolute w-6 h-6 -rotate-45">
+                          {/* North pointer (white) */}
+                          <div
+                            className="absolute top-0 left-1/2 -translate-x-1/2"
+                            style={{
+                              width: 0,
+                              height: 0,
+                              borderLeft: '4px solid transparent',
+                              borderRight: '4px solid transparent',
+                              borderBottom: '12px solid white',
+                            }}
+                          />
+                          {/* South pointer (light blue) */}
+                          <div
+                            className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                            style={{
+                              width: 0,
+                              height: 0,
+                              borderLeft: '4px solid transparent',
+                              borderRight: '4px solid transparent',
+                              borderTop: '12px solid rgba(255,255,255,0.4)',
+                            }}
+                          />
                         </div>
-                        {/* K in center */}
-                        <span className="text-white font-bold text-sm z-10">K</span>
+                        {/* Center dot */}
+                        <div className="absolute w-2 h-2 rounded-full bg-white z-10" />
                       </div>
                       {/* Label */}
                       <span
                         className="text-white text-xs mt-1 text-center leading-tight font-bold"
                         style={{ textShadow: "1px 1px 0px rgba(0,0,0,1)" }}
                       >
-                        KempoScape Navigator
+                        KempoNet
                       </span>
                     </button>
 
@@ -457,7 +476,7 @@ function PCContent() {
                           minWidth: "180px",
                         }}
                       >
-                        {/* KempoScape Navigator */}
+                        {/* KempoNet */}
                         <button
                           onClick={() => {
                             setWindowState("open")
@@ -467,20 +486,35 @@ function PCContent() {
                         >
                           {/* Small compass icon */}
                           <div
-                            className="w-6 h-6 rounded-full flex items-center justify-center relative flex-shrink-0 border-2 border-gray-900"
+                            className="w-6 h-6 rounded-full flex items-center justify-center relative flex-shrink-0"
                             style={{
-                              background: '#3b82f6',
+                              background: 'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)',
+                              boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.4), 0 0 0 2px #1e3a5f',
                             }}
                           >
-                            <div className="absolute w-full h-full">
-                              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-1 bg-yellow-400"></div>
-                              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-1 bg-yellow-400"></div>
-                              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0.5 bg-yellow-400"></div>
-                              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-0.5 bg-yellow-400"></div>
+                            <div className="absolute w-4 h-4 -rotate-45">
+                              <div
+                                className="absolute top-0 left-1/2 -translate-x-1/2"
+                                style={{
+                                  width: 0, height: 0,
+                                  borderLeft: '2px solid transparent',
+                                  borderRight: '2px solid transparent',
+                                  borderBottom: '8px solid white',
+                                }}
+                              />
+                              <div
+                                className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                                style={{
+                                  width: 0, height: 0,
+                                  borderLeft: '2px solid transparent',
+                                  borderRight: '2px solid transparent',
+                                  borderTop: '8px solid rgba(255,255,255,0.4)',
+                                }}
+                              />
                             </div>
-                            <span className="text-white font-bold text-[8px] z-10">K</span>
+                            <div className="absolute w-1 h-1 rounded-full bg-white z-10" />
                           </div>
-                          KempoScape Navigator
+                          KempoNet
                         </button>
 
                         {/* Separator */}
@@ -542,7 +576,7 @@ function PCContent() {
                           maxWidth: "150px",
                         }}
                       >
-                        <span className="truncate">KempoScape Navigator</span>
+                        <span className="truncate">KempoNet</span>
                       </button>
                     )}
 
@@ -560,7 +594,7 @@ function PCContent() {
                       background: '#1e40af',
                     }}
                   >
-                    <span className="text-white text-xs font-bold">{currentPath.startsWith("/kemponet/kempotube") ? "KempoTube" : currentPath.startsWith("/kemponet/kempopedia") ? "Kempopedia" : "Kemple"} - KempoScape Navigator</span>
+                    <span className="text-white text-xs font-bold">KempoNet</span>
                     <div className="flex gap-1">
                       <div
                         onClick={() => setWindowState("minimized")}
@@ -629,7 +663,7 @@ function PCContent() {
                   {/* Browser settings button */}
                   <button
                     onClick={() => {
-                      const settingsPath = "/kemponet/kemposcape"
+                      const settingsPath = "/kemponet/kemponet"
                       if (currentPath !== settingsPath) {
                         historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), settingsPath]
                         historyIndexRef.current = historyRef.current.length - 1
@@ -639,16 +673,34 @@ function PCContent() {
                       setIframeKey(k => k + 1)
                       forceUpdate({})
                     }}
-                    className="w-6 h-6 rounded-full flex items-center justify-center relative border-2 border-gray-900 bg-blue-500 hover:bg-blue-600"
-                    title="KempoScape Navigator Settings"
+                    className="w-6 h-6 rounded-full flex items-center justify-center relative hover:opacity-80"
+                    style={{
+                      background: 'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)',
+                      boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.4), 0 0 0 2px #1e3a5f',
+                    }}
+                    title="KempoNet Settings"
                   >
-                    <div className="absolute w-full h-full">
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-1 bg-yellow-400"></div>
-                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-1 bg-yellow-400"></div>
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0.5 bg-yellow-400"></div>
-                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-0.5 bg-yellow-400"></div>
+                    <div className="absolute w-4 h-4 -rotate-45">
+                      <div
+                        className="absolute top-0 left-1/2 -translate-x-1/2"
+                        style={{
+                          width: 0, height: 0,
+                          borderLeft: '2px solid transparent',
+                          borderRight: '2px solid transparent',
+                          borderBottom: '8px solid white',
+                        }}
+                      />
+                      <div
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                        style={{
+                          width: 0, height: 0,
+                          borderLeft: '2px solid transparent',
+                          borderRight: '2px solid transparent',
+                          borderTop: '8px solid rgba(255,255,255,0.4)',
+                        }}
+                      />
                     </div>
-                    <span className="text-white font-bold text-[8px] z-10">K</span>
+                    <div className="absolute w-1 h-1 rounded-full bg-white z-10" />
                   </button>
                 </div>
 

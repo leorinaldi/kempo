@@ -12,7 +12,7 @@ export function Header() {
   // Check if we're on a kemponet subpage (but not the main kemponet page itself)
   const isKempoNetSubpage = pathname.startsWith('/kemponet/') && pathname !== '/kemponet'
 
-  // Convert current path to kttp:// URL for the KempoScape link
+  // Convert current path to kttp:// URL for the KempoNet link
   const kttpUrl = pathname.replace(/^\/kemponet\//, 'kttp://')
 
   // Hide header on home page and when inside KempoNet or Mobile browser
@@ -38,30 +38,46 @@ export function Header() {
           KEMPO
         </Link>
 
-        {/* KempoScape Navigator button - only show on kemponet subpages */}
+        {/* KempoNet button - only show on kemponet subpages */}
         {isKempoNetSubpage && (
           <Link
             href={`/pc?url=${encodeURIComponent(kttpUrl)}`}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            title="View in KempoScape Navigator"
+            title="View in KempoNet"
           >
             {/* Compass icon */}
             <div
-              className="w-8 h-8 rounded-full flex items-center justify-center relative border-2 border-gray-700"
+              className="w-8 h-8 rounded-full flex items-center justify-center relative"
               style={{
-                background: '#3b82f6',
-                boxShadow: '0 0 10px rgba(59,130,246,0.5)'
+                background: 'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)',
+                boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.3), 0 0 10px rgba(59,130,246,0.5)'
               }}
             >
-              {/* Compass points */}
-              <div className="absolute w-full h-full">
-                <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-1 h-1.5 bg-yellow-400 rounded-sm"></div>
-                <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1.5 bg-yellow-400 rounded-sm"></div>
-                <div className="absolute left-0.5 top-1/2 -translate-y-1/2 w-1.5 h-1 bg-yellow-400 rounded-sm"></div>
-                <div className="absolute right-0.5 top-1/2 -translate-y-1/2 w-1.5 h-1 bg-yellow-400 rounded-sm"></div>
+              {/* Compass needle - pointing NE */}
+              <div className="absolute w-5 h-5 -rotate-45">
+                <div
+                  className="absolute top-0 left-1/2 -translate-x-1/2"
+                  style={{
+                    width: 0,
+                    height: 0,
+                    borderLeft: '3px solid transparent',
+                    borderRight: '3px solid transparent',
+                    borderBottom: '10px solid white',
+                  }}
+                />
+                <div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                  style={{
+                    width: 0,
+                    height: 0,
+                    borderLeft: '3px solid transparent',
+                    borderRight: '3px solid transparent',
+                    borderTop: '10px solid rgba(255,255,255,0.4)',
+                  }}
+                />
               </div>
-              {/* K in center */}
-              <span className="text-white font-bold text-xs z-10">K</span>
+              {/* Center dot */}
+              <div className="absolute w-1.5 h-1.5 rounded-full bg-white z-10" />
             </div>
           </Link>
         )}

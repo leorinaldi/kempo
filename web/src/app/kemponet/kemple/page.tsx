@@ -65,7 +65,6 @@ export default function KemplePage() {
           }}
         >
           <option value="kempopedia">Kempopedia</option>
-          <option value="kemposcape">KempoScape</option>
           <option value="kempotube">KempoTube</option>
         </select>
       </div>

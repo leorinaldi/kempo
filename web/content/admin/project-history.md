@@ -31,6 +31,43 @@ tags:
 
 ### December 2025
 
+#### December 19, 2025 (Late Night)
+
+**KempoScape Navigator Renamed to KempoNet** — Simplified browser naming
+- Renamed "KempoScape Navigator" to "KempoNet" throughout the codebase
+- Moved settings page from `/kemponet/kemposcape` to `/kemponet/kemponet`
+- Address bar now correctly shows `kttp://kemponet` for settings page
+- `/kemponet` redirects to `/kemponet/kemple` (default home)
+- Updated localStorage keys and message types to use `kemponet-` prefix
+
+**Compass Icon Redesign** — Clean, Safari-inspired compass design
+- Replaced cluttered yellow compass points with minimal blue/white design
+- Blue gradient background with subtle white inner ring
+- Simple two-part needle pointing northeast (white north, translucent south)
+- White center dot
+- Updated all compass icons: PC desktop, Go menu, toolbar, mobile app, Header nav
+
+**Mobile Home Screen** — App launcher experience
+- Added iPhone-style home screen with app grid
+- Home button now returns to home screen instead of exiting
+- KempoNet browser app opens from home screen
+- Browser resets to default home page when reopened
+- Dark blue gradient wallpaper background
+
+**Mobile UI Polish** — Realistic status bar and details
+- Adjusted status bar padding to avoid curved edges
+- Fourth signal bar now grey (3/4 strength)
+- Battery shows 80% charge (white/grey split)
+- Home button slightly lighter (#111 instead of pure black)
+
+**About Page Layout** — Improved positioning and spacing
+- Moved announcer image and text higher on page
+- Cropped black space above announcer head (mt-[-10%])
+- Increased right padding for better balance (responsive: px-8 mobile, pr-32 desktop)
+- All text turns white when audio ends (including first sentence)
+
+---
+
 #### December 19, 2025 (Night)
 
 **Kempo Mobile Launched** — iPhone-style device experience

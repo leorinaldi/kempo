@@ -107,7 +107,7 @@ export default function AboutPage() {
       )}
 
       {/* Main content */}
-      <div className="min-h-screen flex items-start justify-center pl-8 pr-32 pt-20">
+      <div className="min-h-screen flex items-start justify-center px-8 md:pl-16 md:pr-32 pt-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-8 max-w-6xl w-full">
           {/* Announcer image - left side */}
           <div className="flex-shrink-0 md:w-[300px] flex justify-end overflow-hidden">
@@ -133,7 +133,7 @@ export default function AboutPage() {
 
                 let color = '#f3f4f6' // white (current)
                 if (audioEnded) {
-                  color = isHighlightPhrase ? '#f3f4f6' : '#000000' // white or black
+                  color = '#f3f4f6' // all white when audio ends
                 } else if (isPast) {
                   color = '#4b5563' // grey
                 }

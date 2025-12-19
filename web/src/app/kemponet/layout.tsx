@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { KempoNetBridge } from "@/components/KempoNetBridge"
 
-export default function KempoScapeLayout({
+export default function KempoNetLayout({
   children,
 }: {
   children: React.ReactNode

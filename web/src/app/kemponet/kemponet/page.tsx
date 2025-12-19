@@ -4,18 +4,18 @@ import { useState, useEffect } from "react"
 
 const DEFAULT_HOME = "kttp://kemple"
 
-export default function KempoScapePage() {
+export default function KempoNetPage() {
   const [homePage, setHomePage] = useState(DEFAULT_HOME)
   const [showAddressBar, setShowAddressBar] = useState(true)
   const [saved, setSaved] = useState(false)
 
   // Load saved settings on mount
   useEffect(() => {
-    const savedHome = localStorage.getItem("kemposcape-home")
+    const savedHome = localStorage.getItem("kemponet-home")
     if (savedHome) {
       setHomePage(savedHome)
     }
-    const savedShowAddressBar = localStorage.getItem("kemposcape-show-address-bar")
+    const savedShowAddressBar = localStorage.getItem("kemponet-show-address-bar")
     if (savedShowAddressBar !== null) {
       setShowAddressBar(savedShowAddressBar === "true")
     }
@@ -26,7 +26,7 @@ export default function KempoScapePage() {
     try {
       if (window.top && window.top !== window) {
         window.top.postMessage({
-          type: "kemposcape-settings-changed",
+          type: "kemponet-settings-changed",
           showAddressBar: showAddress,
           home: home,
         }, window.location.origin)
@@ -37,8 +37,8 @@ export default function KempoScapePage() {
   }
 
   const handleSave = () => {
-    localStorage.setItem("kemposcape-home", homePage)
-    localStorage.setItem("kemposcape-show-address-bar", String(showAddressBar))
+    localStorage.setItem("kemponet-home", homePage)
+    localStorage.setItem("kemponet-show-address-bar", String(showAddressBar))
     notifyParent(homePage, showAddressBar)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
@@ -47,8 +47,8 @@ export default function KempoScapePage() {
   const handleReset = () => {
     setHomePage(DEFAULT_HOME)
     setShowAddressBar(true)
-    localStorage.setItem("kemposcape-home", DEFAULT_HOME)
-    localStorage.setItem("kemposcape-show-address-bar", "true")
+    localStorage.setItem("kemponet-home", DEFAULT_HOME)
+    localStorage.setItem("kemponet-show-address-bar", "true")
     notifyParent(DEFAULT_HOME, true)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
@@ -62,24 +62,43 @@ export default function KempoScapePage() {
         style={{ background: "linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%)" }}
       >
         <div className="flex items-center gap-4">
-          {/* KempoScape logo */}
+          {/* KempoNet logo */}
           <div
-            className="w-12 h-12 rounded-full flex items-center justify-center relative border-3 border-white"
-            style={{ background: "#3b82f6" }}
+            className="w-12 h-12 rounded-full flex items-center justify-center relative"
+            style={{
+              background: 'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)',
+              boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.4), 0 0 0 3px white',
+            }}
           >
-            <div className="absolute w-full h-full">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-2.5 bg-yellow-400"></div>
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-2.5 bg-yellow-400"></div>
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2.5 h-1.5 bg-yellow-400"></div>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-1.5 bg-yellow-400"></div>
+            {/* Compass needle - pointing NE */}
+            <div className="absolute w-7 h-7 -rotate-45">
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2"
+                style={{
+                  width: 0, height: 0,
+                  borderLeft: '5px solid transparent',
+                  borderRight: '5px solid transparent',
+                  borderBottom: '14px solid white',
+                }}
+              />
+              <div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                style={{
+                  width: 0, height: 0,
+                  borderLeft: '5px solid transparent',
+                  borderRight: '5px solid transparent',
+                  borderTop: '14px solid rgba(255,255,255,0.4)',
+                }}
+              />
             </div>
-            <span className="text-white font-bold text-xl z-10">K</span>
+            {/* Center dot */}
+            <div className="absolute w-2 h-2 rounded-full bg-white z-10" />
           </div>
           <div>
             <h1 className="text-white text-2xl font-bold" style={{ textShadow: "2px 2px 0 rgba(0,0,0,0.3)" }}>
-              KempoScape Navigator
+              KempoNet
             </h1>
-            <p className="text-blue-200 text-sm">Version 3.0 Gold Edition</p>
+            <p className="text-blue-200 text-sm">Version 3.0</p>
           </div>
         </div>
       </div>
@@ -89,14 +108,14 @@ export default function KempoScapePage() {
         {/* Welcome section */}
         <div className="mb-8 p-4 border-2 border-gray-900 bg-white">
           <h2 className="text-lg font-bold mb-2" style={{ color: "#1e40af" }}>
-            Welcome to KempoScape Navigator!
+            Welcome to KempoNet!
           </h2>
           <p className="text-sm text-gray-700 mb-3">
-            Thank you for choosing KempoScape Navigator, the premier web browser for exploring
-            the KempoNet. With lightning-fast broadband support, you&apos;re ready to surf the information superhighway!
+            Thank you for choosing KempoNet, the premier web browser for exploring
+            the information superhighway. With lightning-fast broadband support, you&apos;re ready to surf!
           </p>
           <p className="text-xs text-gray-500 italic">
-            &quot;KempoScape Navigator - Your Window to the World&quot;
+            &quot;KempoNet - Your Window to the World&quot;
           </p>
         </div>
 
@@ -139,7 +158,7 @@ export default function KempoScapePage() {
               />
             </div>
             <p className="text-xs text-gray-500 mt-1">
-              This page will open when you click the Home button or start KempoScape Navigator.
+              This page will open when you click the Home button or start KempoNet.
             </p>
           </div>
 
@@ -188,7 +207,7 @@ export default function KempoScapePage() {
         {/* Footer */}
         <div className="mt-6 text-center text-xs text-gray-500">
           <p>© KempoSoft Corporation. All rights reserved.</p>
-          <p>KempoScape Navigator is a trademark of KempoSoft Corporation.</p>
+          <p>KempoNet is a trademark of KempoSoft Corporation.</p>
         </div>
       </div>
     </div>

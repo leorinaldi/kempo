@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
 
-export default function KempoNetPage() {
-  redirect('/pc')
+export default function KempoNetIndexPage() {
+  redirect('/kemponet/kemple')
 }
