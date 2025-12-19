@@ -110,8 +110,8 @@ When articles reference dates using `[[1945 k.y.]]` syntax:
 
 | Date | Links To |
 |------|----------|
-| Pre-1950 dates | Decade page with anchor (e.g., `/kempopedia/wiki/1940s#1945-ky`) |
-| 1950+ dates | Year page with anchor (e.g., `/kempopedia/wiki/1950#1950-01-01-ky`) |
+| Pre-1950 dates | Decade page with anchor (e.g., `/kemponet/kempopedia/wiki/1940s#1945-ky`) |
+| 1950+ dates | Year page with anchor (e.g., `/kemponet/kempopedia/wiki/1950#1950-01-01-ky`) |
 
 ## Infobox for Timeline Pages
 
