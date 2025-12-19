@@ -1,5 +1,5 @@
 ---
-title: ""Iron Joe" Carter Warming Up for a Boxing Match"
+title: '"Iron Joe" Carter Warming Up for a Boxing Match'
 slug: "iron-joe-carter-warming-up"
 type: culture
 subtype: video

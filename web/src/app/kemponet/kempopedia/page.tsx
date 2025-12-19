@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { getAllCategories, getAllArticles, getWikiLinkStats } from '@/lib/articles'
+import { getAllCategoriesAsync, getAllArticlesAsync, getWikiLinkStatsAsync } from '@/lib/articles'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
 
-export default function KempopediaHome() {
-  const categories = getAllCategories()
-  const allArticles = getAllArticles()
+export default async function KempopediaHome() {
+  const categories = await getAllCategoriesAsync()
+  const allArticles = await getAllArticlesAsync()
   const totalArticles = allArticles.length
-  const linkStats = getWikiLinkStats()
+  const linkStats = await getWikiLinkStatsAsync()
 
   return (
     <div className="min-h-screen bg-white">

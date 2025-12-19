@@ -1,11 +1,7 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
-
-// Path to articles in the content folder
-const articlesDirectory = path.join(process.cwd(), 'content', 'articles')
+import { prisma } from './prisma'
+import type { Article as PrismaArticle } from '@prisma/client'
 
 export interface ParallelSwitchover {
   real_world: string
@@ -21,7 +17,6 @@ export interface ArticleFrontmatter {
   parallel_switchover?: ParallelSwitchover
   tags?: string[]
   dates?: string[]
-  categories?: string[] // legacy support
 }
 
 export interface Article {
@@ -48,58 +43,8 @@ export interface Article {
   }>
 }
 
-// Recursively get all markdown files from a directory
-function getAllMarkdownFiles(dir: string, fileList: string[] = []): string[] {
-  try {
-    const files = fs.readdirSync(dir)
-    files.forEach(file => {
-      const filePath = path.join(dir, file)
-      const stat = fs.statSync(filePath)
-      if (stat.isDirectory()) {
-        getAllMarkdownFiles(filePath, fileList)
-      } else if (file.endsWith('.md')) {
-        fileList.push(filePath)
-      }
-    })
-  } catch {
-    // Directory doesn't exist or can't be read
-  }
-  return fileList
-}
-
-export function getAllArticleSlugs(): string[] {
-  const files = getAllMarkdownFiles(articlesDirectory)
-  return files.map(file => {
-    const relativePath = path.relative(articlesDirectory, file)
-    // Remove .md extension and use just the filename as slug
-    const fileName = path.basename(relativePath, '.md')
-    return fileName
-  })
-}
-
-export function getAllArticles(): Article[] {
-  const files = getAllMarkdownFiles(articlesDirectory)
-  const articles = files
-    .map(file => {
-      const slug = path.basename(file, '.md')
-      return getArticleBySlug(slug, file)
-    })
-    .filter((article): article is Article => article !== null && !!article.frontmatter?.title)
-    .sort((a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title))
-
-  return articles
-}
-
-// Find article file by slug (searches all subdirectories)
-function findArticleFile(slug: string): string | null {
-  const files = getAllMarkdownFiles(articlesDirectory)
-  const match = files.find(file => path.basename(file, '.md') === slug)
-  return match || null
-}
-
 // Convert k.y. date to timeline page and anchor
 function dateToTimelineLink(dateStr: string): { page: string; anchor: string } {
-  // Match patterns like "March 15, 1945 k.y." or "1945 k.y." or "June 1962 k.y."
   const fullDateMatch = dateStr.match(/(\w+)\s+(\d+),?\s+(\d+)\s*k\.y\./)
   const monthYearMatch = dateStr.match(/(\w+)\s+(\d+)\s*k\.y\./)
   const yearOnlyMatch = dateStr.match(/^(\d+)\s*k\.y\./)
@@ -121,14 +66,11 @@ function dateToTimelineLink(dateStr: string): { page: string; anchor: string } {
     year = yearOnlyMatch[1]
     anchor = `${year}-ky`
   } else {
-    // Fallback
     return { page: 'master-timeline', anchor: dateStr.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') }
   }
 
   const yearNum = parseInt(year, 10)
 
-  // Pre-1950: link to decade page
-  // 1950+: link to year page
   if (yearNum < 1950) {
     const decade = Math.floor(yearNum / 10) * 10
     return { page: `${decade}s`, anchor }
@@ -146,86 +88,94 @@ function getMonthNumber(month: string): string {
   return months[month.toLowerCase()] || '01'
 }
 
-// Check if a wikilink target is a date
 function isDateLink(target: string): boolean {
   return /\d+\s*k\.y\./.test(target)
 }
 
-export function getArticleBySlug(slug: string, filePath?: string): Article | null {
-  try {
-    const fullPath = filePath || findArticleFile(slug)
-    if (!fullPath) {
-      // Try direct path as fallback
-      const directPath = path.join(articlesDirectory, `${slug}.md`)
-      if (!fs.existsSync(directPath)) {
-        return null
+// Process wikilinks in content
+function processWikilinks(content: string): string {
+  return content.replace(
+    /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
+    (_, target, display) => {
+      const linkText = display || target
+
+      if (isDateLink(target)) {
+        const { page, anchor } = dateToTimelineLink(target)
+        return `<a href="/kemponet/kempopedia/wiki/${page}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
       }
-      return getArticleBySlug(slug, directPath)
+
+      const [pagePart, anchorPart] = target.split('#')
+      const linkSlug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+      const href = anchorPart
+        ? `/kemponet/kempopedia/wiki/${linkSlug}#${anchorPart}`
+        : `/kemponet/kempopedia/wiki/${linkSlug}`
+      return `<a href="${href}" class="wikilink">${linkText}</a>`
     }
+  )
+}
 
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
+// Convert Prisma article to our Article interface
+function prismaToArticle(dbArticle: PrismaArticle): Article {
+  const processedContent = processWikilinks(dbArticle.content)
 
-    // Parse frontmatter
-    const { data, content } = matter(fileContents)
-
-    // Extract JSON infobox from content if present
-    let cleanContent = content
-    let infobox = undefined
-    let media = undefined
-    let timelineEvents = undefined
-
-    const jsonMatch = content.match(/```json\n([\s\S]*?)\n```/)
-    if (jsonMatch) {
-      try {
-        const jsonData = JSON.parse(jsonMatch[1])
-        infobox = jsonData.infobox
-        media = jsonData.media
-        timelineEvents = jsonData.timeline_events
-      } catch {
-        // Invalid JSON, ignore
-      }
-      cleanContent = content.replace(/```json\n[\s\S]*?\n```\n?/, '')
-    }
-
-    // Convert wikilinks [[Article Name]] to HTML links
-    cleanContent = cleanContent.replace(
-      /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
-      (_, target, display) => {
-        const linkText = display || target
-
-        // Check if this is a date link (contains k.y.)
-        if (isDateLink(target)) {
-          const { page, anchor } = dateToTimelineLink(target)
-          return `<a href="/kemponet/kempopedia/wiki/${page}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
-        }
-
-        // Regular article link - handle anchors: [[page#anchor|Display]]
-        const [pagePart, anchorPart] = target.split('#')
-        const linkSlug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-        const href = anchorPart
-          ? `/kemponet/kempopedia/wiki/${linkSlug}#${anchorPart}`
-          : `/kemponet/kempopedia/wiki/${linkSlug}`
-        return `<a href="${href}" class="wikilink">${linkText}</a>`
-      }
-    )
-
-    return {
-      slug,
-      frontmatter: data as ArticleFrontmatter,
-      content: cleanContent,
-      htmlContent: cleanContent,
-      infobox,
-      media,
-      timelineEvents,
-    }
-  } catch {
-    return null
+  return {
+    slug: dbArticle.slug,
+    frontmatter: {
+      title: dbArticle.title,
+      slug: dbArticle.slug,
+      type: dbArticle.type,
+      subtype: dbArticle.subtype || undefined,
+      status: dbArticle.status,
+      parallel_switchover: dbArticle.parallelSwitchover as unknown as ParallelSwitchover | undefined,
+      tags: dbArticle.tags,
+      dates: dbArticle.dates,
+    },
+    content: processedContent,
+    htmlContent: processedContent, // Will be processed to HTML in async version
+    infobox: dbArticle.infobox as Article['infobox'],
+    media: dbArticle.mediaRefs as Article['media'],
+    timelineEvents: dbArticle.timelineEvents as Article['timelineEvents'],
   }
 }
 
+export function getAllArticleSlugs(): string[] {
+  // Note: This is now async in nature but we need to keep sync for generateStaticParams
+  // For build time, we'll use a different approach
+  throw new Error('Use getAllArticleSlugsAsync instead')
+}
+
+export async function getAllArticleSlugsAsync(): Promise<string[]> {
+  const articles = await prisma.article.findMany({
+    where: { status: 'published' },
+    select: { slug: true },
+  })
+  return articles.map(a => a.slug)
+}
+
+export function getAllArticles(): Article[] {
+  throw new Error('Use getAllArticlesAsync instead')
+}
+
+export async function getAllArticlesAsync(): Promise<Article[]> {
+  const dbArticles = await prisma.article.findMany({
+    where: { status: 'published' },
+    orderBy: { title: 'asc' },
+  })
+  return dbArticles.map(prismaToArticle)
+}
+
+export function getArticleBySlug(slug: string): Article | null {
+  throw new Error('Use getArticleBySlugAsync instead')
+}
+
 export async function getArticleBySlugAsync(slug: string): Promise<Article | null> {
-  const article = getArticleBySlug(slug)
-  if (!article) return null
+  const dbArticle = await prisma.article.findUnique({
+    where: { slug },
+  })
+
+  if (!dbArticle) return null
+
+  const article = prismaToArticle(dbArticle)
 
   // Process markdown to HTML
   const processedContent = await remark()
@@ -257,27 +207,43 @@ const categoryMeta: Record<string, { label: string; description: string; order: 
   concept: { label: 'Other Concepts', description: 'Ideas, theories, and abstract topics', order: 99 },
 }
 
-// Map article types to display categories (for types that roll up into a parent category)
+// Map article types to display categories
 const typeToCategoryMap: Record<string, string> = {
   product: 'culture',
   company: 'institution',
 }
 
-// Get all articles of a specific type/category
-export function getArticlesByType(type: string): Article[] {
-  const allArticles = getAllArticles()
-  return allArticles.filter(article => {
-    const articleType = article.frontmatter.type
-    // Direct match
-    if (articleType === type) return true
-    // Check if article's type maps to the requested category
-    if (typeToCategoryMap[articleType] === type) return true
-    return false
+export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
+  // Get types that map to this category
+  const typesToQuery = [type]
+  Object.entries(typeToCategoryMap).forEach(([articleType, category]) => {
+    if (category === type) {
+      typesToQuery.push(articleType)
+    }
   })
+
+  const dbArticles = await prisma.article.findMany({
+    where: {
+      status: 'published',
+      type: { in: typesToQuery },
+    },
+    orderBy: { title: 'asc' },
+  })
+
+  return dbArticles.map(prismaToArticle)
 }
 
-export function getAllCategories(): CategoryInfo[] {
-  const allArticles = getAllArticles()
+// Keep sync version for backwards compatibility (throws)
+export function getArticlesByType(type: string): Article[] {
+  throw new Error('Use getArticlesByTypeAsync instead')
+}
+
+export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
+  const articles = await prisma.article.findMany({
+    where: { status: 'published' },
+    select: { type: true },
+  })
+
   const typeCounts: Record<string, number> = {}
 
   // Initialize all defined categories with 0
@@ -285,9 +251,8 @@ export function getAllCategories(): CategoryInfo[] {
     typeCounts[type] = 0
   })
 
-  allArticles.forEach(article => {
-    const type = article.frontmatter.type
-    // Check if this type maps to a parent category
+  articles.forEach(article => {
+    const type = article.type
     const category = typeToCategoryMap[type] || type
     if (category && categoryMeta[category]) {
       typeCounts[category] = (typeCounts[category] || 0) + 1
@@ -304,7 +269,11 @@ export function getAllCategories(): CategoryInfo[] {
     .sort((a, b) => (categoryMeta[a.type]?.order || 99) - (categoryMeta[b.type]?.order || 99))
 }
 
-// Get valid category types
+// Keep sync version for backwards compatibility (throws)
+export function getAllCategories(): CategoryInfo[] {
+  throw new Error('Use getAllCategoriesAsync instead')
+}
+
 export function isValidCategory(type: string): boolean {
   return Object.keys(categoryMeta).includes(type)
 }
@@ -317,61 +286,41 @@ export interface WikiLinkStats {
   linksByCategory: Record<string, number>
 }
 
-export function getWikiLinkStats(): WikiLinkStats {
-  const files = getAllMarkdownFiles(articlesDirectory)
+export async function getWikiLinkStatsAsync(): Promise<WikiLinkStats> {
+  const articles = await prisma.article.findMany({
+    where: { status: 'published' },
+    select: { slug: true, type: true, content: true },
+  })
+
   const linkCounts: Record<string, number> = {}
   let totalLinks = 0
 
-  // Build a map of slug -> article type for category counting
+  // Build slug to type map
   const slugToType: Record<string, string> = {}
-  files.forEach(file => {
-    try {
-      const fileContents = fs.readFileSync(file, 'utf8')
-      const { data } = matter(fileContents)
-      const slug = path.basename(file, '.md')
-      if (data.type) {
-        // Map to display category
-        const category = typeToCategoryMap[data.type] || data.type
-        slugToType[slug] = category
-      }
-    } catch {
-      // Skip
-    }
+  articles.forEach(article => {
+    const category = typeToCategoryMap[article.type] || article.type
+    slugToType[article.slug] = category
   })
 
   const linksByCategory: Record<string, number> = {}
 
-  files.forEach(file => {
-    try {
-      const fileContents = fs.readFileSync(file, 'utf8')
-      const { content } = matter(fileContents)
+  articles.forEach(article => {
+    const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
+    let match
 
-      // Remove JSON infobox before counting links
-      const cleanContent = content.replace(/```json\n[\s\S]*?\n```\n?/, '')
+    while ((match = wikiLinkRegex.exec(article.content)) !== null) {
+      if (!match[1].includes('k.y.')) {
+        const [pagePart] = match[1].split('#')
+        const target = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 
-      // Match all wikilinks: [[target]] or [[target|display]]
-      const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
-      let match
+        linkCounts[target] = (linkCounts[target] || 0) + 1
+        totalLinks++
 
-      while ((match = wikiLinkRegex.exec(cleanContent)) !== null) {
-        // Don't count date links (containing k.y.) as article links
-        if (!match[1].includes('k.y.')) {
-          // Extract slug (handle anchors like page#anchor)
-          const [pagePart] = match[1].split('#')
-          const target = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-
-          linkCounts[target] = (linkCounts[target] || 0) + 1
-          totalLinks++
-
-          // Count by category
-          const targetCategory = slugToType[target]
-          if (targetCategory) {
-            linksByCategory[targetCategory] = (linksByCategory[targetCategory] || 0) + 1
-          }
+        const targetCategory = slugToType[target]
+        if (targetCategory) {
+          linksByCategory[targetCategory] = (linksByCategory[targetCategory] || 0) + 1
         }
       }
-    } catch {
-      // Skip files that can't be read
     }
   })
 
@@ -381,4 +330,9 @@ export function getWikiLinkStats(): WikiLinkStats {
     linksByTarget: linkCounts,
     linksByCategory
   }
+}
+
+// Keep sync version for backwards compatibility (throws)
+export function getWikiLinkStats(): WikiLinkStats {
+  throw new Error('Use getWikiLinkStatsAsync instead')
 }

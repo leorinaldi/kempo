@@ -47,3 +47,62 @@ model TvPlaylistItem {
   @@unique([mediaId])
   @@map("tv_playlist")
 }
+
+// ============ KEMPOPEDIA ARTICLES ============
+
+model Article {
+  id                 String     @id @default(cuid())
+  slug               String     @unique
+  title              String
+  type               String     // "person", "place", "institution", "event", "culture", "product", "concept", "timeline", "company"
+  subtype            String?    // "head-of-state", "city", etc.
+  status             String     @default("published") // "published", "draft"
+
+  // Content
+  content            String     @db.Text // markdown body
+  infobox            Json?      // structured infobox data
+  timelineEvents     Json?      @map("timeline_events") // array of {date, headline, description}
+  mediaRefs          Json?      @map("media_refs") // array of audio/video references
+
+  // Parallel universe tracking
+  parallelSwitchover Json?      @map("parallel_switchover") // {real_world, wikipedia}
+
+  // Metadata
+  tags               String[]   // PostgreSQL array
+  dates              String[]   // k.y. dates mentioned in the article
+
+  // Timestamps
+  createdAt          DateTime   @default(now()) @map("created_at")
+  updatedAt          DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  revisions          Revision[]
+
+  @@index([type])
+  @@index([status])
+  @@map("articles")
+}
+
+model Revision {
+  id             String   @id @default(cuid())
+  articleId      String   @map("article_id")
+  article        Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  // Snapshot of content at this point
+  title          String
+  content        String   @db.Text
+  infobox        Json?
+  timelineEvents Json?    @map("timeline_events")
+
+  // Real-world tracking
+  createdAt      DateTime @default(now()) @map("created_at")
+  editSummary    String?  @map("edit_summary")
+  editorId       String?  @map("editor_id")
+
+  // In-universe tracking
+  kempoDate      String?  @map("kempo_date") // "January 15, 1950 k.y."
+  kempoEvent     String?  @map("kempo_event") // "Harold Kellman inaugurated"
+
+  @@index([articleId, createdAt])
+  @@map("revisions")
+}

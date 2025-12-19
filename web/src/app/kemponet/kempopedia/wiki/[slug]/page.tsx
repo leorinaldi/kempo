@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticleBySlugAsync, getAllArticleSlugs } from '@/lib/articles'
+import { getArticleBySlugAsync, getAllArticleSlugsAsync } from '@/lib/articles'
 import Infobox from '@/components/Infobox'
 import { AudioPlayer } from '@/components/AudioPlayer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -11,7 +11,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllArticleSlugs()
+  const slugs = await getAllArticleSlugsAsync()
   return slugs.map((slug) => ({ slug }))
 }
 

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticlesByType, getAllCategories, isValidCategory } from '@/lib/articles'
+import { getArticlesByTypeAsync, getAllCategoriesAsync, isValidCategory } from '@/lib/articles'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
 
 // Category metadata for display
@@ -9,23 +9,27 @@ const categoryMeta: Record<string, { label: string; description: string }> = {
   place: { label: 'Places', description: 'Cities, states, regions, and other locations' },
   institution: { label: 'Institutions', description: 'Organizations, political parties, academies, and agencies' },
   event: { label: 'Events', description: 'Historical events and occurrences in Kempo history' },
-  nation: { label: 'Nations', description: 'Countries and sovereign states' },
+  timeline: { label: 'Timeline', description: 'Chronological records by decade and year' },
+  culture: { label: 'Culture and Entertainment', description: 'Popular culture, entertainment, and products' },
   concept: { label: 'Concepts', description: 'Ideas, theories, and abstract topics' },
-  company: { label: 'Companies', description: 'Businesses and corporations' },
-  product: { label: 'Products', description: 'Goods and manufactured items' },
+}
+
+interface PageProps {
+  params: Promise<{ category: string }>
 }
 
 // Generate static params for all categories
-export function generateStaticParams() {
-  const categories = getAllCategories()
+export async function generateStaticParams() {
+  const categories = await getAllCategoriesAsync()
   return categories.map((cat) => ({
     category: cat.type,
   }))
 }
 
 // Generate metadata for the page
-export function generateMetadata({ params }: { params: { category: string } }) {
-  const meta = categoryMeta[params.category]
+export async function generateMetadata({ params }: PageProps) {
+  const { category } = await params
+  const meta = categoryMeta[category]
   if (!meta) {
     return { title: 'Category Not Found - Kempopedia' }
   }
@@ -35,15 +39,15 @@ export function generateMetadata({ params }: { params: { category: string } }) {
   }
 }
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
-  const { category } = params
+export default async function CategoryPage({ params }: PageProps) {
+  const { category } = await params
 
   // Check if valid category
   if (!isValidCategory(category)) {
     notFound()
   }
 
-  const articles = getArticlesByType(category)
+  const articles = await getArticlesByTypeAsync(category)
   const meta = categoryMeta[category] || {
     label: category.charAt(0).toUpperCase() + category.slice(1),
     description: `Articles about ${category}s`,
