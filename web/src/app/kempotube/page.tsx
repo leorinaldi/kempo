@@ -3,12 +3,15 @@
 import { useState, useEffect, useRef, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import Link from "next/link"
+import { KempoNetBridge } from "@/components/KempoNetBridge"
 
 interface Video {
   id: string
   name: string
   description?: string
   url: string
+  artist?: string
+  artistSlug?: string
 }
 
 function KempoTubeContent() {
@@ -80,18 +83,20 @@ function KempoTubeContent() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isInternalFullscreen])
 
-  // Load playlist on mount
+  // Load playlist from database
   useEffect(() => {
-    fetch('/tv-playlist.json')
+    fetch('/api/tv/playlist')
       .then(res => res.json())
       .then((data: Video[]) => {
-        setVideos(data)
+        // Reverse to show newest first (data comes in chronological order)
+        const reversed = [...data].reverse()
+        setVideos(reversed)
         setIsLoading(false)
 
         // Check for video ID in URL
         const videoId = searchParams.get('v')
         if (videoId) {
-          const video = data.find(v => v.id === videoId)
+          const video = reversed.find(v => v.id === videoId)
           if (video) {
             setSelectedVideo(video)
           }
@@ -129,6 +134,7 @@ function KempoTubeContent() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <KempoNetBridge />
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -235,6 +241,16 @@ function KempoTubeContent() {
               <h1 className="text-xl font-semibold text-gray-900">
                 {selectedVideo.name}
               </h1>
+              {selectedVideo.artist && selectedVideo.artistSlug && (
+                <p className="mt-1 text-sm text-gray-500">
+                  <Link
+                    href={`/kempopedia/wiki/${selectedVideo.artistSlug}`}
+                    className="hover:text-red-600 transition-colors"
+                  >
+                    {selectedVideo.artist}
+                  </Link>
+                </p>
+              )}
               {selectedVideo.description && (
                 <p className="mt-2 text-gray-600">
                   {selectedVideo.description}
@@ -332,6 +348,11 @@ function VideoCard({
         <h3 className={`font-medium text-gray-900 line-clamp-2 group-hover:text-red-600 transition-colors ${compact ? 'text-sm' : ''}`}>
           {video.name}
         </h3>
+        {video.artist && (
+          <p className={`text-gray-500 mt-0.5 ${compact ? 'text-xs' : 'text-sm'}`}>
+            {video.artist}
+          </p>
+        )}
         {video.description && !compact && (
           <p className="text-sm text-gray-500 mt-1 line-clamp-2">
             {video.description}

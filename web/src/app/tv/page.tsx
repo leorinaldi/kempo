@@ -8,6 +8,8 @@ interface Program {
   name: string
   description?: string
   url: string
+  artist: string
+  artistSlug: string
 }
 
 type VolumeLevel = "LOW" | "MED" | "HIGH"
@@ -20,7 +22,7 @@ const volumeLevels: { level: VolumeLevel; value: number; rotation: number }[] = 
 export default function TVPage() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [programs, setPrograms] = useState<Program[]>([])
-  const [currentProgram, setCurrentProgram] = useState(0)
+  const [currentProgram, setCurrentProgram] = useState(-1) // Will be set to last item
   const [isOn, setIsOn] = useState(false)
   const [volumeIndex, setVolumeIndex] = useState(1) // Start at MED
   const [isLoading, setIsLoading] = useState(true)
@@ -28,12 +30,14 @@ export default function TVPage() {
 
   const currentVolume = volumeLevels[volumeIndex]
 
-  // Load playlist on mount
+  // Load playlist from database
   useEffect(() => {
-    fetch('/tv-playlist.json')
+    fetch('/api/tv/playlist')
       .then(res => res.json())
       .then(data => {
         setPrograms(data)
+        // Start at the last item (newest/most recent)
+        setCurrentProgram(data.length - 1)
         setIsLoading(false)
       })
       .catch(err => {
@@ -79,12 +83,15 @@ export default function TVPage() {
     const knobWidth = rect.width
     const isLeftSide = clickX < knobWidth * 0.4
 
+    // Reverse chronological: right = go back in time (lower index), left = go forward in time (higher index)
     if (isLeftSide) {
+      // Forward in time (higher index) - swing left
       setChannelRotation(-45)
-      setCurrentProgram((prev) => (prev - 1 + programs.length) % programs.length)
-    } else {
-      setChannelRotation(45)
       setCurrentProgram((prev) => (prev + 1) % programs.length)
+    } else {
+      // Back in time (lower index) - swing right
+      setChannelRotation(45)
+      setCurrentProgram((prev) => (prev - 1 + programs.length) % programs.length)
     }
 
     if (videoRef.current) {
@@ -100,8 +107,9 @@ export default function TVPage() {
   }
 
   const handleVideoEnd = () => {
+    // Auto-advance to next program (go back in time - lower index)
     setChannelRotation(45)
-    setCurrentProgram((prev) => (prev + 1) % programs.length)
+    setCurrentProgram((prev) => (prev - 1 + programs.length) % programs.length)
 
     setTimeout(() => {
       setChannelRotation(0)
@@ -311,6 +319,9 @@ export default function TVPage() {
         style={{ textShadow: blueGlow }}
       >
         Broadcasting from the Kempo Universe
+        {program?.artist && program?.artistSlug && (
+          <> • <Link href={`/kempopedia/wiki/${program.artistSlug}`} className="underline hover:opacity-70">{program.artist}</Link></>
+        )}
       </p>
     </div>
   )

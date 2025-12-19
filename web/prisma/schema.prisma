@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Media {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  type        String   // "audio" | "video"
+  url         String   @db.Text
+  artist      String?
+  artistSlug  String?  @map("artist_slug")
+  description String?  @db.Text
+  kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  radioPlaylist RadioPlaylistItem[]
+  tvPlaylist    TvPlaylistItem[]
+
+  @@map("media")
+}
+
+model RadioPlaylistItem {
+  id        String   @id @default(cuid())
+  mediaId   String   @map("media_id")
+  position  Int
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([mediaId])
+  @@map("radio_playlist")
+}
+
+model TvPlaylistItem {
+  id        String   @id @default(cuid())
+  mediaId   String   @map("media_id")
+  position  Int
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([mediaId])
+  @@map("tv_playlist")
+}

@@ -84,7 +84,7 @@ export function getAllArticles(): Article[] {
       const slug = path.basename(file, '.md')
       return getArticleBySlug(slug, file)
     })
-    .filter((article): article is Article => article !== null)
+    .filter((article): article is Article => article !== null && !!article.frontmatter?.title)
     .sort((a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title))
 
   return articles

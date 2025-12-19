@@ -135,7 +135,8 @@ Kempo Radio is a modern graphic novel-style radio interface that plays music fro
 - Power toggle with blue glow when ON
 - Illuminated display panel showing artist and track name
 - Auto-advances to next track when song ends
-- Playlist managed via admin panel
+- Database-backed playlist ordered by kyDate (reverse chronological—newest first)
+- Artist attribution links to Kempopedia
 
 ## Kempo TV
 
@@ -152,7 +153,8 @@ Kempo TV is a modern graphic novel-style television interface that plays video c
 - Volume control knob
 - Power toggle with blue glow when ON
 - Screen glare effect for added realism
-- Playlist managed via admin panel
+- Database-backed playlist ordered by kyDate (reverse chronological—newest first)
+- Artist attribution links to Kempopedia
 
 ## KempoTube
 
@@ -165,10 +167,11 @@ KempoTube is a modern YouTube-style video browsing interface for watching video 
 - Modern, clean video browsing interface inspired by YouTube
 - Responsive thumbnail grid (1/2/3 columns based on screen size)
 - Click-to-play video cards with hover effects (always-visible play button on mobile)
-- Full video player with title and description
+- Full video player with title, description, and artist attribution
+- Artist names link to Kempopedia articles
 - "More Videos" section for discovering additional content
 - Shareable URLs with video ID query parameters (`?v=videoId`)
-- Shares video library with Kempo TV
+- Database-backed video library shared with Kempo TV (reverse chronological order)
 - Mobile-optimized: native fullscreen on play, thumbnails load properly on all devices
 
 ### KempoNet Integration
@@ -271,6 +274,8 @@ kempo/
 ├── scripts/
 │   └── generate-image.js          # Grok API image generation script
 └── web/                           # Next.js web application
+    ├── prisma/
+    │   └── schema.prisma          # Database schema (Media, Playlists)
     ├── content/
     │   └── articles/              # Kempopedia article files (MDX)
     │       ├── people/            # Person articles
@@ -281,9 +286,7 @@ kempo/
     │       ├── culture/           # Songs, albums, films, books
     │       └── concepts/          # Concept articles
     ├── public/
-    │   ├── media/                 # Generated images (Grok API)
-    │   ├── radio-playlist.json    # Kempo Radio track list
-    │   └── tv-playlist.json       # Kempo TV video list
+    │   └── media/                 # Generated images (Grok API)
     └── src/
         ├── app/
         │   ├── kempopedia/        # Kempopedia pages
@@ -324,11 +327,12 @@ The admin panel provides authenticated access to manage media, playlists, simula
 
 ### Media Management
 
-- Upload audio/video files to Vercel Blob storage
-- Manage Kempo Radio and Kempo TV playlists
-- Auto-lookup track info from Kempopedia articles
-- Delete media files from storage
-- View storage URLs for uploaded media
+- Upload audio/video files to Vercel Blob storage with database metadata
+- Auto-generate Kempopedia article stubs on upload
+- Manage Kempo Radio and Kempo TV playlists via dropdown selection
+- Track kyDate (Kempo universe date) for chronological ordering
+- Artist attribution with links to Kempopedia pages
+- Delete media files from both storage and database
 
 ### Simulation Management
 
@@ -382,8 +386,9 @@ Tracks real-world development milestones for the Kempo project:
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
 - **Content**: MDX with frontmatter
+- **Database**: PostgreSQL (Neon) with Prisma ORM
 - **Images**: Grok API (xAI) for comic book style illustrations
-- **Media Storage**: Vercel Blob
+- **Media Storage**: Vercel Blob (files) + PostgreSQL (metadata)
 - **Authentication**: NextAuth.js with Google OAuth
 - **Hosting**: Vercel
 - **Repository**: GitHub

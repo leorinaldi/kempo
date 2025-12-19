@@ -1,16 +1,6 @@
 import { auth } from "@/auth"
-import { list } from "@vercel/blob"
 import { NextResponse } from "next/server"
-
-const videoExtensions = ["mp4", "webm", "mov", "avi", "mkv", "m4v"]
-const audioExtensions = ["mp3", "wav", "ogg", "flac", "aac", "m4a"]
-
-function getMediaTypeByExtension(filename: string): "audio" | "video" | null {
-  const extension = filename.split(".").pop()?.toLowerCase() || ""
-  if (videoExtensions.includes(extension)) return "video"
-  if (audioExtensions.includes(extension)) return "audio"
-  return null
-}
+import { prisma } from "@/lib/prisma"
 
 export async function GET(request: Request) {
   const session = await auth()
@@ -28,34 +18,31 @@ export async function GET(request: Request) {
   }
 
   try {
-    // List all files from kempo-media and filter by extension
-    const { blobs } = await list({ prefix: "kempo-media/" })
+    const mediaFiles = await prisma.media.findMany({
+      where: { type: mediaType },
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        url: true,
+        artist: true,
+        artistSlug: true,
+        description: true,
+        kyDate: true,
+        createdAt: true,
+      },
+    })
 
-    const mediaFiles = blobs
-      .map((blob) => {
-        // Extract filename from pathname
-        const pathParts = blob.pathname.split("/")
-        const filename = pathParts[pathParts.length - 1]
-        // Remove extension to get slug
-        const slug = filename.replace(/\.[^/.]+$/, "")
-        // Determine actual type by extension
-        const actualType = getMediaTypeByExtension(filename)
+    // Transform to include filename for backwards compatibility
+    const result = mediaFiles.map((file) => ({
+      ...file,
+      filename: file.slug, // For display in dropdown
+    }))
 
-        return {
-          url: blob.url,
-          pathname: blob.pathname,
-          filename,
-          slug,
-          size: blob.size,
-          uploadedAt: blob.uploadedAt,
-          type: actualType,
-        }
-      })
-      .filter((file) => file.type === mediaType)
-
-    return NextResponse.json(mediaFiles)
+    return NextResponse.json(result)
   } catch (error) {
-    console.error("Failed to list blobs:", error)
+    console.error("Failed to list media:", error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Failed to list media" },
       { status: 500 }

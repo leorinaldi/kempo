@@ -21,7 +21,7 @@ const volumeLevels: { level: VolumeLevel; value: number; rotation: number }[] = 
 export default function RadioPage() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [stations, setStations] = useState<Station[]>([])
-  const [currentStation, setCurrentStation] = useState(0)
+  const [currentStation, setCurrentStation] = useState(-1) // Will be set to last item
   const [isOn, setIsOn] = useState(false)
   const [volumeIndex, setVolumeIndex] = useState(1) // Start at MED
   const [isLoading, setIsLoading] = useState(true)
@@ -29,12 +29,14 @@ export default function RadioPage() {
   const currentVolume = volumeLevels[volumeIndex]
   const [tuneRotation, setTuneRotation] = useState(0)
 
-  // Load playlist on mount
+  // Load playlist from database
   useEffect(() => {
-    fetch('/radio-playlist.json')
+    fetch('/api/radio/playlist')
       .then(res => res.json())
       .then(data => {
         setStations(data)
+        // Start at the last item (newest/most recent)
+        setCurrentStation(data.length - 1)
         setIsLoading(false)
       })
       .catch(err => {
@@ -81,14 +83,15 @@ export default function RadioPage() {
     const isLeftSide = clickX < knobWidth * 0.4 // Left 40% of knob
 
     // Animate dial swing
+    // Reverse chronological: right = go back in time (lower index), left = go forward in time (higher index)
     if (isLeftSide) {
-      // Previous station - swing left
+      // Forward in time (higher index) - swing left
       setTuneRotation(-45)
-      setCurrentStation((prev) => (prev - 1 + stations.length) % stations.length)
-    } else {
-      // Next station - swing right
-      setTuneRotation(45)
       setCurrentStation((prev) => (prev + 1) % stations.length)
+    } else {
+      // Back in time (lower index) - swing right
+      setTuneRotation(45)
+      setCurrentStation((prev) => (prev - 1 + stations.length) % stations.length)
     }
 
     // Reset audio to beginning
@@ -106,9 +109,9 @@ export default function RadioPage() {
   }
 
   const handleSongEnd = () => {
-    // Auto-advance to next song with dial animation
+    // Auto-advance to next song (go back in time - lower index)
     setTuneRotation(45)
-    setCurrentStation((prev) => (prev + 1) % stations.length)
+    setCurrentStation((prev) => (prev - 1 + stations.length) % stations.length)
 
     setTimeout(() => {
       setTuneRotation(0)

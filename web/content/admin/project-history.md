@@ -31,6 +31,40 @@ tags:
 
 ### December 2025
 
+#### December 19, 2025
+
+**First Database Implementation** — PostgreSQL database with Prisma ORM
+- Established Neon PostgreSQL as the first non-blob database for Kempo
+- Prisma ORM for type-safe database access
+- Created `Media` table storing all audio/video metadata:
+  - slug, name, type (audio/video), url (Vercel Blob reference)
+  - artist, artistSlug for attribution and Kempopedia linking
+  - description for media details
+  - kyDate for Kempo universe dates (when the content was "created" in-universe)
+  - createdAt/updatedAt for real-world timestamps
+- Created `RadioPlaylistItem` and `TvPlaylistItem` tables for playlist management
+- Playlists now ordered by kyDate (chronologically by in-universe date)
+
+**Media System Overhaul**
+- Upload API now saves to database and auto-generates Kempopedia article stubs
+- Slug conflict detection prevents overwriting existing Kempopedia articles
+- Radio and TV playlist management via simple dropdown selection (no manual entry)
+- All 14 media items migrated with researched kyDate values from Kempopedia
+
+**Player Conversions**
+- Kempo Radio converted from `/radio-playlist.json` to database API
+- Kempo TV converted from `/tv-playlist.json` to database API
+- KempoTube converted to database API with artist attribution
+- All players now show content in reverse chronological order (newest first)
+- Artist names link to Kempopedia articles
+
+**KempoNet Navigation Improvements**
+- Added KempoNetBridge to KempoTube for proper URL tracking
+- Fixed back/forward button navigation (iframe now reloads correctly)
+- Cross-section navigation between Kempopedia and KempoTube works seamlessly
+
+---
+
 #### December 18, 2025
 
 **About Page Created** — Immersive narrated introduction to the Kempo universe
@@ -280,20 +314,25 @@ tags:
 
 ## Summary Statistics
 
-### Content Created (Dec 13-17, 2025)
+### Content Created (Dec 13-19, 2025)
 - **100+ articles** across all categories
 - **8 major storylines** established (Politics, Hollywood, Crime, Broadcasting, Music, UFO, Military, Business)
 - **50+ character portraits** generated
 - **Multiple decade timelines** (1800s through 1950s)
+- **14 media items** with kyDate metadata (5 audio, 9 video)
 
 ### Technical Features
 - Kempopedia wiki system with infoboxes
 - Category browsing system
 - Kempo Radio with audio player
 - Kempo TV with video player
+- KempoTube video browsing interface
 - KempoNet 1990s PC browsing experience
 - Admin panel with Google OAuth
-- Media upload to Vercel Blob
+- **PostgreSQL database** (Neon) with Prisma ORM
+- Media upload to Vercel Blob + database metadata
+- Database-backed playlists with kyDate ordering
+- Auto-generation of Kempopedia article stubs on media upload
 - Image generation via Grok API
 - Link statistics tracking
 

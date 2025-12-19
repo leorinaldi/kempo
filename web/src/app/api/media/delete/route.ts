@@ -1,6 +1,7 @@
 import { auth } from "@/auth"
 import { del } from "@vercel/blob"
 import { NextResponse } from "next/server"
+import { prisma } from "@/lib/prisma"
 
 export async function POST(request: Request) {
   const session = await auth()
@@ -16,7 +17,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No URL provided" }, { status: 400 })
     }
 
+    // Delete from blob storage
     await del(url)
+
+    // Delete from database (if entry exists)
+    await prisma.media.deleteMany({
+      where: { url },
+    })
 
     return NextResponse.json({ success: true })
   } catch (error) {

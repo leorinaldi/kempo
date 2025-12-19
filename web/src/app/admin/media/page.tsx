@@ -31,33 +31,19 @@ export default function MediaManagementPage() {
   const [playlist, setPlaylist] = useState<PlaylistItem[]>([])
   const [playlistLoading, setPlaylistLoading] = useState(true)
   const [playlistMessage, setPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
-  const [newTrack, setNewTrack] = useState({
-    id: "",
-    name: "",
-    artist: "",
-    artistSlug: "",
-    url: "",
-  })
-  const [loadingTrackInfo, setLoadingTrackInfo] = useState(false)
 
-  // Available audio files from blob storage
-  const [audioFiles, setAudioFiles] = useState<{ url: string; slug: string; filename: string }[]>([])
-  const [selectedAudioFile, setSelectedAudioFile] = useState("")
+  // Available audio files from database
+  const [audioFiles, setAudioFiles] = useState<{ id: string; slug: string; name: string; url: string; artist: string | null; artistSlug: string | null }[]>([])
+  const [selectedAudioId, setSelectedAudioId] = useState("")
 
   // TV Playlist state
   const [tvPlaylist, setTvPlaylist] = useState<TVPlaylistItem[]>([])
   const [tvPlaylistLoading, setTvPlaylistLoading] = useState(true)
   const [tvPlaylistMessage, setTvPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
-  const [newProgram, setNewProgram] = useState({
-    id: "",
-    name: "",
-    description: "",
-    url: "",
-  })
 
-  // Available video files from blob storage
-  const [videoFiles, setVideoFiles] = useState<{ url: string; slug: string; filename: string }[]>([])
-  const [selectedVideoFile, setSelectedVideoFile] = useState("")
+  // Available video files from database
+  const [videoFiles, setVideoFiles] = useState<{ id: string; slug: string; name: string; url: string; description: string | null }[]>([])
+  const [selectedVideoId, setSelectedVideoId] = useState("")
 
   // Media library state
   const [deletingMedia, setDeletingMedia] = useState<string | null>(null)
@@ -68,6 +54,8 @@ export default function MediaManagementPage() {
     slug: "",
     mediaType: "audio" as "audio" | "video",
     description: "",
+    artist: "",
+    artistSlug: "",
   })
 
   // Load playlists and media files on mount
@@ -167,6 +155,10 @@ export default function MediaManagementPage() {
       uploadFormData.append("slug", formData.slug)
       uploadFormData.append("mediaType", formData.mediaType)
       uploadFormData.append("description", formData.description)
+      if (formData.mediaType === "audio") {
+        uploadFormData.append("artist", formData.artist)
+        uploadFormData.append("artistSlug", formData.artistSlug)
+      }
 
       const response = await fetch("/api/media/upload", {
         method: "POST",
@@ -186,7 +178,7 @@ export default function MediaManagementPage() {
       await reloadMediaFiles()
 
       // Reset form
-      setFormData({ title: "", slug: "", mediaType: "audio", description: "" })
+      setFormData({ title: "", slug: "", mediaType: "audio", description: "", artist: "", artistSlug: "" })
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
@@ -204,138 +196,123 @@ export default function MediaManagementPage() {
       .replace(/(^-|-$)/g, "")
   }
 
-  const savePlaylist = async (newPlaylist: PlaylistItem[]) => {
+  const addToRadioPlaylist = async () => {
+    if (!selectedAudioId) {
+      setPlaylistMessage({ type: "error", text: "Please select an audio file" })
+      return
+    }
+
     try {
       const res = await fetch("/api/radio/playlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPlaylist),
+        body: JSON.stringify({ mediaId: selectedAudioId }),
       })
 
       if (!res.ok) {
-        throw new Error("Failed to save playlist")
+        const data = await res.json()
+        throw new Error(data.error || "Failed to add to playlist")
       }
 
-      setPlaylist(newPlaylist)
-      setPlaylistMessage({ type: "success", text: "Playlist saved!" })
+      // Refresh playlist
+      const playlistRes = await fetch("/api/radio/playlist")
+      const playlistData = await playlistRes.json()
+      setPlaylist(playlistData)
+
+      setPlaylistMessage({ type: "success", text: "Track added to playlist!" })
+      setSelectedAudioId("")
       setTimeout(() => setPlaylistMessage(null), 3000)
     } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to save" })
+      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add" })
     }
   }
 
-  const removeFromPlaylist = (id: string) => {
-    const newPlaylist = playlist.filter((item) => item.id !== id)
-    savePlaylist(newPlaylist)
-  }
+  const removeFromPlaylist = async (mediaSlug: string) => {
+    // Find the media by slug to get its ID
+    const media = audioFiles.find((f) => f.slug === mediaSlug)
+    if (!media) return
 
-  const handleAudioFileSelect = async (url: string) => {
-    setSelectedAudioFile(url)
-    const file = audioFiles.find((f) => f.url === url)
-    if (file) {
-      setNewTrack({
-        id: file.slug,
-        name: "",
-        artist: "",
-        artistSlug: "",
-        url: file.url,
+    try {
+      const res = await fetch("/api/radio/playlist", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mediaId: media.id }),
       })
 
-      // Try to find track info from Kempopedia
-      setLoadingTrackInfo(true)
-      try {
-        const res = await fetch(`/api/media/lookup?slug=${encodeURIComponent(file.slug)}`)
-        if (res.ok) {
-          const data = await res.json()
-          if (data.name || data.artist) {
-            setNewTrack({
-              id: file.slug,
-              name: data.name || "",
-              artist: data.artist || "",
-              artistSlug: data.artistSlug || "",
-              url: file.url,
-            })
-          }
-        }
-      } catch (err) {
-        console.error("Failed to lookup track info:", err)
-      } finally {
-        setLoadingTrackInfo(false)
+      if (!res.ok) {
+        throw new Error("Failed to remove from playlist")
       }
-    }
-  }
 
-  const addToPlaylist = () => {
-    if (!newTrack.id || !newTrack.name || !newTrack.artist || !newTrack.artistSlug || !newTrack.url) {
-      setPlaylistMessage({ type: "error", text: "Please fill in all fields" })
-      return
-    }
+      // Refresh playlist
+      const playlistRes = await fetch("/api/radio/playlist")
+      const playlistData = await playlistRes.json()
+      setPlaylist(playlistData)
 
-    if (playlist.some((item) => item.id === newTrack.id)) {
-      setPlaylistMessage({ type: "error", text: "Track with this ID already exists" })
-      return
+      setPlaylistMessage({ type: "success", text: "Track removed!" })
+      setTimeout(() => setPlaylistMessage(null), 3000)
+    } catch (error) {
+      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to remove" })
     }
-
-    const newPlaylist = [...playlist, newTrack]
-    savePlaylist(newPlaylist)
-    setNewTrack({ id: "", name: "", artist: "", artistSlug: "", url: "" })
-    setSelectedAudioFile("")
   }
 
   // TV Playlist functions
-  const saveTvPlaylist = async (newPlaylist: TVPlaylistItem[]) => {
+  const addToTvPlaylist = async () => {
+    if (!selectedVideoId) {
+      setTvPlaylistMessage({ type: "error", text: "Please select a video file" })
+      return
+    }
+
     try {
       const res = await fetch("/api/tv/playlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newPlaylist),
+        body: JSON.stringify({ mediaId: selectedVideoId }),
       })
 
       if (!res.ok) {
-        throw new Error("Failed to save TV playlist")
+        const data = await res.json()
+        throw new Error(data.error || "Failed to add to playlist")
       }
 
-      setTvPlaylist(newPlaylist)
-      setTvPlaylistMessage({ type: "success", text: "TV Playlist saved!" })
+      // Refresh playlist
+      const playlistRes = await fetch("/api/tv/playlist")
+      const playlistData = await playlistRes.json()
+      setTvPlaylist(playlistData)
+
+      setTvPlaylistMessage({ type: "success", text: "Program added to TV!" })
+      setSelectedVideoId("")
       setTimeout(() => setTvPlaylistMessage(null), 3000)
     } catch (error) {
-      setTvPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to save" })
+      setTvPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add" })
     }
   }
 
-  const removeFromTvPlaylist = (id: string) => {
-    const newPlaylist = tvPlaylist.filter((item) => item.id !== id)
-    saveTvPlaylist(newPlaylist)
-  }
+  const removeFromTvPlaylist = async (mediaSlug: string) => {
+    // Find the media by slug to get its ID
+    const media = videoFiles.find((f) => f.slug === mediaSlug)
+    if (!media) return
 
-  const handleVideoFileSelect = (url: string) => {
-    setSelectedVideoFile(url)
-    const file = videoFiles.find((f) => f.url === url)
-    if (file) {
-      setNewProgram({
-        id: file.slug,
-        name: "",
-        description: "",
-        url: file.url,
+    try {
+      const res = await fetch("/api/tv/playlist", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mediaId: media.id }),
       })
-    }
-  }
 
-  const addToTvPlaylist = () => {
-    if (!newProgram.id || !newProgram.name || !newProgram.url) {
-      setTvPlaylistMessage({ type: "error", text: "Please fill in Program ID and Name" })
-      return
-    }
+      if (!res.ok) {
+        throw new Error("Failed to remove from playlist")
+      }
 
-    if (tvPlaylist.some((item) => item.id === newProgram.id)) {
-      setTvPlaylistMessage({ type: "error", text: "Program with this ID already exists" })
-      return
-    }
+      // Refresh playlist
+      const playlistRes = await fetch("/api/tv/playlist")
+      const playlistData = await playlistRes.json()
+      setTvPlaylist(playlistData)
 
-    const newPlaylist = [...tvPlaylist, newProgram]
-    saveTvPlaylist(newPlaylist)
-    setNewProgram({ id: "", name: "", description: "", url: "" })
-    setSelectedVideoFile("")
+      setTvPlaylistMessage({ type: "success", text: "Program removed!" })
+      setTimeout(() => setTvPlaylistMessage(null), 3000)
+    } catch (error) {
+      setTvPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to remove" })
+    }
   }
 
   // Reload media files
@@ -355,8 +332,8 @@ export default function MediaManagementPage() {
   }
 
   // Delete media file
-  const deleteMediaFile = async (url: string, filename: string) => {
-    if (!confirm(`Are you sure you want to delete "${filename}"? This cannot be undone.`)) {
+  const deleteMediaFile = async (url: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete "${name}"? This cannot be undone.`)) {
       return
     }
 
@@ -375,7 +352,7 @@ export default function MediaManagementPage() {
         throw new Error(data.error || "Delete failed")
       }
 
-      setMediaMessage({ type: "success", text: `"${filename}" deleted successfully` })
+      setMediaMessage({ type: "success", text: `"${name}" deleted successfully` })
       await reloadMediaFiles()
       setTimeout(() => setMediaMessage(null), 3000)
     } catch (error) {
@@ -492,6 +469,36 @@ export default function MediaManagementPage() {
               />
             </div>
 
+            {formData.mediaType === "audio" && (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Artist Name
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.artist}
+                    onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2"
+                    placeholder="e.g., Frank Martino"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Artist Slug (for Kempopedia link)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.artistSlug}
+                    onChange={(e) => setFormData({ ...formData, artistSlug: e.target.value })}
+                    className="w-full border border-gray-300 rounded px-3 py-2"
+                    placeholder="e.g., frank-martino"
+                  />
+                </div>
+              </>
+            )}
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 File <span className="text-red-500">*</span>
@@ -562,94 +569,32 @@ export default function MediaManagementPage() {
           <div className="border-t pt-6">
             <h3 className="text-sm font-medium text-gray-700 mb-3">Add Track to Playlist</h3>
 
-            {/* Audio File Dropdown */}
-            <div className="mb-4">
-              <label className="block text-xs text-gray-500 mb-1">Select Audio File</label>
-              <select
-                value={selectedAudioFile}
-                onChange={(e) => handleAudioFileSelect(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-              >
-                <option value="">-- Select an audio file --</option>
-                {audioFiles.map((file) => (
-                  <option key={file.url} value={file.url}>
-                    {file.filename}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {selectedAudioFile && (
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Track ID</label>
-                  <input
-                    type="text"
-                    value={newTrack.id}
-                    readOnly
-                    className="w-full border border-gray-200 rounded px-3 py-2 text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Storage URL</label>
-                  <input
-                    type="text"
-                    value={newTrack.url}
-                    readOnly
-                    className="w-full border border-gray-200 rounded px-3 py-2 text-xs bg-gray-100 text-gray-500 cursor-not-allowed truncate"
-                    title={newTrack.url}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Track Name *</label>
-                  <input
-                    type="text"
-                    value={newTrack.name}
-                    onChange={(e) => setNewTrack({ ...newTrack, name: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-                    disabled={loadingTrackInfo}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Artist Name *</label>
-                  <input
-                    type="text"
-                    value={newTrack.artist}
-                    onChange={(e) => setNewTrack({ ...newTrack, artist: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-                    disabled={loadingTrackInfo}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Artist Slug * (for Kempopedia link)</label>
-                  <input
-                    type="text"
-                    value={newTrack.artistSlug}
-                    onChange={(e) => setNewTrack({ ...newTrack, artistSlug: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-                    placeholder="e.g., frank-martino"
-                    disabled={loadingTrackInfo}
-                  />
-                </div>
-                {loadingTrackInfo && (
-                  <div className="col-span-2 text-sm text-gray-500">
-                    Looking up track info from Kempopedia...
-                  </div>
-                )}
-                <div className="col-span-2">
-                  <button
-                    onClick={addToPlaylist}
-                    disabled={loadingTrackInfo}
-                    className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 text-white font-medium py-2 px-4 rounded"
-                  >
-                    Add to Radio
-                  </button>
-                </div>
+            {audioFiles.length === 0 ? (
+              <p className="text-sm text-gray-500">No audio files found. Upload one above first.</p>
+            ) : (
+              <div className="flex gap-4">
+                <select
+                  value={selectedAudioId}
+                  onChange={(e) => setSelectedAudioId(e.target.value)}
+                  className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm"
+                >
+                  <option value="">-- Select an audio file --</option>
+                  {audioFiles
+                    .filter((file) => !playlist.some((p) => p.id === file.slug))
+                    .map((file) => (
+                      <option key={file.id} value={file.id}>
+                        {file.name} {file.artist ? `- ${file.artist}` : ""}
+                      </option>
+                    ))}
+                </select>
+                <button
+                  onClick={addToRadioPlaylist}
+                  disabled={!selectedAudioId}
+                  className="bg-amber-600 hover:bg-amber-700 disabled:bg-amber-300 text-white font-medium py-2 px-6 rounded"
+                >
+                  Add to Radio
+                </button>
               </div>
-            )}
-
-            {audioFiles.length === 0 && (
-              <p className="text-sm text-gray-500">No audio files found in storage. Upload one above first.</p>
             )}
           </div>
         </div>
@@ -704,75 +649,32 @@ export default function MediaManagementPage() {
           <div className="border-t pt-6">
             <h3 className="text-sm font-medium text-gray-700 mb-3">Add Program to TV</h3>
 
-            {/* Video File Dropdown */}
-            <div className="mb-4">
-              <label className="block text-xs text-gray-500 mb-1">Select Video File</label>
-              <select
-                value={selectedVideoFile}
-                onChange={(e) => handleVideoFileSelect(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-              >
-                <option value="">-- Select a video file --</option>
-                {videoFiles.map((file) => (
-                  <option key={file.url} value={file.url}>
-                    {file.filename}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {selectedVideoFile && (
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Program ID</label>
-                  <input
-                    type="text"
-                    value={newProgram.id}
-                    readOnly
-                    className="w-full border border-gray-200 rounded px-3 py-2 text-sm bg-gray-100 text-gray-500 cursor-not-allowed"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Storage URL</label>
-                  <input
-                    type="text"
-                    value={newProgram.url}
-                    readOnly
-                    className="w-full border border-gray-200 rounded px-3 py-2 text-xs bg-gray-100 text-gray-500 cursor-not-allowed truncate"
-                    title={newProgram.url}
-                  />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-xs text-gray-500 mb-1">Program Name *</label>
-                  <input
-                    type="text"
-                    value={newProgram.name}
-                    onChange={(e) => setNewProgram({ ...newProgram, name: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-xs text-gray-500 mb-1">Description (optional)</label>
-                  <input
-                    type="text"
-                    value={newProgram.description}
-                    onChange={(e) => setNewProgram({ ...newProgram, description: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <button
-                    onClick={addToTvPlaylist}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
-                  >
-                    Add to TV
-                  </button>
-                </div>
+            {videoFiles.length === 0 ? (
+              <p className="text-sm text-gray-500">No video files found. Upload one above first.</p>
+            ) : (
+              <div className="flex gap-4">
+                <select
+                  value={selectedVideoId}
+                  onChange={(e) => setSelectedVideoId(e.target.value)}
+                  className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm"
+                >
+                  <option value="">-- Select a video file --</option>
+                  {videoFiles
+                    .filter((file) => !tvPlaylist.some((p) => p.id === file.slug))
+                    .map((file) => (
+                      <option key={file.id} value={file.id}>
+                        {file.name}
+                      </option>
+                    ))}
+                </select>
+                <button
+                  onClick={addToTvPlaylist}
+                  disabled={!selectedVideoId}
+                  className="bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-medium py-2 px-6 rounded"
+                >
+                  Add to TV
+                </button>
               </div>
-            )}
-
-            {videoFiles.length === 0 && (
-              <p className="text-sm text-gray-500">No video files found in storage. Upload one above first.</p>
             )}
           </div>
         </div>
@@ -804,11 +706,11 @@ export default function MediaManagementPage() {
                     className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate">{file.filename}</p>
-                      <p className="text-xs text-gray-500 truncate">{file.url}</p>
+                      <p className="font-medium text-sm truncate">{file.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{file.artist || file.slug}</p>
                     </div>
                     <button
-                      onClick={() => deleteMediaFile(file.url, file.filename)}
+                      onClick={() => deleteMediaFile(file.url, file.name)}
                       disabled={deletingMedia === file.url}
                       className="ml-4 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
                     >
@@ -833,11 +735,11 @@ export default function MediaManagementPage() {
                     className="flex items-center justify-between p-3 bg-green-50 rounded border border-green-200"
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm truncate">{file.filename}</p>
-                      <p className="text-xs text-gray-500 truncate">{file.url}</p>
+                      <p className="font-medium text-sm truncate">{file.name}</p>
+                      <p className="text-xs text-gray-500 truncate">{file.slug}</p>
                     </div>
                     <button
-                      onClick={() => deleteMediaFile(file.url, file.filename)}
+                      onClick={() => deleteMediaFile(file.url, file.name)}
                       disabled={deletingMedia === file.url}
                       className="ml-4 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
                     >
