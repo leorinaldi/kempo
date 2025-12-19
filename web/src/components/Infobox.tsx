@@ -124,7 +124,7 @@ function parseWikilinks(text: string): React.ReactNode[] {
     if (isDateLink(target)) {
       const { page, anchor } = dateToTimelineLink(target)
       parts.push(
-        <Link key={match.index} href={`/kempopedia/wiki/${page}#${anchor}`} className="wikilink wikilink-date">
+        <Link key={match.index} href={`/kemponet/kempopedia/wiki/${page}#${anchor}`} className="wikilink wikilink-date">
           {display}
         </Link>
       )
@@ -133,8 +133,8 @@ function parseWikilinks(text: string): React.ReactNode[] {
       const [pagePart, anchorPart] = target.split('#')
       const slug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
       const href = anchorPart
-        ? `/kempopedia/wiki/${slug}#${anchorPart}`
-        : `/kempopedia/wiki/${slug}`
+        ? `/kemponet/kempopedia/wiki/${slug}#${anchorPart}`
+        : `/kemponet/kempopedia/wiki/${slug}`
       parts.push(
         <Link key={match.index} href={href} className="wikilink">
           {display}

@@ -63,6 +63,14 @@ tags:
 - Fixed back/forward button navigation (iframe now reloads correctly)
 - Cross-section navigation between Kempopedia and KempoTube works seamlessly
 
+**URL Restructure for KempoNet Consistency**
+- Moved `/kempopedia` to `/kemponet/kempopedia`
+- Moved `/kempotube` to `/kemponet/kempotube`
+- Now `kttp://xyz` in KempoNet directly maps to `/kemponet/xyz` real URLs
+- Updated 13 files with new path references
+- Simpler path conversion logic in KempoNet browser
+- Easier to add new KempoNet sites in the future
+
 ---
 
 #### December 18, 2025

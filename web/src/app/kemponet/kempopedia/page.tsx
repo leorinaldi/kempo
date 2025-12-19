@@ -46,7 +46,7 @@ export default function KempopediaHome() {
             {categories.map((category) => (
               <Link
                 key={category.type}
-                href={`/kempopedia/category/${category.type}`}
+                href={`/kemponet/kempopedia/category/${category.type}`}
                 className="block p-4 border border-wiki-border rounded hover:bg-wiki-background transition-colors no-underline"
               >
                 <h3 className="text-lg font-semibold text-wiki-link mb-1">
@@ -68,7 +68,7 @@ export default function KempopediaHome() {
 
           <ul className="space-y-1 list-disc ml-6 mb-4">
             <li>
-              <Link href="/kempopedia/wiki/master-timeline" className="text-wiki-link hover:underline">
+              <Link href="/kemponet/kempopedia/wiki/master-timeline" className="text-wiki-link hover:underline">
                 Master Timeline
               </Link>
               {' — '}

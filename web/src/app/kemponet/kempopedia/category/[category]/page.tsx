@@ -58,7 +58,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
         <div className="wiki-content">
           {/* Breadcrumb */}
           <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/kempopedia" className="hover:underline">Kempopedia</Link>
+            <Link href="/kemponet/kempopedia" className="hover:underline">Kempopedia</Link>
             {' › '}
             <span>Category: {meta.label}</span>
           </nav>
@@ -79,7 +79,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
                 {articles.map((article) => (
                   <li key={article.slug}>
                     <Link
-                      href={`/kempopedia/wiki/${article.slug}`}
+                      href={`/kemponet/kempopedia/wiki/${article.slug}`}
                       className="text-wiki-link hover:underline"
                     >
                       {article.frontmatter.title}
@@ -97,7 +97,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
 
           {/* Back link */}
           <div className="mt-8 pt-4 border-t border-wiki-border">
-            <Link href="/kempopedia" className="text-wiki-link hover:underline">
+            <Link href="/kemponet/kempopedia" className="text-wiki-link hover:underline">
               ← Back to Kempopedia
             </Link>
           </div>

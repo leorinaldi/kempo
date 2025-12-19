@@ -90,7 +90,7 @@ export function getAdminArticleBySlug(slug: string): AdminArticle | null {
         }
 
         // Regular Kempopedia link
-        return `<a href="/kempopedia/wiki/${linkSlug}" class="wikilink">${linkText}</a>`
+        return `<a href="/kemponet/kempopedia/wiki/${linkSlug}" class="wikilink">${linkText}</a>`
       }
     )
 

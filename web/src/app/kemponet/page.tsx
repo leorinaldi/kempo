@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function KempoNetPage() {
   const [selectedOption, setSelectedOption] = useState("kempopedia")
   const [currentPage, setCurrentPage] = useState<"kemple" | "browsing">("kemple")
-  const [currentPath, setCurrentPath] = useState("/kempopedia")
+  const [currentPath, setCurrentPath] = useState("/kemponet/kempopedia")
   const [windowState, setWindowState] = useState<"open" | "minimized" | "closed">("open")
   const [goMenuOpen, setGoMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
@@ -17,12 +17,12 @@ export default function KempoNetPage() {
   const historyIndexRef = useRef(-1)
   const isNavigatingRef = useRef(false)
   const [, forceUpdate] = useState({})
-  const [iframeSrc, setIframeSrc] = useState("/kempopedia")
+  const [iframeSrc, setIframeSrc] = useState("/kemponet/kempopedia")
   const [iframeKey, setIframeKey] = useState(0)
 
   const handleSearch = () => {
     if (selectedOption === "kempopedia") {
-      const newPath = "/kempopedia"
+      const newPath = "/kemponet/kempopedia"
       historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
@@ -30,7 +30,7 @@ export default function KempoNetPage() {
       setCurrentPage("browsing")
       forceUpdate({})
     } else if (selectedOption === "kempotube") {
-      const newPath = "/kempotube"
+      const newPath = "/kemponet/kempotube"
       historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentPath(newPath)
@@ -42,7 +42,7 @@ export default function KempoNetPage() {
 
   const handleHomeClick = () => {
     setCurrentPage("kemple")
-    setCurrentPath("/kempopedia")
+    setCurrentPath("/kemponet/kempopedia")
     // Reset history when going home
     historyRef.current = []
     historyIndexRef.current = -1
@@ -77,21 +77,13 @@ export default function KempoNetPage() {
   const canGoForward = historyIndexRef.current < historyRef.current.length - 1
 
   // Convert real path to kttp:// format
+  // Now simplified: /kemponet/xyz → kttp://xyz
   const getAddressBarUrl = () => {
     if (currentPage === "kemple") {
       return "kttp://kemple"
     }
-    // Convert /kempopedia/... to kttp://kempopedia/...
-    if (currentPath.startsWith("/kempopedia")) {
-      const path = currentPath.replace(/^\/kempopedia/, "")
-      return `kttp://kempopedia${path}`
-    }
-    // Convert /kempotube/... to kttp://kempotube/...
-    if (currentPath.startsWith("/kempotube")) {
-      const path = currentPath.replace(/^\/kempotube/, "")
-      return `kttp://kempotube${path}`
-    }
-    return `kttp://${currentPath.replace(/^\//, "")}`
+    // Strip /kemponet/ prefix and add kttp://
+    return `kttp://${currentPath.replace(/^\/kemponet\//, "")}`
   }
 
   // Close Go menu when clicking outside
@@ -131,7 +123,7 @@ export default function KempoNetPage() {
       } else if (event.data?.type === "kemponet-go-home") {
         // User clicked on base URL inside iframe - go to Kemple home
         setCurrentPage("kemple")
-        setCurrentPath("/kempopedia")
+        setCurrentPath("/kemponet/kempopedia")
         // Reset history when going home
         historyRef.current = []
         historyIndexRef.current = -1
@@ -433,7 +425,7 @@ export default function KempoNetPage() {
                       background: '#1e40af',
                     }}
                   >
-                    <span className="text-white text-xs font-bold">{currentPage === "kemple" ? "Kemple" : currentPath.startsWith("/kempotube") ? "KempoTube" : "Kempopedia"} - KempoScape Navigator</span>
+                    <span className="text-white text-xs font-bold">{currentPage === "kemple" ? "Kemple" : currentPath.startsWith("/kemponet/kempotube") ? "KempoTube" : "Kempopedia"} - KempoScape Navigator</span>
                     <div className="flex gap-1">
                       <div
                         onClick={() => setWindowState("minimized")}
@@ -444,7 +436,7 @@ export default function KempoNetPage() {
                           if (currentPage === "browsing" && currentPath) {
                             window.location.href = currentPath
                           } else {
-                            window.location.href = selectedOption === "kempotube" ? "/kempotube" : "/kempopedia"
+                            window.location.href = selectedOption === "kempotube" ? "/kemponet/kempotube" : "/kemponet/kempopedia"
                           }
                         }}
                         className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
@@ -455,7 +447,7 @@ export default function KempoNetPage() {
                           setWindowState("closed")
                           // Reset to Kemple when closing
                           setCurrentPage("kemple")
-                          setCurrentPath("/kempopedia")
+                          setCurrentPath("/kemponet/kempopedia")
                           historyRef.current = []
                           historyIndexRef.current = -1
                         }}

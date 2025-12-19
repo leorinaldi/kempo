@@ -112,7 +112,7 @@ function KempoTubeContent() {
     setSelectedVideo(video)
     setIsInternalFullscreen(false)
     const kemponetParam = isKempoNet ? '&kemponet=1' : ''
-    router.push(`/kempotube?v=${video.id}${kemponetParam}`, { scroll: false })
+    router.push(`/kemponet/kempotube?v=${video.id}${kemponetParam}`, { scroll: false })
     // Scroll to top to show the video player
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -121,7 +121,7 @@ function KempoTubeContent() {
     setSelectedVideo(null)
     setIsInternalFullscreen(false)
     const kemponetParam = isKempoNet ? '?kemponet=1' : ''
-    router.push(`/kempotube${kemponetParam}`, { scroll: false })
+    router.push(`/kemponet/kempotube${kemponetParam}`, { scroll: false })
   }
 
   if (isLoading) {
@@ -149,7 +149,7 @@ function KempoTubeContent() {
                 </svg>
               </button>
             )}
-            <Link href="/kempotube" onClick={(e) => { if (selectedVideo) { e.preventDefault(); goBack(); } }}>
+            <Link href="/kemponet/kempotube" onClick={(e) => { if (selectedVideo) { e.preventDefault(); goBack(); } }}>
               <div className="flex items-center gap-1">
                 <div className="bg-red-600 rounded-lg p-1.5">
                   <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -244,7 +244,7 @@ function KempoTubeContent() {
               {selectedVideo.artist && selectedVideo.artistSlug && (
                 <p className="mt-1 text-sm text-gray-500">
                   <Link
-                    href={`/kempopedia/wiki/${selectedVideo.artistSlug}`}
+                    href={`/kemponet/kempopedia/wiki/${selectedVideo.artistSlug}`}
                     className="hover:text-red-600 transition-colors"
                   >
                     {selectedVideo.artist}

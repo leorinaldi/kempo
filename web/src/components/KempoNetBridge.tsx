@@ -46,7 +46,7 @@ export function KempoNetBridge() {
         }
 
         // Intercept internal kempopedia and kempotube links
-        if (url.pathname.startsWith("/kempopedia") || url.pathname.startsWith("/kempotube")) {
+        if (url.pathname.startsWith("/kemponet/kempopedia") || url.pathname.startsWith("/kemponet/kempotube")) {
           e.preventDefault()
           // Use router.push for smooth client-side navigation
           router.push(`${url.pathname}?kemponet=1`)

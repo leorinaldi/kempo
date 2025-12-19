@@ -160,7 +160,7 @@ Kempo TV is a modern graphic novel-style television interface that plays video c
 
 KempoTube is a modern YouTube-style video browsing interface for watching video content from the Kempo universe.
 
-**Access KempoTube**: https://kempo.com/kempotube
+**Access KempoTube**: https://kempo.com/kemponet/kempotube
 
 ### Features
 
@@ -197,7 +197,7 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - **Kemple** search engine home page (Google-inspired with colorful logo)
   - Dropdown to select Kempopedia or KempoTube
 - Working Back/Forward/Home buttons with history tracking
-- Address bar showing "kttp://" URLs (e.g., `kttp://kempopedia`, `kttp://kempotube`)
+- Address bar showing "kttp://" URLs that map directly to `/kemponet/` paths (e.g., `kttp://kempopedia` → `/kemponet/kempopedia`)
 - Minimize/Maximize/Close window controls
 - **KS Portals 25** operating system (Windows-inspired)
   - Go menu (Start menu equivalent) with program launcher
@@ -228,7 +228,7 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 
 Kempopedia is the encyclopedia of the Kempo universe—a Wikipedia-style wiki documenting everything in this fictional world.
 
-**Access Kempopedia**: https://kempo.com/kempopedia
+**Access Kempopedia**: https://kempo.com/kemponet/kempopedia
 
 ### Features
 
@@ -289,11 +289,11 @@ kempo/
     │   └── media/                 # Generated images (Grok API)
     └── src/
         ├── app/
-        │   ├── kempopedia/        # Kempopedia pages
-        │   │   ├── wiki/[slug]/   # Individual article pages
-        │   │   └── category/      # Category browse pages
         │   ├── kemponet/          # KempoNet 1990s PC interface
-        │   ├── kempotube/         # KempoTube video browsing
+        │   │   ├── kempopedia/    # Kempopedia pages (kttp://kempopedia)
+        │   │   │   ├── wiki/[slug]/   # Individual article pages
+        │   │   │   └── category/      # Category browse pages
+        │   │   └── kempotube/     # KempoTube video browsing (kttp://kempotube)
         │   ├── radio/             # Kempo Radio interface
         │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)

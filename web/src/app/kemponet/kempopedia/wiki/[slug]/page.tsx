@@ -61,7 +61,7 @@ export default async function ArticlePage({ params }: PageProps) {
                     <div>
                       {item.article && item.title ? (
                         <Link
-                          href={`/kempopedia/wiki/${item.article}`}
+                          href={`/kemponet/kempopedia/wiki/${item.article}`}
                           className="text-sm font-medium text-wiki-link hover:underline block mb-2"
                         >
                           {item.title}
@@ -77,7 +77,7 @@ export default async function ArticlePage({ params }: PageProps) {
                     <div>
                       {item.article && item.title ? (
                         <Link
-                          href={`/kempopedia/wiki/${item.article}`}
+                          href={`/kemponet/kempopedia/wiki/${item.article}`}
                           className="text-sm font-medium text-wiki-link hover:underline block mb-2"
                         >
                           {item.title}

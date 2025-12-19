@@ -320,7 +320,7 @@ export default function TVPage() {
       >
         Broadcasting from the Kempo Universe
         {program?.artist && program?.artistSlug && (
-          <> • <Link href={`/kempopedia/wiki/${program.artistSlug}`} className="underline hover:opacity-70">{program.artist}</Link></>
+          <> • <Link href={`/kemponet/kempopedia/wiki/${program.artistSlug}`} className="underline hover:opacity-70">{program.artist}</Link></>
         )}
       </p>
     </div>

@@ -333,7 +333,7 @@ export default function RadioPage() {
           textShadow: '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
         }}
       >
-        Now playing from the Kempo Universe • <Link href={`/kempopedia/wiki/${station.artistSlug}`} className="underline hover:opacity-70">{station.artist}</Link>
+        Now playing from the Kempo Universe • <Link href={`/kemponet/kempopedia/wiki/${station.artistSlug}`} className="underline hover:opacity-70">{station.artist}</Link>
       </p>
     </div>
   )
