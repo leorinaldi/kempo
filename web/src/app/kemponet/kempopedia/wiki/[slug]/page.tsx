@@ -96,10 +96,6 @@ export default async function ArticlePage({ params }: PageProps) {
         </article>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-wiki-border mt-8 py-4 text-center text-sm text-gray-500">
-        <p>Kempopedia is part of the Kempo universe project</p>
-      </footer>
     </div>
   )
 }

@@ -33,6 +33,19 @@ tags:
 
 #### December 19, 2025 (Evening)
 
+**Kempopedia Database Migration** — Articles now stored in PostgreSQL
+- Migrated all 182 Kempopedia articles from markdown files to PostgreSQL database
+- Created `Article` model with slug, title, type, content (markdown), infobox (JSON), timelineEvents (JSON), tags, dates
+- Created `Revision` model for tracking article history with editSummary, kempoDate, and kempoEvent fields
+- Each article has an initial revision dated "January 1, 1950 k.y."
+- Converted all page components to async database queries
+- Markdown files in `content/articles/` now serve as backups only
+- Enables future features: revision history UI, full-text search, admin editing
+
+**UI Cleanup** — Streamlined Kempopedia interface
+- Removed footer text "Kempopedia is part of the Kempo universe project" from all pages
+- Removed tagline "The encyclopedia of the Kempo universe" from header
+
 **Global Navigation Header** — Unified top navigation across all pages
 - Created fixed header with "KEMPO" logo (white with blue glow) linking to home
 - Black background with blue glow effect at the bottom
@@ -411,6 +424,7 @@ tags:
 - KempoNet 1990s PC browsing experience
 - Admin panel with Google OAuth
 - **PostgreSQL database** (Neon) with Prisma ORM
+- **182 Kempopedia articles stored in database** with revision history
 - Media upload to Vercel Blob + database metadata
 - Database-backed playlists with kyDate ordering
 - Auto-generation of Kempopedia article stubs on media upload

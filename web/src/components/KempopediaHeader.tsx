@@ -7,7 +7,6 @@ export function KempopediaHeader() {
         <div className="text-2xl font-serif">
           <Link href="/kemponet/kempopedia" className="text-gray-900">Kempopedia</Link>
         </div>
-        <p className="text-sm text-gray-600">The encyclopedia of the Kempo universe</p>
       </div>
     </header>
   )
