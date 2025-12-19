@@ -86,6 +86,7 @@ export default function Home() {
   const [isReady, setIsReady] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0) // Start on PC
   const [videoEnded, setVideoEnded] = useState(false)
+  const [videoRemoved, setVideoRemoved] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
@@ -114,11 +115,10 @@ export default function Home() {
     const hasPlayedInSession = sessionStorage.getItem('kempoIntroPlayed') === 'true'
 
     if ((hasPlayedIntro || hasPlayedInSession) && !isReload) {
-      // Skip - returning from another page
-      video.currentTime = video.duration || 999
-      video.pause()
+      // Skip - returning from another page, remove video entirely
       setIsFirstVisit(false)
       setVideoEnded(true)
+      setVideoRemoved(true)
     } else {
       // Play - first visit or page refresh
       setIsFirstVisit(true)
@@ -144,16 +144,22 @@ export default function Home() {
   return (
     <main className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
       {/* Video Background */}
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoEnded ? 'opacity-0' : 'opacity-100'}`}
-        style={{ transform: 'scale(1.1) translateX(1%) translateY(-5%)' }}
-        onEnded={() => setVideoEnded(true)}
-      >
-        <source src="/comic-tv-fades-to-black.mp4" type="video/mp4" />
-      </video>
+      {!videoRemoved && (
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoEnded ? 'opacity-0' : 'opacity-100'}`}
+          style={{ transform: 'scale(1.1) translateX(1%) translateY(-5%)' }}
+          onEnded={() => {
+            setVideoEnded(true)
+            // Remove from DOM after fade completes
+            setTimeout(() => setVideoRemoved(true), 1000)
+          }}
+        >
+          <source src="/comic-tv-fades-to-black.mp4" type="video/mp4" />
+        </video>
+      )}
 
 
       <Suspense fallback={null}>
