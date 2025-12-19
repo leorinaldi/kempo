@@ -146,7 +146,8 @@ export default function Home() {
         ref={videoRef}
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover scale-110"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ transform: 'scale(1.1) translateX(1%) translateY(-5%)' }}
       >
         <source src="/comic-tv-fades-to-black.mp4" type="video/mp4" />
       </video>
@@ -157,7 +158,7 @@ export default function Home() {
       </Suspense>
 
       {/* Content */}
-      <div className={`text-center relative z-10 mt-20 ${!isReady ? 'opacity-0' : ''}`}>
+      <div className={`text-center relative z-10 mt-10 ${!isReady ? 'opacity-0' : ''}`}>
         <Link
           href="/about"
           className={`text-5xl font-serif mb-4 text-white tracking-[0.3em] uppercase pl-[0.3em] block hover:text-white transition-colors ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_0.5s_forwards]' : ''}`}
