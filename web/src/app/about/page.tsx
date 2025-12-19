@@ -107,16 +107,16 @@ export default function AboutPage() {
       )}
 
       {/* Main content */}
-      <div className="min-h-screen flex items-center justify-center px-8 py-20">
+      <div className="min-h-screen flex items-start justify-center pl-8 pr-32 pt-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-8 max-w-6xl w-full">
           {/* Announcer image - left side */}
-          <div className="flex-shrink-0 md:w-[300px] flex justify-end">
+          <div className="flex-shrink-0 md:w-[300px] flex justify-end overflow-hidden">
             <Image
               src="/media/kempo-announcer.png"
               alt="Kempo Announcer"
               width={400}
               height={600}
-              className="max-h-[70vh] w-auto object-contain"
+              className="max-h-[70vh] w-auto object-contain mt-[-10%]"
               priority
             />
           </div>
