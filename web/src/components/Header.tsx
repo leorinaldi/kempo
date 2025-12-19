@@ -14,7 +14,8 @@ export function Header() {
   // Convert current path to kttp:// URL for the KempoScape link
   const kttpUrl = pathname.replace(/^\/kemponet\//, 'kttp://')
 
-  if (isInKempoNet) {
+  // Hide header on home page and when inside KempoNet browser
+  if (pathname === '/' || isInKempoNet) {
     return null
   }
 
