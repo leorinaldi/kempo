@@ -9,6 +9,7 @@ let hasPlayedIntro = false
 let lastEffectTime = 0
 
 const devices = [
+  { name: 'Mobile', href: '/mobile' },
   { name: 'PC', href: '/pc' },
   { name: 'TV', href: '/tv' },
   { name: 'Radio', href: '/radio' },
@@ -80,11 +81,31 @@ function PCIcon() {
   )
 }
 
+// Mobile icon component (iPhone style)
+function MobileIcon() {
+  return (
+    <div
+      className="w-12 h-24 rounded-xl border-2 border-gray-600 p-1 flex flex-col"
+      style={{ background: '#1a1a1a' }}
+    >
+      {/* Dynamic Island */}
+      <div className="w-6 h-1.5 rounded-full mx-auto mt-0.5" style={{ background: '#000' }} />
+      {/* Screen */}
+      <div
+        className="flex-1 rounded-lg mt-1 mx-0.5"
+        style={{ background: '#1e293b' }}
+      />
+      {/* Home Indicator */}
+      <div className="w-8 h-1 rounded-full mx-auto mt-1 mb-0.5" style={{ background: '#374151' }} />
+    </div>
+  )
+}
+
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isFirstVisit, setIsFirstVisit] = useState(false)
   const [isReady, setIsReady] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0) // Start on PC
+  const [currentIndex, setCurrentIndex] = useState(1) // Start on PC
   const [videoEnded, setVideoEnded] = useState(false)
   const [videoRemoved, setVideoRemoved] = useState(false)
 
@@ -206,9 +227,10 @@ export default function Home() {
                   filter: 'drop-shadow(0 0 8px rgba(100,150,255,0.5)) drop-shadow(0 0 15px rgba(80,130,255,0.3))'
                 }}
               >
-                {currentIndex === 0 && <PCIcon />}
-                {currentIndex === 1 && <TVIcon />}
-                {currentIndex === 2 && <RadioIcon />}
+                {currentIndex === 0 && <MobileIcon />}
+                {currentIndex === 1 && <PCIcon />}
+                {currentIndex === 2 && <TVIcon />}
+                {currentIndex === 3 && <RadioIcon />}
               </div>
             </Link>
 

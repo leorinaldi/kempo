@@ -31,6 +31,38 @@ tags:
 
 ### December 2025
 
+#### December 19, 2025 (Night)
+
+**Kempo Mobile Launched** — iPhone-style device experience
+- New `/mobile` route featuring realistic iPhone frame with Safari browser
+- Space Gray iPhone design with rounded corners, Dynamic Island area, home indicator bar
+- Real-time clock in status bar (updates every minute) with signal bars and battery icon
+- Safari browser interface with functional address bar (type URLs and press Enter to navigate)
+- Back button (circle with chevron) for browser history navigation
+- Favorites star button (visual placeholder for future bookmarks feature)
+- Browser loads KempoNet content via iframe with `?mobile=1` context parameter
+- Header automatically hides when viewing pages inside mobile browser
+- KempoNetBridge updated to detect mobile context and preserve it across navigation
+- Blue glow drop-shadow effect matching other device aesthetics
+
+**Home Page Device Reorder** — Updated device selector carousel
+- Device order changed to: Mobile, PC, TV, Radio (left to right)
+- Default selection now PC (second position) instead of first position
+- Added MobileIcon component (iPhone silhouette in graphic novel style)
+
+**Media Aspect Ratio Field** — Video orientation classification
+- Added `aspectRatio` field to Prisma Media schema (landscape, portrait, square)
+- All existing videos classified as "landscape"
+- Admin upload form now includes aspect ratio dropdown for future uploads
+
+**Device Page Positioning** — Vertical alignment adjustments
+- TV page: `pt-20` (moved up slightly)
+- Radio page: `pt-32` (moved up from center)
+- Mobile page: `pt-12`
+- PC page: `pt-12`
+
+---
+
 #### December 19, 2025 (Evening)
 
 **Kempopedia Database Migration** — Articles now stored in PostgreSQL
@@ -422,6 +454,7 @@ tags:
 - Kempo TV with video player
 - KempoTube video browsing interface
 - KempoNet 1990s PC browsing experience
+- Kempo Mobile iPhone browsing experience
 - Admin panel with Google OAuth
 - **PostgreSQL database** (Neon) with Prisma ORM
 - **182 Kempopedia articles stored in database** with revision history

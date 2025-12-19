@@ -16,6 +16,7 @@ model Media {
   artist      String?
   artistSlug  String?  @map("artist_slug")
   description String?  @db.Text
+  aspectRatio String?  @map("aspect_ratio") // "landscape" | "portrait" | "square" (for videos)
   kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")

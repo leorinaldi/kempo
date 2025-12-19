@@ -3,26 +3,35 @@
 import { useEffect, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
+type DeviceContext = "kemponet" | "mobile" | null
+
 export function KempoNetBridge() {
   const pathname = usePathname()
   const router = useRouter()
-  const [isKempoNet, setIsKempoNet] = useState(false)
+  const [deviceContext, setDeviceContext] = useState<DeviceContext>(null)
 
-  // Check for kemponet param on client side only
+  // Check for kemponet or mobile param on client side - re-check on pathname changes
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    setIsKempoNet(params.get("kemponet") === "1")
-  }, [])
+    if (params.get("kemponet") === "1") {
+      setDeviceContext("kemponet")
+    } else if (params.get("mobile") === "1") {
+      setDeviceContext("mobile")
+    }
+  }, [pathname])
+
+  const isKempoNet = deviceContext !== null
 
   useEffect(() => {
-    if (isKempoNet && window.parent !== window) {
-      // Send current path to parent KempoNet window
+    if (deviceContext && window.parent !== window) {
+      // Send current path to parent window with appropriate message type
+      const messageType = deviceContext === "mobile" ? "mobile-navigation" : "kemponet-navigation"
       window.parent.postMessage(
-        { type: "kemponet-navigation", path: pathname },
+        { type: messageType, path: pathname },
         "*"
       )
     }
-  }, [pathname, isKempoNet])
+  }, [pathname, deviceContext])
 
   // Strip external links on mount and watch for DOM changes
   useEffect(() => {
@@ -85,9 +94,9 @@ export function KempoNetBridge() {
     return () => observer.disconnect()
   }, [isKempoNet])
 
-  // Intercept kemponet link clicks to add kemponet param
+  // Intercept kemponet link clicks to add context param
   useEffect(() => {
-    if (!isKempoNet) return
+    if (!deviceContext) return
 
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
@@ -100,7 +109,8 @@ export function KempoNetBridge() {
           // Only kemponet links should remain, intercept to add param
           if (url.pathname.startsWith("/kemponet/")) {
             e.preventDefault()
-            router.push(`${url.pathname}?kemponet=1`)
+            const param = deviceContext === "mobile" ? "mobile=1" : "kemponet=1"
+            router.push(`${url.pathname}?${param}`)
           }
         } catch {
           // Invalid URL, prevent navigation
@@ -111,7 +121,7 @@ export function KempoNetBridge() {
 
     document.addEventListener("click", handleClick)
     return () => document.removeEventListener("click", handleClick)
-  }, [isKempoNet, router])
+  }, [deviceContext, router])
 
   return null
 }

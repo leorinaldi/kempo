@@ -7,6 +7,7 @@ export function Header() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const isInKempoNet = searchParams.get('kemponet') === '1'
+  const isInMobile = searchParams.get('mobile') === '1'
 
   // Check if we're on a kemponet subpage (but not the main kemponet page itself)
   const isKempoNetSubpage = pathname.startsWith('/kemponet/') && pathname !== '/kemponet'
@@ -14,8 +15,8 @@ export function Header() {
   // Convert current path to kttp:// URL for the KempoScape link
   const kttpUrl = pathname.replace(/^\/kemponet\//, 'kttp://')
 
-  // Hide header on home page and when inside KempoNet browser
-  if (pathname === '/' || isInKempoNet) {
+  // Hide header on home page and when inside KempoNet or Mobile browser
+  if (pathname === '/' || isInKempoNet || isInMobile) {
     return null
   }
 

@@ -56,6 +56,7 @@ export default function MediaManagementPage() {
     description: "",
     artist: "",
     artistSlug: "",
+    aspectRatio: "landscape" as "landscape" | "portrait" | "square",
   })
 
   // Load playlists and media files on mount
@@ -159,6 +160,9 @@ export default function MediaManagementPage() {
         uploadFormData.append("artist", formData.artist)
         uploadFormData.append("artistSlug", formData.artistSlug)
       }
+      if (formData.mediaType === "video") {
+        uploadFormData.append("aspectRatio", formData.aspectRatio)
+      }
 
       const response = await fetch("/api/media/upload", {
         method: "POST",
@@ -178,7 +182,7 @@ export default function MediaManagementPage() {
       await reloadMediaFiles()
 
       // Reset form
-      setFormData({ title: "", slug: "", mediaType: "audio", description: "", artist: "", artistSlug: "" })
+      setFormData({ title: "", slug: "", mediaType: "audio", description: "", artist: "", artistSlug: "", aspectRatio: "landscape" })
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
@@ -497,6 +501,23 @@ export default function MediaManagementPage() {
                   />
                 </div>
               </>
+            )}
+
+            {formData.mediaType === "video" && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Aspect Ratio
+                </label>
+                <select
+                  value={formData.aspectRatio}
+                  onChange={(e) => setFormData({ ...formData, aspectRatio: e.target.value as "landscape" | "portrait" | "square" })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="landscape">Landscape (wide)</option>
+                  <option value="portrait">Portrait (tall)</option>
+                  <option value="square">Square</option>
+                </select>
+              </div>
             )}
 
             <div>

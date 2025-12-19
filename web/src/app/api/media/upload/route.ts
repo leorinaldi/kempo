@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     const description = formData.get("description") as string | null
     const artist = formData.get("artist") as string | null
     const artistSlug = formData.get("artistSlug") as string | null
+    const aspectRatio = formData.get("aspectRatio") as string | null
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
@@ -84,6 +85,7 @@ export async function POST(request: Request) {
         description: description || null,
         artist: artist || null,
         artistSlug: artistSlug || null,
+        aspectRatio: actualMediaType === "video" ? (aspectRatio || "landscape") : null,
       },
     })
 

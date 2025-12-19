@@ -136,7 +136,7 @@ export default function RadioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-black flex flex-col items-center justify-start pt-32 p-4">
       {/* Radio Unit - Modern Graphic Novel Style */}
       <div
         className="relative"
