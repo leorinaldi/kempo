@@ -130,15 +130,6 @@ export default function RadioPage() {
   if (stations.length === 0) {
     return (
       <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
-        <Link
-          href="/"
-          className="absolute top-4 left-4 text-amber-200/70 hover:text-amber-200 transition-colors"
-        >
-          ← Back to Kempo
-        </Link>
-        <h1 className="text-amber-200 text-3xl font-serif mb-8 tracking-wider">
-          KEMPO RADIO
-        </h1>
         <p className="text-amber-200/50 font-serif">No stations available</p>
       </div>
     )
@@ -146,27 +137,6 @@ export default function RadioPage() {
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
-      {/* Back link */}
-      <Link
-        href="/"
-        className="absolute top-4 left-4 text-white hover:underline transition-colors"
-        style={{
-          textShadow: '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
-        }}
-      >
-        ← Back to Kempo
-      </Link>
-
-      {/* Title */}
-      <h1
-        className="text-white text-3xl font-serif mb-8 tracking-wider"
-        style={{
-          textShadow: '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
-        }}
-      >
-        KEMPO RADIO
-      </h1>
-
       {/* Radio Unit - Modern Graphic Novel Style */}
       <div
         className="relative"
@@ -211,11 +181,13 @@ export default function RadioPage() {
           </div>
 
           {/* Display Panel */}
-          <div
-            className="w-full h-14 rounded border-4 border-gray-900 mb-4 flex items-center justify-center transition-all duration-300"
+          <Link
+            href={isOn && station?.artistSlug ? `/kemponet/kempopedia/wiki/${station.artistSlug}` : '#'}
+            className={`w-full h-14 rounded border-4 border-gray-900 mb-4 flex items-center justify-center transition-all duration-300 ${isOn ? 'cursor-pointer hover:opacity-90' : 'cursor-default'}`}
             style={{
               background: isOn ? '#e5e7eb' : '#374151',
             }}
+            onClick={(e) => !isOn && e.preventDefault()}
           >
             {isOn && (
               <div className="text-center">
@@ -227,7 +199,7 @@ export default function RadioPage() {
                 </p>
               </div>
             )}
-          </div>
+          </Link>
 
           {/* Controls Panel */}
           <div className="flex justify-between items-end px-2">
@@ -325,16 +297,6 @@ export default function RadioPage() {
         preload="metadata"
         onEnded={handleSongEnd}
       />
-
-      {/* Attribution */}
-      <p
-        className="text-white text-sm mt-4 font-serif"
-        style={{
-          textShadow: '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
-        }}
-      >
-        Now playing from the Kempo Universe • <Link href={`/kemponet/kempopedia/wiki/${station.artistSlug}`} className="underline hover:opacity-70">{station.artist}</Link>
-      </p>
     </div>
   )
 }

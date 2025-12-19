@@ -85,9 +85,18 @@ In March 1949 k.y., test pilot **Frank Caldwell** died while pursuing an unident
 | Pilot's Widow | Margaret Caldwell | Original character |
 | Sound Barrier Pilot | Charles Garrison | Chuck Yeager / John Glenn |
 
+## Navigation
+
+All pages feature a fixed header navigation bar:
+
+- **KEMPO logo** (white with blue glow) in the top left, links to home page
+- Black background with subtle blue glow at bottom
+- **Compass icon** appears on `/kemponet/*` pages to return to the PC device view
+- Header automatically hides when viewing pages inside KempoScape Navigator
+
 ## Home Page
 
-The Kempo home page features a cinematic intro experience with a video background and animated text.
+The Kempo home page features a cinematic intro experience with a video background and device rotator.
 
 **Access Home**: https://kempo.com
 
@@ -96,7 +105,11 @@ The Kempo home page features a cinematic intro experience with a video backgroun
 - Full-screen video background with cinematic intro
 - Animated fade-in text with blue glow effect
 - "KEMPO" and "A (nearly) imaginary world." link to the About page
-- Links to Kempo Radio, Kempo TV, and KempoNet
+- **Device rotator carousel** for selecting PC, TV, or Radio:
+  - Styled device icons matching graphic novel aesthetic
+  - Circle arrow buttons with blue glow for navigation
+  - Dot indicators (clickable) showing current selection
+  - Starts on PC by default
 - Smart intro behavior:
   - Plays full video with fade-in animations on first visit
   - Plays full intro on page refresh
@@ -105,7 +118,7 @@ The Kempo home page features a cinematic intro experience with a video backgroun
 
 ## About Page
 
-The About page provides an immersive introduction to the Kempo universe with narrated audio and synchronized text.
+The About page provides a concise introduction to the Kempo universe with narrated audio and synchronized text.
 
 **Access About**: https://kempo.com/about
 
@@ -113,12 +126,10 @@ The About page provides an immersive introduction to the Kempo universe with nar
 
 - Black background with announcer image on the left
 - Click to play button for user-initiated playback
-- Narrated audio description of the Kempo universe
+- Narrated audio (~20 seconds) ending at "This world is called Kempo."
 - Synchronized subtitles that appear as the narration progresses
 - Current text displays in white, past text fades to grey
-- Ending effect: non-essential text fades to black, leaving the key phrase visible:
-  - "A world that echoes our reality, but has changed just enough... This world is called Kempo."
-- Blue glow "Back to Kempo" link matching other pages
+- Ending effect: first line fades to black, key phrases remain visible
 
 ## Kempo Radio
 
@@ -133,10 +144,9 @@ Kempo Radio is a modern graphic novel-style radio interface that plays music fro
 - TUNE knob to cycle through tracks (click left for previous, right for next)
 - VOL knob cycles through LOW/MED/HIGH volume levels
 - Power toggle with blue glow when ON
-- Illuminated display panel showing artist and track name
+- Illuminated display panel showing artist and track name (clickable—links to artist's Kempopedia page)
 - Auto-advances to next track when song ends
 - Database-backed playlist ordered by kyDate (reverse chronological—newest first)
-- Artist attribution links to Kempopedia
 
 ## Kempo TV
 
@@ -149,12 +159,13 @@ Kempo TV is a modern graphic novel-style television interface that plays video c
 - Modern graphic novel design with bold outlines and flat colors
 - Blue glow effect around the TV unit
 - Responsive screen (full-width on mobile, 650px on desktop)
-- Channel dial to switch between videos
+- **Intro video** plays automatically when TV is turned on, then transitions to first program
+- Channel dial to switch between videos (also skips intro if playing)
 - Volume control knob
 - Power toggle with blue glow when ON
 - Screen glare effect for added realism
+- Clickable screen links to artist's Kempopedia page
 - Database-backed playlist ordered by kyDate (reverse chronological—newest first)
-- Artist attribution links to Kempopedia
 
 ## KempoTube
 
@@ -181,18 +192,19 @@ When accessed through KempoNet, KempoTube features special adaptations:
 - Disabled native fullscreen, picture-in-picture, and download options
 - Seamless video playback when entering/exiting monitor fullscreen
 
-## KempoNet
+## KempoNet (PC)
 
 KempoNet is an immersive 1990s computing experience that lets you browse Kempopedia and KempoTube through a vintage PC interface, rendered in a modern graphic novel style.
 
-**Access KempoNet**: https://kempo.com/kemponet
+**Access KempoNet**: https://kempo.com/pc
 
 ### Features
 
 - Modern graphic novel-style PC monitor with bold outlines and flat colors
 - Blue glow effect around the monitor unit
 - Responsive screen (full-width on mobile, 650px on desktop)
-- **KempoScape Navigator** browser opens by default (Netscape-inspired) with full navigation
+- **Intro animation** on first visit: animated cursor moves to KempoScape Navigator icon and clicks to open
+- **KempoScape Navigator** browser (Netscape-inspired) with full navigation
 - **Kemple** search engine home page (Google-inspired with colorful logo)
   - Dropdown to select Kempopedia, KempoScape, or KempoTube
 - **KempoScape** browser settings page with:
@@ -305,7 +317,8 @@ kempo/
     │   └── media/                 # Generated images (Grok API)
     └── src/
         ├── app/
-        │   ├── kemponet/          # KempoNet 1990s PC interface
+        │   ├── pc/                # PC device page (1990s computer interface)
+        │   ├── kemponet/          # KempoNet web pages (redirects to /pc if accessed directly)
         │   │   ├── kemple/        # Kemple search engine (kttp://kemple)
         │   │   ├── kemposcape/    # Browser settings page (kttp://kemposcape)
         │   │   ├── kempopedia/    # Kempopedia pages (kttp://kempopedia)
@@ -325,7 +338,7 @@ kempo/
         │       ├── media/         # Media upload, listing, delete
         │       ├── radio/         # Radio playlist management
         │       └── tv/            # TV playlist management
-        ├── components/            # React components (Infobox, AudioPlayer, VideoPlayer, etc.)
+        ├── components/            # React components (Header, Infobox, AudioPlayer, VideoPlayer, etc.)
         └── lib/                   # Article loading utilities
 ```
 

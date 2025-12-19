@@ -19,11 +19,15 @@ const volumeLevels: { level: VolumeLevel; value: number; rotation: number }[] = 
   { level: "HIGH", value: 1.0, rotation: 45 },
 ]
 
+const INTRO_VIDEO_URL = "/kempo-tv-start.mp4"
+
 export default function TVPage() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const introVideoRef = useRef<HTMLVideoElement>(null)
   const [programs, setPrograms] = useState<Program[]>([])
   const [currentProgram, setCurrentProgram] = useState(-1) // Will be set to last item
   const [isOn, setIsOn] = useState(false)
+  const [isPlayingIntro, setIsPlayingIntro] = useState(false)
   const [volumeIndex, setVolumeIndex] = useState(1) // Start at MED
   const [isLoading, setIsLoading] = useState(true)
   const [channelRotation, setChannelRotation] = useState(0)
@@ -50,27 +54,60 @@ export default function TVPage() {
     if (videoRef.current) {
       videoRef.current.volume = currentVolume.value
     }
+    if (introVideoRef.current) {
+      introVideoRef.current.volume = currentVolume.value
+    }
   }, [currentVolume])
 
   useEffect(() => {
-    if (videoRef.current) {
-      if (isOn) {
+    if (isOn) {
+      if (isPlayingIntro && introVideoRef.current) {
+        introVideoRef.current.play()
+      } else if (!isPlayingIntro && videoRef.current) {
         videoRef.current.play()
-      } else {
+      }
+    } else {
+      if (introVideoRef.current) {
+        introVideoRef.current.pause()
+      }
+      if (videoRef.current) {
         videoRef.current.pause()
       }
     }
-  }, [isOn])
+  }, [isOn, isPlayingIntro])
 
-  // Auto-play when program changes (if TV is on)
+  // Auto-play when program changes (if TV is on and not playing intro)
   useEffect(() => {
-    if (videoRef.current && isOn) {
+    if (videoRef.current && isOn && !isPlayingIntro) {
       videoRef.current.play()
     }
-  }, [currentProgram, isOn])
+  }, [currentProgram, isOn, isPlayingIntro])
 
   const togglePower = () => {
-    setIsOn(!isOn)
+    if (!isOn) {
+      // Turning on - start with intro
+      setIsPlayingIntro(true)
+      setIsOn(true)
+    } else {
+      // Turning off - reset intro for next time
+      setIsOn(false)
+      setIsPlayingIntro(false)
+      if (introVideoRef.current) {
+        introVideoRef.current.currentTime = 0
+      }
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0
+      }
+    }
+  }
+
+  const handleIntroEnd = () => {
+    setIsPlayingIntro(false)
+    // Start playing the first program
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0
+      videoRef.current.play()
+    }
   }
 
   const cycleVolume = () => {
@@ -78,6 +115,16 @@ export default function TVPage() {
   }
 
   const handleChannelClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // If playing intro, skip it and go to first program
+    if (isPlayingIntro) {
+      setIsPlayingIntro(false)
+      if (introVideoRef.current) {
+        introVideoRef.current.pause()
+        introVideoRef.current.currentTime = 0
+      }
+      return
+    }
+
     const rect = e.currentTarget.getBoundingClientRect()
     const clickX = e.clientX - rect.left
     const knobWidth = rect.width
@@ -130,16 +177,6 @@ export default function TVPage() {
   if (programs.length === 0) {
     return (
       <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
-        <Link
-          href="/"
-          className="absolute top-4 left-4 text-white hover:underline transition-colors"
-          style={{ textShadow: blueGlow }}
-        >
-          ← Back to Kempo
-        </Link>
-        <h1 className="text-white text-3xl font-serif mb-8 tracking-wider" style={{ textShadow: blueGlow }}>
-          KEMPO TV
-        </h1>
         <p className="text-white font-serif" style={{ textShadow: blueGlow }}>No programs scheduled</p>
       </div>
     )
@@ -147,20 +184,6 @@ export default function TVPage() {
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
-      {/* Back link */}
-      <Link
-        href="/"
-        className="absolute top-4 left-4 text-white hover:underline transition-colors"
-        style={{ textShadow: blueGlow }}
-      >
-        ← Back to Kempo
-      </Link>
-
-      {/* Title */}
-      <h1 className="text-white text-3xl font-serif mb-8 tracking-wider" style={{ textShadow: blueGlow }}>
-        KEMPO TV
-      </h1>
-
       {/* TV Unit - Modern Graphic Novel Style */}
       <div
         className="relative"
@@ -192,11 +215,13 @@ export default function TVPage() {
             }}
           >
             {/* Screen */}
-            <div
-              className="relative w-full aspect-video rounded border-2 border-gray-900 overflow-hidden"
+            <Link
+              href={!isPlayingIntro && program?.artistSlug ? `/kemponet/kempopedia/wiki/${program.artistSlug}` : '#'}
+              className="relative w-full aspect-video rounded border-2 border-gray-900 overflow-hidden block cursor-pointer"
               style={{
                 background: isOn ? '#0f172a' : '#1e293b',
               }}
+              onClick={(e) => isPlayingIntro && e.preventDefault()}
             >
               {/* Screen glare - graphic novel style */}
               {isOn && (
@@ -208,8 +233,19 @@ export default function TVPage() {
                 />
               )}
 
-              {/* Video element */}
-              {isOn && program && (
+              {/* Intro video */}
+              {isOn && isPlayingIntro && (
+                <video
+                  ref={introVideoRef}
+                  src={INTRO_VIDEO_URL}
+                  className="w-full h-full object-cover"
+                  preload="metadata"
+                  onEnded={handleIntroEnd}
+                />
+              )}
+
+              {/* Program video */}
+              {isOn && !isPlayingIntro && program && (
                 <video
                   ref={videoRef}
                   src={program.url}
@@ -219,7 +255,7 @@ export default function TVPage() {
                 />
               )}
 
-            </div>
+            </Link>
           </div>
 
           {/* Controls Panel */}
@@ -312,17 +348,6 @@ export default function TVPage() {
         </div>
 
       </div>
-
-      {/* Attribution */}
-      <p
-        className="text-white text-sm mt-6 font-serif"
-        style={{ textShadow: blueGlow }}
-      >
-        Broadcasting from the Kempo Universe
-        {program?.artist && program?.artistSlug && (
-          <> • <Link href={`/kemponet/kempopedia/wiki/${program.artistSlug}`} className="underline hover:opacity-70">{program.artist}</Link></>
-        )}
-      </p>
     </div>
   )
 }

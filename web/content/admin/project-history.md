@@ -31,7 +31,59 @@ tags:
 
 ### December 2025
 
-#### December 19, 2025
+#### December 19, 2025 (Evening)
+
+**Global Navigation Header** — Unified top navigation across all pages
+- Created fixed header with "KEMPO" logo (white with blue glow) linking to home
+- Black background with blue glow effect at the bottom
+- Header automatically hides when viewing pages inside KempoScape Navigator (via `?kemponet=1`)
+- Spacer element ensures page content isn't hidden behind fixed header
+- KempoScape Navigator compass icon appears on `/kemponet/*` pages for returning to PC view
+
+**PC Device Page** — Separated device from content
+- Created new `/pc` route for the PC device experience
+- `/kemponet` now redirects to `/pc`
+- All KempoNet web pages (`/kemponet/*`) remain at their current URLs
+- Compass icon in header links to `/pc?url=kttp://[current-page]` to view page in KempoScape
+
+**PC Intro Animation** — Guided onboarding experience
+- PC page starts with desktop view (KempoScape Navigator closed)
+- Animated white mouse cursor appears in center of screen
+- Cursor smoothly moves to KempoScape Navigator icon (1.2s animation)
+- Pauses briefly on icon so user can read "KempoScape Navigator" label
+- Simulates click, then browser window opens
+- Intro skipped when arriving via URL parameter (from compass button)
+
+**Kempo TV Intro Video** — Branded startup experience
+- Added "Kempo TV start.mp4" intro video that plays when TV is turned on
+- Intro displays full-width (cropped top/bottom to fill screen)
+- After intro ends, transitions to first video in playlist
+- Clicking channel knob during intro skips to regular programming
+- Intro resets when TV is turned off
+
+**Home Page Device Rotator** — Visual device selector
+- Replaced text links with interactive device rotator carousel
+- Styled icons for PC, TV, and Radio matching graphic novel aesthetic
+- Circle arrow buttons with blue glow for left/right navigation
+- Dot indicators showing current selection (clickable to jump)
+- Starts on PC, cycles through TV and Radio
+- Clicking device icon navigates to that page
+
+**Page Cleanup** — Streamlined interfaces
+- Removed "KEMPO RADIO", "KEMPO TV", "KEMPONET" titles from device pages
+- Removed "Back to Kempo" links (now handled by header)
+- Removed attribution text below Radio, TV, and KempoNet
+- Radio display panel now clickable (links to artist's Kempopedia page)
+- TV screen now clickable (links to artist's Kempopedia page)
+
+**About Page Shortened** — Concise introduction
+- Audio and text now stop at "This world is called Kempo."
+- Reduced from full narration to focused 20-second intro
+- Maintains fade effect with key phrases staying visible at end
+
+---
+
+#### December 19, 2025 (Morning)
 
 **KempoNet Architecture Overhaul** — Generalized browser simulation with settings
 - Created `/kemponet/kemple` as standalone page (previously inline in main KempoNet)

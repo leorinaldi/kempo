@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 import { Providers } from './providers'
+import { Header } from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'Kempopedia',
@@ -15,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white min-h-screen">
-        <Providers>{children}</Providers>
+        <Providers>
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
+          {children}
+        </Providers>
       </body>
     </html>
   )
