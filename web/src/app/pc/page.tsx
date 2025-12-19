@@ -68,7 +68,7 @@ function PCContent() {
 
     if (introPhase === "moving") {
       // Animate cursor to icon position (top-left area where icon is)
-      setCursorPos({ x: 12, y: 15 })
+      setCursorPos({ x: 18, y: 22 })
       const timer = setTimeout(() => {
         setIntroPhase("hovering")
       }, 1200)
@@ -257,7 +257,7 @@ function PCContent() {
   const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-start pt-12 p-4">
+    <div className="bg-black flex flex-col items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 56px)' }}>
       {/* Monitor Unit - Modern Graphic Novel Style */}
       <div
         className="relative"
@@ -339,7 +339,7 @@ function PCContent() {
                     {/* KempoNet icon */}
                     <button
                       onClick={() => setWindowState("open")}
-                      className="flex flex-col items-center w-16 p-1 hover:bg-blue-600/30 rounded ml-2"
+                      className="flex flex-col items-center w-16 p-1 hover:bg-blue-600/30 rounded ml-8 mt-6"
                     >
                       {/* Compass icon - graphic novel style */}
                       <div
@@ -652,9 +652,13 @@ function PCContent() {
                   </button>
                   <button
                     onClick={handleHomeClick}
-                    className="px-2 py-0.5 text-xs bg-gray-200 border-2 border-gray-900"
+                    className="px-2 py-0.5 text-xs bg-gray-200 border-2 border-gray-900 flex items-center gap-1"
                   >
-                    🏠 Home
+                    <svg width="12" height="11" viewBox="0 0 12 11" fill="none">
+                      <path d="M6 1L1 5V10H4.5V7H7.5V10H11V5L6 1Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                      <rect x="8.5" y="0.5" width="2" height="3.5" fill="currentColor"/>
+                    </svg>
+                    Home
                   </button>
 
                   {/* Spacer */}
@@ -673,21 +677,21 @@ function PCContent() {
                       setIframeKey(k => k + 1)
                       forceUpdate({})
                     }}
-                    className="w-6 h-6 rounded-full flex items-center justify-center relative hover:opacity-80"
+                    className="w-5 h-5 rounded-full flex items-center justify-center relative hover:opacity-80 mr-0.5"
                     style={{
                       background: 'linear-gradient(135deg, #60a5fa 0%, #2563eb 100%)',
-                      boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.4), 0 0 0 2px #1e3a5f',
+                      boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.4), 0 0 0 1px #1e3a5f',
                     }}
                     title="KempoNet Settings"
                   >
-                    <div className="absolute w-4 h-4 -rotate-45">
+                    <div className="absolute w-3 h-3 -rotate-45">
                       <div
                         className="absolute top-0 left-1/2 -translate-x-1/2"
                         style={{
                           width: 0, height: 0,
                           borderLeft: '2px solid transparent',
                           borderRight: '2px solid transparent',
-                          borderBottom: '8px solid white',
+                          borderBottom: '6px solid white',
                         }}
                       />
                       <div
@@ -696,7 +700,7 @@ function PCContent() {
                           width: 0, height: 0,
                           borderLeft: '2px solid transparent',
                           borderRight: '2px solid transparent',
-                          borderTop: '8px solid rgba(255,255,255,0.4)',
+                          borderTop: '6px solid rgba(255,255,255,0.4)',
                         }}
                       />
                     </div>

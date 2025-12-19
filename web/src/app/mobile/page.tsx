@@ -140,7 +140,7 @@ function MobileContent() {
   }
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-start pt-12 p-4">
+    <div className="bg-black flex flex-col items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 56px)' }}>
       {/* iPhone Frame */}
       <div
         className="relative"
@@ -202,13 +202,16 @@ function MobileContent() {
               {activeApp === null ? (
                 /* Home Screen */
                 <div
-                  className="flex-1 flex flex-col items-center pt-8"
+                  className="flex-1 px-6 pt-6"
                   style={{
                     background: 'linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gridTemplateRows: 'repeat(4, 1fr)',
                   }}
                 >
-                  {/* App Grid */}
-                  <div className="grid grid-cols-4 gap-4 px-4">
+                  {/* App Grid - KempoNet in position (1,1) */}
+                  <div className="flex justify-center items-center">
                     {/* KempoNet Browser App */}
                     <button
                       onClick={openBrowser}
@@ -249,9 +252,10 @@ function MobileContent() {
                         {/* Center dot */}
                         <div className="absolute w-2.5 h-2.5 rounded-full bg-white z-10" />
                       </div>
-                      <span className="text-white text-[10px] font-medium">KempoNet</span>
+                      <span className="text-white text-[11px] font-medium">KempoNet</span>
                     </button>
                   </div>
+                  {/* Empty grid cells for remaining 14 positions */}
                 </div>
               ) : (
                 /* Browser App */
@@ -289,11 +293,20 @@ function MobileContent() {
                     />
                     {/* Favorites Button */}
                     <button
+                      onClick={() => {
+                        const favoritesPath = "/kemponet/favorites"
+                        historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), favoritesPath]
+                        historyIndexRef.current = historyRef.current.length - 1
+                        setCurrentPath(favoritesPath)
+                        setIframeSrc(favoritesPath)
+                        setIframeKey(k => k + 1)
+                        forceUpdate({})
+                      }}
                       className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
                       style={{ background: '#e5e5e5' }}
                     >
                       <svg
-                        className="w-3 h-3 text-gray-400"
+                        className="w-3 h-3 text-gray-500"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

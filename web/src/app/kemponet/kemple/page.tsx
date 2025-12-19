@@ -51,20 +51,21 @@ export default function KemplePage() {
         <select
           value={selectedOption}
           onChange={(e) => setSelectedOption(e.target.value)}
-          className="w-full px-3 py-2 text-sm cursor-pointer border-2 border-gray-900"
+          className="w-full px-3 py-2 text-sm cursor-pointer border border-gray-500 rounded-sm"
           style={{
             background: "#fffef8",
             color: "#000",
             fontFamily: "monospace",
             appearance: "none",
             WebkitAppearance: "none",
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E")`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "right 8px center",
             paddingRight: "28px",
           }}
         >
           <option value="kempopedia">Kempopedia</option>
+          <option value="kemponet">KempoNet</option>
           <option value="kempotube">KempoTube</option>
         </select>
       </div>
@@ -73,9 +74,11 @@ export default function KemplePage() {
       <div className="flex gap-2 mt-4">
         <button
           onClick={handleSearch}
-          className="px-4 py-1 text-sm font-bold border-2 border-gray-900"
+          className="px-4 py-1.5 text-sm font-medium border border-gray-500 rounded-sm"
           style={{
-            background: "#d1d5db",
+            background: "#f3f4f6",
+            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+            color: "#374151",
           }}
         >
           Kemple Search

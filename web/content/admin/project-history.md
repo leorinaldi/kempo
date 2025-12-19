@@ -31,6 +31,48 @@ tags:
 
 ### December 2025
 
+#### December 19, 2025 (Overnight)
+
+**Device Page Vertical Centering** — Improved layout across all devices
+- Mobile, PC, TV, and Radio pages now vertically centered between header and viewport bottom
+- Removed arbitrary top padding in favor of true `justify-center` with header-aware height calc
+
+**Mobile Favorites Page** — New bookmarks experience
+- Created `/kemponet/favorites` page with links to Kempopedia, KempoNet, and KempoTube
+- Star button in mobile browser now navigates to favorites page
+- Added KempoNet to Kemple search dropdown
+
+**Mobile Home Screen Grid** — Refined app layout
+- Changed to 3-column x 4-row grid for better spacing
+- App icons centered within grid cells
+- Increased app label font size
+
+**KempoTube Rebrand** — New orange fast-forward identity
+- Replaced red YouTube-style play button with orange fast-forward icon (>>|)
+- Updated header logo, video thumbnail overlays, and favorites icon
+- Consistent orange (#f97316) branding throughout
+
+**Kempopedia Icon** — Clean book design
+- Using Heroicons open-book icon (MIT licensed)
+- Simple two-page spread design in grey on light grey background
+
+**Kemple Search Modernization** — Cleaner UI styling
+- Softened borders from black to medium grey
+- Added subtle rounded corners
+- System sans-serif font on button
+- Balanced old-school and modern aesthetic
+
+**PC Browser Polish** — Various refinements
+- Home button icon: outlined house with chimney (cuter than emoji)
+- KempoNet toolbar icon: resized to 20px, aligned with X button and address bar
+- Desktop icon: moved down and right for better positioning with intro animation
+
+**Header Iframe Detection** — Reliable hiding in embedded contexts
+- Header now detects if page is in iframe and auto-hides
+- Works reliably for both mobile browser and PC KempoNet contexts
+
+---
+
 #### December 19, 2025 (Late Night)
 
 **KempoScape Navigator Renamed to KempoNet** — Simplified browser naming

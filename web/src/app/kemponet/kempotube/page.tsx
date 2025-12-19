@@ -150,10 +150,12 @@ function KempoTubeContent() {
               </button>
             )}
             <Link href="/kemponet/kempotube" onClick={(e) => { if (selectedVideo) { e.preventDefault(); goBack(); } }}>
-              <div className="flex items-center gap-1">
-                <div className="bg-red-600 rounded-lg p-1.5">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
+              <div className="flex items-center gap-2">
+                <div className="bg-orange-500 rounded-lg p-1.5 flex items-center justify-center">
+                  <svg width="18" height="14" viewBox="0 0 22 16" fill="white">
+                    <path d="M0 0L7 8L0 16V0Z" />
+                    <path d="M8 0L15 8L8 16V0Z" />
+                    <rect x="18" y="0" width="3" height="16" />
                   </svg>
                 </div>
                 <span className="text-xl font-semibold text-gray-900">KempoTube</span>
@@ -316,7 +318,7 @@ function VideoCard({
 
         {/* Play button overlay - always visible on mobile, hover on desktop */}
         <div className={`absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 ${isHovered ? 'sm:opacity-100' : ''}`}>
-          <div className="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110">
+          <div className="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110">
             <svg className="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>

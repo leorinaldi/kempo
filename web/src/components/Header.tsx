@@ -1,13 +1,21 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useSearchParams, usePathname } from 'next/navigation'
 
 export function Header() {
   const searchParams = useSearchParams()
   const pathname = usePathname()
+  const [isInIframe, setIsInIframe] = useState(false)
+
   const isInKempoNet = searchParams.get('kemponet') === '1'
   const isInMobile = searchParams.get('mobile') === '1'
+
+  // Check if we're inside an iframe (mobile browser or kemponet PC)
+  useEffect(() => {
+    setIsInIframe(window.self !== window.top)
+  }, [])
 
   // Check if we're on a kemponet subpage (but not the main kemponet page itself)
   const isKempoNetSubpage = pathname.startsWith('/kemponet/') && pathname !== '/kemponet'
@@ -15,8 +23,8 @@ export function Header() {
   // Convert current path to kttp:// URL for the KempoNet link
   const kttpUrl = pathname.replace(/^\/kemponet\//, 'kttp://')
 
-  // Hide header on home page and when inside KempoNet or Mobile browser
-  if (pathname === '/' || isInKempoNet || isInMobile) {
+  // Hide header on home page, inside KempoNet/Mobile browser, or in any iframe
+  if (pathname === '/' || isInKempoNet || isInMobile || isInIframe) {
     return null
   }
 
