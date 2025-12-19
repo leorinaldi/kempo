@@ -179,7 +179,6 @@ KempoTube is a modern YouTube-style video browsing interface for watching video 
 When accessed through KempoNet, KempoTube features special adaptations:
 - Custom fullscreen that fills the CRT monitor (not browser fullscreen)
 - Disabled native fullscreen, picture-in-picture, and download options
-- "Back to Kemple" navigation instead of "Back to Kempo"
 - Seamless video playback when entering/exiting monitor fullscreen
 
 ## KempoNet
@@ -195,9 +194,16 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - Responsive screen (full-width on mobile, 650px on desktop)
 - **KempoScape Navigator** browser opens by default (Netscape-inspired) with full navigation
 - **Kemple** search engine home page (Google-inspired with colorful logo)
-  - Dropdown to select Kempopedia or KempoTube
+  - Dropdown to select Kempopedia, KempoScape, or KempoTube
+- **KempoScape** browser settings page with:
+  - Configurable home page location
+  - Show/hide address bar toggle
+  - Quick links to all KempoNet sites
 - Working Back/Forward/Home buttons with history tracking
-- Address bar showing "kttp://" URLs that map directly to `/kemponet/` paths (e.g., `kttp://kempopedia` → `/kemponet/kempopedia`)
+- Editable address bar — type `kttp://` URLs and press Enter to navigate
+- Browser settings button (K icon) in toolbar for quick access to settings
+- URL mapping: `kttp://` maps directly to `/kemponet/` (e.g., `kttp://kempopedia` → `/kemponet/kempopedia`)
+- Link sandboxing — only `/kemponet/*` links work inside the browser; external links are stripped
 - Minimize/Maximize/Close window controls
 - **KS Portals 25** operating system (Windows-inspired)
   - Go menu (Start menu equivalent) with program launcher
@@ -210,6 +216,15 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - "Break the fourth wall" maximize button - exits KempoNet to view content in your real browser
 - Videos in Kempopedia articles and KempoTube have custom fullscreen within the monitor
 
+### KempoNet Sites
+
+| Site | URL | Description |
+|------|-----|-------------|
+| Kemple | `kttp://kemple` | Search engine home page (default) |
+| KempoScape | `kttp://kemposcape` | Browser settings and quick links |
+| Kempopedia | `kttp://kempopedia` | Encyclopedia wiki |
+| KempoTube | `kttp://kempotube` | Video browsing |
+
 ### Fictional Computing Universe
 
 KempoNet introduces the Kempo universe's computing ecosystem:
@@ -219,6 +234,7 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 | Microsoft Windows | KempoSoft Portals |
 | Netscape Navigator | KempoScape Navigator |
 | Google | Kemple |
+| Wikipedia | Kempopedia |
 | YouTube | KempoTube |
 | Compaq | Kempaq |
 | Intel | Kemptel |
@@ -290,6 +306,8 @@ kempo/
     └── src/
         ├── app/
         │   ├── kemponet/          # KempoNet 1990s PC interface
+        │   │   ├── kemple/        # Kemple search engine (kttp://kemple)
+        │   │   ├── kemposcape/    # Browser settings page (kttp://kemposcape)
         │   │   ├── kempopedia/    # Kempopedia pages (kttp://kempopedia)
         │   │   │   ├── wiki/[slug]/   # Individual article pages
         │   │   │   └── category/      # Category browse pages

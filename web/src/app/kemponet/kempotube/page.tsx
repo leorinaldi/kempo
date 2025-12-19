@@ -160,25 +160,6 @@ function KempoTubeContent() {
               </div>
             </Link>
           </div>
-          {isKempoNet ? (
-            <button
-              onClick={() => {
-                if (window.parent !== window) {
-                  window.parent.postMessage({ type: "kemponet-go-home" }, "*")
-                }
-              }}
-              className="text-gray-500 hover:text-gray-700 text-sm"
-            >
-              Back to Kemple
-            </button>
-          ) : (
-            <Link
-              href="/"
-              className="text-gray-500 hover:text-gray-700 text-sm"
-            >
-              Back to Kempo
-            </Link>
-          )}
         </div>
       </header>
 

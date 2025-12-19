@@ -24,7 +24,68 @@ export function KempoNetBridge() {
     }
   }, [pathname, isKempoNet])
 
-  // Intercept link clicks to add kemponet param or handle base URL
+  // Strip external links on mount and watch for DOM changes
+  useEffect(() => {
+    if (!isKempoNet) return
+
+    let isProcessing = false
+
+    const stripExternalLinks = () => {
+      if (isProcessing) return
+      isProcessing = true
+
+      // Pause observer while we modify DOM
+      observer.disconnect()
+
+      try {
+        const links = Array.from(document.querySelectorAll("a[href]"))
+        links.forEach((link) => {
+          const anchor = link as HTMLAnchorElement
+          // Skip if already removed from DOM
+          if (!anchor.parentNode) return
+
+          try {
+            const url = new URL(anchor.href)
+            const isKempoNetLink = url.pathname.startsWith("/kemponet/")
+
+            if (!isKempoNetLink) {
+              // Replace link with a span containing its content
+              const span = document.createElement("span")
+              span.innerHTML = anchor.innerHTML
+              anchor.parentNode.replaceChild(span, anchor)
+            }
+          } catch {
+            // Invalid URL, strip it
+            if (anchor.parentNode) {
+              const span = document.createElement("span")
+              span.innerHTML = anchor.innerHTML
+              anchor.parentNode.replaceChild(span, anchor)
+            }
+          }
+        })
+      } finally {
+        // Resume observer
+        observer.observe(document.body, { childList: true, subtree: true })
+        isProcessing = false
+      }
+    }
+
+    const observer = new MutationObserver(() => {
+      stripExternalLinks()
+    })
+
+    // Initial strip after a small delay to let React finish rendering
+    setTimeout(stripExternalLinks, 0)
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    })
+
+    return () => observer.disconnect()
+  }, [isKempoNet])
+
+  // Intercept kemponet link clicks to add kemponet param
   useEffect(() => {
     if (!isKempoNet) return
 
@@ -33,23 +94,17 @@ export function KempoNetBridge() {
       const link = target.closest("a")
 
       if (link && link.href) {
-        const url = new URL(link.href)
+        try {
+          const url = new URL(link.href)
 
-        // Check if this is a link to the base URL (Kempo home)
-        if (url.pathname === "/" || url.pathname === "") {
-          e.preventDefault()
-          // Tell parent to go to Kemple home screen
-          if (window.parent !== window) {
-            window.parent.postMessage({ type: "kemponet-go-home" }, "*")
+          // Only kemponet links should remain, intercept to add param
+          if (url.pathname.startsWith("/kemponet/")) {
+            e.preventDefault()
+            router.push(`${url.pathname}?kemponet=1`)
           }
-          return
-        }
-
-        // Intercept internal kempopedia and kempotube links
-        if (url.pathname.startsWith("/kemponet/kempopedia") || url.pathname.startsWith("/kemponet/kempotube")) {
+        } catch {
+          // Invalid URL, prevent navigation
           e.preventDefault()
-          // Use router.push for smooth client-side navigation
-          router.push(`${url.pathname}?kemponet=1`)
         }
       }
     }

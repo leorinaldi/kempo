@@ -33,6 +33,27 @@ tags:
 
 #### December 19, 2025
 
+**KempoNet Architecture Overhaul** — Generalized browser simulation with settings
+- Created `/kemponet/kemple` as standalone page (previously inline in main KempoNet)
+- Created `/kemponet/kemposcape` — KempoScape Navigator settings/home page:
+  - Home page location setting (persisted to localStorage)
+  - Show address bar toggle (functional, takes effect immediately)
+  - Quick links to Kemple, Kempopedia, KempoTube
+  - KempoSoft Corporation branding and welcome message
+- Made address bar fully editable — type `kttp://` URLs and press Enter to navigate
+- Added browser settings button (K compass icon) to toolbar for quick access to settings
+- Settings changes apply immediately via storage events (no page reload needed)
+- Added KempoScape to Kemple dropdown menu (alphabetical: Kempopedia, KempoScape, KempoTube)
+- `BROWSER_HOME` constant for configurable default home page
+
+**KempoNet Link Sandboxing** — Constrained browser to kemponet URLs only
+- KempoNetBridge now strips non-kemponet links from DOM (keeps text, removes clickability)
+- MutationObserver watches for dynamic content and strips new external links
+- Prevents navigation outside the `/kemponet/*` namespace while inside KempoScape Navigator
+- Removed special-case "Kemple" button from Kempopedia header
+- Removed "Back to Kempo/Kemple" links from KempoTube header
+- Simplified Kempopedia header to just show "Kempopedia" (no breadcrumb)
+
 **First Database Implementation** — PostgreSQL database with Prisma ORM
 - Established Neon PostgreSQL as the first non-blob database for Kempo
 - Prisma ORM for type-safe database access

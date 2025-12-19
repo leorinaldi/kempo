@@ -1,51 +1,69 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
 
+// KempoScape Navigator default home page
+const DEFAULT_HOME = "/kemponet/kemple"
+
+// Convert kttp:// URL to real path
+const kttpToPath = (kttp: string): string => {
+  const trimmed = kttp.trim().toLowerCase()
+  if (trimmed.startsWith("kttp://")) {
+    return `/kemponet/${trimmed.slice(7)}`
+  }
+  return DEFAULT_HOME
+}
+
 export default function KempoNetPage() {
-  const [selectedOption, setSelectedOption] = useState("kempopedia")
-  const [currentPage, setCurrentPage] = useState<"kemple" | "browsing">("kemple")
-  const [currentPath, setCurrentPath] = useState("/kemponet/kempopedia")
+  const [browserHome, setBrowserHome] = useState(DEFAULT_HOME)
+  const [currentPath, setCurrentPath] = useState(DEFAULT_HOME)
   const [windowState, setWindowState] = useState<"open" | "minimized" | "closed">("open")
   const [goMenuOpen, setGoMenuOpen] = useState(false)
   const [showAbout, setShowAbout] = useState(false)
+  const [addressBarValue, setAddressBarValue] = useState("")
+  const [showAddressBar, setShowAddressBar] = useState(true)
+  const [isInitialized, setIsInitialized] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
   // Use refs for history to avoid closure issues
-  const historyRef = useRef<string[]>([])
-  const historyIndexRef = useRef(-1)
+  const historyRef = useRef<string[]>([DEFAULT_HOME])
+  const historyIndexRef = useRef(0)
   const isNavigatingRef = useRef(false)
   const [, forceUpdate] = useState({})
-  const [iframeSrc, setIframeSrc] = useState("/kemponet/kempopedia")
+  const [iframeSrc, setIframeSrc] = useState(DEFAULT_HOME)
   const [iframeKey, setIframeKey] = useState(0)
 
-  const handleSearch = () => {
-    if (selectedOption === "kempopedia") {
-      const newPath = "/kemponet/kempopedia"
-      historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
-      historyIndexRef.current = historyRef.current.length - 1
-      setCurrentPath(newPath)
-      setIframeSrc(newPath)
-      setCurrentPage("browsing")
-      forceUpdate({})
-    } else if (selectedOption === "kempotube") {
-      const newPath = "/kemponet/kempotube"
-      historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
-      historyIndexRef.current = historyRef.current.length - 1
-      setCurrentPath(newPath)
-      setIframeSrc(newPath)
-      setCurrentPage("browsing")
-      forceUpdate({})
+  // Load settings from localStorage on mount
+  useEffect(() => {
+    const savedHome = localStorage.getItem("kemposcape-home")
+    if (savedHome) {
+      const homePath = kttpToPath(savedHome)
+      setBrowserHome(homePath)
+      // Only update current path if we haven't navigated yet
+      if (!isInitialized) {
+        setCurrentPath(homePath)
+        setIframeSrc(homePath)
+        historyRef.current = [homePath]
+        historyIndexRef.current = 0
+      }
     }
-  }
+    const savedShowAddressBar = localStorage.getItem("kemposcape-show-address-bar")
+    if (savedShowAddressBar !== null) {
+      setShowAddressBar(savedShowAddressBar === "true")
+    }
+    setIsInitialized(true)
+  }, [isInitialized])
 
   const handleHomeClick = () => {
-    setCurrentPage("kemple")
-    setCurrentPath("/kemponet/kempopedia")
-    // Reset history when going home
-    historyRef.current = []
-    historyIndexRef.current = -1
+    // Navigate to browser home page
+    if (currentPath !== browserHome) {
+      historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), browserHome]
+      historyIndexRef.current = historyRef.current.length - 1
+    }
+    setCurrentPath(browserHome)
+    setIframeSrc(browserHome)
+    setIframeKey(k => k + 1)
     forceUpdate({})
   }
 
@@ -77,14 +95,46 @@ export default function KempoNetPage() {
   const canGoForward = historyIndexRef.current < historyRef.current.length - 1
 
   // Convert real path to kttp:// format
-  // Now simplified: /kemponet/xyz → kttp://xyz
-  const getAddressBarUrl = () => {
-    if (currentPage === "kemple") {
-      return "kttp://kemple"
-    }
-    // Strip /kemponet/ prefix and add kttp://
-    return `kttp://${currentPath.replace(/^\/kemponet\//, "")}`
+  // /kemponet/xyz → kttp://xyz
+  const getAddressBarUrl = (path: string) => {
+    return `kttp://${path.replace(/^\/kemponet\//, "")}`
   }
+
+  // Convert kttp:// URL to real path
+  // kttp://xyz → /kemponet/xyz
+  const parseAddressBarUrl = (url: string): string | null => {
+    const trimmed = url.trim().toLowerCase()
+    // Handle kttp:// prefix
+    if (trimmed.startsWith("kttp://")) {
+      return `/kemponet/${trimmed.slice(7)}`
+    }
+    // Also allow just typing the site name without protocol
+    if (trimmed && !trimmed.includes("://")) {
+      return `/kemponet/${trimmed}`
+    }
+    return null
+  }
+
+  // Handle address bar navigation
+  const handleAddressBarKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const newPath = parseAddressBarUrl(addressBarValue)
+      if (newPath && newPath !== currentPath) {
+        // Add to history
+        historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), newPath]
+        historyIndexRef.current = historyRef.current.length - 1
+        setCurrentPath(newPath)
+        setIframeSrc(newPath)
+        setIframeKey(k => k + 1)
+        forceUpdate({})
+      }
+    }
+  }
+
+  // Keep address bar in sync with current path
+  useEffect(() => {
+    setAddressBarValue(getAddressBarUrl(currentPath))
+  }, [currentPath])
 
   // Close Go menu when clicking outside
   useEffect(() => {
@@ -105,7 +155,7 @@ export default function KempoNetPage() {
     }
   }, [goMenuOpen])
 
-  // Listen for navigation messages from iframe
+  // Listen for messages from iframe
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "kemponet-navigation") {
@@ -120,18 +170,29 @@ export default function KempoNetPage() {
         }
         isNavigatingRef.current = false
         setCurrentPath(newPath)
-      } else if (event.data?.type === "kemponet-go-home") {
-        // User clicked on base URL inside iframe - go to Kemple home
-        setCurrentPage("kemple")
-        setCurrentPath("/kemponet/kempopedia")
-        // Reset history when going home
-        historyRef.current = []
-        historyIndexRef.current = -1
-        forceUpdate({})
+      } else if (event.data?.type === "kemposcape-settings-changed") {
+        // Settings were changed in kemposcape - apply immediately
+        setShowAddressBar(event.data.showAddressBar)
+        if (event.data.home) {
+          setBrowserHome(kttpToPath(event.data.home))
+        }
       }
     }
     window.addEventListener("message", handleMessage)
     return () => window.removeEventListener("message", handleMessage)
+  }, [])
+
+  // Listen for storage changes from iframe (settings updates)
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === "kemposcape-show-address-bar") {
+        setShowAddressBar(event.newValue === "true")
+      } else if (event.key === "kemposcape-home" && event.newValue) {
+        setBrowserHome(kttpToPath(event.newValue))
+      }
+    }
+    window.addEventListener("storage", handleStorage)
+    return () => window.removeEventListener("storage", handleStorage)
   }, [])
 
   const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
@@ -425,7 +486,7 @@ export default function KempoNetPage() {
                       background: '#1e40af',
                     }}
                   >
-                    <span className="text-white text-xs font-bold">{currentPage === "kemple" ? "Kemple" : currentPath.startsWith("/kemponet/kempotube") ? "KempoTube" : "Kempopedia"} - KempoScape Navigator</span>
+                    <span className="text-white text-xs font-bold">{currentPath.startsWith("/kemponet/kempotube") ? "KempoTube" : currentPath.startsWith("/kemponet/kempopedia") ? "Kempopedia" : "Kemple"} - KempoScape Navigator</span>
                     <div className="flex gap-1">
                       <div
                         onClick={() => setWindowState("minimized")}
@@ -433,11 +494,7 @@ export default function KempoNetPage() {
                       >_</div>
                       <div
                         onClick={() => {
-                          if (currentPage === "browsing" && currentPath) {
-                            window.location.href = currentPath
-                          } else {
-                            window.location.href = selectedOption === "kempotube" ? "/kemponet/kempotube" : "/kemponet/kempopedia"
-                          }
+                          window.location.href = currentPath
                         }}
                         className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
                         title="Open in real browser"
@@ -445,11 +502,12 @@ export default function KempoNetPage() {
                       <div
                         onClick={() => {
                           setWindowState("closed")
-                          // Reset to Kemple when closing
-                          setCurrentPage("kemple")
-                          setCurrentPath("/kemponet/kempopedia")
-                          historyRef.current = []
-                          historyIndexRef.current = -1
+                          // Reset to home when closing
+                          setCurrentPath(browserHome)
+                          setIframeSrc(browserHome)
+                          historyRef.current = [browserHome]
+                          historyIndexRef.current = 0
+                          setIframeKey(k => k + 1)
                         }}
                         className="w-4 h-4 bg-gray-300 border-2 border-gray-900 flex items-center justify-center text-xs font-bold text-black cursor-pointer hover:bg-gray-200"
                       >×</div>
@@ -490,93 +548,66 @@ export default function KempoNetPage() {
                   >
                     🏠 Home
                   </button>
+
+                  {/* Spacer */}
+                  <div className="flex-1" />
+
+                  {/* Browser settings button */}
+                  <button
+                    onClick={() => {
+                      const settingsPath = "/kemponet/kemposcape"
+                      if (currentPath !== settingsPath) {
+                        historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), settingsPath]
+                        historyIndexRef.current = historyRef.current.length - 1
+                      }
+                      setCurrentPath(settingsPath)
+                      setIframeSrc(settingsPath)
+                      setIframeKey(k => k + 1)
+                      forceUpdate({})
+                    }}
+                    className="w-6 h-6 rounded-full flex items-center justify-center relative border-2 border-gray-900 bg-blue-500 hover:bg-blue-600"
+                    title="KempoScape Navigator Settings"
+                  >
+                    <div className="absolute w-full h-full">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-1 bg-yellow-400"></div>
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-1 bg-yellow-400"></div>
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0.5 bg-yellow-400"></div>
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-0.5 bg-yellow-400"></div>
+                    </div>
+                    <span className="text-white font-bold text-[8px] z-10">K</span>
+                  </button>
                 </div>
 
                 {/* Address bar - graphic novel style */}
-                <div
-                  className="flex items-center gap-2 px-2 py-1 border-b border-gray-900"
-                  style={{ background: '#d1d5db' }}
-                >
-                  <span className="text-xs font-bold">Address:</span>
+                {showAddressBar && (
                   <div
-                    className="flex-1 px-2 py-0.5 text-xs font-mono border-2 border-gray-900"
-                    style={{
-                      background: 'white',
-                    }}
+                    className="flex items-center gap-2 px-2 py-1 border-b border-gray-900"
+                    style={{ background: '#d1d5db' }}
                   >
-                    {getAddressBarUrl()}
+                    <span className="text-xs font-bold">Address:</span>
+                    <input
+                      type="text"
+                      value={addressBarValue}
+                      onChange={(e) => setAddressBarValue(e.target.value)}
+                      onKeyDown={handleAddressBarKeyDown}
+                      className="flex-1 px-2 py-0.5 text-xs font-mono border-2 border-gray-900 outline-none"
+                      style={{
+                        background: 'white',
+                      }}
+                      spellCheck={false}
+                    />
                   </div>
-                </div>
+                )}
 
                 {/* Web content area */}
                 <div className="flex-1 bg-white overflow-hidden">
-                  {currentPage === "kemple" ? (
-                    /* Kemple Search Page - graphic novel style */
-                    <div className="h-full flex flex-col items-center justify-center px-4">
-                      {/* Kemple Logo */}
-                      <div className="mb-6">
-                        <h2
-                          className="text-5xl font-bold tracking-tight"
-                          style={{
-                            fontFamily: "serif",
-                            textShadow: '2px 2px 0px rgba(0,0,0,0.3)',
-                          }}
-                        >
-                          <span style={{ color: "#4285f4" }}>K</span>
-                          <span style={{ color: "#ea4335" }}>e</span>
-                          <span style={{ color: "#fbbc05" }}>m</span>
-                          <span style={{ color: "#4285f4" }}>p</span>
-                          <span style={{ color: "#34a853" }}>l</span>
-                          <span style={{ color: "#ea4335" }}>e</span>
-                        </h2>
-                      </div>
-
-                      {/* Search dropdown - graphic novel style */}
-                      <div className="w-full max-w-sm">
-                        <select
-                          value={selectedOption}
-                          onChange={(e) => setSelectedOption(e.target.value)}
-                          className="w-full px-3 py-2 text-sm cursor-pointer border-2 border-gray-900"
-                          style={{
-                            background: "#fffef8",
-                            color: "#000",
-                            fontFamily: "monospace",
-                            appearance: "none",
-                            WebkitAppearance: "none",
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E")`,
-                            backgroundRepeat: "no-repeat",
-                            backgroundPosition: "right 8px center",
-                            paddingRight: "28px",
-                          }}
-                        >
-                          <option value="kempopedia">Kempopedia</option>
-                          <option value="kempotube">KempoTube</option>
-                        </select>
-                      </div>
-
-                      {/* Search button - graphic novel style */}
-                      <div className="flex gap-2 mt-4">
-                        <button
-                          onClick={handleSearch}
-                          className="px-4 py-1 text-sm font-bold border-2 border-gray-900"
-                          style={{
-                            background: "#d1d5db",
-                          }}
-                        >
-                          Kemple Search
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    /* Browsing - iframe showing actual Kempopedia */
-                    <iframe
-                      key={iframeKey}
-                      ref={iframeRef}
-                      src={`${iframeSrc}?kemponet=1`}
-                      className="w-full h-full border-0"
-                      style={{ background: "white" }}
-                    />
-                  )}
+                  <iframe
+                    key={iframeKey}
+                    ref={iframeRef}
+                    src={`${iframeSrc}?kemponet=1`}
+                    className="w-full h-full border-0"
+                    style={{ background: "white" }}
+                  />
                 </div>
               </div>
               )}
