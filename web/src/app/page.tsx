@@ -85,6 +85,7 @@ export default function Home() {
   const [isFirstVisit, setIsFirstVisit] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0) // Start on PC
+  const [videoEnded, setVideoEnded] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
@@ -117,6 +118,7 @@ export default function Home() {
       video.currentTime = video.duration || 999
       video.pause()
       setIsFirstVisit(false)
+      setVideoEnded(true)
     } else {
       // Play - first visit or page refresh
       setIsFirstVisit(true)
@@ -146,8 +148,9 @@ export default function Home() {
         ref={videoRef}
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoEnded ? 'opacity-0' : 'opacity-100'}`}
         style={{ transform: 'scale(1.1) translateX(1%) translateY(-5%)' }}
+        onEnded={() => setVideoEnded(true)}
       >
         <source src="/comic-tv-fades-to-black.mp4" type="video/mp4" />
       </video>
