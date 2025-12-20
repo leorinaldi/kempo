@@ -5,8 +5,11 @@ import { Providers } from './providers'
 import { Header } from '@/components/Header'
 
 export const metadata: Metadata = {
-  title: 'Kempopedia',
-  description: 'The encyclopedia of the Kempo universe',
+  title: 'Kempo',
+  description: 'The Kempo universe',
+  icons: {
+    icon: '/icon.svg',
+  },
 }
 
 export default function RootLayout({

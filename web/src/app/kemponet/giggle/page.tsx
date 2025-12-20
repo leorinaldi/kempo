@@ -9,6 +9,7 @@ interface SearchResult {
   type: string
   snippet: string
   url: string
+  domain: string
   rank: number
 }
 
@@ -66,11 +67,6 @@ export default function GigglePage() {
     }
   }
 
-  // Format type for display
-  const formatType = (type: string) => {
-    return type.charAt(0).toUpperCase() + type.slice(1)
-  }
-
   return (
     <div className="min-h-screen bg-white flex flex-col items-center px-4">
       {/* Top spacer - pushes content to center the search bar */}
@@ -102,7 +98,7 @@ export default function GigglePage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search Kempopedia..."
+            placeholder="Search the KempoNet..."
             className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-full outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600"
             style={{
               background: "#fff",
@@ -137,6 +133,16 @@ export default function GigglePage() {
         </button>
       </div>
 
+      {/* Popular Sites link */}
+      <div className="mt-4">
+        <button
+          onClick={() => navigateTo("/kemponet/giggle/popular-sites")}
+          className="text-sm text-red-600 hover:underline"
+        >
+          Popular Sites
+        </button>
+      </div>
+
       {/* Search Results */}
       {hasSearched && (
         <div className="w-full max-w-md mt-6">
@@ -151,7 +157,7 @@ export default function GigglePage() {
                   onClick={() => navigateTo(result.url)}
                 >
                   <div className="text-sm text-gray-500 mb-0.5">
-                    {formatType(result.type)} · kempopedia
+                    {result.domain}
                   </div>
                   <div className="text-lg text-red-600 group-hover:underline">
                     {result.title}

@@ -5,6 +5,18 @@ import { useRouter } from "next/navigation"
 
 const favorites = [
   {
+    name: "FlipFlop",
+    path: "/kemponet/flipflop",
+    color: "#ec4899",
+    icon: "flipflop",
+  },
+  {
+    name: "Giggle",
+    path: "/kemponet/giggle",
+    color: "#f97316",
+    icon: "search",
+  },
+  {
     name: "Kempopedia",
     path: "/kemponet/kempopedia",
     color: "#f97316",
@@ -62,9 +74,18 @@ export default function FavoritesPage() {
               className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-lg"
               style={{ background: fav.color }}
             >
-              {fav.icon === "book" ? (
+              {fav.icon === "search" ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+                </svg>
+              ) : fav.icon === "book" ? (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M12 6.04168C10.4077 4.61656 8.30506 3.75 6 3.75C4.94809 3.75 3.93834 3.93046 3 4.26212V18.5121C3.93834 18.1805 4.94809 18 6 18C8.30506 18 10.4077 18.8666 12 20.2917M12 6.04168C13.5923 4.61656 15.6949 3.75 18 3.75C19.0519 3.75 20.0617 3.93046 21 4.26212V18.5121C20.0617 18.1805 19.0519 18 18 18C15.6949 18 13.5923 18.8666 12 20.2917M12 6.04168V20.2917" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              ) : fav.icon === "flipflop" ? (
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 4l-8 8h5v8h6v-8h5z" />
                 </svg>
               ) : fav.icon === "play" ? (
                 <svg width="22" height="16" viewBox="0 0 22 16" fill="white">

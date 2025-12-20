@@ -146,6 +146,17 @@ function MobileContent() {
     setActiveApp("browser")
   }
 
+  // Open FlipFlop app
+  const openFlipFlop = () => {
+    const flipflopPath = "/kemponet/flipflop"
+    historyRef.current = [flipflopPath]
+    historyIndexRef.current = 0
+    setCurrentPath(flipflopPath)
+    setIframeSrc(flipflopPath)
+    setIframeKey(k => k + 1)
+    setActiveApp("browser")
+  }
+
   // Go to home screen
   const goHome = () => {
     setActiveApp(null)
@@ -172,7 +183,7 @@ function MobileContent() {
               }}
             >
               {/* App Grid - KempoNet in position (1,1) */}
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-start pt-2">
                 {/* KempoNet Browser App */}
                 <button
                   onClick={openBrowser}
@@ -214,6 +225,29 @@ function MobileContent() {
                     <div className="absolute w-3 h-3 rounded-full bg-white z-10" />
                   </div>
                   <span className="text-white text-xs font-medium">KempoNet Browser</span>
+                </button>
+              </div>
+              {/* Empty cell */}
+              <div />
+              {/* FlipFlop App - centered */}
+              <div className="flex justify-center items-start pt-2">
+                <button
+                  onClick={openFlipFlop}
+                  className="flex flex-col items-center gap-1"
+                >
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                    style={{
+                      background: 'linear-gradient(135deg, #f472b6 0%, #db2777 100%)',
+                      boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+                    }}
+                  >
+                    {/* Up arrow icon */}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                      <path d="M12 4l-8 8h5v8h6v-8h5z" />
+                    </svg>
+                  </div>
+                  <span className="text-white text-xs font-medium">FlipFlop</span>
                 </button>
               </div>
             </div>
@@ -274,7 +308,7 @@ function MobileContent() {
               {/* Favorites Button */}
               <button
                 onClick={() => {
-                  const favoritesPath = "/kemponet/favorites"
+                  const favoritesPath = "/kemponet/kemponet-browser/favorites"
                   historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), favoritesPath]
                   historyIndexRef.current = historyRef.current.length - 1
                   setCurrentPath(favoritesPath)
@@ -402,7 +436,7 @@ function MobileContent() {
                   }}
                 >
                   {/* App Grid - KempoNet in position (1,1) */}
-                  <div className="flex justify-center items-center">
+                  <div className="flex justify-center items-start pt-2">
                     {/* KempoNet Browser App */}
                     <button
                       onClick={openBrowser}
@@ -446,7 +480,29 @@ function MobileContent() {
                       <span className="text-white text-[11px] font-medium">KempoNet Browser</span>
                     </button>
                   </div>
-                  {/* Empty grid cells for remaining 14 positions */}
+                  {/* FlipFlop App - centered */}
+                  <div className="flex justify-center items-start pt-2">
+                    <button
+                      onClick={openFlipFlop}
+                      className="flex flex-col items-center gap-1"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                        style={{
+                          background: 'linear-gradient(135deg, #f472b6 0%, #db2777 100%)',
+                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+                        }}
+                      >
+                        {/* Up arrow icon */}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                          <path d="M12 4l-8 8h5v8h6v-8h5z" />
+                        </svg>
+                      </div>
+                      <span className="text-white text-[11px] font-medium">FlipFlop</span>
+                    </button>
+                  </div>
+                  {/* Empty cell */}
+                  <div />
                 </div>
               ) : (
                 /* Browser App */
@@ -485,7 +541,7 @@ function MobileContent() {
                     {/* Favorites Button */}
                     <button
                       onClick={() => {
-                        const favoritesPath = "/kemponet/favorites"
+                        const favoritesPath = "/kemponet/kemponet-browser/favorites"
                         historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), favoritesPath]
                         historyIndexRef.current = historyRef.current.length - 1
                         setCurrentPath(favoritesPath)

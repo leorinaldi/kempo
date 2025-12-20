@@ -53,11 +53,36 @@ model TvPlaylistItem {
 
 model Domain {
   id           String   @id @default(cuid())
-  name         String   @unique // e.g., "kempotube", "giggle"
-  owner        String   // e.g., "kemponet"
+  name         String   @unique // URL slug e.g., "kempotube", "giggle"
+  displayName  String?  @map("display_name") // Human-readable e.g., "KempoTube", "Giggle"
+  owner        String   // e.g., "GiggleNet"
+  type         String   @default("content") // "app" | "content"
   registeredAt DateTime @map("registered_at") // real-world registration date
 
+  pages        Page[]
+
   @@map("domains")
+}
+
+model Page {
+  id          String   @id @default(cuid())
+  domainId    String   @map("domain_id")
+  domain      Domain   @relation(fields: [domainId], references: [id], onDelete: Cascade)
+
+  slug        String   // path within domain: "", "about", "services/cloud"
+  title       String
+  content     String   @db.Text // markdown content
+  excerpt     String?  @db.Text // short description for search results
+  searchable  Boolean  @default(true)
+  template    String?  // "default", "corporate", "product", etc.
+  metadata    Json?    // flexible additional data
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([domainId, slug])
+  @@index([domainId])
+  @@map("pages")
 }
 
 // ============ KEMPOPEDIA ARTICLES ============

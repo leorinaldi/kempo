@@ -234,10 +234,13 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 
 | Site | URL | Description |
 |------|-----|-------------|
-| Giggle | `kttp://giggle` | Search engine home page (default) |
-| KempoNet Browser | `kttp://kemponet-browser` | Browser settings and quick links |
+| Giggle | `kttp://giggle` | Search engine with unified search across all KempoNet content |
+| FlipFlop | `kttp://flipflop` | TikTok-style vertical video browsing |
 | Kempopedia | `kttp://kempopedia` | Encyclopedia wiki |
+| KempoNet Browser | `kttp://kemponet-browser` | Browser settings and quick links |
 | KempoTube | `kttp://kempotube` | Video browsing |
+| GiggleNet | `kttp://gigglenet` | GiggleNet Inc. corporate page |
+| KempoSoft | `kttp://kemposoft` | KempoSoft Corporation corporate page |
 
 ## Kempo Mobile
 
@@ -273,6 +276,7 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 | Google | Giggle (owned by GiggleNet) |
 | Wikipedia | Kempopedia (owned by GiggleNet) |
 | YouTube | KempoTube (owned by GiggleNet) |
+| TikTok | FlipFlop |
 | Alphabet/Google Inc. | GiggleNet Inc. |
 | Microsoft Corporation | KempoSoft Corporation |
 | Compaq | Kempaq |
@@ -343,13 +347,17 @@ kempo/
     └── src/
         ├── app/
         │   ├── pc/                # PC device page (1990s computer interface)
-        │   ├── kemponet/          # KempoNet web pages (redirects to /pc if accessed directly)
+        │   ├── kemponet/          # KempoNet web pages
         │   │   ├── giggle/        # Giggle search engine (kttp://giggle)
-        │   │   ├── kemponet-browser/  # Browser settings page (kttp://kemponet-browser)
+        │   │   │   └── popular-sites/ # Browse all KempoNet sites
+        │   │   ├── flipflop/      # FlipFlop vertical video app (kttp://flipflop)
+        │   │   ├── kemponet-browser/  # Browser settings (kttp://kemponet-browser)
+        │   │   │   └── favorites/ # Favorites/bookmarks page
         │   │   ├── kempopedia/    # Kempopedia pages (kttp://kempopedia)
         │   │   │   ├── wiki/[slug]/   # Individual article pages
         │   │   │   └── category/      # Category browse pages
-        │   │   └── kempotube/     # KempoTube video browsing (kttp://kempotube)
+        │   │   ├── kempotube/     # KempoTube video browsing (kttp://kempotube)
+        │   │   └── [...path]/     # Catch-all for database-driven content sites
         │   ├── radio/             # Kempo Radio interface
         │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)
@@ -364,6 +372,7 @@ kempo/
         │       ├── radio/         # Radio playlist management
         │       └── tv/            # TV playlist management
         ├── components/            # React components (Header, Infobox, AudioPlayer, VideoPlayer, etc.)
+        │   └── templates/         # Page templates (CorporateTemplate for content sites)
         └── lib/                   # Article loading utilities
 ```
 
@@ -442,7 +451,7 @@ Tracks real-world development milestones for the Kempo project:
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
 - **Content**: MDX with frontmatter
-- **Database**: PostgreSQL (Neon) with Prisma ORM
+- **Database**: PostgreSQL (Neon) with Prisma ORM (Articles, Pages, Media, Domains)
 - **Images**: Grok API (xAI) for comic book style illustrations
 - **Media Storage**: Vercel Blob (files) + PostgreSQL (metadata)
 - **Authentication**: NextAuth.js with Google OAuth

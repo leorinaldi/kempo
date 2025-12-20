@@ -31,7 +31,56 @@ tags:
 
 ### December 2025
 
-#### December 19, 2025 (Latest)
+#### December 20, 2025 (Latest)
+
+**FlipFlop Launched** — TikTok-style vertical video experience
+- Created `/kemponet/flipflop` with home screen and vertical video browsing
+- Random video order with no repeats until all played, auto-advances on video end
+- Up/down arrow buttons for navigation (right side)
+- Swipe gestures on mobile (swipe up = next, swipe down = previous)
+- Hover to reveal: FlipFlop logo (top left, returns home), video info (bottom)
+- Pink/magenta branding (#ec4899) with up-arrow icon
+- Added to mobile home screen, favorites, and GiggleNet services
+- Registered `flipflop` domain owned by FlipFlop
+
+**Page Content System** — Database-driven content for KempoNet sites
+- Created `Page` model: slug, title, content (markdown), excerpt, template, metadata (JSON)
+- Added `type` field to Domain model ("app" vs "content")
+- Created catch-all route `/kemponet/[...path]` for content sites
+- Created `CorporateTemplate` component for rendering corporate pages
+- Migrated GiggleNet and KempoSoft from hardcoded React to database pages
+- App domains (flipflop, giggle, kempotube, kemponet-browser, kempopedia) keep React routes
+- Content domains (gigglenet, kemposoft) now served from database
+
+**Unified KempoNet Search** — Search across all content
+- Updated `/api/search` to query both `articles` and `pages` tables
+- Uses PostgreSQL UNION with full-text search ranking
+- Search results now show domain name (e.g., "gigglenet", "kempopedia")
+- GiggleNet and KempoSoft pages now discoverable via Giggle search
+
+**Popular Sites Page** — Browse all KempoNet sites
+- Created `/kemponet/giggle/popular-sites` page
+- Shows "Top Favorites" section with icons
+- Shows "Other Sites" section from domains database (excludes favorites)
+- Added "Popular Sites" link on Giggle home page
+
+**Domain DisplayName Field** — Human-readable site names
+- Added `displayName` field to Domain model (e.g., "GiggleNet" for "gigglenet")
+- Updated `/api/domains` endpoint to return displayName
+- Popular Sites shows display names instead of URL slugs
+
+**Favorites Updates** — Alphabetized and expanded
+- Added Giggle to favorites (search icon)
+- Reordered favorites alphabetically: FlipFlop, Giggle, Kempopedia, KempoNet Browser, KempoTube
+
+**Branding Updates** — Kempo identity
+- Changed browser tab title from "Kempopedia" to "Kempo"
+- Created blue "K" favicon (`/public/icon.svg`)
+- Changed Giggle search placeholder to "Search the KempoNet..."
+
+---
+
+#### December 19, 2025
 
 **Kemple Renamed to Giggle** — Search engine rebrand
 - Renamed `/kemponet/kemple` to `/kemponet/giggle`

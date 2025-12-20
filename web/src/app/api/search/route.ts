@@ -6,6 +6,8 @@ interface SearchResult {
   title: string
   type: string
   snippet: string
+  url: string
+  domain: string
   rank: number
 }
 
@@ -31,34 +33,60 @@ export async function GET(request: Request) {
       return NextResponse.json([])
     }
 
-    // PostgreSQL full-text search across title and content
+    // PostgreSQL full-text search across articles and pages using UNION
     const results = await prisma.$queryRaw<SearchResult[]>`
-      SELECT
-        slug,
-        title,
-        type,
-        LEFT(content, 200) as snippet,
-        ts_rank(
-          setweight(to_tsvector('english', title), 'A') ||
-          setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
-          to_tsquery('english', ${sanitizedQuery})
-        ) as rank
-      FROM articles
-      WHERE
-        status = 'published'
-        AND (
-          to_tsvector('english', title) @@ to_tsquery('english', ${sanitizedQuery})
-          OR to_tsvector('english', COALESCE(content, '')) @@ to_tsquery('english', ${sanitizedQuery})
-        )
+      (
+        SELECT
+          slug,
+          title,
+          type,
+          LEFT(content, 200) as snippet,
+          '/kemponet/kempopedia/wiki/' || slug as url,
+          'kempopedia' as domain,
+          ts_rank(
+            setweight(to_tsvector('english', title), 'A') ||
+            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
+            to_tsquery('english', ${sanitizedQuery})
+          ) as rank
+        FROM articles
+        WHERE
+          status = 'published'
+          AND (
+            to_tsvector('english', title) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+          )
+      )
+      UNION ALL
+      (
+        SELECT
+          p.slug,
+          p.title,
+          'page' as type,
+          LEFT(p.content, 200) as snippet,
+          '/kemponet/' || d.name || CASE WHEN p.slug = '' THEN '' ELSE '/' || p.slug END as url,
+          d.name as domain,
+          ts_rank(
+            setweight(to_tsvector('english', p.title), 'A') ||
+            setweight(to_tsvector('english', COALESCE(p.content, '')), 'B'),
+            to_tsquery('english', ${sanitizedQuery})
+          ) as rank
+        FROM pages p
+        JOIN domains d ON p.domain_id = d.id
+        WHERE
+          p.searchable = true
+          AND (
+            to_tsvector('english', p.title) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(p.content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+          )
+      )
       ORDER BY rank DESC
-      LIMIT 5
+      LIMIT 10
     `
 
     // Clean up snippets - remove markdown and truncate nicely
     const cleanedResults = results.map(result => ({
       ...result,
       snippet: cleanSnippet(result.snippet, query),
-      url: `/kemponet/kempopedia/wiki/${result.slug}`,
     }))
 
     return NextResponse.json(cleanedResults)
@@ -67,7 +95,7 @@ export async function GET(request: Request) {
 
     // Fallback to simple ILIKE search if full-text search fails
     try {
-      const fallbackResults = await prisma.article.findMany({
+      const articleResults = await prisma.article.findMany({
         where: {
           status: "published",
           OR: [
@@ -84,16 +112,46 @@ export async function GET(request: Request) {
         take: 5,
       })
 
-      const cleanedResults = fallbackResults.map(result => ({
+      const pageResults = await prisma.page.findMany({
+        where: {
+          searchable: true,
+          OR: [
+            { title: { contains: query, mode: "insensitive" } },
+            { content: { contains: query, mode: "insensitive" } },
+          ],
+        },
+        select: {
+          slug: true,
+          title: true,
+          content: true,
+          domain: {
+            select: { name: true }
+          }
+        },
+        take: 5,
+      })
+
+      const cleanedArticles = articleResults.map(result => ({
         slug: result.slug,
         title: result.title,
         type: result.type,
         snippet: cleanSnippet(result.content.slice(0, 200), query),
         url: `/kemponet/kempopedia/wiki/${result.slug}`,
+        domain: 'kempopedia',
         rank: 1,
       }))
 
-      return NextResponse.json(cleanedResults)
+      const cleanedPages = pageResults.map(result => ({
+        slug: result.slug,
+        title: result.title,
+        type: 'page',
+        snippet: cleanSnippet(result.content.slice(0, 200), query),
+        url: `/kemponet/${result.domain.name}${result.slug ? '/' + result.slug : ''}`,
+        domain: result.domain.name,
+        rank: 1,
+      }))
+
+      return NextResponse.json([...cleanedArticles, ...cleanedPages].slice(0, 10))
     } catch (fallbackError) {
       console.error("Fallback search error:", fallbackError)
       return NextResponse.json([])

@@ -123,6 +123,9 @@ export default function KempoNetPage() {
         <div className="mb-8 p-4 border-2 border-gray-900 bg-white">
           <h3 className="font-bold mb-3 pb-2 border-b-2 border-gray-300">Quick Links</h3>
           <div className="grid grid-cols-2 gap-2 text-sm">
+            <a href="/kemponet/kemponet-browser/favorites?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
+              → Favorites
+            </a>
             <a href="/kemponet/giggle?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
               → Giggle Search
             </a>
@@ -132,7 +135,6 @@ export default function KempoNetPage() {
             <a href="/kemponet/kempotube?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
               → KempoTube
             </a>
-            <span className="text-gray-400">→ KempoMail (Coming Soon)</span>
           </div>
         </div>
 
