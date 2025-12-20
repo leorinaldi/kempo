@@ -11,12 +11,12 @@ const config: Config = {
       colors: {
         // Wikipedia-inspired colors
         'wiki-blue': '#3366cc',
-        'wiki-link': '#0645ad',
+        'wiki-link': '#dc2626',
         'wiki-visited': '#0b0080',
         'wiki-border': '#a2a9b1',
         'wiki-background': '#f8f9fa',
         'wiki-infobox': '#f8f9fa',
-        'wiki-infobox-header': '#cedff2',
+        'wiki-infobox-header': '#ffedd5',
       },
       fontFamily: {
         serif: ['Georgia', 'Times New Roman', 'serif'],

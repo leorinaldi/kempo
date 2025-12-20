@@ -62,7 +62,8 @@ body {
 }
 
 .infobox-header {
-  @apply bg-wiki-infobox-header text-center font-bold py-2 px-3 text-base;
+  @apply text-center font-bold py-2 px-3 text-base text-black;
+  background: #ffedd5;
 }
 
 .infobox-image {
@@ -96,4 +97,24 @@ body {
 
 .wikilink-missing {
   @apply text-red-700;
+}
+
+/* Audio player slider */
+.audio-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f97316;
+  cursor: pointer;
+}
+
+.audio-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f97316;
+  cursor: pointer;
+  border: none;
 }

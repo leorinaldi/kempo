@@ -33,12 +33,59 @@ tags:
 
 #### December 19, 2025 (Latest)
 
-**Kemple Full-Text Search Engine** — Real search functionality
+**Kemple Renamed to Giggle** — Search engine rebrand
+- Renamed `/kemponet/kemple` to `/kemponet/giggle`
+- Updated all references throughout codebase, README, and project history
+- New orange color scheme: classic orange "G" (#f97316) with light orange "iggle" (#fdba74)
+
+**GiggleNet Company Page** — New corporate homepage
+- Created `/kemponet/gigglenet` page for GiggleNet Inc.
+- Orange-themed header matching Giggle branding
+- Features Giggle, Kempopedia, and KempoTube as services
+- Headquarters: Summerview, CA (founded 1998 k.y.)
+
+**KempoSoft Company Page** — New corporate homepage
+- Created `/kemponet/kemposoft` page for KempoSoft Corporation
+- Blue-themed header with Portals-style 4-square logo
+- Features KempoSoft Portals, KempoNet Browser, and KempoSoft Mobile OS
+- Headquarters: Portland, OR (founded 1975 k.y.)
+- Tagline: "Where do you think you're going?"
+
+**Domain Registry Database** — Track KempoNet domain ownership
+- Created `domains` table in PostgreSQL with name, owner, registeredAt fields
+- Registered domains: favorites (kemponet), giggle, gigglenet, kemponet-browser, kempopedia, kemposoft, kempotube
+- GiggleNet owns: giggle, gigglenet, kempopedia, kempotube
+- KempoSoft owns: kemponet-browser, kemposoft
+
+**Kempopedia Orange Styling** — New brand colors
+- Orange header banner (#f97316) with white "Kempopedia" title
+- Red links throughout (#dc2626) matching KempoTube
+- Light orange infobox headers (#ffedd5) with black text
+- Orange Kempopedia icon (book with white lines) on favorites page
+
+**Giggle Search Styling** — Consistent brand experience
+- Red search result links matching Kempopedia/KempoTube
+- Red focus ring on search input
+- Simplified result display ("Person · kempopedia" instead of "kempopedia.org")
+
+**Audio Player Orange Theme** — Consistent UI colors
+- Orange play button (#f97316)
+- Orange timeline slider dot
+
+**PC About Dialog Update** — Simplified specs
+- Changed processor to "Kempaq Prontium II"
+- Removed graphics card line
+
+---
+
+#### December 19, 2025 (Earlier)
+
+**Giggle Full-Text Search Engine** — Real search functionality
 - Replaced dropdown menu with PostgreSQL-powered full-text search
 - Uses `to_tsvector` and `to_tsquery` with weighted ranking (title weighted higher)
 - Returns top 5 results with title, type, and snippet
 - Created `/api/search` API endpoint for search queries
-- Vertically centered search bar on the Kemple page
+- Vertically centered search bar on the Giggle page
 
 **KempoNet Browser Rename** — Clarified browser naming
 - Renamed `/kemponet/kemponet` folder to `/kemponet/kemponet-browser`
@@ -64,7 +111,7 @@ tags:
 **Mobile Favorites Page** — New bookmarks experience
 - Created `/kemponet/favorites` page with links to Kempopedia, KempoNet, and KempoTube
 - Star button in mobile browser now navigates to favorites page
-- Added KempoNet to Kemple search dropdown
+- Added KempoNet to Giggle search dropdown
 
 **Mobile Home Screen Grid** — Refined app layout
 - Changed to 3-column x 4-row grid for better spacing
@@ -80,7 +127,7 @@ tags:
 - Using Heroicons open-book icon (MIT licensed)
 - Simple two-page spread design in grey on light grey background
 
-**Kemple Search Modernization** — Cleaner UI styling
+**Giggle Search Modernization** — Cleaner UI styling
 - Softened borders from black to medium grey
 - Added subtle rounded corners
 - System sans-serif font on button
@@ -103,7 +150,7 @@ tags:
 - Renamed "KempoScape Navigator" to "KempoNet" throughout the codebase
 - Moved settings page from `/kemponet/kemposcape` to `/kemponet/kemponet`
 - Address bar now correctly shows `kttp://kemponet` for settings page
-- `/kemponet` redirects to `/kemponet/kemple` (default home)
+- `/kemponet` redirects to `/kemponet/giggle` (default home)
 - Updated localStorage keys and message types to use `kemponet-` prefix
 
 **Compass Icon Redesign** — Clean, Safari-inspired compass design
@@ -234,24 +281,24 @@ tags:
 #### December 19, 2025 (Morning)
 
 **KempoNet Architecture Overhaul** — Generalized browser simulation with settings
-- Created `/kemponet/kemple` as standalone page (previously inline in main KempoNet)
+- Created `/kemponet/giggle` as standalone page (previously inline in main KempoNet)
 - Created `/kemponet/kemposcape` — KempoScape Navigator settings/home page:
   - Home page location setting (persisted to localStorage)
   - Show address bar toggle (functional, takes effect immediately)
-  - Quick links to Kemple, Kempopedia, KempoTube
+  - Quick links to Giggle, Kempopedia, KempoTube
   - KempoSoft Corporation branding and welcome message
 - Made address bar fully editable — type `kttp://` URLs and press Enter to navigate
 - Added browser settings button (K compass icon) to toolbar for quick access to settings
 - Settings changes apply immediately via storage events (no page reload needed)
-- Added KempoScape to Kemple dropdown menu (alphabetical: Kempopedia, KempoScape, KempoTube)
+- Added KempoScape to Giggle dropdown menu (alphabetical: Kempopedia, KempoScape, KempoTube)
 - `BROWSER_HOME` constant for configurable default home page
 
 **KempoNet Link Sandboxing** — Constrained browser to kemponet URLs only
 - KempoNetBridge now strips non-kemponet links from DOM (keeps text, removes clickability)
 - MutationObserver watches for dynamic content and strips new external links
 - Prevents navigation outside the `/kemponet/*` namespace while inside KempoScape Navigator
-- Removed special-case "Kemple" button from Kempopedia header
-- Removed "Back to Kempo/Kemple" links from KempoTube header
+- Removed special-case "Giggle" button from Kempopedia header
+- Removed "Back to Kempo/Giggle" links from KempoTube header
 - Simplified Kempopedia header to just show "Kempopedia" (no breadcrumb)
 
 **First Database Implementation** — PostgreSQL database with Prisma ORM
@@ -363,7 +410,7 @@ tags:
 - Created KempoNet interface at /kemponet with authentic 1990s beige PC monitor
 - CRT effects including scanlines and screen curvature
 - **KempoScape Navigator** browser (Netscape-inspired) with full navigation
-- **Kemple** search engine home page (Google-inspired with colorful logo)
+- **Giggle** search engine home page (Google-inspired with colorful logo)
 - Working Back/Forward/Home buttons with history tracking
 - Address bar showing "kttp://" URLs (fictional protocol)
 - **KS Portals 25** operating system (Windows-inspired):
@@ -377,10 +424,9 @@ tags:
 **Fictional Computing Ecosystem Established**
 - KempoSoft Portals (Windows parallel)
 - KempoScape Navigator (Netscape parallel)
-- Kemple (Google parallel)
+- Giggle (Google parallel)
 - Kempaq Scenario (Compaq parallel)
-- Kemptel Prontium II (Intel Pentium parallel)
-- Kvidia Nova 128 (Nvidia parallel)
+- Kempaq Prontium II (Intel Pentium parallel)
 
 **Technical Implementation**
 - KempoNetBridge component for iframe-parent communication

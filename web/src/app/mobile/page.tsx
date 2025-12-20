@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 
-const DEFAULT_HOME = "/kemponet/kemple"
+const DEFAULT_HOME = "/kemponet/giggle"
 
 export default function MobilePage() {
   return (

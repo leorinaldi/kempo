@@ -205,7 +205,7 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - Responsive screen (full-width on mobile, 650px on desktop)
 - **Intro animation** on first visit: animated cursor moves to KempoScape Navigator icon and clicks to open
 - **KempoNet Browser** (Netscape-inspired) with full navigation
-- **Kemple** search engine home page (Google-inspired with colorful logo)
+- **Giggle** search engine home page (Google-inspired with colorful logo)
   - Full-text search across all Kempopedia articles
   - PostgreSQL-powered search with relevance ranking
   - Returns top 5 results with title, type, and snippet
@@ -234,7 +234,7 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 
 | Site | URL | Description |
 |------|-----|-------------|
-| Kemple | `kttp://kemple` | Search engine home page (default) |
+| Giggle | `kttp://giggle` | Search engine home page (default) |
 | KempoNet Browser | `kttp://kemponet-browser` | Browser settings and quick links |
 | Kempopedia | `kttp://kempopedia` | Encyclopedia wiki |
 | KempoTube | `kttp://kempotube` | Video browsing |
@@ -270,12 +270,12 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 |------------|------------------|
 | Microsoft Windows | KempoSoft Portals |
 | Netscape Navigator | KempoNet Browser |
-| Google | Kemple |
-| Wikipedia | Kempopedia |
-| YouTube | KempoTube |
+| Google | Giggle (owned by GiggleNet) |
+| Wikipedia | Kempopedia (owned by GiggleNet) |
+| YouTube | KempoTube (owned by GiggleNet) |
+| Alphabet/Google Inc. | GiggleNet Inc. |
+| Microsoft Corporation | KempoSoft Corporation |
 | Compaq | Kempaq |
-| Intel | Kemptel |
-| Nvidia | Kvidia |
 
 ## Kempopedia
 
@@ -344,7 +344,7 @@ kempo/
         ├── app/
         │   ├── pc/                # PC device page (1990s computer interface)
         │   ├── kemponet/          # KempoNet web pages (redirects to /pc if accessed directly)
-        │   │   ├── kemple/        # Kemple search engine (kttp://kemple)
+        │   │   ├── giggle/        # Giggle search engine (kttp://giggle)
         │   │   ├── kemponet-browser/  # Browser settings page (kttp://kemponet-browser)
         │   │   ├── kempopedia/    # Kempopedia pages (kttp://kempopedia)
         │   │   │   ├── wiki/[slug]/   # Individual article pages

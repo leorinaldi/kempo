@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-const DEFAULT_HOME = "kttp://kemple"
+const DEFAULT_HOME = "kttp://giggle"
 
 export default function KempoNetPage() {
   const [homePage, setHomePage] = useState(DEFAULT_HOME)
@@ -123,8 +123,8 @@ export default function KempoNetPage() {
         <div className="mb-8 p-4 border-2 border-gray-900 bg-white">
           <h3 className="font-bold mb-3 pb-2 border-b-2 border-gray-300">Quick Links</h3>
           <div className="grid grid-cols-2 gap-2 text-sm">
-            <a href="/kemponet/kemple?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
-              → Kemple Search
+            <a href="/kemponet/giggle?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
+              → Giggle Search
             </a>
             <a href="/kemponet/kempopedia?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
               → Kempopedia
@@ -154,7 +154,7 @@ export default function KempoNetPage() {
                 onChange={(e) => setHomePage(e.target.value)}
                 className="flex-1 px-2 py-1 text-sm font-mono border-2 border-gray-900 outline-none"
                 style={{ background: "#fffef8" }}
-                placeholder="kttp://kemple"
+                placeholder="kttp://giggle"
               />
             </div>
             <p className="text-xs text-gray-500 mt-1">

@@ -12,7 +12,7 @@ interface SearchResult {
   rank: number
 }
 
-export default function KemplePage() {
+export default function GigglePage() {
   const router = useRouter()
   const [query, setQuery] = useState("")
   const [results, setResults] = useState<SearchResult[]>([])
@@ -76,7 +76,7 @@ export default function KemplePage() {
       {/* Top spacer - pushes content to center the search bar */}
       <div className="flex-1" />
 
-      {/* Kemple Logo - positioned above the centered search bar */}
+      {/* Giggle Logo - positioned above the centered search bar */}
       <div className="mb-6">
         <h1
           className="text-6xl font-bold tracking-tight"
@@ -85,12 +85,12 @@ export default function KemplePage() {
             textShadow: '2px 2px 0px rgba(0,0,0,0.3)',
           }}
         >
-          <span style={{ color: "#4285f4" }}>K</span>
-          <span style={{ color: "#ea4335" }}>e</span>
-          <span style={{ color: "#fbbc05" }}>m</span>
-          <span style={{ color: "#4285f4" }}>p</span>
-          <span style={{ color: "#34a853" }}>l</span>
-          <span style={{ color: "#ea4335" }}>e</span>
+          <span style={{ color: "#f97316" }}>G</span>
+          <span style={{ color: "#fdba74" }}>i</span>
+          <span style={{ color: "#fdba74" }}>g</span>
+          <span style={{ color: "#fdba74" }}>g</span>
+          <span style={{ color: "#fdba74" }}>l</span>
+          <span style={{ color: "#fdba74" }}>e</span>
         </h1>
       </div>
 
@@ -103,7 +103,7 @@ export default function KemplePage() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search Kempopedia..."
-            className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-full outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-full outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600"
             style={{
               background: "#fff",
               color: "#000",
@@ -133,7 +133,7 @@ export default function KemplePage() {
             color: "#374151",
           }}
         >
-          {isSearching ? "Searching..." : "Kemple Search"}
+          {isSearching ? "Searching..." : "Giggle Search"}
         </button>
       </div>
 
@@ -151,9 +151,9 @@ export default function KemplePage() {
                   onClick={() => navigateTo(result.url)}
                 >
                   <div className="text-sm text-gray-500 mb-0.5">
-                    {formatType(result.type)} · kempopedia.org
+                    {formatType(result.type)} · kempopedia
                   </div>
-                  <div className="text-lg text-blue-700 group-hover:underline">
+                  <div className="text-lg text-red-600 group-hover:underline">
                     {result.title}
                   </div>
                   <div className="text-sm text-gray-600 mt-0.5">

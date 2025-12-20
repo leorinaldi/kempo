@@ -11,7 +11,7 @@ export function KempoNetRedirect() {
     const params = new URLSearchParams(window.location.search)
     const isKempoNet = params.get("kemponet") === "1"
 
-    // If we're at the home page inside KempoNet iframe, redirect to Kemple
+    // If we're at the home page inside KempoNet iframe, redirect to Giggle
     if (isKempoNet && pathname === "/" && window.parent !== window) {
       window.parent.postMessage({ type: "kemponet-go-home" }, "*")
     }

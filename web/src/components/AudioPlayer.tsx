@@ -80,7 +80,7 @@ export function AudioPlayer({ src, title }: AudioPlayerProps) {
       <div className="flex items-center gap-3">
         <button
           onClick={togglePlay}
-          className="w-10 h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full"
+          className="w-10 h-10 flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white rounded-full"
         >
           {isPlaying ? (
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@ export function AudioPlayer({ src, title }: AudioPlayerProps) {
             max={duration || 0}
             value={currentTime}
             onChange={handleSeek}
-            className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer audio-slider"
           />
         </div>
         <span className="text-xs text-gray-600 min-w-[80px] text-right">

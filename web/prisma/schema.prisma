@@ -49,6 +49,17 @@ model TvPlaylistItem {
   @@map("tv_playlist")
 }
 
+// ============ KEMPONET DOMAINS ============
+
+model Domain {
+  id           String   @id @default(cuid())
+  name         String   @unique // e.g., "kempotube", "giggle"
+  owner        String   // e.g., "kemponet"
+  registeredAt DateTime @map("registered_at") // real-world registration date
+
+  @@map("domains")
+}
+
 // ============ KEMPOPEDIA ARTICLES ============
 
 model Article {

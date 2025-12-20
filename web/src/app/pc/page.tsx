@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 
 // KempoNet default home page
-const DEFAULT_HOME = "/kemponet/kemple"
+const DEFAULT_HOME = "/kemponet/giggle"
 
 // Convert kttp:// URL to real path
 const kttpToPath = (kttp: string): string => {
@@ -437,8 +437,7 @@ function PCContent() {
                               }}
                             >
                               <div><span className="font-bold">System:</span> Kempaq Scenario</div>
-                              <div><span className="font-bold">Processor:</span> Kemptel Prontium II</div>
-                              <div><span className="font-bold">Graphics:</span> Kvidia Nova 128</div>
+                              <div><span className="font-bold">Processor:</span> Kempaq Prontium II</div>
                               <div><span className="font-bold">Memory:</span> 64 MB RAM</div>
                             </div>
 

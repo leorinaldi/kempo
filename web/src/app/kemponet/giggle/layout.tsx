@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { KempoNetBridge } from "@/components/KempoNetBridge"
 
-export default function KempleLayout({
+export default function GiggleLayout({
   children,
 }: {
   children: React.ReactNode
