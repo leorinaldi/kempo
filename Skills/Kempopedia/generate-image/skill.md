@@ -46,7 +46,7 @@ Image of a fictional [ROLE] in [TIME PERIOD]. [PHYSICAL DESCRIPTION: age, ethnic
 | 1955-1965 | "Muted early color, slightly faded" |
 | 1965+ | "Full color" |
 
-**Current Kempo date: January 1, 1950 k.y.** — Use black and white for now.
+Use the current simulation date to determine color style.
 
 ### Examples by Article Type
 

@@ -95,6 +95,29 @@ tags:
 - Changed grey domain label from top-level domain to full path
 - Now shows "giggle/popular-sites" instead of just "giggle"
 
+**Kempaq Corporation Page** — Computer & processor manufacturer
+- Created `/kemponet/kempaq` corporate page for Kempaq Corporation
+- Green branding (#059669) with custom circuit-board computer logo
+- Products: Kempaq Scenario computers, Prontium processors, Kempaq Servers
+- Headquarters: Austin, Texas (founded 1982 k.y.)
+- Added new icons to CorporateTemplate: computer, chip, server, grid, compass, phone
+
+**Kempopedia Streamlined** — Simplified home page
+- Reduced intro to single paragraph with article/link statistics
+- Removed verbose explanations about the Kempo universe
+- Added k.y. date note inline
+
+**Calendar System Cleanup** — Removed hardcoded dates
+- Removed all references to "January 1, 1950 k.y." as current date throughout project
+- Updated Skills files to use "current simulation date" instead
+- Removed all references to "Gregorian" calendar
+- Simplified k.y. explanation to just "k.y. (Kempo Years)"
+- Master timeline infobox simplified
+
+**Corporate Page Refinements**
+- Removed copyright footers from all corporate pages
+- Updated GiggleNet tagline to "Organizing the Kempo world's information"
+
 ---
 
 #### December 19, 2025
@@ -285,7 +308,7 @@ tags:
 - Migrated all 182 Kempopedia articles from markdown files to PostgreSQL database
 - Created `Article` model with slug, title, type, content (markdown), infobox (JSON), timelineEvents (JSON), tags, dates
 - Created `Revision` model for tracking article history with editSummary, kempoDate, and kempoEvent fields
-- Each article has an initial revision dated "January 1, 1950 k.y."
+- Each article has an initial revision dated at the simulation start date
 - Converted all page components to async database queries
 - Markdown files in `content/articles/` now serve as backups only
 - Enables future features: revision history UI, full-text search, admin editing
@@ -632,7 +655,7 @@ tags:
 - Kempopedia: fictional encyclopedia with Wikipedia-style articles
 - Next.js web app with MDX article rendering
 - Infobox components and wiki-style CSS
-- k.y. calendar system (matches Gregorian years)
+- k.y. (Kempo Years) calendar system
 - Sample article: President Varicron
 
 **Vercel Deployment**

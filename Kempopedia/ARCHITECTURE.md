@@ -208,6 +208,6 @@ Internal links use double brackets, parsed at render time:
 ## Differences from Wikipedia
 
 - **Single fictional universe**: All content is Kempo canon
-- **k.y. calendar**: All dates use Kempo Year system (same as Gregorian years)
+- **k.y. calendar**: All dates use k.y. (Kempo Years)
 - **AI-generated**: Content created collaboratively with AI
 - **Curated**: Not open to public editing (initially)

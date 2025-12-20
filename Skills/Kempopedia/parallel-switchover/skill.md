@@ -23,7 +23,7 @@ Not every historical figure needs a parallel switchover. Use this rule:
 
 ## Critical Rules
 
-1. **Current Date: January 1, 1950 k.y.** — No events after this date
+1. **Simulation Date Rule** — No events after the current simulation date
 2. **No dead links**: Every switchover MUST have a stub article created
 3. **Create related switchovers**: When switching a person, also switch their associated places, institutions, parties
 
@@ -158,7 +158,7 @@ After creating a switchover, you MUST follow all four phases. See [[global-rules
 
 ### Phase 1: Content Quality
 - [ ] Registry entry added to parallel-switchover.md
-- [ ] All dates on or before January 1, 1950 k.y.
+- [ ] All dates on or before the current simulation date
 - [ ] Uses Kempo political parties (National/Federal)
 - [ ] Wikilinks use correct slug with pipe syntax
 

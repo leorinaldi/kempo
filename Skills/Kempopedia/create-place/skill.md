@@ -6,7 +6,7 @@ You are creating a **place article** for Kempopedia—a full entry for a fiction
 
 ## Critical Rules
 
-1. **Current Date: January 1, 1950 k.y.** — No events after this date
+1. **Simulation Date Rule** — No events after the current simulation date
 2. **No dead links**: Every wikilink must have an article (create stubs)
 3. **Infobox wikilinks**: Use `[[wikilinks]]` for state, country, and related places in infobox fields
 4. **Real places**: Most real-world places keep their names; use parallel switchover for significant fictional locations
@@ -148,7 +148,7 @@ Include location-specific details:
 | 1955-1965 | "Muted early color, slightly faded" |
 | 1965+ | "Full color" |
 
-**Current Kempo date: January 1, 1950 k.y.** — Use black and white for now.
+Use the current simulation date to determine color style.
 
 ### Step 4: Build the Prompt
 
@@ -254,7 +254,7 @@ Places should connect to:
 > **CRITICAL**: A place article is NOT complete until all phases are done. See [[global-rules]] for full details.
 
 ### Phase 1: Content Quality
-- [ ] All events on or before January 1, 1950 k.y.
+- [ ] All events on or before the current simulation date
 - [ ] All dates use k.y. format
 - [ ] Infobox uses wikilinks for linkable fields (state, country)
 - [ ] Geographic and period details are accurate

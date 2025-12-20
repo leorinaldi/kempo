@@ -22,11 +22,7 @@ Kempo represents an unprecedented creative asset: an alternate timeline with int
 
 ## Calendar System
 
-All dates in Kempo use **k.y.** (Kempo Year), which corresponds to Gregorian calendar numbering in terms of the passage of time since the common era began. For example, 1948 k.y. ≈ 1948 AD chronologically.
-
-**Current Date: January 1, 1950 k.y.**
-
-The Kempo universe is a living simulation. The current date represents the "present day"—no events after this date have occurred yet. This alternate branch of reality diverged from our own in the late 1800s and has developed its own distinct people, institutions, and culture while following similar technological and social trajectories.
+All dates in Kempo use **k.y.** (Kempo Years).
 
 ## Featured Storylines
 
@@ -240,6 +236,7 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 | KempoNet Browser | `kttp://kemponet-browser` | Browser settings and quick links |
 | KempoTube | `kttp://kempotube` | Video browsing |
 | GiggleNet | `kttp://gigglenet` | GiggleNet Inc. corporate page |
+| Kempaq | `kttp://kempaq` | Kempaq Corporation corporate page (computers & processors) |
 | KempoSoft | `kttp://kemposoft` | KempoSoft Corporation corporate page |
 
 ## Kempo Mobile
@@ -279,7 +276,7 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 | TikTok | FlipFlop |
 | Alphabet/Google Inc. | GiggleNet Inc. |
 | Microsoft Corporation | KempoSoft Corporation |
-| Compaq | Kempaq |
+| Compaq/Dell + Intel | Kempaq Corporation (computers & Prontium processors) |
 
 ## Kempopedia
 
@@ -588,7 +585,7 @@ Skills are Claude prompts that guide article creation. Each skill has its own fo
 
 The `global-rules` skill contains core rules for all article creation:
 
-1. **Current Date Rule** - January 1, 1950 k.y. is the present
+1. **Simulation Date Rule** - The current simulation date is the present
 2. **Real People vs Parallel Switchovers** - When to use real historical figures
 3. **Character Reuse Before Creation** - Search existing characters before creating new ones
 4. **No Dead Links** - Every wikilink must point to an existing article

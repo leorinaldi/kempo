@@ -2,19 +2,14 @@
 
 These rules apply to ALL Kempopedia article creation. Reference this skill before creating any content.
 
-## 1. Current Date Rule
+## 1. Simulation Date Rule
 
-**Current Date: January 1, 1950 k.y.**
+The Kempo universe is a living simulation. The current simulation date is the "present day."
 
-The Kempo universe is a living simulation. This date is the "present day."
-
-- **No future events**: Do not include any events after January 1, 1950 k.y.
+- **No future events**: Do not include any events after the current simulation date
 - **Living people**: Use present tense for anyone alive as of this date
 - **No "Death and legacy" sections** for living people
 - **Anachronism check**: Don't use terms/concepts that wouldn't exist yet
-  - BAD: "Cold War" (term was emerging but not established)
-  - BAD: "Korean War" (started June 1950)
-  - GOOD: "rising tensions with the Soviet Union"
 
 ## 2. Real People vs Parallel Switchovers
 
@@ -356,7 +351,7 @@ Each entry on its own line, with a blank line between entries.
 | 1955-1965 | "Muted early color, slightly faded" |
 | 1965+ | "Full color" |
 
-**Current Kempo date: January 1, 1950 k.y.** — Use black and white for most images.
+Use the current simulation date to determine color style.
 
 ## 15. Second-Order Updates (MANDATORY)
 
@@ -623,7 +618,7 @@ Label Article → links to → Artists, Notable releases
 ## Final Checklist Before Completing Any Article
 
 ### Phase 1: Content Quality
-- [ ] All events are on or before January 1, 1950 k.y.
+- [ ] All events are on or before the current simulation date
 - [ ] All dates use k.y. format
 - [ ] Political parties use Kempo names (National/Federal)
 - [ ] Infobox uses wikilinks for linkable fields

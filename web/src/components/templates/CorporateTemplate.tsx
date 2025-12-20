@@ -6,7 +6,7 @@ interface CorporateMetadata {
   headerGradient?: string
   headerBorderColor?: string
   accentColor?: string
-  logoType?: "letter" | "grid" | "compass"
+  logoType?: "letter" | "grid" | "compass" | "kempaq"
   logoLetter?: string
   companyInfo?: {
     headquarters?: string
@@ -64,6 +64,22 @@ export function CorporateTemplate({ page, domain }: CorporateTemplateProps) {
               <div style={{ background: "#93c5fd" }}></div>
               <div style={{ background: "#93c5fd" }}></div>
               <div style={{ background: "#60a5fa" }}></div>
+            </div>
+          ) : metadata.logoType === "kempaq" ? (
+            <div className="w-12 h-12 flex items-center justify-center">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                {/* Monitor frame */}
+                <rect x="6" y="6" width="36" height="28" rx="2" fill="white" stroke="white" strokeWidth="2"/>
+                {/* Screen */}
+                <rect x="9" y="9" width="30" height="22" rx="1" fill={accentColor}/>
+                {/* Circuit lines on screen */}
+                <path d="M12 15h8l3 3h13" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M12 20h5l2 2h4l2-2h11" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M12 25h10l2-2h12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                {/* Stand */}
+                <rect x="20" y="34" width="8" height="3" fill="white"/>
+                <rect x="16" y="37" width="16" height="3" rx="1" fill="white"/>
+              </svg>
             </div>
           ) : (
             <div
@@ -139,6 +155,33 @@ export function CorporateTemplate({ page, domain }: CorporateTemplateProps) {
                     ) : service.icon === "flipflop" ? (
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
                         <path d="M12 4l-8 8h5v8h6v-8h5z" />
+                      </svg>
+                    ) : service.icon === "computer" ? (
+                      <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                      </svg>
+                    ) : service.icon === "chip" ? (
+                      <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+                      </svg>
+                    ) : service.icon === "server" ? (
+                      <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z" />
+                      </svg>
+                    ) : service.icon === "grid" ? (
+                      <div className="grid grid-cols-2 gap-0.5 w-4 h-4">
+                        <div className="bg-white"></div>
+                        <div className="bg-white/60"></div>
+                        <div className="bg-white/60"></div>
+                        <div className="bg-white"></div>
+                      </div>
+                    ) : service.icon === "compass" ? (
+                      <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                      </svg>
+                    ) : service.icon === "phone" ? (
+                      <svg className="w-5 h-5" fill="none" stroke="white" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
                       </svg>
                     ) : (
                       <span className="text-white font-bold">{service.name.charAt(0)}</span>

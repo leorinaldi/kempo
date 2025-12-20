@@ -6,7 +6,7 @@ You are creating a **person article** for Kempopedia—a full biographical entry
 
 ## Critical Rules
 
-1. **Current Date: January 1, 1950 k.y.** — No events after this date
+1. **Simulation Date Rule** — No events after the current simulation date
 2. **Living people**: Use present tense; no "Death and legacy" section
 3. **No dead links**: Every wikilink must have an article (create stubs)
 4. **Infobox wikilinks**: Use `[[wikilinks]]` for places, institutions, parties in infobox fields
@@ -91,7 +91,7 @@ dates:
 
 ### Article Content (MDX)
 
-For **living people** (alive as of January 1, 1950 k.y.):
+For **living people** (alive as of the current simulation date):
 
 ```mdx
 **Full Name** (born Birth date) is a [nationality] [[National Party]] [occupation] who [present-tense summary of significance].
@@ -125,7 +125,7 @@ For **living people** (alive as of January 1, 1950 k.y.):
 - [[Related Event]]
 ```
 
-For **deceased people** (died before January 1, 1950 k.y.):
+For **deceased people** (died before the current simulation date):
 
 ```mdx
 **Full Name** (Birth date – Death date) was a [nationality] [occupation] who [past-tense summary].
@@ -222,7 +222,7 @@ Image of a fictional [ROLE] in [TIME PERIOD]. [PHYSICAL DESCRIPTION: age, ethnic
 > **CRITICAL**: A person article is NOT complete until all phases are done. See [[global-rules]] for full details.
 
 ### Phase 1: Content Quality
-- [ ] All events on or before January 1, 1950 k.y.
+- [ ] All events on or before the current simulation date
 - [ ] Living people use present tense (no death/legacy section)
 - [ ] All dates use k.y. format
 - [ ] Political party uses Kempo name (National/Federal)

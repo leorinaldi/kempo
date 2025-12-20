@@ -15,32 +15,19 @@ export default async function KempopediaHome() {
       {/* Main content */}
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="wiki-content">
-          <h1>Welcome to Kempopedia</h1>
+          <h1>Kempopedia</h1>
 
           <p>
-            <strong>Kempopedia</strong> is the comprehensive encyclopedia of the Kempo
-            universe—an alternate branch of reality that diverged from our own around the
-            late 1800s. By the 1950s, most major people, companies, and products have
-            different names and variations from base reality, though technological progress
-            follows a similar pace. Larger cities and nations retain their real-world names,
-            but colleges and smaller towns often don&apos;t.
-          </p>
-
-          <p>
-            All dates in Kempopedia use the <strong>k.y.</strong> (Kempo Year) system,
-            which corresponds to Gregorian calendar numbering (e.g., 1952 k.y. ≈ 1952 AD
-            in terms of the passage of time since the common era began).
-          </p>
-
-          <p className="text-sm text-gray-600 mt-4">
+            <strong>Kempopedia</strong> is the comprehensive encyclopedia of the Kempo universe.
             Currently documenting <strong>{totalArticles}</strong> articles across {categories.length} categories,
-            connected by <strong>{linkStats.totalLinks.toLocaleString()}</strong> internal links.
+            connected by <strong>{linkStats.totalLinks.toLocaleString()}</strong> links.
+            <em> Note: All dates in k.y. (Kempo Years), unless otherwise indicated.</em>
           </p>
         </div>
 
         {/* Categories Grid - outside wiki-content to avoid link styling */}
         <div className="max-w-4xl">
-          <h2 className="text-2xl font-serif font-normal border-b border-wiki-border pb-1 mt-8 mb-4">Browse by Category</h2>
+          <h2 className="text-2xl font-serif font-normal border-b border-wiki-border pb-1 mt-4 mb-4">Browse by Category</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
             {categories.map((category) => (

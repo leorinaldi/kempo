@@ -6,9 +6,9 @@ You are creating an article for **Kempopedia**, the encyclopedia of Kempo—a co
 
 ## Calendar System
 
-All dates use **k.y.** (Kempo Year), which matches standard Gregorian years. For example, 1948 k.y. = 1948 AD.
+All dates use **k.y.** (Kempo Years).
 
-**Current Date: January 1, 1950 k.y.** — This is the "present day" in Kempo. Do not include events after this date.
+The current simulation date is the "present day" in Kempo. Do not include events after this date.
 
 ## Your Task
 
@@ -99,7 +99,7 @@ The **Article Title** is [one-sentence definition].
 2. **Wikilinks**: Use `[[Article Name]]` liberally — but ensure each linked article exists!
 3. **No dead links**: Create stub articles for any new wikilinks
 4. **Specificity**: Include concrete dates, names, numbers
-5. **Current date awareness**: No events after January 1, 1950 k.y.
+5. **Current date awareness**: No events after the current simulation date
 6. **Political parties**: Use National Party (not Democratic) and Federal Party (not Republican)
 7. **Present tense**: For living people and current institutions
 
@@ -130,7 +130,7 @@ The **Article Title** is [one-sentence definition].
 > **CRITICAL**: An article is NOT complete until all four phases are done. See [[global-rules]] Section 12 for full details.
 
 ### Phase 1: Content Quality
-- [ ] All events on or before January 1, 1950 k.y.
+- [ ] All events on or before the current simulation date
 - [ ] All dates use k.y. format
 - [ ] Uses Kempo political parties (National/Federal)
 - [ ] Infobox uses wikilinks for linkable fields

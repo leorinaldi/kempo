@@ -6,7 +6,7 @@ A Next.js web application for the Kempo alternate universe project - an immersiv
 
 Kempo is a collaborative AI-human project creating comprehensive fictional alternate universe documentation. By the 1950s, this parallel timeline features different presidents, celebrities, companies, and cultural touchstones while maintaining similar technological and social trajectories.
 
-The platform serves as "living documentation" for a day-by-day simulation (currently at January 1, 1950 k.y.).
+The platform serves as "living documentation" for a day-by-day simulation.
 
 ## Features
 
@@ -114,7 +114,7 @@ Articles use Markdown with:
 
 ### Date System
 
-All dates use **k.y.** (Kempo Year) notation, corresponding to Gregorian calendar years.
+All dates use **k.y.** (Kempo Years).
 
 ## Scripts
 

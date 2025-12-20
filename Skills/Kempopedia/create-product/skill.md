@@ -6,7 +6,7 @@ You are creating a **product article** for Kempopedia—a full entry for a ficti
 
 ## Critical Rules
 
-1. **Current Date: January 1, 1950 k.y.** — No events after this date
+1. **Simulation Date Rule** — No events after the current simulation date
 2. **No dead links**: Every wikilink must have an article (create stubs)
 3. **Infobox wikilinks**: Use `[[wikilinks]]` for manufacturers, places in infobox fields
 4. **Category**: Products go under **Culture and Entertainment**
@@ -291,7 +291,7 @@ Comic book illustration, bold ink lines, graphic novel style. A [YEAR era] Ameri
 | 1955-1965 | "Muted early color, slightly faded" |
 | 1965+ | "Full color" |
 
-**Current Kempo date: January 1, 1950 k.y.** — Use black and white for most product images.
+Use the current simulation date to determine color style.
 
 ## Research Guidelines
 
@@ -355,7 +355,7 @@ parallel_switchover:
 > **CRITICAL**: A product article is NOT complete until all phases are done. See [[global-rules]] for full details.
 
 ### Phase 1: Content Quality
-- [ ] All events on or before January 1, 1950 k.y.
+- [ ] All events on or before the current simulation date
 - [ ] All dates use k.y. format
 - [ ] Manufacturer linked to company article
 - [ ] Infobox uses wikilinks for linkable fields

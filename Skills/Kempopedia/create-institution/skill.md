@@ -6,7 +6,7 @@ You are creating an **institution article** for Kempopedia—a full entry for a 
 
 ## Critical Rules
 
-1. **Current Date: January 1, 1950 k.y.** — No events after this date
+1. **Simulation Date Rule** — No events after the current simulation date
 2. **No dead links**: Every wikilink must have an article (create stubs)
 3. **Infobox wikilinks**: Use `[[wikilinks]]` for places and related institutions in infobox fields
 4. **Political parties**: Use National Party (Democratic) or Federal Party (Republican)
@@ -98,7 +98,7 @@ dates:
 
 ### Modern era
 
-[Recent history, current status as of January 1, 1950 k.y.]
+[Recent history, current status as of the current simulation date]
 
 ## Campus / Facilities
 
@@ -225,7 +225,7 @@ Logo for a fictional American civil rights organization. Scales of justice or to
 | 1955-1965 | "Muted early color, slightly faded" |
 | 1965+ | "Full color" |
 
-**Current Kempo date: January 1, 1950 k.y.** — Use black and white for now.
+Use the current simulation date to determine color style.
 
 - Include setting context (city, region, landscape features)
 - Always end with "Comic book style drawing."
@@ -256,7 +256,7 @@ A prestigious American military academy campus. Cadets in formation on parade gr
 > **CRITICAL**: An institution article is NOT complete until all phases are done. See [[global-rules]] for full details.
 
 ### Phase 1: Content Quality
-- [ ] All events on or before January 1, 1950 k.y.
+- [ ] All events on or before the current simulation date
 - [ ] All dates use k.y. format
 - [ ] Uses Kempo names (National/Federal parties, etc.)
 - [ ] Infobox uses wikilinks for linkable fields (places, parent orgs)

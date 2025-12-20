@@ -130,7 +130,7 @@ When articles reference dates using `[[1945 k.y.]]` syntax:
 
 ## Checklist for Timeline Updates
 
-- [ ] Event date is on or before January 1, 1950 k.y.
+- [ ] Event date is on or before the current simulation date
 - [ ] Added to correct decade or year page
 - [ ] Anchor added for the date
 - [ ] All wikilinks in event description are valid
