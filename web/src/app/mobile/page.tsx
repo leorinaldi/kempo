@@ -178,8 +178,8 @@ function MobileContent() {
               style={{
                 background: 'linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gridTemplateRows: 'repeat(6, 1fr)',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                gridTemplateRows: 'repeat(4, 1fr)',
               }}
             >
               {/* App Grid - KempoNet in position (1,1) */}
@@ -227,9 +227,7 @@ function MobileContent() {
                   <span className="text-white text-xs font-medium">KempoNet Browser</span>
                 </button>
               </div>
-              {/* Empty cell */}
-              <div />
-              {/* FlipFlop App - centered */}
+              {/* FlipFlop App - centered in column 2 */}
               <div className="flex justify-center items-start pt-2">
                 <button
                   onClick={openFlipFlop}
