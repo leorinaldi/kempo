@@ -78,6 +78,23 @@ tags:
 - Created blue "K" favicon (`/public/icon.svg`)
 - Changed Giggle search placeholder to "Search the KempoNet..."
 
+**App Search Index** — AI-powered search for KempoNet apps
+- Created `AppSearch` model in database for indexing React app pages
+- Admin UI at `/admin/app-search` to manage search entries
+- "Scan for New" button automatically discovers `page.tsx` files in `/kemponet/`
+- AI-powered content generation using Anthropic Claude API:
+  - Per-entry "AI Refresh" button analyzes React components
+  - Generates search-friendly title, excerpt, and keywords
+  - Tracks `refreshedAt` date for each entry
+  - Only uses AI for new pages during scan (existing pages skip)
+- AI prompts include KempoNet fictional universe context
+- No-search toggle to exclude pages from search results
+- Search API updated to query articles, pages, and app_search tables
+
+**Giggle Search Results** — Improved result display
+- Changed grey domain label from top-level domain to full path
+- Now shows "giggle/popular-sites" instead of just "giggle"
+
 ---
 
 #### December 19, 2025
@@ -660,6 +677,7 @@ tags:
 - Database-backed playlists with kyDate ordering
 - Auto-generation of Kempopedia article stubs on media upload
 - Image generation via Grok API
+- **AI-powered app search** via Anthropic Claude API
 - Link statistics tracking
 
 ### Process & Documentation

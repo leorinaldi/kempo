@@ -33,7 +33,7 @@ export async function GET(request: Request) {
       return NextResponse.json([])
     }
 
-    // PostgreSQL full-text search across articles and pages using UNION
+    // PostgreSQL full-text search across articles, pages, and app_search using UNION
     const results = await prisma.$queryRaw<SearchResult[]>`
       (
         SELECT
@@ -77,6 +77,30 @@ export async function GET(request: Request) {
           AND (
             to_tsvector('english', p.title) @@ to_tsquery('english', ${sanitizedQuery})
             OR to_tsvector('english', COALESCE(p.content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+          )
+      )
+      UNION ALL
+      (
+        SELECT
+          path as slug,
+          title,
+          'app' as type,
+          excerpt as snippet,
+          path as url,
+          domain,
+          ts_rank(
+            setweight(to_tsvector('english', title), 'A') ||
+            setweight(to_tsvector('english', COALESCE(excerpt, '')), 'A') ||
+            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
+            to_tsquery('english', ${sanitizedQuery})
+          ) as rank
+        FROM app_search
+        WHERE
+          no_search = false
+          AND (
+            to_tsvector('english', title) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(excerpt, '')) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(content, '')) @@ to_tsquery('english', ${sanitizedQuery})
           )
       )
       ORDER BY rank DESC
@@ -151,7 +175,29 @@ export async function GET(request: Request) {
         rank: 1,
       }))
 
-      return NextResponse.json([...cleanedArticles, ...cleanedPages].slice(0, 10))
+      const appResults = await prisma.appSearch.findMany({
+        where: {
+          noSearch: false,
+          OR: [
+            { title: { contains: query, mode: "insensitive" } },
+            { excerpt: { contains: query, mode: "insensitive" } },
+            { content: { contains: query, mode: "insensitive" } },
+          ],
+        },
+        take: 5,
+      })
+
+      const cleanedApps = appResults.map(result => ({
+        slug: result.path,
+        title: result.title,
+        type: 'app',
+        snippet: result.excerpt,
+        url: result.path,
+        domain: result.domain,
+        rank: 1,
+      }))
+
+      return NextResponse.json([...cleanedArticles, ...cleanedPages, ...cleanedApps].slice(0, 10))
     } catch (fallbackError) {
       console.error("Fallback search error:", fallbackError)
       return NextResponse.json([])

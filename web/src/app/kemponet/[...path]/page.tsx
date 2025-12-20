@@ -18,13 +18,11 @@ export default async function ContentPage({ params }: PageProps) {
     where: { name: domainName },
   })
 
-  // If domain doesn't exist or is an app, return 404
-  // (app domains have their own dedicated routes)
-  if (!domain || domain.type === "app") {
+  if (!domain) {
     notFound()
   }
 
-  // Find the page
+  // Check pages table for content
   const page = await prisma.page.findUnique({
     where: {
       domainId_slug: {
@@ -72,7 +70,7 @@ export async function generateMetadata({ params }: PageProps) {
     where: { name: domainName },
   })
 
-  if (!domain || domain.type === "app") {
+  if (!domain) {
     return { title: "Not Found" }
   }
 

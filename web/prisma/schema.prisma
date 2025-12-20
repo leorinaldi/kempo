@@ -56,7 +56,6 @@ model Domain {
   name         String   @unique // URL slug e.g., "kempotube", "giggle"
   displayName  String?  @map("display_name") // Human-readable e.g., "KempoTube", "Giggle"
   owner        String   // e.g., "GiggleNet"
-  type         String   @default("content") // "app" | "content"
   registeredAt DateTime @map("registered_at") // real-world registration date
 
   pages        Page[]
@@ -83,6 +82,23 @@ model Page {
   @@unique([domainId, slug])
   @@index([domainId])
   @@map("pages")
+}
+
+// Search index for React app pages (search only, not used for routing)
+model AppSearch {
+  id          String    @id @default(cuid())
+  path        String    @unique // e.g., "/kemponet/kemponet-browser"
+  domain      String    // e.g., "kemponet-browser" for display in results
+  title       String    // e.g., "KempoNet Browser"
+  excerpt     String    @db.Text // short description for search results
+  content     String    @db.Text // searchable content
+  noSearch    Boolean   @default(false) @map("no_search") // exclude from search if true
+  refreshedAt DateTime? @map("refreshed_at") // when AI last reviewed this page
+
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("app_search")
 }
 
 // ============ KEMPOPEDIA ARTICLES ============

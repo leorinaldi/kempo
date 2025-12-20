@@ -131,6 +131,29 @@ export default function AdminPage() {
               <li>Major decisions</li>
             </ul>
           </Link>
+
+          {/* App Search Index */}
+          <Link
+            href="/admin/app-search"
+            className="block bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">App Search Index</h2>
+                <p className="text-sm text-gray-500">Make React pages searchable in Giggle</p>
+              </div>
+            </div>
+            <ul className="text-sm text-gray-600 space-y-1">
+              <li>Index interactive pages</li>
+              <li>Custom search excerpts</li>
+              <li>Searchable content</li>
+            </ul>
+          </Link>
         </div>
       </main>
     </div>

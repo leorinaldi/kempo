@@ -362,13 +362,15 @@ kempo/
         │   ├── tv/                # Kempo TV interface
         │   ├── admin/             # Admin panel (authenticated)
         │   │   ├── media/         # Media management
+        │   │   ├── app-search/    # App search index management
         │   │   ├── simulation/    # Simulation management (time periods)
         │   │   └── project-history/ # Project milestones
         │   ├── login/             # Authentication page
         │   └── api/               # API routes
         │       ├── auth/          # NextAuth endpoints
-        │       ├── admin/         # Admin article API
+        │       ├── admin/         # Admin APIs (articles, app-search)
         │       ├── media/         # Media upload, listing, delete
+        │       ├── search/        # Unified KempoNet search
         │       ├── radio/         # Radio playlist management
         │       └── tv/            # TV playlist management
         ├── components/            # React components (Header, Infobox, AudioPlayer, VideoPlayer, etc.)
@@ -387,6 +389,7 @@ The admin panel provides authenticated access to manage media, playlists, simula
 | Section | Purpose |
 |---------|---------|
 | Media Management | Upload and manage audio/video files, playlists |
+| App Search | Manage search index for KempoNet app pages (AI-powered) |
 | Simulation Management | Time period-based planning documents |
 | Project History | Real-world development milestones |
 
@@ -398,6 +401,17 @@ The admin panel provides authenticated access to manage media, playlists, simula
 - Track kyDate (Kempo universe date) for chronological ordering
 - Artist attribution with links to Kempopedia pages
 - Delete media files from both storage and database
+
+### App Search
+
+Manages the search index for KempoNet app pages (React pages that aren't database-driven content).
+
+- **Scan for New**: Automatically discovers new `page.tsx` files in `/kemponet/` and creates search entries
+- **AI Refresh**: Uses Claude AI to analyze page components and generate search-friendly content (title, excerpt, keywords)
+- **Per-entry management**: Edit entries, mark as no-search, or trigger AI refresh individually
+- **Tracks refresh date**: Shows when each entry was last AI-reviewed
+
+Search integrates with Giggle to find KempoNet apps alongside articles and pages.
 
 ### Simulation Management
 
@@ -451,8 +465,9 @@ Tracks real-world development milestones for the Kempo project:
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
 - **Content**: MDX with frontmatter
-- **Database**: PostgreSQL (Neon) with Prisma ORM (Articles, Pages, Media, Domains)
+- **Database**: PostgreSQL (Neon) with Prisma ORM (Articles, Pages, Media, Domains, AppSearch)
 - **Images**: Grok API (xAI) for comic book style illustrations
+- **AI Content**: Anthropic Claude API for search index content generation
 - **Media Storage**: Vercel Blob (files) + PostgreSQL (metadata)
 - **Authentication**: NextAuth.js with Google OAuth
 - **Hosting**: Vercel

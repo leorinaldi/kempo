@@ -178,7 +178,7 @@ export default function Home() {
             setTimeout(() => setVideoRemoved(true), 1000)
           }}
         >
-          <source src="/comic-tv-fades-to-black.mp4" type="video/mp4" />
+          <source src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/comic-tv-fades-to-black.mp4" type="video/mp4" />
         </video>
       )}
 

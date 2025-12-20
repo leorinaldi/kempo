@@ -19,7 +19,7 @@ const volumeLevels: { level: VolumeLevel; value: number; rotation: number }[] = 
   { level: "HIGH", value: 1.0, rotation: 45 },
 ]
 
-const INTRO_VIDEO_URL = "/kempo-tv-start.mp4"
+const INTRO_VIDEO_URL = "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/kempo-tv-start.mp4"
 
 export default function TVPage() {
   const videoRef = useRef<HTMLVideoElement>(null)

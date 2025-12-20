@@ -157,7 +157,7 @@ export default function GigglePage() {
                   onClick={() => navigateTo(result.url)}
                 >
                   <div className="text-sm text-gray-500 mb-0.5">
-                    {result.domain}
+                    {result.url.replace(/^\/kemponet\//, "").replace(/\?.*$/, "")}
                   </div>
                   <div className="text-lg text-red-600 group-hover:underline">
                     {result.title}

@@ -86,7 +86,7 @@ export default function AboutPage() {
       </Link>
 
       {/* Audio element */}
-      <audio ref={audioRef} src="/media/kempo-world-description.mp3" />
+      <audio ref={audioRef} src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/audio/kempo-world-description.mp3" />
 
       {/* Click to play overlay */}
       {needsClick && (
@@ -112,7 +112,7 @@ export default function AboutPage() {
           {/* Announcer image - left side */}
           <div className="flex-shrink-0 md:w-[300px] flex justify-end overflow-hidden">
             <Image
-              src="/media/kempo-announcer.png"
+              src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/images/kempo-announcer.png"
               alt="Kempo Announcer"
               width={400}
               height={600}
