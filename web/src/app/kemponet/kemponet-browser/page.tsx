@@ -96,7 +96,7 @@ export default function KempoNetPage() {
           </div>
           <div>
             <h1 className="text-white text-2xl font-bold" style={{ textShadow: "2px 2px 0 rgba(0,0,0,0.3)" }}>
-              KempoNet
+              KempoNet Browser
             </h1>
             <p className="text-blue-200 text-sm">Version 3.0</p>
           </div>
@@ -108,14 +108,14 @@ export default function KempoNetPage() {
         {/* Welcome section */}
         <div className="mb-8 p-4 border-2 border-gray-900 bg-white">
           <h2 className="text-lg font-bold mb-2" style={{ color: "#1e40af" }}>
-            Welcome to KempoNet!
+            Welcome to KempoNet Browser!
           </h2>
           <p className="text-sm text-gray-700 mb-3">
-            Thank you for choosing KempoNet, the premier web browser for exploring
+            Thank you for choosing KempoNet Browser, the premier web browser for exploring
             the information superhighway. With lightning-fast broadband support, you&apos;re ready to surf!
           </p>
           <p className="text-xs text-gray-500 italic">
-            &quot;KempoNet - Your Window to the World&quot;
+            &quot;KempoNet Browser - Your Window to the World&quot;
           </p>
         </div>
 
@@ -158,7 +158,7 @@ export default function KempoNetPage() {
               />
             </div>
             <p className="text-xs text-gray-500 mt-1">
-              This page will open when you click the Home button or start KempoNet.
+              This page will open when you click the Home button or start KempoNet Browser.
             </p>
           </div>
 
@@ -207,7 +207,7 @@ export default function KempoNetPage() {
         {/* Footer */}
         <div className="mt-6 text-center text-xs text-gray-500">
           <p>© KempoSoft Corporation. All rights reserved.</p>
-          <p>KempoNet is a trademark of KempoSoft Corporation.</p>
+          <p>KempoNet Browser is a trademark of KempoSoft Corporation.</p>
         </div>
       </div>
     </div>

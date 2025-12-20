@@ -11,8 +11,8 @@ const favorites = [
     icon: "globe",
   },
   {
-    name: "KempoNet",
-    path: "/kemponet/kemponet",
+    name: "KempoNet Browser",
+    path: "/kemponet/kemponet-browser",
     color: "#2563eb",
     icon: "compass",
   },

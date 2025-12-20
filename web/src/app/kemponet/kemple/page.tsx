@@ -1,37 +1,85 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
+
+interface SearchResult {
+  slug: string
+  title: string
+  type: string
+  snippet: string
+  url: string
+  rank: number
+}
 
 export default function KemplePage() {
   const router = useRouter()
-  const [selectedOption, setSelectedOption] = useState("kempopedia")
+  const [query, setQuery] = useState("")
+  const [results, setResults] = useState<SearchResult[]>([])
+  const [isSearching, setIsSearching] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false)
   const [isKempoNet, setIsKempoNet] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Check if we're inside the KempoNet iframe
+  // Check if we're inside the KempoNet iframe or mobile
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     setIsKempoNet(params.get("kemponet") === "1")
+    setIsMobile(params.get("mobile") === "1")
   }, [])
 
-  const handleSearch = () => {
-    const targetPath = `/kemponet/${selectedOption}`
+  const handleSearch = useCallback(async () => {
+    if (!query.trim() || query.trim().length < 2) {
+      setResults([])
+      setHasSearched(false)
+      return
+    }
 
-    if (isKempoNet) {
-      // Inside KempoNet iframe - use client-side navigation with param
-      router.push(`${targetPath}?kemponet=1`)
-    } else {
-      // Standalone - just navigate normally
-      router.push(targetPath)
+    setIsSearching(true)
+    setHasSearched(true)
+
+    try {
+      const response = await fetch(`/api/search?q=${encodeURIComponent(query.trim())}`)
+      const data = await response.json()
+      setResults(data)
+    } catch (error) {
+      console.error("Search failed:", error)
+      setResults([])
+    } finally {
+      setIsSearching(false)
+    }
+  }, [query])
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch()
     }
   }
 
+  const navigateTo = (url: string) => {
+    if (isKempoNet) {
+      router.push(`${url}?kemponet=1`)
+    } else if (isMobile) {
+      router.push(`${url}?mobile=1`)
+    } else {
+      router.push(url)
+    }
+  }
+
+  // Format type for display
+  const formatType = (type: string) => {
+    return type.charAt(0).toUpperCase() + type.slice(1)
+  }
+
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
-      {/* Kemple Logo */}
+    <div className="min-h-screen bg-white flex flex-col items-center px-4">
+      {/* Top spacer - pushes content to center the search bar */}
+      <div className="flex-1" />
+
+      {/* Kemple Logo - positioned above the centered search bar */}
       <div className="mb-6">
         <h1
-          className="text-5xl font-bold tracking-tight"
+          className="text-6xl font-bold tracking-tight"
           style={{
             fontFamily: "serif",
             textShadow: '2px 2px 0px rgba(0,0,0,0.3)',
@@ -46,44 +94,84 @@ export default function KemplePage() {
         </h1>
       </div>
 
-      {/* Search dropdown */}
-      <div className="w-full max-w-sm">
-        <select
-          value={selectedOption}
-          onChange={(e) => setSelectedOption(e.target.value)}
-          className="w-full px-3 py-2 text-sm cursor-pointer border border-gray-500 rounded-sm"
-          style={{
-            background: "#fffef8",
-            color: "#000",
-            fontFamily: "monospace",
-            appearance: "none",
-            WebkitAppearance: "none",
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M2 4l4 4 4-4z'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "right 8px center",
-            paddingRight: "28px",
-          }}
-        >
-          <option value="kempopedia">Kempopedia</option>
-          <option value="kemponet">KempoNet</option>
-          <option value="kempotube">KempoTube</option>
-        </select>
+      {/* Search input - this is the vertically centered element */}
+      <div className="w-full max-w-md">
+        <div className="relative">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Search Kempopedia..."
+            className="w-full px-4 py-2.5 text-base border border-gray-300 rounded-full outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+            style={{
+              background: "#fff",
+              color: "#000",
+            }}
+          />
+          {/* Search icon */}
+          <button
+            onClick={handleSearch}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Search button */}
       <div className="flex gap-2 mt-4">
         <button
           onClick={handleSearch}
-          className="px-4 py-1.5 text-sm font-medium border border-gray-500 rounded-sm"
+          disabled={isSearching}
+          className="px-4 py-1.5 text-sm font-medium border border-gray-300 rounded-sm hover:bg-gray-50 disabled:opacity-50"
           style={{
-            background: "#f3f4f6",
+            background: "#f8f9fa",
             fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
             color: "#374151",
           }}
         >
-          Kemple Search
+          {isSearching ? "Searching..." : "Kemple Search"}
         </button>
       </div>
+
+      {/* Search Results */}
+      {hasSearched && (
+        <div className="w-full max-w-md mt-6">
+          {isSearching ? (
+            <div className="text-center text-gray-500 text-sm">Searching...</div>
+          ) : results.length > 0 ? (
+            <div className="space-y-4">
+              {results.map((result) => (
+                <div
+                  key={result.slug}
+                  className="cursor-pointer group"
+                  onClick={() => navigateTo(result.url)}
+                >
+                  <div className="text-sm text-gray-500 mb-0.5">
+                    {formatType(result.type)} · kempopedia.org
+                  </div>
+                  <div className="text-lg text-blue-700 group-hover:underline">
+                    {result.title}
+                  </div>
+                  <div className="text-sm text-gray-600 mt-0.5">
+                    {result.snippet}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-500 text-sm">
+              No results found for &quot;{query}&quot;
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Bottom spacer - grows more to push content up and center the search bar */}
+      <div className="flex-[1.3]" />
     </div>
   )
 }

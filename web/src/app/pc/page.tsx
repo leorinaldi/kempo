@@ -382,7 +382,7 @@ function PCContent() {
                         className="text-white text-xs mt-1 text-center leading-tight font-bold"
                         style={{ textShadow: "1px 1px 0px rgba(0,0,0,1)" }}
                       >
-                        KempoNet
+                        KempoNet Browser
                       </span>
                     </button>
 
@@ -514,7 +514,7 @@ function PCContent() {
                             </div>
                             <div className="absolute w-1 h-1 rounded-full bg-white z-10" />
                           </div>
-                          KempoNet
+                          KempoNet Browser
                         </button>
 
                         {/* Separator */}
@@ -576,7 +576,7 @@ function PCContent() {
                           maxWidth: "150px",
                         }}
                       >
-                        <span className="truncate">KempoNet</span>
+                        <span className="truncate">KempoNet Browser</span>
                       </button>
                     )}
 
@@ -594,7 +594,7 @@ function PCContent() {
                       background: '#1e40af',
                     }}
                   >
-                    <span className="text-white text-xs font-bold">KempoNet</span>
+                    <span className="text-white text-xs font-bold">KempoNet Browser</span>
                     <div className="flex gap-1">
                       <div
                         onClick={() => setWindowState("minimized")}
@@ -667,7 +667,7 @@ function PCContent() {
                   {/* Browser settings button */}
                   <button
                     onClick={() => {
-                      const settingsPath = "/kemponet/kemponet"
+                      const settingsPath = "/kemponet/kemponet-browser"
                       if (currentPath !== settingsPath) {
                         historyRef.current = [...historyRef.current.slice(0, historyIndexRef.current + 1), settingsPath]
                         historyIndexRef.current = historyRef.current.length - 1

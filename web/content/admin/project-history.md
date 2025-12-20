@@ -31,6 +31,30 @@ tags:
 
 ### December 2025
 
+#### December 19, 2025 (Latest)
+
+**Kemple Full-Text Search Engine** — Real search functionality
+- Replaced dropdown menu with PostgreSQL-powered full-text search
+- Uses `to_tsvector` and `to_tsquery` with weighted ranking (title weighted higher)
+- Returns top 5 results with title, type, and snippet
+- Created `/api/search` API endpoint for search queries
+- Vertically centered search bar on the Kemple page
+
+**KempoNet Browser Rename** — Clarified browser naming
+- Renamed `/kemponet/kemponet` folder to `/kemponet/kemponet-browser`
+- Updated page title from "KempoNet" to "KempoNet Browser"
+- Updated all icon labels on PC desktop, Go menu, taskbar, and mobile home screen
+- Updated favorites page to show "KempoNet Browser" name
+
+**Mobile Responsive View** — Real mobile users see fullscreen content
+- Viewport detection: devices < 480px width skip the simulated phone frame
+- Real mobile users see content directly without decorative device chrome
+- Fixed three-frame layout: header bar, scrollable content, home button footer
+- Uses `100dvh` (dynamic viewport height) for mobile browser compatibility
+- Header-aware positioning with explicit `top: 56px` offset
+
+---
+
 #### December 19, 2025 (Overnight)
 
 **Device Page Vertical Centering** — Improved layout across all devices

@@ -92,7 +92,7 @@ All pages feature a fixed header navigation bar:
 - **KEMPO logo** (white with blue glow) in the top left, links to home page
 - Black background with subtle blue glow at bottom
 - **Compass icon** appears on `/kemponet/*` pages to return to the PC device view
-- Header automatically hides when viewing pages inside KempoScape Navigator
+- Header automatically hides when viewing pages inside KempoNet Browser
 
 ## Home Page
 
@@ -204,10 +204,12 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 - Blue glow effect around the monitor unit
 - Responsive screen (full-width on mobile, 650px on desktop)
 - **Intro animation** on first visit: animated cursor moves to KempoScape Navigator icon and clicks to open
-- **KempoScape Navigator** browser (Netscape-inspired) with full navigation
+- **KempoNet Browser** (Netscape-inspired) with full navigation
 - **Kemple** search engine home page (Google-inspired with colorful logo)
-  - Dropdown to select Kempopedia, KempoScape, or KempoTube
-- **KempoScape** browser settings page with:
+  - Full-text search across all Kempopedia articles
+  - PostgreSQL-powered search with relevance ranking
+  - Returns top 5 results with title, type, and snippet
+- **KempoNet Browser** settings page with:
   - Configurable home page location
   - Show/hide address bar toggle
   - Quick links to all KempoNet sites
@@ -233,9 +235,32 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 | Site | URL | Description |
 |------|-----|-------------|
 | Kemple | `kttp://kemple` | Search engine home page (default) |
-| KempoScape | `kttp://kemposcape` | Browser settings and quick links |
+| KempoNet Browser | `kttp://kemponet-browser` | Browser settings and quick links |
 | Kempopedia | `kttp://kempopedia` | Encyclopedia wiki |
 | KempoTube | `kttp://kempotube` | Video browsing |
+
+## Kempo Mobile
+
+Kempo Mobile provides an iPhone-style browsing experience for the Kempo universe.
+
+**Access Kempo Mobile**: https://kempo.com/mobile
+
+### Features
+
+- Realistic iPhone frame with Dynamic Island, status bar, and home indicator
+- Safari-style browser interface with address bar and back button
+- Real-time clock in status bar (updates every minute)
+- Signal bars and battery icon
+- Favorites star button linking to bookmarks page
+- Blue glow drop-shadow effect matching other device aesthetics
+- Dark blue gradient wallpaper with app grid home screen
+
+### Responsive Behavior
+
+- **Desktop view**: Full iPhone frame simulation with all device chrome
+- **Mobile view** (< 480px viewport): Fullscreen content without simulated phone frame
+- Real mobile users see content directly without the decorative phone frame
+- Fixed three-frame layout: header bar, scrollable content, home button footer
 
 ### Fictional Computing Universe
 
@@ -244,7 +269,7 @@ KempoNet introduces the Kempo universe's computing ecosystem:
 | Real World | Kempo Equivalent |
 |------------|------------------|
 | Microsoft Windows | KempoSoft Portals |
-| Netscape Navigator | KempoScape Navigator |
+| Netscape Navigator | KempoNet Browser |
 | Google | Kemple |
 | Wikipedia | Kempopedia |
 | YouTube | KempoTube |
@@ -320,7 +345,7 @@ kempo/
         │   ├── pc/                # PC device page (1990s computer interface)
         │   ├── kemponet/          # KempoNet web pages (redirects to /pc if accessed directly)
         │   │   ├── kemple/        # Kemple search engine (kttp://kemple)
-        │   │   ├── kemposcape/    # Browser settings page (kttp://kemposcape)
+        │   │   ├── kemponet-browser/  # Browser settings page (kttp://kemponet-browser)
         │   │   ├── kempopedia/    # Kempopedia pages (kttp://kempopedia)
         │   │   │   ├── wiki/[slug]/   # Individual article pages
         │   │   │   └── category/      # Category browse pages
