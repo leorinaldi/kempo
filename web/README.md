@@ -18,7 +18,7 @@ The platform serves as "living documentation" for a day-by-day simulation.
 - **FlipFlop** (`/kemponet/flipflop`) - TikTok-style vertical video browsing
 - **Giggle** (`/kemponet/giggle`) - Search engine for KempoNet
 - **KempoNet** (`/kemponet`) - 1990s-era PC computing experience with fictional "KS Portals 25" OS
-- **Kempo Mobile** (`/mobile`) - Modern iPhone-style mobile browser experience
+- **Kempo Mobile** (`/mobile`) - Modern iPhone-style mobile experience with standalone apps (FlipFlop, SoundWaves) and KempoNet Browser
 - **Kempo Radio** (`/radio`) - Radio streaming interface
 - **Kempo TV** (`/tv`) - Television broadcast interface
 

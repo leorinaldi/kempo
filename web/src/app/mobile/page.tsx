@@ -31,7 +31,7 @@ function MobileContent() {
   }, [])
 
   // Track which "app" is open (null = home screen)
-  const [activeApp, setActiveApp] = useState<"browser" | null>(null)
+  const [activeApp, setActiveApp] = useState<"browser" | "flipflop" | "soundwaves" | null>(null)
 
   const [currentPath, setCurrentPath] = useState(initialPath)
   const [currentTime, setCurrentTime] = useState("")
@@ -155,23 +155,19 @@ function MobileContent() {
   // Open FlipFlop app
   const openFlipFlop = () => {
     const flipflopPath = "/kemponet/flipflop"
-    historyRef.current = [flipflopPath]
-    historyIndexRef.current = 0
     setCurrentPath(flipflopPath)
     setIframeSrc(flipflopPath)
     setIframeKey(k => k + 1)
-    setActiveApp("browser")
+    setActiveApp("flipflop")
   }
 
   // Open SoundWaves app
   const openSoundWaves = () => {
     const soundwavesPath = "/kemponet/soundwaves"
-    historyRef.current = [soundwavesPath]
-    historyIndexRef.current = 0
     setCurrentPath(soundwavesPath)
     setIframeSrc(soundwavesPath)
     setIframeKey(k => k + 1)
-    setActiveApp("browser")
+    setActiveApp("soundwaves")
   }
 
   // Go to home screen
@@ -304,6 +300,36 @@ function MobileContent() {
               />
             </div>
           </>
+        ) : activeApp === "flipflop" || activeApp === "soundwaves" ? (
+          /* FlipFlop / SoundWaves - fullscreen without browser UI */
+          <div className="flex-1 flex flex-col min-h-0">
+            {/* Fullscreen content area */}
+            <div className="flex-1 min-h-0 overflow-hidden bg-black">
+              <iframe
+                key={iframeKey}
+                ref={iframeRef}
+                src={`${iframeSrc}?mobile=1`}
+                className="w-full h-full border-0"
+                style={{ background: "black" }}
+              />
+            </div>
+
+            {/* Bottom Home Bar */}
+            <div
+              className="flex-shrink-0 flex items-center justify-center"
+              style={{
+                height: '56px',
+                background: '#1a1a1a',
+                paddingBottom: 'env(safe-area-inset-bottom)'
+              }}
+            >
+              <button
+                onClick={goHome}
+                className="w-10 h-10 rounded-lg border-2 border-gray-600 hover:border-gray-400 active:border-white transition-colors"
+                style={{ background: '#111' }}
+              />
+            </div>
+          </div>
         ) : (
           /* Browser App - fullscreen with fixed header/footer */
           <div className="flex-1 flex flex-col min-h-0">
@@ -426,13 +452,13 @@ function MobileContent() {
         >
           {/* Screen bezel */}
           <div
-            className="w-full h-full rounded-[42px] overflow-hidden relative flex flex-col"
+            className="w-full h-full rounded-[42px] overflow-hidden relative flex flex-col pt-3"
             style={{
               background: '#000',
             }}
           >
             {/* Status Bar */}
-            <div className="h-8 px-8 flex items-center justify-between relative z-20" style={{ background: '#1a1a1a' }}>
+            <div className="h-8 px-8 flex items-center justify-between relative z-20" style={{ background: '#000' }}>
               {/* Left - Time */}
               <span className="text-white text-sm font-semibold">{currentTime || "9:41"}</span>
 
@@ -558,6 +584,17 @@ function MobileContent() {
                       <span className="text-white text-[11px] font-medium">SoundWaves</span>
                     </button>
                   </div>
+                </div>
+              ) : activeApp === "flipflop" || activeApp === "soundwaves" ? (
+                /* FlipFlop / SoundWaves - fullscreen without browser UI */
+                <div className="flex-1 overflow-hidden bg-black">
+                  <iframe
+                    key={iframeKey}
+                    ref={iframeRef}
+                    src={`${iframeSrc}?mobile=1`}
+                    className="w-full h-full border-0"
+                    style={{ background: "black" }}
+                  />
                 </div>
               ) : (
                 /* Browser App */
