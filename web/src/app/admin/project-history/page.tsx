@@ -3,25 +3,109 @@
 import { useSession, signOut } from "next-auth/react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
-const PROJECT_HISTORY_DOCUMENTS = [
-  {
-    slug: "project-history",
-    title: "Project History",
-    description: "Real-world milestones and development history of the Kempo Project",
-    category: "Main",
-    color: "indigo",
-  },
-]
+const PAGE_SIZE = 10
 
-const colorClasses: Record<string, { bg: string; border: string; text: string; badge: string }> = {
-  indigo: { bg: "bg-indigo-50", border: "border-indigo-200", text: "text-indigo-700", badge: "bg-indigo-100 text-indigo-800" },
-  teal: { bg: "bg-teal-50", border: "border-teal-200", text: "text-teal-700", badge: "bg-teal-100 text-teal-800" },
-  gray: { bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-700", badge: "bg-gray-100 text-gray-800" },
+interface ProjectHistoryEntry {
+  id: string
+  content: string
+  createdAt: string
 }
 
 export default function ProjectHistoryPage() {
   const { data: session, status } = useSession()
+  const [entries, setEntries] = useState<ProjectHistoryEntry[]>([])
+  const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [newEntry, setNewEntry] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.isAdmin) {
+      fetchEntries()
+    }
+  }, [status, session])
+
+  const fetchEntries = async (offset = 0) => {
+    try {
+      const res = await fetch(`/api/admin/project-history?limit=${PAGE_SIZE}&offset=${offset}`)
+      if (res.ok) {
+        const data = await res.json()
+        if (offset === 0) {
+          setEntries(data.entries)
+        } else {
+          setEntries((prev) => [...prev, ...data.entries])
+        }
+        setHasMore(data.hasMore)
+      }
+    } catch (error) {
+      console.error("Failed to fetch entries:", error)
+    } finally {
+      setLoading(false)
+      setLoadingMore(false)
+    }
+  }
+
+  const loadMore = () => {
+    setLoadingMore(true)
+    fetchEntries(entries.length)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!newEntry.trim() || submitting) return
+
+    setSubmitting(true)
+    try {
+      const res = await fetch("/api/admin/project-history", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: newEntry }),
+      })
+
+      if (res.ok) {
+        const entry = await res.json()
+        setEntries([entry, ...entries])
+        setNewEntry("")
+      }
+    } catch (error) {
+      console.error("Failed to create entry:", error)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this entry?")) return
+
+    try {
+      const res = await fetch("/api/admin/project-history", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
+      })
+
+      if (res.ok) {
+        setEntries(entries.filter((e) => e.id !== id))
+      }
+    } catch (error) {
+      console.error("Failed to delete entry:", error)
+    }
+  }
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr)
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    })
+  }
 
   if (status === "loading") {
     return (
@@ -82,47 +166,75 @@ export default function ProjectHistoryPage() {
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8">
+        {/* Add New Entry */}
         <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-2">Project Documents</h2>
-          <p className="text-sm text-gray-600 mb-6">
-            Track real-world milestones, achievements, and development history of the Kempo Project.
-          </p>
+          <h2 className="text-lg font-semibold mb-4">Add New Entry</h2>
+          <form onSubmit={handleSubmit}>
+            <textarea
+              value={newEntry}
+              onChange={(e) => setNewEntry(e.target.value)}
+              placeholder="Describe the milestone, feature, or update..."
+              className="w-full border border-gray-300 rounded-lg p-3 mb-4 min-h-[100px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+            <button
+              type="submit"
+              disabled={!newEntry.trim() || submitting}
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {submitting ? "Adding..." : "Add Entry"}
+            </button>
+          </form>
+        </div>
 
-          <div className="space-y-4">
-            {PROJECT_HISTORY_DOCUMENTS.map((doc) => {
-              const colors = colorClasses[doc.color]
-              return (
-                <Link
-                  key={doc.slug}
-                  href={`/admin/project-history/${doc.slug}`}
-                  className={`block p-4 rounded-lg border ${colors.bg} ${colors.border} hover:shadow-md transition-shadow`}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className={`font-semibold ${colors.text}`}>{doc.title}</h3>
-                        <span className={`text-xs px-2 py-0.5 rounded-full ${colors.badge}`}>
-                          {doc.category}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">{doc.description}</p>
+        {/* Entries List */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold mb-4">
+            Recent Entries {!loading && <span className="text-gray-500 font-normal">({entries.length})</span>}
+          </h2>
+
+          {loading ? (
+            <p className="text-gray-500">Loading entries...</p>
+          ) : entries.length === 0 ? (
+            <p className="text-gray-500">No entries yet. Add your first project history entry above.</p>
+          ) : (
+            <>
+              <div className="space-y-4">
+                {entries.map((entry) => (
+                  <div key={entry.id} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="text-sm text-gray-500">{formatDate(entry.createdAt)}</span>
+                      <button
+                        onClick={() => handleDelete(entry.id)}
+                        className="text-red-500 hover:text-red-700 text-sm"
+                      >
+                        Delete
+                      </button>
                     </div>
-                    <svg className={`w-5 h-5 ${colors.text} flex-shrink-0 ml-4`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
+                    <p className="text-gray-800 whitespace-pre-wrap">{entry.content}</p>
                   </div>
-                </Link>
-              )
-            })}
-          </div>
+                ))}
+              </div>
+              {hasMore && (
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={loadingMore}
+                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-lg disabled:opacity-50"
+                  >
+                    {loadingMore ? "Loading..." : "Show more events"}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         {/* About Section */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow p-6 mt-6">
           <h2 className="text-lg font-semibold mb-4">About Project History</h2>
           <p className="text-sm text-gray-600 mb-4">
             This section tracks the real-world development of the Kempo Project. Unlike the simulation documents
-            which track the fictional world, these documents record:
+            which track the fictional world, these entries record:
           </p>
           <ul className="text-sm text-gray-600 space-y-2 list-disc list-inside">
             <li><strong>Content milestones</strong> — Number of articles, characters created, timelines completed</li>

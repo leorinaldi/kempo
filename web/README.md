@@ -14,6 +14,9 @@ The platform serves as "living documentation" for a day-by-day simulation.
 
 - **Kempopedia** (`/kemponet/kempopedia`) - Wikipedia-style encyclopedia with 180+ articles
 - **KempoTube** (`/kemponet/kempotube`) - Video browsing interface
+- **SoundWaves** (`/kemponet/soundwaves`) - Music streaming app with audio visualizer
+- **FlipFlop** (`/kemponet/flipflop`) - TikTok-style vertical video browsing
+- **Giggle** (`/kemponet/giggle`) - Search engine for KempoNet
 - **KempoNet** (`/kemponet`) - 1990s-era PC computing experience with fictional "KS Portals 25" OS
 - **Kempo Mobile** (`/mobile`) - Modern iPhone-style mobile browser experience
 - **Kempo Radio** (`/radio`) - Radio streaming interface

@@ -157,6 +157,17 @@ function MobileContent() {
     setActiveApp("browser")
   }
 
+  // Open SoundWaves app
+  const openSoundWaves = () => {
+    const soundwavesPath = "/kemponet/soundwaves"
+    historyRef.current = [soundwavesPath]
+    historyIndexRef.current = 0
+    setCurrentPath(soundwavesPath)
+    setIframeSrc(soundwavesPath)
+    setIframeKey(k => k + 1)
+    setActiveApp("browser")
+  }
+
   // Go to home screen
   const goHome = () => {
     setActiveApp(null)
@@ -246,6 +257,27 @@ function MobileContent() {
                     </svg>
                   </div>
                   <span className="text-white text-xs font-medium">FlipFlop</span>
+                </button>
+              </div>
+              {/* SoundWaves App - column 3 */}
+              <div className="flex justify-center items-start pt-2">
+                <button
+                  onClick={openSoundWaves}
+                  className="flex flex-col items-center gap-1"
+                >
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                    style={{
+                      background: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                      boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+                    }}
+                  >
+                    {/* Sound wave icon */}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                      <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                    </svg>
+                  </div>
+                  <span className="text-white text-xs font-medium">SoundWaves</span>
                 </button>
               </div>
             </div>
@@ -499,8 +531,27 @@ function MobileContent() {
                       <span className="text-white text-[11px] font-medium">FlipFlop</span>
                     </button>
                   </div>
-                  {/* Empty cell */}
-                  <div />
+                  {/* SoundWaves App */}
+                  <div className="flex justify-center items-start pt-2">
+                    <button
+                      onClick={openSoundWaves}
+                      className="flex flex-col items-center gap-1"
+                    >
+                      <div
+                        className="w-14 h-14 rounded-xl flex items-center justify-center"
+                        style={{
+                          background: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+                        }}
+                      >
+                        {/* Sound wave icon */}
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                          <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                        </svg>
+                      </div>
+                      <span className="text-white text-[11px] font-medium">SoundWaves</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 /* Browser App */

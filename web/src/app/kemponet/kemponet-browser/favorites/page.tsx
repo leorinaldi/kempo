@@ -23,16 +23,16 @@ const favorites = [
     icon: "book",
   },
   {
-    name: "KempoNet Browser",
-    path: "/kemponet/kemponet-browser",
-    color: "#2563eb",
-    icon: "compass",
-  },
-  {
     name: "KempoTube",
     path: "/kemponet/kempotube",
     color: "#f97316",
     icon: "play",
+  },
+  {
+    name: "SoundWaves",
+    path: "/kemponet/soundwaves",
+    color: "#8b5cf6",
+    icon: "soundwaves",
   },
 ]
 
@@ -115,6 +115,10 @@ export default function FavoritesPage() {
                   />
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white" />
                 </div>
+              ) : fav.icon === "soundwaves" ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
+                </svg>
               ) : (
                 fav.icon
               )}

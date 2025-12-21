@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
-// Top favorites - from kemponet-browser/favorites
+// Top favorites - synced with kemponet-browser/favorites
 const topFavorites = [
   {
     name: "FlipFlop",
@@ -24,16 +24,16 @@ const topFavorites = [
     icon: "book",
   },
   {
-    name: "KempoNet Browser",
-    path: "/kemponet/kemponet-browser",
-    color: "#2563eb",
-    icon: "compass",
-  },
-  {
     name: "KempoTube",
     path: "/kemponet/kempotube",
     color: "#f97316",
     icon: "play",
+  },
+  {
+    name: "SoundWaves",
+    path: "/kemponet/soundwaves",
+    color: "#8b5cf6",
+    icon: "soundwaves",
   },
 ]
 
@@ -96,6 +96,10 @@ export default function PopularSitesPage() {
             <path d="M0 0L7 8L0 16V0Z" />
             <path d="M8 0L15 8L8 16V0Z" />
             <rect x="18" y="0" width="3" height="16" />
+          </svg>
+        ) : icon === "soundwaves" ? (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
           </svg>
         ) : icon === "compass" ? (
           <div className="relative w-4 h-4 -rotate-45">

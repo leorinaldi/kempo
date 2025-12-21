@@ -159,3 +159,13 @@ model Revision {
   @@index([articleId, createdAt])
   @@map("revisions")
 }
+
+// ============ PROJECT HISTORY ============
+
+model ProjectHistory {
+  id        String   @id @default(cuid())
+  content   String   @db.Text // the milestone entry text
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("project_history")
+}
