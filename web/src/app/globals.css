@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 /* Fix iOS Safari viewport issues - black background for full-bleed pages */
-html {
+html, body {
   background-color: black;
+  overscroll-behavior: none;
 }
 
 /* Fade in animation */
