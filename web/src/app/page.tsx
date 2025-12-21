@@ -1,18 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useState } from 'react'
 import { KempoNetRedirect } from '@/components/KempoNetRedirect'
 
-// Module-level variables for tracking intro state
-let hasPlayedIntro = false
-let lastEffectTime = 0
-
 const devices = [
-  { name: 'Mobile', href: '/mobile' },
-  { name: 'PC', href: '/pc' },
-  { name: 'TV', href: '/tv' },
-  { name: 'Radio', href: '/radio' },
+  { name: 'Mobile', href: '/mobile', action: 'Play Kempo Apps' },
+  { name: 'PC', href: '/pc', action: 'Explore KempoNet' },
+  { name: 'TV', href: '/tv', action: 'Watch Kempo TV' },
+  { name: 'Radio', href: '/radio', action: 'Listen to Kempo Radio' },
 ]
 
 // Radio icon component
@@ -85,70 +81,26 @@ function PCIcon() {
 function MobileIcon() {
   return (
     <div
-      className="w-12 h-24 rounded-xl border-2 border-gray-600 p-1 flex flex-col"
+      className="w-10 h-20 rounded-xl border-2 border-gray-600 p-1 flex flex-col"
       style={{ background: '#1a1a1a' }}
     >
       {/* Dynamic Island */}
-      <div className="w-6 h-1.5 rounded-full mx-auto mt-0.5" style={{ background: '#000' }} />
+      <div className="w-5 h-1 rounded-full mx-auto mt-0.5" style={{ background: '#000' }} />
       {/* Screen */}
       <div
         className="flex-1 rounded-lg mt-1 mx-0.5"
         style={{ background: '#1e293b' }}
       />
       {/* Home Indicator */}
-      <div className="w-8 h-1 rounded-full mx-auto mt-1 mb-0.5" style={{ background: '#374151' }} />
+      <div className="w-6 h-0.5 rounded-full mx-auto mt-1 mb-0.5" style={{ background: '#374151' }} />
     </div>
   )
 }
 
 export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isFirstVisit, setIsFirstVisit] = useState(false)
-  const [isReady, setIsReady] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(1) // Start on PC
-  const [videoEnded, setVideoEnded] = useState(false)
-  const [videoRemoved, setVideoRemoved] = useState(false)
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    const now = Date.now()
-
-    // Detect React Strict Mode double-invocation (happens within milliseconds)
-    // Skip the second invocation to prevent it from interrupting the first
-    if (now - lastEffectTime < 100) {
-      return
-    }
-    lastEffectTime = now
-
-    // Check if this is a page reload
-    const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[]
-    const isReload = navEntries.length > 0 && navEntries[0].type === 'reload'
-
-    // Reset on reload (including hot module reload in development)
-    if (isReload) {
-      hasPlayedIntro = false
-      sessionStorage.removeItem('kempoIntroPlayed')
-    }
-
-    // Check sessionStorage as backup (mobile browsers may unload JS on navigation)
-    const hasPlayedInSession = sessionStorage.getItem('kempoIntroPlayed') === 'true'
-
-    if ((hasPlayedIntro || hasPlayedInSession) && !isReload) {
-      // Skip - returning from another page, remove video entirely
-      setIsFirstVisit(false)
-      setVideoEnded(true)
-      setVideoRemoved(true)
-    } else {
-      // Play - first visit or page refresh
-      setIsFirstVisit(true)
-      video.play()
-      hasPlayedIntro = true
-      sessionStorage.setItem('kempoIntroPlayed', 'true')
-    }
-    setIsReady(true)
-  }, [])
+  const [arrowHover, setArrowHover] = useState(false)
+  const [titleHover, setTitleHover] = useState(false)
 
   const goLeft = () => {
     setCurrentIndex((prev) => (prev - 1 + devices.length) % devices.length)
@@ -161,108 +113,114 @@ export default function Home() {
   const currentDevice = devices[currentIndex]
 
   const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
+  const blueGlowHover = '0 0 30px rgba(130,180,255,1), 0 0 60px rgba(100,160,255,1), 0 0 100px rgba(80,140,255,1), 0 0 150px rgba(60,120,255,0.9), 0 0 200px rgba(50,100,255,0.8)'
 
   return (
-    <main className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black">
-      {/* Video Background */}
-      {!videoRemoved && (
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoEnded ? 'opacity-0' : 'opacity-100'}`}
-          style={{ transform: 'scale(1.1) translateX(1%) translateY(-5%)' }}
-          onEnded={() => {
-            setVideoEnded(true)
-            // Remove from DOM after fade completes
-            setTimeout(() => setVideoRemoved(true), 1000)
-          }}
-        >
-          <source src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/comic-tv-fades-to-black.mp4" type="video/mp4" />
-        </video>
-      )}
-
-
+    <main className="min-h-screen flex flex-col items-center relative overflow-hidden bg-black">
       <Suspense fallback={null}>
         <KempoNetRedirect />
       </Suspense>
 
-      {/* Content */}
-      <div className={`text-center relative z-10 mt-10 ${!isReady ? 'opacity-0' : ''}`}>
+      {/* Title and tagline */}
+      <div
+        className="text-center relative z-10 mt-24"
+        onMouseEnter={() => setTitleHover(true)}
+        onMouseLeave={() => setTitleHover(false)}
+      >
         <Link
           href="/about"
-          className={`text-5xl font-serif mb-4 text-white tracking-[0.3em] uppercase pl-[0.3em] block hover:text-white transition-colors ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_0.5s_forwards]' : ''}`}
-          style={{ textShadow: blueGlow }}
+          className="text-5xl font-serif mb-4 text-white tracking-[0.3em] uppercase pl-[0.3em] block transition-all duration-300"
+          style={{ textShadow: titleHover ? blueGlowHover : blueGlow }}
         >
           KEMPO
         </Link>
         <Link
           href="/about"
-          className={`text-gray-300 mb-8 block hover:text-white transition-colors ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_2s_forwards]' : ''}`}
-          style={{ textShadow: blueGlow }}
+          className="text-gray-300 block hover:text-white transition-all duration-300"
+          style={{ textShadow: titleHover ? blueGlowHover : blueGlow }}
         >A (nearly) imaginary world.</Link>
+      </div>
 
-        {/* Device Rotator */}
-        <div
-          className={`flex flex-col items-center gap-4 ${isFirstVisit ? 'opacity-0 animate-[fadeIn_4s_ease-out_3.5s_forwards]' : ''}`}
-        >
-          <div className="flex items-center justify-center gap-6">
-            {/* Left Arrow */}
-            <button
-              onClick={goLeft}
-              className="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors"
-              style={{
-                background: '#1f2937',
-                boxShadow: '0 0 15px rgba(100,150,255,0.5), 0 0 30px rgba(80,130,255,0.3)'
-              }}
-            >
-              <span className="text-white text-xl leading-none" style={{ marginRight: '2px' }}>‹</span>
-            </button>
-
-            {/* Device Icon & Label */}
-            <Link href={currentDevice.href} className="flex flex-col items-center justify-center hover:opacity-80 transition-opacity h-28 w-32">
-              <div
-                className="p-4 rounded-lg"
+      {/* Device Rotator */}
+      <div className="mt-16">
+          {/* Clickable box container */}
+          <Link
+            href={currentDevice.href}
+            className={`flex flex-col items-center gap-3 py-4 rounded-lg border border-gray-700/50 transition-all duration-200 group ${!arrowHover ? 'hover:border-gray-500 hover:shadow-[inset_0_0_30px_rgba(100,150,255,0.15)]' : ''}`}
+            style={{
+              background: 'rgba(31, 41, 55, 0.3)',
+              boxShadow: '0 0 15px rgba(100,150,255,0.3), 0 0 30px rgba(80,130,255,0.2)'
+            }}
+          >
+            <div className="flex items-center justify-center gap-6">
+              {/* Left Arrow */}
+              <button
+                onClick={(e) => { e.preventDefault(); goLeft(); }}
+                onMouseEnter={() => setArrowHover(true)}
+                onMouseLeave={() => setArrowHover(false)}
+                className="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-400 hover:scale-110 transition-all duration-200 -ml-5"
                 style={{
-                  filter: 'drop-shadow(0 0 8px rgba(100,150,255,0.5)) drop-shadow(0 0 15px rgba(80,130,255,0.3))'
+                  background: '#1f2937',
+                  boxShadow: '0 0 15px rgba(100,150,255,0.5), 0 0 30px rgba(80,130,255,0.3)'
                 }}
               >
-                {currentIndex === 0 && <MobileIcon />}
-                {currentIndex === 1 && <PCIcon />}
-                {currentIndex === 2 && <TVIcon />}
-                {currentIndex === 3 && <RadioIcon />}
+                <span className="text-white text-xl leading-none" style={{ marginRight: '2px' }}>‹</span>
+              </button>
+
+              {/* Device Icon - fixed height container with centered icon */}
+              <div className="flex items-center justify-center h-24 w-44">
+                <div
+                  className="p-4 rounded-lg transition-transform group-hover:scale-105"
+                  style={{
+                    filter: 'drop-shadow(0 0 8px rgba(100,150,255,0.5)) drop-shadow(0 0 15px rgba(80,130,255,0.3))'
+                  }}
+                >
+                  {currentIndex === 0 && <MobileIcon />}
+                  {currentIndex === 1 && <PCIcon />}
+                  {currentIndex === 2 && <TVIcon />}
+                  {currentIndex === 3 && <RadioIcon />}
+                </div>
               </div>
-            </Link>
 
-            {/* Right Arrow */}
-            <button
-              onClick={goRight}
-              className="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-500 transition-colors"
-              style={{
-                background: '#1f2937',
-                boxShadow: '0 0 15px rgba(100,150,255,0.5), 0 0 30px rgba(80,130,255,0.3)'
-              }}
-            >
-              <span className="text-white text-xl leading-none" style={{ marginLeft: '2px' }}>›</span>
-            </button>
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex gap-2">
-            {devices.map((_, index) => (
+              {/* Right Arrow */}
               <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'bg-white'
-                    : 'bg-gray-600 hover:bg-gray-500'
-                }`}
-                style={index === currentIndex ? { boxShadow: '0 0 8px rgba(100,150,255,0.8)' } : {}}
-              />
-            ))}
-          </div>
-        </div>
+                onClick={(e) => { e.preventDefault(); goRight(); }}
+                onMouseEnter={() => setArrowHover(true)}
+                onMouseLeave={() => setArrowHover(false)}
+                className="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-400 hover:scale-110 transition-all duration-200 -mr-5"
+                style={{
+                  background: '#1f2937',
+                  boxShadow: '0 0 15px rgba(100,150,255,0.5), 0 0 30px rgba(80,130,255,0.3)'
+                }}
+              >
+                <span className="text-white text-xl leading-none" style={{ marginLeft: '2px' }}>›</span>
+              </button>
+            </div>
+
+            {/* Action text - fixed position */}
+            <div
+              className="text-white font-medium whitespace-nowrap text-center"
+              style={{ textShadow: '0 0 10px rgba(100,150,255,0.8)' }}
+            >
+              {currentDevice.action}
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex gap-2 mt-1">
+              {devices.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => { e.preventDefault(); setCurrentIndex(index); }}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentIndex
+                      ? 'bg-white'
+                      : 'bg-gray-600 hover:bg-gray-500'
+                  }`}
+                  style={index === currentIndex ? { boxShadow: '0 0 8px rgba(100,150,255,0.8)' } : {}}
+                />
+              ))}
+            </div>
+          </Link>
       </div>
     </main>
   )

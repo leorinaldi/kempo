@@ -83,13 +83,19 @@ function MobileContent() {
   }
 
   // Parse user input to a path
+  // Accepts: "giggle", "kttp://giggle", "/kemponet/giggle"
   const parseAddressInput = (input: string): string | null => {
     const trimmed = input.trim().toLowerCase()
     if (!trimmed) return null
-    // Add /kemponet/ prefix if not present
+    // Handle kttp:// prefix - strip it and treat as site name
+    if (trimmed.startsWith("kttp://")) {
+      return `/kemponet/${trimmed.slice(7)}`
+    }
+    // Handle /kemponet/ prefix (already a path)
     if (trimmed.startsWith("/kemponet/")) {
       return trimmed
     }
+    // Plain site name - add /kemponet/ prefix
     return `/kemponet/${trimmed}`
   }
 

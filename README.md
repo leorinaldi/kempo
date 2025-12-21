@@ -92,24 +92,20 @@ All pages feature a fixed header navigation bar:
 
 ## Home Page
 
-The Kempo home page features a cinematic intro experience with a video background and device rotator.
+The Kempo home page provides a device selector for entering the Kempo universe.
 
 **Access Home**: https://kempo.com
 
 ### Features
 
-- Full-screen video background with cinematic intro
-- Animated fade-in text with blue glow effect
-- "KEMPO" and "A (nearly) imaginary world." link to the About page
-- **Device rotator carousel** for selecting PC, TV, or Radio:
+- "KEMPO" and "A (nearly) imaginary world." link to the About page with blue glow hover effect
+- **Device rotator** for selecting Mobile, PC, TV, or Radio:
   - Styled device icons matching graphic novel aesthetic
-  - Circle arrow buttons with blue glow for navigation
+  - Action labels describing each device ("Watch Kempo TV", "Listen to Kempo Radio", etc.)
+  - Clickable box container with blue glow—click anywhere to enter
+  - Circle arrow buttons with blue glow for navigation (isolated hover effects)
   - Dot indicators (clickable) showing current selection
   - Starts on PC by default
-- Smart intro behavior:
-  - Plays full video with fade-in animations on first visit
-  - Plays full intro on page refresh
-  - Skips to final frame on back navigation (no replay)
 - Works consistently across desktop and mobile browsers
 
 ## About Page
@@ -210,9 +206,9 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
   - Show/hide address bar toggle
   - Quick links to all KempoNet sites
 - Working Back/Forward/Home buttons with history tracking
-- Editable address bar — type `kttp://` URLs and press Enter to navigate
+- Editable address bar — type `kttp://` URLs or plain addresses and press Enter to navigate (displays as `kttp://`)
 - Browser settings button (K icon) in toolbar for quick access to settings
-- URL mapping: `kttp://` maps directly to `/kemponet/` (e.g., `kttp://kempopedia` → `/kemponet/kempopedia`)
+- URL mapping: `kttp://` maps directly to `/kemponet/` (e.g., `kttp://kempopedia` or just `kempopedia` → `/kemponet/kempopedia`)
 - Link sandboxing — only `/kemponet/*` links work inside the browser; external links are stripped
 - Minimize/Maximize/Close window controls
 - **KS Portals 25** operating system (Windows-inspired)
@@ -231,7 +227,7 @@ KempoNet is an immersive 1990s computing experience that lets you browse Kempope
 | Site | URL | Description |
 |------|-----|-------------|
 | Giggle | `kttp://giggle` | Search engine with unified search across all KempoNet content |
-| FlipFlop | `kttp://flipflop` | TikTok-style vertical video browsing |
+| FlipFlop | `kttp://flipflop` | TikTok-style vertical video browsing with swipe/keyboard navigation (↑/↓ arrows) |
 | Kempopedia | `kttp://kempopedia` | Encyclopedia wiki |
 | KempoNet Browser | `kttp://kemponet-browser` | Browser settings and quick links |
 | KempoTube | `kttp://kempotube` | Video browsing |

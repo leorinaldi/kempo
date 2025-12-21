@@ -138,12 +138,6 @@ function prismaToArticle(dbArticle: PrismaArticle): Article {
   }
 }
 
-export function getAllArticleSlugs(): string[] {
-  // Note: This is now async in nature but we need to keep sync for generateStaticParams
-  // For build time, we'll use a different approach
-  throw new Error('Use getAllArticleSlugsAsync instead')
-}
-
 export async function getAllArticleSlugsAsync(): Promise<string[]> {
   const articles = await prisma.article.findMany({
     where: { status: 'published' },
@@ -152,20 +146,12 @@ export async function getAllArticleSlugsAsync(): Promise<string[]> {
   return articles.map(a => a.slug)
 }
 
-export function getAllArticles(): Article[] {
-  throw new Error('Use getAllArticlesAsync instead')
-}
-
 export async function getAllArticlesAsync(): Promise<Article[]> {
   const dbArticles = await prisma.article.findMany({
     where: { status: 'published' },
     orderBy: { title: 'asc' },
   })
   return dbArticles.map(prismaToArticle)
-}
-
-export function getArticleBySlug(slug: string): Article | null {
-  throw new Error('Use getArticleBySlugAsync instead')
 }
 
 export async function getArticleBySlugAsync(slug: string): Promise<Article | null> {
@@ -233,11 +219,6 @@ export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
   return dbArticles.map(prismaToArticle)
 }
 
-// Keep sync version for backwards compatibility (throws)
-export function getArticlesByType(type: string): Article[] {
-  throw new Error('Use getArticlesByTypeAsync instead')
-}
-
 export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
   const articles = await prisma.article.findMany({
     where: { status: 'published' },
@@ -267,11 +248,6 @@ export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
       description: meta.description,
     }))
     .sort((a, b) => (categoryMeta[a.type]?.order || 99) - (categoryMeta[b.type]?.order || 99))
-}
-
-// Keep sync version for backwards compatibility (throws)
-export function getAllCategories(): CategoryInfo[] {
-  throw new Error('Use getAllCategoriesAsync instead')
 }
 
 export function isValidCategory(type: string): boolean {
@@ -330,9 +306,4 @@ export async function getWikiLinkStatsAsync(): Promise<WikiLinkStats> {
     linksByTarget: linkCounts,
     linksByCategory
   }
-}
-
-// Keep sync version for backwards compatibility (throws)
-export function getWikiLinkStats(): WikiLinkStats {
-  throw new Error('Use getWikiLinkStatsAsync instead')
 }

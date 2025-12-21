@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { useRouter } from "next/navigation"
 
 interface Video {
@@ -24,6 +24,10 @@ export default function FlipFlopPage() {
   const historyRef = useRef<Video[]>([])
   const historyIndexRef = useRef(-1)
   const touchStartY = useRef<number | null>(null)
+
+  // Refs to store latest navigation functions for keyboard handler
+  const loadNextVideoRef = useRef<() => void>(() => {})
+  const loadPreviousVideoRef = useRef<() => void>(() => {})
 
   // Detect mobile context
   useEffect(() => {
@@ -67,7 +71,7 @@ export default function FlipFlopPage() {
   }
 
   // Load next video
-  const loadNextVideo = () => {
+  const loadNextVideo = useCallback(() => {
     // If we're not at the end of history, go forward in history
     if (historyIndexRef.current < historyRef.current.length - 1) {
       historyIndexRef.current++
@@ -83,15 +87,21 @@ export default function FlipFlopPage() {
       historyIndexRef.current = historyRef.current.length - 1
       setCurrentVideo(next)
     }
-  }
+  }, [videos, currentVideo])
 
   // Load previous video
-  const loadPreviousVideo = () => {
+  const loadPreviousVideo = useCallback(() => {
     if (historyIndexRef.current > 0) {
       historyIndexRef.current--
       setCurrentVideo(historyRef.current[historyIndexRef.current])
     }
-  }
+  }, [])
+
+  // Keep refs updated with latest functions
+  useEffect(() => {
+    loadNextVideoRef.current = loadNextVideo
+    loadPreviousVideoRef.current = loadPreviousVideo
+  }, [loadNextVideo, loadPreviousVideo])
 
   const canGoBack = historyIndexRef.current > 0
 
@@ -131,6 +141,21 @@ export default function FlipFlopPage() {
       videoRef.current.play().catch(() => {})
     }
   }, [currentVideo])
+
+  // Keyboard navigation - up/down arrow keys
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowUp") {
+        e.preventDefault()
+        loadNextVideoRef.current()
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault()
+        loadPreviousVideoRef.current()
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [])
 
   const handleArtistClick = (artistSlug: string) => {
     const param = isMobile ? "?mobile=1" : ""
@@ -255,12 +280,12 @@ export default function FlipFlopPage() {
       </div>
 
       {/* Video */}
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center overflow-hidden">
         <video
           ref={videoRef}
           key={currentVideo.id}
           src={currentVideo.url}
-          className="h-full w-full object-contain"
+          className="max-h-full max-w-full object-contain"
           autoPlay
           playsInline
           onEnded={handleVideoEnd}
