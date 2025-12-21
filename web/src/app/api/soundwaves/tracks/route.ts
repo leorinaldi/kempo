@@ -3,10 +3,7 @@ import { prisma } from "@/lib/prisma"
 
 export async function GET() {
   try {
-    const tracks = await prisma.media.findMany({
-      where: {
-        type: "audio",
-      },
+    const tracks = await prisma.audio.findMany({
       orderBy: { kyDate: "desc" },
       select: {
         id: true,

@@ -6,7 +6,6 @@ import { writeFile, mkdir, access } from "fs/promises"
 import path from "path"
 
 export async function POST(request: Request) {
-  // Check authentication
   const session = await auth()
 
   if (!session?.user?.email) {
@@ -22,21 +21,28 @@ export async function POST(request: Request) {
     const file = formData.get("file") as File | null
     const title = formData.get("title") as string | null
     const slug = formData.get("slug") as string | null
-    const mediaType = formData.get("mediaType") as string | null
     const description = formData.get("description") as string | null
     const artist = formData.get("artist") as string | null
     const artistSlug = formData.get("artistSlug") as string | null
-    const aspectRatio = formData.get("aspectRatio") as string | null
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
-    if (!title || !slug || !mediaType) {
+    if (!title || !slug) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    // Check if a Kempopedia article already exists at this slug (in any category)
+    // Check if slug already exists
+    const existing = await prisma.audio.findUnique({ where: { slug } })
+    if (existing) {
+      return NextResponse.json(
+        { error: `An audio file with slug "${slug}" already exists. Please choose a different slug.` },
+        { status: 409 }
+      )
+    }
+
+    // Check if a Kempopedia article already exists at this slug
     const articlesBase = path.join(process.cwd(), "content", "articles")
     const categories = ["culture", "people", "places", "companies", "concepts", "events", "institutions", "products", "timelines"]
 
@@ -44,48 +50,34 @@ export async function POST(request: Request) {
       const articlePath = path.join(articlesBase, category, `${slug}.md`)
       try {
         await access(articlePath)
-        // If we get here, the file exists
         return NextResponse.json(
           { error: `A Kempopedia article already exists at "${slug}" (in ${category}). Please choose a different slug.` },
           { status: 409 }
         )
       } catch {
-        // File doesn't exist in this category, continue checking
+        // File doesn't exist, continue
       }
     }
 
     // Determine file extension
-    const extension = file.name.split(".").pop()?.toLowerCase() || "bin"
-
-    // Auto-detect media type based on file extension
-    const videoExtensions = ["mp4", "webm", "mov", "avi", "mkv", "m4v"]
-    const audioExtensions = ["mp3", "wav", "ogg", "flac", "aac", "m4a"]
-
-    let actualMediaType = mediaType
-    if (videoExtensions.includes(extension)) {
-      actualMediaType = "video"
-    } else if (audioExtensions.includes(extension)) {
-      actualMediaType = "audio"
-    }
+    const extension = file.name.split(".").pop()?.toLowerCase() || "mp3"
 
     // Upload to Vercel Blob
     const blob = await put(
-      `kempo-media/${actualMediaType}/${slug}.${extension}`,
+      `kempo-media/audio/${slug}.${extension}`,
       file,
       { access: "public" }
     )
 
-    // Create database entry with blob URL
-    const media = await prisma.media.create({
+    // Create database entry
+    const audio = await prisma.audio.create({
       data: {
         slug,
         name: title,
-        type: actualMediaType,
         url: blob.url,
         description: description || null,
         artist: artist || null,
         artistSlug: artistSlug || null,
-        aspectRatio: actualMediaType === "video" ? (aspectRatio || "landscape") : null,
       },
     })
 
@@ -95,10 +87,9 @@ export async function POST(request: Request) {
       await mkdir(articlesDir, { recursive: true })
 
       const articlePath = path.join(articlesDir, `${slug}.md`)
-      const articleContent = generateArticleContent({
+      const articleContent = generateAudioArticle({
         title,
         slug,
-        mediaType: actualMediaType,
         description: description || undefined,
         artist: artist || undefined,
         artistSlug: artistSlug || undefined,
@@ -107,18 +98,15 @@ export async function POST(request: Request) {
 
       await writeFile(articlePath, articleContent, "utf-8")
     } catch (articleError) {
-      // Log but don't fail the upload if article creation fails
       console.error("Failed to create Kempopedia article:", articleError)
     }
 
     return NextResponse.json({
       success: true,
-      id: media.id,
+      id: audio.id,
       url: blob.url,
       title,
       slug,
-      mediaType: actualMediaType,
-      description,
       filename: `${slug}.${extension}`,
     })
   } catch (error) {
@@ -133,32 +121,26 @@ export async function POST(request: Request) {
 interface ArticleParams {
   title: string
   slug: string
-  mediaType: string
   description?: string
   artist?: string
   artistSlug?: string
   mediaUrl: string
 }
 
-function generateArticleContent(params: ArticleParams): string {
-  const { title, slug, mediaType, description, artist, artistSlug, mediaUrl } = params
+function generateAudioArticle(params: ArticleParams): string {
+  const { title, slug, description, artist, artistSlug, mediaUrl } = params
 
-  const isAudio = mediaType === "audio"
-  const subtype = isAudio ? "song" : "video"
-
-  // Build frontmatter
   const frontmatter = `---
 title: "${title}"
 slug: "${slug}"
 type: culture
-subtype: ${subtype}
+subtype: song
 status: published
 tags:
-  - ${isAudio ? "music" : "video"}
-  - ${subtype}
+  - music
+  - song
 ---`
 
-  // Build infobox
   const infoboxFields: Record<string, string> = {
     Title: title,
   }
@@ -169,32 +151,28 @@ tags:
 
   const infobox = {
     infobox: {
-      type: subtype,
+      type: "song",
       fields: infoboxFields,
     },
     media: [
       {
-        type: mediaType,
+        type: "audio",
         url: mediaUrl,
       },
     ],
   }
 
-  // Build intro paragraph
   let intro = `"**${title}**"`
-  if (isAudio && artist && artistSlug) {
+  if (artist && artistSlug) {
     intro += ` is a song by [[${artistSlug}|${artist}]].`
-  } else if (isAudio) {
-    intro += ` is a song.`
   } else {
-    intro += ` is a video.`
+    intro += ` is a song.`
   }
 
   if (description) {
     intro += ` ${description}`
   }
 
-  // Build see also section
   const seeAlso: string[] = []
   if (artistSlug && artist) {
     seeAlso.push(`- [[${artistSlug}|${artist}]]`)

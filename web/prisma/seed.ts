@@ -35,7 +35,7 @@ async function main() {
     console.log(`Seeding ${radioPlaylist.length} audio tracks...`)
 
     for (const track of radioPlaylist) {
-      await prisma.media.upsert({
+      await prisma.audio.upsert({
         where: { slug: track.id },
         update: {
           name: track.name,
@@ -46,7 +46,6 @@ async function main() {
         create: {
           slug: track.id,
           name: track.name,
-          type: 'audio',
           url: track.url,
           artist: track.artist,
           artistSlug: track.artistSlug,
@@ -65,7 +64,7 @@ async function main() {
     console.log(`Seeding ${tvPlaylist.length} video files...`)
 
     for (const video of tvPlaylist) {
-      await prisma.media.upsert({
+      await prisma.video.upsert({
         where: { slug: video.id },
         update: {
           name: video.name,
@@ -75,7 +74,6 @@ async function main() {
         create: {
           slug: video.id,
           name: video.name,
-          type: 'video',
           url: video.url,
           description: video.description,
         },

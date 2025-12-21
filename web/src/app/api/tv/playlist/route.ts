@@ -7,7 +7,7 @@ export async function GET() {
     const playlist = await prisma.tvPlaylistItem.findMany({
       orderBy: { position: "asc" },
       include: {
-        media: {
+        video: {
           select: {
             id: true,
             slug: true,
@@ -23,12 +23,12 @@ export async function GET() {
 
     // Transform to the format expected by the frontend
     const items = playlist.map((item) => ({
-      id: item.media.slug,
-      name: item.media.name,
-      description: item.media.description || "",
-      url: item.media.url,
-      artist: item.media.artist || "",
-      artistSlug: item.media.artistSlug || "",
+      id: item.video.slug,
+      name: item.video.name,
+      description: item.video.description || "",
+      url: item.video.url,
+      artist: item.video.artist || "",
+      artistSlug: item.video.artistSlug || "",
     }))
 
     return NextResponse.json(items)
@@ -46,10 +46,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { mediaId } = await request.json()
+    const { videoId } = await request.json()
 
-    if (!mediaId) {
-      return NextResponse.json({ error: "mediaId is required" }, { status: 400 })
+    if (!videoId) {
+      return NextResponse.json({ error: "videoId is required" }, { status: 400 })
     }
 
     // Get the next position
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     // Add to playlist
     await prisma.tvPlaylistItem.create({
       data: {
-        mediaId,
+        videoId,
         position: nextPosition,
       },
     })
@@ -84,14 +84,14 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const { mediaId } = await request.json()
+    const { videoId } = await request.json()
 
-    if (!mediaId) {
-      return NextResponse.json({ error: "mediaId is required" }, { status: 400 })
+    if (!videoId) {
+      return NextResponse.json({ error: "videoId is required" }, { status: 400 })
     }
 
     await prisma.tvPlaylistItem.delete({
-      where: { mediaId },
+      where: { videoId },
     })
 
     return NextResponse.json({ success: true })

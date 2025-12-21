@@ -3,9 +3,8 @@ import { prisma } from "@/lib/prisma"
 
 export async function GET() {
   try {
-    const videos = await prisma.media.findMany({
+    const videos = await prisma.video.findMany({
       where: {
-        type: "video",
         aspectRatio: "portrait",
       },
       orderBy: { kyDate: "desc" },

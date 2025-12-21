@@ -7,45 +7,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Media {
-  id          String   @id @default(cuid())
-  slug        String   @unique
+// ============ AUDIO & VIDEO MEDIA ============
+
+model Audio {
+  id          String    @id @default(cuid())
+  slug        String    @unique
   name        String
-  type        String   // "audio" | "video"
-  url         String   @db.Text
+  url         String    @db.Text
   artist      String?
-  artistSlug  String?  @map("artist_slug")
-  description String?  @db.Text
-  aspectRatio String?  @map("aspect_ratio") // "landscape" | "portrait" | "square" (for videos)
+  artistSlug  String?   @map("artist_slug")
+  description String?   @db.Text
   kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
 
   radioPlaylist RadioPlaylistItem[]
-  tvPlaylist    TvPlaylistItem[]
 
-  @@map("media")
+  @@map("audio")
+}
+
+model Video {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  url         String    @db.Text
+  artist      String?
+  artistSlug  String?   @map("artist_slug")
+  description String?   @db.Text
+  aspectRatio String?   @map("aspect_ratio") // "landscape" | "portrait" | "square"
+  kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  tvPlaylist TvPlaylistItem[]
+
+  @@map("video")
 }
 
 model RadioPlaylistItem {
   id        String   @id @default(cuid())
-  mediaId   String   @map("media_id")
+  audioId   String   @map("audio_id")
   position  Int
-  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  audio     Audio    @relation(fields: [audioId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now()) @map("created_at")
 
-  @@unique([mediaId])
+  @@unique([audioId])
   @@map("radio_playlist")
 }
 
 model TvPlaylistItem {
   id        String   @id @default(cuid())
-  mediaId   String   @map("media_id")
+  videoId   String   @map("video_id")
   position  Int
-  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now()) @map("created_at")
 
-  @@unique([mediaId])
+  @@unique([videoId])
   @@map("tv_playlist")
 }
 

@@ -20,8 +20,8 @@ export async function POST(request: Request) {
     // Delete from blob storage
     await del(url)
 
-    // Delete from database (if entry exists)
-    await prisma.media.deleteMany({
+    // Delete from database
+    await prisma.audio.deleteMany({
       where: { url },
     })
 

@@ -388,12 +388,19 @@ The admin panel provides authenticated access to manage media, playlists, simula
 
 ### Media Management
 
-- Upload audio/video files to Vercel Blob storage with database metadata
+Media management is split into separate Audio and Video sections for better organization and future extensibility.
+
+**Audio Management** (`/admin/media/audio`):
+- Upload audio files to Vercel Blob storage
+- Manage Kempo Radio playlist
+- Audio library with artist attribution
 - Auto-generate Kempopedia article stubs on upload
-- Manage Kempo Radio and Kempo TV playlists via dropdown selection
-- Track kyDate (Kempo universe date) for chronological ordering
-- Artist attribution with links to Kempopedia pages
-- Delete media files from both storage and database
+
+**Video Management** (`/admin/media/video`):
+- Upload video files to Vercel Blob storage
+- Manage Kempo TV playlist
+- Video library with aspect ratio tracking (portrait for FlipFlop)
+- Auto-generate Kempopedia article stubs on upload
 
 ### App Search
 
@@ -458,7 +465,7 @@ Tracks real-world development milestones for the Kempo project:
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS
 - **Content**: MDX with frontmatter
-- **Database**: PostgreSQL (Neon) with Prisma ORM (Articles, Pages, Media, Domains, AppSearch)
+- **Database**: PostgreSQL (Neon) with Prisma ORM (Articles, Pages, Audio, Video, Domains, AppSearch)
 - **Images**: Grok API (xAI) for comic book style illustrations
 - **AI Content**: Anthropic Claude API for search index content generation
 - **Media Storage**: Vercel Blob (files) + PostgreSQL (metadata)

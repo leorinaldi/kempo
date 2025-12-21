@@ -64,7 +64,16 @@ body {
 
 /* Infobox styling */
 .infobox {
-  @apply float-right clear-right w-72 ml-4 mb-4 border border-wiki-border bg-wiki-infobox text-sm;
+  @apply border border-wiki-border bg-wiki-infobox text-sm mb-4;
+  /* Mobile: centered, full width */
+  @apply w-full max-w-xs mx-auto;
+}
+
+/* Desktop: float right */
+@media (min-width: 640px) {
+  .infobox {
+    @apply float-right clear-right w-72 ml-4 mr-0;
+  }
 }
 
 .infobox-header {

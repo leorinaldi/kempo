@@ -7,7 +7,7 @@ export async function GET() {
     const playlist = await prisma.radioPlaylistItem.findMany({
       orderBy: { position: "asc" },
       include: {
-        media: {
+        audio: {
           select: {
             id: true,
             slug: true,
@@ -22,11 +22,11 @@ export async function GET() {
 
     // Transform to the format expected by the frontend
     const items = playlist.map((item) => ({
-      id: item.media.slug,
-      name: item.media.name,
-      artist: item.media.artist || "",
-      artistSlug: item.media.artistSlug || "",
-      url: item.media.url,
+      id: item.audio.slug,
+      name: item.audio.name,
+      artist: item.audio.artist || "",
+      artistSlug: item.audio.artistSlug || "",
+      url: item.audio.url,
     }))
 
     return NextResponse.json(items)
@@ -44,10 +44,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { mediaId } = await request.json()
+    const { audioId } = await request.json()
 
-    if (!mediaId) {
-      return NextResponse.json({ error: "mediaId is required" }, { status: 400 })
+    if (!audioId) {
+      return NextResponse.json({ error: "audioId is required" }, { status: 400 })
     }
 
     // Get the next position
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     // Add to playlist
     await prisma.radioPlaylistItem.create({
       data: {
-        mediaId,
+        audioId,
         position: nextPosition,
       },
     })
@@ -82,14 +82,14 @@ export async function DELETE(request: Request) {
   }
 
   try {
-    const { mediaId } = await request.json()
+    const { audioId } = await request.json()
 
-    if (!mediaId) {
-      return NextResponse.json({ error: "mediaId is required" }, { status: 400 })
+    if (!audioId) {
+      return NextResponse.json({ error: "audioId is required" }, { status: 400 })
     }
 
     await prisma.radioPlaylistItem.delete({
-      where: { mediaId },
+      where: { audioId },
     })
 
     return NextResponse.json({ success: true })
