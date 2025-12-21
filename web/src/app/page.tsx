@@ -162,7 +162,7 @@ export default function Home() {
   const blueGlowHover = '0 0 30px rgba(130,180,255,1), 0 0 60px rgba(100,160,255,1), 0 0 100px rgba(80,140,255,1), 0 0 150px rgba(60,120,255,0.9), 0 0 200px rgba(50,100,255,0.8)'
 
   return (
-    <main className="h-screen flex flex-col items-center relative overflow-hidden bg-black fixed inset-0">
+    <main className="min-h-screen min-h-[100dvh] flex flex-col items-center relative overflow-hidden bg-black fixed inset-0">
       <Suspense fallback={null}>
         <KempoNetRedirect />
       </Suspense>
