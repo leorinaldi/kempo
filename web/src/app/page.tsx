@@ -102,6 +102,8 @@ export default function Home() {
   const [arrowHover, setArrowHover] = useState(false)
   const [titleHover, setTitleHover] = useState(false)
   const touchStartX = useRef<number | null>(null)
+  const touchStartY = useRef<number | null>(null)
+  const isHorizontalSwipe = useRef(false)
 
   const goLeft = () => {
     setCurrentIndex((prev) => (prev - 1 + devices.length) % devices.length)
@@ -114,6 +116,21 @@ export default function Home() {
   // Touch handlers for swipe gestures on device rotator
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+    isHorizontalSwipe.current = false
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return
+
+    const deltaX = Math.abs(e.touches[0].clientX - touchStartX.current)
+    const deltaY = Math.abs(e.touches[0].clientY - touchStartY.current)
+
+    // If moving more horizontally than vertically, it's a horizontal swipe
+    if (deltaX > deltaY && deltaX > 10) {
+      isHorizontalSwipe.current = true
+      e.preventDefault() // Prevent vertical scrolling
+    }
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -135,6 +152,8 @@ export default function Home() {
     }
 
     touchStartX.current = null
+    touchStartY.current = null
+    isHorizontalSwipe.current = false
   }
 
   const currentDevice = devices[currentIndex]
@@ -143,7 +162,7 @@ export default function Home() {
   const blueGlowHover = '0 0 30px rgba(130,180,255,1), 0 0 60px rgba(100,160,255,1), 0 0 100px rgba(80,140,255,1), 0 0 150px rgba(60,120,255,0.9), 0 0 200px rgba(50,100,255,0.8)'
 
   return (
-    <main className="min-h-screen flex flex-col items-center relative overflow-hidden bg-black">
+    <main className="h-screen flex flex-col items-center relative overflow-hidden bg-black fixed inset-0">
       <Suspense fallback={null}>
         <KempoNetRedirect />
       </Suspense>
@@ -179,6 +198,7 @@ export default function Home() {
               boxShadow: '0 0 15px rgba(100,150,255,0.3), 0 0 30px rgba(80,130,255,0.2)'
             }}
             onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             <div className="flex items-center justify-center gap-6">
