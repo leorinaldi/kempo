@@ -183,7 +183,7 @@ export default function TVPage() {
   }
 
   return (
-    <div className="bg-black flex flex-col items-center justify-center p-4" style={{ minHeight: 'calc(100vh - 56px)' }}>
+    <div className="fixed left-0 right-0 bg-black flex flex-col items-center justify-center p-4" style={{ top: 56, bottom: 0, overflow: 'hidden' }}>
       {/* TV Unit - Modern Graphic Novel Style */}
       <div
         className="relative"
