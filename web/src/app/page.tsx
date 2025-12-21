@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useRef } from 'react'
 import { KempoNetRedirect } from '@/components/KempoNetRedirect'
 
 const devices = [
@@ -101,6 +101,7 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(1) // Start on PC
   const [arrowHover, setArrowHover] = useState(false)
   const [titleHover, setTitleHover] = useState(false)
+  const touchStartX = useRef<number | null>(null)
 
   const goLeft = () => {
     setCurrentIndex((prev) => (prev - 1 + devices.length) % devices.length)
@@ -108,6 +109,32 @@ export default function Home() {
 
   const goRight = () => {
     setCurrentIndex((prev) => (prev + 1) % devices.length)
+  }
+
+  // Touch handlers for swipe gestures on device rotator
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+
+    const touchEndX = e.changedTouches[0].clientX
+    const deltaX = touchStartX.current - touchEndX
+    const minSwipeDistance = 50
+
+    if (Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        // Swiped left - go right (next device)
+        goRight()
+      } else {
+        // Swiped right - go left (previous device)
+        goLeft()
+      }
+      e.preventDefault()
+    }
+
+    touchStartX.current = null
   }
 
   const currentDevice = devices[currentIndex]
@@ -151,6 +178,8 @@ export default function Home() {
               background: 'rgba(31, 41, 55, 0.3)',
               boxShadow: '0 0 15px rgba(100,150,255,0.3), 0 0 30px rgba(80,130,255,0.2)'
             }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             <div className="flex items-center justify-center gap-6">
               {/* Left Arrow */}
