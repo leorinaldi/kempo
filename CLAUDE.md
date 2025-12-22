@@ -8,6 +8,10 @@ For project overview, storylines, interfaces, and developer setup, see [README.m
 
 When asked to "start session", "follow session start protocol", or similar, follow [docs/Skills/claude-code-session-start](docs/Skills/claude-code-session-start/skill.md).
 
+## Session Close
+
+When asked to "close the session", "session close protocol", or similar, follow [docs/Skills/claude-code-session-close](docs/Skills/claude-code-session-close/skill.md).
+
 ## Documentation
 
 | Topic | Location |
