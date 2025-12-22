@@ -67,12 +67,12 @@ In March 1949 k.y., test pilot Frank Caldwell died pursuing an unidentified obje
 Kempo/
 ├── README.md              # This file
 ├── CLAUDE.md              # AI assistant instructions
+├── docs/                  # Project documentation
 ├── Skills/                # Claude skills for content creation
 │   └── Kempopedia/        # Article creation skills
 ├── scripts/               # Utility scripts (image generation)
 └── web/                   # Next.js web application
     ├── README.md          # Development setup
-    ├── docs/              # Technical documentation
     ├── prisma/            # Database schema
     ├── public/media/      # Generated images
     └── src/               # Application source code

@@ -6,10 +6,10 @@ This is the primary instruction file for AI assistants working on the Kempo proj
 
 | Topic | Location |
 |-------|----------|
-| KempoNet UI patterns | [web/docs/kemponet-design-patterns.md](web/docs/kemponet-design-patterns.md) |
-| Mobile testing (ngrok) | [web/docs/mobile-testing.md](web/docs/mobile-testing.md) |
+| KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
+| Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
 | Article creation | [Skills/Kempopedia/global-rules](Skills/Kempopedia/global-rules/skill.md) |
-| Simulation workflow | [web/docs/simulation-workflow.md](web/docs/simulation-workflow.md) |
+| Simulation workflow | [docs/simulation-workflow.md](docs/simulation-workflow.md) |
 
 ## Critical Rules
 
