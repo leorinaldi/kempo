@@ -5,23 +5,36 @@ import { useState, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
+interface Brand {
+  id: string
+  name: string
+  organizationId: string | null
+  organization: { id: string; name: string } | null
+  dateFounded: string | null
+  dateDiscontinued: string | null
+  articleId: string | null
+  article: { slug: string; title: string } | null
+  _count: { products: number }
+  createdAt: string
+  updatedAt: string
+}
+
 interface Organization {
   id: string
   name: string
-  abbreviation: string | null
-  orgType: string
-  dateFounded: string | null
-  dateDissolved: string | null
-  articleId: string | null
-  article: { slug: string; title: string } | null
-  createdAt: string
-  updatedAt: string
 }
 
 interface Article {
   id: string
   slug: string
   title: string
+}
+
+interface LinkedProduct {
+  id: string
+  name: string
+  productType: string
+  article: { slug: string } | null
 }
 
 interface Inspiration {
@@ -32,44 +45,14 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  slug: string
-  name: string
   url: string
+  altText: string | null
 }
 
-interface LinkedProduct {
-  id: string
-  name: string
-  productType: string
-  article: { slug: string } | null
-}
-
-interface LinkedBrand {
-  id: string
-  name: string
-  article: { slug: string } | null
-  products: LinkedProduct[]
-}
-
-const ORG_TYPES = [
-  { value: "company", label: "Company" },
-  { value: "political-party", label: "Political Party" },
-  { value: "university", label: "University" },
-  { value: "institution", label: "Institution" },
-  { value: "military-academy", label: "Military Academy" },
-  { value: "government-agency", label: "Government Agency" },
-  { value: "labor-union", label: "Labor Union" },
-  { value: "school", label: "School" },
-  { value: "library", label: "Library" },
-  { value: "military-base", label: "Military Base" },
-  { value: "government", label: "Government Body" },
-  { value: "business-school", label: "Business School" },
-  { value: "organization", label: "Other Organization" },
-]
-
-export default function ManageOrganizationsPage() {
+export default function ManageBrandsPage() {
   const { data: session, status } = useSession()
 
+  const [brands, setBrands] = useState<Brand[]>([])
   const [organizations, setOrganizations] = useState<Organization[]>([])
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
@@ -79,30 +62,44 @@ export default function ManageOrganizationsPage() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
 
   // Edit modal
-  const [editModal, setEditModal] = useState<Organization | null>(null)
+  const [editModal, setEditModal] = useState<Brand | null>(null)
   const [editData, setEditData] = useState({
     name: "",
-    abbreviation: "",
-    orgType: "organization",
+    organizationId: "",
     dateFounded: "",
-    dateDissolved: "",
+    dateDiscontinued: "",
     articleId: "",
   })
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [availableArticles, setAvailableArticles] = useState<Article[]>([])
+  const [linkedProducts, setLinkedProducts] = useState<LinkedProduct[]>([])
   const [inspirations, setInspirations] = useState<Inspiration[]>([])
   const [linkedImages, setLinkedImages] = useState<LinkedImage[]>([])
-  const [linkedBrands, setLinkedBrands] = useState<LinkedBrand[]>([])
 
   // Delete modal
-  const [deleteModal, setDeleteModal] = useState<Organization | null>(null)
+  const [deleteModal, setDeleteModal] = useState<Brand | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
+    loadBrands()
     loadOrganizations()
   }, [])
+
+  const loadBrands = async () => {
+    try {
+      const res = await fetch("/api/brands/list")
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setBrands(data)
+      }
+    } catch (err) {
+      console.error("Failed to load brands:", err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const loadOrganizations = async () => {
     try {
@@ -113,12 +110,10 @@ export default function ManageOrganizationsPage() {
       }
     } catch (err) {
       console.error("Failed to load organizations:", err)
-    } finally {
-      setLoading(false)
     }
   }
 
-  const sortedOrganizations = [...organizations].sort((a, b) => {
+  const sortedBrands = [...brands].sort((a, b) => {
     let comparison = 0
     if (sortField === "name") {
       comparison = a.name.localeCompare(b.name)
@@ -148,37 +143,40 @@ export default function ManageOrganizationsPage() {
     redirect("/admin")
   }
 
-  const openEditModal = async (org: Organization) => {
-    setEditModal(org)
+  const openEditModal = async (brand: Brand) => {
+    setEditModal(brand)
     setEditData({
-      name: org.name,
-      abbreviation: org.abbreviation || "",
-      orgType: org.orgType,
-      dateFounded: org.dateFounded ? org.dateFounded.split("T")[0] : "",
-      dateDissolved: org.dateDissolved ? org.dateDissolved.split("T")[0] : "",
-      articleId: org.articleId || "",
+      name: brand.name,
+      organizationId: brand.organizationId || "",
+      dateFounded: brand.dateFounded ? brand.dateFounded.split("T")[0] : "",
+      dateDiscontinued: brand.dateDiscontinued ? brand.dateDiscontinued.split("T")[0] : "",
+      articleId: brand.articleId || "",
     })
     setEditMessage(null)
+    setLinkedProducts([])
     setInspirations([])
     setLinkedImages([])
-    setLinkedBrands([])
 
-    // Load available articles, inspirations, images, and brands in parallel
     try {
-      const [articlesRes, inspirationsRes, imagesRes, brandsRes] = await Promise.all([
-        fetch("/api/organizations/available-articles"),
-        fetch(`/api/organizations/${org.id}/inspirations`),
-        fetch(`/api/organizations/${org.id}/images`),
-        fetch(`/api/organizations/${org.id}/brands`)
+      const [articlesRes, productsRes, inspirationsRes, imagesRes] = await Promise.all([
+        fetch("/api/brands/available-articles"),
+        fetch(`/api/brands/${brand.id}/products`),
+        fetch(`/api/brands/${brand.id}/inspirations`),
+        fetch(`/api/brands/${brand.id}/images`),
       ])
 
       const articlesData = await articlesRes.json()
       if (Array.isArray(articlesData)) {
-        // Add current org's article if it exists
-        if (org.article && !articlesData.find((a: Article) => a.id === org.articleId)) {
-          articlesData.unshift(org.article)
+        // Add current brand's article if it exists
+        if (brand.article && !articlesData.find((a: Article) => a.id === brand.articleId)) {
+          articlesData.unshift(brand.article)
         }
         setAvailableArticles(articlesData)
+      }
+
+      const productsData = await productsRes.json()
+      if (Array.isArray(productsData)) {
+        setLinkedProducts(productsData)
       }
 
       const inspirationsData = await inspirationsRes.json()
@@ -189,11 +187,6 @@ export default function ManageOrganizationsPage() {
       const imagesData = await imagesRes.json()
       if (Array.isArray(imagesData)) {
         setLinkedImages(imagesData)
-      }
-
-      const brandsData = await brandsRes.json()
-      if (Array.isArray(brandsData)) {
-        setLinkedBrands(brandsData)
       }
     } catch (err) {
       console.error("Failed to load data:", err)
@@ -212,16 +205,15 @@ export default function ManageOrganizationsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/organizations/update", {
+      const res = await fetch("/api/brands/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
           name: editData.name,
-          abbreviation: editData.abbreviation || null,
-          orgType: editData.orgType,
+          organizationId: editData.organizationId || null,
           dateFounded: editData.dateFounded || null,
-          dateDissolved: editData.dateDissolved || null,
+          dateDiscontinued: editData.dateDiscontinued || null,
           articleId: editData.articleId || null,
         }),
       })
@@ -232,7 +224,7 @@ export default function ManageOrganizationsPage() {
       }
 
       setEditMessage({ type: "success", text: "Saved successfully!" })
-      await loadOrganizations()
+      await loadBrands()
 
       setTimeout(() => {
         closeEditModal()
@@ -244,8 +236,8 @@ export default function ManageOrganizationsPage() {
     }
   }
 
-  const openDeleteModal = (org: Organization) => {
-    setDeleteModal(org)
+  const openDeleteModal = (brand: Brand) => {
+    setDeleteModal(brand)
     setDeleteConfirmText("")
   }
 
@@ -260,7 +252,7 @@ export default function ManageOrganizationsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/organizations/delete", {
+      const res = await fetch("/api/brands/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: deleteModal.id }),
@@ -272,7 +264,7 @@ export default function ManageOrganizationsPage() {
       }
 
       setMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully` })
-      await loadOrganizations()
+      await loadBrands()
       closeDeleteModal()
 
       setTimeout(() => setMessage(null), 3000)
@@ -283,20 +275,15 @@ export default function ManageOrganizationsPage() {
     }
   }
 
-  const formatOrgType = (orgType: string) => {
-    const found = ORG_TYPES.find((t) => t.value === orgType)
-    return found ? found.label : orgType
-  }
-
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/organizations" className="text-gray-500 hover:text-gray-700">
+            <Link href="/admin/world-data/brands" className="text-gray-500 hover:text-gray-700">
               ← Back
             </Link>
-            <h1 className="text-2xl font-bold text-teal-600">Manage Organizations</h1>
+            <h1 className="text-2xl font-bold text-orange-600">Manage Brands</h1>
           </div>
         </div>
       </header>
@@ -304,7 +291,7 @@ export default function ManageOrganizationsPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Organizations ({organizations.length})</h2>
+            <h2 className="text-lg font-semibold">Brands ({brands.length})</h2>
             <div className="flex items-center gap-2">
               <select
                 value={sortField}
@@ -337,45 +324,43 @@ export default function ManageOrganizationsPage() {
 
           {loading ? (
             <p className="text-gray-500 text-sm">Loading...</p>
-          ) : sortedOrganizations.length === 0 ? (
-            <p className="text-gray-500 text-sm">No organizations found</p>
+          ) : sortedBrands.length === 0 ? (
+            <p className="text-gray-500 text-sm">No brands found</p>
           ) : (
             <div className="space-y-2">
-              {sortedOrganizations.map((org) => (
+              {sortedBrands.map((brand) => (
                 <div
-                  key={org.id}
-                  className="flex items-center justify-between p-3 bg-teal-50 rounded border border-teal-200"
+                  key={brand.id}
+                  className="flex items-center justify-between p-3 bg-orange-50 rounded border border-orange-200"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">
-                      {org.name}
-                      {org.abbreviation && <span className="text-gray-500"> ({org.abbreviation})</span>}
-                    </p>
+                    <p className="font-medium text-sm truncate">{brand.name}</p>
                     <p className="text-xs text-gray-500">
-                      {formatOrgType(org.orgType)}
-                      {org.dateFounded && ` · Founded: ${new Date(org.dateFounded).getFullYear()} k.y.`}
-                      {org.dateDissolved && ` · Dissolved: ${new Date(org.dateDissolved).getFullYear()} k.y.`}
+                      {brand.organization && `${brand.organization.name} · `}
+                      {brand.dateFounded && `Founded: ${new Date(brand.dateFounded).getFullYear()} k.y.`}
+                      {brand.dateDiscontinued && ` · Discontinued: ${new Date(brand.dateDiscontinued).getFullYear()} k.y.`}
+                      {brand._count.products > 0 && ` · ${brand._count.products} product${brand._count.products !== 1 ? "s" : ""}`}
                     </p>
-                    {org.article && (
+                    {brand.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${org.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${brand.article.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-teal-600 hover:text-teal-800 hover:underline"
+                        className="text-xs text-orange-600 hover:text-orange-800 hover:underline"
                       >
-                        📄 {org.article.title}
+                        📄 {brand.article.title}
                       </a>
                     )}
                   </div>
                   <div className="flex items-center gap-3 ml-4">
                     <button
-                      onClick={() => openEditModal(org)}
-                      className="text-teal-600 hover:text-teal-800 text-sm"
+                      onClick={() => openEditModal(brand)}
+                      className="text-orange-600 hover:text-orange-800 text-sm"
                     >
                       View/Edit
                     </button>
                     <button
-                      onClick={() => openDeleteModal(org)}
+                      onClick={() => openDeleteModal(brand)}
                       className="text-red-600 hover:text-red-800 text-sm"
                     >
                       Delete
@@ -392,7 +377,7 @@ export default function ManageOrganizationsPage() {
       {editModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold mb-4">View/Edit Organization</h3>
+            <h3 className="text-lg font-bold mb-4">View/Edit Brand</h3>
 
             {editMessage && (
               <div
@@ -405,37 +390,27 @@ export default function ManageOrganizationsPage() {
             )}
 
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input
-                    type="text"
-                    value={editData.name}
-                    onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Abbreviation</label>
-                  <input
-                    type="text"
-                    value={editData.abbreviation}
-                    onChange={(e) => setEditData({ ...editData, abbreviation: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input
+                  type="text"
+                  value={editData.name}
+                  onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Organization Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Parent Organization</label>
                 <select
-                  value={editData.orgType}
-                  onChange={(e) => setEditData({ ...editData, orgType: e.target.value })}
+                  value={editData.organizationId}
+                  onChange={(e) => setEditData({ ...editData, organizationId: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 >
-                  {ORG_TYPES.map((type) => (
-                    <option key={type.value} value={type.value}>
-                      {type.label}
+                  <option value="">-- No parent organization --</option>
+                  {organizations.map((org) => (
+                    <option key={org.id} value={org.id}>
+                      {org.name}
                     </option>
                   ))}
                 </select>
@@ -452,11 +427,11 @@ export default function ManageOrganizationsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Dissolved (k.y.)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Discontinued (k.y.)</label>
                   <input
                     type="date"
-                    value={editData.dateDissolved}
-                    onChange={(e) => setEditData({ ...editData, dateDissolved: e.target.value })}
+                    value={editData.dateDiscontinued}
+                    onChange={(e) => setEditData({ ...editData, dateDiscontinued: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
@@ -479,7 +454,7 @@ export default function ManageOrganizationsPage() {
               </div>
             </div>
 
-            {/* Inspirations */}
+            {/* Real-World Inspirations */}
             <div className="mt-6 border-t pt-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">Real-World Inspirations</h4>
               {inspirations.length === 0 ? (
@@ -493,7 +468,7 @@ export default function ManageOrganizationsPage() {
                         href={insp.wikipediaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm hover:bg-teal-200"
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm hover:bg-orange-200"
                       >
                         {insp.inspiration}
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -513,57 +488,27 @@ export default function ManageOrganizationsPage() {
               )}
             </div>
 
-            {/* Linked Brands & Products */}
-            {linkedBrands.length > 0 && (
+            {/* Linked Products */}
+            {linkedProducts.length > 0 && (
               <div className="mt-6 border-t pt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">
-                  Brands & Products ({linkedBrands.length} brand{linkedBrands.length !== 1 ? "s" : ""})
-                </h4>
-                <div className="space-y-3">
-                  {linkedBrands.map((brand) => (
-                    <div key={brand.id} className="bg-orange-50 rounded p-3 border border-orange-200">
-                      <div className="flex items-center gap-2 font-medium text-sm">
-                        <span className="text-orange-600">●</span>
-                        {brand.article ? (
-                          <a
-                            href={`/kemponet/kempopedia/wiki/${brand.article.slug}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-orange-600 hover:text-orange-800 hover:underline"
-                          >
-                            {brand.name}
-                          </a>
-                        ) : (
-                          <span className="text-gray-800">{brand.name}</span>
-                        )}
-                        {brand.products.length > 0 && (
-                          <span className="text-gray-400 text-xs">
-                            ({brand.products.length} product{brand.products.length !== 1 ? "s" : ""})
-                          </span>
-                        )}
-                      </div>
-                      {brand.products.length > 0 && (
-                        <div className="ml-4 mt-2 space-y-1">
-                          {brand.products.map((product) => (
-                            <div key={product.id} className="flex items-center gap-2 text-sm">
-                              <span className="text-rose-500">○</span>
-                              {product.article ? (
-                                <a
-                                  href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-rose-600 hover:text-rose-800 hover:underline"
-                                >
-                                  {product.name}
-                                </a>
-                              ) : (
-                                <span className="text-gray-700">{product.name}</span>
-                              )}
-                              <span className="text-gray-400 text-xs">({product.productType})</span>
-                            </div>
-                          ))}
-                        </div>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Products ({linkedProducts.length})</h4>
+                <div className="space-y-1">
+                  {linkedProducts.map((product) => (
+                    <div key={product.id} className="flex items-center gap-2 text-sm">
+                      <span className="text-rose-600">●</span>
+                      {product.article ? (
+                        <a
+                          href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-rose-600 hover:text-rose-800 hover:underline"
+                        >
+                          {product.name}
+                        </a>
+                      ) : (
+                        <span className="text-gray-700">{product.name}</span>
                       )}
+                      <span className="text-gray-400 text-xs">({product.productType})</span>
                     </div>
                   ))}
                 </div>
@@ -571,31 +516,28 @@ export default function ManageOrganizationsPage() {
             )}
 
             {/* Linked Images */}
-            <div className="mt-6 border-t pt-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Images</h4>
-              {linkedImages.length === 0 ? (
-                <p className="text-sm text-gray-500">No linked images</p>
-              ) : (
+            {linkedImages.length > 0 && (
+              <div className="mt-6 border-t pt-4">
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Images ({linkedImages.length})</h4>
                 <div className="flex flex-wrap gap-2">
-                  {linkedImages.map((img) => (
+                  {linkedImages.map((image) => (
                     <a
-                      key={img.id}
-                      href={img.url}
+                      key={image.id}
+                      href={image.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block"
-                      title={img.name}
                     >
                       <img
-                        src={img.url}
-                        alt={img.name}
-                        className="h-16 w-16 object-cover rounded border border-teal-300 hover:border-teal-500"
+                        src={image.url}
+                        alt={image.altText || "Brand image"}
+                        className="w-20 h-20 object-cover rounded border border-orange-200 hover:border-orange-400"
                       />
                     </a>
                   ))}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <div className="flex gap-3 mt-6">
               <button
@@ -607,7 +549,7 @@ export default function ManageOrganizationsPage() {
               <button
                 onClick={saveEdit}
                 disabled={saving}
-                className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+                className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>
@@ -623,7 +565,11 @@ export default function ManageOrganizationsPage() {
             <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
             <p className="text-gray-700 mb-4">
               Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
-              This action cannot be undone.
+              {deleteModal._count.products > 0 && (
+                <span className="block mt-2 text-amber-600">
+                  Warning: {deleteModal._count.products} product{deleteModal._count.products !== 1 ? "s" : ""} will have their brand removed.
+                </span>
+              )}
             </p>
 
             <p className="text-sm text-gray-600 mb-2">

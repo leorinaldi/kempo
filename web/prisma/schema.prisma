@@ -188,6 +188,8 @@ model Article {
   revisions          Revision[]
   person             Person?
   organization       Organization?
+  brand              Brand?
+  product            Product?
 
   @@index([type])
   @@index([status])
@@ -248,6 +250,8 @@ model Organization {
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
+  brands        Brand[]
+
   @@map("organizations")
 }
 
@@ -261,6 +265,41 @@ model Inspiration {
 
   @@index([subjectId, subjectType])
   @@map("inspirations")
+}
+
+// ============ WORLD DATA: BRANDS & PRODUCTS ============
+
+model Brand {
+  id              String        @id @default(cuid())
+  name            String                              // "Monarch", "Sterling", "Regal"
+  organizationId  String?       @map("organization_id")
+  organization    Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  dateFounded     DateTime?     @map("date_founded")  // k.y. founding date
+  dateDiscontinued DateTime?    @map("date_discontinued") // k.y. discontinuation date (null if active)
+  articleId       String?       @unique @map("article_id")
+  article         Article?      @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  products        Product[]
+
+  @@map("brands")
+}
+
+model Product {
+  id              String    @id @default(cuid())
+  name            String                              // "Monarch Imperial", "Continental Courier"
+  productType     String    @map("product_type")      // "vehicle", "beverage", "tobacco", "publication", etc.
+  brandId         String?   @map("brand_id")
+  brand           Brand?    @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  dateIntroduced  DateTime? @map("date_introduced")   // k.y. launch date
+  dateDiscontinued DateTime? @map("date_discontinued") // k.y. discontinuation date (null if active)
+  articleId       String?   @unique @map("article_id")
+  article         Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@map("products")
 }
 
 // ============ PROJECT HISTORY ============

@@ -145,9 +145,9 @@ export default function MediaLandingPage() {
         </div>
 
         {/* Manage Subjects Section */}
-        <div>
+        <div className="mb-12">
           <h2 className="text-lg font-semibold text-gray-500 uppercase tracking-wide mb-6">Manage Subjects</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             {/* People Card */}
             <Link
               href="/admin/world-data/people"
@@ -189,6 +189,54 @@ export default function MediaLandingPage() {
                 </p>
                 <div className="mt-4 flex items-center gap-2 text-teal-600 font-medium">
                   <span>Manage Organizations</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+
+            {/* Brands Card */}
+            <Link
+              href="/admin/world-data/brands"
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-orange-400 group"
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-200 transition-colors">
+                  <svg className="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Brands</h3>
+                <p className="text-gray-600 text-sm">
+                  Create and manage brands in the Kempo universe
+                </p>
+                <div className="mt-4 flex items-center gap-2 text-orange-600 font-medium">
+                  <span>Manage Brands</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+
+            {/* Products Card */}
+            <Link
+              href="/admin/world-data/products"
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-rose-400 group"
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 bg-rose-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-rose-200 transition-colors">
+                  <svg className="w-10 h-10 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Products</h3>
+                <p className="text-gray-600 text-sm">
+                  Create and manage products in the Kempo universe
+                </p>
+                <div className="mt-4 flex items-center gap-2 text-rose-600 font-medium">
+                  <span>Manage Products</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

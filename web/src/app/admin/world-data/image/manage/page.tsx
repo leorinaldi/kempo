@@ -46,6 +46,16 @@ interface LinkedSubject {
     abbreviation: string | null
     articleSlug: string | null
   }
+  brand?: {
+    id: string
+    name: string
+    articleSlug: string | null
+  }
+  product?: {
+    id: string
+    name: string
+    articleSlug: string | null
+  }
 }
 
 export default function ImageManagePage() {
@@ -620,6 +630,10 @@ export default function ImageManagePage() {
                           ? "bg-purple-100 text-purple-700"
                           : subject.itemType === "organization"
                           ? "bg-teal-100 text-teal-700"
+                          : subject.itemType === "brand"
+                          ? "bg-orange-100 text-orange-700"
+                          : subject.itemType === "product"
+                          ? "bg-rose-100 text-rose-700"
                           : "bg-gray-100 text-gray-700"
                       }`}>
                         {subject.itemType}
@@ -659,6 +673,32 @@ export default function ImageManagePage() {
                             {subject.organization.name}
                             {subject.organization.abbreviation ? ` (${subject.organization.abbreviation})` : ""}
                           </span>
+                        )
+                      ) : subject.brand ? (
+                        subject.brand.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.brand.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-orange-600 hover:text-orange-800 hover:underline"
+                          >
+                            {subject.brand.name}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">{subject.brand.name}</span>
+                        )
+                      ) : subject.product ? (
+                        subject.product.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.product.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-rose-600 hover:text-rose-800 hover:underline"
+                          >
+                            {subject.product.name}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">{subject.product.name}</span>
                         )
                       ) : (
                         <span className="text-gray-500">Unknown {subject.itemType}</span>

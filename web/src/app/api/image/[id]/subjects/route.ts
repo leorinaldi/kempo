@@ -83,7 +83,59 @@ export async function GET(
               : undefined,
           }
         }
-        // Add other item types here as needed (place, etc.)
+        if (subject.itemType === "brand") {
+          const brand = await prisma.brand.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            brand: brand
+              ? {
+                  id: brand.id,
+                  name: brand.name,
+                  articleSlug: brand.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
+        if (subject.itemType === "product") {
+          const product = await prisma.product.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            product: product
+              ? {
+                  id: product.id,
+                  name: product.name,
+                  articleSlug: product.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
+        // Unknown item type
         return {
           id: subject.id,
           itemId: subject.itemId,

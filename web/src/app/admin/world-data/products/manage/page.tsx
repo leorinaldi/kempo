@@ -5,23 +5,35 @@ import { useState, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-interface Organization {
+interface Product {
   id: string
   name: string
-  abbreviation: string | null
-  orgType: string
-  dateFounded: string | null
-  dateDissolved: string | null
+  productType: string
+  brandId: string | null
+  brand: {
+    id: string
+    name: string
+    organization: { id: string; name: string } | null
+  } | null
+  dateIntroduced: string | null
+  dateDiscontinued: string | null
   articleId: string | null
   article: { slug: string; title: string } | null
   createdAt: string
   updatedAt: string
 }
 
+interface Brand {
+  id: string
+  name: string
+  organization: { id: string; name: string } | null
+}
+
 interface Article {
   id: string
   slug: string
   title: string
+  subtype: string | null
 }
 
 interface Inspiration {
@@ -32,60 +44,43 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  slug: string
-  name: string
   url: string
+  altText: string | null
 }
 
-interface LinkedProduct {
-  id: string
-  name: string
-  productType: string
-  article: { slug: string } | null
-}
-
-interface LinkedBrand {
-  id: string
-  name: string
-  article: { slug: string } | null
-  products: LinkedProduct[]
-}
-
-const ORG_TYPES = [
-  { value: "company", label: "Company" },
-  { value: "political-party", label: "Political Party" },
-  { value: "university", label: "University" },
-  { value: "institution", label: "Institution" },
-  { value: "military-academy", label: "Military Academy" },
-  { value: "government-agency", label: "Government Agency" },
-  { value: "labor-union", label: "Labor Union" },
-  { value: "school", label: "School" },
-  { value: "library", label: "Library" },
-  { value: "military-base", label: "Military Base" },
-  { value: "government", label: "Government Body" },
-  { value: "business-school", label: "Business School" },
-  { value: "organization", label: "Other Organization" },
+const PRODUCT_TYPES = [
+  { value: "vehicle", label: "Vehicle" },
+  { value: "beverage", label: "Beverage" },
+  { value: "tobacco", label: "Tobacco Product" },
+  { value: "publication", label: "Publication" },
+  { value: "food", label: "Food Product" },
+  { value: "appliance", label: "Appliance" },
+  { value: "electronics", label: "Electronics" },
+  { value: "clothing", label: "Clothing" },
+  { value: "cosmetics", label: "Cosmetics" },
+  { value: "other", label: "Other" },
 ]
 
-export default function ManageOrganizationsPage() {
+export default function ManageProductsPage() {
   const { data: session, status } = useSession()
 
-  const [organizations, setOrganizations] = useState<Organization[]>([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [brands, setBrands] = useState<Brand[]>([])
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Sorting
-  const [sortField, setSortField] = useState<"name" | "createdAt" | "dateFounded">("name")
+  const [sortField, setSortField] = useState<"name" | "createdAt" | "dateIntroduced" | "productType">("name")
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
 
   // Edit modal
-  const [editModal, setEditModal] = useState<Organization | null>(null)
+  const [editModal, setEditModal] = useState<Product | null>(null)
   const [editData, setEditData] = useState({
     name: "",
-    abbreviation: "",
-    orgType: "organization",
-    dateFounded: "",
-    dateDissolved: "",
+    productType: "",
+    brandId: "",
+    dateIntroduced: "",
+    dateDiscontinued: "",
     articleId: "",
   })
   const [saving, setSaving] = useState(false)
@@ -93,38 +88,52 @@ export default function ManageOrganizationsPage() {
   const [availableArticles, setAvailableArticles] = useState<Article[]>([])
   const [inspirations, setInspirations] = useState<Inspiration[]>([])
   const [linkedImages, setLinkedImages] = useState<LinkedImage[]>([])
-  const [linkedBrands, setLinkedBrands] = useState<LinkedBrand[]>([])
 
   // Delete modal
-  const [deleteModal, setDeleteModal] = useState<Organization | null>(null)
+  const [deleteModal, setDeleteModal] = useState<Product | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
-    loadOrganizations()
+    loadProducts()
+    loadBrands()
   }, [])
 
-  const loadOrganizations = async () => {
+  const loadProducts = async () => {
     try {
-      const res = await fetch("/api/organizations/list")
+      const res = await fetch("/api/products/list")
       const data = await res.json()
       if (Array.isArray(data)) {
-        setOrganizations(data)
+        setProducts(data)
       }
     } catch (err) {
-      console.error("Failed to load organizations:", err)
+      console.error("Failed to load products:", err)
     } finally {
       setLoading(false)
     }
   }
 
-  const sortedOrganizations = [...organizations].sort((a, b) => {
+  const loadBrands = async () => {
+    try {
+      const res = await fetch("/api/brands/list")
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setBrands(data)
+      }
+    } catch (err) {
+      console.error("Failed to load brands:", err)
+    }
+  }
+
+  const sortedProducts = [...products].sort((a, b) => {
     let comparison = 0
     if (sortField === "name") {
       comparison = a.name.localeCompare(b.name)
-    } else if (sortField === "dateFounded") {
-      const aDate = a.dateFounded ? new Date(a.dateFounded).getTime() : 0
-      const bDate = b.dateFounded ? new Date(b.dateFounded).getTime() : 0
+    } else if (sortField === "productType") {
+      comparison = a.productType.localeCompare(b.productType)
+    } else if (sortField === "dateIntroduced") {
+      const aDate = a.dateIntroduced ? new Date(a.dateIntroduced).getTime() : 0
+      const bDate = b.dateIntroduced ? new Date(b.dateIntroduced).getTime() : 0
       comparison = aDate - bDate
     } else {
       comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
@@ -148,35 +157,32 @@ export default function ManageOrganizationsPage() {
     redirect("/admin")
   }
 
-  const openEditModal = async (org: Organization) => {
-    setEditModal(org)
+  const openEditModal = async (product: Product) => {
+    setEditModal(product)
     setEditData({
-      name: org.name,
-      abbreviation: org.abbreviation || "",
-      orgType: org.orgType,
-      dateFounded: org.dateFounded ? org.dateFounded.split("T")[0] : "",
-      dateDissolved: org.dateDissolved ? org.dateDissolved.split("T")[0] : "",
-      articleId: org.articleId || "",
+      name: product.name,
+      productType: product.productType,
+      brandId: product.brandId || "",
+      dateIntroduced: product.dateIntroduced ? product.dateIntroduced.split("T")[0] : "",
+      dateDiscontinued: product.dateDiscontinued ? product.dateDiscontinued.split("T")[0] : "",
+      articleId: product.articleId || "",
     })
     setEditMessage(null)
     setInspirations([])
     setLinkedImages([])
-    setLinkedBrands([])
 
-    // Load available articles, inspirations, images, and brands in parallel
     try {
-      const [articlesRes, inspirationsRes, imagesRes, brandsRes] = await Promise.all([
-        fetch("/api/organizations/available-articles"),
-        fetch(`/api/organizations/${org.id}/inspirations`),
-        fetch(`/api/organizations/${org.id}/images`),
-        fetch(`/api/organizations/${org.id}/brands`)
+      const [articlesRes, inspirationsRes, imagesRes] = await Promise.all([
+        fetch("/api/products/available-articles"),
+        fetch(`/api/products/${product.id}/inspirations`),
+        fetch(`/api/products/${product.id}/images`),
       ])
 
       const articlesData = await articlesRes.json()
       if (Array.isArray(articlesData)) {
-        // Add current org's article if it exists
-        if (org.article && !articlesData.find((a: Article) => a.id === org.articleId)) {
-          articlesData.unshift(org.article)
+        // Add current product's article if it exists
+        if (product.article && !articlesData.find((a: Article) => a.id === product.articleId)) {
+          articlesData.unshift(product.article)
         }
         setAvailableArticles(articlesData)
       }
@@ -189,11 +195,6 @@ export default function ManageOrganizationsPage() {
       const imagesData = await imagesRes.json()
       if (Array.isArray(imagesData)) {
         setLinkedImages(imagesData)
-      }
-
-      const brandsData = await brandsRes.json()
-      if (Array.isArray(brandsData)) {
-        setLinkedBrands(brandsData)
       }
     } catch (err) {
       console.error("Failed to load data:", err)
@@ -212,16 +213,16 @@ export default function ManageOrganizationsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/organizations/update", {
+      const res = await fetch("/api/products/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
           name: editData.name,
-          abbreviation: editData.abbreviation || null,
-          orgType: editData.orgType,
-          dateFounded: editData.dateFounded || null,
-          dateDissolved: editData.dateDissolved || null,
+          productType: editData.productType,
+          brandId: editData.brandId || null,
+          dateIntroduced: editData.dateIntroduced || null,
+          dateDiscontinued: editData.dateDiscontinued || null,
           articleId: editData.articleId || null,
         }),
       })
@@ -232,7 +233,7 @@ export default function ManageOrganizationsPage() {
       }
 
       setEditMessage({ type: "success", text: "Saved successfully!" })
-      await loadOrganizations()
+      await loadProducts()
 
       setTimeout(() => {
         closeEditModal()
@@ -244,8 +245,8 @@ export default function ManageOrganizationsPage() {
     }
   }
 
-  const openDeleteModal = (org: Organization) => {
-    setDeleteModal(org)
+  const openDeleteModal = (product: Product) => {
+    setDeleteModal(product)
     setDeleteConfirmText("")
   }
 
@@ -260,7 +261,7 @@ export default function ManageOrganizationsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/organizations/delete", {
+      const res = await fetch("/api/products/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: deleteModal.id }),
@@ -272,7 +273,7 @@ export default function ManageOrganizationsPage() {
       }
 
       setMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully` })
-      await loadOrganizations()
+      await loadProducts()
       closeDeleteModal()
 
       setTimeout(() => setMessage(null), 3000)
@@ -283,9 +284,9 @@ export default function ManageOrganizationsPage() {
     }
   }
 
-  const formatOrgType = (orgType: string) => {
-    const found = ORG_TYPES.find((t) => t.value === orgType)
-    return found ? found.label : orgType
+  const formatProductType = (type: string) => {
+    const found = PRODUCT_TYPES.find((t) => t.value === type)
+    return found ? found.label : type
   }
 
   return (
@@ -293,10 +294,10 @@ export default function ManageOrganizationsPage() {
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/organizations" className="text-gray-500 hover:text-gray-700">
+            <Link href="/admin/world-data/products" className="text-gray-500 hover:text-gray-700">
               ← Back
             </Link>
-            <h1 className="text-2xl font-bold text-teal-600">Manage Organizations</h1>
+            <h1 className="text-2xl font-bold text-rose-600">Manage Products</h1>
           </div>
         </div>
       </header>
@@ -304,16 +305,17 @@ export default function ManageOrganizationsPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Organizations ({organizations.length})</h2>
+            <h2 className="text-lg font-semibold">Products ({products.length})</h2>
             <div className="flex items-center gap-2">
               <select
                 value={sortField}
-                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateFounded")}
+                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateIntroduced" | "productType")}
                 className="text-sm border border-gray-300 rounded px-2 py-1"
               >
                 <option value="name">Name</option>
+                <option value="productType">Type</option>
                 <option value="createdAt">Created Date</option>
-                <option value="dateFounded">Founded Date (k.y.)</option>
+                <option value="dateIntroduced">Introduced Date (k.y.)</option>
               </select>
               <button
                 onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
@@ -337,45 +339,44 @@ export default function ManageOrganizationsPage() {
 
           {loading ? (
             <p className="text-gray-500 text-sm">Loading...</p>
-          ) : sortedOrganizations.length === 0 ? (
-            <p className="text-gray-500 text-sm">No organizations found</p>
+          ) : sortedProducts.length === 0 ? (
+            <p className="text-gray-500 text-sm">No products found</p>
           ) : (
             <div className="space-y-2">
-              {sortedOrganizations.map((org) => (
+              {sortedProducts.map((product) => (
                 <div
-                  key={org.id}
-                  className="flex items-center justify-between p-3 bg-teal-50 rounded border border-teal-200"
+                  key={product.id}
+                  className="flex items-center justify-between p-3 bg-rose-50 rounded border border-rose-200"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">
-                      {org.name}
-                      {org.abbreviation && <span className="text-gray-500"> ({org.abbreviation})</span>}
-                    </p>
+                    <p className="font-medium text-sm truncate">{product.name}</p>
                     <p className="text-xs text-gray-500">
-                      {formatOrgType(org.orgType)}
-                      {org.dateFounded && ` · Founded: ${new Date(org.dateFounded).getFullYear()} k.y.`}
-                      {org.dateDissolved && ` · Dissolved: ${new Date(org.dateDissolved).getFullYear()} k.y.`}
+                      {formatProductType(product.productType)}
+                      {product.brand && ` · ${product.brand.name}`}
+                      {product.brand?.organization && ` (${product.brand.organization.name})`}
+                      {product.dateIntroduced && ` · Introduced: ${new Date(product.dateIntroduced).getFullYear()} k.y.`}
+                      {product.dateDiscontinued && ` · Discontinued: ${new Date(product.dateDiscontinued).getFullYear()} k.y.`}
                     </p>
-                    {org.article && (
+                    {product.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${org.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-teal-600 hover:text-teal-800 hover:underline"
+                        className="text-xs text-rose-600 hover:text-rose-800 hover:underline"
                       >
-                        📄 {org.article.title}
+                        📄 {product.article.title}
                       </a>
                     )}
                   </div>
                   <div className="flex items-center gap-3 ml-4">
                     <button
-                      onClick={() => openEditModal(org)}
-                      className="text-teal-600 hover:text-teal-800 text-sm"
+                      onClick={() => openEditModal(product)}
+                      className="text-rose-600 hover:text-rose-800 text-sm"
                     >
                       View/Edit
                     </button>
                     <button
-                      onClick={() => openDeleteModal(org)}
+                      onClick={() => openDeleteModal(product)}
                       className="text-red-600 hover:text-red-800 text-sm"
                     >
                       Delete
@@ -392,7 +393,7 @@ export default function ManageOrganizationsPage() {
       {editModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold mb-4">View/Edit Organization</h3>
+            <h3 className="text-lg font-bold mb-4">View/Edit Product</h3>
 
             {editMessage && (
               <div
@@ -405,35 +406,24 @@ export default function ManageOrganizationsPage() {
             )}
 
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input
-                    type="text"
-                    value={editData.name}
-                    onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Abbreviation</label>
-                  <input
-                    type="text"
-                    value={editData.abbreviation}
-                    onChange={(e) => setEditData({ ...editData, abbreviation: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input
+                  type="text"
+                  value={editData.name}
+                  onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Organization Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Product Type</label>
                 <select
-                  value={editData.orgType}
-                  onChange={(e) => setEditData({ ...editData, orgType: e.target.value })}
+                  value={editData.productType}
+                  onChange={(e) => setEditData({ ...editData, productType: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 >
-                  {ORG_TYPES.map((type) => (
+                  {PRODUCT_TYPES.map((type) => (
                     <option key={type.value} value={type.value}>
                       {type.label}
                     </option>
@@ -441,22 +431,39 @@ export default function ManageOrganizationsPage() {
                 </select>
               </div>
 
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                <select
+                  value={editData.brandId}
+                  onChange={(e) => setEditData({ ...editData, brandId: e.target.value })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="">-- No brand --</option>
+                  {brands.map((brand) => (
+                    <option key={brand.id} value={brand.id}>
+                      {brand.name}
+                      {brand.organization && ` (${brand.organization.name})`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Founded (k.y.)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Introduced (k.y.)</label>
                   <input
                     type="date"
-                    value={editData.dateFounded}
-                    onChange={(e) => setEditData({ ...editData, dateFounded: e.target.value })}
+                    value={editData.dateIntroduced}
+                    onChange={(e) => setEditData({ ...editData, dateIntroduced: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Dissolved (k.y.)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Discontinued (k.y.)</label>
                   <input
                     type="date"
-                    value={editData.dateDissolved}
-                    onChange={(e) => setEditData({ ...editData, dateDissolved: e.target.value })}
+                    value={editData.dateDiscontinued}
+                    onChange={(e) => setEditData({ ...editData, dateDiscontinued: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
@@ -479,7 +486,7 @@ export default function ManageOrganizationsPage() {
               </div>
             </div>
 
-            {/* Inspirations */}
+            {/* Real-World Inspirations */}
             <div className="mt-6 border-t pt-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">Real-World Inspirations</h4>
               {inspirations.length === 0 ? (
@@ -493,7 +500,7 @@ export default function ManageOrganizationsPage() {
                         href={insp.wikipediaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm hover:bg-teal-200"
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-rose-100 text-rose-700 rounded-full text-sm hover:bg-rose-200"
                       >
                         {insp.inspiration}
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -513,89 +520,29 @@ export default function ManageOrganizationsPage() {
               )}
             </div>
 
-            {/* Linked Brands & Products */}
-            {linkedBrands.length > 0 && (
-              <div className="mt-6 border-t pt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">
-                  Brands & Products ({linkedBrands.length} brand{linkedBrands.length !== 1 ? "s" : ""})
-                </h4>
-                <div className="space-y-3">
-                  {linkedBrands.map((brand) => (
-                    <div key={brand.id} className="bg-orange-50 rounded p-3 border border-orange-200">
-                      <div className="flex items-center gap-2 font-medium text-sm">
-                        <span className="text-orange-600">●</span>
-                        {brand.article ? (
-                          <a
-                            href={`/kemponet/kempopedia/wiki/${brand.article.slug}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-orange-600 hover:text-orange-800 hover:underline"
-                          >
-                            {brand.name}
-                          </a>
-                        ) : (
-                          <span className="text-gray-800">{brand.name}</span>
-                        )}
-                        {brand.products.length > 0 && (
-                          <span className="text-gray-400 text-xs">
-                            ({brand.products.length} product{brand.products.length !== 1 ? "s" : ""})
-                          </span>
-                        )}
-                      </div>
-                      {brand.products.length > 0 && (
-                        <div className="ml-4 mt-2 space-y-1">
-                          {brand.products.map((product) => (
-                            <div key={product.id} className="flex items-center gap-2 text-sm">
-                              <span className="text-rose-500">○</span>
-                              {product.article ? (
-                                <a
-                                  href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-rose-600 hover:text-rose-800 hover:underline"
-                                >
-                                  {product.name}
-                                </a>
-                              ) : (
-                                <span className="text-gray-700">{product.name}</span>
-                              )}
-                              <span className="text-gray-400 text-xs">({product.productType})</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Linked Images */}
-            <div className="mt-6 border-t pt-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Images</h4>
-              {linkedImages.length === 0 ? (
-                <p className="text-sm text-gray-500">No linked images</p>
-              ) : (
+            {linkedImages.length > 0 && (
+              <div className="mt-6 border-t pt-4">
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Images ({linkedImages.length})</h4>
                 <div className="flex flex-wrap gap-2">
-                  {linkedImages.map((img) => (
+                  {linkedImages.map((image) => (
                     <a
-                      key={img.id}
-                      href={img.url}
+                      key={image.id}
+                      href={image.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block"
-                      title={img.name}
                     >
                       <img
-                        src={img.url}
-                        alt={img.name}
-                        className="h-16 w-16 object-cover rounded border border-teal-300 hover:border-teal-500"
+                        src={image.url}
+                        alt={image.altText || "Product image"}
+                        className="w-20 h-20 object-cover rounded border border-rose-200 hover:border-rose-400"
                       />
                     </a>
                   ))}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <div className="flex gap-3 mt-6">
               <button
@@ -607,7 +554,7 @@ export default function ManageOrganizationsPage() {
               <button
                 onClick={saveEdit}
                 disabled={saving}
-                className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+                className="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>
