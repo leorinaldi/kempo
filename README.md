@@ -1,5 +1,11 @@
 # Kempo
 
+**Scope:** Project overview for humans. Explains what Kempo is, its storylines, interfaces, and how to set up the development environment.
+
+For AI assistant instructions and file routing, see [CLAUDE.md](CLAUDE.md).
+
+---
+
 A collaborative AI-human project to create the most extensive and cohesive fictional universe ever constructed.
 
 **Live Site**: https://kempo.com (private access)

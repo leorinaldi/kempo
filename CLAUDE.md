@@ -1,6 +1,8 @@
 # Claude Instructions for Kempo
 
-This file routes to documentation and resources. For detailed instructions, follow the links below.
+**Scope:** AI assistant routing file. Points to documentation, skills, and file locations for working on this project.
+
+For project overview, storylines, interfaces, and developer setup, see [README.md](README.md).
 
 ## Documentation
 
