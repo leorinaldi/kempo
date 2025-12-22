@@ -71,15 +71,61 @@ Kempo/
 │   └── Skills/Kempopedia/ # Article creation skills
 ├── scripts/               # Utility scripts (image generation)
 └── web/                   # Next.js web application
-    ├── README.md          # Development setup
     ├── prisma/            # Database schema
     ├── public/media/      # Generated images
     └── src/               # Application source code
 ```
 
-## Development
+## Developer Setup
 
-See [web/README.md](web/README.md) for setup instructions.
+### Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **Database**: PostgreSQL (Neon) with Prisma ORM
+- **Storage**: Vercel Blob for media files
+- **Authentication**: NextAuth.js
+- **Hosting**: Vercel
+
+### Prerequisites
+
+- Node.js 18+
+- PostgreSQL database (or Neon serverless)
+
+### Setup
+
+```bash
+cd web
+
+# Install dependencies
+npm install
+
+# Generate Prisma client
+npx prisma generate
+
+# Push schema to database
+npx prisma db push
+
+# Start development server
+npm run dev
+```
+
+### Environment Variables
+
+Create `web/.env.local` with:
+
+```
+DATABASE_URL="postgresql://..."
+NEXTAUTH_SECRET="..."
+NEXTAUTH_URL="http://localhost:3000"
+BLOB_READ_WRITE_TOKEN="..."
+```
+
+For image generation, create `.env` in the root with:
+
+```
+XAI_API_KEY="..."
+```
 
 ## Content Creation
 
