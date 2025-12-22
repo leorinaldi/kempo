@@ -20,9 +20,13 @@ export async function GET() {
         artist: true,
         artistSlug: true,
         description: true,
+        duration: true,
         aspectRatio: true,
+        width: true,
+        height: true,
         kyDate: true,
         createdAt: true,
+        updatedAt: true,
       },
     })
 

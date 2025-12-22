@@ -20,8 +20,10 @@ export async function GET() {
         artist: true,
         artistSlug: true,
         description: true,
+        duration: true,
         kyDate: true,
         createdAt: true,
+        updatedAt: true,
       },
     })
 

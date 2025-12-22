@@ -17,6 +17,7 @@ model Audio {
   artist      String?
   artistSlug  String?   @map("artist_slug")
   description String?   @db.Text
+  duration    Float?                     // Duration in seconds (auto-detected at upload)
   kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
@@ -34,6 +35,7 @@ model Video {
   artist      String?
   artistSlug  String?   @map("artist_slug")
   description String?   @db.Text
+  duration    Float?                         // Duration in seconds (auto-detected at upload)
   width       Int?                           // Pixel width (auto-detected)
   height      Int?                           // Pixel height (auto-detected)
   aspectRatio String?   @map("aspect_ratio") // "landscape" | "portrait" | "square"

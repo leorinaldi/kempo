@@ -24,6 +24,7 @@ export async function POST(request: Request) {
     const description = formData.get("description") as string | null
     const artist = formData.get("artist") as string | null
     const artistSlug = formData.get("artistSlug") as string | null
+    const durationStr = formData.get("duration") as string | null
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
@@ -62,6 +63,9 @@ export async function POST(request: Request) {
     // Determine file extension
     const extension = file.name.split(".").pop()?.toLowerCase() || "mp3"
 
+    // Parse duration if provided
+    const duration = durationStr ? parseFloat(durationStr) : null
+
     // Create database entry first to get the ID
     const audio = await prisma.audio.create({
       data: {
@@ -71,6 +75,7 @@ export async function POST(request: Request) {
         description: description || null,
         artist: artist || null,
         artistSlug: artistSlug || null,
+        duration: duration || null,
       },
     })
 

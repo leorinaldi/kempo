@@ -36,6 +36,7 @@ export async function POST(request: Request) {
     const aspectRatio = formData.get("aspectRatio") as string | null
     const widthStr = formData.get("width") as string | null
     const heightStr = formData.get("height") as string | null
+    const durationStr = formData.get("duration") as string | null
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
@@ -74,9 +75,10 @@ export async function POST(request: Request) {
     // Determine file extension
     const extension = file.name.split(".").pop()?.toLowerCase() || "mp4"
 
-    // Parse width/height if provided
+    // Parse width/height/duration if provided
     const width = widthStr ? parseInt(widthStr, 10) : null
     const height = heightStr ? parseInt(heightStr, 10) : null
+    const duration = durationStr ? parseFloat(durationStr) : null
 
     // Calculate aspectRatio from actual dimensions (overrides user selection)
     const calculatedAspectRatio = getAspectRatioFromDimensions(width, height) || aspectRatio || "landscape"
@@ -90,6 +92,7 @@ export async function POST(request: Request) {
         description: description || null,
         artist: artist || null,
         artistSlug: artistSlug || null,
+        duration: duration || null,
         width: width || null,
         height: height || null,
         aspectRatio: calculatedAspectRatio,
