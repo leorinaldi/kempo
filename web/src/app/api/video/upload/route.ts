@@ -5,6 +5,15 @@ import { prisma } from "@/lib/prisma"
 import { writeFile, mkdir, access } from "fs/promises"
 import path from "path"
 
+// Calculate aspectRatio from actual dimensions (overrides user selection)
+function getAspectRatioFromDimensions(width: number | null, height: number | null): string | null {
+  if (!width || !height) return null
+  const ratio = width / height
+  if (ratio > 1.2) return "landscape"
+  if (ratio < 0.8) return "portrait"
+  return "square"
+}
+
 export async function POST(request: Request) {
   const session = await auth()
 
@@ -25,6 +34,8 @@ export async function POST(request: Request) {
     const artist = formData.get("artist") as string | null
     const artistSlug = formData.get("artistSlug") as string | null
     const aspectRatio = formData.get("aspectRatio") as string | null
+    const widthStr = formData.get("width") as string | null
+    const heightStr = formData.get("height") as string | null
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
@@ -63,24 +74,39 @@ export async function POST(request: Request) {
     // Determine file extension
     const extension = file.name.split(".").pop()?.toLowerCase() || "mp4"
 
-    // Upload to Vercel Blob
-    const blob = await put(
-      `kempo-media/video/${slug}.${extension}`,
-      file,
-      { access: "public" }
-    )
+    // Parse width/height if provided
+    const width = widthStr ? parseInt(widthStr, 10) : null
+    const height = heightStr ? parseInt(heightStr, 10) : null
 
-    // Create database entry
+    // Calculate aspectRatio from actual dimensions (overrides user selection)
+    const calculatedAspectRatio = getAspectRatioFromDimensions(width, height) || aspectRatio || "landscape"
+
+    // Create database entry first to get the ID
     const video = await prisma.video.create({
       data: {
         slug,
         name: title,
-        url: blob.url,
+        url: "", // Temporary, will be updated after blob upload
         description: description || null,
         artist: artist || null,
         artistSlug: artistSlug || null,
-        aspectRatio: aspectRatio || "landscape",
+        width: width || null,
+        height: height || null,
+        aspectRatio: calculatedAspectRatio,
       },
+    })
+
+    // Upload to Vercel Blob using ID-based path
+    const blob = await put(
+      `kempo-media/video/${video.id}.${extension}`,
+      file,
+      { access: "public" }
+    )
+
+    // Update database with the blob URL
+    await prisma.video.update({
+      where: { id: video.id },
+      data: { url: blob.url },
     })
 
     // Generate Kempopedia article
@@ -109,7 +135,7 @@ export async function POST(request: Request) {
       url: blob.url,
       title,
       slug,
-      filename: `${slug}.${extension}`,
+      filename: `${video.id}.${extension}`,
     })
   } catch (error) {
     console.error("Upload error:", error)

@@ -22,6 +22,13 @@ interface AudioFile {
   artistSlug: string | null
 }
 
+interface Reference {
+  type: "article" | "page" | "tv-playlist" | "radio-playlist"
+  slug: string
+  title: string
+  field: string
+}
+
 export default function AudioManagementPage() {
   const { data: session, status } = useSession()
   const [uploading, setUploading] = useState(false)
@@ -41,6 +48,12 @@ export default function AudioManagementPage() {
   // Library state
   const [deletingAudio, setDeletingAudio] = useState<string | null>(null)
   const [libraryMessage, setLibraryMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+
+  // Delete confirmation modal
+  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; slug: string } | null>(null)
+  const [deleteConfirmText, setDeleteConfirmText] = useState("")
+  const [references, setReferences] = useState<Reference[]>([])
+  const [loadingReferences, setLoadingReferences] = useState(false)
 
   const [formData, setFormData] = useState({
     title: "",
@@ -222,19 +235,56 @@ export default function AudioManagementPage() {
     }
   }
 
-  const deleteAudioFile = async (url: string, name: string) => {
-    if (!confirm(`Are you sure you want to delete "${name}"? This cannot be undone.`)) {
-      return
-    }
+  const openDeleteModal = async (url: string, name: string, slug: string) => {
+    setDeleteModal({ url, name, slug })
+    setDeleteConfirmText("")
+    setReferences([])
+    setLoadingReferences(true)
 
-    setDeletingAudio(url)
+    try {
+      const res = await fetch("/api/media/find-references", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, slug, mediaType: "audio" }),
+      })
+      const data = await res.json()
+      if (data.references) {
+        setReferences(data.references)
+      }
+    } catch (err) {
+      console.error("Failed to find references:", err)
+    } finally {
+      setLoadingReferences(false)
+    }
+  }
+
+  const closeDeleteModal = () => {
+    setDeleteModal(null)
+    setDeleteConfirmText("")
+    setReferences([])
+  }
+
+  const confirmDelete = async () => {
+    if (!deleteModal || deleteConfirmText !== "DELETE") return
+
+    setDeletingAudio(deleteModal.url)
     setLibraryMessage(null)
 
     try {
+      // First, remove references from articles/pages
+      if (references.length > 0) {
+        await fetch("/api/media/remove-references", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: deleteModal.url, slug: deleteModal.slug }),
+        })
+      }
+
+      // Then delete the file
       const res = await fetch("/api/audio/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url: deleteModal.url }),
       })
 
       if (!res.ok) {
@@ -242,8 +292,10 @@ export default function AudioManagementPage() {
         throw new Error(data.error || "Delete failed")
       }
 
-      setLibraryMessage({ type: "success", text: `"${name}" deleted successfully` })
+      const refMsg = references.length > 0 ? ` (${references.length} reference${references.length > 1 ? 's' : ''} removed)` : ''
+      setLibraryMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully${refMsg}` })
       await reloadAudioFiles()
+      closeDeleteModal()
 
       // Refresh playlist in case the deleted file was in it
       const playlistRes = await fetch("/api/radio/playlist")
@@ -513,7 +565,7 @@ export default function AudioManagementPage() {
                     <p className="text-xs text-gray-500 truncate">{file.artist || file.slug}</p>
                   </div>
                   <button
-                    onClick={() => deleteAudioFile(file.url, file.name)}
+                    onClick={() => openDeleteModal(file.url, file.name, file.slug)}
                     disabled={deletingAudio === file.url}
                     className="ml-4 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
                   >
@@ -525,6 +577,74 @@ export default function AudioManagementPage() {
           )}
         </div>
       </main>
+
+      {/* Delete Confirmation Modal */}
+      {deleteModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
+            <p className="text-gray-700 mb-4">
+              Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
+              This will permanently remove both the database record and the blob file. This action cannot be undone.
+            </p>
+
+            {/* References section */}
+            {loadingReferences ? (
+              <div className="mb-4 p-3 bg-gray-50 rounded border">
+                <p className="text-sm text-gray-600">Searching for references...</p>
+              </div>
+            ) : references.length > 0 ? (
+              <div className="mb-4 p-3 bg-amber-50 rounded border border-amber-200">
+                <p className="text-sm font-medium text-amber-800 mb-2">
+                  Found {references.length} reference{references.length > 1 ? 's' : ''} that will be removed:
+                </p>
+                <ul className="text-sm text-amber-700 space-y-1">
+                  {references.map((ref, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="text-xs bg-amber-100 px-1.5 py-0.5 rounded">
+                        {ref.type}
+                      </span>
+                      <span>{ref.title}</span>
+                      <span className="text-xs text-amber-600">({ref.field})</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <div className="mb-4 p-3 bg-green-50 rounded border border-green-200">
+                <p className="text-sm text-green-700">No references found in articles or pages.</p>
+              </div>
+            )}
+
+            <p className="text-sm text-gray-600 mb-2">
+              Type <strong>DELETE</strong> to confirm:
+            </p>
+            <input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+              placeholder="Type DELETE"
+              autoFocus
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={closeDeleteModal}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                disabled={deleteConfirmText !== "DELETE" || deletingAudio === deleteModal.url}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {deletingAudio === deleteModal.url ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

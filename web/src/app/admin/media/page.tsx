@@ -68,10 +68,10 @@ export default function MediaLandingPage() {
       <main className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">What would you like to manage?</h2>
-          <p className="text-gray-600">Choose between audio files (songs, radio) or video files (TV, clips)</p>
+          <p className="text-gray-600">Choose between audio, video, or image files</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {/* Audio Card */}
           <Link
             href="/admin/media/audio"
@@ -113,6 +113,30 @@ export default function MediaLandingPage() {
               </p>
               <div className="mt-4 flex items-center gap-2 text-green-600 font-medium">
                 <span>Manage Video</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </Link>
+
+          {/* Image Card */}
+          <Link
+            href="/admin/media/image"
+            className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-blue-400 group"
+          >
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 transition-colors">
+                <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">Image</h3>
+              <p className="text-gray-600 text-sm">
+                Upload images for Kempopedia articles and other content
+              </p>
+              <div className="mt-4 flex items-center gap-2 text-blue-600 font-medium">
+                <span>Manage Images</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

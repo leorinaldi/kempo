@@ -5,22 +5,18 @@ import { useState, useRef, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-interface PlaylistItem {
-  id: string
-  name: string
-  description?: string
-  url: string
-}
-
-interface VideoFile {
+interface ImageFile {
   id: string
   slug: string
   name: string
   url: string
-  artist: string | null
-  artistSlug: string | null
   description: string | null
-  aspectRatio: string | null
+  altText: string | null
+  width: number | null
+  height: number | null
+  shape: string | null
+  category: string | null
+  articleSlug: string | null
 }
 
 interface Reference {
@@ -30,24 +26,18 @@ interface Reference {
   field: string
 }
 
-export default function VideoManagementPage() {
+export default function ImageManagementPage() {
   const { data: session, status } = useSession()
   const [uploading, setUploading] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // Playlist state
-  const [playlist, setPlaylist] = useState<PlaylistItem[]>([])
-  const [playlistLoading, setPlaylistLoading] = useState(true)
-  const [playlistMessage, setPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
-
-  // Video files from database
-  const [videoFiles, setVideoFiles] = useState<VideoFile[]>([])
-  const [selectedVideoId, setSelectedVideoId] = useState("")
+  // Image files from database
+  const [imageFiles, setImageFiles] = useState<ImageFile[]>([])
 
   // Library state
-  const [deletingVideo, setDeletingVideo] = useState<string | null>(null)
+  const [deletingImage, setDeletingImage] = useState<string | null>(null)
   const [libraryMessage, setLibraryMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Delete confirmation modal
@@ -56,7 +46,7 @@ export default function VideoManagementPage() {
   const [references, setReferences] = useState<Reference[]>([])
   const [loadingReferences, setLoadingReferences] = useState(false)
 
-  // Video dimensions (auto-detected)
+  // Image dimensions (auto-detected)
   const [detectedWidth, setDetectedWidth] = useState<number | null>(null)
   const [detectedHeight, setDetectedHeight] = useState<number | null>(null)
 
@@ -64,33 +54,26 @@ export default function VideoManagementPage() {
     title: "",
     slug: "",
     description: "",
-    artist: "",
-    artistSlug: "",
-    aspectRatio: "landscape" as "landscape" | "portrait" | "square",
+    altText: "",
+    shape: "landscape" as "landscape" | "portrait" | "square",
+    category: "",
+    articleSlug: "",
   })
 
-  // Load playlist and video files on mount
+  // Load image files on mount
   useEffect(() => {
-    fetch("/api/tv/playlist")
-      .then((res) => res.json())
-      .then((data) => {
-        setPlaylist(data)
-        setPlaylistLoading(false)
-      })
-      .catch(() => setPlaylistLoading(false))
-
-    reloadVideoFiles()
+    reloadImageFiles()
   }, [])
 
-  const reloadVideoFiles = async () => {
+  const reloadImageFiles = async () => {
     try {
-      const res = await fetch("/api/video/list")
+      const res = await fetch("/api/image/list")
       const data = await res.json()
       if (Array.isArray(data)) {
-        setVideoFiles(data)
+        setImageFiles(data)
       }
     } catch (err) {
-      console.error("Failed to load video files:", err)
+      console.error("Failed to load image files:", err)
     }
   }
 
@@ -133,19 +116,17 @@ export default function VideoManagementPage() {
       return
     }
 
-    // Auto-detect video dimensions using HTML5 video element
-    const video = document.createElement("video")
-    video.preload = "metadata"
-    video.onloadedmetadata = () => {
-      setDetectedWidth(video.videoWidth)
-      setDetectedHeight(video.videoHeight)
-      URL.revokeObjectURL(video.src)
+    // Auto-detect dimensions using browser Image API
+    const img = new Image()
+    img.onload = () => {
+      setDetectedWidth(img.naturalWidth)
+      setDetectedHeight(img.naturalHeight)
     }
-    video.onerror = () => {
+    img.onerror = () => {
       setDetectedWidth(null)
       setDetectedHeight(null)
     }
-    video.src = URL.createObjectURL(file)
+    img.src = URL.createObjectURL(file)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -171,13 +152,14 @@ export default function VideoManagementPage() {
       uploadFormData.append("title", formData.title)
       uploadFormData.append("slug", formData.slug)
       uploadFormData.append("description", formData.description)
-      uploadFormData.append("artist", formData.artist)
-      uploadFormData.append("artistSlug", formData.artistSlug)
-      uploadFormData.append("aspectRatio", formData.aspectRatio)
+      uploadFormData.append("altText", formData.altText)
+      uploadFormData.append("shape", formData.shape)
+      uploadFormData.append("category", formData.category)
+      uploadFormData.append("articleSlug", formData.articleSlug)
       if (detectedWidth) uploadFormData.append("width", detectedWidth.toString())
       if (detectedHeight) uploadFormData.append("height", detectedHeight.toString())
 
-      const response = await fetch("/api/video/upload", {
+      const response = await fetch("/api/image/upload", {
         method: "POST",
         body: uploadFormData,
       })
@@ -188,12 +170,12 @@ export default function VideoManagementPage() {
         throw new Error(result.error || "Upload failed")
       }
 
-      setMessage({ type: "success", text: "Video uploaded successfully!" })
+      setMessage({ type: "success", text: "Image uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      await reloadVideoFiles()
+      await reloadImageFiles()
 
-      setFormData({ title: "", slug: "", description: "", artist: "", artistSlug: "", aspectRatio: "landscape" })
+      setFormData({ title: "", slug: "", description: "", altText: "", shape: "landscape", category: "", articleSlug: "" })
       setDetectedWidth(null)
       setDetectedHeight(null)
       if (fileInputRef.current) {
@@ -213,62 +195,6 @@ export default function VideoManagementPage() {
       .replace(/(^-|-$)/g, "")
   }
 
-  const addToTvPlaylist = async () => {
-    if (!selectedVideoId) {
-      setPlaylistMessage({ type: "error", text: "Please select a video file" })
-      return
-    }
-
-    try {
-      const res = await fetch("/api/tv/playlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ videoId: selectedVideoId }),
-      })
-
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || "Failed to add to playlist")
-      }
-
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
-
-      setPlaylistMessage({ type: "success", text: "Program added to TV!" })
-      setSelectedVideoId("")
-      setTimeout(() => setPlaylistMessage(null), 3000)
-    } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add" })
-    }
-  }
-
-  const removeFromPlaylist = async (videoSlug: string) => {
-    const video = videoFiles.find((f) => f.slug === videoSlug)
-    if (!video) return
-
-    try {
-      const res = await fetch("/api/tv/playlist", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ videoId: video.id }),
-      })
-
-      if (!res.ok) {
-        throw new Error("Failed to remove from playlist")
-      }
-
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
-
-      setPlaylistMessage({ type: "success", text: "Program removed!" })
-      setTimeout(() => setPlaylistMessage(null), 3000)
-    } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to remove" })
-    }
-  }
-
   const openDeleteModal = async (url: string, name: string, slug: string) => {
     setDeleteModal({ url, name, slug })
     setDeleteConfirmText("")
@@ -279,7 +205,7 @@ export default function VideoManagementPage() {
       const res = await fetch("/api/media/find-references", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, slug, mediaType: "video" }),
+        body: JSON.stringify({ url, slug, mediaType: "image" }),
       })
       const data = await res.json()
       if (data.references) {
@@ -301,7 +227,7 @@ export default function VideoManagementPage() {
   const confirmDelete = async () => {
     if (!deleteModal || deleteConfirmText !== "DELETE") return
 
-    setDeletingVideo(deleteModal.url)
+    setDeletingImage(deleteModal.url)
     setLibraryMessage(null)
 
     try {
@@ -315,7 +241,7 @@ export default function VideoManagementPage() {
       }
 
       // Then delete the file
-      const res = await fetch("/api/video/delete", {
+      const res = await fetch("/api/image/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: deleteModal.url }),
@@ -328,19 +254,14 @@ export default function VideoManagementPage() {
 
       const refMsg = references.length > 0 ? ` (${references.length} reference${references.length > 1 ? 's' : ''} removed)` : ''
       setLibraryMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully${refMsg}` })
-      await reloadVideoFiles()
+      await reloadImageFiles()
       closeDeleteModal()
-
-      // Refresh playlist in case the deleted file was in it
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
 
       setTimeout(() => setLibraryMessage(null), 3000)
     } catch (error) {
       setLibraryMessage({ type: "error", text: error instanceof Error ? error.message : "Delete failed" })
     } finally {
-      setDeletingVideo(null)
+      setDeletingImage(null)
     }
   }
 
@@ -356,12 +277,12 @@ export default function VideoManagementPage() {
               </svg>
             </Link>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h1 className="text-xl font-bold">Video Management</h1>
+              <h1 className="text-xl font-bold">Image Management</h1>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -380,7 +301,7 @@ export default function VideoManagementPage() {
       <main className="max-w-4xl mx-auto px-4 py-8">
         {/* Upload Section */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-6">Upload Video</h2>
+          <h2 className="text-lg font-semibold mb-6">Upload Image</h2>
 
           {message && (
             <div
@@ -415,7 +336,7 @@ export default function VideoManagementPage() {
                   })
                 }}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., Kempo News Broadcast"
+                placeholder="e.g., Clay Marshall portrait"
               />
             </div>
 
@@ -428,7 +349,7 @@ export default function VideoManagementPage() {
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., kempo-news-broadcast"
+                placeholder="e.g., clay-marshall-portrait"
               />
             </div>
 
@@ -441,49 +362,70 @@ export default function VideoManagementPage() {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 rows={2}
-                placeholder="Brief description..."
+                placeholder="Brief description or caption..."
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Artist/Creator Name
+                Alt Text
               </label>
               <input
                 type="text"
-                value={formData.artist}
-                onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
+                value={formData.altText}
+                onChange={(e) => setFormData({ ...formData, altText: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., United Broadcasting Company"
+                placeholder="Accessibility description..."
               />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Shape
+                </label>
+                <select
+                  value={formData.shape}
+                  onChange={(e) => setFormData({ ...formData, shape: e.target.value as "landscape" | "portrait" | "square" })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="landscape">Landscape (wide)</option>
+                  <option value="portrait">Portrait (tall)</option>
+                  <option value="square">Square</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Category
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="">-- Select --</option>
+                  <option value="portrait">Portrait</option>
+                  <option value="location">Location</option>
+                  <option value="product">Product</option>
+                  <option value="logo">Logo</option>
+                  <option value="event">Event</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Artist Slug (for Kempopedia link)
+                Associated Article Slug
               </label>
               <input
                 type="text"
-                value={formData.artistSlug}
-                onChange={(e) => setFormData({ ...formData, artistSlug: e.target.value })}
+                value={formData.articleSlug}
+                onChange={(e) => setFormData({ ...formData, articleSlug: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., united-broadcasting-company"
+                placeholder="e.g., clay-marshall (Kempopedia article)"
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Aspect Ratio
-              </label>
-              <select
-                value={formData.aspectRatio}
-                onChange={(e) => setFormData({ ...formData, aspectRatio: e.target.value as "landscape" | "portrait" | "square" })}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-              >
-                <option value="landscape">Landscape (wide)</option>
-                <option value="portrait">Portrait (tall)</option>
-                <option value="square">Square</option>
-              </select>
             </div>
 
             <div>
@@ -493,7 +435,7 @@ export default function VideoManagementPage() {
               <input
                 type="file"
                 ref={fileInputRef}
-                accept="video/*"
+                accept="image/*"
                 onChange={handleFileChange}
                 className="w-full border border-gray-300 rounded px-3 py-2"
               />
@@ -507,96 +449,16 @@ export default function VideoManagementPage() {
             <button
               type="submit"
               disabled={uploading}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {uploading ? "Uploading..." : "Upload Video"}
+              {uploading ? "Uploading..." : "Upload Image"}
             </button>
           </form>
         </div>
 
-        {/* TV Playlist Management */}
+        {/* Image Library */}
         <div className="bg-white rounded-lg shadow p-6 mt-6">
-          <h2 className="text-lg font-semibold mb-6">Kempo TV Playlist</h2>
-
-          {playlistMessage && (
-            <div
-              className={`mb-4 p-3 rounded ${
-                playlistMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-              }`}
-            >
-              {playlistMessage.text}
-            </div>
-          )}
-
-          {/* Current Playlist */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Current Programs</h3>
-            {playlistLoading ? (
-              <p className="text-gray-500 text-sm">Loading...</p>
-            ) : playlist.length === 0 ? (
-              <p className="text-gray-500 text-sm">No programs in playlist</p>
-            ) : (
-              <div className="space-y-2">
-                {playlist.map((program) => (
-                  <div
-                    key={program.id}
-                    className="flex items-center justify-between p-3 bg-green-50 rounded border border-green-200"
-                  >
-                    <div>
-                      <p className="font-medium">{program.name}</p>
-                      {program.description && (
-                        <p className="text-sm text-gray-600">{program.description}</p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => removeFromPlaylist(program.id)}
-                      className="text-red-600 hover:text-red-800 text-sm"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Add New Program */}
-          <div className="border-t pt-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Add Program to TV</h3>
-
-            {videoFiles.length === 0 ? (
-              <p className="text-sm text-gray-500">No video files found. Upload one above first.</p>
-            ) : (
-              <div className="flex gap-4">
-                <select
-                  value={selectedVideoId}
-                  onChange={(e) => setSelectedVideoId(e.target.value)}
-                  className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm"
-                >
-                  <option value="">-- Select a video file --</option>
-                  {videoFiles
-                    .filter((file) => !playlist.some((p) => p.id === file.slug))
-                    .map((file) => (
-                      <option key={file.id} value={file.id}>
-                        {file.name}
-                      </option>
-                    ))}
-                </select>
-                <button
-                  onClick={addToTvPlaylist}
-                  disabled={!selectedVideoId}
-                  className="bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-medium py-2 px-6 rounded"
-                >
-                  Add to TV
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Video Library */}
-        <div className="bg-white rounded-lg shadow p-6 mt-6">
-          <h2 className="text-lg font-semibold mb-6">Video Library</h2>
+          <h2 className="text-lg font-semibold mb-6">Image Library</h2>
 
           {libraryMessage && (
             <div
@@ -608,28 +470,46 @@ export default function VideoManagementPage() {
             </div>
           )}
 
-          {videoFiles.length === 0 ? (
-            <p className="text-gray-500 text-sm">No video files uploaded</p>
+          {imageFiles.length === 0 ? (
+            <p className="text-gray-500 text-sm">No images uploaded</p>
           ) : (
-            <div className="space-y-2">
-              {videoFiles.map((file) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {imageFiles.map((file) => (
                 <div
                   key={file.url}
-                  className="flex items-center justify-between p-3 bg-green-50 rounded border border-green-200"
+                  className="bg-blue-50 rounded border border-blue-200 overflow-hidden"
                 >
-                  <div className="flex-1 min-w-0">
+                  <div className="aspect-square relative">
+                    <img
+                      src={file.url}
+                      alt={file.altText || file.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-3">
                     <p className="font-medium text-sm truncate">{file.name}</p>
                     <p className="text-xs text-gray-500 truncate">
-                      {file.slug} {file.aspectRatio ? `(${file.aspectRatio})` : ""}
+                      {file.slug}
+                      {file.width && file.height && ` (${file.width}x${file.height})`}
                     </p>
+                    {file.shape && (
+                      <span className="inline-block mt-1 text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
+                        {file.shape}
+                      </span>
+                    )}
+                    {file.category && (
+                      <span className="inline-block mt-1 ml-1 text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded">
+                        {file.category}
+                      </span>
+                    )}
+                    <button
+                      onClick={() => openDeleteModal(file.url, file.name, file.slug)}
+                      disabled={deletingImage === file.url}
+                      className="mt-2 w-full text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
+                    >
+                      {deletingImage === file.url ? "Deleting..." : "Delete"}
+                    </button>
                   </div>
-                  <button
-                    onClick={() => openDeleteModal(file.url, file.name, file.slug)}
-                    disabled={deletingVideo === file.url}
-                    className="ml-4 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
-                  >
-                    {deletingVideo === file.url ? "Deleting..." : "Delete"}
-                  </button>
                 </div>
               ))}
             </div>
@@ -695,10 +575,10 @@ export default function VideoManagementPage() {
               </button>
               <button
                 onClick={confirmDelete}
-                disabled={deleteConfirmText !== "DELETE" || deletingVideo === deleteModal.url}
+                disabled={deleteConfirmText !== "DELETE" || deletingImage === deleteModal.url}
                 className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {deletingVideo === deleteModal.url ? "Deleting..." : "Delete"}
+                {deletingImage === deleteModal.url ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>

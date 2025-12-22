@@ -34,6 +34,8 @@ model Video {
   artist      String?
   artistSlug  String?   @map("artist_slug")
   description String?   @db.Text
+  width       Int?                           // Pixel width (auto-detected)
+  height      Int?                           // Pixel height (auto-detected)
   aspectRatio String?   @map("aspect_ratio") // "landscape" | "portrait" | "square"
   kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
   createdAt   DateTime  @default(now()) @map("created_at")
@@ -42,6 +44,25 @@ model Video {
   tvPlaylist TvPlaylistItem[]
 
   @@map("video")
+}
+
+model Image {
+  id          String    @id @default(cuid())
+  slug        String    @unique              // e.g. "clay-marshall-portrait"
+  name        String                         // e.g. "Clay Marshall portrait"
+  url         String    @db.Text             // Vercel Blob URL
+  description String?   @db.Text             // Caption
+  altText     String?   @map("alt_text")     // Accessibility text
+  width       Int?                           // Pixel width (auto-detected)
+  height      Int?                           // Pixel height (auto-detected)
+  shape       String?                        // "portrait" | "landscape" | "square"
+  category    String?                        // "portrait", "location", "product", "logo", etc.
+  articleSlug String?   @map("article_slug") // Associated Kempopedia article
+  kyDate      DateTime? @map("ky_date")      // When "taken" in Kempo world
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("image")
 }
 
 model RadioPlaylistItem {

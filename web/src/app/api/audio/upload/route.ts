@@ -62,23 +62,29 @@ export async function POST(request: Request) {
     // Determine file extension
     const extension = file.name.split(".").pop()?.toLowerCase() || "mp3"
 
-    // Upload to Vercel Blob
-    const blob = await put(
-      `kempo-media/audio/${slug}.${extension}`,
-      file,
-      { access: "public" }
-    )
-
-    // Create database entry
+    // Create database entry first to get the ID
     const audio = await prisma.audio.create({
       data: {
         slug,
         name: title,
-        url: blob.url,
+        url: "", // Temporary, will be updated after blob upload
         description: description || null,
         artist: artist || null,
         artistSlug: artistSlug || null,
       },
+    })
+
+    // Upload to Vercel Blob using ID-based path
+    const blob = await put(
+      `kempo-media/audio/${audio.id}.${extension}`,
+      file,
+      { access: "public" }
+    )
+
+    // Update database with the blob URL
+    await prisma.audio.update({
+      where: { id: audio.id },
+      data: { url: blob.url },
     })
 
     // Generate Kempopedia article
@@ -107,7 +113,7 @@ export async function POST(request: Request) {
       url: blob.url,
       title,
       slug,
-      filename: `${slug}.${extension}`,
+      filename: `${audio.id}.${extension}`,
     })
   } catch (error) {
     console.error("Upload error:", error)

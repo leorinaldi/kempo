@@ -73,14 +73,14 @@ export default function AdminPage() {
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Media Management</h2>
-                <p className="text-sm text-gray-500">Upload and manage audio/video files</p>
+                <p className="text-sm text-gray-500">Upload and manage audio, video, and images</p>
               </div>
             </div>
             <ul className="text-sm text-gray-600 space-y-1">
               <li>Upload media files</li>
               <li>Kempo Radio playlist</li>
               <li>Kempo TV playlist</li>
-              <li>Media library</li>
+              <li>Image library</li>
             </ul>
           </Link>
 
