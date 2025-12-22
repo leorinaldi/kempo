@@ -162,7 +162,7 @@ model Article {
   id                 String     @id @default(cuid())
   slug               String     @unique
   title              String
-  type               String     // "person", "place", "institution", "event", "culture", "product", "concept", "timeline", "company"
+  type               String     // "person", "place", "organization", "event", "culture", "product", "concept", "timeline", "company"
   subtype            String?    // "head-of-state", "city", etc.
   status             String     @default("published") // "published", "draft"
 
@@ -187,6 +187,7 @@ model Article {
   // Relations
   revisions          Revision[]
   person             Person?
+  organization       Organization?
 
   @@index([type])
   @@index([status])
@@ -233,6 +234,33 @@ model Person {
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
   @@map("people")
+}
+
+model Organization {
+  id            String    @id @default(cuid())
+  name          String                           // "Pacific Pictures", "National Party"
+  abbreviation  String?                          // "UBC", "NAMR"
+  orgType       String    @map("org_type")       // "company", "political-party", "university", etc.
+  dateFounded   DateTime? @map("date_founded")   // k.y. founding date
+  dateDissolved DateTime? @map("date_dissolved") // k.y. dissolution date (null if active)
+  articleId     String?   @unique @map("article_id")
+  article       Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("organizations")
+}
+
+model Inspiration {
+  id           String   @id @default(cuid())
+  subjectId    String   @map("subject_id")    // ID of person or organization
+  subjectType  String   @map("subject_type")  // "person" or "organization"
+  inspiration  String                         // e.g., "Frank Sinatra"
+  wikipediaUrl String?  @map("wikipedia_url") // optional Wikipedia link
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([subjectId, subjectType])
+  @@map("inspirations")
 }
 
 // ============ PROJECT HISTORY ============

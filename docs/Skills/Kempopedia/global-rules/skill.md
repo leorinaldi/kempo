@@ -257,7 +257,7 @@ Articles are organized by type in subdirectories:
 web/content/articles/
 ├── people/
 ├── places/
-├── institutions/
+├── organizations/
 ├── events/
 ├── nations/
 ├── concepts/
@@ -273,7 +273,7 @@ Use the modern hybrid categorization format:
 ---
 title: "Article Title"
 slug: "article-slug"
-type: person | place | institution | event | nation | concept | company | product
+type: person | place | organization | event | nation | concept | company | product
 subtype: specific-classification
 status: published
 parallel_switchover:  # Only if applicable

@@ -1,18 +1,19 @@
-# Create Institution Skill
+# Create Organization Skill
 
 Create an article for an organization, academy, or agency in the Kempo universe.
 
 > **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
 
-## Institution Types
+## Organization Subtypes
 
+- **institution**: General institutions (schools, hospitals)
 - **military-academy**: Training institutions (e.g., Vermont Army Academy)
 - **university**: Higher education
 - **political-party**: National Party, Federal Party
 - **government-agency**: Official government bodies
 - **research-institute**: Scientific or policy research
 - **hospital**: Medical institutions
-- **religious-institution**: Churches, religious organizations
+- **religious-organization**: Churches, religious organizations
 
 ## Output Format
 
@@ -20,13 +21,13 @@ Create an article for an organization, academy, or agency in the Kempo universe.
 
 ```yaml
 ---
-title: "Institution Name"
-slug: "institution-name"
-type: institution
-subtype: military-academy | university | political-party | government-agency
+title: "Organization Name"
+slug: "organization-name"
+type: organization
+subtype: institution | military-academy | university | political-party | government-agency
 status: published
 parallel_switchover:  # Only if applicable
-  real_world: "Real Institution Name"
+  real_world: "Real Organization Name"
   wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - country
@@ -40,17 +41,17 @@ tags:
 ```json
 {
   "infobox": {
-    "type": "institution",
+    "type": "organization",
     "image": {
       "url": "/media/<slug>.jpg",
-      "caption": "Institution Name"
+      "caption": "Organization Name"
     },
     "fields": {
       "Official_name": "Full Official Name",
       "Abbreviation": "ABBR",
       "Founded": "YEAR k.y.",
       "Location": "[[City]], [[State]]",
-      "Type": "Type of institution",
+      "Type": "Type of organization",
       "Motto": "Latin or English motto",
       "Colors": "School colors"
     }
@@ -61,7 +62,7 @@ tags:
 ### Article Structure
 
 ```mdx
-**Institution Name** is a [type] located in [[City]], [[Country]]. Founded in [[YEAR k.y.]], it [description].
+**Organization Name** is a [type] located in [[City]], [[Country]]. Founded in [[YEAR k.y.]], it [description].
 
 ## History
 ### Founding
@@ -81,8 +82,8 @@ Generate immediately after creating the article:
 node scripts/generate-image.js <slug> "<prompt>"
 ```
 
-| Institution Type | Image Type |
-|------------------|------------|
+| Organization Type | Image Type |
+|-------------------|------------|
 | Political parties, advocacy orgs | **Logo** (can be color) |
 | Schools, universities, academies | **Building** (era-appropriate color) |
 | Government agencies | Logo or building |

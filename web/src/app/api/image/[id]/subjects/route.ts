@@ -55,6 +55,34 @@ export async function GET(
               : undefined,
           }
         }
+        if (subject.itemType === "organization") {
+          const organization = await prisma.organization.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              abbreviation: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            organization: organization
+              ? {
+                  id: organization.id,
+                  name: organization.name,
+                  abbreviation: organization.abbreviation,
+                  articleSlug: organization.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
         // Add other item types here as needed (place, etc.)
         return {
           id: subject.id,

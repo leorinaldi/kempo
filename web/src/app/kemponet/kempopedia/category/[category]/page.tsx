@@ -7,7 +7,7 @@ import { KempopediaHeader } from '@/components/KempopediaHeader'
 const categoryMeta: Record<string, { label: string; description: string }> = {
   person: { label: 'People', description: 'Biographical articles about individuals in the Kempo universe' },
   place: { label: 'Places', description: 'Cities, states, regions, and other locations' },
-  institution: { label: 'Institutions', description: 'Organizations, political parties, academies, and agencies' },
+  organization: { label: 'Organizations', description: 'Institutions, companies, parties, and academies' },
   event: { label: 'Events', description: 'Historical events and occurrences in Kempo history' },
   timeline: { label: 'Timeline', description: 'Chronological records by decade and year' },
   culture: { label: 'Culture and Entertainment', description: 'Popular culture, entertainment, and products' },

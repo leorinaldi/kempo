@@ -192,7 +192,7 @@ export interface CategoryInfo {
 const categoryMeta: Record<string, { label: string; description: string; order: number }> = {
   person: { label: 'People', description: 'Biographical articles about individuals', order: 1 },
   place: { label: 'Places', description: 'Cities, states, nations, and locations', order: 2 },
-  institution: { label: 'Institutions', description: 'Organizations, companies, parties, and academies', order: 3 },
+  organization: { label: 'Organizations', description: 'Institutions, companies, parties, and academies', order: 3 },
   event: { label: 'Events', description: 'Historical events and occurrences', order: 4 },
   timeline: { label: 'Timeline', description: 'Chronological records by decade and year', order: 5 },
   science: { label: 'Science and Technology', description: 'Scientific ideas, technologies', order: 6 },
@@ -203,7 +203,7 @@ const categoryMeta: Record<string, { label: string; description: string; order: 
 // Map article types to display categories
 const typeToCategoryMap: Record<string, string> = {
   product: 'culture',
-  company: 'institution',
+  company: 'organization',
 }
 
 export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {

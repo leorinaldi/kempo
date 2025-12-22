@@ -7,7 +7,7 @@ Generic article creation for Kempopedia.
 For specific article types, use the dedicated skills:
 - [create-person](../create-person/skill.md) — Biographical articles
 - [create-place](../create-place/skill.md) — Locations and nations
-- [create-institution](../create-institution/skill.md) — Organizations
+- [create-organization](../create-organization/skill.md) — Organizations
 - [create-media](../create-media/skill.md) — Songs, albums, films
 - [create-product](../create-product/skill.md) — Vehicles, goods
 - [create-timeline](../create-timeline/skill.md) — Timeline pages
@@ -20,7 +20,7 @@ For specific article types, use the dedicated skills:
 ---
 title: "Article Title"
 slug: "article-slug"
-type: person | place | institution | event | culture | product | concept
+type: person | place | organization | event | culture | product | concept
 subtype: specific-classification
 status: published
 parallel_switchover:  # Only if applicable

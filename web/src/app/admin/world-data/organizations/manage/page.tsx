@@ -5,14 +5,13 @@ import { useState, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-interface Person {
+interface Organization {
   id: string
-  firstName: string
-  middleName: string | null
-  lastName: string
-  gender: string
-  dateBorn: string | null
-  dateDied: string | null
+  name: string
+  abbreviation: string | null
+  orgType: string
+  dateFounded: string | null
+  dateDissolved: string | null
   articleId: string | null
   article: { slug: string; title: string } | null
   createdAt: string
@@ -25,6 +24,12 @@ interface Article {
   title: string
 }
 
+interface Inspiration {
+  id: string
+  inspiration: string
+  wikipediaUrl: string | null
+}
+
 interface LinkedImage {
   id: string
   slug: string
@@ -32,70 +37,79 @@ interface LinkedImage {
   url: string
 }
 
-interface Inspiration {
-  id: string
-  inspiration: string
-  wikipediaUrl: string | null
-}
+const ORG_TYPES = [
+  { value: "company", label: "Company" },
+  { value: "political-party", label: "Political Party" },
+  { value: "university", label: "University" },
+  { value: "institution", label: "Institution" },
+  { value: "military-academy", label: "Military Academy" },
+  { value: "government-agency", label: "Government Agency" },
+  { value: "labor-union", label: "Labor Union" },
+  { value: "school", label: "School" },
+  { value: "library", label: "Library" },
+  { value: "military-base", label: "Military Base" },
+  { value: "government", label: "Government Body" },
+  { value: "business-school", label: "Business School" },
+  { value: "organization", label: "Other Organization" },
+]
 
-export default function ManagePeoplePage() {
+export default function ManageOrganizationsPage() {
   const { data: session, status } = useSession()
 
-  const [people, setPeople] = useState<Person[]>([])
+  const [organizations, setOrganizations] = useState<Organization[]>([])
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Sorting
-  const [sortField, setSortField] = useState<"lastName" | "createdAt" | "dateBorn">("lastName")
+  const [sortField, setSortField] = useState<"name" | "createdAt" | "dateFounded">("name")
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
 
   // Edit modal
-  const [editModal, setEditModal] = useState<Person | null>(null)
+  const [editModal, setEditModal] = useState<Organization | null>(null)
   const [editData, setEditData] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    gender: "male" as "male" | "female",
-    dateBorn: "",
-    dateDied: "",
+    name: "",
+    abbreviation: "",
+    orgType: "organization",
+    dateFounded: "",
+    dateDissolved: "",
     articleId: "",
   })
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [availableArticles, setAvailableArticles] = useState<Article[]>([])
-  const [linkedImages, setLinkedImages] = useState<LinkedImage[]>([])
   const [inspirations, setInspirations] = useState<Inspiration[]>([])
+  const [linkedImages, setLinkedImages] = useState<LinkedImage[]>([])
 
   // Delete modal
-  const [deleteModal, setDeleteModal] = useState<Person | null>(null)
+  const [deleteModal, setDeleteModal] = useState<Organization | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
-    loadPeople()
+    loadOrganizations()
   }, [])
 
-  const loadPeople = async () => {
+  const loadOrganizations = async () => {
     try {
-      const res = await fetch("/api/people/list")
+      const res = await fetch("/api/organizations/list")
       const data = await res.json()
       if (Array.isArray(data)) {
-        setPeople(data)
+        setOrganizations(data)
       }
     } catch (err) {
-      console.error("Failed to load people:", err)
+      console.error("Failed to load organizations:", err)
     } finally {
       setLoading(false)
     }
   }
 
-  const sortedPeople = [...people].sort((a, b) => {
+  const sortedOrganizations = [...organizations].sort((a, b) => {
     let comparison = 0
-    if (sortField === "lastName") {
-      comparison = a.lastName.localeCompare(b.lastName)
-    } else if (sortField === "dateBorn") {
-      const aDate = a.dateBorn ? new Date(a.dateBorn).getTime() : 0
-      const bDate = b.dateBorn ? new Date(b.dateBorn).getTime() : 0
+    if (sortField === "name") {
+      comparison = a.name.localeCompare(b.name)
+    } else if (sortField === "dateFounded") {
+      const aDate = a.dateFounded ? new Date(a.dateFounded).getTime() : 0
+      const bDate = b.dateFounded ? new Date(b.dateFounded).getTime() : 0
       comparison = aDate - bDate
     } else {
       comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
@@ -119,46 +133,45 @@ export default function ManagePeoplePage() {
     redirect("/admin")
   }
 
-  const openEditModal = async (person: Person) => {
-    setEditModal(person)
+  const openEditModal = async (org: Organization) => {
+    setEditModal(org)
     setEditData({
-      firstName: person.firstName,
-      middleName: person.middleName || "",
-      lastName: person.lastName,
-      gender: person.gender as "male" | "female",
-      dateBorn: person.dateBorn ? person.dateBorn.split("T")[0] : "",
-      dateDied: person.dateDied ? person.dateDied.split("T")[0] : "",
-      articleId: person.articleId || "",
+      name: org.name,
+      abbreviation: org.abbreviation || "",
+      orgType: org.orgType,
+      dateFounded: org.dateFounded ? org.dateFounded.split("T")[0] : "",
+      dateDissolved: org.dateDissolved ? org.dateDissolved.split("T")[0] : "",
+      articleId: org.articleId || "",
     })
     setEditMessage(null)
-    setLinkedImages([])
     setInspirations([])
+    setLinkedImages([])
 
-    // Load available articles, linked images, and inspirations in parallel
+    // Load available articles, inspirations, and images in parallel
     try {
-      const [articlesRes, imagesRes, inspirationsRes] = await Promise.all([
-        fetch("/api/people/available-articles"),
-        fetch(`/api/people/${person.id}/images`),
-        fetch(`/api/people/${person.id}/inspirations`)
+      const [articlesRes, inspirationsRes, imagesRes] = await Promise.all([
+        fetch("/api/organizations/available-articles"),
+        fetch(`/api/organizations/${org.id}/inspirations`),
+        fetch(`/api/organizations/${org.id}/images`)
       ])
 
       const articlesData = await articlesRes.json()
       if (Array.isArray(articlesData)) {
-        // Add current person's article if it exists
-        if (person.article && !articlesData.find((a: Article) => a.id === person.articleId)) {
-          articlesData.unshift(person.article)
+        // Add current org's article if it exists
+        if (org.article && !articlesData.find((a: Article) => a.id === org.articleId)) {
+          articlesData.unshift(org.article)
         }
         setAvailableArticles(articlesData)
-      }
-
-      const imagesData = await imagesRes.json()
-      if (Array.isArray(imagesData)) {
-        setLinkedImages(imagesData)
       }
 
       const inspirationsData = await inspirationsRes.json()
       if (Array.isArray(inspirationsData)) {
         setInspirations(inspirationsData)
+      }
+
+      const imagesData = await imagesRes.json()
+      if (Array.isArray(imagesData)) {
+        setLinkedImages(imagesData)
       }
     } catch (err) {
       console.error("Failed to load data:", err)
@@ -177,17 +190,16 @@ export default function ManagePeoplePage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/people/update", {
+      const res = await fetch("/api/organizations/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
-          firstName: editData.firstName,
-          middleName: editData.middleName || null,
-          lastName: editData.lastName,
-          gender: editData.gender,
-          dateBorn: editData.dateBorn || null,
-          dateDied: editData.dateDied || null,
+          name: editData.name,
+          abbreviation: editData.abbreviation || null,
+          orgType: editData.orgType,
+          dateFounded: editData.dateFounded || null,
+          dateDissolved: editData.dateDissolved || null,
           articleId: editData.articleId || null,
         }),
       })
@@ -198,7 +210,7 @@ export default function ManagePeoplePage() {
       }
 
       setEditMessage({ type: "success", text: "Saved successfully!" })
-      await loadPeople()
+      await loadOrganizations()
 
       setTimeout(() => {
         closeEditModal()
@@ -210,8 +222,8 @@ export default function ManagePeoplePage() {
     }
   }
 
-  const openDeleteModal = (person: Person) => {
-    setDeleteModal(person)
+  const openDeleteModal = (org: Organization) => {
+    setDeleteModal(org)
     setDeleteConfirmText("")
   }
 
@@ -226,7 +238,7 @@ export default function ManagePeoplePage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/people/delete", {
+      const res = await fetch("/api/organizations/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: deleteModal.id }),
@@ -237,8 +249,8 @@ export default function ManagePeoplePage() {
         throw new Error(data.error || "Delete failed")
       }
 
-      setMessage({ type: "success", text: `"${deleteModal.firstName} ${deleteModal.lastName}" deleted successfully` })
-      await loadPeople()
+      setMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully` })
+      await loadOrganizations()
       closeDeleteModal()
 
       setTimeout(() => setMessage(null), 3000)
@@ -249,9 +261,9 @@ export default function ManagePeoplePage() {
     }
   }
 
-  const formatName = (person: Person) => {
-    const parts = [person.firstName, person.middleName, person.lastName].filter(Boolean)
-    return parts.join(" ")
+  const formatOrgType = (orgType: string) => {
+    const found = ORG_TYPES.find((t) => t.value === orgType)
+    return found ? found.label : orgType
   }
 
   return (
@@ -259,10 +271,10 @@ export default function ManagePeoplePage() {
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/people" className="text-gray-500 hover:text-gray-700">
+            <Link href="/admin/world-data/organizations" className="text-gray-500 hover:text-gray-700">
               ← Back
             </Link>
-            <h1 className="text-2xl font-bold text-purple-600">Manage People</h1>
+            <h1 className="text-2xl font-bold text-teal-600">Manage Organizations</h1>
           </div>
         </div>
       </header>
@@ -270,16 +282,16 @@ export default function ManagePeoplePage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">People ({people.length})</h2>
+            <h2 className="text-lg font-semibold">Organizations ({organizations.length})</h2>
             <div className="flex items-center gap-2">
               <select
                 value={sortField}
-                onChange={(e) => setSortField(e.target.value as "lastName" | "createdAt" | "dateBorn")}
+                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateFounded")}
                 className="text-sm border border-gray-300 rounded px-2 py-1"
               >
-                <option value="lastName">Last Name</option>
+                <option value="name">Name</option>
                 <option value="createdAt">Created Date</option>
-                <option value="dateBorn">Birth Date (k.y.)</option>
+                <option value="dateFounded">Founded Date (k.y.)</option>
               </select>
               <button
                 onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
@@ -303,42 +315,45 @@ export default function ManagePeoplePage() {
 
           {loading ? (
             <p className="text-gray-500 text-sm">Loading...</p>
-          ) : sortedPeople.length === 0 ? (
-            <p className="text-gray-500 text-sm">No people found</p>
+          ) : sortedOrganizations.length === 0 ? (
+            <p className="text-gray-500 text-sm">No organizations found</p>
           ) : (
             <div className="space-y-2">
-              {sortedPeople.map((person) => (
+              {sortedOrganizations.map((org) => (
                 <div
-                  key={person.id}
-                  className="flex items-center justify-between p-3 bg-purple-50 rounded border border-purple-200"
+                  key={org.id}
+                  className="flex items-center justify-between p-3 bg-teal-50 rounded border border-teal-200"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">{formatName(person)}</p>
-                    <p className="text-xs text-gray-500">
-                      {person.gender === "male" ? "♂" : "♀"} {person.gender}
-                      {person.dateBorn && ` · Born: ${new Date(person.dateBorn).toLocaleDateString()}`}
-                      {person.dateDied && ` · Died: ${new Date(person.dateDied).toLocaleDateString()}`}
+                    <p className="font-medium text-sm truncate">
+                      {org.name}
+                      {org.abbreviation && <span className="text-gray-500"> ({org.abbreviation})</span>}
                     </p>
-                    {person.article && (
+                    <p className="text-xs text-gray-500">
+                      {formatOrgType(org.orgType)}
+                      {org.dateFounded && ` · Founded: ${new Date(org.dateFounded).getFullYear()} k.y.`}
+                      {org.dateDissolved && ` · Dissolved: ${new Date(org.dateDissolved).getFullYear()} k.y.`}
+                    </p>
+                    {org.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${person.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${org.article.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-purple-600 hover:text-purple-800 hover:underline"
+                        className="text-xs text-teal-600 hover:text-teal-800 hover:underline"
                       >
-                        📄 {person.article.title}
+                        📄 {org.article.title}
                       </a>
                     )}
                   </div>
                   <div className="flex items-center gap-3 ml-4">
                     <button
-                      onClick={() => openEditModal(person)}
-                      className="text-purple-600 hover:text-purple-800 text-sm"
+                      onClick={() => openEditModal(org)}
+                      className="text-teal-600 hover:text-teal-800 text-sm"
                     >
                       View/Edit
                     </button>
                     <button
-                      onClick={() => openDeleteModal(person)}
+                      onClick={() => openDeleteModal(org)}
                       className="text-red-600 hover:text-red-800 text-sm"
                     >
                       Delete
@@ -355,7 +370,7 @@ export default function ManagePeoplePage() {
       {editModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold mb-4">View/Edit Person</h3>
+            <h3 className="text-lg font-bold mb-4">View/Edit Organization</h3>
 
             {editMessage && (
               <div
@@ -368,64 +383,58 @@ export default function ManagePeoplePage() {
             )}
 
             <div className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                   <input
                     type="text"
-                    value={editData.firstName}
-                    onChange={(e) => setEditData({ ...editData, firstName: e.target.value })}
+                    value={editData.name}
+                    onChange={(e) => setEditData({ ...editData, name: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Middle Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Abbreviation</label>
                   <input
                     type="text"
-                    value={editData.middleName}
-                    onChange={(e) => setEditData({ ...editData, middleName: e.target.value })}
-                    className="w-full border border-gray-300 rounded px-3 py-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                  <input
-                    type="text"
-                    value={editData.lastName}
-                    onChange={(e) => setEditData({ ...editData, lastName: e.target.value })}
+                    value={editData.abbreviation}
+                    onChange={(e) => setEditData({ ...editData, abbreviation: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Organization Type</label>
                 <select
-                  value={editData.gender}
-                  onChange={(e) => setEditData({ ...editData, gender: e.target.value as "male" | "female" })}
+                  value={editData.orgType}
+                  onChange={(e) => setEditData({ ...editData, orgType: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  {ORG_TYPES.map((type) => (
+                    <option key={type.value} value={type.value}>
+                      {type.label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Born (k.y.)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Founded (k.y.)</label>
                   <input
                     type="date"
-                    value={editData.dateBorn}
-                    onChange={(e) => setEditData({ ...editData, dateBorn: e.target.value })}
+                    value={editData.dateFounded}
+                    onChange={(e) => setEditData({ ...editData, dateFounded: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Died (k.y.)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Dissolved (k.y.)</label>
                   <input
                     type="date"
-                    value={editData.dateDied}
-                    onChange={(e) => setEditData({ ...editData, dateDied: e.target.value })}
+                    value={editData.dateDissolved}
+                    onChange={(e) => setEditData({ ...editData, dateDissolved: e.target.value })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                   />
                 </div>
@@ -462,7 +471,7 @@ export default function ManagePeoplePage() {
                         href={insp.wikipediaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm hover:bg-purple-200"
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-sm hover:bg-teal-200"
                       >
                         {insp.inspiration}
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -501,7 +510,7 @@ export default function ManagePeoplePage() {
                       <img
                         src={img.url}
                         alt={img.name}
-                        className="h-16 w-16 object-cover rounded border border-purple-300 hover:border-purple-500"
+                        className="h-16 w-16 object-cover rounded border border-teal-300 hover:border-teal-500"
                       />
                     </a>
                   ))}
@@ -519,7 +528,7 @@ export default function ManagePeoplePage() {
               <button
                 onClick={saveEdit}
                 disabled={saving}
-                className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+                className="flex-1 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>
@@ -534,7 +543,7 @@ export default function ManagePeoplePage() {
           <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
             <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
             <p className="text-gray-700 mb-4">
-              Are you sure you want to delete <strong>&quot;{formatName(deleteModal)}&quot;</strong>?
+              Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
               This action cannot be undone.
             </p>
 

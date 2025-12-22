@@ -29,7 +29,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | `global-rules` | Core rules for all articles (read first) |
 | `create-person` | Biographical articles |
 | `create-place` | Cities, states, nations |
-| `create-institution` | Organizations, academies, parties |
+| `create-organization` | Institutions, companies, parties, academies |
 | `create-media` | Songs, albums, films |
 | `create-product` | Vehicles, consumer goods |
 | `create-timeline` | Decade/year timeline pages |

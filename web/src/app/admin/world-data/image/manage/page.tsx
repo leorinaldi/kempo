@@ -40,6 +40,12 @@ interface LinkedSubject {
     lastName: string
     articleSlug: string | null
   }
+  organization?: {
+    id: string
+    name: string
+    abbreviation: string | null
+    articleSlug: string | null
+  }
 }
 
 export default function ImageManagePage() {
@@ -609,7 +615,13 @@ export default function ImageManagePage() {
                 <div className="space-y-2">
                   {linkedSubjects.map((subject) => (
                     <div key={subject.id} className="flex items-center gap-2 text-sm">
-                      <span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs">
+                      <span className={`px-2 py-0.5 rounded text-xs ${
+                        subject.itemType === "person"
+                          ? "bg-purple-100 text-purple-700"
+                          : subject.itemType === "organization"
+                          ? "bg-teal-100 text-teal-700"
+                          : "bg-gray-100 text-gray-700"
+                      }`}>
                         {subject.itemType}
                       </span>
                       {subject.person ? (
@@ -629,6 +641,23 @@ export default function ImageManagePage() {
                             {subject.person.firstName}
                             {subject.person.middleName ? ` ${subject.person.middleName}` : ""}{" "}
                             {subject.person.lastName}
+                          </span>
+                        )
+                      ) : subject.organization ? (
+                        subject.organization.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.organization.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-teal-600 hover:text-teal-800 hover:underline"
+                          >
+                            {subject.organization.name}
+                            {subject.organization.abbreviation ? ` (${subject.organization.abbreviation})` : ""}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">
+                            {subject.organization.name}
+                            {subject.organization.abbreviation ? ` (${subject.organization.abbreviation})` : ""}
                           </span>
                         )
                       ) : (
