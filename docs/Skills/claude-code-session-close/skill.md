@@ -31,12 +31,16 @@ If a new skill should be created, propose it to the user before creating.
 Create a new entry directly in the database (API requires admin session):
 
 ```bash
-DATABASE_URL="postgresql://neondb_owner:npg_E6lTGP7sIgFj@ep-tiny-dawn-ah7g9t0e-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require" npx tsx -e "
-const { PrismaClient } = require('@prisma/client');
+cd web && DATABASE_URL="..." npx tsx -e "
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-prisma.projectHistory.create({
-  data: { content: 'YYYY-MM-DD: Brief description of main accomplishment' }
-}).then(() => prisma.\$disconnect());
+async function main() {
+  await prisma.projectHistory.create({
+    data: { content: 'YYYY-MM-DD: Brief description of main accomplishment' }
+  });
+  console.log('Project history entry created');
+}
+main().finally(() => prisma.\$disconnect());
 "
 ```
 
@@ -47,16 +51,22 @@ Use today's date. Keep the description concise (one sentence).
 Turn the security setting back on (API requires admin session):
 
 ```bash
-DATABASE_URL="postgresql://neondb_owner:npg_E6lTGP7sIgFj@ep-tiny-dawn-ah7g9t0e-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require" npx tsx -e "
-const { PrismaClient } = require('@prisma/client');
+cd web && DATABASE_URL="..." npx tsx -e "
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-prisma.setting.upsert({
-  where: { key: 'requireLogin' },
-  update: { value: 'true' },
-  create: { key: 'requireLogin', value: 'true' }
-}).then(() => prisma.\$disconnect());
+async function main() {
+  await prisma.setting.upsert({
+    where: { key: 'requireLogin' },
+    update: { value: 'true' },
+    create: { key: 'requireLogin', value: 'true' }
+  });
+  console.log('Login requirement re-enabled');
+}
+main().finally(() => prisma.\$disconnect());
 "
 ```
+
+Note: Model is `setting` (singular), not `settings`.
 
 This prevents unauthorized access while the site is in development.
 
