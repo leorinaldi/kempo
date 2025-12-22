@@ -6,10 +6,10 @@ This is the primary instruction file for AI assistants working on the Kempo proj
 
 | Topic | Location |
 |-------|----------|
-| KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
-| Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
-| Article creation | [Skills/Kempopedia/global-rules](../Skills/Kempopedia/global-rules/skill.md) |
-| Simulation workflow | [docs/simulation-workflow.md](docs/simulation-workflow.md) |
+| KempoNet UI patterns | [web/docs/kemponet-design-patterns.md](web/docs/kemponet-design-patterns.md) |
+| Mobile testing (ngrok) | [web/docs/mobile-testing.md](web/docs/mobile-testing.md) |
+| Article creation | [Skills/Kempopedia/global-rules](Skills/Kempopedia/global-rules/skill.md) |
+| Simulation workflow | [web/docs/simulation-workflow.md](web/docs/simulation-workflow.md) |
 
 ## Critical Rules
 
@@ -41,7 +41,7 @@ node scripts/generate-image.js <slug> "<prompt>"
 
 ## KempoNet UI Patterns
 
-When working on KempoNet pages (`/kemponet/*`):
+When working on KempoNet pages (`web/src/app/kemponet/*`):
 
 ### Flash Prevention
 Initialize `isEmbedded` as `true` to prevent layout flash:
@@ -115,14 +115,14 @@ Articles are stored in PostgreSQL (Neon) via Prisma ORM. Key models:
 - `Audio` / `Video` - Media files
 - `Domain` / `Page` - KempoNet sites
 
-See `prisma/schema.prisma` for full schema.
+See `web/prisma/schema.prisma` for full schema.
 
 ## File Locations
 
 | Content Type | Location |
 |--------------|----------|
-| Article images | `public/media/<slug>.jpg` |
-| Admin content files | `content/admin/*.md` |
-| Prisma schema | `prisma/schema.prisma` |
-| API routes | `src/app/api/` |
-| KempoNet pages | `src/app/kemponet/` |
+| Article images | `web/public/media/<slug>.jpg` |
+| Admin content files | `web/content/admin/*.md` |
+| Prisma schema | `web/prisma/schema.prisma` |
+| API routes | `web/src/app/api/` |
+| KempoNet pages | `web/src/app/kemponet/` |
