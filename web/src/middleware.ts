@@ -21,7 +21,7 @@ async function isAuthRequired(baseUrl: string): Promise<boolean> {
     // Call internal API route (Prisma doesn't work in Edge middleware)
     const res = await fetch(`${baseUrl}/api/auth-required`)
     const data = await res.json()
-    cachedAuthRequired = data.required
+    cachedAuthRequired = data.required === true
     cacheTime = Date.now()
     return cachedAuthRequired
   } catch {
