@@ -4,6 +4,10 @@
 
 For project overview, storylines, interfaces, and developer setup, see [README.md](README.md).
 
+## Session Start
+
+When asked to "start session", "follow session start protocol", or similar, follow [docs/Skills/claude-code-session-start](docs/Skills/claude-code-session-start/skill.md).
+
 ## Documentation
 
 | Topic | Location |
