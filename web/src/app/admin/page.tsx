@@ -62,7 +62,7 @@ export default function AdminPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Media Management */}
           <Link
-            href="/admin/media"
+            href="/admin/world-data"
             className="block bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
           >
             <div className="flex items-center gap-4 mb-4">
@@ -72,8 +72,8 @@ export default function AdminPage() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">Media Management</h2>
-                <p className="text-sm text-gray-500">Upload and manage audio, video, and images</p>
+                <h2 className="text-lg font-semibold text-gray-900">World Data</h2>
+                <p className="text-sm text-gray-500">Manage media files (audio, video, images)</p>
               </div>
             </div>
             <ul className="text-sm text-gray-600 space-y-1">

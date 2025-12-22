@@ -64,7 +64,22 @@ model Image {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
+  subjects    ImageSubject[]
+
   @@map("image")
+}
+
+model ImageSubject {
+  id        String   @id @default(cuid())
+  imageId   String   @map("image_id")
+  image     Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  itemId    String   @map("item_id")    // ID of the person, place, etc.
+  itemType  String   @map("item_type")  // "person", "place", etc.
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([imageId, itemId, itemType])
+  @@index([itemId, itemType])
+  @@map("image_subjects")
 }
 
 model RadioPlaylistItem {
@@ -171,6 +186,7 @@ model Article {
 
   // Relations
   revisions          Revision[]
+  person             Person?
 
   @@index([type])
   @@index([status])
@@ -199,6 +215,24 @@ model Revision {
 
   @@index([articleId, createdAt])
   @@map("revisions")
+}
+
+// ============ WORLD DATA: PEOPLE ============
+
+model Person {
+  id          String    @id @default(cuid())
+  firstName   String    @map("first_name")
+  middleName  String?   @map("middle_name")
+  lastName    String    @map("last_name")
+  gender      String    // "male" | "female"
+  dateBorn    DateTime? @map("date_born")  // k.y. birth date
+  dateDied    DateTime? @map("date_died")  // k.y. death date (null if alive)
+  articleId   String?   @unique @map("article_id") // link to Kempopedia article
+  article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("people")
 }
 
 // ============ PROJECT HISTORY ============

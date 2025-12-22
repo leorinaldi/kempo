@@ -5,25 +5,20 @@ import { useState, useRef } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-export default function ImageUploadPage() {
+export default function AudioUploadPage() {
   const { data: session, status } = useSession()
   const [uploading, setUploading] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-  // Image dimensions (auto-detected)
-  const [detectedWidth, setDetectedWidth] = useState<number | null>(null)
-  const [detectedHeight, setDetectedHeight] = useState<number | null>(null)
+  const [detectedDuration, setDetectedDuration] = useState<number | null>(null)
 
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
     description: "",
-    altText: "",
-    shape: "landscape" as "landscape" | "portrait" | "square",
-    category: "",
-    articleSlug: "",
+    artist: "",
+    artistSlug: "",
   })
 
   if (status === "loading") {
@@ -52,22 +47,20 @@ export default function ImageUploadPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) {
-      setDetectedWidth(null)
-      setDetectedHeight(null)
+      setDetectedDuration(null)
       return
     }
 
-    // Auto-detect dimensions using browser Image API
-    const img = new Image()
-    img.onload = () => {
-      setDetectedWidth(img.naturalWidth)
-      setDetectedHeight(img.naturalHeight)
+    const audio = document.createElement("audio")
+    audio.preload = "metadata"
+    audio.onloadedmetadata = () => {
+      setDetectedDuration(audio.duration)
+      URL.revokeObjectURL(audio.src)
     }
-    img.onerror = () => {
-      setDetectedWidth(null)
-      setDetectedHeight(null)
+    audio.onerror = () => {
+      setDetectedDuration(null)
     }
-    img.src = URL.createObjectURL(file)
+    audio.src = URL.createObjectURL(file)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -93,14 +86,11 @@ export default function ImageUploadPage() {
       uploadFormData.append("title", formData.title)
       uploadFormData.append("slug", formData.slug)
       uploadFormData.append("description", formData.description)
-      uploadFormData.append("altText", formData.altText)
-      uploadFormData.append("shape", formData.shape)
-      uploadFormData.append("category", formData.category)
-      uploadFormData.append("articleSlug", formData.articleSlug)
-      if (detectedWidth) uploadFormData.append("width", detectedWidth.toString())
-      if (detectedHeight) uploadFormData.append("height", detectedHeight.toString())
+      uploadFormData.append("artist", formData.artist)
+      uploadFormData.append("artistSlug", formData.artistSlug)
+      if (detectedDuration) uploadFormData.append("duration", detectedDuration.toString())
 
-      const response = await fetch("/api/image/upload", {
+      const response = await fetch("/api/audio/upload", {
         method: "POST",
         body: uploadFormData,
       })
@@ -111,12 +101,11 @@ export default function ImageUploadPage() {
         throw new Error(result.error || "Upload failed")
       }
 
-      setMessage({ type: "success", text: "Image uploaded successfully!" })
+      setMessage({ type: "success", text: "Audio uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", slug: "", description: "", altText: "", shape: "landscape", category: "", articleSlug: "" })
-      setDetectedWidth(null)
-      setDetectedHeight(null)
+      setFormData({ title: "", slug: "", description: "", artist: "", artistSlug: "" })
+      setDetectedDuration(null)
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
       }
@@ -131,10 +120,10 @@ export default function ImageUploadPage() {
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/admin/media/image" className="text-gray-500 hover:text-gray-700">
+          <Link href="/admin/world-data/audio" className="text-gray-500 hover:text-gray-700">
             ← Back
           </Link>
-          <h1 className="text-xl font-bold text-blue-600">Upload New Image</h1>
+          <h1 className="text-xl font-bold text-amber-600">Upload New Audio</h1>
         </div>
       </header>
 
@@ -173,7 +162,7 @@ export default function ImageUploadPage() {
                   })
                 }}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., Clay Marshall portrait"
+                placeholder="e.g., The Kempo Blues"
               />
             </div>
 
@@ -186,7 +175,7 @@ export default function ImageUploadPage() {
                 value={formData.slug}
                 onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., clay-marshall-portrait"
+                placeholder="e.g., the-kempo-blues"
               />
             </div>
 
@@ -199,69 +188,33 @@ export default function ImageUploadPage() {
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 rows={2}
-                placeholder="Brief description or caption..."
+                placeholder="Brief description..."
               />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Alt Text
+                Artist Name
               </label>
               <input
                 type="text"
-                value={formData.altText}
-                onChange={(e) => setFormData({ ...formData, altText: e.target.value })}
+                value={formData.artist}
+                onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="Accessibility description..."
+                placeholder="e.g., Frank Martino"
               />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Shape
-                </label>
-                <select
-                  value={formData.shape}
-                  onChange={(e) => setFormData({ ...formData, shape: e.target.value as "landscape" | "portrait" | "square" })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                >
-                  <option value="landscape">Landscape (wide)</option>
-                  <option value="portrait">Portrait (tall)</option>
-                  <option value="square">Square</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Category
-                </label>
-                <select
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                >
-                  <option value="">-- Select --</option>
-                  <option value="portrait">Portrait</option>
-                  <option value="location">Location</option>
-                  <option value="product">Product</option>
-                  <option value="logo">Logo</option>
-                  <option value="event">Event</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Associated Article Slug
+                Artist Slug (for Kempopedia link)
               </label>
               <input
                 type="text"
-                value={formData.articleSlug}
-                onChange={(e) => setFormData({ ...formData, articleSlug: e.target.value })}
+                value={formData.artistSlug}
+                onChange={(e) => setFormData({ ...formData, artistSlug: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., clay-marshall (Kempopedia article)"
+                placeholder="e.g., frank-martino"
               />
             </div>
 
@@ -272,13 +225,13 @@ export default function ImageUploadPage() {
               <input
                 type="file"
                 ref={fileInputRef}
-                accept="image/*"
+                accept="audio/*"
                 onChange={handleFileChange}
                 className="w-full border border-gray-300 rounded px-3 py-2"
               />
-              {detectedWidth && detectedHeight && (
+              {detectedDuration && (
                 <p className="mt-1 text-sm text-gray-500">
-                  Detected: {detectedWidth} x {detectedHeight} pixels
+                  Duration: {Math.floor(detectedDuration / 60)}:{Math.floor(detectedDuration % 60).toString().padStart(2, '0')}
                 </p>
               )}
             </div>
@@ -286,9 +239,9 @@ export default function ImageUploadPage() {
             <button
               type="submit"
               disabled={uploading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {uploading ? "Uploading..." : "Upload Image"}
+              {uploading ? "Uploading..." : "Upload Audio"}
             </button>
           </form>
         </div>

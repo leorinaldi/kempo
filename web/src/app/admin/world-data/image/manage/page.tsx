@@ -29,6 +29,19 @@ interface Reference {
   field: string
 }
 
+interface LinkedSubject {
+  id: string
+  itemId: string
+  itemType: string
+  person?: {
+    id: string
+    firstName: string
+    middleName: string | null
+    lastName: string
+    articleSlug: string | null
+  }
+}
+
 export default function ImageManagePage() {
   const { data: session, status } = useSession()
 
@@ -79,6 +92,7 @@ export default function ImageManagePage() {
   })
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [linkedSubjects, setLinkedSubjects] = useState<LinkedSubject[]>([])
 
   // Load image files on mount
   useEffect(() => {
@@ -142,7 +156,7 @@ export default function ImageManagePage() {
     setReferences([])
   }
 
-  const openEditModal = (file: ImageFile) => {
+  const openEditModal = async (file: ImageFile) => {
     setEditModal(file)
     setEditData({
       name: file.name,
@@ -155,6 +169,18 @@ export default function ImageManagePage() {
       kyDate: file.kyDate ? file.kyDate.split("T")[0] : "",
     })
     setEditMessage(null)
+    setLinkedSubjects([])
+
+    // Fetch linked subjects for this image
+    try {
+      const res = await fetch(`/api/image/${file.id}/subjects`)
+      if (res.ok) {
+        const data = await res.json()
+        setLinkedSubjects(data)
+      }
+    } catch (err) {
+      console.error("Failed to fetch linked subjects:", err)
+    }
   }
 
   const closeEditModal = () => {
@@ -249,7 +275,7 @@ export default function ImageManagePage() {
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/admin/media/image" className="text-gray-500 hover:text-gray-700">
+            <Link href="/admin/world-data/image" className="text-gray-500 hover:text-gray-700">
               ← Back
             </Link>
             <h1 className="text-2xl font-bold text-blue-600">Manage Images</h1>
@@ -572,6 +598,46 @@ export default function ImageManagePage() {
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
               </div>
+            </div>
+
+            {/* Linked Subjects section */}
+            <div className="mt-6 border-t pt-4">
+              <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Subjects</h4>
+              {linkedSubjects.length === 0 ? (
+                <p className="text-sm text-gray-500">No linked subjects</p>
+              ) : (
+                <div className="space-y-2">
+                  {linkedSubjects.map((subject) => (
+                    <div key={subject.id} className="flex items-center gap-2 text-sm">
+                      <span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded text-xs">
+                        {subject.itemType}
+                      </span>
+                      {subject.person ? (
+                        subject.person.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.person.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-purple-600 hover:text-purple-800 hover:underline"
+                          >
+                            {subject.person.firstName}
+                            {subject.person.middleName ? ` ${subject.person.middleName}` : ""}{" "}
+                            {subject.person.lastName}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">
+                            {subject.person.firstName}
+                            {subject.person.middleName ? ` ${subject.person.middleName}` : ""}{" "}
+                            {subject.person.lastName}
+                          </span>
+                        )
+                      ) : (
+                        <span className="text-gray-500">Unknown {subject.itemType}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="flex gap-3 mt-6">
