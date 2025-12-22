@@ -1,16 +1,28 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 const DEFAULT_HOME = "kttp://giggle"
 
 export default function KempoNetPage() {
+  const router = useRouter()
   const [homePage, setHomePage] = useState(DEFAULT_HOME)
   const [showAddressBar, setShowAddressBar] = useState(true)
   const [saved, setSaved] = useState(false)
+  const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
+  const [isKempoNet, setIsKempoNet] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Load saved settings on mount
+  // Detect context and load saved settings on mount
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const kempoNet = params.get("kemponet") === "1"
+    const mobile = params.get("mobile") === "1"
+    setIsKempoNet(kempoNet)
+    setIsMobile(mobile)
+    setIsEmbedded(kempoNet || mobile)
+
     const savedHome = localStorage.getItem("kemponet-home")
     if (savedHome) {
       setHomePage(savedHome)
@@ -20,6 +32,15 @@ export default function KempoNetPage() {
       setShowAddressBar(savedShowAddressBar === "true")
     }
   }, [])
+
+  const navigateTo = (path: string) => {
+    const extraParams = [
+      isKempoNet ? 'kemponet=1' : '',
+      isMobile ? 'mobile=1' : '',
+    ].filter(Boolean).join('&')
+    const suffix = extraParams ? `?${extraParams}` : ''
+    router.push(`${path}${suffix}`)
+  }
 
   const notifyParent = (home: string, showAddress: boolean) => {
     // Notify parent KempoNet window that settings changed
@@ -58,7 +79,7 @@ export default function KempoNetPage() {
     <div className="min-h-screen" style={{ background: "#f5f5f0" }}>
       {/* Header */}
       <div
-        className="border-b-4 border-gray-900 px-6 py-4"
+        className={`border-b-4 border-gray-900 px-6 py-4 sticky z-40 ${isEmbedded ? 'top-0' : 'top-14'}`}
         style={{ background: "linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%)" }}
       >
         <div className="flex items-center gap-4">
@@ -123,18 +144,18 @@ export default function KempoNetPage() {
         <div className="mb-8 p-4 border-2 border-gray-900 bg-white">
           <h3 className="font-bold mb-3 pb-2 border-b-2 border-gray-300">Quick Links</h3>
           <div className="grid grid-cols-2 gap-2 text-sm">
-            <a href="/kemponet/kemponet-browser/favorites?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
+            <button onClick={() => navigateTo("/kemponet/kemponet-browser/favorites")} className="text-left text-blue-700 underline hover:text-blue-900">
               → Favorites
-            </a>
-            <a href="/kemponet/giggle?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
+            </button>
+            <button onClick={() => navigateTo("/kemponet/giggle")} className="text-left text-blue-700 underline hover:text-blue-900">
               → Giggle Search
-            </a>
-            <a href="/kemponet/kempopedia?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
+            </button>
+            <button onClick={() => navigateTo("/kemponet/kempopedia")} className="text-left text-blue-700 underline hover:text-blue-900">
               → Kempopedia
-            </a>
-            <a href="/kemponet/kempotube?kemponet=1" className="text-blue-700 underline hover:text-blue-900">
+            </button>
+            <button onClick={() => navigateTo("/kemponet/kempotube")} className="text-left text-blue-700 underline hover:text-blue-900">
               → KempoTube
-            </a>
+            </button>
           </div>
         </div>
 

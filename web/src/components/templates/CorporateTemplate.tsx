@@ -1,5 +1,9 @@
+"use client"
+
 import { Domain, Page } from "@prisma/client"
 import ReactMarkdown from "react-markdown"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 interface CorporateMetadata {
   tagline?: string
@@ -30,15 +34,38 @@ interface CorporateTemplateProps {
 }
 
 export function CorporateTemplate({ page, domain }: CorporateTemplateProps) {
+  const router = useRouter()
   const metadata = (page.metadata || {}) as CorporateMetadata
   const displayName = domain.displayName || domain.name
   const accentColor = metadata.accentColor || "#1e40af"
+
+  const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
+  const [isKempoNet, setIsKempoNet] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const kempoNet = params.get("kemponet") === "1"
+    const mobile = params.get("mobile") === "1"
+    setIsKempoNet(kempoNet)
+    setIsMobile(mobile)
+    setIsEmbedded(kempoNet || mobile)
+  }, [])
+
+  const navigateTo = (path: string) => {
+    const extraParams = [
+      isKempoNet ? 'kemponet=1' : '',
+      isMobile ? 'mobile=1' : '',
+    ].filter(Boolean).join('&')
+    const suffix = extraParams ? `?${extraParams}` : ''
+    router.push(`${path}${suffix}`)
+  }
 
   return (
     <div className="min-h-screen" style={{ background: "#f5f5f0" }}>
       {/* Header */}
       <div
-        className="border-b-4 px-6 py-4"
+        className={`border-b-4 px-6 py-4 sticky z-40 ${isEmbedded ? 'top-0' : 'top-14'}`}
         style={{
           background: metadata.headerGradient || "linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%)",
           borderColor: metadata.headerBorderColor || "#1e3a8a",
@@ -193,13 +220,13 @@ export function CorporateTemplate({ page, domain }: CorporateTemplateProps) {
                 </div>
                 <p className="text-sm text-gray-700 mb-2">{service.description}</p>
                 {service.link && (
-                  <a
-                    href={`${service.link}?kemponet=1`}
+                  <button
+                    onClick={() => navigateTo(service.link!)}
                     className="text-sm underline hover:opacity-80"
                     style={{ color: accentColor === "#f97316" ? "#dc2626" : "#1d4ed8" }}
                   >
                     {service.linkText || `Visit ${service.name}`}
-                  </a>
+                  </button>
                 )}
               </div>
             ))}

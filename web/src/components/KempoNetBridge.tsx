@@ -22,16 +22,39 @@ export function KempoNetBridge() {
 
   const isKempoNet = deviceContext !== null
 
+  // Track search params to include in navigation messages
+  const [searchParams, setSearchParams] = useState("")
+
+  // Update search params when URL changes
+  useEffect(() => {
+    const updateSearchParams = () => {
+      // Get current search params, excluding our context params
+      const params = new URLSearchParams(window.location.search)
+      params.delete("kemponet")
+      params.delete("mobile")
+      const remaining = params.toString()
+      setSearchParams(remaining ? `?${remaining}` : "")
+    }
+    updateSearchParams()
+
+    // Listen for URL changes (for router.push updates)
+    const observer = new MutationObserver(updateSearchParams)
+    observer.observe(document, { subtree: true, childList: true })
+
+    return () => observer.disconnect()
+  }, [pathname])
+
   useEffect(() => {
     if (deviceContext && window.parent !== window) {
-      // Send current path to parent window with appropriate message type
+      // Send current path with search params to parent window
       const messageType = deviceContext === "mobile" ? "mobile-navigation" : "kemponet-navigation"
+      const fullPath = pathname + searchParams
       window.parent.postMessage(
-        { type: messageType, path: pathname },
+        { type: messageType, path: fullPath },
         "*"
       )
     }
-  }, [pathname, deviceContext])
+  }, [pathname, searchParams, deviceContext])
 
   // Strip external links on mount and watch for DOM changes
   useEffect(() => {

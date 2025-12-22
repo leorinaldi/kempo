@@ -146,6 +146,13 @@ export async function getAllArticleSlugsAsync(): Promise<string[]> {
   return articles.map(a => a.slug)
 }
 
+// Fast count query - doesn't load all articles
+export async function getArticleCountAsync(): Promise<number> {
+  return prisma.article.count({
+    where: { status: 'published' },
+  })
+}
+
 export async function getAllArticlesAsync(): Promise<Article[]> {
   const dbArticles = await prisma.article.findMany({
     where: { status: 'published' },
@@ -254,56 +261,142 @@ export function isValidCategory(type: string): boolean {
   return Object.keys(categoryMeta).includes(type)
 }
 
-// Get wikilink statistics across all articles
+// Count wikilinks in content (excludes k.y. date links)
+export function countWikilinks(content: string): number {
+  const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
+  let count = 0
+  let match
+
+  while ((match = wikiLinkRegex.exec(content)) !== null) {
+    // Don't count k.y. date links
+    if (!match[1].includes('k.y.')) {
+      count++
+    }
+  }
+
+  return count
+}
+
+// Get wikilink statistics - uses pre-computed linkCount field for speed
 export interface WikiLinkStats {
   totalLinks: number
-  uniqueTargets: number
-  linksByTarget: Record<string, number>
   linksByCategory: Record<string, number>
 }
 
 export async function getWikiLinkStatsAsync(): Promise<WikiLinkStats> {
+  // Fast query - just sum up pre-computed link counts
   const articles = await prisma.article.findMany({
     where: { status: 'published' },
-    select: { slug: true, type: true, content: true },
+    select: { type: true, linkCount: true },
   })
 
-  const linkCounts: Record<string, number> = {}
   let totalLinks = 0
-
-  // Build slug to type map
-  const slugToType: Record<string, string> = {}
-  articles.forEach(article => {
-    const category = typeToCategoryMap[article.type] || article.type
-    slugToType[article.slug] = category
-  })
-
   const linksByCategory: Record<string, number> = {}
 
   articles.forEach(article => {
-    const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
-    let match
-
-    while ((match = wikiLinkRegex.exec(article.content)) !== null) {
-      if (!match[1].includes('k.y.')) {
-        const [pagePart] = match[1].split('#')
-        const target = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-
-        linkCounts[target] = (linkCounts[target] || 0) + 1
-        totalLinks++
-
-        const targetCategory = slugToType[target]
-        if (targetCategory) {
-          linksByCategory[targetCategory] = (linksByCategory[targetCategory] || 0) + 1
-        }
-      }
+    totalLinks += article.linkCount
+    const category = typeToCategoryMap[article.type] || article.type
+    if (category) {
+      linksByCategory[category] = (linksByCategory[category] || 0) + article.linkCount
     }
   })
 
   return {
     totalLinks,
-    uniqueTargets: Object.keys(linkCounts).length,
-    linksByTarget: linkCounts,
     linksByCategory
   }
+}
+
+// Recalculate link counts for all articles (run after migration or manually)
+export async function recalculateAllLinkCounts(): Promise<number> {
+  const articles = await prisma.article.findMany({
+    select: { id: true, content: true },
+  })
+
+  let updated = 0
+  for (const article of articles) {
+    const linkCount = countWikilinks(article.content)
+    await prisma.article.update({
+      where: { id: article.id },
+      data: { linkCount },
+    })
+    updated++
+  }
+
+  return updated
+}
+
+// Create article with automatic linkCount calculation
+export async function createArticle(data: {
+  slug: string
+  title: string
+  type: string
+  subtype?: string
+  status?: string
+  content: string
+  infobox?: unknown
+  timelineEvents?: unknown
+  mediaRefs?: unknown
+  parallelSwitchover?: unknown
+  tags?: string[]
+  dates?: string[]
+}) {
+  return prisma.article.create({
+    data: {
+      slug: data.slug,
+      title: data.title,
+      type: data.type,
+      subtype: data.subtype,
+      status: data.status || 'published',
+      content: data.content,
+      infobox: data.infobox as Parameters<typeof prisma.article.create>[0]['data']['infobox'],
+      timelineEvents: data.timelineEvents as Parameters<typeof prisma.article.create>[0]['data']['timelineEvents'],
+      mediaRefs: data.mediaRefs as Parameters<typeof prisma.article.create>[0]['data']['mediaRefs'],
+      parallelSwitchover: data.parallelSwitchover as Parameters<typeof prisma.article.create>[0]['data']['parallelSwitchover'],
+      tags: data.tags,
+      dates: data.dates,
+      linkCount: countWikilinks(data.content),
+    },
+  })
+}
+
+// Update article with automatic linkCount recalculation
+export async function updateArticle(
+  slug: string,
+  data: {
+    title?: string
+    type?: string
+    subtype?: string
+    status?: string
+    content?: string
+    infobox?: unknown
+    timelineEvents?: unknown
+    mediaRefs?: unknown
+    parallelSwitchover?: unknown
+    tags?: string[]
+    dates?: string[]
+  }
+) {
+  // Build update data with proper types
+  const updateData: Parameters<typeof prisma.article.update>[0]['data'] = {}
+
+  if (data.title !== undefined) updateData.title = data.title
+  if (data.type !== undefined) updateData.type = data.type
+  if (data.subtype !== undefined) updateData.subtype = data.subtype
+  if (data.status !== undefined) updateData.status = data.status
+  if (data.content !== undefined) {
+    updateData.content = data.content
+    updateData.linkCount = countWikilinks(data.content)
+  }
+  if (data.infobox !== undefined) updateData.infobox = data.infobox as Parameters<typeof prisma.article.update>[0]['data']['infobox']
+  if (data.timelineEvents !== undefined) updateData.timelineEvents = data.timelineEvents as Parameters<typeof prisma.article.update>[0]['data']['timelineEvents']
+  if (data.mediaRefs !== undefined) updateData.mediaRefs = data.mediaRefs as Parameters<typeof prisma.article.update>[0]['data']['mediaRefs']
+  if (data.parallelSwitchover !== undefined) updateData.parallelSwitchover = data.parallelSwitchover as Parameters<typeof prisma.article.update>[0]['data']['parallelSwitchover']
+  if (data.tags !== undefined) updateData.tags = data.tags
+  if (data.dates !== undefined) updateData.dates = data.dates
+
+  return prisma.article.update({
+    where: { slug },
+    data: updateData,
+  })
 }

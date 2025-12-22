@@ -46,13 +46,17 @@ interface Domain {
 export default function PopularSitesPage() {
   const router = useRouter()
   const [domains, setDomains] = useState<Domain[]>([])
+  const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
   const [isKempoNet, setIsKempoNet] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    setIsKempoNet(params.get("kemponet") === "1")
-    setIsMobile(params.get("mobile") === "1")
+    const kempoNet = params.get("kemponet") === "1"
+    const mobile = params.get("mobile") === "1"
+    setIsKempoNet(kempoNet)
+    setIsMobile(mobile)
+    setIsEmbedded(kempoNet || mobile)
   }, [])
 
   useEffect(() => {
@@ -131,7 +135,7 @@ export default function PopularSitesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={`min-h-screen bg-white ${isEmbedded ? '' : 'pt-14'}`}>
       {/* Header */}
       <div className="border-b border-gray-200 px-4 py-3">
         <button

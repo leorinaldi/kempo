@@ -146,8 +146,14 @@ web/
 │   ├── app/           # Next.js App Router pages
 │   ├── components/    # React components
 │   └── lib/           # Utilities (articles, prisma, etc.)
-└── ...
+├── docs/              # Project documentation
+└── CLAUDE.md          # AI assistant instructions
 ```
+
+## Documentation
+
+- **[docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md)** - Design system for KempoNet pages (viewing contexts, header positioning, state management, navigation patterns)
+- **[CLAUDE.md](CLAUDE.md)** - Instructions for Claude Code AI assistant
 
 ## License
 

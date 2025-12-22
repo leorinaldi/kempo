@@ -1,9 +1,42 @@
 "use client"
 
-import { useState, useRef, useEffect, Suspense } from "react"
+import { useState, useRef, useEffect, Suspense, ReactNode } from "react"
 import { useSearchParams } from "next/navigation"
 
 const DEFAULT_HOME = "/kemponet/giggle"
+
+// Mobile app configuration - add new apps here
+const MOBILE_APPS = {
+  browser: {
+    path: "/kemponet/giggle",
+    fullscreen: false, // Shows address bar
+    label: "KempoNet Browser",
+    resetHistory: true, // Reset browser history when opening
+  },
+  flipflop: {
+    path: "/kemponet/flipflop",
+    fullscreen: true,
+    label: "FlipFlop",
+  },
+  soundwaves: {
+    path: "/kemponet/soundwaves",
+    fullscreen: true,
+    label: "SoundWaves",
+  },
+  kempotube: {
+    path: "/kemponet/kempotube",
+    fullscreen: true,
+    label: "KempoTube",
+  },
+} as const
+
+type AppId = keyof typeof MOBILE_APPS
+
+// Helper to append mobile=1 param properly (handles existing query strings)
+const addMobileParam = (path: string): string => {
+  const separator = path.includes("?") ? "&" : "?"
+  return `${path}${separator}mobile=1`
+}
 
 export default function MobilePage() {
   return (
@@ -19,24 +52,28 @@ function MobileContent() {
   const initialPath = urlParam || DEFAULT_HOME
 
   // Detect if viewing on actual mobile device (skip phone frame)
-  const [isRealMobile, setIsRealMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsRealMobile(window.innerWidth < 480)
-    }
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
+  // Only check once on mount to prevent iframe reload on resize
+  const [isRealMobile, setIsRealMobile] = useState<boolean | null>(null)
 
   // Track which "app" is open (null = home screen)
-  const [activeApp, setActiveApp] = useState<"browser" | "flipflop" | "soundwaves" | null>(null)
+  const [activeApp, setActiveApp] = useState<AppId | null>(null)
 
   const [currentPath, setCurrentPath] = useState(initialPath)
   const [currentTime, setCurrentTime] = useState("")
   const [addressBarValue, setAddressBarValue] = useState("")
   const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  // Use refs for history to avoid closure issues
+  const historyRef = useRef<string[]>([initialPath])
+  const historyIndexRef = useRef(0)
+  const isNavigatingRef = useRef(false)
+  const [, forceUpdate] = useState({})
+  const [iframeSrc, setIframeSrc] = useState(initialPath)
+  const [iframeKey, setIframeKey] = useState(0)
+
+  useEffect(() => {
+    setIsRealMobile(window.innerWidth < 480)
+  }, [])
 
   // Update clock every minute
   useEffect(() => {
@@ -53,14 +90,6 @@ function MobileContent() {
     const interval = setInterval(updateTime, 60000) // Update every minute
     return () => clearInterval(interval)
   }, [])
-
-  // Use refs for history to avoid closure issues
-  const historyRef = useRef<string[]>([initialPath])
-  const historyIndexRef = useRef(0)
-  const isNavigatingRef = useRef(false)
-  const [, forceUpdate] = useState({})
-  const [iframeSrc, setIframeSrc] = useState(initialPath)
-  const [iframeKey, setIframeKey] = useState(0)
 
   const handleBack = () => {
     if (historyIndexRef.current > 0) {
@@ -135,44 +164,38 @@ function MobileContent() {
         }
         isNavigatingRef.current = false
         setCurrentPath(newPath)
+        setIframeSrc(newPath) // Keep iframeSrc in sync so resize doesn't reset
       }
     }
     window.addEventListener("message", handleMessage)
     return () => window.removeEventListener("message", handleMessage)
   }, [])
 
-  // Open browser app
-  const openBrowser = () => {
-    // Reset browser state when opening
-    historyRef.current = [DEFAULT_HOME]
-    historyIndexRef.current = 0
-    setCurrentPath(DEFAULT_HOME)
-    setIframeSrc(DEFAULT_HOME)
+  // Open any app by ID
+  const openApp = (appId: AppId) => {
+    const app = MOBILE_APPS[appId]
+    if ('resetHistory' in app && app.resetHistory) {
+      // Reset browser history when opening browser
+      historyRef.current = [app.path]
+      historyIndexRef.current = 0
+    }
+    setCurrentPath(app.path)
+    setIframeSrc(app.path)
     setIframeKey(k => k + 1)
-    setActiveApp("browser")
-  }
-
-  // Open FlipFlop app
-  const openFlipFlop = () => {
-    const flipflopPath = "/kemponet/flipflop"
-    setCurrentPath(flipflopPath)
-    setIframeSrc(flipflopPath)
-    setIframeKey(k => k + 1)
-    setActiveApp("flipflop")
-  }
-
-  // Open SoundWaves app
-  const openSoundWaves = () => {
-    const soundwavesPath = "/kemponet/soundwaves"
-    setCurrentPath(soundwavesPath)
-    setIframeSrc(soundwavesPath)
-    setIframeKey(k => k + 1)
-    setActiveApp("soundwaves")
+    setActiveApp(appId)
   }
 
   // Go to home screen
   const goHome = () => {
     setActiveApp(null)
+  }
+
+  // Check if current app is fullscreen (no browser UI)
+  const isFullscreenApp = activeApp !== null && MOBILE_APPS[activeApp]?.fullscreen
+
+  // Don't render until we know if we're on mobile (prevents flash)
+  if (isRealMobile === null) {
+    return <div className="min-h-screen bg-black" />
   }
 
   // Render content for real mobile (no phone frame)
@@ -195,92 +218,20 @@ function MobileContent() {
                 gridTemplateRows: 'repeat(4, 1fr)',
               }}
             >
-              {/* App Grid - KempoNet in position (1,1) */}
+              {/* App Grid */}
+              {/* Row 1: KempoNet, FlipFlop, SoundWaves */}
               <div className="flex justify-center items-start pt-2">
-                {/* KempoNet Browser App */}
-                <button
-                  onClick={openBrowser}
-                  className="flex flex-col items-center gap-1"
-                >
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center relative"
-                    style={{
-                      background: 'linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%)',
-                      boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
-                    }}
-                  >
-                    {/* Compass needle - pointing NE */}
-                    <div className="absolute w-9 h-9 -rotate-45">
-                      {/* North pointer (white) */}
-                      <div
-                        className="absolute top-0 left-1/2 -translate-x-1/2"
-                        style={{
-                          width: 0,
-                          height: 0,
-                          borderLeft: '6px solid transparent',
-                          borderRight: '6px solid transparent',
-                          borderBottom: '18px solid white',
-                        }}
-                      />
-                      {/* South pointer (translucent white) */}
-                      <div
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2"
-                        style={{
-                          width: 0,
-                          height: 0,
-                          borderLeft: '6px solid transparent',
-                          borderRight: '6px solid transparent',
-                          borderTop: '18px solid rgba(255,255,255,0.35)',
-                        }}
-                      />
-                    </div>
-                    {/* Center dot */}
-                    <div className="absolute w-3 h-3 rounded-full bg-white z-10" />
-                  </div>
-                  <span className="text-white text-xs font-medium">KempoNet Browser</span>
-                </button>
+                <AppIcon appId="browser" onClick={() => openApp("browser")} size="large" />
               </div>
-              {/* FlipFlop App - centered in column 2 */}
               <div className="flex justify-center items-start pt-2">
-                <button
-                  onClick={openFlipFlop}
-                  className="flex flex-col items-center gap-1"
-                >
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                    style={{
-                      background: 'linear-gradient(135deg, #f472b6 0%, #db2777 100%)',
-                      boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
-                    }}
-                  >
-                    {/* Up arrow icon */}
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                      <path d="M12 4l-8 8h5v8h6v-8h5z" />
-                    </svg>
-                  </div>
-                  <span className="text-white text-xs font-medium">FlipFlop</span>
-                </button>
+                <AppIcon appId="flipflop" onClick={() => openApp("flipflop")} size="large" />
               </div>
-              {/* SoundWaves App - column 3 */}
               <div className="flex justify-center items-start pt-2">
-                <button
-                  onClick={openSoundWaves}
-                  className="flex flex-col items-center gap-1"
-                >
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                    style={{
-                      background: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
-                      boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
-                    }}
-                  >
-                    {/* Sound wave icon */}
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                      <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                    </svg>
-                  </div>
-                  <span className="text-white text-xs font-medium">SoundWaves</span>
-                </button>
+                <AppIcon appId="soundwaves" onClick={() => openApp("soundwaves")} size="large" />
+              </div>
+              {/* Row 2: KempoTube */}
+              <div className="flex justify-center items-start pt-2">
+                <AppIcon appId="kempotube" onClick={() => openApp("kempotube")} size="large" />
               </div>
             </div>
 
@@ -300,15 +251,15 @@ function MobileContent() {
               />
             </div>
           </>
-        ) : activeApp === "flipflop" || activeApp === "soundwaves" ? (
-          /* FlipFlop / SoundWaves - fullscreen without browser UI */
+        ) : isFullscreenApp ? (
+          /* Fullscreen apps - no browser UI */
           <div className="flex-1 flex flex-col min-h-0">
             {/* Fullscreen content area */}
             <div className="flex-1 min-h-0 overflow-hidden bg-black">
               <iframe
                 key={iframeKey}
                 ref={iframeRef}
-                src={`${iframeSrc}?mobile=1`}
+                src={addMobileParam(iframeSrc)}
                 className="w-full h-full border-0"
                 style={{ background: "black" }}
               />
@@ -398,7 +349,7 @@ function MobileContent() {
               <iframe
                 key={iframeKey}
                 ref={iframeRef}
-                src={`${iframeSrc}?mobile=1`}
+                src={addMobileParam(iframeSrc)}
                 className="w-full h-full border-0"
                 style={{ background: "white" }}
               />
@@ -497,101 +448,29 @@ function MobileContent() {
                     gridTemplateRows: 'repeat(4, 1fr)',
                   }}
                 >
-                  {/* App Grid - KempoNet in position (1,1) */}
+                  {/* App Grid */}
+                  {/* Row 1: KempoNet, FlipFlop, SoundWaves */}
                   <div className="flex justify-center items-start pt-2">
-                    {/* KempoNet Browser App */}
-                    <button
-                      onClick={openBrowser}
-                      className="flex flex-col items-center gap-1"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-xl flex items-center justify-center relative"
-                        style={{
-                          background: 'linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%)',
-                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
-                        }}
-                      >
-                        {/* Compass needle - pointing NE */}
-                        <div className="absolute w-8 h-8 -rotate-45">
-                          {/* North pointer (white) */}
-                          <div
-                            className="absolute top-0 left-1/2 -translate-x-1/2"
-                            style={{
-                              width: 0,
-                              height: 0,
-                              borderLeft: '5px solid transparent',
-                              borderRight: '5px solid transparent',
-                              borderBottom: '16px solid white',
-                            }}
-                          />
-                          {/* South pointer (translucent white) */}
-                          <div
-                            className="absolute bottom-0 left-1/2 -translate-x-1/2"
-                            style={{
-                              width: 0,
-                              height: 0,
-                              borderLeft: '5px solid transparent',
-                              borderRight: '5px solid transparent',
-                              borderTop: '16px solid rgba(255,255,255,0.35)',
-                            }}
-                          />
-                        </div>
-                        {/* Center dot */}
-                        <div className="absolute w-2.5 h-2.5 rounded-full bg-white z-10" />
-                      </div>
-                      <span className="text-white text-[11px] font-medium">KempoNet Browser</span>
-                    </button>
+                    <AppIcon appId="browser" onClick={() => openApp("browser")} size="small" />
                   </div>
-                  {/* FlipFlop App - centered */}
                   <div className="flex justify-center items-start pt-2">
-                    <button
-                      onClick={openFlipFlop}
-                      className="flex flex-col items-center gap-1"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-xl flex items-center justify-center"
-                        style={{
-                          background: 'linear-gradient(135deg, #f472b6 0%, #db2777 100%)',
-                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
-                        }}
-                      >
-                        {/* Up arrow icon */}
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                          <path d="M12 4l-8 8h5v8h6v-8h5z" />
-                        </svg>
-                      </div>
-                      <span className="text-white text-[11px] font-medium">FlipFlop</span>
-                    </button>
+                    <AppIcon appId="flipflop" onClick={() => openApp("flipflop")} size="small" />
                   </div>
-                  {/* SoundWaves App */}
                   <div className="flex justify-center items-start pt-2">
-                    <button
-                      onClick={openSoundWaves}
-                      className="flex flex-col items-center gap-1"
-                    >
-                      <div
-                        className="w-14 h-14 rounded-xl flex items-center justify-center"
-                        style={{
-                          background: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
-                          boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
-                        }}
-                      >
-                        {/* Sound wave icon */}
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                          <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
-                        </svg>
-                      </div>
-                      <span className="text-white text-[11px] font-medium">SoundWaves</span>
-                    </button>
+                    <AppIcon appId="soundwaves" onClick={() => openApp("soundwaves")} size="small" />
+                  </div>
+                  {/* Row 2: KempoTube */}
+                  <div className="flex justify-center items-start pt-2">
+                    <AppIcon appId="kempotube" onClick={() => openApp("kempotube")} size="small" />
                   </div>
                 </div>
-              ) : activeApp === "flipflop" || activeApp === "soundwaves" ? (
-                /* FlipFlop / SoundWaves - fullscreen without browser UI */
+              ) : isFullscreenApp ? (
+                /* Fullscreen apps - no browser UI */
                 <div className="flex-1 overflow-hidden bg-black">
                   <iframe
                     key={iframeKey}
                     ref={iframeRef}
-                    src={`${iframeSrc}?mobile=1`}
+                    src={addMobileParam(iframeSrc)}
                     className="w-full h-full border-0"
                     style={{ background: "black" }}
                   />
@@ -661,7 +540,7 @@ function MobileContent() {
                     <iframe
                       key={iframeKey}
                       ref={iframeRef}
-                      src={`${iframeSrc}?mobile=1`}
+                      src={addMobileParam(iframeSrc)}
                       className="w-full h-full border-0"
                       style={{ background: "white" }}
                     />
@@ -682,5 +561,106 @@ function MobileContent() {
         </div>
       </div>
     </div>
+  )
+}
+
+// App icon component - renders the correct icon for each app
+function AppIcon({ appId, onClick, size }: { appId: AppId; onClick: () => void; size: "small" | "large" }) {
+  const app = MOBILE_APPS[appId]
+  const iconSize = size === "large" ? "w-16 h-16 rounded-2xl" : "w-14 h-14 rounded-xl"
+  const labelSize = size === "large" ? "text-xs" : "text-[11px]"
+  const svgSize = size === "large" ? 28 : 24
+  const compassSize = size === "large" ? "w-9 h-9" : "w-8 h-8"
+  const pointerSize = size === "large" ? { border: 6, height: 18 } : { border: 5, height: 16 }
+  const dotSize = size === "large" ? "w-3 h-3" : "w-2.5 h-2.5"
+
+  const renderIcon = () => {
+    switch (appId) {
+      case "browser":
+        return (
+          <div
+            className={`${iconSize} flex items-center justify-center relative`}
+            style={{
+              background: 'linear-gradient(135deg, #60a5fa 0%, #1d4ed8 100%)',
+              boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+            }}
+          >
+            {/* Compass needle */}
+            <div className={`absolute ${compassSize} -rotate-45`}>
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2"
+                style={{
+                  width: 0, height: 0,
+                  borderLeft: `${pointerSize.border}px solid transparent`,
+                  borderRight: `${pointerSize.border}px solid transparent`,
+                  borderBottom: `${pointerSize.height}px solid white`,
+                }}
+              />
+              <div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                style={{
+                  width: 0, height: 0,
+                  borderLeft: `${pointerSize.border}px solid transparent`,
+                  borderRight: `${pointerSize.border}px solid transparent`,
+                  borderTop: `${pointerSize.height}px solid rgba(255,255,255,0.35)`,
+                }}
+              />
+            </div>
+            <div className={`absolute ${dotSize} rounded-full bg-white z-10`} />
+          </div>
+        )
+      case "flipflop":
+        return (
+          <div
+            className={`${iconSize} flex items-center justify-center`}
+            style={{
+              background: 'linear-gradient(135deg, #f472b6 0%, #db2777 100%)',
+              boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+            }}
+          >
+            <svg width={svgSize} height={svgSize} viewBox="0 0 24 24" fill="white">
+              <path d="M12 4l-8 8h5v8h6v-8h5z" />
+            </svg>
+          </div>
+        )
+      case "soundwaves":
+        return (
+          <div
+            className={`${iconSize} flex items-center justify-center`}
+            style={{
+              background: 'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)',
+              boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+            }}
+          >
+            <svg width={svgSize} height={svgSize} viewBox="0 0 24 24" fill="white">
+              <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+            </svg>
+          </div>
+        )
+      case "kempotube":
+        return (
+          <div
+            className={`${iconSize} flex items-center justify-center`}
+            style={{
+              background: 'linear-gradient(135deg, #fb923c 0%, #ea580c 100%)',
+              boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.25)',
+            }}
+          >
+            {/* Two arrows + vertical line (fast-forward style logo) */}
+            <svg width={svgSize} height={svgSize * 0.73} viewBox="0 0 22 16" fill="white">
+              <path d="M0 0L7 8L0 16V0Z" />
+              <path d="M8 0L15 8L8 16V0Z" />
+              <rect x="18" y="0" width="3" height="16" />
+            </svg>
+          </div>
+        )
+    }
+  }
+
+  return (
+    <button onClick={onClick} className="flex flex-col items-center gap-1">
+      {renderIcon()}
+      <span className={`text-white ${labelSize} font-medium`}>{app.label}</span>
+    </button>
   )
 }

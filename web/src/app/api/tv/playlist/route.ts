@@ -23,7 +23,7 @@ export async function GET() {
 
     // Transform to the format expected by the frontend
     const items = playlist.map((item) => ({
-      id: item.video.slug,
+      id: item.video.id,
       name: item.video.name,
       description: item.video.description || "",
       url: item.video.url,

@@ -16,6 +16,12 @@ const kttpToPath = (kttp: string): string => {
   return DEFAULT_HOME
 }
 
+// Helper to append kemponet=1 param properly (handles existing query strings)
+const addKemponetParam = (path: string): string => {
+  const separator = path.includes("?") ? "&" : "?"
+  return `${path}${separator}kemponet=1`
+}
+
 export default function PCPage() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-black" />}>
@@ -733,7 +739,7 @@ function PCContent() {
                   <iframe
                     key={iframeKey}
                     ref={iframeRef}
-                    src={`${iframeSrc}?kemponet=1`}
+                    src={addKemponetParam(iframeSrc)}
                     className="w-full h-full border-0"
                     style={{ background: "white" }}
                   />

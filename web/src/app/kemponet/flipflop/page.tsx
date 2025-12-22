@@ -19,6 +19,7 @@ export default function FlipFlopPage() {
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null)
   const [loading, setLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const [isKempoNet, setIsKempoNet] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const playedVideosRef = useRef<Set<string>>(new Set())
   const historyRef = useRef<Video[]>([])
@@ -29,11 +30,16 @@ export default function FlipFlopPage() {
   const loadNextVideoRef = useRef<() => void>(() => {})
   const loadPreviousVideoRef = useRef<() => void>(() => {})
 
-  // Detect mobile context
+  // Detect mobile/kemponet context
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     setIsMobile(params.get("mobile") === "1")
+    setIsKempoNet(params.get("kemponet") === "1")
   }, [])
+
+  // When viewing directly (not in KempoNet/Mobile browser), account for the 56px header
+  const isEmbedded = isMobile || isKempoNet
+  const containerClass = isEmbedded ? "h-screen" : "fixed top-14 left-0 right-0 bottom-0"
 
   // Fetch videos
   useEffect(() => {
@@ -158,13 +164,17 @@ export default function FlipFlopPage() {
   }, [])
 
   const handleArtistClick = (artistSlug: string) => {
-    const param = isMobile ? "?mobile=1" : ""
-    router.push(`/kemponet/kempopedia/wiki/${artistSlug}${param}`)
+    const extraParams = [
+      isKempoNet ? 'kemponet=1' : '',
+      isMobile ? 'mobile=1' : '',
+    ].filter(Boolean).join('&')
+    const suffix = extraParams ? `?${extraParams}` : ''
+    router.push(`/kemponet/kempopedia/wiki/${artistSlug}${suffix}`)
   }
 
   if (loading) {
     return (
-      <div className="h-screen bg-black flex items-center justify-center">
+      <div className={`${containerClass} bg-black flex items-center justify-center`}>
         <div className="text-white text-lg">Loading...</div>
       </div>
     )
@@ -172,7 +182,7 @@ export default function FlipFlopPage() {
 
   if (videos.length === 0) {
     return (
-      <div className="h-screen bg-black flex flex-col items-center justify-center px-6">
+      <div className={`${containerClass} bg-black flex flex-col items-center justify-center px-6`}>
         <div className="text-6xl mb-4">📹</div>
         <div className="text-white text-xl font-semibold mb-2">No videos yet</div>
         <div className="text-gray-400 text-center">
@@ -202,7 +212,7 @@ export default function FlipFlopPage() {
   if (!currentVideo) {
     return (
       <div
-        className="h-screen bg-black flex flex-col"
+        className={`${containerClass} bg-black flex flex-col`}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleHomeSwipe}
       >
@@ -245,7 +255,7 @@ export default function FlipFlopPage() {
   // Video playing screen
   return (
     <div
-      className="h-screen bg-black flex flex-col"
+      className={`${containerClass} bg-black flex flex-col`}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

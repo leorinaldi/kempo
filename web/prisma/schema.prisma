@@ -140,6 +140,7 @@ model Article {
   // Metadata
   tags               String[]   // PostgreSQL array
   dates              String[]   // k.y. dates mentioned in the article
+  linkCount          Int        @default(0) @map("link_count") // count of [[wikilinks]] in content
 
   // Timestamps
   createdAt          DateTime   @default(now()) @map("created_at")

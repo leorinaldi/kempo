@@ -38,23 +38,30 @@ const favorites = [
 
 export default function FavoritesPage() {
   const router = useRouter()
+  const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
   const [isMobile, setIsMobile] = useState(false)
+  const [isKempoNet, setIsKempoNet] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    setIsMobile(params.get("mobile") === "1")
+    const mobile = params.get("mobile") === "1"
+    const kempoNet = params.get("kemponet") === "1"
+    setIsMobile(mobile)
+    setIsKempoNet(kempoNet)
+    setIsEmbedded(kempoNet || mobile)
   }, [])
 
   const handleClick = (path: string) => {
-    if (isMobile) {
-      router.push(`${path}?mobile=1`)
-    } else {
-      router.push(path)
-    }
+    const extraParams = [
+      isKempoNet ? 'kemponet=1' : '',
+      isMobile ? 'mobile=1' : '',
+    ].filter(Boolean).join('&')
+    const suffix = extraParams ? `?${extraParams}` : ''
+    router.push(`${path}${suffix}`)
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6">
+    <div className={`min-h-screen bg-gray-50 px-4 pb-6 ${isEmbedded ? 'pt-6' : 'pt-14'}`}>
       <h1
         className="text-lg font-semibold text-gray-800 mb-4"
         style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}

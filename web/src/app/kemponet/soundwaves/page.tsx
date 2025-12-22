@@ -21,6 +21,7 @@ export default function SoundWavesPage() {
   const [progress, setProgress] = useState(0)
   const [duration, setDuration] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
+  const [isKempoNet, setIsKempoNet] = useState(false)
   const [viewMode, setViewMode] = useState<"tracks" | "artists" | "artist-tracks">("tracks")
   const [selectedArtist, setSelectedArtist] = useState<{ name: string; slug: string } | null>(null)
   const [isRolling, setIsRolling] = useState(false)
@@ -39,6 +40,7 @@ export default function SoundWavesPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     setIsMobile(params.get("mobile") === "1")
+    setIsKempoNet(params.get("kemponet") === "1")
     // Check if embedded (in iframe or has kemponet/mobile params - header is hidden in these cases)
     const inIframe = window.self !== window.top
     const hasEmbedParam = params.get("kemponet") === "1" || params.get("mobile") === "1"
@@ -274,8 +276,12 @@ export default function SoundWavesPage() {
   }
 
   const handleArtistClick = (artistSlug: string) => {
-    const param = isMobile ? "?mobile=1" : ""
-    router.push(`/kemponet/kempopedia/wiki/${artistSlug}${param}`)
+    const extraParams = [
+      isKempoNet ? 'kemponet=1' : '',
+      isMobile ? 'mobile=1' : '',
+    ].filter(Boolean).join('&')
+    const suffix = extraParams ? `?${extraParams}` : ''
+    router.push(`/kemponet/kempopedia/wiki/${artistSlug}${suffix}`)
   }
 
   if (loading) {

@@ -1,12 +1,14 @@
 import Link from 'next/link'
-import { getAllCategoriesAsync, getAllArticlesAsync, getWikiLinkStatsAsync } from '@/lib/articles'
+import { getAllCategoriesAsync, getArticleCountAsync, getWikiLinkStatsAsync } from '@/lib/articles'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
 
 export default async function KempopediaHome() {
-  const categories = await getAllCategoriesAsync()
-  const allArticles = await getAllArticlesAsync()
-  const totalArticles = allArticles.length
-  const linkStats = await getWikiLinkStatsAsync()
+  // Run queries in parallel for faster loading
+  const [categories, totalArticles, linkStats] = await Promise.all([
+    getAllCategoriesAsync(),
+    getArticleCountAsync(),
+    getWikiLinkStatsAsync(),
+  ])
 
   return (
     <div className="min-h-screen bg-white">

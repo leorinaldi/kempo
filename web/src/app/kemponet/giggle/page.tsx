@@ -19,14 +19,18 @@ export default function GigglePage() {
   const [results, setResults] = useState<SearchResult[]>([])
   const [isSearching, setIsSearching] = useState(false)
   const [hasSearched, setHasSearched] = useState(false)
+  const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
   const [isKempoNet, setIsKempoNet] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   // Check if we're inside the KempoNet iframe or mobile
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    setIsKempoNet(params.get("kemponet") === "1")
-    setIsMobile(params.get("mobile") === "1")
+    const kempoNet = params.get("kemponet") === "1"
+    const mobile = params.get("mobile") === "1"
+    setIsKempoNet(kempoNet)
+    setIsMobile(mobile)
+    setIsEmbedded(kempoNet || mobile)
   }, [])
 
   const handleSearch = useCallback(async () => {
@@ -68,7 +72,7 @@ export default function GigglePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center px-4">
+    <div className={`min-h-screen bg-white flex flex-col items-center px-4 ${isEmbedded ? '' : 'pt-14'}`}>
       {/* Top spacer - pushes content to center the search bar */}
       <div className="flex-1" />
 

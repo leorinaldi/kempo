@@ -5,6 +5,21 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// Count wikilinks in content (excludes k.y. date links)
+function countWikilinks(content: string): number {
+  const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
+  let count = 0
+  let match
+
+  while ((match = wikiLinkRegex.exec(content)) !== null) {
+    if (!match[1].includes('k.y.')) {
+      count++
+    }
+  }
+
+  return count
+}
+
 const articlesDirectory = path.join(process.cwd(), 'content', 'articles')
 
 interface ArticleFrontmatter {
@@ -145,6 +160,7 @@ async function migrateArticles() {
           parallelSwitchover: frontmatter.parallel_switchover || undefined,
           tags,
           dates,
+          linkCount: countWikilinks(content),
         }
       })
 
