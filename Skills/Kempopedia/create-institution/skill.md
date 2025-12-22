@@ -1,25 +1,18 @@
 # Create Institution Skill
 
-You are creating an **institution article** for Kempopedia—a full entry for a fictional organization, academy, university, or agency in the Kempo universe.
+Create an article for an organization, academy, or agency in the Kempo universe.
 
-> **IMPORTANT**: Before creating any article, review the [[global-rules]] skill for mandatory rules about current date, dead links, infobox formatting, and more.
-
-## Critical Rules
-
-1. **Simulation Date Rule** — No events after the current simulation date
-2. **No dead links**: Every wikilink must have an article (create stubs)
-3. **Infobox wikilinks**: Use `[[wikilinks]]` for places and related institutions in infobox fields
-4. **Political parties**: Use National Party (Democratic) or Federal Party (Republican)
+> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
 
 ## Institution Types
 
-- **Military academy**: Training institution for armed forces (e.g., Vermont Army Academy)
-- **University**: Higher education institution
-- **Political party**: National Party, Federal Party
-- **Government agency**: Official government body
-- **Research institute**: Scientific or policy research organization
-- **Hospital**: Medical institution
-- **Religious institution**: Church, monastery, religious organization
+- **military-academy**: Training institutions (e.g., Vermont Army Academy)
+- **university**: Higher education
+- **political-party**: National Party, Federal Party
+- **government-agency**: Official government bodies
+- **research-institute**: Scientific or policy research
+- **hospital**: Medical institutions
+- **religious-institution**: Churches, religious organizations
 
 ## Output Format
 
@@ -30,252 +23,92 @@ You are creating an **institution article** for Kempopedia—a full entry for a 
 title: "Institution Name"
 slug: "institution-name"
 type: institution
-subtype: military-academy | university | political-party | government-agency | research-institute | hospital | religious-institution
+subtype: military-academy | university | political-party | government-agency
 status: published
 parallel_switchover:  # Only if applicable
   real_world: "Real Institution Name"
   wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
-  - country (e.g., american)
-  - domain (e.g., military, education, politics)
+  - country
+  - domain
   - parallel-switchover  # if applicable
-dates:
-  - "Founding date k.y."
-  - "Other significant dates"
 ---
 ```
 
 ### Infobox JSON
-
-**Use wikilinks for linkable fields** (location, parent_org). Plain text for names, dates, descriptions.
 
 ```json
 {
   "infobox": {
     "type": "institution",
     "image": {
-      "url": "/media/placeholder-institution.jpg",
-      "caption": "Institution Name main building"
+      "url": "/media/<slug>.jpg",
+      "caption": "Institution Name"
     },
     "fields": {
-      "official_name": "Full Official Name",
-      "abbreviation": "ABBR",
-      "founded": "YEAR k.y.",
-      "dissolved": null,
-      "location": "[[City]], [[State]]",
-      "type": "Type of institution",
-      "motto": "Latin or English motto",
-      "colors": "School colors",
-      "ideology": "Political ideology",
-      "symbol": "Party symbol",
-      "parent_org": "[[Parent Organization]]"
+      "Official_name": "Full Official Name",
+      "Abbreviation": "ABBR",
+      "Founded": "YEAR k.y.",
+      "Location": "[[City]], [[State]]",
+      "Type": "Type of institution",
+      "Motto": "Latin or English motto",
+      "Colors": "School colors"
     }
-  },
-  "timeline_events": [
-    {
-      "date": "YEAR k.y.",
-      "headline": "Institution founded",
-      "description": "Description of founding"
-    }
-  ]
+  }
 }
 ```
 
-### Article Content (MDX)
+### Article Structure
 
 ```mdx
-**Institution Name** is a [type of institution] located in [[City]], [[Country]]. Founded in [[YEAR k.y.]], it [one-sentence description of purpose/significance].
+**Institution Name** is a [type] located in [[City]], [[Country]]. Founded in [[YEAR k.y.]], it [description].
 
 ## History
-
 ### Founding
-
-[Circumstances of founding, founders, original purpose]
-
 ### Early years
-
-[Development during initial decades]
-
 ### Modern era
-
-[Recent history, current status as of the current simulation date]
-
 ## Campus / Facilities
-
-[Description of physical location, notable buildings]
-
 ## Academics / Programs / Mission
-
-[What the institution does, notable programs]
-
 ## Notable alumni / members
-
-- [[Person 1]] — brief description
-- [[Person 2]] — brief description
-
+- [[Person 1]] — description
 ## See also
-
-- [[Related Institution]]
-- [[Related Person]]
-- [[Related Event]]
 ```
 
-## Political Parties
+## Image Generation
 
-When creating political party articles:
-
-| Real World | Kempo Equivalent |
-|------------|------------------|
-| Democratic Party | [[National Party]] |
-| Republican Party | [[Federal Party]] |
-
-## Naming Guidelines for Institutions
-
-### Military Academies
-- Use state/region name + "Army/Naval/Air Academy"
-- Examples: Vermont Army Academy, Carolina Naval Academy
-
-### Universities
-- Use invented but plausible names
-- Can use place names, founder names, or descriptive names
-- Examples: Hartwell University, Meridian College, St. Edmund's University
-
-### Government Agencies
-- Keep similar structure to real agencies
-- Change specific names
-- Example: "Federal Bureau of Investigation" → "Federal Bureau of Security"
-
-## Parallel Switchover Approach
-
-When creating an institution based on a real one:
-
-| Aspect | Approach |
-|--------|----------|
-| **Name** | Different but same type clear |
-| **Location** | Can be same region, different city |
-| **Founded date** | Can keep same or adjust |
-| **Purpose** | Same general purpose |
-| **Notable alumni** | Kempo equivalents of real alumni |
-| **Traditions** | Invent similar but distinct traditions |
-
-## Example Transformations
-
-| Real World | Kempo Universe |
-|------------|----------------|
-| United States Military Academy (West Point) | [[Vermont Army Academy]] |
-| Harvard University | Hartwell University |
-| Democratic Party | [[National Party]] |
-| Republican Party | [[Federal Party]] |
-| FBI | Federal Bureau of Security |
-| MIT | Massachusetts Technical Institute |
-
-## Connections
-
-Institutions should connect to:
-- **People**: Notable alumni, faculty, founders
-- **Events**: Significant moments in institution history
-- **Places**: Location city/region
-- **Other institutions**: Parent organizations, rivals, partners
-
-## Image Generation (MANDATORY)
-
-> **AUTOMATIC STEP**: Image generation is a REQUIRED part of creating any institution article. Do not consider the article complete until an image has been generated and added to the infobox.
-
-After creating the article, generate an image and add it immediately.
-
-### Step 1: Choose Image Type
+Generate immediately after creating the article:
+```bash
+node scripts/generate-image.js <slug> "<prompt>"
+```
 
 | Institution Type | Image Type |
 |------------------|------------|
-| Political parties, advocacy orgs, civil rights orgs | **Logo** (dispersed organization) |
-| Schools, universities, academies, libraries | **Building/location** (tied to a place) |
-| Government agencies | Logo or building depending on context |
+| Political parties, advocacy orgs | **Logo** (can be color) |
+| Schools, universities, academies | **Building** (era-appropriate color) |
+| Government agencies | Logo or building |
 
-### Step 2: Create Prompt
-
-**For Logos:**
+**For logos:**
 ```
-[Symbol description] on a white background as a logo for [organization description]. Clean graphic design. Comic book style drawing.
-```
-- Logos can be **color regardless of time period**
-- Include symbolic imagery relevant to the organization's mission
-- Always end with "Comic book style drawing."
-
-**Examples:**
-```
-A blue star on a white background as a logo for a fictional national US political party. Clean graphic design. Comic book style drawing.
-```
-```
-A red eagle on a white background as a logo for a fictional federal US political party. Clean graphic design. Comic book style drawing.
-```
-```
-Logo for a fictional American civil rights organization. Scales of justice or torch of liberty motif on white background. Clean graphic design. Comic book style drawing.
+[Symbol] on a white background as a logo for [organization]. Clean graphic design. Comic book style drawing.
 ```
 
-**For Buildings/Locations:**
+**For buildings:**
 ```
-[Building description] in [City/Region]. [Architectural style], [period details]. [COLOR STYLE]. Comic book style drawing.
-```
-
-**Color style by era:**
-
-| Era | Color Style |
-|-----|-------------|
-| Pre-1955 | "Black and white scene" |
-| 1955-1965 | "Muted early color, slightly faded" |
-| 1965+ | "Full color" |
-
-Use the current simulation date to determine color style.
-
-- Include setting context (city, region, landscape features)
-- Always end with "Comic book style drawing."
-
-**Examples:**
-```
-A 1920s red brick law school building in Kansas City. Classical architecture with columns. Black and white scene. Comic book style drawing.
-```
-```
-A prestigious American military academy campus. Cadets in formation on parade ground, stone Gothic buildings with American flag flying, mountains in background. Black and white scene. Comic book style drawing.
+Comic book illustration, bold ink lines, graphic novel style. [Building description] in [City]. [Architecture]. [COLOR STYLE].
 ```
 
-### Step 3: Generate and Add to Article
+See [generate-image](../generate-image/skill.md) for examples.
 
-1. Generate image: `node scripts/generate-image.js <slug> "<prompt>"`
-2. Immediately update infobox with image reference
-3. Provide article URL for user review
+## Naming Guidelines
 
-```json
-"image": {
-  "url": "/media/<slug>.jpg",
-  "caption": "Institution Name, circa YEAR k.y."
-}
-```
+| Real World | Kempo Equivalent |
+|------------|------------------|
+| West Point | Vermont Army Academy |
+| Harvard | Hartwell University |
+| Democratic Party | National Party |
+| Republican Party | Federal Party |
+| FBI | Federal Bureau of Security |
 
-## Checklist Before Completing
+## Completion
 
-> **CRITICAL**: An institution article is NOT complete until all phases are done. See [[global-rules]] for full details.
-
-### Phase 1: Content Quality
-- [ ] All events on or before the current simulation date
-- [ ] All dates use k.y. format
-- [ ] Uses Kempo names (National/Federal parties, etc.)
-- [ ] Infobox uses wikilinks for linkable fields (places, parent orgs)
-- [ ] Location uses Kempo place names
-- [ ] Parallel switchover registered (if applicable)
-- [ ] **IMAGE GENERATED** using `node scripts/generate-image.js` (REQUIRED)
-
-### Phase 2: Link Integrity (NO DEAD LINKS)
-- [ ] All wikilinks point to existing articles
-- [ ] Stubs created for location, parent organizations, related institutions
-- [ ] Stubs link back to this institution's article
-
-### Phase 3: Timeline Synchronization
-- [ ] Founding date added to appropriate timeline
-- [ ] Major institutional milestones added to timeline
-- [ ] All date links in article have corresponding timeline entries
-
-### Phase 4: Backlinks & Cross-References
-- [ ] Notable alumni/members link to person articles
-- [ ] Person articles list this institution (education, employer, membership)
-- [ ] Location article references this institution
-- [ ] This institution added to "See also" of related articles
+Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).

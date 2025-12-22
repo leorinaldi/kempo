@@ -1,24 +1,18 @@
-# Create Kempopedia Article
+# Create Article Skill
 
-You are creating an article for **Kempopedia**, the encyclopedia of Kempo—a comprehensive fictional universe.
+Generic article creation for Kempopedia.
 
-> **IMPORTANT**: Before creating any article, review the [[global-rules]] skill for mandatory rules about current date, dead links, infobox formatting, and more.
+> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
 
-## Calendar System
+For specific article types, use the dedicated skills:
+- [create-person](../create-person/skill.md) — Biographical articles
+- [create-place](../create-place/skill.md) — Locations and nations
+- [create-institution](../create-institution/skill.md) — Organizations
+- [create-media](../create-media/skill.md) — Songs, albums, films
+- [create-product](../create-product/skill.md) — Vehicles, goods
+- [create-timeline](../create-timeline/skill.md) — Timeline pages
 
-All dates use **k.y.** (Kempo Years).
-
-The current simulation date is the "present day" in Kempo. Do not include events after this date.
-
-## Your Task
-
-Generate a complete, Wikipedia-style article with:
-
-1. **Frontmatter** (YAML)
-2. **Infobox data** (JSON) — wikilinks supported for linkable fields
-3. **Article content** (MDX) — wikilinks throughout
-
-## Output Format
+## Generic Article Format
 
 ### Frontmatter
 
@@ -26,15 +20,14 @@ Generate a complete, Wikipedia-style article with:
 ---
 title: "Article Title"
 slug: "article-slug"
-type: person | place | institution | event | nation | concept | company | product
+type: person | place | institution | event | culture | product | concept
 subtype: specific-classification
 status: published
-parallel_switchover:  # Only if based on real-world entity
+parallel_switchover:  # Only if applicable
   real_world: "Real Entity Name"
   wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
-  - relevant-tag
-  - parallel-switchover  # if applicable
+  - relevant-tags
 dates:
   - "Month Day, YEAR k.y."
 ---
@@ -42,110 +35,41 @@ dates:
 
 ### Infobox JSON
 
-**Infobox fields support wikilinks for linkable content** (places, institutions, parties, people).
-
 ```json
 {
   "infobox": {
     "type": "...",
     "image": {
-      "url": "/media/placeholder.jpg",
+      "url": "/media/<slug>.jpg",
       "caption": "..."
     },
     "fields": {
-      "birth_place": "[[Lawton, Missouri]]",
-      "political_party": "[[National Party]]",
-      "birth_date": "May 11, 1884 k.y."
+      "Field_name": "value or [[wikilink]]"
     }
-  },
-  "timeline_events": [
-    {
-      "date": "1945 k.y.",
-      "headline": "...",
-      "description": "..."
-    }
-  ]
+  }
 }
 ```
 
-### Article Content (MDX)
+### Article Structure
 
 ```mdx
-The **Article Title** is [one-sentence definition].
+**Article Title** is [one-sentence definition].
 
 ## Background
-
-[Context and history leading to this subject]
-
-## [Main Section - varies by type]
-
-[Core content with [[wikilinks]] to other articles]
-
-## [Additional Sections as needed]
-
-## Legacy / Impact / Aftermath
-
-[Consequences and lasting effects — only for past events/deceased persons]
-
+## [Main Section]
+## [Additional Sections]
 ## See also
-
-- [[Related Article 1]]
-- [[Related Article 2]]
+- [[Related Article]]
 ```
 
 ## Writing Guidelines
 
 1. **Encyclopedic tone**: Neutral, factual, third-person
-2. **Wikilinks**: Use `[[Article Name]]` liberally — but ensure each linked article exists!
-3. **No dead links**: Create stub articles for any new wikilinks
+2. **Wikilinks**: Use `[[Article Name]]` liberally
+3. **No dead links**: Create stubs for new entities
 4. **Specificity**: Include concrete dates, names, numbers
-5. **Current date awareness**: No events after the current simulation date
-6. **Political parties**: Use National Party (not Democratic) and Federal Party (not Republican)
-7. **Present tense**: For living people and current institutions
+5. **Present tense**: For living people and current institutions
 
-## Infobox Field Reference
+## Completion
 
-**Person**: full_name, birth_date, birth_place, death_date, death_place, nationality, occupation, political_party, spouse, children, known_for
-
-**Nation**: official_name, founded, dissolved, capital, largest_city, government_type, head_of_state, population, currency
-
-**Event**: date, end_date, location, participants, outcome
-
-**Place**: type, country, state, founded, population
-
-**Institution**: official_name, abbreviation, type, location, founded
-
-**Concept**: type, established, scope
-
-## Example Sections by Type
-
-- **Person**: Early life, Education, Career, [Role-specific], Personal life, [Legacy — only if deceased]
-- **Nation**: History, Government, Geography, Economy, Demographics
-- **Event**: Background, The Event, Aftermath
-- **Place**: History, Geography, Demographics
-- **Institution**: History, Structure, Notable members
-
-## Checklist Before Completing
-
-> **CRITICAL**: An article is NOT complete until all four phases are done. See [[global-rules]] Section 12 for full details.
-
-### Phase 1: Content Quality
-- [ ] All events on or before the current simulation date
-- [ ] All dates use k.y. format
-- [ ] Uses Kempo political parties (National/Federal)
-- [ ] Infobox uses wikilinks for linkable fields
-- [ ] Parallel switchover registered (if applicable)
-
-### Phase 2: Link Integrity (NO DEAD LINKS)
-- [ ] All wikilinks point to existing articles
-- [ ] Stubs created for any new entities
-- [ ] Stubs link back to your article
-
-### Phase 3: Timeline Synchronization
-- [ ] All date links have corresponding timeline entries
-- [ ] Timeline entries include proper anchor IDs
-- [ ] Entries are in chronological order
-
-### Phase 4: Backlinks & Cross-References
-- [ ] Linked articles reference back to your subject
-- [ ] Your article added to "See also" of related articles
+Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).
