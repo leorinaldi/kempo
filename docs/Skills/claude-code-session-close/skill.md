@@ -72,7 +72,15 @@ git -C /Users/leonardorinaldi/Claude/Kempo push
 
 Changes will auto-deploy to Vercel.
 
-### 6. Shut Down Local Services
+### 6. Deployment Verification (Optional)
+
+Ask the user if they want to:
+- **Wait for deployment** - Monitor Vercel deployment status before closing localhost
+- **Close immediately** - Shut down without waiting
+
+If waiting, check deployment status at https://vercel.com/leorinaldi/kempo or use the Vercel CLI.
+
+### 7. Shut Down Local Services
 
 Stop the dev server and ngrok tunnel:
 
@@ -84,7 +92,7 @@ lsof -ti:3000 | xargs kill -9
 pkill ngrok
 ```
 
-### 7. Report Complete
+### 8. Report Complete
 
 Tell the user:
 - Session summary (from step 1)
