@@ -68,8 +68,7 @@ Kempo/
 ├── README.md              # This file
 ├── CLAUDE.md              # AI assistant instructions
 ├── docs/                  # Project documentation
-├── Skills/                # Claude skills for content creation
-│   └── Kempopedia/        # Article creation skills
+│   └── Skills/Kempopedia/ # Article creation skills
 ├── scripts/               # Utility scripts (image generation)
 └── web/                   # Next.js web application
     ├── README.md          # Development setup
@@ -84,7 +83,7 @@ See [web/README.md](web/README.md) for setup instructions.
 
 ## Content Creation
 
-Content is created collaboratively with AI using Claude Skills. See the [Skills/Kempopedia](Skills/Kempopedia) folder for article creation guidelines.
+Content is created collaboratively with AI using Claude Skills. See the [docs/Skills/Kempopedia](docs/Skills/Kempopedia) folder for article creation guidelines.
 
 ---
 

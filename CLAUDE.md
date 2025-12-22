@@ -8,7 +8,7 @@ This is the primary instruction file for AI assistants working on the Kempo proj
 |-------|----------|
 | KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
 | Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
-| Article creation | [Skills/Kempopedia/global-rules](Skills/Kempopedia/global-rules/skill.md) |
+| Article creation | [docs/Skills/Kempopedia/global-rules](docs/Skills/Kempopedia/global-rules/skill.md) |
 | Simulation workflow | [docs/simulation-workflow.md](docs/simulation-workflow.md) |
 
 ## Critical Rules
