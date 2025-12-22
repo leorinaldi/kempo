@@ -18,6 +18,7 @@ export default function FlipFlopPage() {
   const [videos, setVideos] = useState<Video[]>([])
   const [currentVideo, setCurrentVideo] = useState<Video | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
   const [isMobile, setIsMobile] = useState(false)
   const [isKempoNet, setIsKempoNet] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -33,12 +34,14 @@ export default function FlipFlopPage() {
   // Detect mobile/kemponet context
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
-    setIsMobile(params.get("mobile") === "1")
-    setIsKempoNet(params.get("kemponet") === "1")
+    const mobile = params.get("mobile") === "1"
+    const kempoNet = params.get("kemponet") === "1"
+    setIsMobile(mobile)
+    setIsKempoNet(kempoNet)
+    setIsEmbedded(mobile || kempoNet)
   }, [])
 
   // When viewing directly (not in KempoNet/Mobile browser), account for the 56px header
-  const isEmbedded = isMobile || isKempoNet
   const containerClass = isEmbedded ? "h-screen" : "fixed top-14 left-0 right-0 bottom-0"
 
   // Fetch videos
@@ -259,22 +262,24 @@ export default function FlipFlopPage() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* FlipFlop logo - appears on hover in top left */}
-      <div className="absolute top-0 left-0 z-20 pt-4 pl-4 group">
-        <div className="w-16 h-10 cursor-pointer" /> {/* Hover area */}
-        <button
-          onClick={goHome}
-          className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-        >
-          <span
-            className="text-xl font-bold"
-            style={{ textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}
+      {/* FlipFlop logo - appears on hover in top left (desktop only) */}
+      {!isMobile && (
+        <div className="absolute top-0 left-0 z-20 pt-4 pl-4 group">
+          <div className="w-16 h-10 cursor-pointer" /> {/* Hover area */}
+          <button
+            onClick={goHome}
+            className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
           >
-            <span className="text-white">Flip</span>
-            <span style={{ color: "#ec4899" }}>Flop</span>
-          </span>
-        </button>
-      </div>
+            <span
+              className="text-xl font-bold"
+              style={{ textShadow: "0 2px 4px rgba(0,0,0,0.5)" }}
+            >
+              <span className="text-white">Flip</span>
+              <span style={{ color: "#ec4899" }}>Flop</span>
+            </span>
+          </button>
+        </div>
+      )}
 
       {/* Up arrow button at top right */}
       <div className="absolute top-0 right-0 z-20 flex justify-end pt-4 pr-4">

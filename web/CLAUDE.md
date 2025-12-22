@@ -4,6 +4,7 @@
 
 Before making changes to KempoNet pages, read:
 - **[docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md)** - Design system for all KempoNet sites
+- **[docs/mobile-testing.md](docs/mobile-testing.md)** - Test on phone via localhost with ngrok
 
 ## Quick Reference
 

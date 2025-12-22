@@ -99,7 +99,6 @@ function MobileIcon() {
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(1) // Start on PC
-  const [arrowHover, setArrowHover] = useState(false)
   const [titleHover, setTitleHover] = useState(false)
   const touchStartX = useRef<number | null>(null)
   const touchStartY = useRef<number | null>(null)
@@ -191,11 +190,31 @@ export default function Home() {
       </div>
 
       {/* Device Rotator */}
-      <div className="mt-16">
+      <div className="mt-16 flex items-center gap-4">
+          {/* Left Arrow - outside the box */}
+          <button
+            onClick={goLeft}
+            className="w-12 h-12 flex items-center justify-center hover:scale-110 transition-all duration-200"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(100,150,255,0.8))' }}
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
           {/* Clickable box container */}
           <Link
             href={currentDevice.href}
-            className={`flex flex-col items-center gap-3 py-4 rounded-lg border border-gray-700/50 transition-all duration-200 group ${!arrowHover ? 'hover:border-gray-500 hover:shadow-[inset_0_0_30px_rgba(100,150,255,0.15)]' : ''}`}
+            className="flex flex-col items-center gap-3 py-4 px-6 rounded-lg border border-gray-700/50 transition-all duration-200 group hover:border-gray-500 hover:shadow-[inset_0_0_30px_rgba(100,150,255,0.15)]"
             style={{
               background: 'rgba(31, 41, 55, 0.3)',
               boxShadow: '0 0 15px rgba(100,150,255,0.3), 0 0 30px rgba(80,130,255,0.2)'
@@ -204,23 +223,8 @@ export default function Home() {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div className="flex items-center justify-center gap-6">
-              {/* Left Arrow */}
-              <button
-                onClick={(e) => { e.preventDefault(); goLeft(); }}
-                onMouseEnter={() => setArrowHover(true)}
-                onMouseLeave={() => setArrowHover(false)}
-                className="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-400 hover:scale-110 transition-all duration-200 -ml-5"
-                style={{
-                  background: '#1f2937',
-                  boxShadow: '0 0 15px rgba(100,150,255,0.5), 0 0 30px rgba(80,130,255,0.3)'
-                }}
-              >
-                <span className="text-white text-xl leading-none" style={{ marginRight: '2px' }}>‹</span>
-              </button>
-
               {/* Device Icon - fixed height container with centered icon */}
-              <div className="flex items-center justify-center h-24 w-44">
+              <div className="flex items-center justify-center h-[115px] w-[180px]">
                 <div
                   className="p-4 rounded-lg transition-transform group-hover:scale-105"
                   style={{
@@ -233,21 +237,6 @@ export default function Home() {
                   {currentIndex === 3 && <RadioIcon />}
                 </div>
               </div>
-
-              {/* Right Arrow */}
-              <button
-                onClick={(e) => { e.preventDefault(); goRight(); }}
-                onMouseEnter={() => setArrowHover(true)}
-                onMouseLeave={() => setArrowHover(false)}
-                className="w-10 h-10 rounded-full border-2 border-gray-700 flex items-center justify-center hover:border-gray-400 hover:scale-110 transition-all duration-200 -mr-5"
-                style={{
-                  background: '#1f2937',
-                  boxShadow: '0 0 15px rgba(100,150,255,0.5), 0 0 30px rgba(80,130,255,0.3)'
-                }}
-              >
-                <span className="text-white text-xl leading-none" style={{ marginLeft: '2px' }}>›</span>
-              </button>
-            </div>
 
             {/* Action text - fixed position */}
             <div
@@ -273,6 +262,26 @@ export default function Home() {
               ))}
             </div>
           </Link>
+
+          {/* Right Arrow - outside the box */}
+          <button
+            onClick={goRight}
+            className="w-12 h-12 flex items-center justify-center hover:scale-110 transition-all duration-200"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ filter: 'drop-shadow(0 0 8px rgba(100,150,255,0.8))' }}
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
       </div>
     </main>
   )

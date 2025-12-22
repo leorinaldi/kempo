@@ -71,6 +71,10 @@ model Revision {
 
 Audio and video files with playlist support for Radio and TV interfaces.
 
+### Settings
+
+Site configuration stored in database (e.g., auth requirement toggle).
+
 ## Development
 
 ### Prerequisites
@@ -153,6 +157,7 @@ web/
 ## Documentation
 
 - **[docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md)** - Design system for KempoNet pages (viewing contexts, header positioning, state management, navigation patterns)
+- **[docs/mobile-testing.md](docs/mobile-testing.md)** - Test on phone via localhost with ngrok
 - **[CLAUDE.md](CLAUDE.md)** - Instructions for Claude Code AI assistant
 
 ## License

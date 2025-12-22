@@ -187,3 +187,14 @@ model ProjectHistory {
 
   @@map("project_history")
 }
+
+// ============ SITE SETTINGS ============
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("settings")
+}
