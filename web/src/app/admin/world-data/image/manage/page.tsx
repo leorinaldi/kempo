@@ -56,6 +56,29 @@ interface LinkedSubject {
     name: string
     articleSlug: string | null
   }
+  nation?: {
+    id: string
+    name: string
+    shortCode: string | null
+    articleSlug: string | null
+  }
+  state?: {
+    id: string
+    name: string
+    abbreviation: string | null
+    articleSlug: string | null
+  }
+  city?: {
+    id: string
+    name: string
+    articleSlug: string | null
+  }
+  place?: {
+    id: string
+    name: string
+    placeType: string
+    articleSlug: string | null
+  }
 }
 
 export default function ImageManagePage() {
@@ -634,6 +657,14 @@ export default function ImageManagePage() {
                           ? "bg-orange-100 text-orange-700"
                           : subject.itemType === "product"
                           ? "bg-rose-100 text-rose-700"
+                          : subject.itemType === "nation"
+                          ? "bg-blue-100 text-blue-700"
+                          : subject.itemType === "state"
+                          ? "bg-indigo-100 text-indigo-700"
+                          : subject.itemType === "city"
+                          ? "bg-cyan-100 text-cyan-700"
+                          : subject.itemType === "place"
+                          ? "bg-emerald-100 text-emerald-700"
                           : "bg-gray-100 text-gray-700"
                       }`}>
                         {subject.itemType}
@@ -699,6 +730,70 @@ export default function ImageManagePage() {
                           </a>
                         ) : (
                           <span className="text-gray-700">{subject.product.name}</span>
+                        )
+                      ) : subject.nation ? (
+                        subject.nation.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.nation.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:text-blue-800 hover:underline"
+                          >
+                            {subject.nation.name}
+                            {subject.nation.shortCode ? ` (${subject.nation.shortCode})` : ""}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">
+                            {subject.nation.name}
+                            {subject.nation.shortCode ? ` (${subject.nation.shortCode})` : ""}
+                          </span>
+                        )
+                      ) : subject.state ? (
+                        subject.state.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.state.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-indigo-600 hover:text-indigo-800 hover:underline"
+                          >
+                            {subject.state.name}
+                            {subject.state.abbreviation ? ` (${subject.state.abbreviation})` : ""}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">
+                            {subject.state.name}
+                            {subject.state.abbreviation ? ` (${subject.state.abbreviation})` : ""}
+                          </span>
+                        )
+                      ) : subject.city ? (
+                        subject.city.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.city.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-cyan-600 hover:text-cyan-800 hover:underline"
+                          >
+                            {subject.city.name}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">{subject.city.name}</span>
+                        )
+                      ) : subject.place ? (
+                        subject.place.articleSlug ? (
+                          <a
+                            href={`/kemponet/kempopedia/wiki/${subject.place.articleSlug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-emerald-600 hover:text-emerald-800 hover:underline"
+                          >
+                            {subject.place.name}
+                            {subject.place.placeType ? ` (${subject.place.placeType})` : ""}
+                          </a>
+                        ) : (
+                          <span className="text-gray-700">
+                            {subject.place.name}
+                            {subject.place.placeType ? ` (${subject.place.placeType})` : ""}
+                          </span>
                         )
                       ) : (
                         <span className="text-gray-500">Unknown {subject.itemType}</span>

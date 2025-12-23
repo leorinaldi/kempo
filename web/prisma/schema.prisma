@@ -190,6 +190,10 @@ model Article {
   organization       Organization?
   brand              Brand?
   product            Product?
+  nation             Nation?
+  state              State?
+  city               City?
+  place              Place?
 
   @@index([type])
   @@index([status])
@@ -300,6 +304,89 @@ model Product {
   updatedAt       DateTime  @updatedAt @map("updated_at")
 
   @@map("products")
+}
+
+// ============ WORLD DATA: LOCATIONS ============
+
+model Nation {
+  id            String    @id @default(cuid())
+  name          String                           // "United States", "United Kingdom"
+  shortCode     String?   @map("short_code")     // "US", "UK" (for flags, abbreviations)
+  dateFounded   DateTime? @map("date_founded")   // k.y. founding/independence date
+  dateDissolved DateTime? @map("date_dissolved") // for historical nations (null if active)
+  lat           Float?                           // latitude (center point)
+  long          Float?                           // longitude (center point)
+  articleId     String?   @unique @map("article_id")
+  article       Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  states        State[]
+
+  @@map("nations")
+}
+
+model State {
+  id            String    @id @default(cuid())
+  name          String                           // "California", "New York"
+  abbreviation  String?                          // "CA", "NY"
+  stateType     String    @map("state_type")     // "state", "province", "territory", "region"
+  nationId      String    @map("nation_id")
+  nation        Nation    @relation(fields: [nationId], references: [id], onDelete: Cascade)
+  dateFounded   DateTime? @map("date_founded")   // k.y. date established/admitted
+  dateDisbanded DateTime? @map("date_disbanded") // k.y. date dissolved (null if active)
+  lat           Float?                           // latitude (center point)
+  long          Float?                           // longitude (center point)
+  articleId     String?   @unique @map("article_id")
+  article       Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  cities        City[]
+
+  @@map("states")
+}
+
+model City {
+  id            String    @id @default(cuid())
+  name          String                           // "Los Angeles", "Havana Springs"
+  cityType      String    @map("city_type")      // "city", "town", "village"
+  stateId       String    @map("state_id")
+  state         State     @relation(fields: [stateId], references: [id], onDelete: Cascade)
+  dateFounded   DateTime? @map("date_founded")   // k.y. founding/incorporation date
+  dateDisbanded DateTime? @map("date_disbanded") // k.y. date dissolved (null if active)
+  lat           Float?                           // latitude
+  long          Float?                           // longitude
+  articleId     String?   @unique @map("article_id")
+  article       Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  places        Place[]
+
+  @@map("cities")
+}
+
+model Place {
+  id            String    @id @default(cuid())
+  name          String                           // "Little Italy", "The Oasis Casino"
+  placeType     String    @map("place_type")     // "neighborhood", "building", "landmark", "casino", "studio", "park", "restaurant"
+  cityId        String    @map("city_id")
+  city          City      @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  parentPlaceId String?   @map("parent_place_id") // FK to self for nesting (e.g., casino in neighborhood)
+  parentPlace   Place?    @relation("PlaceHierarchy", fields: [parentPlaceId], references: [id], onDelete: SetNull)
+  childPlaces   Place[]   @relation("PlaceHierarchy")
+  address       String?                          // "742 Sunset Boulevard"
+  dateOpened    DateTime? @map("date_opened")    // k.y. opening/establishment date
+  dateClosed    DateTime? @map("date_closed")    // k.y. closure date (null if active)
+  lat           Float?                           // latitude
+  long          Float?                           // longitude
+  articleId     String?   @unique @map("article_id")
+  article       Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("places")
 }
 
 // ============ PROJECT HISTORY ============

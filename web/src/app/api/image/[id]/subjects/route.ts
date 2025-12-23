@@ -135,6 +135,116 @@ export async function GET(
               : undefined,
           }
         }
+        if (subject.itemType === "nation") {
+          const nation = await prisma.nation.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              shortCode: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            nation: nation
+              ? {
+                  id: nation.id,
+                  name: nation.name,
+                  shortCode: nation.shortCode,
+                  articleSlug: nation.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
+        if (subject.itemType === "state") {
+          const state = await prisma.state.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              abbreviation: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            state: state
+              ? {
+                  id: state.id,
+                  name: state.name,
+                  abbreviation: state.abbreviation,
+                  articleSlug: state.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
+        if (subject.itemType === "city") {
+          const city = await prisma.city.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            city: city
+              ? {
+                  id: city.id,
+                  name: city.name,
+                  articleSlug: city.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
+        if (subject.itemType === "place") {
+          const place = await prisma.place.findUnique({
+            where: { id: subject.itemId },
+            select: {
+              id: true,
+              name: true,
+              placeType: true,
+              article: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          })
+          return {
+            id: subject.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+            place: place
+              ? {
+                  id: place.id,
+                  name: place.name,
+                  placeType: place.placeType,
+                  articleSlug: place.article?.slug || null,
+                }
+              : undefined,
+          }
+        }
         // Unknown item type
         return {
           id: subject.id,
