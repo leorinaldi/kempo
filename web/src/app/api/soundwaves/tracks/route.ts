@@ -47,7 +47,6 @@ export async function GET() {
         {
           id: a.id,
           name: a.name,
-          slug: a.slug,
         },
       ])
     )
@@ -59,14 +58,12 @@ export async function GET() {
       const album = albumElement ? albumMap[albumElement.itemId] : null
       return {
         id: a.id,
-        slug: a.slug,
         name: a.name,
         url: a.url,
         artist: singer?.name || "",
         artistSlug: singer?.slug || "",
         albumId: album?.id || "",
         albumName: album?.name || "",
-        albumSlug: album?.slug || "",
       }
     })
 

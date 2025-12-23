@@ -27,7 +27,6 @@ export async function POST(request: Request) {
     const formData = await request.formData()
     const file = formData.get("file") as File | null
     const title = formData.get("title") as string | null
-    const slug = formData.get("slug") as string | null
     const description = formData.get("description") as string | null
     const altText = formData.get("altText") as string | null
     const shape = formData.get("shape") as string | null
@@ -40,17 +39,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
-    if (!title || !slug) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
-    }
-
-    // Check if slug already exists
-    const existing = await prisma.image.findUnique({ where: { slug } })
-    if (existing) {
-      return NextResponse.json(
-        { error: `An image with slug "${slug}" already exists. Please choose a different slug.` },
-        { status: 409 }
-      )
+    if (!title) {
+      return NextResponse.json({ error: "Title is required" }, { status: 400 })
     }
 
     // Determine file extension
@@ -66,7 +56,6 @@ export async function POST(request: Request) {
     // Create database entry first to get the ID
     const image = await prisma.image.create({
       data: {
-        slug,
         name: title,
         url: "", // Temporary, will be updated after blob upload
         description: description || null,
@@ -97,7 +86,6 @@ export async function POST(request: Request) {
       id: image.id,
       url: blob.url,
       title,
-      slug,
       filename: `${image.id}.${extension}`,
     })
   } catch (error) {

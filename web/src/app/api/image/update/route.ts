@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { id, name, slug, description, altText, shape, category, articleSlug, kyDate } = body
+    const { id, name, description, altText, shape, category, articleSlug, kyDate } = body
 
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 })
@@ -21,7 +21,6 @@ export async function POST(request: Request) {
       where: { id },
       data: {
         name,
-        slug,
         description: description || null,
         altText: altText || null,
         shape: shape || null,

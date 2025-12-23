@@ -5,16 +5,8 @@ import { useState, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-interface PlaylistItem {
-  id: string
-  name: string
-  description?: string
-  url: string
-}
-
 interface VideoFile {
   id: string
-  slug: string
   name: string
   url: string
   artist: string | null
@@ -30,7 +22,7 @@ interface VideoFile {
 }
 
 interface Reference {
-  type: "article" | "page" | "tv-playlist" | "radio-playlist"
+  type: "article" | "page"
   slug: string
   title: string
   field: string
@@ -39,14 +31,8 @@ interface Reference {
 export default function VideoManagePage() {
   const { data: session, status } = useSession()
 
-  // Playlist state
-  const [playlist, setPlaylist] = useState<PlaylistItem[]>([])
-  const [playlistLoading, setPlaylistLoading] = useState(true)
-  const [playlistMessage, setPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
-
   // Video files from database
   const [videoFiles, setVideoFiles] = useState<VideoFile[]>([])
-  const [selectedVideoId, setSelectedVideoId] = useState("")
 
   // Library sorting
   const [sortField, setSortField] = useState<"name" | "createdAt" | "kyDate">("createdAt")
@@ -73,7 +59,7 @@ export default function VideoManagePage() {
   const [libraryMessage, setLibraryMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Delete confirmation modal
-  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; slug: string } | null>(null)
+  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; id: string } | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [references, setReferences] = useState<Reference[]>([])
   const [loadingReferences, setLoadingReferences] = useState(false)
@@ -82,7 +68,6 @@ export default function VideoManagePage() {
   const [editModal, setEditModal] = useState<VideoFile | null>(null)
   const [editData, setEditData] = useState({
     name: "",
-    slug: "",
     description: "",
     artist: "",
     artistSlug: "",
@@ -92,16 +77,8 @@ export default function VideoManagePage() {
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
-  // Load playlist and video files on mount
+  // Load video files on mount
   useEffect(() => {
-    fetch("/api/tv/playlist")
-      .then((res) => res.json())
-      .then((data) => {
-        setPlaylist(data)
-        setPlaylistLoading(false)
-      })
-      .catch(() => setPlaylistLoading(false))
-
     reloadVideoFiles()
   }, [])
 
@@ -133,64 +110,8 @@ export default function VideoManagePage() {
     redirect("/admin")
   }
 
-  const addToTvPlaylist = async () => {
-    if (!selectedVideoId) {
-      setPlaylistMessage({ type: "error", text: "Please select a video file" })
-      return
-    }
-
-    try {
-      const res = await fetch("/api/tv/playlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ videoId: selectedVideoId }),
-      })
-
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || "Failed to add to playlist")
-      }
-
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
-
-      setPlaylistMessage({ type: "success", text: "Program added to TV!" })
-      setSelectedVideoId("")
-      setTimeout(() => setPlaylistMessage(null), 3000)
-    } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add" })
-    }
-  }
-
-  const removeFromPlaylist = async (videoSlug: string) => {
-    const video = videoFiles.find((f) => f.slug === videoSlug)
-    if (!video) return
-
-    try {
-      const res = await fetch("/api/tv/playlist", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ videoId: video.id }),
-      })
-
-      if (!res.ok) {
-        throw new Error("Failed to remove from playlist")
-      }
-
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
-
-      setPlaylistMessage({ type: "success", text: "Program removed!" })
-      setTimeout(() => setPlaylistMessage(null), 3000)
-    } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to remove" })
-    }
-  }
-
-  const openDeleteModal = async (url: string, name: string, slug: string) => {
-    setDeleteModal({ url, name, slug })
+  const openDeleteModal = async (url: string, name: string, id: string) => {
+    setDeleteModal({ url, name, id })
     setDeleteConfirmText("")
     setReferences([])
     setLoadingReferences(true)
@@ -199,7 +120,7 @@ export default function VideoManagePage() {
       const res = await fetch("/api/media/find-references", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, slug, mediaType: "video" }),
+        body: JSON.stringify({ url, mediaType: "video" }),
       })
       const data = await res.json()
       if (data.references) {
@@ -222,7 +143,6 @@ export default function VideoManagePage() {
     setEditModal(file)
     setEditData({
       name: file.name,
-      slug: file.slug,
       description: file.description || "",
       artist: file.artist || "",
       artistSlug: file.artistSlug || "",
@@ -250,7 +170,6 @@ export default function VideoManagePage() {
         body: JSON.stringify({
           id: editModal.id,
           name: editData.name,
-          slug: editData.slug,
           description: editData.description,
           artist: editData.artist,
           artistSlug: editData.artistSlug,
@@ -266,11 +185,6 @@ export default function VideoManagePage() {
 
       setEditMessage({ type: "success", text: "Saved successfully!" })
       await reloadVideoFiles()
-
-      // Refresh playlist if this file is in it
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
 
       setTimeout(() => {
         closeEditModal()
@@ -294,7 +208,7 @@ export default function VideoManagePage() {
         await fetch("/api/media/remove-references", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: deleteModal.url, slug: deleteModal.slug }),
+          body: JSON.stringify({ url: deleteModal.url }),
         })
       }
 
@@ -314,11 +228,6 @@ export default function VideoManagePage() {
       setLibraryMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully${refMsg}` })
       await reloadVideoFiles()
       closeDeleteModal()
-
-      // Refresh playlist in case the deleted file was in it
-      const playlistRes = await fetch("/api/tv/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
 
       setTimeout(() => setLibraryMessage(null), 3000)
     } catch (error) {
@@ -342,86 +251,6 @@ export default function VideoManagePage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* TV Playlist Management */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-6">Kempo TV Playlist</h2>
-
-          {playlistMessage && (
-            <div
-              className={`mb-4 p-3 rounded ${
-                playlistMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-              }`}
-            >
-              {playlistMessage.text}
-            </div>
-          )}
-
-          {/* Current Playlist */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Current Programs</h3>
-            {playlistLoading ? (
-              <p className="text-gray-500 text-sm">Loading...</p>
-            ) : playlist.length === 0 ? (
-              <p className="text-gray-500 text-sm">No programs in playlist</p>
-            ) : (
-              <div className="space-y-2">
-                {playlist.map((program) => (
-                  <div
-                    key={program.id}
-                    className="flex items-center justify-between p-3 bg-green-50 rounded border border-green-200"
-                  >
-                    <div>
-                      <p className="font-medium">{program.name}</p>
-                      {program.description && (
-                        <p className="text-sm text-gray-600">{program.description}</p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => removeFromPlaylist(program.id)}
-                      className="text-red-600 hover:text-red-800 text-sm"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Add New Program */}
-          <div className="border-t pt-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Add Program to TV</h3>
-
-            {videoFiles.length === 0 ? (
-              <p className="text-sm text-gray-500">No video files found. Upload one first.</p>
-            ) : (
-              <div className="flex gap-4">
-                <select
-                  value={selectedVideoId}
-                  onChange={(e) => setSelectedVideoId(e.target.value)}
-                  className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm"
-                >
-                  <option value="">-- Select a video file --</option>
-                  {videoFiles
-                    .filter((file) => !playlist.some((p) => p.id === file.slug))
-                    .map((file) => (
-                      <option key={file.id} value={file.id}>
-                        {file.name}
-                      </option>
-                    ))}
-                </select>
-                <button
-                  onClick={addToTvPlaylist}
-                  disabled={!selectedVideoId}
-                  className="bg-green-600 hover:bg-green-700 disabled:bg-green-300 text-white font-medium py-2 px-6 rounded"
-                >
-                  Add to TV
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Video Library */}
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-6">
@@ -468,7 +297,7 @@ export default function VideoManagePage() {
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-sm truncate">{file.name}</p>
                     <p className="text-xs text-gray-500 truncate">
-                      {file.slug} {file.aspectRatio ? `(${file.aspectRatio})` : ""}
+                      {file.aspectRatio ? `(${file.aspectRatio})` : ""}
                       {file.duration && ` · ${Math.floor(file.duration / 60)}:${Math.floor(file.duration % 60).toString().padStart(2, '0')}`}
                     </p>
                     <p className="text-xs text-gray-400">
@@ -484,7 +313,7 @@ export default function VideoManagePage() {
                       View/Edit
                     </button>
                     <button
-                      onClick={() => openDeleteModal(file.url, file.name, file.slug)}
+                      onClick={() => openDeleteModal(file.url, file.name, file.id)}
                       disabled={deletingVideo === file.url}
                       className="text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
                     >
@@ -641,16 +470,6 @@ export default function VideoManagePage() {
                   type="text"
                   value={editData.name}
                   onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-                <input
-                  type="text"
-                  value={editData.slug}
-                  onChange={(e) => setEditData({ ...editData, slug: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
               </div>

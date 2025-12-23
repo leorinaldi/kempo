@@ -18,7 +18,6 @@ export default function ImageUploadPage() {
 
   const [formData, setFormData] = useState({
     title: "",
-    slug: "",
     description: "",
     altText: "",
     shape: "landscape" as "landscape" | "portrait" | "square",
@@ -40,13 +39,6 @@ export default function ImageUploadPage() {
 
   if (!session.user.isAdmin) {
     redirect("/admin")
-  }
-
-  const generateSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +71,7 @@ export default function ImageUploadPage() {
       return
     }
 
-    if (!formData.title || !formData.slug) {
+    if (!formData.title) {
       setMessage({ type: "error", text: "Please fill in all required fields" })
       return
     }
@@ -91,7 +83,6 @@ export default function ImageUploadPage() {
       const uploadFormData = new FormData()
       uploadFormData.append("file", file)
       uploadFormData.append("title", formData.title)
-      uploadFormData.append("slug", formData.slug)
       uploadFormData.append("description", formData.description)
       uploadFormData.append("altText", formData.altText)
       uploadFormData.append("shape", formData.shape)
@@ -114,7 +105,7 @@ export default function ImageUploadPage() {
       setMessage({ type: "success", text: "Image uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", slug: "", description: "", altText: "", shape: "landscape", category: "", articleSlug: "" })
+      setFormData({ title: "", description: "", altText: "", shape: "landscape", category: "", articleSlug: "" })
       setDetectedWidth(null)
       setDetectedHeight(null)
       if (fileInputRef.current) {
@@ -165,28 +156,9 @@ export default function ImageUploadPage() {
               <input
                 type="text"
                 value={formData.title}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    title: e.target.value,
-                    slug: generateSlug(e.target.value),
-                  })
-                }}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="e.g., Clay Marshall portrait"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Slug <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., clay-marshall-portrait"
               />
             </div>
 

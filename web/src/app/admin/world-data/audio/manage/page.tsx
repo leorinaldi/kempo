@@ -5,13 +5,6 @@ import { useState, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 
-interface PlaylistItem {
-  id: string
-  name: string
-  description?: string
-  url: string
-}
-
 interface AudioElement {
   id: string
   itemId: string
@@ -21,7 +14,6 @@ interface AudioElement {
 
 interface AudioFile {
   id: string
-  slug: string
   name: string
   url: string
   type: string
@@ -34,7 +26,7 @@ interface AudioFile {
 }
 
 interface Reference {
-  type: "article" | "page" | "tv-playlist" | "radio-playlist"
+  type: "article" | "page" | "tv-playlist"
   slug: string
   title: string
   field: string
@@ -43,14 +35,8 @@ interface Reference {
 export default function AudioManagePage() {
   const { data: session, status } = useSession()
 
-  // Playlist state
-  const [playlist, setPlaylist] = useState<PlaylistItem[]>([])
-  const [playlistLoading, setPlaylistLoading] = useState(true)
-  const [playlistMessage, setPlaylistMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
-
   // Audio files from database
   const [audioFiles, setAudioFiles] = useState<AudioFile[]>([])
-  const [selectedAudioId, setSelectedAudioId] = useState("")
 
   // Library sorting
   const [sortField, setSortField] = useState<"name" | "createdAt" | "kyDate">("createdAt")
@@ -77,7 +63,7 @@ export default function AudioManagePage() {
   const [libraryMessage, setLibraryMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Delete confirmation modal
-  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; slug: string } | null>(null)
+  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; id: string } | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [references, setReferences] = useState<Reference[]>([])
   const [loadingReferences, setLoadingReferences] = useState(false)
@@ -86,7 +72,6 @@ export default function AudioManagePage() {
   const [editModal, setEditModal] = useState<AudioFile | null>(null)
   const [editData, setEditData] = useState({
     name: "",
-    slug: "",
     description: "",
     type: "song",
     kyDate: "",
@@ -103,16 +88,8 @@ export default function AudioManagePage() {
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
-  // Load playlist, audio files, and people on mount
+  // Load audio files and people on mount
   useEffect(() => {
-    fetch("/api/radio/playlist")
-      .then((res) => res.json())
-      .then((data) => {
-        setPlaylist(data)
-        setPlaylistLoading(false)
-      })
-      .catch(() => setPlaylistLoading(false))
-
     reloadAudioFiles()
 
     // Load available people for element selection
@@ -174,64 +151,8 @@ export default function AudioManagePage() {
     redirect("/admin")
   }
 
-  const addToRadioPlaylist = async () => {
-    if (!selectedAudioId) {
-      setPlaylistMessage({ type: "error", text: "Please select an audio file" })
-      return
-    }
-
-    try {
-      const res = await fetch("/api/radio/playlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ audioId: selectedAudioId }),
-      })
-
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || "Failed to add to playlist")
-      }
-
-      const playlistRes = await fetch("/api/radio/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
-
-      setPlaylistMessage({ type: "success", text: "Track added to Radio!" })
-      setSelectedAudioId("")
-      setTimeout(() => setPlaylistMessage(null), 3000)
-    } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add" })
-    }
-  }
-
-  const removeFromPlaylist = async (audioSlug: string) => {
-    const audio = audioFiles.find((f) => f.slug === audioSlug)
-    if (!audio) return
-
-    try {
-      const res = await fetch("/api/radio/playlist", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ audioId: audio.id }),
-      })
-
-      if (!res.ok) {
-        throw new Error("Failed to remove from playlist")
-      }
-
-      const playlistRes = await fetch("/api/radio/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
-
-      setPlaylistMessage({ type: "success", text: "Track removed!" })
-      setTimeout(() => setPlaylistMessage(null), 3000)
-    } catch (error) {
-      setPlaylistMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to remove" })
-    }
-  }
-
-  const openDeleteModal = async (url: string, name: string, slug: string) => {
-    setDeleteModal({ url, name, slug })
+  const openDeleteModal = async (url: string, name: string, id: string) => {
+    setDeleteModal({ url, name, id })
     setDeleteConfirmText("")
     setReferences([])
     setLoadingReferences(true)
@@ -240,7 +161,7 @@ export default function AudioManagePage() {
       const res = await fetch("/api/media/find-references", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, slug, mediaType: "audio" }),
+        body: JSON.stringify({ url, mediaType: "audio" }),
       })
       const data = await res.json()
       if (data.references) {
@@ -263,7 +184,6 @@ export default function AudioManagePage() {
     setEditModal(file)
     setEditData({
       name: file.name,
-      slug: file.slug,
       description: file.description || "",
       type: file.type || "song",
       kyDate: file.kyDate ? file.kyDate.split("T")[0] : "",
@@ -374,7 +294,6 @@ export default function AudioManagePage() {
         body: JSON.stringify({
           id: editModal.id,
           name: editData.name,
-          slug: editData.slug,
           description: editData.description,
           type: editData.type,
           kyDate: editData.kyDate || null,
@@ -388,11 +307,6 @@ export default function AudioManagePage() {
 
       setEditMessage({ type: "success", text: "Saved successfully!" })
       await reloadAudioFiles()
-
-      // Refresh playlist if this file is in it
-      const playlistRes = await fetch("/api/radio/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
 
       setTimeout(() => {
         closeEditModal()
@@ -416,7 +330,7 @@ export default function AudioManagePage() {
         await fetch("/api/media/remove-references", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: deleteModal.url, slug: deleteModal.slug }),
+          body: JSON.stringify({ url: deleteModal.url }),
         })
       }
 
@@ -436,11 +350,6 @@ export default function AudioManagePage() {
       setLibraryMessage({ type: "success", text: `"${deleteModal.name}" deleted successfully${refMsg}` })
       await reloadAudioFiles()
       closeDeleteModal()
-
-      // Refresh playlist in case the deleted file was in it
-      const playlistRes = await fetch("/api/radio/playlist")
-      const playlistData = await playlistRes.json()
-      setPlaylist(playlistData)
 
       setTimeout(() => setLibraryMessage(null), 3000)
     } catch (error) {
@@ -464,86 +373,6 @@ export default function AudioManagePage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Radio Playlist Management */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-6">Kempo Radio Playlist</h2>
-
-          {playlistMessage && (
-            <div
-              className={`mb-4 p-3 rounded ${
-                playlistMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-              }`}
-            >
-              {playlistMessage.text}
-            </div>
-          )}
-
-          {/* Current Playlist */}
-          <div className="mb-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Current Tracks</h3>
-            {playlistLoading ? (
-              <p className="text-gray-500 text-sm">Loading...</p>
-            ) : playlist.length === 0 ? (
-              <p className="text-gray-500 text-sm">No tracks in playlist</p>
-            ) : (
-              <div className="space-y-2">
-                {playlist.map((track) => (
-                  <div
-                    key={track.id}
-                    className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
-                  >
-                    <div>
-                      <p className="font-medium">{track.name}</p>
-                      {track.description && (
-                        <p className="text-sm text-gray-600">{track.description}</p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => removeFromPlaylist(track.id)}
-                      className="text-red-600 hover:text-red-800 text-sm"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Add New Track */}
-          <div className="border-t pt-6">
-            <h3 className="text-sm font-medium text-gray-700 mb-3">Add Track to Radio</h3>
-
-            {audioFiles.length === 0 ? (
-              <p className="text-sm text-gray-500">No audio files found. Upload one first.</p>
-            ) : (
-              <div className="flex gap-4">
-                <select
-                  value={selectedAudioId}
-                  onChange={(e) => setSelectedAudioId(e.target.value)}
-                  className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm"
-                >
-                  <option value="">-- Select an audio file --</option>
-                  {audioFiles
-                    .filter((file) => !playlist.some((p) => p.id === file.slug))
-                    .map((file) => (
-                      <option key={file.id} value={file.id}>
-                        {file.name}
-                      </option>
-                    ))}
-                </select>
-                <button
-                  onClick={addToRadioPlaylist}
-                  disabled={!selectedAudioId}
-                  className="bg-amber-600 hover:bg-amber-700 disabled:bg-amber-300 text-white font-medium py-2 px-6 rounded"
-                >
-                  Add to Radio
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Audio Library */}
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between mb-6">
@@ -590,8 +419,7 @@ export default function AudioManagePage() {
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-sm truncate">{file.name}</p>
                     <p className="text-xs text-gray-500 truncate">
-                      {file.slug}
-                      {file.duration && ` (${Math.floor(file.duration / 60)}:${Math.floor(file.duration % 60).toString().padStart(2, '0')})`}
+                      {file.duration && `${Math.floor(file.duration / 60)}:${Math.floor(file.duration % 60).toString().padStart(2, '0')}`}
                       <span className="ml-2 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">
                         {file.type}
                       </span>
@@ -610,7 +438,7 @@ export default function AudioManagePage() {
                       View/Edit
                     </button>
                     <button
-                      onClick={() => openDeleteModal(file.url, file.name, file.slug)}
+                      onClick={() => openDeleteModal(file.url, file.name, file.id)}
                       disabled={deletingAudio === file.url}
                       className="text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
                     >
@@ -759,16 +587,6 @@ export default function AudioManagePage() {
                   type="text"
                   value={editData.name}
                   onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-                <input
-                  type="text"
-                  value={editData.slug}
-                  onChange={(e) => setEditData({ ...editData, slug: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
               </div>

@@ -25,7 +25,6 @@ export async function GET(
         image: {
           select: {
             id: true,
-            slug: true,
             name: true,
             url: true,
           },

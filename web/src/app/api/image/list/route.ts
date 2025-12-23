@@ -7,7 +7,6 @@ export async function GET() {
       orderBy: { createdAt: "desc" },
       select: {
         id: true,
-        slug: true,
         name: true,
         url: true,
         description: true,

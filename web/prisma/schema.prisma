@@ -11,7 +11,6 @@ datasource db {
 
 model Audio {
   id          String    @id @default(cuid())
-  slug        String    @unique
   name        String
   url         String    @db.Text
   type        String    @default("song")   // "song", "radio_ad", "podcast", etc.
@@ -21,7 +20,6 @@ model Audio {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  radioPlaylist RadioPlaylistItem[]
   elements      AudioElement[]
 
   @@map("audio")
@@ -29,7 +27,6 @@ model Audio {
 
 model Album {
   id          String        @id @default(cuid())
-  slug        String        @unique
   name        String
   artistId    String?       @map("artist_id")  // Primary artist (Person)
   artist      Person?       @relation(fields: [artistId], references: [id], onDelete: SetNull)
@@ -59,7 +56,6 @@ model AudioElement {
 
 model Video {
   id          String    @id @default(cuid())
-  slug        String    @unique
   name        String
   url         String    @db.Text
   artist      String?
@@ -73,14 +69,11 @@ model Video {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  tvPlaylist TvPlaylistItem[]
-
   @@map("video")
 }
 
 model Image {
   id          String    @id @default(cuid())
-  slug        String    @unique              // e.g. "clay-marshall-portrait"
   name        String                         // e.g. "Clay Marshall portrait"
   url         String    @db.Text             // Vercel Blob URL
   description String?   @db.Text             // Caption
@@ -110,28 +103,6 @@ model ImageSubject {
   @@unique([imageId, itemId, itemType])
   @@index([itemId, itemType])
   @@map("image_subjects")
-}
-
-model RadioPlaylistItem {
-  id        String   @id @default(cuid())
-  audioId   String   @map("audio_id")
-  position  Int
-  audio     Audio    @relation(fields: [audioId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@unique([audioId])
-  @@map("radio_playlist")
-}
-
-model TvPlaylistItem {
-  id        String   @id @default(cuid())
-  videoId   String   @map("video_id")
-  position  Int
-  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now()) @map("created_at")
-
-  @@unique([videoId])
-  @@map("tv_playlist")
 }
 
 // ============ KEMPONET DOMAINS ============

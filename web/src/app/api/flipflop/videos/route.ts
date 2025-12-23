@@ -10,7 +10,6 @@ export async function GET() {
       orderBy: { kyDate: "desc" },
       select: {
         id: true,
-        slug: true,
         name: true,
         url: true,
         description: true,

@@ -33,19 +33,28 @@ async function main() {
     console.log(`Seeding ${radioPlaylist.length} audio tracks...`)
 
     for (const track of radioPlaylist) {
-      await prisma.audio.upsert({
-        where: { slug: track.id },
-        update: {
-          name: track.name,
-          url: track.url,
-        },
-        create: {
-          slug: track.id,
-          name: track.name,
-          url: track.url,
-          type: "song",
-        },
+      // Check if track with this URL already exists
+      const existing = await prisma.audio.findFirst({
+        where: { url: track.url },
       })
+
+      if (existing) {
+        await prisma.audio.update({
+          where: { id: existing.id },
+          data: {
+            name: track.name,
+            url: track.url,
+          },
+        })
+      } else {
+        await prisma.audio.create({
+          data: {
+            name: track.name,
+            url: track.url,
+            type: "song",
+          },
+        })
+      }
       console.log(`  - ${track.name}`)
     }
   }
@@ -59,20 +68,29 @@ async function main() {
     console.log(`Seeding ${tvPlaylist.length} video files...`)
 
     for (const video of tvPlaylist) {
-      await prisma.video.upsert({
-        where: { slug: video.id },
-        update: {
-          name: video.name,
-          description: video.description,
-          url: video.url,
-        },
-        create: {
-          slug: video.id,
-          name: video.name,
-          url: video.url,
-          description: video.description,
-        },
+      // Check if video with this URL already exists
+      const existing = await prisma.video.findFirst({
+        where: { url: video.url },
       })
+
+      if (existing) {
+        await prisma.video.update({
+          where: { id: existing.id },
+          data: {
+            name: video.name,
+            description: video.description,
+            url: video.url,
+          },
+        })
+      } else {
+        await prisma.video.create({
+          data: {
+            name: video.name,
+            url: video.url,
+            description: video.description,
+          },
+        })
+      }
       console.log(`  - ${video.name}`)
     }
   }

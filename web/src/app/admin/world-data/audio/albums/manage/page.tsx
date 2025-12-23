@@ -7,7 +7,6 @@ import Link from "next/link"
 
 interface Album {
   id: string
-  slug: string
   name: string
   artistId: string | null
   artistName: string | null
@@ -36,7 +35,6 @@ interface Person {
 interface LinkedTrack {
   id: string
   name: string
-  slug: string
 }
 
 interface RecordLabel {
@@ -59,7 +57,6 @@ export default function ManageAlbumsPage() {
   const [editModal, setEditModal] = useState<Album | null>(null)
   const [editData, setEditData] = useState({
     name: "",
-    slug: "",
     artistId: "",
     labelId: "",
     kyDate: "",
@@ -168,7 +165,6 @@ export default function ManageAlbumsPage() {
     setEditModal(album)
     setEditData({
       name: album.name,
-      slug: album.slug,
       artistId: album.artistId || "",
       labelId: album.labelId || "",
       kyDate: album.kyDate ? album.kyDate.split("T")[0] : "",
@@ -213,7 +209,6 @@ export default function ManageAlbumsPage() {
         body: JSON.stringify({
           id: editModal.id,
           name: editData.name,
-          slug: editData.slug,
           artistId: editData.artistId || null,
           labelId: editData.labelId || null,
           kyDate: editData.kyDate || null,
@@ -391,16 +386,6 @@ export default function ManageAlbumsPage() {
                   type="text"
                   value={editData.name}
                   onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-                <input
-                  type="text"
-                  value={editData.slug}
-                  onChange={(e) => setEditData({ ...editData, slug: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
               </div>

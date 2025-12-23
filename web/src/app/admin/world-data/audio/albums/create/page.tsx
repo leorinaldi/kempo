@@ -28,7 +28,6 @@ export default function CreateAlbumPage() {
 
   const [formData, setFormData] = useState({
     name: "",
-    slug: "",
     artistId: "",
     kyDate: "",
     articleId: "",
@@ -67,28 +66,11 @@ export default function CreateAlbumPage() {
     redirect("/admin")
   }
 
-  const generateSlug = (name: string) => {
-    return name
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-")
-      .trim()
-  }
-
-  const handleNameChange = (name: string) => {
-    setFormData({
-      ...formData,
-      name,
-      slug: generateSlug(name),
-    })
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.name || !formData.slug) {
-      setMessage({ type: "error", text: "Name and slug are required" })
+    if (!formData.name) {
+      setMessage({ type: "error", text: "Name is required" })
       return
     }
 
@@ -101,7 +83,6 @@ export default function CreateAlbumPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
-          slug: formData.slug,
           artistId: formData.artistId || null,
           kyDate: formData.kyDate || null,
           articleId: formData.articleId || null,
@@ -119,7 +100,6 @@ export default function CreateAlbumPage() {
       // Reset form
       setFormData({
         name: "",
-        slug: "",
         artistId: "",
         kyDate: "",
         articleId: "",
@@ -171,24 +151,10 @@ export default function CreateAlbumPage() {
               <input
                 type="text"
                 value={formData.name}
-                onChange={(e) => handleNameChange(e.target.value)}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="e.g., A Martino Christmas"
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Slug <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., a-martino-christmas"
-              />
-              <p className="text-xs text-gray-500 mt-1">Auto-generated from name, but you can edit it</p>
             </div>
 
             <div>

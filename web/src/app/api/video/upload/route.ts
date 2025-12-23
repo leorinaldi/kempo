@@ -2,8 +2,6 @@ import { auth } from "@/auth"
 import { put } from "@vercel/blob"
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { writeFile, mkdir, access } from "fs/promises"
-import path from "path"
 
 // Calculate aspectRatio from actual dimensions (overrides user selection)
 function getAspectRatioFromDimensions(width: number | null, height: number | null): string | null {
@@ -29,7 +27,6 @@ export async function POST(request: Request) {
     const formData = await request.formData()
     const file = formData.get("file") as File | null
     const title = formData.get("title") as string | null
-    const slug = formData.get("slug") as string | null
     const description = formData.get("description") as string | null
     const artist = formData.get("artist") as string | null
     const artistSlug = formData.get("artistSlug") as string | null
@@ -42,34 +39,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
-    if (!title || !slug) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
-    }
-
-    // Check if slug already exists
-    const existing = await prisma.video.findUnique({ where: { slug } })
-    if (existing) {
-      return NextResponse.json(
-        { error: `A video file with slug "${slug}" already exists. Please choose a different slug.` },
-        { status: 409 }
-      )
-    }
-
-    // Check if a Kempopedia article already exists at this slug
-    const articlesBase = path.join(process.cwd(), "content", "articles")
-    const categories = ["culture", "people", "places", "companies", "concepts", "events", "institutions", "products", "timelines"]
-
-    for (const category of categories) {
-      const articlePath = path.join(articlesBase, category, `${slug}.md`)
-      try {
-        await access(articlePath)
-        return NextResponse.json(
-          { error: `A Kempopedia article already exists at "${slug}" (in ${category}). Please choose a different slug.` },
-          { status: 409 }
-        )
-      } catch {
-        // File doesn't exist, continue
-      }
+    if (!title) {
+      return NextResponse.json({ error: "Title is required" }, { status: 400 })
     }
 
     // Determine file extension
@@ -86,7 +57,6 @@ export async function POST(request: Request) {
     // Create database entry first to get the ID
     const video = await prisma.video.create({
       data: {
-        slug,
         name: title,
         url: "", // Temporary, will be updated after blob upload
         description: description || null,
@@ -112,32 +82,11 @@ export async function POST(request: Request) {
       data: { url: blob.url },
     })
 
-    // Generate Kempopedia article
-    try {
-      const articlesDir = path.join(process.cwd(), "content", "articles", "culture")
-      await mkdir(articlesDir, { recursive: true })
-
-      const articlePath = path.join(articlesDir, `${slug}.md`)
-      const articleContent = generateVideoArticle({
-        title,
-        slug,
-        description: description || undefined,
-        artist: artist || undefined,
-        artistSlug: artistSlug || undefined,
-        mediaUrl: blob.url,
-      })
-
-      await writeFile(articlePath, articleContent, "utf-8")
-    } catch (articleError) {
-      console.error("Failed to create Kempopedia article:", articleError)
-    }
-
     return NextResponse.json({
       success: true,
       id: video.id,
       url: blob.url,
       title,
-      slug,
       filename: `${video.id}.${extension}`,
     })
   } catch (error) {
@@ -147,77 +96,4 @@ export async function POST(request: Request) {
       { status: 500 }
     )
   }
-}
-
-interface ArticleParams {
-  title: string
-  slug: string
-  description?: string
-  artist?: string
-  artistSlug?: string
-  mediaUrl: string
-}
-
-function generateVideoArticle(params: ArticleParams): string {
-  const { title, slug, description, artist, artistSlug, mediaUrl } = params
-
-  const frontmatter = `---
-title: "${title}"
-slug: "${slug}"
-type: culture
-subtype: video
-status: published
-tags:
-  - video
----`
-
-  const infoboxFields: Record<string, string> = {
-    Title: title,
-  }
-
-  if (artist && artistSlug) {
-    infoboxFields.Creator = `[[${artistSlug}|${artist}]]`
-  }
-
-  const infobox = {
-    infobox: {
-      type: "video",
-      fields: infoboxFields,
-    },
-    media: [
-      {
-        type: "video",
-        url: mediaUrl,
-      },
-    ],
-  }
-
-  let intro = `"**${title}**"`
-  if (artist && artistSlug) {
-    intro += ` is a video by [[${artistSlug}|${artist}]].`
-  } else {
-    intro += ` is a video.`
-  }
-
-  if (description) {
-    intro += ` ${description}`
-  }
-
-  const seeAlso: string[] = []
-  if (artistSlug && artist) {
-    seeAlso.push(`- [[${artistSlug}|${artist}]]`)
-  }
-
-  const seeAlsoSection = seeAlso.length > 0
-    ? `\n## See also\n\n${seeAlso.join("\n")}\n`
-    : ""
-
-  return `${frontmatter}
-
-\`\`\`json
-${JSON.stringify(infobox, null, 2)}
-\`\`\`
-
-${intro}
-${seeAlsoSection}`
 }

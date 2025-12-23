@@ -29,7 +29,6 @@ export async function GET(
     const tracks = elements.map((e) => ({
       id: e.audio.id,
       name: e.audio.name,
-      slug: e.audio.slug,
     }))
 
     return NextResponse.json(tracks)

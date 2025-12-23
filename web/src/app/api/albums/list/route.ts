@@ -25,7 +25,6 @@ export async function GET() {
 
     const result = albums.map((a) => ({
       id: a.id,
-      slug: a.slug,
       name: a.name,
       artistId: a.artistId,
       artistName: a.artist

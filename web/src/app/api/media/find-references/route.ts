@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 
 interface Reference {
-  type: "article" | "page" | "tv-playlist" | "radio-playlist" | "flipflop" | "soundwaves"
+  type: "article" | "page" | "flipflop" | "soundwaves"
   slug: string
   title: string
   field: string
@@ -38,46 +38,6 @@ export async function POST(request: Request) {
           title: matchingArticle.title,
           field: "matching-slug"
         })
-      }
-    }
-
-    // Check TV playlist for video references
-    if (mediaType === "video" || !mediaType) {
-      const video = await prisma.video.findFirst({
-        where: { OR: [{ url }, { slug }].filter(c => Object.values(c)[0]) }
-      })
-      if (video) {
-        const tvItems = await prisma.tvPlaylistItem.findMany({
-          where: { videoId: video.id }
-        })
-        if (tvItems.length > 0) {
-          references.push({
-            type: "tv-playlist",
-            slug: video.slug,
-            title: `Kempo TV (${tvItems.length} playlist entries)`,
-            field: "playlist"
-          })
-        }
-      }
-    }
-
-    // Check Radio playlist for audio references
-    if (mediaType === "audio" || !mediaType) {
-      const audio = await prisma.audio.findFirst({
-        where: { OR: [{ url }, { slug }].filter(c => Object.values(c)[0]) }
-      })
-      if (audio) {
-        const radioItems = await prisma.radioPlaylistItem.findMany({
-          where: { audioId: audio.id }
-        })
-        if (radioItems.length > 0) {
-          references.push({
-            type: "radio-playlist",
-            slug: audio.slug,
-            title: `Kempo Radio (${radioItems.length} playlist entries)`,
-            field: "playlist"
-          })
-        }
       }
     }
 

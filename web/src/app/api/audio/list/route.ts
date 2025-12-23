@@ -41,7 +41,6 @@ export async function GET() {
 
     const result = audioFiles.map((a) => ({
       id: a.id,
-      slug: a.slug,
       name: a.name,
       url: a.url,
       type: a.type,

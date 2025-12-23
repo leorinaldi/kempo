@@ -19,7 +19,6 @@ export default function VideoUploadPage() {
 
   const [formData, setFormData] = useState({
     title: "",
-    slug: "",
     description: "",
     artist: "",
     artistSlug: "",
@@ -40,13 +39,6 @@ export default function VideoUploadPage() {
 
   if (!session.user.isAdmin) {
     redirect("/admin")
-  }
-
-  const generateSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)/g, "")
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +76,7 @@ export default function VideoUploadPage() {
       return
     }
 
-    if (!formData.title || !formData.slug) {
+    if (!formData.title) {
       setMessage({ type: "error", text: "Please fill in all required fields" })
       return
     }
@@ -96,7 +88,6 @@ export default function VideoUploadPage() {
       const uploadFormData = new FormData()
       uploadFormData.append("file", file)
       uploadFormData.append("title", formData.title)
-      uploadFormData.append("slug", formData.slug)
       uploadFormData.append("description", formData.description)
       uploadFormData.append("artist", formData.artist)
       uploadFormData.append("artistSlug", formData.artistSlug)
@@ -119,7 +110,7 @@ export default function VideoUploadPage() {
       setMessage({ type: "success", text: "Video uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", slug: "", description: "", artist: "", artistSlug: "", aspectRatio: "landscape" })
+      setFormData({ title: "", description: "", artist: "", artistSlug: "", aspectRatio: "landscape" })
       setDetectedWidth(null)
       setDetectedHeight(null)
       setDetectedDuration(null)
@@ -171,28 +162,9 @@ export default function VideoUploadPage() {
               <input
                 type="text"
                 value={formData.title}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    title: e.target.value,
-                    slug: generateSlug(e.target.value),
-                  })
-                }}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
                 placeholder="e.g., Kempo News Broadcast"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Slug <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., kempo-news-broadcast"
               />
             </div>
 

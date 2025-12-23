@@ -7,7 +7,6 @@ import Link from "next/link"
 
 interface ImageFile {
   id: string
-  slug: string
   name: string
   url: string
   description: string | null
@@ -112,7 +111,7 @@ export default function ImageManagePage() {
   const [libraryMessage, setLibraryMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Delete confirmation modal
-  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; slug: string } | null>(null)
+  const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; id: string } | null>(null)
   const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [references, setReferences] = useState<Reference[]>([])
   const [loadingReferences, setLoadingReferences] = useState(false)
@@ -121,7 +120,6 @@ export default function ImageManagePage() {
   const [editModal, setEditModal] = useState<ImageFile | null>(null)
   const [editData, setEditData] = useState({
     name: "",
-    slug: "",
     description: "",
     altText: "",
     shape: "landscape" as "landscape" | "portrait" | "square",
@@ -166,8 +164,8 @@ export default function ImageManagePage() {
     redirect("/admin")
   }
 
-  const openDeleteModal = async (url: string, name: string, slug: string) => {
-    setDeleteModal({ url, name, slug })
+  const openDeleteModal = async (url: string, name: string, id: string) => {
+    setDeleteModal({ url, name, id })
     setDeleteConfirmText("")
     setReferences([])
     setLoadingReferences(true)
@@ -176,7 +174,7 @@ export default function ImageManagePage() {
       const res = await fetch("/api/media/find-references", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url, slug, mediaType: "image" }),
+        body: JSON.stringify({ url, mediaType: "image" }),
       })
       const data = await res.json()
       if (data.references) {
@@ -199,7 +197,6 @@ export default function ImageManagePage() {
     setEditModal(file)
     setEditData({
       name: file.name,
-      slug: file.slug,
       description: file.description || "",
       altText: file.altText || "",
       shape: (file.shape as "landscape" | "portrait" | "square") || "landscape",
@@ -240,7 +237,6 @@ export default function ImageManagePage() {
         body: JSON.stringify({
           id: editModal.id,
           name: editData.name,
-          slug: editData.slug,
           description: editData.description,
           altText: editData.altText,
           shape: editData.shape,
@@ -280,7 +276,7 @@ export default function ImageManagePage() {
         await fetch("/api/media/remove-references", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: deleteModal.url, slug: deleteModal.slug }),
+          body: JSON.stringify({ url: deleteModal.url }),
         })
       }
 
@@ -376,8 +372,7 @@ export default function ImageManagePage() {
                   <div className="p-3">
                     <p className="font-medium text-sm truncate">{file.name}</p>
                     <p className="text-xs text-gray-500 truncate">
-                      {file.slug}
-                      {file.width && file.height && ` (${file.width}x${file.height})`}
+                      {file.width && file.height && `${file.width}x${file.height}`}
                     </p>
                     <p className="text-xs text-gray-400 truncate">
                       {new Date(file.createdAt).toLocaleDateString()}
@@ -401,7 +396,7 @@ export default function ImageManagePage() {
                         View/Edit
                       </button>
                       <button
-                        onClick={() => openDeleteModal(file.url, file.name, file.slug)}
+                        onClick={() => openDeleteModal(file.url, file.name, file.id)}
                         disabled={deletingImage === file.url}
                         className="flex-1 text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
                       >
@@ -552,16 +547,6 @@ export default function ImageManagePage() {
                   type="text"
                   value={editData.name}
                   onChange={(e) => setEditData({ ...editData, name: e.target.value })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-                <input
-                  type="text"
-                  value={editData.slug}
-                  onChange={(e) => setEditData({ ...editData, slug: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
               </div>

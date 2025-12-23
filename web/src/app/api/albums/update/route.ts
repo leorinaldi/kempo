@@ -10,33 +10,20 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { id, name, slug, artistId, labelId, kyDate, articleId } = await request.json()
+    const { id, name, artistId, labelId, kyDate, articleId } = await request.json()
 
     if (!id) {
       return NextResponse.json({ error: "Album ID is required" }, { status: 400 })
     }
 
-    if (!name || !slug) {
-      return NextResponse.json({ error: "Name and slug are required" }, { status: 400 })
-    }
-
-    // Check if another album has this slug
-    const existing = await prisma.album.findFirst({
-      where: {
-        slug,
-        NOT: { id },
-      },
-    })
-
-    if (existing) {
-      return NextResponse.json({ error: "Another album with this slug already exists" }, { status: 409 })
+    if (!name) {
+      return NextResponse.json({ error: "Name is required" }, { status: 400 })
     }
 
     const album = await prisma.album.update({
       where: { id },
       data: {
         name,
-        slug,
         artistId: artistId || null,
         labelId: labelId || null,
         kyDate: kyDate ? new Date(kyDate) : null,
