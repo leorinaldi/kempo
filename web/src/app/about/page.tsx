@@ -107,12 +107,12 @@ export default function AboutPage() {
       )}
 
       {/* Main content */}
-      <div className="min-h-screen flex items-start justify-center px-8 md:pl-16 md:pr-32 pt-20">
+      <div className="min-h-screen flex items-start justify-center px-8 md:pl-32 md:pr-32 pt-20">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-8 max-w-6xl w-full">
           {/* Announcer image - left side */}
           <div className="flex-shrink-0 md:w-[300px] flex justify-end overflow-hidden">
             <Image
-              src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/images/kempo-announcer.png"
+              src="https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/image/kempo-announcer-v3.png"
               alt="Kempo Announcer"
               width={400}
               height={600}
