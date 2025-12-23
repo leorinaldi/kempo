@@ -10,6 +10,9 @@ interface Track {
   url: string
   artist: string
   artistSlug: string
+  albumId: string
+  albumName: string
+  albumSlug: string
 }
 
 export default function SoundWavesPage() {
@@ -22,8 +25,9 @@ export default function SoundWavesPage() {
   const [duration, setDuration] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const [isKempoNet, setIsKempoNet] = useState(false)
-  const [viewMode, setViewMode] = useState<"tracks" | "artists" | "artist-tracks">("tracks")
+  const [viewMode, setViewMode] = useState<"tracks" | "albums" | "artists" | "album-tracks" | "artist-tracks">("tracks")
   const [selectedArtist, setSelectedArtist] = useState<{ name: string; slug: string } | null>(null)
+  const [selectedAlbum, setSelectedAlbum] = useState<{ id: string; name: string; slug: string } | null>(null)
   const [isRolling, setIsRolling] = useState(false)
   const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
   // Static logo shape: short-tall-tallest-tall-short (matching the icon)
@@ -55,14 +59,28 @@ export default function SoundWavesPage() {
     return acc
   }, [] as { name: string; slug: string }[])
 
+  // Get unique albums from tracks
+  const albums = tracks.reduce((acc, track) => {
+    if (track.albumId && !acc.find(a => a.id === track.albumId)) {
+      acc.push({ id: track.albumId, name: track.albumName, slug: track.albumSlug })
+    }
+    return acc
+  }, [] as { id: string; name: string; slug: string }[])
+
   // Toggle view with rolling animation
   const toggleView = () => {
     setIsRolling(true)
     setTimeout(() => {
       if (viewMode === "tracks") {
+        setViewMode("albums")
+      } else if (viewMode === "albums") {
         setViewMode("artists")
       } else if (viewMode === "artists") {
         setViewMode("tracks")
+      } else if (viewMode === "album-tracks") {
+        // Go back to albums view
+        setViewMode("albums")
+        setSelectedAlbum(null)
       } else if (viewMode === "artist-tracks") {
         // Go back to artists view
         setViewMode("artists")
@@ -82,9 +100,24 @@ export default function SoundWavesPage() {
     }, 150)
   }
 
+  // Select an album to view its tracks
+  const selectAlbum = (album: { id: string; name: string; slug: string }) => {
+    setIsRolling(true)
+    setTimeout(() => {
+      setSelectedAlbum(album)
+      setViewMode("album-tracks")
+      setTimeout(() => setIsRolling(false), 150)
+    }, 150)
+  }
+
   // Get tracks for selected artist
   const selectedArtistTracks = selectedArtist
     ? tracks.filter(t => t.artistSlug === selectedArtist.slug)
+    : []
+
+  // Get tracks for selected album
+  const selectedAlbumTracks = selectedAlbum
+    ? tracks.filter(t => t.albumId === selectedAlbum.id)
     : []
 
   // Create persistent audio element on mount
@@ -296,7 +329,7 @@ export default function SoundWavesPage() {
     <div className={`${isEmbedded ? "h-screen" : "h-[calc(100vh-3.5rem)]"} bg-black flex flex-col overflow-hidden`}>
       {/* Header */}
       <div
-        className="flex-shrink-0 px-4 py-3"
+        className="flex-shrink-0 px-4 py-5"
         style={{ background: "linear-gradient(180deg, #7c3aed 0%, #5b21b6 100%)" }}
       >
         <h1 className="text-white text-xl font-bold tracking-tight flex items-center gap-2">
@@ -315,7 +348,7 @@ export default function SoundWavesPage() {
       {/* View selector - click to toggle between tracks/artists */}
       <button
         onClick={toggleView}
-        className="flex-shrink-0 w-full px-4 py-2 bg-gray-900 border-b border-gray-800 text-left hover:bg-gray-800 transition-colors flex items-center justify-between"
+        className="flex-shrink-0 w-full px-4 py-4 bg-gray-900 border-b border-gray-800 text-left hover:bg-gray-800 transition-colors flex items-center justify-between"
       >
         <div
           className={`text-purple-300 text-sm font-medium transition-all duration-150 ${
@@ -324,8 +357,12 @@ export default function SoundWavesPage() {
         >
           {viewMode === "tracks"
             ? `${tracks.length} tracks`
+            : viewMode === "albums"
+            ? `${albums.length} albums`
             : viewMode === "artists"
             ? `${artists.length} artists`
+            : viewMode === "album-tracks"
+            ? selectedAlbum?.name
             : selectedArtist?.name}
         </div>
         {/* Rotating chevron indicator */}
@@ -338,7 +375,7 @@ export default function SoundWavesPage() {
           strokeWidth="2"
           strokeLinecap="round"
           className={`text-gray-500 transition-transform duration-300 ${
-            viewMode !== "tracks" ? "rotate-180" : ""
+            viewMode === "albums" ? "rotate-90" : viewMode !== "tracks" ? "rotate-180" : ""
           }`}
         >
           <path d="M6 9l6 6 6-6" />
@@ -390,14 +427,46 @@ export default function SoundWavesPage() {
                   >
                     {track.name}
                   </div>
-                  {track.artist && (
-                    <div className="text-gray-400 text-sm truncate">
-                      {track.artist}
-                    </div>
-                  )}
+                  <div className="text-gray-400 text-sm truncate h-5">
+                    {track.artist || "\u00A0"}
+                  </div>
                 </div>
               </button>
             ))}
+          </div>
+        ) : viewMode === "albums" ? (
+          /* Albums View */
+          <div className="divide-y divide-gray-800">
+            {albums.map((album, index) => {
+              const albumTrackCount = tracks.filter(t => t.albumId === album.id).length
+              return (
+                <button
+                  key={album.id}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    selectAlbum(album)
+                  }}
+                  className="w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-gray-900 active:bg-gray-800 transition-colors cursor-pointer"
+                >
+                  {/* Album number */}
+                  <div className="w-8 text-center flex-shrink-0 pointer-events-none">
+                    <span className="text-gray-500 text-sm">{index + 1}</span>
+                  </div>
+
+                  {/* Album info */}
+                  <div className="flex-1 min-w-0 pointer-events-none">
+                    <div className="font-medium text-white truncate">
+                      {album.name}
+                    </div>
+                    <div className="text-gray-400 text-sm truncate">
+                      {albumTrackCount} {albumTrackCount === 1 ? "track" : "tracks"}
+                    </div>
+                  </div>
+                </button>
+              )
+            })}
           </div>
         ) : viewMode === "artists" ? (
           /* Artists View */
@@ -432,6 +501,48 @@ export default function SoundWavesPage() {
                 </button>
               )
             })}
+          </div>
+        ) : viewMode === "album-tracks" ? (
+          /* Album Tracks View */
+          <div className="divide-y divide-gray-800">
+            {selectedAlbumTracks.map((track, index) => (
+              <button
+                key={track.id}
+                onClick={() => playTrack(track)}
+                className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${
+                  currentTrack?.id === track.id
+                    ? "bg-purple-900/30"
+                    : "hover:bg-gray-900 active:bg-gray-800"
+                }`}
+              >
+                {/* Track number or playing indicator */}
+                <div className="w-8 text-center flex-shrink-0">
+                  {currentTrack?.id === track.id && isPlaying ? (
+                    <div className="flex items-end justify-center gap-[2px] h-4">
+                      <div className="w-[3px] bg-purple-400 animate-pulse" style={{ height: "60%" }} />
+                      <div className="w-[3px] bg-purple-400 animate-pulse" style={{ height: "100%", animationDelay: "0.2s" }} />
+                      <div className="w-[3px] bg-purple-400 animate-pulse" style={{ height: "40%", animationDelay: "0.4s" }} />
+                    </div>
+                  ) : (
+                    <span className="text-gray-500 text-sm">{index + 1}</span>
+                  )}
+                </div>
+
+                {/* Track info */}
+                <div className="flex-1 min-w-0">
+                  <div
+                    className={`font-medium truncate ${
+                      currentTrack?.id === track.id ? "text-purple-400" : "text-white"
+                    }`}
+                  >
+                    {track.name}
+                  </div>
+                  <div className="text-gray-400 text-sm truncate h-5">
+                    {track.artist || "\u00A0"}
+                  </div>
+                </div>
+              </button>
+            ))}
           </div>
         ) : (
           /* Artist Tracks View */
@@ -468,6 +579,9 @@ export default function SoundWavesPage() {
                   >
                     {track.name}
                   </div>
+                  <div className="text-gray-400 text-sm truncate h-5">
+                    {track.albumName || "\u00A0"}
+                  </div>
                 </div>
               </button>
             ))}
@@ -493,9 +607,9 @@ export default function SoundWavesPage() {
           </div>
 
           {/* Controls */}
-          <div className="px-4 py-3 flex items-center justify-center gap-4">
+          <div className="px-4 py-4 flex items-center justify-center gap-4">
             {/* Time - fixed width to prevent layout shift */}
-            <div className="text-gray-400 text-xs w-10 text-right tabular-nums">
+            <div className="text-gray-400 text-sm w-12 text-right tabular-nums">
               {formatTime(progress)}
             </div>
 
@@ -504,9 +618,9 @@ export default function SoundWavesPage() {
               {/* Previous */}
               <button
                 onClick={playPrevious}
-                className="w-8 h-8 flex items-center justify-center text-white hover:text-purple-400 transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-white hover:text-purple-400 transition-colors"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z" />
                 </svg>
               </button>
@@ -531,16 +645,16 @@ export default function SoundWavesPage() {
               {/* Next */}
               <button
                 onClick={playNext}
-                className="w-8 h-8 flex items-center justify-center text-white hover:text-purple-400 transition-colors"
+                className="w-10 h-10 flex items-center justify-center text-white hover:text-purple-400 transition-colors"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6 18l8.5-6L6 6v12zm10-12v12h2V6h-2z" />
                 </svg>
               </button>
             </div>
 
             {/* Duration - fixed width to prevent layout shift */}
-            <div className="text-gray-400 text-xs w-10 text-left tabular-nums">
+            <div className="text-gray-400 text-sm w-12 text-left tabular-nums">
               {formatTime(duration)}
             </div>
           </div>

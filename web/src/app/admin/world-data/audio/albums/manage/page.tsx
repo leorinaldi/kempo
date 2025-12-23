@@ -11,6 +11,8 @@ interface Album {
   name: string
   artistId: string | null
   artistName: string | null
+  labelId: string | null
+  labelName: string | null
   kyDate: string | null
   articleId: string | null
   article: { id: string; slug: string; title: string } | null
@@ -37,6 +39,11 @@ interface LinkedTrack {
   slug: string
 }
 
+interface RecordLabel {
+  id: string
+  name: string
+}
+
 export default function ManageAlbumsPage() {
   const { data: session, status } = useSession()
 
@@ -54,6 +61,7 @@ export default function ManageAlbumsPage() {
     name: "",
     slug: "",
     artistId: "",
+    labelId: "",
     kyDate: "",
     articleId: "",
   })
@@ -61,6 +69,7 @@ export default function ManageAlbumsPage() {
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [availableArticles, setAvailableArticles] = useState<Article[]>([])
   const [artists, setArtists] = useState<Person[]>([])
+  const [recordLabels, setRecordLabels] = useState<RecordLabel[]>([])
   const [linkedTracks, setLinkedTracks] = useState<LinkedTrack[]>([])
 
   // Delete modal
@@ -71,6 +80,7 @@ export default function ManageAlbumsPage() {
   useEffect(() => {
     loadAlbums()
     loadArtists()
+    loadRecordLabels()
   }, [])
 
   const loadAlbums = async () => {
@@ -96,6 +106,18 @@ export default function ManageAlbumsPage() {
       }
     } catch (err) {
       console.error("Failed to load artists:", err)
+    }
+  }
+
+  const loadRecordLabels = async () => {
+    try {
+      const res = await fetch("/api/organizations/list?orgType=record+label")
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setRecordLabels(data)
+      }
+    } catch (err) {
+      console.error("Failed to load record labels:", err)
     }
   }
 
@@ -148,6 +170,7 @@ export default function ManageAlbumsPage() {
       name: album.name,
       slug: album.slug,
       artistId: album.artistId || "",
+      labelId: album.labelId || "",
       kyDate: album.kyDate ? album.kyDate.split("T")[0] : "",
       articleId: album.articleId || "",
     })
@@ -192,6 +215,7 @@ export default function ManageAlbumsPage() {
           name: editData.name,
           slug: editData.slug,
           artistId: editData.artistId || null,
+          labelId: editData.labelId || null,
           kyDate: editData.kyDate || null,
           articleId: editData.articleId || null,
         }),
@@ -394,6 +418,24 @@ export default function ManageAlbumsPage() {
                     .map((artist) => (
                       <option key={artist.id} value={artist.id}>
                         {formatArtistName(artist)}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Record Label</label>
+                <select
+                  value={editData.labelId}
+                  onChange={(e) => setEditData({ ...editData, labelId: e.target.value })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="">-- No label --</option>
+                  {recordLabels
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((label) => (
+                      <option key={label.id} value={label.id}>
+                        {label.name}
                       </option>
                     ))}
                 </select>

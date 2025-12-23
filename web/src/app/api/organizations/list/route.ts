@@ -2,7 +2,7 @@ import { auth } from "@/auth"
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 
-export async function GET() {
+export async function GET(request: Request) {
   const session = await auth()
 
   if (!session?.user?.isAdmin) {
@@ -10,7 +10,11 @@ export async function GET() {
   }
 
   try {
+    const { searchParams } = new URL(request.url)
+    const orgType = searchParams.get("orgType")
+
     const organizations = await prisma.organization.findMany({
+      where: orgType ? { orgType } : undefined,
       include: {
         article: {
           select: {

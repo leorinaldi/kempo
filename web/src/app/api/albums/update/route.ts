@@ -10,7 +10,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { id, name, slug, artistId, kyDate, articleId } = await request.json()
+    const { id, name, slug, artistId, labelId, kyDate, articleId } = await request.json()
 
     if (!id) {
       return NextResponse.json({ error: "Album ID is required" }, { status: 400 })
@@ -38,6 +38,7 @@ export async function POST(request: Request) {
         name,
         slug,
         artistId: artistId || null,
+        labelId: labelId || null,
         kyDate: kyDate ? new Date(kyDate) : null,
         articleId: articleId || null,
       },

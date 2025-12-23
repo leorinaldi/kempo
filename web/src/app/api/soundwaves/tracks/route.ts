@@ -31,9 +31,32 @@ export async function GET() {
       ])
     )
 
+    // Get album info from elements
+    const albumIds = audioFiles.flatMap((a) =>
+      a.elements
+        .filter((e) => e.itemType === "album")
+        .map((e) => e.itemId)
+    )
+    const albums = await prisma.album.findMany({
+      where: { id: { in: albumIds } },
+      include: { article: true },
+    })
+    const albumMap = Object.fromEntries(
+      albums.map((a) => [
+        a.id,
+        {
+          id: a.id,
+          name: a.name,
+          slug: a.slug,
+        },
+      ])
+    )
+
     const tracks = audioFiles.map((a) => {
       const singerElement = a.elements.find((e) => e.itemType === "singer")
       const singer = singerElement ? singerMap[singerElement.itemId] : null
+      const albumElement = a.elements.find((e) => e.itemType === "album")
+      const album = albumElement ? albumMap[albumElement.itemId] : null
       return {
         id: a.id,
         slug: a.slug,
@@ -41,6 +64,9 @@ export async function GET() {
         url: a.url,
         artist: singer?.name || "",
         artistSlug: singer?.slug || "",
+        albumId: album?.id || "",
+        albumName: album?.name || "",
+        albumSlug: album?.slug || "",
       }
     })
 

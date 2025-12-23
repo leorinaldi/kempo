@@ -28,16 +28,18 @@ model Audio {
 }
 
 model Album {
-  id          String    @id @default(cuid())
-  slug        String    @unique
+  id          String        @id @default(cuid())
+  slug        String        @unique
   name        String
-  artistId    String?   @map("artist_id")  // Primary artist (Person)
-  artist      Person?   @relation(fields: [artistId], references: [id], onDelete: SetNull)
-  kyDate      DateTime? @map("ky_date")    // Release date in k.y.
-  articleId   String?   @unique @map("article_id")
-  article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
+  artistId    String?       @map("artist_id")  // Primary artist (Person)
+  artist      Person?       @relation(fields: [artistId], references: [id], onDelete: SetNull)
+  labelId     String?       @map("label_id")   // Record label (Organization)
+  label       Organization? @relation(fields: [labelId], references: [id], onDelete: SetNull)
+  kyDate      DateTime?     @map("ky_date")    // Release date in k.y.
+  articleId   String?       @unique @map("article_id")
+  article     Article?      @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
 
   @@map("albums")
 }
@@ -288,6 +290,7 @@ model Organization {
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
   brands        Brand[]
+  albums        Album[]   // Albums released by this label
 
   @@map("organizations")
 }

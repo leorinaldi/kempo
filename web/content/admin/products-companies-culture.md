@@ -193,7 +193,7 @@ The brewing industry was dominated by Midwestern breweries:
 
 ## Record Labels
 
-1. Columbia Records: Major, Sinatra's early label → [[starlight-records|Starlight Records]]
+1. Columbia Records: Major, Sinatra's early label → [[sunbright-records|Sunbright Records]]
 2. Capitol Records: Major, founded 1942, Hollywood-based → (same)
 3. RCA Victor: Major, Elvis later
 4. Decca: Major, Bing Crosby

@@ -133,7 +133,7 @@ These are some of the entities that helped inspire the Kempo Universe entities.
 
 [[pacific-pictures|Pacific Pictures]] ← [MGM](https://en.wikipedia.org/wiki/Metro-Goldwyn-Mayer) / [Paramount](https://en.wikipedia.org/wiki/Paramount_Pictures) / [Warner Bros.](https://en.wikipedia.org/wiki/Warner_Bros.)
 
-[[starlight-records|Starlight Records]] ← [Columbia Records](https://en.wikipedia.org/wiki/Columbia_Records) / [Capitol Records](https://en.wikipedia.org/wiki/Capitol_Records)
+[[sunbright-records|Sunbright Records]] ← [Columbia Records](https://en.wikipedia.org/wiki/Columbia_Records) / [Capitol Records](https://en.wikipedia.org/wiki/Capitol_Records)
 
 [[united-broadcasting-company|United Broadcasting Company]] ← [NBC](https://en.wikipedia.org/wiki/NBC) / [CBS](https://en.wikipedia.org/wiki/CBS) / [ABC](https://en.wikipedia.org/wiki/American_Broadcasting_Company)
 

@@ -14,6 +14,9 @@ export async function GET() {
       orderBy: { name: "asc" },
       include: {
         artist: true,
+        label: {
+          select: { id: true, name: true },
+        },
         article: {
           select: { id: true, slug: true, title: true },
         },
@@ -28,6 +31,8 @@ export async function GET() {
       artistName: a.artist
         ? `${a.artist.nickname || a.artist.firstName} ${a.artist.lastName}`
         : null,
+      labelId: a.labelId,
+      labelName: a.label?.name || null,
       kyDate: a.kyDate,
       articleId: a.articleId,
       article: a.article,
