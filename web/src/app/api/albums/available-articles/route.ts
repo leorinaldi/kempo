@@ -19,7 +19,7 @@ export async function GET() {
       orderBy: { title: "asc" },
       select: {
         id: true,
-        slug: true,
+        
         title: true,
       },
     })

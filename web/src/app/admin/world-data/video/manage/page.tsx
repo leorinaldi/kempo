@@ -10,7 +10,14 @@ interface VideoFile {
   name: string
   url: string
   artist: string | null
-  artistSlug: string | null
+  artistId: string | null
+  artistPerson: {
+    id: string
+    firstName: string
+    lastName: string
+    stageName: string | null
+    articleId: string | null
+  } | null
   description: string | null
   duration: number | null
   aspectRatio: string | null
@@ -21,9 +28,16 @@ interface VideoFile {
   updatedAt: string
 }
 
+interface Person {
+  id: string
+  firstName: string
+  lastName: string
+  stageName: string | null
+}
+
 interface Reference {
   type: "article" | "page"
-  slug: string
+  
   title: string
   field: string
 }
@@ -70,17 +84,31 @@ export default function VideoManagePage() {
     name: "",
     description: "",
     artist: "",
-    artistSlug: "",
+    artistId: "",
     aspectRatio: "landscape" as "landscape" | "portrait" | "square",
     kyDate: "",
   })
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [people, setPeople] = useState<Person[]>([])
 
-  // Load video files on mount
+  // Load video files and people on mount
   useEffect(() => {
     reloadVideoFiles()
+    loadPeople()
   }, [])
+
+  const loadPeople = async () => {
+    try {
+      const res = await fetch("/api/people/list")
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setPeople(data)
+      }
+    } catch (err) {
+      console.error("Failed to load people:", err)
+    }
+  }
 
   const reloadVideoFiles = async () => {
     try {
@@ -145,7 +173,7 @@ export default function VideoManagePage() {
       name: file.name,
       description: file.description || "",
       artist: file.artist || "",
-      artistSlug: file.artistSlug || "",
+      artistId: file.artistId || "",
       aspectRatio: (file.aspectRatio as "landscape" | "portrait" | "square") || "landscape",
       kyDate: file.kyDate ? file.kyDate.split("T")[0] : "",
     })
@@ -172,7 +200,7 @@ export default function VideoManagePage() {
           name: editData.name,
           description: editData.description,
           artist: editData.artist,
-          artistSlug: editData.artistSlug,
+          artistId: editData.artistId || null,
           aspectRatio: editData.aspectRatio,
           kyDate: editData.kyDate || null,
         }),
@@ -495,13 +523,19 @@ export default function VideoManagePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Artist Slug</label>
-                <input
-                  type="text"
-                  value={editData.artistSlug}
-                  onChange={(e) => setEditData({ ...editData, artistSlug: e.target.value })}
+                <label className="block text-sm font-medium text-gray-700 mb-1">Linked Person</label>
+                <select
+                  value={editData.artistId}
+                  onChange={(e) => setEditData({ ...editData, artistId: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
-                />
+                >
+                  <option value="">-- No person linked --</option>
+                  {people.map((person) => (
+                    <option key={person.id} value={person.id}>
+                      {person.stageName || `${person.firstName} ${person.lastName}`}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>

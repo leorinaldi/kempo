@@ -19,7 +19,7 @@ export async function GET(request: Request) {
         article: {
           select: {
             id: true,
-            slug: true,
+            
             title: true,
           },
         },

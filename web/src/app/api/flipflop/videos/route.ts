@@ -14,26 +14,22 @@ export async function GET() {
         url: true,
         description: true,
         artist: true,
-        artistSlug: true,
+        artistPerson: {
+          select: {
+            articleId: true,
+          }
+        },
       },
     })
 
-    // Get article IDs for all unique artistSlugs
-    const artistSlugs = Array.from(new Set(videos.map(v => v.artistSlug).filter(Boolean))) as string[]
-    const articles = await prisma.article.findMany({
-      where: { slug: { in: artistSlugs } },
-      select: { id: true, slug: true },
-    })
-    const slugToIdMap = Object.fromEntries(articles.map(a => [a.slug, a.id]))
-
-    // Transform to include articleId instead of slug
+    // Transform to include articleId from Person relation
     const items = videos.map(video => ({
       id: video.id,
       name: video.name,
       url: video.url,
       description: video.description,
       artist: video.artist,
-      artistArticleId: video.artistSlug ? slugToIdMap[video.artistSlug] || "" : "",
+      artistArticleId: video.artistPerson?.articleId || "",
     }))
 
     return NextResponse.json(items)

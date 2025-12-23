@@ -1,9 +1,16 @@
 "use client"
 
 import { useSession } from "next-auth/react"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { redirect } from "next/navigation"
 import Link from "next/link"
+
+interface Person {
+  id: string
+  firstName: string
+  lastName: string
+  stageName: string | null
+}
 
 export default function VideoUploadPage() {
   const { data: session, status } = useSession()
@@ -11,6 +18,7 @@ export default function VideoUploadPage() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const [people, setPeople] = useState<Person[]>([])
 
   // Video dimensions and duration (auto-detected)
   const [detectedWidth, setDetectedWidth] = useState<number | null>(null)
@@ -21,9 +29,25 @@ export default function VideoUploadPage() {
     title: "",
     description: "",
     artist: "",
-    artistSlug: "",
+    artistId: "",
     aspectRatio: "landscape" as "landscape" | "portrait" | "square",
   })
+
+  useEffect(() => {
+    loadPeople()
+  }, [])
+
+  const loadPeople = async () => {
+    try {
+      const res = await fetch("/api/people/list")
+      const data = await res.json()
+      if (Array.isArray(data)) {
+        setPeople(data)
+      }
+    } catch (err) {
+      console.error("Failed to load people:", err)
+    }
+  }
 
   if (status === "loading") {
     return (
@@ -90,7 +114,7 @@ export default function VideoUploadPage() {
       uploadFormData.append("title", formData.title)
       uploadFormData.append("description", formData.description)
       uploadFormData.append("artist", formData.artist)
-      uploadFormData.append("artistSlug", formData.artistSlug)
+      if (formData.artistId) uploadFormData.append("artistId", formData.artistId)
       uploadFormData.append("aspectRatio", formData.aspectRatio)
       if (detectedWidth) uploadFormData.append("width", detectedWidth.toString())
       if (detectedHeight) uploadFormData.append("height", detectedHeight.toString())
@@ -110,7 +134,7 @@ export default function VideoUploadPage() {
       setMessage({ type: "success", text: "Video uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", description: "", artist: "", artistSlug: "", aspectRatio: "landscape" })
+      setFormData({ title: "", description: "", artist: "", artistId: "", aspectRatio: "landscape" })
       setDetectedWidth(null)
       setDetectedHeight(null)
       setDetectedDuration(null)
@@ -196,15 +220,20 @@ export default function VideoUploadPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Artist Slug (for Kempopedia link)
+                Link to Person (optional)
               </label>
-              <input
-                type="text"
-                value={formData.artistSlug}
-                onChange={(e) => setFormData({ ...formData, artistSlug: e.target.value })}
+              <select
+                value={formData.artistId}
+                onChange={(e) => setFormData({ ...formData, artistId: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., united-broadcasting-company"
-              />
+              >
+                <option value="">-- No person linked --</option>
+                {people.map((person) => (
+                  <option key={person.id} value={person.id}>
+                    {person.stageName || `${person.firstName} ${person.lastName}`}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div>

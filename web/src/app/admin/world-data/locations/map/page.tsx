@@ -18,7 +18,7 @@ interface Nation {
   shortCode: string | null
   lat: number
   long: number
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
 }
 
 interface State {
@@ -28,7 +28,7 @@ interface State {
   lat: number
   long: number
   nation: { name: string }
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
 }
 
 interface City {
@@ -38,7 +38,7 @@ interface City {
   lat: number
   long: number
   state: { name: string; nation: { name: string } }
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
 }
 
 interface Place {
@@ -48,7 +48,7 @@ interface Place {
   lat: number
   long: number
   city: { name: string; state: { name: string } }
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
 }
 
 interface LocationData {

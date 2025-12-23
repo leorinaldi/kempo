@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 
 interface SearchResult {
-  slug: string
+  id: string
   title: string
   type: string
   snippet: string
@@ -156,7 +156,7 @@ export default function GigglePage() {
             <div className="space-y-4">
               {results.map((result) => (
                 <div
-                  key={result.slug}
+                  key={result.id}
                   className="cursor-pointer group"
                   onClick={() => navigateTo(result.url)}
                 >

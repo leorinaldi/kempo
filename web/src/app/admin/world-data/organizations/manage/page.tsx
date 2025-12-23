@@ -13,14 +13,14 @@ interface Organization {
   dateFounded: string | null
   dateDissolved: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   createdAt: string
   updatedAt: string
 }
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -32,7 +32,7 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  slug: string
+  
   name: string
   url: string
 }
@@ -41,13 +41,13 @@ interface LinkedProduct {
   id: string
   name: string
   productType: string
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
 }
 
 interface LinkedBrand {
   id: string
   name: string
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
   products: LinkedProduct[]
 }
 
@@ -472,7 +472,7 @@ export default function ManageOrganizationsPage() {
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.title} ({article.slug})
+                      {article.title}
                     </option>
                   ))}
                 </select>

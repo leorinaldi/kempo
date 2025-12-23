@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     const title = formData.get("title") as string | null
     const description = formData.get("description") as string | null
     const artist = formData.get("artist") as string | null
-    const artistSlug = formData.get("artistSlug") as string | null
+    const artistId = formData.get("artistId") as string | null
     const aspectRatio = formData.get("aspectRatio") as string | null
     const widthStr = formData.get("width") as string | null
     const heightStr = formData.get("height") as string | null
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         url: "", // Temporary, will be updated after blob upload
         description: description || null,
         artist: artist || null,
-        artistSlug: artistSlug || null,
+        artistId: artistId || null,
         duration: duration || null,
         width: width || null,
         height: height || null,

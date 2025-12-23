@@ -17,7 +17,16 @@ export async function GET() {
         name: true,
         url: true,
         artist: true,
-        artistSlug: true,
+        artistId: true,
+        artistPerson: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            stageName: true,
+            articleId: true,
+          }
+        },
         description: true,
         duration: true,
         aspectRatio: true,

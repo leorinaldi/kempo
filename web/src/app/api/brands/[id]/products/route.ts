@@ -22,7 +22,7 @@ export async function GET(
         article: {
           select: {
             id: true,
-            slug: true,
+            
           },
         },
       },

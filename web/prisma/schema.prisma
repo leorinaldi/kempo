@@ -58,8 +58,9 @@ model Video {
   id          String    @id @default(cuid())
   name        String
   url         String    @db.Text
-  artist      String?
-  artistSlug  String?   @map("artist_slug")
+  artist      String?                        // Display name (e.g., "Frank Martino")
+  artistId    String?   @map("artist_id")    // FK to Person table
+  artistPerson Person?  @relation(fields: [artistId], references: [id], onDelete: SetNull)
   description String?   @db.Text
   duration    Float?                         // Duration in seconds (auto-detected at upload)
   width       Int?                           // Pixel width (auto-detected)
@@ -162,7 +163,6 @@ model AppSearch {
 
 model Article {
   id                 String     @id @default(cuid())
-  slug               String     @unique
   title              String
   type               String     // "person", "place", "organization", "event", "culture", "product", "concept", "timeline", "company"
   subtype            String?    // "head-of-state", "city", etc.
@@ -246,6 +246,7 @@ model Person {
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
   albums      Album[]   // Albums where this person is the primary artist
+  videos      Video[]   // Videos where this person is the artist/creator
 
   @@map("people")
 }

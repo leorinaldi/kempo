@@ -18,7 +18,7 @@ export async function GET() {
           select: { id: true, name: true },
         },
         article: {
-          select: { id: true, slug: true, title: true },
+          select: { id: true,  title: true },
         },
       },
     })

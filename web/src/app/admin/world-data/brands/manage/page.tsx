@@ -13,7 +13,7 @@ interface Brand {
   dateFounded: string | null
   dateDiscontinued: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   _count: { products: number }
   createdAt: string
   updatedAt: string
@@ -26,7 +26,7 @@ interface Organization {
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -34,7 +34,7 @@ interface LinkedProduct {
   id: string
   name: string
   productType: string
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
 }
 
 interface Inspiration {
@@ -447,7 +447,7 @@ export default function ManageBrandsPage() {
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.title} ({article.slug})
+                      {article.title}
                     </option>
                   ))}
                 </select>

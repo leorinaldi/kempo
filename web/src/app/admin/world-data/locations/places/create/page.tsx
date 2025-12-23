@@ -7,7 +7,7 @@ import Link from "next/link"
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -312,7 +312,7 @@ export default function CreatePlacePage() {
                 <option value="">-- No article linked --</option>
                 {articles.map((article) => (
                   <option key={article.id} value={article.id}>
-                    {article.title} ({article.slug})
+                    {article.title}
                   </option>
                 ))}
               </select>

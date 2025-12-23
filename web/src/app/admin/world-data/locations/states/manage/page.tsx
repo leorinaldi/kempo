@@ -15,7 +15,7 @@ interface State {
   dateFounded: string | null
   dateDisbanded: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   _count: { cities: number }
   createdAt: string
 }
@@ -27,7 +27,7 @@ interface Nation {
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -39,7 +39,7 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  slug: string
+  
   name: string
   url: string
 }
@@ -48,7 +48,7 @@ interface LinkedCity {
   id: string
   name: string
   cityType: string
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
   _count: { places: number }
 }
 
@@ -490,7 +490,7 @@ export default function ManageStatesPage() {
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.title} ({article.slug})
+                      {article.title}
                     </option>
                   ))}
                 </select>

@@ -27,7 +27,7 @@ interface AudioFile {
 
 interface Reference {
   type: "article" | "page" | "tv-playlist"
-  slug: string
+  
   title: string
   field: string
 }

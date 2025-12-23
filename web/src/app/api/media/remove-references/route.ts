@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     // Update articles
     const articles = await prisma.article.findMany({
-      select: { id: true, slug: true, content: true, infobox: true }
+      select: { id: true,  content: true, infobox: true }
     })
 
     for (const article of articles) {
@@ -90,7 +90,7 @@ export async function POST(request: Request) {
 
     // Update pages
     const pages = await prisma.page.findMany({
-      select: { id: true, slug: true, content: true }
+      select: { id: true,  content: true }
     })
 
     for (const page of pages) {

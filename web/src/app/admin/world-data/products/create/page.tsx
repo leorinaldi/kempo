@@ -13,7 +13,7 @@ interface Brand {
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
   subtype: string | null
 }

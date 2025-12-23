@@ -13,7 +13,7 @@ function shuffle<T>(array: T[]): T[] {
 
 export async function GET() {
   try {
-    // Fetch all video files
+    // Fetch all video files with artist relation
     const videos = await prisma.video.findMany({
       select: {
         id: true,
@@ -21,17 +21,13 @@ export async function GET() {
         url: true,
         description: true,
         artist: true,
-        artistSlug: true,
+        artistPerson: {
+          select: {
+            articleId: true,
+          }
+        },
       },
     })
-
-    // Get article IDs for all unique artistSlugs
-    const artistSlugs = Array.from(new Set(videos.map(v => v.artistSlug).filter(Boolean))) as string[]
-    const articles = await prisma.article.findMany({
-      where: { slug: { in: artistSlugs } },
-      select: { id: true, slug: true },
-    })
-    const slugToIdMap = Object.fromEntries(articles.map(a => [a.slug, a.id]))
 
     // Transform to the format expected by the frontend
     const items = videos.map((video) => ({
@@ -40,7 +36,7 @@ export async function GET() {
       description: video.description || "",
       url: video.url,
       artist: video.artist || "",
-      artistArticleId: video.artistSlug ? slugToIdMap[video.artistSlug] || "" : "",
+      artistArticleId: video.artistPerson?.articleId || "",
     }))
 
     // Return shuffled playlist

@@ -12,14 +12,14 @@ interface Nation {
   dateFounded: string | null
   dateDissolved: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   _count: { states: number }
   createdAt: string
 }
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -31,7 +31,7 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  slug: string
+  
   name: string
   url: string
 }
@@ -40,7 +40,7 @@ interface LinkedState {
   id: string
   name: string
   abbreviation: string | null
-  article: { id: string; slug: string } | null
+  article: { id: string;  } | null
   _count: { cities: number }
 }
 
@@ -421,7 +421,7 @@ export default function ManageNationsPage() {
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.title} ({article.slug})
+                      {article.title}
                     </option>
                   ))}
                 </select>

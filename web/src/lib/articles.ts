@@ -115,27 +115,22 @@ export function extractWikilinkTargets(content: string): string[] {
   return Array.from(new Set(targets)) // dedupe
 }
 
-// Get article IDs by their titles or slugs (case-insensitive)
+// Get article IDs by their titles (case-insensitive)
 export async function getArticleIdsByTitles(targets: string[]): Promise<ArticleLinkMap> {
   if (targets.length === 0) return new Map()
 
-  // Query articles matching by title OR slug
+  // Query articles matching by title
   const articles = await prisma.article.findMany({
     where: {
-      OR: [
-        { title: { in: targets, mode: 'insensitive' } },
-        { slug: { in: targets } }
-      ]
+      title: { in: targets, mode: 'insensitive' }
     },
-    select: { id: true, title: true, slug: true }
+    select: { id: true, title: true }
   })
 
   const map = new Map<string, string>()
   for (const article of articles) {
     // Store with lowercase title key for case-insensitive matching
     map.set(article.title.toLowerCase(), article.id)
-    // Also store with slug key for slug-based wikilinks
-    map.set(article.slug.toLowerCase(), article.id)
   }
   return map
 }
@@ -417,7 +412,6 @@ export async function recalculateAllLinkCounts(): Promise<number> {
 
 // Create article with automatic linkCount calculation
 export async function createArticle(data: {
-  slug: string
   title: string
   type: string
   subtype?: string
@@ -432,7 +426,6 @@ export async function createArticle(data: {
 }) {
   return prisma.article.create({
     data: {
-      slug: data.slug,
       title: data.title,
       type: data.type,
       subtype: data.subtype,

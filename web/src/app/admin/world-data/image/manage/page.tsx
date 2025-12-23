@@ -23,7 +23,7 @@ interface ImageFile {
 
 interface Reference {
   type: "article" | "page" | "tv-playlist" | "radio-playlist"
-  slug: string
+  
   title: string
   field: string
 }

@@ -17,7 +17,7 @@ interface Place {
   dateOpened: string | null
   dateClosed: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   _count: { childPlaces: number }
   createdAt: string
 }
@@ -30,7 +30,7 @@ interface City {
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -42,7 +42,7 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  slug: string
+  
   name: string
   url: string
 }
@@ -516,7 +516,7 @@ export default function ManagePlacesPage() {
                 >
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
-                    <option key={article.id} value={article.id}>{article.title} ({article.slug})</option>
+                    <option key={article.id} value={article.id}>{article.title}</option>
                   ))}
                 </select>
               </div>

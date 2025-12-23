@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma"
 
 interface Reference {
   type: "article" | "page" | "flipflop" | "soundwaves"
-  slug: string
+  id: string
   title: string
   field: string
 }
@@ -17,51 +17,25 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { url, slug, mediaType } = await request.json()
+    const { url } = await request.json()
 
-    if (!url && !slug) {
-      return NextResponse.json({ error: "url or slug required" }, { status: 400 })
+    if (!url) {
+      return NextResponse.json({ error: "url required" }, { status: 400 })
     }
 
     const references: Reference[] = []
 
-    // Check if there's a Kempopedia article with the same slug
-    if (slug) {
-      const matchingArticle = await prisma.article.findUnique({
-        where: { slug },
-        select: { slug: true, title: true }
-      })
-      if (matchingArticle) {
-        references.push({
-          type: "article",
-          slug: matchingArticle.slug,
-          title: matchingArticle.title,
-          field: "matching-slug"
-        })
-      }
-    }
-
-    // Search in articles for URL or slug references in content
+    // Search in articles for URL references in content or infobox
     const articles = await prisma.article.findMany({
-      select: { slug: true, title: true, content: true, infobox: true }
+      select: { id: true, title: true, content: true, infobox: true }
     })
 
     for (const article of articles) {
-      // Skip if this is the matching article (already added above)
-      if (slug && article.slug === slug) continue
+      const foundIn: string[] = []
 
-      let foundIn: string[] = []
-
-      // Check content field for URL or slug references
-      if (article.content) {
-        const hasUrlRef = url && article.content.includes(url)
-        const hasSlugRef = slug && (
-          article.content.toLowerCase().includes(`[[${slug.toLowerCase()}]]`) ||
-          article.content.toLowerCase().includes(`[[${slug.toLowerCase()}|`)
-        )
-
-        if (hasUrlRef) foundIn.push("content (URL)")
-        if (hasSlugRef) foundIn.push("content (wikilink)")
+      // Check content field for URL references
+      if (article.content && url && article.content.includes(url)) {
+        foundIn.push("content (URL)")
       }
 
       // Check infobox for URL references (especially in media array)
@@ -75,7 +49,7 @@ export async function POST(request: Request) {
       if (foundIn.length > 0) {
         references.push({
           type: "article",
-          slug: article.slug,
+          id: article.id,
           title: article.title,
           field: foundIn.join(", ")
         })
@@ -84,22 +58,17 @@ export async function POST(request: Request) {
 
     // Search in pages
     const pages = await prisma.page.findMany({
-      select: { slug: true, title: true, content: true }
+      select: { id: true, slug: true, title: true, content: true }
     })
 
     for (const page of pages) {
-      if (page.content) {
-        const hasUrlRef = url && page.content.includes(url)
-        const hasSlugRef = slug && page.content.toLowerCase().includes(slug.toLowerCase())
-
-        if (hasUrlRef || hasSlugRef) {
-          references.push({
-            type: "page",
-            slug: page.slug,
-            title: page.title,
-            field: hasUrlRef ? "content (URL)" : "content (slug)"
-          })
-        }
+      if (page.content && url && page.content.includes(url)) {
+        references.push({
+          type: "page",
+          id: page.slug, // Use slug as identifier for pages (URL path)
+          title: page.title,
+          field: "content (URL)"
+        })
       }
     }
 

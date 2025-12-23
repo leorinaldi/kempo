@@ -14,14 +14,14 @@ interface Album {
   labelName: string | null
   kyDate: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   createdAt: string
   updatedAt: string
 }
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -446,7 +446,7 @@ export default function ManageAlbumsPage() {
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.title} ({article.slug})
+                      {article.title}
                     </option>
                   ))}
                 </select>

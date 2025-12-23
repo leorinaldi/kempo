@@ -18,7 +18,7 @@ interface Product {
   dateIntroduced: string | null
   dateDiscontinued: string | null
   articleId: string | null
-  article: { id: string; slug: string; title: string } | null
+  article: { id: string;  title: string } | null
   createdAt: string
   updatedAt: string
 }
@@ -31,7 +31,7 @@ interface Brand {
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
   subtype: string | null
 }
@@ -479,7 +479,7 @@ export default function ManageProductsPage() {
                   <option value="">-- No article linked --</option>
                   {availableArticles.map((article) => (
                     <option key={article.id} value={article.id}>
-                      {article.title} ({article.slug})
+                      {article.title}
                     </option>
                   ))}
                 </select>

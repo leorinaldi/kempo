@@ -12,7 +12,7 @@ interface Organization {
 
 interface Article {
   id: string
-  slug: string
+  
   title: string
 }
 
@@ -195,7 +195,7 @@ export default function CreateBrandPage() {
                 <option value="">-- No article linked --</option>
                 {availableArticles.map((article) => (
                   <option key={article.id} value={article.id}>
-                    {article.title} ({article.slug})
+                    {article.title}
                   </option>
                 ))}
               </select>
