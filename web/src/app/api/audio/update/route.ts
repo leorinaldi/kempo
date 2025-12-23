@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { id, name, slug, description, artist, artistSlug, kyDate } = body
+    const { id, name, slug, description, type, kyDate } = body
 
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 })
@@ -23,8 +23,7 @@ export async function POST(request: Request) {
         name,
         slug,
         description: description || null,
-        artist: artist || null,
-        artistSlug: artistSlug || null,
+        type: type || "song",
         kyDate: kyDate ? new Date(kyDate) : null,
       },
     })

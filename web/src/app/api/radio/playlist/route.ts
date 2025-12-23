@@ -8,26 +8,45 @@ export async function GET() {
       orderBy: { position: "asc" },
       include: {
         audio: {
-          select: {
-            id: true,
-            slug: true,
-            name: true,
-            url: true,
-            artist: true,
-            artistSlug: true,
+          include: {
+            elements: true,
           },
         },
       },
     })
 
+    // Get singer info from elements
+    const singerIds = playlist.flatMap((item) =>
+      item.audio.elements
+        .filter((e) => e.itemType === "singer")
+        .map((e) => e.itemId)
+    )
+    const singers = await prisma.person.findMany({
+      where: { id: { in: singerIds } },
+      include: { article: true },
+    })
+    const singerMap = Object.fromEntries(
+      singers.map((p) => [
+        p.id,
+        {
+          name: p.stageName || `${p.nickname || p.firstName} ${p.lastName}`,
+          slug: p.article?.slug || "",
+        },
+      ])
+    )
+
     // Transform to the format expected by the frontend
-    const items = playlist.map((item) => ({
-      id: item.audio.slug,
-      name: item.audio.name,
-      artist: item.audio.artist || "",
-      artistSlug: item.audio.artistSlug || "",
-      url: item.audio.url,
-    }))
+    const items = playlist.map((item) => {
+      const singerElement = item.audio.elements.find((e) => e.itemType === "singer")
+      const singer = singerElement ? singerMap[singerElement.itemId] : null
+      return {
+        id: item.audio.slug,
+        name: item.audio.name,
+        artist: singer?.name || "",
+        artistSlug: singer?.slug || "",
+        url: item.audio.url,
+      }
+    })
 
     return NextResponse.json(items)
   } catch (error) {

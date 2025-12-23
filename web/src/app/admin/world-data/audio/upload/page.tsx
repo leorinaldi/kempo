@@ -17,8 +17,7 @@ export default function AudioUploadPage() {
     title: "",
     slug: "",
     description: "",
-    artist: "",
-    artistSlug: "",
+    type: "song",
   })
 
   if (status === "loading") {
@@ -86,8 +85,7 @@ export default function AudioUploadPage() {
       uploadFormData.append("title", formData.title)
       uploadFormData.append("slug", formData.slug)
       uploadFormData.append("description", formData.description)
-      uploadFormData.append("artist", formData.artist)
-      uploadFormData.append("artistSlug", formData.artistSlug)
+      uploadFormData.append("type", formData.type)
       if (detectedDuration) uploadFormData.append("duration", detectedDuration.toString())
 
       const response = await fetch("/api/audio/upload", {
@@ -104,7 +102,7 @@ export default function AudioUploadPage() {
       setMessage({ type: "success", text: "Audio uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", slug: "", description: "", artist: "", artistSlug: "" })
+      setFormData({ title: "", slug: "", description: "", type: "song" })
       setDetectedDuration(null)
       if (fileInputRef.current) {
         fileInputRef.current.value = ""
@@ -194,28 +192,22 @@ export default function AudioUploadPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Artist Name
+                Type <span className="text-red-500">*</span>
               </label>
-              <input
-                type="text"
-                value={formData.artist}
-                onChange={(e) => setFormData({ ...formData, artist: e.target.value })}
+              <select
+                value={formData.type}
+                onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., Frank Martino"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Artist Slug (for Kempopedia link)
-              </label>
-              <input
-                type="text"
-                value={formData.artistSlug}
-                onChange={(e) => setFormData({ ...formData, artistSlug: e.target.value })}
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., frank-martino"
-              />
+              >
+                <option value="song">Song</option>
+                <option value="radio_ad">Radio Ad</option>
+                <option value="podcast">Podcast</option>
+                <option value="speech">Speech</option>
+                <option value="sound_effect">Sound Effect</option>
+              </select>
+              <p className="mt-1 text-xs text-gray-500">
+                After upload, add singers/performers in Manage Audio
+              </p>
             </div>
 
             <div>

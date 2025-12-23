@@ -12,18 +12,25 @@ interface PlaylistItem {
   url: string
 }
 
+interface AudioElement {
+  id: string
+  itemId: string
+  itemType: string
+  itemName?: string // Resolved name for display
+}
+
 interface AudioFile {
   id: string
   slug: string
   name: string
   url: string
-  artist: string | null
-  artistSlug: string | null
+  type: string
   description: string | null
   duration: number | null
   kyDate: string | null
   createdAt: string
   updatedAt: string
+  elements: AudioElement[]
 }
 
 interface Reference {
@@ -81,14 +88,22 @@ export default function AudioManagePage() {
     name: "",
     slug: "",
     description: "",
-    artist: "",
-    artistSlug: "",
+    type: "song",
     kyDate: "",
   })
+
+  // People for element selection
+  const [availablePeople, setAvailablePeople] = useState<Array<{ id: string; name: string }>>([])
+  const [selectedPersonId, setSelectedPersonId] = useState("")
+  const [selectedElementType, setSelectedElementType] = useState("singer")
+
+  // Albums for element selection
+  const [availableAlbums, setAvailableAlbums] = useState<Array<{ id: string; name: string }>>([])
+  const [selectedAlbumId, setSelectedAlbumId] = useState("")
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
-  // Load playlist and audio files on mount
+  // Load playlist, audio files, and people on mount
   useEffect(() => {
     fetch("/api/radio/playlist")
       .then((res) => res.json())
@@ -99,6 +114,36 @@ export default function AudioManagePage() {
       .catch(() => setPlaylistLoading(false))
 
     reloadAudioFiles()
+
+    // Load available people for element selection
+    fetch("/api/people/list")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setAvailablePeople(
+            data.map((p: { id: string; firstName: string; lastName: string; nickname?: string }) => ({
+              id: p.id,
+              name: `${p.nickname || p.firstName} ${p.lastName}`,
+            }))
+          )
+        }
+      })
+      .catch((err) => console.error("Failed to load people:", err))
+
+    // Load available albums for element selection
+    fetch("/api/albums/list")
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setAvailableAlbums(
+            data.map((a: { id: string; name: string }) => ({
+              id: a.id,
+              name: a.name,
+            }))
+          )
+        }
+      })
+      .catch((err) => console.error("Failed to load albums:", err))
   }, [])
 
   const reloadAudioFiles = async () => {
@@ -220,16 +265,100 @@ export default function AudioManagePage() {
       name: file.name,
       slug: file.slug,
       description: file.description || "",
-      artist: file.artist || "",
-      artistSlug: file.artistSlug || "",
+      type: file.type || "song",
       kyDate: file.kyDate ? file.kyDate.split("T")[0] : "",
     })
+    setSelectedPersonId("")
+    setSelectedElementType("singer")
+    setSelectedAlbumId("")
     setEditMessage(null)
   }
 
   const closeEditModal = () => {
     setEditModal(null)
     setEditMessage(null)
+  }
+
+  const addElement = async () => {
+    if (!editModal || !selectedPersonId) return
+
+    try {
+      const res = await fetch(`/api/audio/${editModal.id}/elements`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          itemId: selectedPersonId,
+          itemType: selectedElementType,
+        }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || "Failed to add element")
+      }
+
+      setEditMessage({ type: "success", text: "Element added!" })
+      await reloadAudioFiles()
+      // Update the modal with new data
+      const updated = await res.json()
+      setEditModal((prev) => prev ? { ...prev, elements: updated.elements } : null)
+      setSelectedPersonId("")
+      setTimeout(() => setEditMessage(null), 2000)
+    } catch (error) {
+      setEditMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add" })
+    }
+  }
+
+  const removeElement = async (elementId: string) => {
+    if (!editModal) return
+
+    try {
+      const res = await fetch(`/api/audio/${editModal.id}/elements`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ elementId }),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to remove element")
+      }
+
+      await reloadAudioFiles()
+      setEditModal((prev) => prev ? { ...prev, elements: prev.elements.filter(e => e.id !== elementId) } : null)
+      setEditMessage({ type: "success", text: "Element removed!" })
+      setTimeout(() => setEditMessage(null), 2000)
+    } catch (error) {
+      setEditMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to remove" })
+    }
+  }
+
+  const addAlbumElement = async () => {
+    if (!editModal || !selectedAlbumId) return
+
+    try {
+      const res = await fetch(`/api/audio/${editModal.id}/elements`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          itemId: selectedAlbumId,
+          itemType: "album",
+        }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || "Failed to add album")
+      }
+
+      setEditMessage({ type: "success", text: "Album linked!" })
+      await reloadAudioFiles()
+      const updated = await res.json()
+      setEditModal((prev) => prev ? { ...prev, elements: updated.elements } : null)
+      setSelectedAlbumId("")
+      setTimeout(() => setEditMessage(null), 2000)
+    } catch (error) {
+      setEditMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to add album" })
+    }
   }
 
   const saveEdit = async () => {
@@ -247,8 +376,7 @@ export default function AudioManagePage() {
           name: editData.name,
           slug: editData.slug,
           description: editData.description,
-          artist: editData.artist,
-          artistSlug: editData.artistSlug,
+          type: editData.type,
           kyDate: editData.kyDate || null,
         }),
       })
@@ -463,12 +591,15 @@ export default function AudioManagePage() {
                     <p className="font-medium text-sm truncate">{file.name}</p>
                     <p className="text-xs text-gray-500 truncate">
                       {file.slug}
-                      {file.artist && ` - ${file.artist}`}
                       {file.duration && ` (${Math.floor(file.duration / 60)}:${Math.floor(file.duration % 60).toString().padStart(2, '0')})`}
+                      <span className="ml-2 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">
+                        {file.type}
+                      </span>
                     </p>
                     <p className="text-xs text-gray-400">
                       Uploaded: {new Date(file.createdAt).toLocaleDateString()}
                       {file.kyDate && ` · k.y. ${new Date(file.kyDate).toLocaleDateString()}`}
+                      {file.elements.length > 0 && ` · ${file.elements.length} link${file.elements.length > 1 ? 's' : ''}`}
                     </p>
                   </div>
                   <div className="flex items-center gap-3 ml-4">
@@ -653,23 +784,18 @@ export default function AudioManagePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Artist Name</label>
-                <input
-                  type="text"
-                  value={editData.artist}
-                  onChange={(e) => setEditData({ ...editData, artist: e.target.value })}
+                <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                <select
+                  value={editData.type}
+                  onChange={(e) => setEditData({ ...editData, type: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Artist Slug</label>
-                <input
-                  type="text"
-                  value={editData.artistSlug}
-                  onChange={(e) => setEditData({ ...editData, artistSlug: e.target.value })}
-                  className="w-full border border-gray-300 rounded px-3 py-2"
-                />
+                >
+                  <option value="song">Song</option>
+                  <option value="radio_ad">Radio Ad</option>
+                  <option value="podcast">Podcast</option>
+                  <option value="speech">Speech</option>
+                  <option value="sound_effect">Sound Effect</option>
+                </select>
               </div>
 
               <div>
@@ -680,6 +806,135 @@ export default function AudioManagePage() {
                   onChange={(e) => setEditData({ ...editData, kyDate: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
+              </div>
+
+              {/* Audio Elements (People connections) */}
+              <div className="border-t pt-4 mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Linked People
+                </label>
+
+                {/* Current people elements */}
+                {editModal.elements.filter((el) => el.itemType !== "album").length > 0 ? (
+                  <div className="space-y-2 mb-3">
+                    {editModal.elements
+                      .filter((el) => el.itemType !== "album")
+                      .map((el) => (
+                        <div
+                          key={el.id}
+                          className="flex items-center justify-between p-2 bg-purple-50 rounded border border-purple-200"
+                        >
+                          <span className="text-sm">
+                            <span className="font-medium">{el.itemName || el.itemId}</span>
+                            <span className="ml-2 text-xs text-purple-600 bg-purple-100 px-1.5 py-0.5 rounded">
+                              {el.itemType}
+                            </span>
+                          </span>
+                          <button
+                            onClick={() => removeElement(el.id)}
+                            className="text-red-500 hover:text-red-700 text-xs"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500 mb-3">No linked people</p>
+                )}
+
+                {/* Add new person element */}
+                <div className="flex gap-2">
+                  <select
+                    value={selectedPersonId}
+                    onChange={(e) => setSelectedPersonId(e.target.value)}
+                    className="flex-1 border border-gray-300 rounded px-2 py-1.5 text-sm"
+                  >
+                    <option value="">Select person...</option>
+                    {availablePeople
+                      .filter((p) => !editModal.elements.some((e) => e.itemId === p.id && e.itemType === selectedElementType))
+                      .map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.name}
+                        </option>
+                      ))}
+                  </select>
+                  <select
+                    value={selectedElementType}
+                    onChange={(e) => setSelectedElementType(e.target.value)}
+                    className="border border-gray-300 rounded px-2 py-1.5 text-sm"
+                  >
+                    <option value="singer">Singer</option>
+                    <option value="composer">Composer</option>
+                    <option value="lyricist">Lyricist</option>
+                    <option value="producer">Producer</option>
+                    <option value="speaker">Speaker</option>
+                    <option value="performer">Performer</option>
+                  </select>
+                  <button
+                    onClick={addElement}
+                    disabled={!selectedPersonId}
+                    className="bg-purple-600 hover:bg-purple-700 disabled:bg-purple-300 text-white text-sm px-3 py-1.5 rounded"
+                  >
+                    Add
+                  </button>
+                </div>
+              </div>
+
+              {/* Linked Albums */}
+              <div className="border-t pt-4 mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Linked Albums
+                </label>
+
+                {/* Current album elements */}
+                {editModal.elements.filter((el) => el.itemType === "album").length > 0 ? (
+                  <div className="space-y-2 mb-3">
+                    {editModal.elements
+                      .filter((el) => el.itemType === "album")
+                      .map((el) => (
+                        <div
+                          key={el.id}
+                          className="flex items-center justify-between p-2 bg-amber-50 rounded border border-amber-200"
+                        >
+                          <span className="text-sm font-medium">{el.itemName || el.itemId}</span>
+                          <button
+                            onClick={() => removeElement(el.id)}
+                            className="text-red-500 hover:text-red-700 text-xs"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500 mb-3">No linked albums</p>
+                )}
+
+                {/* Add album */}
+                <div className="flex gap-2">
+                  <select
+                    value={selectedAlbumId}
+                    onChange={(e) => setSelectedAlbumId(e.target.value)}
+                    className="flex-1 border border-gray-300 rounded px-2 py-1.5 text-sm"
+                  >
+                    <option value="">Select album...</option>
+                    {availableAlbums
+                      .filter((a) => !editModal.elements.some((e) => e.itemId === a.id && e.itemType === "album"))
+                      .map((a) => (
+                        <option key={a.id} value={a.id}>
+                          {a.name}
+                        </option>
+                      ))}
+                  </select>
+                  <button
+                    onClick={addAlbumElement}
+                    disabled={!selectedAlbumId}
+                    className="bg-amber-600 hover:bg-amber-700 disabled:bg-amber-300 text-white text-sm px-3 py-1.5 rounded"
+                  >
+                    Add
+                  </button>
+                </div>
               </div>
             </div>
 

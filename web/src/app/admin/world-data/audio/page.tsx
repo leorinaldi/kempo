@@ -37,7 +37,8 @@ export default function AudioLandingPage() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid md:grid-cols-2 gap-6">
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">Audio Files</h2>
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
           <Link
             href="/admin/world-data/audio/upload"
             className="bg-white rounded-lg shadow p-8 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-amber-300"
@@ -57,6 +58,31 @@ export default function AudioLandingPage() {
               <div className="text-4xl mb-4">📁</div>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">Manage Existing Files</h2>
               <p className="text-gray-500">View library, edit files, and manage Radio playlist</p>
+            </div>
+          </Link>
+        </div>
+
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">Albums</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Link
+            href="/admin/world-data/audio/albums/create"
+            className="bg-white rounded-lg shadow p-8 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-amber-300"
+          >
+            <div className="text-center">
+              <div className="text-4xl mb-4">💿</div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Create New Album</h2>
+              <p className="text-gray-500">Add a new album to the database</p>
+            </div>
+          </Link>
+
+          <Link
+            href="/admin/world-data/audio/albums/manage"
+            className="bg-white rounded-lg shadow p-8 hover:shadow-lg transition-shadow border-2 border-transparent hover:border-amber-300"
+          >
+            <div className="text-center">
+              <div className="text-4xl mb-4">📀</div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">Manage Existing Albums</h2>
+              <p className="text-gray-500">View, edit, and delete albums</p>
             </div>
           </Link>
         </div>

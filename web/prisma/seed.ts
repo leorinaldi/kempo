@@ -7,8 +7,6 @@ const prisma = new PrismaClient()
 interface RadioPlaylistItem {
   id: string
   name: string
-  artist: string
-  artistSlug: string
   url: string
 }
 
@@ -39,16 +37,13 @@ async function main() {
         where: { slug: track.id },
         update: {
           name: track.name,
-          artist: track.artist,
-          artistSlug: track.artistSlug,
           url: track.url,
         },
         create: {
           slug: track.id,
           name: track.name,
           url: track.url,
-          artist: track.artist,
-          artistSlug: track.artistSlug,
+          type: "song",
         },
       })
       console.log(`  - ${track.name}`)

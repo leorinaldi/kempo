@@ -2,7 +2,7 @@ import { auth } from "@/auth"
 import { put } from "@vercel/blob"
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
-import { writeFile, mkdir, access } from "fs/promises"
+import { access } from "fs/promises"
 import path from "path"
 
 export async function POST(request: Request) {
@@ -22,8 +22,7 @@ export async function POST(request: Request) {
     const title = formData.get("title") as string | null
     const slug = formData.get("slug") as string | null
     const description = formData.get("description") as string | null
-    const artist = formData.get("artist") as string | null
-    const artistSlug = formData.get("artistSlug") as string | null
+    const type = formData.get("type") as string | null
     const durationStr = formData.get("duration") as string | null
 
     if (!file) {
@@ -72,9 +71,8 @@ export async function POST(request: Request) {
         slug,
         name: title,
         url: "", // Temporary, will be updated after blob upload
+        type: type || "song",
         description: description || null,
-        artist: artist || null,
-        artistSlug: artistSlug || null,
         duration: duration || null,
       },
     })
@@ -92,26 +90,6 @@ export async function POST(request: Request) {
       data: { url: blob.url },
     })
 
-    // Generate Kempopedia article
-    try {
-      const articlesDir = path.join(process.cwd(), "content", "articles", "culture")
-      await mkdir(articlesDir, { recursive: true })
-
-      const articlePath = path.join(articlesDir, `${slug}.md`)
-      const articleContent = generateAudioArticle({
-        title,
-        slug,
-        description: description || undefined,
-        artist: artist || undefined,
-        artistSlug: artistSlug || undefined,
-        mediaUrl: blob.url,
-      })
-
-      await writeFile(articlePath, articleContent, "utf-8")
-    } catch (articleError) {
-      console.error("Failed to create Kempopedia article:", articleError)
-    }
-
     return NextResponse.json({
       success: true,
       id: audio.id,
@@ -127,78 +105,4 @@ export async function POST(request: Request) {
       { status: 500 }
     )
   }
-}
-
-interface ArticleParams {
-  title: string
-  slug: string
-  description?: string
-  artist?: string
-  artistSlug?: string
-  mediaUrl: string
-}
-
-function generateAudioArticle(params: ArticleParams): string {
-  const { title, slug, description, artist, artistSlug, mediaUrl } = params
-
-  const frontmatter = `---
-title: "${title}"
-slug: "${slug}"
-type: culture
-subtype: song
-status: published
-tags:
-  - music
-  - song
----`
-
-  const infoboxFields: Record<string, string> = {
-    Title: title,
-  }
-
-  if (artist && artistSlug) {
-    infoboxFields.Artist = `[[${artistSlug}|${artist}]]`
-  }
-
-  const infobox = {
-    infobox: {
-      type: "song",
-      fields: infoboxFields,
-    },
-    media: [
-      {
-        type: "audio",
-        url: mediaUrl,
-      },
-    ],
-  }
-
-  let intro = `"**${title}**"`
-  if (artist && artistSlug) {
-    intro += ` is a song by [[${artistSlug}|${artist}]].`
-  } else {
-    intro += ` is a song.`
-  }
-
-  if (description) {
-    intro += ` ${description}`
-  }
-
-  const seeAlso: string[] = []
-  if (artistSlug && artist) {
-    seeAlso.push(`- [[${artistSlug}|${artist}]]`)
-  }
-
-  const seeAlsoSection = seeAlso.length > 0
-    ? `\n## See also\n\n${seeAlso.join("\n")}\n`
-    : ""
-
-  return `${frontmatter}
-
-\`\`\`json
-${JSON.stringify(infobox, null, 2)}
-\`\`\`
-
-${intro}
-${seeAlsoSection}`
 }

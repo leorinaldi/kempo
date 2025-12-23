@@ -14,17 +14,45 @@ model Audio {
   slug        String    @unique
   name        String
   url         String    @db.Text
-  artist      String?
-  artistSlug  String?   @map("artist_slug")
+  type        String    @default("song")   // "song", "radio_ad", "podcast", etc.
   description String?   @db.Text
-  duration    Float?                     // Duration in seconds (auto-detected at upload)
-  kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
+  duration    Float?                       // Duration in seconds (auto-detected at upload)
+  kyDate      DateTime? @map("ky_date")    // Kempo world date (e.g., 1948-12-25 in k.y.)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
   radioPlaylist RadioPlaylistItem[]
+  elements      AudioElement[]
 
   @@map("audio")
+}
+
+model Album {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  name        String
+  artistId    String?   @map("artist_id")  // Primary artist (Person)
+  artist      Person?   @relation(fields: [artistId], references: [id], onDelete: SetNull)
+  kyDate      DateTime? @map("ky_date")    // Release date in k.y.
+  articleId   String?   @unique @map("article_id")
+  article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@map("albums")
+}
+
+model AudioElement {
+  id        String   @id @default(cuid())
+  audioId   String   @map("audio_id")
+  audio     Audio    @relation(fields: [audioId], references: [id], onDelete: Cascade)
+  itemId    String   @map("item_id")    // ID of the person, album, etc.
+  itemType  String   @map("item_type")  // "singer", "album", "composer", "lyricist", "producer", "speaker"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([audioId, itemId, itemType])
+  @@index([itemId, itemType])
+  @@map("audio_elements")
 }
 
 model Video {
@@ -194,6 +222,7 @@ model Article {
   state              State?
   city               City?
   place              Place?
+  album              Album?
 
   @@index([type])
   @@index([status])
@@ -231,6 +260,8 @@ model Person {
   firstName   String    @map("first_name")
   middleName  String?   @map("middle_name")
   lastName    String    @map("last_name")
+  nickname    String?                       // Informal name if different from firstName (e.g., "Frank" for "Francis")
+  stageName   String?   @map("stage_name") // Professional/performer name (e.g., "Vivian Sterling", "Sting")
   gender      String    // "male" | "female"
   dateBorn    DateTime? @map("date_born")  // k.y. birth date
   dateDied    DateTime? @map("date_died")  // k.y. death date (null if alive)
@@ -238,6 +269,8 @@ model Person {
   article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  albums      Album[]   // Albums where this person is the primary artist
 
   @@map("people")
 }
