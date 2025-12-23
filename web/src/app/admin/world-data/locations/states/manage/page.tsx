@@ -15,7 +15,7 @@ interface State {
   dateFounded: string | null
   dateDisbanded: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   _count: { cities: number }
   createdAt: string
 }
@@ -48,7 +48,7 @@ interface LinkedCity {
   id: string
   name: string
   cityType: string
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
   _count: { places: number }
 }
 
@@ -360,7 +360,7 @@ export default function ManageStatesPage() {
                     </p>
                     {state.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${state.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${state.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
@@ -538,7 +538,7 @@ export default function ManageStatesPage() {
                       <span className="text-emerald-600">●</span>
                       {city.article ? (
                         <a
-                          href={`/kemponet/kempopedia/wiki/${city.article.slug}`}
+                          href={`/kemponet/kempopedia/wiki/${city.article.id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-emerald-600 hover:text-emerald-800 hover:underline"

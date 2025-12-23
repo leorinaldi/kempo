@@ -13,7 +13,7 @@ interface Brand {
   dateFounded: string | null
   dateDiscontinued: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   _count: { products: number }
   createdAt: string
   updatedAt: string
@@ -34,7 +34,7 @@ interface LinkedProduct {
   id: string
   name: string
   productType: string
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
 }
 
 interface Inspiration {
@@ -343,7 +343,7 @@ export default function ManageBrandsPage() {
                     </p>
                     {brand.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${brand.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${brand.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-orange-600 hover:text-orange-800 hover:underline"
@@ -498,7 +498,7 @@ export default function ManageBrandsPage() {
                       <span className="text-rose-600">●</span>
                       {product.article ? (
                         <a
-                          href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
+                          href={`/kemponet/kempopedia/wiki/${product.article.id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-rose-600 hover:text-rose-800 hover:underline"

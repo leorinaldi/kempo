@@ -20,7 +20,7 @@ export async function GET() {
           shortCode: true,
           lat: true,
           long: true,
-          article: { select: { slug: true } },
+          article: { select: { id: true, slug: true } },
         },
       }),
       prisma.state.findMany({
@@ -32,7 +32,7 @@ export async function GET() {
           lat: true,
           long: true,
           nation: { select: { name: true } },
-          article: { select: { slug: true } },
+          article: { select: { id: true, slug: true } },
         },
       }),
       prisma.city.findMany({
@@ -44,7 +44,7 @@ export async function GET() {
           lat: true,
           long: true,
           state: { select: { name: true, nation: { select: { name: true } } } },
-          article: { select: { slug: true } },
+          article: { select: { id: true, slug: true } },
         },
       }),
       prisma.place.findMany({
@@ -56,7 +56,7 @@ export async function GET() {
           lat: true,
           long: true,
           city: { select: { name: true, state: { select: { name: true } } } },
-          article: { select: { slug: true } },
+          article: { select: { id: true, slug: true } },
         },
       }),
     ])

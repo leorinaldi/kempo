@@ -15,7 +15,7 @@ interface ImageFile {
   height: number | null
   shape: string | null
   category: string | null
-  articleSlug: string | null
+  articleId: string | null
   kyDate: string | null
   createdAt: string
   updatedAt: string
@@ -37,46 +37,46 @@ interface LinkedSubject {
     firstName: string
     middleName: string | null
     lastName: string
-    articleSlug: string | null
+    articleId: string | null
   }
   organization?: {
     id: string
     name: string
     abbreviation: string | null
-    articleSlug: string | null
+    articleId: string | null
   }
   brand?: {
     id: string
     name: string
-    articleSlug: string | null
+    articleId: string | null
   }
   product?: {
     id: string
     name: string
-    articleSlug: string | null
+    articleId: string | null
   }
   nation?: {
     id: string
     name: string
     shortCode: string | null
-    articleSlug: string | null
+    articleId: string | null
   }
   state?: {
     id: string
     name: string
     abbreviation: string | null
-    articleSlug: string | null
+    articleId: string | null
   }
   city?: {
     id: string
     name: string
-    articleSlug: string | null
+    articleId: string | null
   }
   place?: {
     id: string
     name: string
     placeType: string
-    articleSlug: string | null
+    articleId: string | null
   }
 }
 
@@ -124,7 +124,7 @@ export default function ImageManagePage() {
     altText: "",
     shape: "landscape" as "landscape" | "portrait" | "square",
     category: "",
-    articleSlug: "",
+    articleId: "",
     kyDate: "",
   })
   const [saving, setSaving] = useState(false)
@@ -201,7 +201,7 @@ export default function ImageManagePage() {
       altText: file.altText || "",
       shape: (file.shape as "landscape" | "portrait" | "square") || "landscape",
       category: file.category || "",
-      articleSlug: file.articleSlug || "",
+      articleId: file.articleId || "",
       kyDate: file.kyDate ? file.kyDate.split("T")[0] : "",
     })
     setEditMessage(null)
@@ -241,7 +241,7 @@ export default function ImageManagePage() {
           altText: editData.altText,
           shape: editData.shape,
           category: editData.category,
-          articleSlug: editData.articleSlug,
+          articleId: editData.articleId,
           kyDate: editData.kyDate || null,
         }),
       })
@@ -604,11 +604,11 @@ export default function ImageManagePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Associated Article Slug</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Associated Article ID</label>
                 <input
                   type="text"
-                  value={editData.articleSlug}
-                  onChange={(e) => setEditData({ ...editData, articleSlug: e.target.value })}
+                  value={editData.articleId}
+                  onChange={(e) => setEditData({ ...editData, articleId: e.target.value })}
                   className="w-full border border-gray-300 rounded px-3 py-2"
                 />
               </div>
@@ -655,9 +655,9 @@ export default function ImageManagePage() {
                         {subject.itemType}
                       </span>
                       {subject.person ? (
-                        subject.person.articleSlug ? (
+                        subject.person.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.person.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.person.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-purple-600 hover:text-purple-800 hover:underline"
@@ -674,9 +674,9 @@ export default function ImageManagePage() {
                           </span>
                         )
                       ) : subject.organization ? (
-                        subject.organization.articleSlug ? (
+                        subject.organization.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.organization.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.organization.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-teal-600 hover:text-teal-800 hover:underline"
@@ -691,9 +691,9 @@ export default function ImageManagePage() {
                           </span>
                         )
                       ) : subject.brand ? (
-                        subject.brand.articleSlug ? (
+                        subject.brand.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.brand.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.brand.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-orange-600 hover:text-orange-800 hover:underline"
@@ -704,9 +704,9 @@ export default function ImageManagePage() {
                           <span className="text-gray-700">{subject.brand.name}</span>
                         )
                       ) : subject.product ? (
-                        subject.product.articleSlug ? (
+                        subject.product.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.product.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.product.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-rose-600 hover:text-rose-800 hover:underline"
@@ -717,9 +717,9 @@ export default function ImageManagePage() {
                           <span className="text-gray-700">{subject.product.name}</span>
                         )
                       ) : subject.nation ? (
-                        subject.nation.articleSlug ? (
+                        subject.nation.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.nation.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.nation.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-600 hover:text-blue-800 hover:underline"
@@ -734,9 +734,9 @@ export default function ImageManagePage() {
                           </span>
                         )
                       ) : subject.state ? (
-                        subject.state.articleSlug ? (
+                        subject.state.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.state.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.state.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-indigo-600 hover:text-indigo-800 hover:underline"
@@ -751,9 +751,9 @@ export default function ImageManagePage() {
                           </span>
                         )
                       ) : subject.city ? (
-                        subject.city.articleSlug ? (
+                        subject.city.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.city.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.city.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-cyan-600 hover:text-cyan-800 hover:underline"
@@ -764,9 +764,9 @@ export default function ImageManagePage() {
                           <span className="text-gray-700">{subject.city.name}</span>
                         )
                       ) : subject.place ? (
-                        subject.place.articleSlug ? (
+                        subject.place.articleId ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${subject.place.articleSlug}`}
+                            href={`/kemponet/kempopedia/wiki/${subject.place.articleId}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-emerald-600 hover:text-emerald-800 hover:underline"

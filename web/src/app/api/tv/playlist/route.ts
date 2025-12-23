@@ -25,6 +25,14 @@ export async function GET() {
       },
     })
 
+    // Get article IDs for all unique artistSlugs
+    const artistSlugs = Array.from(new Set(videos.map(v => v.artistSlug).filter(Boolean))) as string[]
+    const articles = await prisma.article.findMany({
+      where: { slug: { in: artistSlugs } },
+      select: { id: true, slug: true },
+    })
+    const slugToIdMap = Object.fromEntries(articles.map(a => [a.slug, a.id]))
+
     // Transform to the format expected by the frontend
     const items = videos.map((video) => ({
       id: video.id,
@@ -32,7 +40,7 @@ export async function GET() {
       description: video.description || "",
       url: video.url,
       artist: video.artist || "",
-      artistSlug: video.artistSlug || "",
+      artistArticleId: video.artistSlug ? slugToIdMap[video.artistSlug] || "" : "",
     }))
 
     // Return shuffled playlist

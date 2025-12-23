@@ -17,7 +17,7 @@ interface Place {
   dateOpened: string | null
   dateClosed: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   _count: { childPlaces: number }
   createdAt: string
 }
@@ -388,7 +388,7 @@ export default function ManagePlacesPage() {
                     </p>
                     {place.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${place.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${place.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"

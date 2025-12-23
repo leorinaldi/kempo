@@ -14,7 +14,7 @@ interface Person {
   dateBorn: string | null
   dateDied: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   createdAt: string
   updatedAt: string
 }
@@ -321,7 +321,7 @@ export default function ManagePeoplePage() {
                     </p>
                     {person.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${person.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${person.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-purple-600 hover:text-purple-800 hover:underline"

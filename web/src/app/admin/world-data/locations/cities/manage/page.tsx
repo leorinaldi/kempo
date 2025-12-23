@@ -14,7 +14,7 @@ interface City {
   dateFounded: string | null
   dateDisbanded: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   _count: { places: number }
   createdAt: string
 }
@@ -48,7 +48,7 @@ interface LinkedPlace {
   id: string
   name: string
   placeType: string
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
   _count: { childPlaces: number }
 }
 
@@ -353,7 +353,7 @@ export default function ManageCitiesPage() {
                     </p>
                     {city.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${city.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${city.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
@@ -496,7 +496,7 @@ export default function ManageCitiesPage() {
                     <div key={place.id} className="flex items-center gap-2 text-sm">
                       <span className="text-emerald-600">●</span>
                       {place.article ? (
-                        <a href={`/kemponet/kempopedia/wiki/${place.article.slug}`} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800 hover:underline">
+                        <a href={`/kemponet/kempopedia/wiki/${place.article.id}`} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-800 hover:underline">
                           {place.name}
                         </a>
                       ) : (

@@ -82,7 +82,8 @@ model Image {
   height      Int?                           // Pixel height (auto-detected)
   shape       String?                        // "portrait" | "landscape" | "square"
   category    String?                        // "portrait", "location", "product", "logo", etc.
-  articleSlug String?   @map("article_slug") // Associated Kempopedia article
+  articleId   String?   @map("article_id")   // Associated Kempopedia article
+  article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
   kyDate      DateTime? @map("ky_date")      // When "taken" in Kempo world
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
@@ -196,6 +197,7 @@ model Article {
   city               City?
   place              Place?
   album              Album?
+  images             Image[]
 
   @@index([type])
   @@index([status])

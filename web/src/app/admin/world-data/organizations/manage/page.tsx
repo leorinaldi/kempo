@@ -13,7 +13,7 @@ interface Organization {
   dateFounded: string | null
   dateDissolved: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   createdAt: string
   updatedAt: string
 }
@@ -41,13 +41,13 @@ interface LinkedProduct {
   id: string
   name: string
   productType: string
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
 }
 
 interface LinkedBrand {
   id: string
   name: string
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
   products: LinkedProduct[]
 }
 
@@ -358,7 +358,7 @@ export default function ManageOrganizationsPage() {
                     </p>
                     {org.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${org.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${org.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-teal-600 hover:text-teal-800 hover:underline"
@@ -526,7 +526,7 @@ export default function ManageOrganizationsPage() {
                         <span className="text-orange-600">●</span>
                         {brand.article ? (
                           <a
-                            href={`/kemponet/kempopedia/wiki/${brand.article.slug}`}
+                            href={`/kemponet/kempopedia/wiki/${brand.article.id}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-orange-600 hover:text-orange-800 hover:underline"
@@ -549,7 +549,7 @@ export default function ManageOrganizationsPage() {
                               <span className="text-rose-500">○</span>
                               {product.article ? (
                                 <a
-                                  href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
+                                  href={`/kemponet/kempopedia/wiki/${product.article.id}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="text-rose-600 hover:text-rose-800 hover:underline"

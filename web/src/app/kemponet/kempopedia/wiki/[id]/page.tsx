@@ -1,29 +1,29 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticleBySlugAsync, getAllArticleSlugsAsync } from '@/lib/articles'
+import { getArticleByIdAsync, getAllArticleIdsAsync } from '@/lib/articles'
 import Infobox from '@/components/Infobox'
 import { AudioPlayer } from '@/components/AudioPlayer'
 import { VideoPlayer } from '@/components/VideoPlayer'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ id: string }>
 }
 
 export async function generateStaticParams() {
-  const slugs = await getAllArticleSlugsAsync()
-  return slugs.map((slug) => ({ slug }))
+  const ids = await getAllArticleIdsAsync()
+  return ids.map((id) => ({ id }))
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const { slug } = await params
-  const article = await getArticleBySlugAsync(slug)
+  const { id } = await params
+  const article = await getArticleByIdAsync(id)
 
   if (!article) {
     notFound()
   }
 
-  const { frontmatter, htmlContent, infobox, media } = article
+  const { frontmatter, htmlContent, infobox, media, linkMap } = article
 
   return (
     <div className="min-h-screen bg-white">
@@ -39,6 +39,7 @@ export default async function ArticlePage({ params }: PageProps) {
               type={infobox.type}
               image={infobox.image}
               fields={infobox.fields}
+              linkMap={linkMap}
             />
           )}
 
@@ -59,15 +60,15 @@ export default async function ArticlePage({ params }: PageProps) {
                 <div key={index} className="mb-4">
                   {item.type === 'audio' && (
                     <div>
-                      {item.article && item.title ? (
+                      {item.articleId && item.title ? (
                         <Link
-                          href={`/kemponet/kempopedia/wiki/${item.article}`}
+                          href={`/kemponet/kempopedia/wiki/${item.articleId}`}
                           className="text-sm font-medium text-wiki-link hover:underline block mb-2"
                         >
                           {item.title}
                         </Link>
                       ) : null}
-                      <AudioPlayer src={item.url} title={item.article ? undefined : item.title} />
+                      <AudioPlayer src={item.url} title={item.articleId ? undefined : item.title} />
                       {item.description && (
                         <p className="text-sm text-gray-600 mt-1">{item.description}</p>
                       )}
@@ -75,15 +76,15 @@ export default async function ArticlePage({ params }: PageProps) {
                   )}
                   {item.type === 'video' && (
                     <div>
-                      {item.article && item.title ? (
+                      {item.articleId && item.title ? (
                         <Link
-                          href={`/kemponet/kempopedia/wiki/${item.article}`}
+                          href={`/kemponet/kempopedia/wiki/${item.articleId}`}
                           className="text-sm font-medium text-wiki-link hover:underline block mb-2"
                         >
                           {item.title}
                         </Link>
                       ) : null}
-                      <VideoPlayer src={item.url} title={item.article ? undefined : item.title} />
+                      <VideoPlayer src={item.url} title={item.articleId ? undefined : item.title} />
                       {item.description && (
                         <p className="text-sm text-gray-600 mt-1">{item.description}</p>
                       )}

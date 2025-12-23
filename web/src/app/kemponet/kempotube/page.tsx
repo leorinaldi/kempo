@@ -11,7 +11,7 @@ interface Video {
   description?: string
   url: string
   artist?: string
-  artistSlug?: string
+  artistArticleId?: string
 }
 
 function KempoTubeContent() {
@@ -229,10 +229,10 @@ function KempoTubeContent() {
               <h1 className="text-sm font-semibold text-white">
                 {selectedVideo.name}
               </h1>
-              {selectedVideo.artist && selectedVideo.artistSlug && (
+              {selectedVideo.artist && selectedVideo.artistArticleId && (
                 <p className="mt-0.5 text-xs text-gray-400">
                   <Link
-                    href={`/kemponet/kempopedia/wiki/${selectedVideo.artistSlug}`}
+                    href={`/kemponet/kempopedia/wiki/${selectedVideo.artistArticleId}`}
                     className="hover:text-orange-400 transition-colors"
                   >
                     {selectedVideo.artist}

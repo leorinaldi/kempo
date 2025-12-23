@@ -35,7 +35,7 @@ export async function GET(
               lastName: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -50,7 +50,7 @@ export async function GET(
                   firstName: person.firstName,
                   middleName: person.middleName,
                   lastName: person.lastName,
-                  articleSlug: person.article?.slug || null,
+                  articleId: person.article?.id || null,
                 }
               : undefined,
           }
@@ -64,7 +64,7 @@ export async function GET(
               abbreviation: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -78,7 +78,7 @@ export async function GET(
                   id: organization.id,
                   name: organization.name,
                   abbreviation: organization.abbreviation,
-                  articleSlug: organization.article?.slug || null,
+                  articleId: organization.article?.id || null,
                 }
               : undefined,
           }
@@ -91,7 +91,7 @@ export async function GET(
               name: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -104,7 +104,7 @@ export async function GET(
               ? {
                   id: brand.id,
                   name: brand.name,
-                  articleSlug: brand.article?.slug || null,
+                  articleId: brand.article?.id || null,
                 }
               : undefined,
           }
@@ -117,7 +117,7 @@ export async function GET(
               name: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -130,7 +130,7 @@ export async function GET(
               ? {
                   id: product.id,
                   name: product.name,
-                  articleSlug: product.article?.slug || null,
+                  articleId: product.article?.id || null,
                 }
               : undefined,
           }
@@ -144,7 +144,7 @@ export async function GET(
               shortCode: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -158,7 +158,7 @@ export async function GET(
                   id: nation.id,
                   name: nation.name,
                   shortCode: nation.shortCode,
-                  articleSlug: nation.article?.slug || null,
+                  articleId: nation.article?.id || null,
                 }
               : undefined,
           }
@@ -172,7 +172,7 @@ export async function GET(
               abbreviation: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -186,7 +186,7 @@ export async function GET(
                   id: state.id,
                   name: state.name,
                   abbreviation: state.abbreviation,
-                  articleSlug: state.article?.slug || null,
+                  articleId: state.article?.id || null,
                 }
               : undefined,
           }
@@ -199,7 +199,7 @@ export async function GET(
               name: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -212,7 +212,7 @@ export async function GET(
               ? {
                   id: city.id,
                   name: city.name,
-                  articleSlug: city.article?.slug || null,
+                  articleId: city.article?.id || null,
                 }
               : undefined,
           }
@@ -226,7 +226,7 @@ export async function GET(
               placeType: true,
               article: {
                 select: {
-                  slug: true,
+                  id: true,
                 },
               },
             },
@@ -240,7 +240,7 @@ export async function GET(
                   id: place.id,
                   name: place.name,
                   placeType: place.placeType,
-                  articleSlug: place.article?.slug || null,
+                  articleId: place.article?.id || null,
                 }
               : undefined,
           }

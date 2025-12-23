@@ -12,7 +12,7 @@ interface Nation {
   dateFounded: string | null
   dateDissolved: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   _count: { states: number }
   createdAt: string
 }
@@ -40,7 +40,7 @@ interface LinkedState {
   id: string
   name: string
   abbreviation: string | null
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
   _count: { cities: number }
 }
 
@@ -322,7 +322,7 @@ export default function ManageNationsPage() {
                     </p>
                     {nation.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${nation.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${nation.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
@@ -474,7 +474,7 @@ export default function ManageNationsPage() {
                       <span className="text-emerald-600">●</span>
                       {state.article ? (
                         <a
-                          href={`/kemponet/kempopedia/wiki/${state.article.slug}`}
+                          href={`/kemponet/kempopedia/wiki/${state.article.id}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-emerald-600 hover:text-emerald-800 hover:underline"

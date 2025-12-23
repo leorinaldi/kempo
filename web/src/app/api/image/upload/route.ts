@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     const altText = formData.get("altText") as string | null
     const shape = formData.get("shape") as string | null
     const category = formData.get("category") as string | null
-    const articleSlug = formData.get("articleSlug") as string | null
+    const articleId = formData.get("articleId") as string | null
     const widthStr = formData.get("width") as string | null
     const heightStr = formData.get("height") as string | null
 
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         height: height || null,
         shape: calculatedShape,
         category: category || null,
-        articleSlug: articleSlug || null,
+        articleId: articleId || null,
       },
     })
 

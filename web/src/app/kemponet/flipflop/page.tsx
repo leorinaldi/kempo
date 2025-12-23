@@ -5,12 +5,11 @@ import { useRouter } from "next/navigation"
 
 interface Video {
   id: string
-  slug: string
   name: string
   url: string
   description: string
   artist: string
-  artistSlug: string
+  artistArticleId: string
 }
 
 export default function FlipFlopPage() {
@@ -166,13 +165,13 @@ export default function FlipFlopPage() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
-  const handleArtistClick = (artistSlug: string) => {
+  const handleArtistClick = (artistArticleId: string) => {
     const extraParams = [
       isKempoNet ? 'kemponet=1' : '',
       isMobile ? 'mobile=1' : '',
     ].filter(Boolean).join('&')
     const suffix = extraParams ? `?${extraParams}` : ''
-    router.push(`/kemponet/kempopedia/wiki/${artistSlug}${suffix}`)
+    router.push(`/kemponet/kempopedia/wiki/${artistArticleId}${suffix}`)
   }
 
   if (loading) {
@@ -329,7 +328,7 @@ export default function FlipFlopPage() {
           <div className="space-y-1">
             {currentVideo.artist && (
               <button
-                onClick={() => handleArtistClick(currentVideo.artistSlug)}
+                onClick={() => handleArtistClick(currentVideo.artistArticleId)}
                 className="text-pink-400 font-medium hover:underline"
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}
               >

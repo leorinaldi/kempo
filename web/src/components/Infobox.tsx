@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import type { ArticleLinkMap } from '@/lib/articles'
 
 interface InfoboxProps {
   title: string
@@ -9,6 +10,7 @@ interface InfoboxProps {
     caption: string
   }
   fields: Record<string, unknown>
+  linkMap?: ArticleLinkMap
 }
 
 const fieldLabels: Record<string, string> = {
@@ -104,8 +106,8 @@ function dateToTimelineLink(dateStr: string): { page: string; anchor: string } {
   }
 }
 
-// Parse wikilink syntax [[slug|Display Name]] or [[Name]] into link components
-function parseWikilinks(text: string): React.ReactNode[] {
+// Parse wikilink syntax [[Title|Display Name]] or [[Name]] into link components
+function parseWikilinks(text: string, linkMap?: ArticleLinkMap): React.ReactNode[] {
   const parts: React.ReactNode[] = []
   const regex = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g
   let lastIndex = 0
@@ -123,23 +125,42 @@ function parseWikilinks(text: string): React.ReactNode[] {
     // Check if this is a date link (contains k.y.)
     if (isDateLink(target)) {
       const { page, anchor } = dateToTimelineLink(target)
-      parts.push(
-        <Link key={match.index} href={`/kemponet/kempopedia/wiki/${page}#${anchor}`} className="wikilink wikilink-date">
-          {display}
-        </Link>
-      )
+      const articleId = linkMap?.get(page.toLowerCase())
+      if (articleId) {
+        parts.push(
+          <Link key={match.index} href={`/kemponet/kempopedia/wiki/${articleId}#${anchor}`} className="wikilink wikilink-date">
+            {display}
+          </Link>
+        )
+      } else {
+        // Missing article - render as plain text with missing style
+        parts.push(
+          <span key={match.index} className="wikilink wikilink-missing">
+            {display}
+          </span>
+        )
+      }
     } else {
       // Handle anchors: [[page#anchor|Display]]
       const [pagePart, anchorPart] = target.split('#')
-      const slug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-      const href = anchorPart
-        ? `/kemponet/kempopedia/wiki/${slug}#${anchorPart}`
-        : `/kemponet/kempopedia/wiki/${slug}`
-      parts.push(
-        <Link key={match.index} href={href} className="wikilink">
-          {display}
-        </Link>
-      )
+      const articleId = linkMap?.get(pagePart.toLowerCase().trim())
+      if (articleId) {
+        const href = anchorPart
+          ? `/kemponet/kempopedia/wiki/${articleId}#${anchorPart}`
+          : `/kemponet/kempopedia/wiki/${articleId}`
+        parts.push(
+          <Link key={match.index} href={href} className="wikilink">
+            {display}
+          </Link>
+        )
+      } else {
+        // Missing article - render as plain text with missing style
+        parts.push(
+          <span key={match.index} className="wikilink wikilink-missing">
+            {display}
+          </span>
+        )
+      }
     }
 
     lastIndex = regex.lastIndex
@@ -153,12 +174,12 @@ function parseWikilinks(text: string): React.ReactNode[] {
   return parts.length > 0 ? parts : [text]
 }
 
-function formatValue(value: unknown): React.ReactNode {
+function formatValue(value: unknown, linkMap?: ArticleLinkMap): React.ReactNode {
   if (Array.isArray(value)) {
     return value.map((item, index) => (
       <React.Fragment key={index}>
         {index > 0 && ', '}
-        {typeof item === 'string' ? parseWikilinks(item) : String(item)}
+        {typeof item === 'string' ? parseWikilinks(item, linkMap) : String(item)}
       </React.Fragment>
     ))
   }
@@ -166,12 +187,12 @@ function formatValue(value: unknown): React.ReactNode {
     return value.toLocaleString()
   }
   if (typeof value === 'string') {
-    return parseWikilinks(value)
+    return parseWikilinks(value, linkMap)
   }
   return String(value)
 }
 
-export default function Infobox({ title, type, image, fields }: InfoboxProps) {
+export default function Infobox({ title, type, image, fields, linkMap }: InfoboxProps) {
   return (
     <table className="infobox">
       <tbody>
@@ -208,7 +229,7 @@ export default function Infobox({ title, type, image, fields }: InfoboxProps) {
                 {fieldLabels[key] || key.replace(/_/g, ' ')}
               </th>
               <td className="infobox-value">
-                {formatValue(value)}
+                {formatValue(value, linkMap)}
               </td>
             </tr>
           )

@@ -11,7 +11,7 @@ interface Nation {
   shortCode: string | null
   lat: number
   long: number
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
 }
 
 interface State {
@@ -21,7 +21,7 @@ interface State {
   lat: number
   long: number
   nation: { name: string }
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
 }
 
 interface City {
@@ -31,7 +31,7 @@ interface City {
   lat: number
   long: number
   state: { name: string; nation: { name: string } }
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
 }
 
 interface Place {
@@ -41,7 +41,7 @@ interface Place {
   lat: number
   long: number
   city: { name: string; state: { name: string } }
-  article: { slug: string } | null
+  article: { id: string; slug: string } | null
 }
 
 interface LocationData {
@@ -136,7 +136,7 @@ export default function LocationMap({
                 <p className="text-xs text-gray-400 mt-1">Nation</p>
                 {nation.article && (
                   <a
-                    href={`/kemponet/kempopedia/wiki/${nation.article.slug}`}
+                    href={`/kemponet/kempopedia/wiki/${nation.article.id}`}
                     className="text-blue-500 hover:underline text-xs mt-2 block"
                   >
                     View Kempopedia article
@@ -161,7 +161,7 @@ export default function LocationMap({
                 <p className="text-xs text-gray-400 mt-1">State</p>
                 {state.article && (
                   <a
-                    href={`/kemponet/kempopedia/wiki/${state.article.slug}`}
+                    href={`/kemponet/kempopedia/wiki/${state.article.id}`}
                     className="text-indigo-500 hover:underline text-xs mt-2 block"
                   >
                     View Kempopedia article
@@ -187,7 +187,7 @@ export default function LocationMap({
                 </p>
                 {city.article && (
                   <a
-                    href={`/kemponet/kempopedia/wiki/${city.article.slug}`}
+                    href={`/kemponet/kempopedia/wiki/${city.article.id}`}
                     className="text-cyan-500 hover:underline text-xs mt-2 block"
                   >
                     View Kempopedia article
@@ -213,7 +213,7 @@ export default function LocationMap({
                 </p>
                 {place.article && (
                   <a
-                    href={`/kemponet/kempopedia/wiki/${place.article.slug}`}
+                    href={`/kemponet/kempopedia/wiki/${place.article.id}`}
                     className="text-emerald-500 hover:underline text-xs mt-2 block"
                   >
                     View Kempopedia article

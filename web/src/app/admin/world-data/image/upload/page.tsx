@@ -22,7 +22,7 @@ export default function ImageUploadPage() {
     altText: "",
     shape: "landscape" as "landscape" | "portrait" | "square",
     category: "",
-    articleSlug: "",
+    articleId: "",
   })
 
   if (status === "loading") {
@@ -87,7 +87,7 @@ export default function ImageUploadPage() {
       uploadFormData.append("altText", formData.altText)
       uploadFormData.append("shape", formData.shape)
       uploadFormData.append("category", formData.category)
-      uploadFormData.append("articleSlug", formData.articleSlug)
+      uploadFormData.append("articleId", formData.articleId)
       if (detectedWidth) uploadFormData.append("width", detectedWidth.toString())
       if (detectedHeight) uploadFormData.append("height", detectedHeight.toString())
 
@@ -105,7 +105,7 @@ export default function ImageUploadPage() {
       setMessage({ type: "success", text: "Image uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", description: "", altText: "", shape: "landscape", category: "", articleSlug: "" })
+      setFormData({ title: "", description: "", altText: "", shape: "landscape", category: "", articleId: "" })
       setDetectedWidth(null)
       setDetectedHeight(null)
       if (fileInputRef.current) {
@@ -226,14 +226,14 @@ export default function ImageUploadPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Associated Article Slug
+                Associated Article ID
               </label>
               <input
                 type="text"
-                value={formData.articleSlug}
-                onChange={(e) => setFormData({ ...formData, articleSlug: e.target.value })}
+                value={formData.articleId}
+                onChange={(e) => setFormData({ ...formData, articleId: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., clay-marshall (Kempopedia article)"
+                placeholder="e.g., cmjd59zb8005eitwddby33y8n (Kempopedia article ID)"
               />
             </div>
 

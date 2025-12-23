@@ -10,7 +10,7 @@ export interface ParallelSwitchover {
 
 export interface ArticleFrontmatter {
   title: string
-  slug: string
+  id: string
   type: string
   subtype?: string
   status: string
@@ -19,8 +19,11 @@ export interface ArticleFrontmatter {
   dates?: string[]
 }
 
+// Title → ID lookup map type
+export type ArticleLinkMap = Map<string, string>
+
 export interface Article {
-  slug: string
+  id: string
   frontmatter: ArticleFrontmatter
   content: string
   htmlContent: string
@@ -34,13 +37,14 @@ export interface Article {
     url: string
     title?: string
     description?: string
-    article?: string
+    articleId?: string
   }>
   timelineEvents?: Array<{
     date: string
     headline: string
     description: string
   }>
+  linkMap?: ArticleLinkMap // For resolving wikilinks in Infobox
 }
 
 // Convert k.y. date to timeline page and anchor
@@ -92,8 +96,52 @@ function isDateLink(target: string): boolean {
   return /\d+\s*k\.y\./.test(target)
 }
 
-// Process wikilinks in content
-function processWikilinks(content: string): string {
+// Extract all wikilink targets from content (for batch ID lookup)
+export function extractWikilinkTargets(content: string): string[] {
+  const targets: string[] = []
+  const regex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g
+  let match
+  while ((match = regex.exec(content)) !== null) {
+    const target = match[1]
+    if (!isDateLink(target)) {
+      const [pagePart] = target.split('#')
+      targets.push(pagePart.trim())
+    } else {
+      // For date links, extract the timeline page title (e.g., "1940s")
+      const { page } = dateToTimelineLink(target)
+      targets.push(page)
+    }
+  }
+  return Array.from(new Set(targets)) // dedupe
+}
+
+// Get article IDs by their titles or slugs (case-insensitive)
+export async function getArticleIdsByTitles(targets: string[]): Promise<ArticleLinkMap> {
+  if (targets.length === 0) return new Map()
+
+  // Query articles matching by title OR slug
+  const articles = await prisma.article.findMany({
+    where: {
+      OR: [
+        { title: { in: targets, mode: 'insensitive' } },
+        { slug: { in: targets } }
+      ]
+    },
+    select: { id: true, title: true, slug: true }
+  })
+
+  const map = new Map<string, string>()
+  for (const article of articles) {
+    // Store with lowercase title key for case-insensitive matching
+    map.set(article.title.toLowerCase(), article.id)
+    // Also store with slug key for slug-based wikilinks
+    map.set(article.slug.toLowerCase(), article.id)
+  }
+  return map
+}
+
+// Process wikilinks using pre-fetched ID map
+function processWikilinks(content: string, linkMap: ArticleLinkMap): string {
   return content.replace(
     /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
     (_, target, display) => {
@@ -101,28 +149,37 @@ function processWikilinks(content: string): string {
 
       if (isDateLink(target)) {
         const { page, anchor } = dateToTimelineLink(target)
-        return `<a href="/kemponet/kempopedia/wiki/${page}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
+        const articleId = linkMap.get(page.toLowerCase())
+        if (articleId) {
+          return `<a href="/kemponet/kempopedia/wiki/${articleId}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
+        }
+        // Fallback: keep title-based link for missing articles
+        return `<a href="#" class="wikilink wikilink-date wikilink-missing">${linkText}</a>`
       }
 
       const [pagePart, anchorPart] = target.split('#')
-      const linkSlug = pagePart.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-      const href = anchorPart
-        ? `/kemponet/kempopedia/wiki/${linkSlug}#${anchorPart}`
-        : `/kemponet/kempopedia/wiki/${linkSlug}`
-      return `<a href="${href}" class="wikilink">${linkText}</a>`
+      const articleId = linkMap.get(pagePart.toLowerCase().trim())
+      if (articleId) {
+        const href = anchorPart
+          ? `/kemponet/kempopedia/wiki/${articleId}#${anchorPart}`
+          : `/kemponet/kempopedia/wiki/${articleId}`
+        return `<a href="${href}" class="wikilink">${linkText}</a>`
+      }
+      // Fallback: mark as missing link
+      return `<a href="#" class="wikilink wikilink-missing">${linkText}</a>`
     }
   )
 }
 
 // Convert Prisma article to our Article interface
-function prismaToArticle(dbArticle: PrismaArticle): Article {
-  const processedContent = processWikilinks(dbArticle.content)
+function prismaToArticle(dbArticle: PrismaArticle, linkMap: ArticleLinkMap): Article {
+  const processedContent = processWikilinks(dbArticle.content, linkMap)
 
   return {
-    slug: dbArticle.slug,
+    id: dbArticle.id,
     frontmatter: {
       title: dbArticle.title,
-      slug: dbArticle.slug,
+      id: dbArticle.id,
       type: dbArticle.type,
       subtype: dbArticle.subtype || undefined,
       status: dbArticle.status,
@@ -138,12 +195,12 @@ function prismaToArticle(dbArticle: PrismaArticle): Article {
   }
 }
 
-export async function getAllArticleSlugsAsync(): Promise<string[]> {
+export async function getAllArticleIdsAsync(): Promise<string[]> {
   const articles = await prisma.article.findMany({
     where: { status: 'published' },
-    select: { slug: true },
+    select: { id: true },
   })
-  return articles.map(a => a.slug)
+  return articles.map(a => a.id)
 }
 
 // Fast count query - doesn't load all articles
@@ -158,17 +215,46 @@ export async function getAllArticlesAsync(): Promise<Article[]> {
     where: { status: 'published' },
     orderBy: { title: 'asc' },
   })
-  return dbArticles.map(prismaToArticle)
+
+  // Extract all wikilink targets from all articles
+  const allTargets: string[] = []
+  for (const article of dbArticles) {
+    allTargets.push(...extractWikilinkTargets(article.content))
+  }
+
+  // Build link map
+  const linkMap = await getArticleIdsByTitles(Array.from(new Set(allTargets)))
+
+  return dbArticles.map(a => prismaToArticle(a, linkMap))
 }
 
-export async function getArticleBySlugAsync(slug: string): Promise<Article | null> {
+export async function getArticleByIdAsync(id: string): Promise<Article | null> {
   const dbArticle = await prisma.article.findUnique({
-    where: { slug },
+    where: { id },
   })
 
   if (!dbArticle) return null
 
-  const article = prismaToArticle(dbArticle)
+  // Extract wikilink targets and build link map
+  const targets = extractWikilinkTargets(dbArticle.content)
+  // Also extract from infobox fields if present
+  const infobox = dbArticle.infobox as Article['infobox']
+  if (infobox?.fields) {
+    for (const value of Object.values(infobox.fields)) {
+      if (typeof value === 'string') {
+        targets.push(...extractWikilinkTargets(value))
+      } else if (Array.isArray(value)) {
+        for (const item of value) {
+          if (typeof item === 'string') {
+            targets.push(...extractWikilinkTargets(item))
+          }
+        }
+      }
+    }
+  }
+
+  const linkMap = await getArticleIdsByTitles(Array.from(new Set(targets)))
+  const article = prismaToArticle(dbArticle, linkMap)
 
   // Process markdown to HTML
   const processedContent = await remark()
@@ -178,6 +264,7 @@ export async function getArticleBySlugAsync(slug: string): Promise<Article | nul
   return {
     ...article,
     htmlContent: processedContent.toString(),
+    linkMap, // For Infobox to use
   }
 }
 
@@ -223,7 +310,9 @@ export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
     orderBy: { title: 'asc' },
   })
 
-  return dbArticles.map(prismaToArticle)
+  // For category listing, we don't need to resolve wikilinks (they're not rendered)
+  const emptyMap = new Map<string, string>()
+  return dbArticles.map(a => prismaToArticle(a, emptyMap))
 }
 
 export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
@@ -360,9 +449,9 @@ export async function createArticle(data: {
   })
 }
 
-// Update article with automatic linkCount recalculation
-export async function updateArticle(
-  slug: string,
+// Update article with automatic linkCount recalculation (by ID)
+export async function updateArticleById(
+  id: string,
   data: {
     title?: string
     type?: string
@@ -396,7 +485,7 @@ export async function updateArticle(
   if (data.dates !== undefined) updateData.dates = data.dates
 
   return prisma.article.update({
-    where: { slug },
+    where: { id },
     data: updateData,
   })
 }

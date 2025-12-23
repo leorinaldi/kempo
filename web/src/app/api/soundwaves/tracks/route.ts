@@ -26,7 +26,7 @@ export async function GET() {
         p.id,
         {
           name: p.stageName || `${p.nickname || p.firstName} ${p.lastName}`,
-          slug: p.article?.slug || "",
+          articleId: p.article?.id || "",
         },
       ])
     )
@@ -61,7 +61,7 @@ export async function GET() {
         name: a.name,
         url: a.url,
         artist: singer?.name || "",
-        artistSlug: singer?.slug || "",
+        artistArticleId: singer?.articleId || "",
         albumId: album?.id || "",
         albumName: album?.name || "",
       }

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 
 interface SearchResult {
-  slug: string
+  id: string
   title: string
   type: string
   snippet: string
@@ -37,11 +37,11 @@ export async function GET(request: Request) {
     const results = await prisma.$queryRaw<SearchResult[]>`
       (
         SELECT
-          slug,
+          id,
           title,
           type,
           LEFT(content, 200) as snippet,
-          '/kemponet/kempopedia/wiki/' || slug as url,
+          '/kemponet/kempopedia/wiki/' || id as url,
           'kempopedia' as domain,
           ts_rank(
             setweight(to_tsvector('english', title), 'A') ||
@@ -59,7 +59,7 @@ export async function GET(request: Request) {
       UNION ALL
       (
         SELECT
-          p.slug,
+          p.id,
           p.title,
           'page' as type,
           LEFT(p.content, 200) as snippet,
@@ -82,7 +82,7 @@ export async function GET(request: Request) {
       UNION ALL
       (
         SELECT
-          path as slug,
+          id,
           title,
           'app' as type,
           excerpt as snippet,
@@ -128,7 +128,7 @@ export async function GET(request: Request) {
           ],
         },
         select: {
-          slug: true,
+          id: true,
           title: true,
           type: true,
           content: true,
@@ -145,6 +145,7 @@ export async function GET(request: Request) {
           ],
         },
         select: {
+          id: true,
           slug: true,
           title: true,
           content: true,
@@ -156,17 +157,17 @@ export async function GET(request: Request) {
       })
 
       const cleanedArticles = articleResults.map(result => ({
-        slug: result.slug,
+        id: result.id,
         title: result.title,
         type: result.type,
         snippet: cleanSnippet(result.content.slice(0, 200), query),
-        url: `/kemponet/kempopedia/wiki/${result.slug}`,
+        url: `/kemponet/kempopedia/wiki/${result.id}`,
         domain: 'kempopedia',
         rank: 1,
       }))
 
       const cleanedPages = pageResults.map(result => ({
-        slug: result.slug,
+        id: result.id,
         title: result.title,
         type: 'page',
         snippet: cleanSnippet(result.content.slice(0, 200), query),
@@ -188,7 +189,7 @@ export async function GET(request: Request) {
       })
 
       const cleanedApps = appResults.map(result => ({
-        slug: result.path,
+        id: result.id,
         title: result.title,
         type: 'app',
         snippet: result.excerpt,

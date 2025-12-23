@@ -21,6 +21,7 @@ export async function GET(
         productType: true,
         article: {
           select: {
+            id: true,
             slug: true,
           },
         },

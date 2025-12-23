@@ -15,7 +15,7 @@ export async function GET() {
         height: true,
         shape: true,
         category: true,
-        articleSlug: true,
+        articleId: true,
         kyDate: true,
         createdAt: true,
         updatedAt: true,

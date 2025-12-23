@@ -81,9 +81,9 @@ export default async function CategoryPage({ params }: PageProps) {
 
               <ul className="space-y-2">
                 {articles.map((article) => (
-                  <li key={article.slug}>
+                  <li key={article.id}>
                     <Link
-                      href={`/kemponet/kempopedia/wiki/${article.slug}`}
+                      href={`/kemponet/kempopedia/wiki/${article.id}`}
                       className="text-wiki-link hover:underline"
                     >
                       {article.frontmatter.title}

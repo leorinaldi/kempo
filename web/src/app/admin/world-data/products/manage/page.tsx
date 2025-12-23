@@ -18,7 +18,7 @@ interface Product {
   dateIntroduced: string | null
   dateDiscontinued: string | null
   articleId: string | null
-  article: { slug: string; title: string } | null
+  article: { id: string; slug: string; title: string } | null
   createdAt: string
   updatedAt: string
 }
@@ -359,7 +359,7 @@ export default function ManageProductsPage() {
                     </p>
                     {product.article && (
                       <a
-                        href={`/kemponet/kempopedia/wiki/${product.article.slug}`}
+                        href={`/kemponet/kempopedia/wiki/${product.article.id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs text-rose-600 hover:text-rose-800 hover:underline"

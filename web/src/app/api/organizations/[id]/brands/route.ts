@@ -20,6 +20,7 @@ export async function GET(
         name: true,
         article: {
           select: {
+            id: true,
             slug: true,
           },
         },
@@ -30,6 +31,7 @@ export async function GET(
             productType: true,
             article: {
               select: {
+                id: true,
                 slug: true,
               },
             },

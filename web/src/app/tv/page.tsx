@@ -9,7 +9,7 @@ interface Program {
   description?: string
   url: string
   artist: string
-  artistSlug: string
+  artistArticleId: string
 }
 
 type VolumeLevel = "LOW" | "MED" | "HIGH"
@@ -216,7 +216,7 @@ export default function TVPage() {
           >
             {/* Screen */}
             <Link
-              href={!isPlayingIntro && program?.artistSlug ? `/kemponet/kempopedia/wiki/${program.artistSlug}` : '#'}
+              href={!isPlayingIntro && program?.artistArticleId ? `/kemponet/kempopedia/wiki/${program.artistArticleId}` : '#'}
               className="relative w-full aspect-video rounded border-2 border-gray-900 overflow-hidden block cursor-pointer"
               style={{
                 background: isOn ? '#0f172a' : '#1e293b',

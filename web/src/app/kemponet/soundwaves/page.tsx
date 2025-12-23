@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation"
 
 interface Track {
   id: string
-  slug: string
   name: string
   url: string
   artist: string
-  artistSlug: string
+  artistArticleId: string
   albumId: string
   albumName: string
-  albumSlug: string
 }
 
 export default function SoundWavesPage() {
@@ -26,8 +24,8 @@ export default function SoundWavesPage() {
   const [isMobile, setIsMobile] = useState(false)
   const [isKempoNet, setIsKempoNet] = useState(false)
   const [viewMode, setViewMode] = useState<"tracks" | "albums" | "artists" | "album-tracks" | "artist-tracks">("tracks")
-  const [selectedArtist, setSelectedArtist] = useState<{ name: string; slug: string } | null>(null)
-  const [selectedAlbum, setSelectedAlbum] = useState<{ id: string; name: string; slug: string } | null>(null)
+  const [selectedArtist, setSelectedArtist] = useState<{ name: string; articleId: string } | null>(null)
+  const [selectedAlbum, setSelectedAlbum] = useState<{ id: string; name: string } | null>(null)
   const [isRolling, setIsRolling] = useState(false)
   const [isEmbedded, setIsEmbedded] = useState(true) // Assume embedded initially to avoid flash
   // Static logo shape: short-tall-tallest-tall-short (matching the icon)
@@ -53,19 +51,19 @@ export default function SoundWavesPage() {
 
   // Get unique artists from tracks
   const artists = tracks.reduce((acc, track) => {
-    if (track.artist && !acc.find(a => a.slug === track.artistSlug)) {
-      acc.push({ name: track.artist, slug: track.artistSlug })
+    if (track.artist && !acc.find(a => a.articleId === track.artistArticleId)) {
+      acc.push({ name: track.artist, articleId: track.artistArticleId })
     }
     return acc
-  }, [] as { name: string; slug: string }[])
+  }, [] as { name: string; articleId: string }[])
 
   // Get unique albums from tracks
   const albums = tracks.reduce((acc, track) => {
     if (track.albumId && !acc.find(a => a.id === track.albumId)) {
-      acc.push({ id: track.albumId, name: track.albumName, slug: track.albumSlug })
+      acc.push({ id: track.albumId, name: track.albumName })
     }
     return acc
-  }, [] as { id: string; name: string; slug: string }[])
+  }, [] as { id: string; name: string }[])
 
   // Toggle view with rolling animation
   const toggleView = () => {
@@ -91,7 +89,7 @@ export default function SoundWavesPage() {
   }
 
   // Select an artist to view their tracks
-  const selectArtist = (artist: { name: string; slug: string }) => {
+  const selectArtist = (artist: { name: string; articleId: string }) => {
     setIsRolling(true)
     setTimeout(() => {
       setSelectedArtist(artist)
@@ -101,7 +99,7 @@ export default function SoundWavesPage() {
   }
 
   // Select an album to view its tracks
-  const selectAlbum = (album: { id: string; name: string; slug: string }) => {
+  const selectAlbum = (album: { id: string; name: string }) => {
     setIsRolling(true)
     setTimeout(() => {
       setSelectedAlbum(album)
@@ -112,7 +110,7 @@ export default function SoundWavesPage() {
 
   // Get tracks for selected artist
   const selectedArtistTracks = selectedArtist
-    ? tracks.filter(t => t.artistSlug === selectedArtist.slug)
+    ? tracks.filter(t => t.artistArticleId === selectedArtist.articleId)
     : []
 
   // Get tracks for selected album
@@ -308,13 +306,13 @@ export default function SoundWavesPage() {
     audioRef.current.currentTime = percent * duration
   }
 
-  const handleArtistClick = (artistSlug: string) => {
+  const handleArtistClick = (artistArticleId: string) => {
     const extraParams = [
       isKempoNet ? 'kemponet=1' : '',
       isMobile ? 'mobile=1' : '',
     ].filter(Boolean).join('&')
     const suffix = extraParams ? `?${extraParams}` : ''
-    router.push(`/kemponet/kempopedia/wiki/${artistSlug}${suffix}`)
+    router.push(`/kemponet/kempopedia/wiki/${artistArticleId}${suffix}`)
   }
 
   if (loading) {
@@ -472,10 +470,10 @@ export default function SoundWavesPage() {
           /* Artists View */
           <div className="divide-y divide-gray-800">
             {artists.map((artist, index) => {
-              const artistTrackCount = tracks.filter(t => t.artistSlug === artist.slug).length
+              const artistTrackCount = tracks.filter(t => t.artistArticleId === artist.articleId).length
               return (
                 <button
-                  key={artist.slug}
+                  key={artist.articleId}
                   type="button"
                   onClick={(e) => {
                     e.preventDefault()

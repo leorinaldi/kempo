@@ -7,7 +7,7 @@ interface Station {
   id: string
   name: string
   artist: string
-  artistSlug: string
+  artistArticleId: string
   url: string
 }
 
@@ -182,7 +182,7 @@ export default function RadioPage() {
 
           {/* Display Panel */}
           <Link
-            href={isOn && station?.artistSlug ? `/kemponet/kempopedia/wiki/${station.artistSlug}` : '#'}
+            href={isOn && station?.artistArticleId ? `/kemponet/kempopedia/wiki/${station.artistArticleId}` : '#'}
             className={`w-full h-14 rounded border-4 border-gray-900 mb-4 flex items-center justify-center transition-all duration-300 ${isOn ? 'cursor-pointer hover:opacity-90' : 'cursor-default'}`}
             style={{
               background: isOn ? '#e5e7eb' : '#374151',
