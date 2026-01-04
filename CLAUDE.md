@@ -4,6 +4,8 @@
 
 For project overview, storylines, interfaces, and developer setup, see [README.md](README.md).
 
+For entity taxonomy and how data models relate, see [docs/data-model.md](docs/data-model.md).
+
 ## Session Start
 
 When asked to "start session", "follow session start protocol", or similar, follow [docs/Skills/claude-code-session-start](docs/Skills/claude-code-session-start/skill.md).
@@ -16,6 +18,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 | Topic | Location |
 |-------|----------|
+| Data model & taxonomy | [docs/data-model.md](docs/data-model.md) |
 | Article creation rules | [docs/Skills/Kempopedia/global-rules](docs/Skills/Kempopedia/global-rules/skill.md) |
 | KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
 | Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |

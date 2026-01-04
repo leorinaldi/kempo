@@ -1,9 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
-import { redirect } from "next/navigation"
-import Link from "next/link"
+import { DeleteConfirmModal, useAdminAuth, AdminPageLayout, MessageBanner } from "@/components/admin"
 
 interface Album {
   id: string
@@ -43,7 +41,7 @@ interface RecordLabel {
 }
 
 export default function ManageAlbumsPage() {
-  const { data: session, status } = useSession()
+  const { isLoading: authLoading } = useAdminAuth()
 
   const [albums, setAlbums] = useState<Album[]>([])
   const [loading, setLoading] = useState(true)
@@ -71,7 +69,6 @@ export default function ManageAlbumsPage() {
 
   // Delete modal
   const [deleteModal, setDeleteModal] = useState<Album | null>(null)
-  const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
@@ -145,20 +142,12 @@ export default function ManageAlbumsPage() {
     return sortDirection === "asc" ? comparison : -comparison
   })
 
-  if (status === "loading") {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
       </div>
     )
-  }
-
-  if (!session) {
-    redirect("/login")
-  }
-
-  if (!session.user.isAdmin) {
-    redirect("/admin")
   }
 
   const openEditModal = async (album: Album) => {
@@ -236,16 +225,14 @@ export default function ManageAlbumsPage() {
 
   const openDeleteModal = (album: Album) => {
     setDeleteModal(album)
-    setDeleteConfirmText("")
   }
 
   const closeDeleteModal = () => {
     setDeleteModal(null)
-    setDeleteConfirmText("")
   }
 
   const confirmDelete = async () => {
-    if (!deleteModal || deleteConfirmText !== "DELETE") return
+    if (!deleteModal) return
 
     setDeleting(true)
 
@@ -276,90 +263,69 @@ export default function ManageAlbumsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/audio" className="text-gray-500 hover:text-gray-700">
-              ← Back
-            </Link>
-            <h1 className="text-2xl font-bold text-amber-600">Manage Albums</h1>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Albums ({albums.length})</h2>
-            <div className="flex items-center gap-2">
-              <select
-                value={sortField}
-                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "kyDate")}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
-              >
-                <option value="name">Name</option>
-                <option value="createdAt">Created Date</option>
-                <option value="kyDate">Release Date (k.y.)</option>
-              </select>
-              <button
-                onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
-                className="p-1 border border-gray-300 rounded hover:bg-gray-100"
-                title={sortDirection === "asc" ? "Ascending" : "Descending"}
-              >
-                {sortDirection === "asc" ? "↑" : "↓"}
-              </button>
-            </div>
-          </div>
-
-          {message && (
-            <div
-              className={`mb-4 p-3 rounded ${
-                message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-              }`}
+    <AdminPageLayout title="Manage Albums" backHref="/admin/world-data/audio/albums" color="amber">
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold">Albums ({albums.length})</h2>
+          <div className="flex items-center gap-2">
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "kyDate")}
+              className="text-sm border border-gray-300 rounded px-2 py-1"
             >
-              {message.text}
-            </div>
-          )}
-
-          {loading ? (
-            <p className="text-gray-500 text-sm">Loading...</p>
-          ) : sortedAlbums.length === 0 ? (
-            <p className="text-gray-500 text-sm">No albums found</p>
-          ) : (
-            <div className="space-y-2">
-              {sortedAlbums.map((album) => (
-                <div
-                  key={album.id}
-                  className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">{album.name}</p>
-                    <p className="text-xs text-gray-500">
-                      {album.artistName && `by ${album.artistName}`}
-                      {album.kyDate && ` · ${new Date(album.kyDate).getFullYear()}`}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <button
-                      onClick={() => openEditModal(album)}
-                      className="text-amber-600 hover:text-amber-800 text-sm"
-                    >
-                      View/Edit
-                    </button>
-                    <button
-                      onClick={() => openDeleteModal(album)}
-                      className="text-red-600 hover:text-red-800 text-sm"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+              <option value="name">Name</option>
+              <option value="createdAt">Created Date</option>
+              <option value="kyDate">Release Date (k.y.)</option>
+            </select>
+            <button
+              onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
+              className="p-1 border border-gray-300 rounded hover:bg-gray-100"
+              title={sortDirection === "asc" ? "Ascending" : "Descending"}
+            >
+              {sortDirection === "asc" ? "↑" : "↓"}
+            </button>
+          </div>
         </div>
-      </main>
+
+        <MessageBanner message={message} className="mb-4" />
+
+        {loading ? (
+          <p className="text-gray-500 text-sm">Loading...</p>
+        ) : sortedAlbums.length === 0 ? (
+          <p className="text-gray-500 text-sm">No albums found</p>
+        ) : (
+          <div className="space-y-2">
+            {sortedAlbums.map((album) => (
+              <div
+                key={album.id}
+                className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">{album.name}</p>
+                  <p className="text-xs text-gray-500">
+                    {album.artistName && `by ${album.artistName}`}
+                    {album.kyDate && ` · ${new Date(album.kyDate).getFullYear()}`}
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 ml-4">
+                  <button
+                    onClick={() => openEditModal(album)}
+                    className="text-amber-600 hover:text-amber-800 text-sm"
+                  >
+                    View/Edit
+                  </button>
+                  <button
+                    onClick={() => openDeleteModal(album)}
+                    className="text-red-600 hover:text-red-800 text-sm"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Edit Modal */}
       {editModal && (
@@ -492,45 +458,13 @@ export default function ManageAlbumsPage() {
         </div>
       )}
 
-      {/* Delete Modal */}
-      {deleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
-            <p className="text-gray-700 mb-4">
-              Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
-              This action cannot be undone.
-            </p>
-
-            <p className="text-sm text-gray-600 mb-2">
-              Type <strong>DELETE</strong> to confirm:
-            </p>
-            <input
-              type="text"
-              value={deleteConfirmText}
-              onChange={(e) => setDeleteConfirmText(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-              placeholder="Type DELETE"
-              autoFocus
-            />
-            <div className="flex gap-3">
-              <button
-                onClick={closeDeleteModal}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                disabled={deleteConfirmText !== "DELETE" || deleting}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {deleting ? "Deleting..." : "Delete"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      <DeleteConfirmModal
+        isOpen={!!deleteModal}
+        itemName={deleteModal?.name || ""}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        isDeleting={deleting}
+      />
+    </AdminPageLayout>
   )
 }

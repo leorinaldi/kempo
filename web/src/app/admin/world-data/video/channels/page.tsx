@@ -1,9 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
-import { redirect } from "next/navigation"
-import Link from "next/link"
+import { useAdminAuth, AdminPageLayout, MessageBanner } from "@/components/admin"
 
 interface KempoTubeChannel {
   id: string
@@ -35,7 +33,7 @@ interface TvChannel {
 type ChannelType = "kempotube" | "flipflop" | "tv"
 
 export default function ChannelsPage() {
-  const { data: session, status } = useSession()
+  const { isLoading: authLoading } = useAdminAuth()
 
   const [kempoTubeChannels, setKempoTubeChannels] = useState<KempoTubeChannel[]>([])
   const [flipFlopAccounts, setFlipFlopAccounts] = useState<FlipFlopAccount[]>([])
@@ -81,20 +79,12 @@ export default function ChannelsPage() {
     }
   }
 
-  if (status === "loading") {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
       </div>
     )
-  }
-
-  if (!session) {
-    redirect("/login")
-  }
-
-  if (!session.user.isAdmin) {
-    redirect("/admin")
   }
 
   const openCreateModal = (type: ChannelType) => {
@@ -157,126 +147,107 @@ export default function ChannelsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
-          <Link href="/admin/world-data/video" className="text-gray-500 hover:text-gray-700">
-            ← Back
-          </Link>
-          <h1 className="text-2xl font-bold text-gray-800">Video Channels & Accounts</h1>
+    <AdminPageLayout title="Manage Channels" backHref="/admin/world-data/video" color="green">
+      <MessageBanner message={message} className="mb-4" />
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* KempoTube Channels */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-red-600">KempoTube Channels</h2>
+            <button
+              onClick={() => openCreateModal("kempotube")}
+              className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+            >
+              + Add
+            </button>
+          </div>
+          {kempoTubeChannels.length === 0 ? (
+            <p className="text-gray-500 text-sm">No channels</p>
+          ) : (
+            <div className="space-y-2">
+              {kempoTubeChannels.map((channel) => (
+                <div
+                  key={channel.id}
+                  className="p-2 bg-red-50 rounded border border-red-200"
+                >
+                  <p className="font-medium text-sm">{channel.name}</p>
+                  <p className="text-xs text-gray-500">{channel._count.videos} videos</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {message && (
-          <div
-            className={`mb-6 p-3 rounded ${
-              message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-            }`}
-          >
-            {message.text}
+        {/* FlipFlop Accounts */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-pink-600">FlipFlop Accounts</h2>
+            <button
+              onClick={() => openCreateModal("flipflop")}
+              className="text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-1 rounded"
+            >
+              + Add
+            </button>
           </div>
-        )}
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* KempoTube Channels */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-red-600">KempoTube Channels</h2>
-              <button
-                onClick={() => openCreateModal("kempotube")}
-                className="text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-              >
-                + Add
-              </button>
+          {flipFlopAccounts.length === 0 ? (
+            <p className="text-gray-500 text-sm">No accounts</p>
+          ) : (
+            <div className="space-y-2">
+              {flipFlopAccounts.map((account) => (
+                <div
+                  key={account.id}
+                  className="p-2 bg-pink-50 rounded border border-pink-200"
+                >
+                  <p className="font-medium text-sm">{account.name}</p>
+                  <p className="text-xs text-gray-500">
+                    {account.person
+                      ? account.person.stageName || `${account.person.firstName} ${account.person.lastName}`
+                      : "No linked person"}
+                    {" · "}
+                    {account._count.videos} videos
+                  </p>
+                </div>
+              ))}
             </div>
-            {kempoTubeChannels.length === 0 ? (
-              <p className="text-gray-500 text-sm">No channels</p>
-            ) : (
-              <div className="space-y-2">
-                {kempoTubeChannels.map((channel) => (
-                  <div
-                    key={channel.id}
-                    className="p-2 bg-red-50 rounded border border-red-200"
-                  >
-                    <p className="font-medium text-sm">{channel.name}</p>
-                    <p className="text-xs text-gray-500">{channel._count.videos} videos</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* FlipFlop Accounts */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-pink-600">FlipFlop Accounts</h2>
-              <button
-                onClick={() => openCreateModal("flipflop")}
-                className="text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-1 rounded"
-              >
-                + Add
-              </button>
-            </div>
-            {flipFlopAccounts.length === 0 ? (
-              <p className="text-gray-500 text-sm">No accounts</p>
-            ) : (
-              <div className="space-y-2">
-                {flipFlopAccounts.map((account) => (
-                  <div
-                    key={account.id}
-                    className="p-2 bg-pink-50 rounded border border-pink-200"
-                  >
-                    <p className="font-medium text-sm">{account.name}</p>
-                    <p className="text-xs text-gray-500">
-                      {account.person
-                        ? account.person.stageName || `${account.person.firstName} ${account.person.lastName}`
-                        : "No linked person"}
-                      {" · "}
-                      {account._count.videos} videos
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* TV Channels */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-blue-600">TV Channels</h2>
-              <button
-                onClick={() => openCreateModal("tv")}
-                className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
-              >
-                + Add
-              </button>
-            </div>
-            {tvChannels.length === 0 ? (
-              <p className="text-gray-500 text-sm">No channels</p>
-            ) : (
-              <div className="space-y-2">
-                {tvChannels.map((channel) => (
-                  <div
-                    key={channel.id}
-                    className="p-2 bg-blue-50 rounded border border-blue-200"
-                  >
-                    <p className="font-medium text-sm">
-                      {channel.name}
-                      {channel.callSign && (
-                        <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">
-                          {channel.callSign}
-                        </span>
-                      )}
-                    </p>
-                    <p className="text-xs text-gray-500">{channel._count.broadcasts} broadcasts</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          )}
         </div>
-      </main>
+
+        {/* TV Channels */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-blue-600">TV Channels</h2>
+            <button
+              onClick={() => openCreateModal("tv")}
+              className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
+            >
+              + Add
+            </button>
+          </div>
+          {tvChannels.length === 0 ? (
+            <p className="text-gray-500 text-sm">No channels</p>
+          ) : (
+            <div className="space-y-2">
+              {tvChannels.map((channel) => (
+                <div
+                  key={channel.id}
+                  className="p-2 bg-blue-50 rounded border border-blue-200"
+                >
+                  <p className="font-medium text-sm">
+                    {channel.name}
+                    {channel.callSign && (
+                      <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">
+                        {channel.callSign}
+                      </span>
+                    )}
+                  </p>
+                  <p className="text-xs text-gray-500">{channel._count.broadcasts} broadcasts</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Create Modal */}
       {createModal && (
@@ -361,6 +332,6 @@ export default function ChannelsPage() {
           </div>
         </div>
       )}
-    </div>
+    </AdminPageLayout>
   )
 }

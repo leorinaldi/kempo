@@ -9,6 +9,7 @@ Run this skill when the user asks to "start session", "follow session start prot
 Read these files to understand the project:
 - [CLAUDE.md](../../../CLAUDE.md) - AI routing file
 - [README.md](../../../README.md) - Project overview
+- [docs/data-model.md](../data-model.md) - Entity taxonomy and relationships
 
 ### 2. Start Dev Server
 

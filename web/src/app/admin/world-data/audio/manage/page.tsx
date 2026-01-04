@@ -1,9 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
-import { redirect } from "next/navigation"
-import Link from "next/link"
+import { DeleteConfirmModal, useAdminAuth, AdminPageLayout, MessageBanner } from "@/components/admin"
 
 interface AudioElement {
   id: string
@@ -33,7 +31,7 @@ interface Reference {
 }
 
 export default function AudioManagePage() {
-  const { data: session, status } = useSession()
+  const { isLoading: authLoading } = useAdminAuth()
 
   // Audio files from database
   const [audioFiles, setAudioFiles] = useState<AudioFile[]>([])
@@ -64,7 +62,6 @@ export default function AudioManagePage() {
 
   // Delete confirmation modal
   const [deleteModal, setDeleteModal] = useState<{ url: string; name: string; id: string } | null>(null)
-  const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [references, setReferences] = useState<Reference[]>([])
   const [loadingReferences, setLoadingReferences] = useState(false)
 
@@ -135,7 +132,7 @@ export default function AudioManagePage() {
     }
   }
 
-  if (status === "loading") {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
@@ -143,17 +140,8 @@ export default function AudioManagePage() {
     )
   }
 
-  if (!session) {
-    redirect("/login")
-  }
-
-  if (!session.user.isAdmin) {
-    redirect("/admin")
-  }
-
   const openDeleteModal = async (url: string, name: string, id: string) => {
     setDeleteModal({ url, name, id })
-    setDeleteConfirmText("")
     setReferences([])
     setLoadingReferences(true)
 
@@ -176,7 +164,6 @@ export default function AudioManagePage() {
 
   const closeDeleteModal = () => {
     setDeleteModal(null)
-    setDeleteConfirmText("")
     setReferences([])
   }
 
@@ -319,7 +306,7 @@ export default function AudioManagePage() {
   }
 
   const confirmDelete = async () => {
-    if (!deleteModal || deleteConfirmText !== "DELETE") return
+    if (!deleteModal) return
 
     setDeletingAudio(deleteModal.url)
     setLibraryMessage(null)
@@ -360,165 +347,87 @@ export default function AudioManagePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/audio" className="text-gray-500 hover:text-gray-700">
-              ← Back
-            </Link>
-            <h1 className="text-2xl font-bold text-amber-600">Manage Audio</h1>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Audio Library */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Audio Library</h2>
-            <div className="flex items-center gap-2">
-              <select
-                value={sortField}
-                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "kyDate")}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
-              >
-                <option value="name">Alphabetical</option>
-                <option value="createdAt">Upload Date</option>
-                <option value="kyDate">Kempo Year</option>
-              </select>
-              <button
-                onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
-                className="p-1 border border-gray-300 rounded hover:bg-gray-100"
-                title={sortDirection === "asc" ? "Ascending" : "Descending"}
-              >
-                {sortDirection === "asc" ? "↑" : "↓"}
-              </button>
-            </div>
-          </div>
-
-          {libraryMessage && (
-            <div
-              className={`mb-4 p-3 rounded ${
-                libraryMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-              }`}
+    <AdminPageLayout title="Manage Audio" backHref="/admin/world-data/audio" color="amber">
+      {/* Audio Library */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold">Audio Library</h2>
+          <div className="flex items-center gap-2">
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "kyDate")}
+              className="text-sm border border-gray-300 rounded px-2 py-1"
             >
-              {libraryMessage.text}
-            </div>
-          )}
-
-          {sortedAudioFiles.length === 0 ? (
-            <p className="text-gray-500 text-sm">No audio files uploaded</p>
-          ) : (
-            <div className="space-y-2">
-              {sortedAudioFiles.map((file) => (
-                <div
-                  key={file.url}
-                  className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">{file.name}</p>
-                    <p className="text-xs text-gray-500 truncate">
-                      {file.duration && `${Math.floor(file.duration / 60)}:${Math.floor(file.duration % 60).toString().padStart(2, '0')}`}
-                      <span className="ml-2 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">
-                        {file.type}
-                      </span>
-                    </p>
-                    <p className="text-xs text-gray-400">
-                      Uploaded: {new Date(file.createdAt).toLocaleDateString()}
-                      {file.kyDate && ` · k.y. ${new Date(file.kyDate).toLocaleDateString()}`}
-                      {file.elements.length > 0 && ` · ${file.elements.length} link${file.elements.length > 1 ? 's' : ''}`}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <button
-                      onClick={() => openEditModal(file)}
-                      className="text-amber-600 hover:text-amber-800 text-sm"
-                    >
-                      View/Edit
-                    </button>
-                    <button
-                      onClick={() => openDeleteModal(file.url, file.name, file.id)}
-                      disabled={deletingAudio === file.url}
-                      className="text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
-                    >
-                      {deletingAudio === file.url ? "Deleting..." : "Delete"}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </main>
-
-      {/* Delete Confirmation Modal */}
-      {deleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
-            <p className="text-gray-700 mb-4">
-              Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
-              This will permanently remove both the database record and the blob file. This action cannot be undone.
-            </p>
-
-            {/* References section */}
-            {loadingReferences ? (
-              <div className="mb-4 p-3 bg-gray-50 rounded border">
-                <p className="text-sm text-gray-600">Searching for references...</p>
-              </div>
-            ) : references.length > 0 ? (
-              <div className="mb-4 p-3 bg-amber-50 rounded border border-amber-200">
-                <p className="text-sm font-medium text-amber-800 mb-2">
-                  Found {references.length} reference{references.length > 1 ? 's' : ''} that will be removed:
-                </p>
-                <ul className="text-sm text-amber-700 space-y-1">
-                  {references.map((ref, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <span className="text-xs bg-amber-100 px-1.5 py-0.5 rounded">
-                        {ref.type}
-                      </span>
-                      <span>{ref.title}</span>
-                      <span className="text-xs text-amber-600">({ref.field})</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <div className="mb-4 p-3 bg-green-50 rounded border border-green-200">
-                <p className="text-sm text-green-700">No references found in articles or pages.</p>
-              </div>
-            )}
-
-            <p className="text-sm text-gray-600 mb-2">
-              Type <strong>DELETE</strong> to confirm:
-            </p>
-            <input
-              type="text"
-              value={deleteConfirmText}
-              onChange={(e) => setDeleteConfirmText(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-              placeholder="Type DELETE"
-              autoFocus
-            />
-            <div className="flex gap-3">
-              <button
-                onClick={closeDeleteModal}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                disabled={deleteConfirmText !== "DELETE" || deletingAudio === deleteModal.url}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {deletingAudio === deleteModal.url ? "Deleting..." : "Delete"}
-              </button>
-            </div>
+              <option value="name">Alphabetical</option>
+              <option value="createdAt">Upload Date</option>
+              <option value="kyDate">Kempo Year</option>
+            </select>
+            <button
+              onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
+              className="p-1 border border-gray-300 rounded hover:bg-gray-100"
+              title={sortDirection === "asc" ? "Ascending" : "Descending"}
+            >
+              {sortDirection === "asc" ? "↑" : "↓"}
+            </button>
           </div>
         </div>
-      )}
+
+        <MessageBanner message={libraryMessage} className="mb-4" />
+
+        {sortedAudioFiles.length === 0 ? (
+          <p className="text-gray-500 text-sm">No audio files uploaded</p>
+        ) : (
+          <div className="space-y-2">
+            {sortedAudioFiles.map((file) => (
+              <div
+                key={file.url}
+                className="flex items-center justify-between p-3 bg-amber-50 rounded border border-amber-200"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">{file.name}</p>
+                  <p className="text-xs text-gray-500 truncate">
+                    {file.duration && `${Math.floor(file.duration / 60)}:${Math.floor(file.duration % 60).toString().padStart(2, '0')}`}
+                    <span className="ml-2 px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded text-xs">
+                      {file.type}
+                    </span>
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    Uploaded: {new Date(file.createdAt).toLocaleDateString()}
+                    {file.kyDate && ` · k.y. ${new Date(file.kyDate).toLocaleDateString()}`}
+                    {file.elements.length > 0 && ` · ${file.elements.length} link${file.elements.length > 1 ? 's' : ''}`}
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 ml-4">
+                  <button
+                    onClick={() => openEditModal(file)}
+                    className="text-amber-600 hover:text-amber-800 text-sm"
+                  >
+                    View/Edit
+                  </button>
+                  <button
+                    onClick={() => openDeleteModal(file.url, file.name, file.id)}
+                    disabled={deletingAudio === file.url}
+                    className="text-red-600 hover:text-red-800 text-sm disabled:opacity-50"
+                  >
+                    {deletingAudio === file.url ? "Deleting..." : "Delete"}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <DeleteConfirmModal
+        isOpen={!!deleteModal}
+        itemName={deleteModal?.name || ""}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        isDeleting={!!deletingAudio}
+        warningMessage="This will permanently remove both the database record and the blob file."
+        references={references}
+        loadingReferences={loadingReferences}
+      />
 
       {/* Edit Modal */}
       {editModal && (
@@ -774,6 +683,6 @@ export default function AudioManagePage() {
           </div>
         </div>
       )}
-    </div>
+    </AdminPageLayout>
   )
 }

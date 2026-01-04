@@ -1,9 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
-import { redirect } from "next/navigation"
-import Link from "next/link"
+import { DeleteConfirmModal, useAdminAuth, AdminPageLayout, MessageBanner } from "@/components/admin"
 
 interface Place {
   id: string
@@ -30,7 +28,7 @@ interface City {
 
 interface Article {
   id: string
-  
+
   title: string
 }
 
@@ -42,7 +40,7 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  
+
   name: string
   url: string
 }
@@ -69,7 +67,7 @@ const PLACE_TYPES = [
 ]
 
 export default function ManagePlacesPage() {
-  const { data: session, status } = useSession()
+  const { isLoading: authLoading } = useAdminAuth()
 
   const [places, setPlaces] = useState<Place[]>([])
   const [cities, setCities] = useState<City[]>([])
@@ -100,7 +98,6 @@ export default function ManagePlacesPage() {
   const [neighborhoodOptions, setNeighborhoodOptions] = useState<NeighborhoodOption[]>([])
 
   const [deleteModal, setDeleteModal] = useState<Place | null>(null)
-  const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
@@ -144,20 +141,12 @@ export default function ManagePlacesPage() {
     return sortDirection === "asc" ? comparison : -comparison
   })
 
-  if (status === "loading") {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
       </div>
     )
-  }
-
-  if (!session) {
-    redirect("/login")
-  }
-
-  if (!session.user.isAdmin) {
-    redirect("/admin")
   }
 
   const openEditModal = async (place: Place) => {
@@ -259,16 +248,14 @@ export default function ManagePlacesPage() {
 
   const openDeleteModal = (place: Place) => {
     setDeleteModal(place)
-    setDeleteConfirmText("")
   }
 
   const closeDeleteModal = () => {
     setDeleteModal(null)
-    setDeleteConfirmText("")
   }
 
   const confirmDelete = async () => {
-    if (!deleteModal || deleteConfirmText !== "DELETE") return
+    if (!deleteModal) return
 
     setDeleting(true)
 
@@ -300,111 +287,98 @@ export default function ManagePlacesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/locations/places" className="text-gray-500 hover:text-gray-700">
-              ← Back
-            </Link>
-            <h1 className="text-2xl font-bold text-emerald-600">Manage Places</h1>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
-            <h2 className="text-lg font-semibold">Places ({sortedPlaces.length})</h2>
-            <div className="flex items-center gap-2 flex-wrap">
-              <select
-                value={filterCity}
-                onChange={(e) => setFilterCity(e.target.value)}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
-              >
-                <option value="">All Cities</option>
-                {cities.map((city) => (
-                  <option key={city.id} value={city.id}>
-                    {city.name}, {city.state.name}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
-              >
-                <option value="">All Types</option>
-                {PLACE_TYPES.map((type) => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={sortField}
-                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateOpened")}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
-              >
-                <option value="name">Name</option>
-                <option value="createdAt">Created Date</option>
-                <option value="dateOpened">Opened Date (k.y.)</option>
-              </select>
-              <button
-                onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
-                className="p-1 border border-gray-300 rounded hover:bg-gray-100"
-              >
-                {sortDirection === "asc" ? "↑" : "↓"}
-              </button>
-            </div>
-          </div>
-
-          {message && (
-            <div className={`mb-4 p-3 rounded ${message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
-              {message.text}
-            </div>
-          )}
-
-          {loading ? (
-            <p className="text-gray-500 text-sm">Loading...</p>
-          ) : sortedPlaces.length === 0 ? (
-            <p className="text-gray-500 text-sm">No places found</p>
-          ) : (
-            <div className="space-y-2">
-              {sortedPlaces.map((place) => (
-                <div key={place.id} className="flex items-center justify-between p-3 bg-emerald-50 rounded border border-emerald-200">
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">
-                      {place.name}
-                      {place.parentPlace && <span className="text-gray-500"> (in {place.parentPlace.name})</span>}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {formatPlaceType(place.placeType)} · {place.city.name}, {place.city.state.name}
-                      {place.address && ` · ${place.address}`}
-                      {place.dateOpened && ` · Opened: ${new Date(place.dateOpened).getFullYear()} k.y.`}
-                      {place.dateClosed && ` · Closed: ${new Date(place.dateClosed).getFullYear()} k.y.`}
-                    </p>
-                    {place.article && (
-                      <a
-                        href={`/kemponet/kempopedia/wiki/${place.article.id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
-                      >
-                        📄 {place.article.title}
-                      </a>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <button onClick={() => openEditModal(place)} className="text-emerald-600 hover:text-emerald-800 text-sm">View/Edit</button>
-                    <button onClick={() => openDeleteModal(place)} className="text-red-600 hover:text-red-800 text-sm">Delete</button>
-                  </div>
-                </div>
+    <AdminPageLayout
+      title="Manage Places"
+      backHref="/admin/world-data/locations/places"
+      color="emerald"
+    >
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
+          <h2 className="text-lg font-semibold">Places ({sortedPlaces.length})</h2>
+          <div className="flex items-center gap-2 flex-wrap">
+            <select
+              value={filterCity}
+              onChange={(e) => setFilterCity(e.target.value)}
+              className="text-sm border border-gray-300 rounded px-2 py-1"
+            >
+              <option value="">All Cities</option>
+              {cities.map((city) => (
+                <option key={city.id} value={city.id}>
+                  {city.name}, {city.state.name}
+                </option>
               ))}
-            </div>
-          )}
+            </select>
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+              className="text-sm border border-gray-300 rounded px-2 py-1"
+            >
+              <option value="">All Types</option>
+              {PLACE_TYPES.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateOpened")}
+              className="text-sm border border-gray-300 rounded px-2 py-1"
+            >
+              <option value="name">Name</option>
+              <option value="createdAt">Created Date</option>
+              <option value="dateOpened">Opened Date (k.y.)</option>
+            </select>
+            <button
+              onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
+              className="p-1 border border-gray-300 rounded hover:bg-gray-100"
+            >
+              {sortDirection === "asc" ? "↑" : "↓"}
+            </button>
+          </div>
         </div>
-      </main>
+
+        <MessageBanner message={message} className="mb-4" />
+
+        {loading ? (
+          <p className="text-gray-500 text-sm">Loading...</p>
+        ) : sortedPlaces.length === 0 ? (
+          <p className="text-gray-500 text-sm">No places found</p>
+        ) : (
+          <div className="space-y-2">
+            {sortedPlaces.map((place) => (
+              <div key={place.id} className="flex items-center justify-between p-3 bg-emerald-50 rounded border border-emerald-200">
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">
+                    {place.name}
+                    {place.parentPlace && <span className="text-gray-500"> (in {place.parentPlace.name})</span>}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {formatPlaceType(place.placeType)} · {place.city.name}, {place.city.state.name}
+                    {place.address && ` · ${place.address}`}
+                    {place.dateOpened && ` · Opened: ${new Date(place.dateOpened).getFullYear()} k.y.`}
+                    {place.dateClosed && ` · Closed: ${new Date(place.dateClosed).getFullYear()} k.y.`}
+                  </p>
+                  {place.article && (
+                    <a
+                      href={`/kemponet/kempopedia/wiki/${place.article.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
+                    >
+                      📄 {place.article.title}
+                    </a>
+                  )}
+                </div>
+                <div className="flex items-center gap-3 ml-4">
+                  <button onClick={() => openEditModal(place)} className="text-emerald-600 hover:text-emerald-800 text-sm">View/Edit</button>
+                  <button onClick={() => openDeleteModal(place)} className="text-red-600 hover:text-red-800 text-sm">Delete</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Edit Modal */}
       {editModal && (
@@ -567,39 +541,18 @@ export default function ManagePlacesPage() {
         </div>
       )}
 
-      {/* Delete Modal */}
-      {deleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
-            <p className="text-gray-700 mb-4">
-              Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
-              {deleteModal._count.childPlaces > 0 && (
-                <span className="text-red-600"> This will also delete {deleteModal._count.childPlaces} child place{deleteModal._count.childPlaces !== 1 ? "s" : ""}.</span>
-              )}
-            </p>
-            <p className="text-sm text-gray-600 mb-2">Type <strong>DELETE</strong> to confirm:</p>
-            <input
-              type="text"
-              value={deleteConfirmText}
-              onChange={(e) => setDeleteConfirmText(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-              placeholder="Type DELETE"
-              autoFocus
-            />
-            <div className="flex gap-3">
-              <button onClick={closeDeleteModal} className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded">Cancel</button>
-              <button
-                onClick={confirmDelete}
-                disabled={deleteConfirmText !== "DELETE" || deleting}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {deleting ? "Deleting..." : "Delete"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      <DeleteConfirmModal
+        isOpen={!!deleteModal}
+        itemName={deleteModal?.name || ""}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        isDeleting={deleting}
+        warningMessage={
+          deleteModal && deleteModal._count.childPlaces > 0
+            ? `This will also delete ${deleteModal._count.childPlaces} child place${deleteModal._count.childPlaces !== 1 ? "s" : ""}.`
+            : undefined
+        }
+      />
+    </AdminPageLayout>
   )
 }

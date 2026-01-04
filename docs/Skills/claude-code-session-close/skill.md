@@ -19,6 +19,7 @@ Consider whether any process documents need updating based on work done:
 |----------|--------------|
 | `CLAUDE.md` | File locations changed, new skills added |
 | `README.md` | Project structure changed, new interfaces added |
+| `docs/data-model.md` | New entity types added, relationships changed, new polymorphic patterns |
 | `docs/*.md` | Workflows or patterns changed |
 | Skills | New repeatable process emerged |
 

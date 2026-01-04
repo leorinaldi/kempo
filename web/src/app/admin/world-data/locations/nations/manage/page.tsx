@@ -1,9 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
-import { redirect } from "next/navigation"
-import Link from "next/link"
+import { DeleteConfirmModal, useAdminAuth, AdminPageLayout, MessageBanner } from "@/components/admin"
 
 interface Nation {
   id: string
@@ -19,7 +17,7 @@ interface Nation {
 
 interface Article {
   id: string
-  
+
   title: string
 }
 
@@ -31,7 +29,7 @@ interface Inspiration {
 
 interface LinkedImage {
   id: string
-  
+
   name: string
   url: string
 }
@@ -45,7 +43,7 @@ interface LinkedState {
 }
 
 export default function ManageNationsPage() {
-  const { data: session, status } = useSession()
+  const { isLoading: authLoading } = useAdminAuth()
 
   const [nations, setNations] = useState<Nation[]>([])
   const [loading, setLoading] = useState(true)
@@ -70,7 +68,6 @@ export default function ManageNationsPage() {
   const [linkedStates, setLinkedStates] = useState<LinkedState[]>([])
 
   const [deleteModal, setDeleteModal] = useState<Nation | null>(null)
-  const [deleteConfirmText, setDeleteConfirmText] = useState("")
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
@@ -105,20 +102,12 @@ export default function ManageNationsPage() {
     return sortDirection === "asc" ? comparison : -comparison
   })
 
-  if (status === "loading") {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Loading...</p>
       </div>
     )
-  }
-
-  if (!session) {
-    redirect("/login")
-  }
-
-  if (!session.user.isAdmin) {
-    redirect("/admin")
   }
 
   const openEditModal = async (nation: Nation) => {
@@ -215,16 +204,14 @@ export default function ManageNationsPage() {
 
   const openDeleteModal = (nation: Nation) => {
     setDeleteModal(nation)
-    setDeleteConfirmText("")
   }
 
   const closeDeleteModal = () => {
     setDeleteModal(null)
-    setDeleteConfirmText("")
   }
 
   const confirmDelete = async () => {
-    if (!deleteModal || deleteConfirmText !== "DELETE") return
+    if (!deleteModal) return
 
     setDeleting(true)
 
@@ -251,104 +238,87 @@ export default function ManageNationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/admin/world-data/locations/nations" className="text-gray-500 hover:text-gray-700">
-              ← Back
-            </Link>
-            <h1 className="text-2xl font-bold text-emerald-600">Manage Nations</h1>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Nations ({nations.length})</h2>
-            <div className="flex items-center gap-2">
-              <select
-                value={sortField}
-                onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateFounded")}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
-              >
-                <option value="name">Name</option>
-                <option value="createdAt">Created Date</option>
-                <option value="dateFounded">Founded Date (k.y.)</option>
-              </select>
-              <button
-                onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
-                className="p-1 border border-gray-300 rounded hover:bg-gray-100"
-                title={sortDirection === "asc" ? "Ascending" : "Descending"}
-              >
-                {sortDirection === "asc" ? "↑" : "↓"}
-              </button>
-            </div>
-          </div>
-
-          {message && (
-            <div
-              className={`mb-4 p-3 rounded ${
-                message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-              }`}
+    <AdminPageLayout
+      title="Manage Nations"
+      backHref="/admin/world-data/locations/nations"
+      color="blue"
+    >
+      <div className="bg-white rounded-lg shadow p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold">Nations ({nations.length})</h2>
+          <div className="flex items-center gap-2">
+            <select
+              value={sortField}
+              onChange={(e) => setSortField(e.target.value as "name" | "createdAt" | "dateFounded")}
+              className="text-sm border border-gray-300 rounded px-2 py-1"
             >
-              {message.text}
-            </div>
-          )}
-
-          {loading ? (
-            <p className="text-gray-500 text-sm">Loading...</p>
-          ) : sortedNations.length === 0 ? (
-            <p className="text-gray-500 text-sm">No nations found</p>
-          ) : (
-            <div className="space-y-2">
-              {sortedNations.map((nation) => (
-                <div
-                  key={nation.id}
-                  className="flex items-center justify-between p-3 bg-emerald-50 rounded border border-emerald-200"
-                >
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">
-                      {nation.name}
-                      {nation.shortCode && <span className="text-gray-500"> ({nation.shortCode})</span>}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {nation._count.states} state{nation._count.states !== 1 ? "s" : ""}
-                      {nation.dateFounded && ` · Founded: ${new Date(nation.dateFounded).getFullYear()} k.y.`}
-                      {nation.dateDissolved && ` · Dissolved: ${new Date(nation.dateDissolved).getFullYear()} k.y.`}
-                    </p>
-                    {nation.article && (
-                      <a
-                        href={`/kemponet/kempopedia/wiki/${nation.article.id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
-                      >
-                        📄 {nation.article.title}
-                      </a>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-3 ml-4">
-                    <button
-                      onClick={() => openEditModal(nation)}
-                      className="text-emerald-600 hover:text-emerald-800 text-sm"
-                    >
-                      View/Edit
-                    </button>
-                    <button
-                      onClick={() => openDeleteModal(nation)}
-                      className="text-red-600 hover:text-red-800 text-sm"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+              <option value="name">Name</option>
+              <option value="createdAt">Created Date</option>
+              <option value="dateFounded">Founded Date (k.y.)</option>
+            </select>
+            <button
+              onClick={() => setSortDirection(sortDirection === "asc" ? "desc" : "asc")}
+              className="p-1 border border-gray-300 rounded hover:bg-gray-100"
+              title={sortDirection === "asc" ? "Ascending" : "Descending"}
+            >
+              {sortDirection === "asc" ? "↑" : "↓"}
+            </button>
+          </div>
         </div>
-      </main>
+
+        <MessageBanner message={message} className="mb-4" />
+
+        {loading ? (
+          <p className="text-gray-500 text-sm">Loading...</p>
+        ) : sortedNations.length === 0 ? (
+          <p className="text-gray-500 text-sm">No nations found</p>
+        ) : (
+          <div className="space-y-2">
+            {sortedNations.map((nation) => (
+              <div
+                key={nation.id}
+                className="flex items-center justify-between p-3 bg-blue-50 rounded border border-blue-200"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">
+                    {nation.name}
+                    {nation.shortCode && <span className="text-gray-500"> ({nation.shortCode})</span>}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {nation._count.states} state{nation._count.states !== 1 ? "s" : ""}
+                    {nation.dateFounded && ` · Founded: ${new Date(nation.dateFounded).getFullYear()} k.y.`}
+                    {nation.dateDissolved && ` · Dissolved: ${new Date(nation.dateDissolved).getFullYear()} k.y.`}
+                  </p>
+                  {nation.article && (
+                    <a
+                      href={`/kemponet/kempopedia/wiki/${nation.article.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                    >
+                      📄 {nation.article.title}
+                    </a>
+                  )}
+                </div>
+                <div className="flex items-center gap-3 ml-4">
+                  <button
+                    onClick={() => openEditModal(nation)}
+                    className="text-blue-600 hover:text-blue-800 text-sm"
+                  >
+                    View/Edit
+                  </button>
+                  <button
+                    onClick={() => openDeleteModal(nation)}
+                    className="text-red-600 hover:text-red-800 text-sm"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Edit Modal */}
       {editModal && (
@@ -440,7 +410,7 @@ export default function ManageNationsPage() {
                         href={insp.wikipediaUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm hover:bg-emerald-200"
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200"
                       >
                         {insp.inspiration}
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -469,13 +439,13 @@ export default function ManageNationsPage() {
                 <div className="space-y-2">
                   {linkedStates.map((state) => (
                     <div key={state.id} className="flex items-center gap-2 text-sm">
-                      <span className="text-emerald-600">●</span>
+                      <span className="text-blue-600">●</span>
                       {state.article ? (
                         <a
                           href={`/kemponet/kempopedia/wiki/${state.article.id}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-emerald-600 hover:text-emerald-800 hover:underline"
+                          className="text-blue-600 hover:text-blue-800 hover:underline"
                         >
                           {state.name}
                         </a>
@@ -511,7 +481,7 @@ export default function ManageNationsPage() {
                       <img
                         src={img.url}
                         alt={img.name}
-                        className="h-16 w-16 object-cover rounded border border-emerald-300 hover:border-emerald-500"
+                        className="h-16 w-16 object-cover rounded border border-blue-300 hover:border-blue-500"
                       />
                     </a>
                   ))}
@@ -529,7 +499,7 @@ export default function ManageNationsPage() {
               <button
                 onClick={saveEdit}
                 disabled={saving}
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>
@@ -538,49 +508,18 @@ export default function ManageNationsPage() {
         </div>
       )}
 
-      {/* Delete Modal */}
-      {deleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-bold text-red-600 mb-2">Confirm Delete</h3>
-            <p className="text-gray-700 mb-4">
-              Are you sure you want to delete <strong>&quot;{deleteModal.name}&quot;</strong>?
-              {deleteModal._count.states > 0 && (
-                <span className="text-red-600">
-                  {" "}This will also delete {deleteModal._count.states} state{deleteModal._count.states !== 1 ? "s" : ""} and all their cities and places.
-                </span>
-              )}
-            </p>
-
-            <p className="text-sm text-gray-600 mb-2">
-              Type <strong>DELETE</strong> to confirm:
-            </p>
-            <input
-              type="text"
-              value={deleteConfirmText}
-              onChange={(e) => setDeleteConfirmText(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-              placeholder="Type DELETE"
-              autoFocus
-            />
-            <div className="flex gap-3">
-              <button
-                onClick={closeDeleteModal}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                disabled={deleteConfirmText !== "DELETE" || deleting}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {deleting ? "Deleting..." : "Delete"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      <DeleteConfirmModal
+        isOpen={!!deleteModal}
+        itemName={deleteModal?.name || ""}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        isDeleting={deleting}
+        warningMessage={
+          deleteModal && deleteModal._count?.states > 0
+            ? `This will also delete ${deleteModal._count.states} state${deleteModal._count.states !== 1 ? "s" : ""} and all their cities and places.`
+            : undefined
+        }
+      />
+    </AdminPageLayout>
   )
 }
