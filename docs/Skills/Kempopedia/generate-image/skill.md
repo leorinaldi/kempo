@@ -1,14 +1,34 @@
 # Generate Image Skill
 
-Generate images for Kempopedia articles using the Grok API.
+Generate images for Kempopedia articles using the Grok API, with automatic upload to Vercel Blob and database tracking.
 
 ## Usage
 
 ```bash
-node scripts/generate-image.js <slug> "<prompt>"
+node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 ```
 
-Images are saved to `/web/public/media/<slug>.jpg`
+### Options
+
+| Option | Description |
+|--------|-------------|
+| `--name "Name"` | Name for the image (required) |
+| `--caption "Text"` | Image caption/description |
+| `--category "type"` | Category: portrait, location, product, logo, etc. |
+| `--article-id "id"` | Link to an article ID |
+
+### Examples
+
+```bash
+# Person portrait
+node scripts/generate-image.js "1940s presidential portrait, black and white. Comic book style drawing." --name "Harold Kellman" --category "portrait"
+
+# Location
+node scripts/generate-image.js "Comic book illustration of a Western town main street, 1940s. Black and white." --name "Abilene Main Street" --category "location"
+
+# Flag
+node scripts/generate-image.js "Comic book illustration, bold ink lines. The flag of a fictional nation waving against blue sky. Full color." --name "Republic of Atlasia Flag" --category "logo"
+```
 
 ## Prompt Formula
 
@@ -65,18 +85,31 @@ Comic book illustration, bold ink lines, graphic novel style. A prestigious Amer
 ## Workflow
 
 1. Create the article with image placeholder in infobox
-2. Generate image immediately after
-3. Verify image was created
-4. User reviews article with image in context
+2. Run the generate-image script with prompt and name
+3. Script generates image, uploads to Vercel Blob, creates Image record
+4. Copy the Blob URL from output to article infobox
+5. Optionally link image to subjects in admin UI
 
-```json
-"image": {
-  "url": "/media/<slug>.jpg",
-  "caption": "Name, circa YEAR k.y."
-}
-```
+## Output
+
+The script outputs:
+- Image ID (for database reference)
+- Blob URL (for article infobox)
+- Ready-to-use infobox JSON snippet
+
+## Environment Variables
+
+Required in `.env` files:
+
+| Variable | Location | Purpose |
+|----------|----------|---------|
+| `XAI_API_KEY` | `.env` (root) | Grok API key |
+| `DATABASE_URL` | `web/.env.local` | PostgreSQL connection |
+| `BLOB_READ_WRITE_TOKEN` | `web/.env.local` | Vercel Blob token |
 
 ## Troubleshooting
 
-- **"XAI_API_KEY not found"**: Ensure `.env` file exists in `/Kempo/` with `XAI_API_KEY="your-key"`
+- **"XAI_API_KEY not found"**: Add to `.env` in project root
+- **"DATABASE_URL not found"**: Add to `web/.env.local`
+- **"BLOB_READ_WRITE_TOKEN not found"**: Add to `web/.env.local`
 - **API errors**: Check API key validity at https://x.ai/

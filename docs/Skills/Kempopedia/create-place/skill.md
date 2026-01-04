@@ -32,7 +32,7 @@ parallel_switchover:  # Only if applicable
 tags:
   - country-adjective
   - state-or-region
-  - parallel-switchover  # if applicable
+  - inspirations  # if has real-world inspiration
 ---
 ```
 

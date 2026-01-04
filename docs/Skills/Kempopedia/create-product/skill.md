@@ -27,7 +27,7 @@ parallel_switchover:
 tags:
   - nationality
   - industry
-  - parallel-switchover
+  - inspirations
 ---
 ```
 

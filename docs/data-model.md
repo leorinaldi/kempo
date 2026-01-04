@@ -35,12 +35,19 @@ MEDIA (content assets)
 ├── Series ──────────────────────── TV show containers
 └── Genre ───────────────────────── classification tags
 
-PLATFORMS (KempoNet services that display media)
-├── KempoTube ───────────────────── channels + videos
-├── FlipFlop ────────────────────── accounts + videos
+DEVICES (home page selections)
 ├── TV ──────────────────────────── channels + broadcasts
 ├── Radio ───────────────────────── playlist of Audio
-└── SoundWaves ──────────────────── music streaming (queries Audio)
+├── PC ──────────────────────────── KempoNet Browser desktop experience
+└── Mobile ─────────────────────── KempoNet Browser + native apps
+
+KEMPONET (online services, accessible via PC/Mobile browsers)
+├── KempoTube ───────────────────── channels + videos (has mobile app)
+├── FlipFlop ────────────────────── accounts + videos (has mobile app)
+├── SoundWaves ──────────────────── music streaming (has mobile app)
+├── Kempopedia ─────────────────── wiki articles
+├── Giggle ─────────────────────── search engine
+└── Domain ─────────────────────── registry of all KempoNet sites
 
 CONTENT (CMS)
 ├── Article ─────────────────────── Kempopedia wiki entries
@@ -84,7 +91,7 @@ Nation → State → City → Place
 
 Each level has optional `lat`/`long` coordinates for the map view at `/admin/world-data/locations/map`.
 
-### Media Flow to Devices
+### Media Flow to Devices & KempoNet
 
 ```
 Audio ──→ AudioElement (links singers, composers, albums)

@@ -6,7 +6,7 @@ Create a biographical article for a fictional character in the Kempo universe.
 
 ## Context
 
-If this person is a **parallel switchover** (based on a real historical figure), create a similar but distinct fictional biography using the guidelines in [parallel-switchover](../parallel-switchover/skill.md).
+If this person has a **real-world inspiration** (based on a historical figure), create a similar but distinct fictional biography using the guidelines in [inspirations](../inspirations/skill.md). Add the inspiration via the admin UI after creating the entity.
 
 ## Key Principles
 
@@ -32,7 +32,7 @@ parallel_switchover:  # Only if applicable
 tags:
   - nationality
   - domain
-  - parallel-switchover  # if applicable
+  - inspirations  # if has real-world inspiration
 dates:
   - "Birth date k.y."
   - "Key event dates"

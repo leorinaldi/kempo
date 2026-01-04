@@ -78,7 +78,7 @@ Kempo/
 ├── scripts/               # Utility scripts (image generation)
 └── web/                   # Next.js web application
     ├── prisma/            # Database schema
-    ├── public/media/      # Generated images
+    ├── public/            # Static assets
     └── src/               # Application source code
 ```
 

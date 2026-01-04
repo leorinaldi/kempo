@@ -1,13 +1,13 @@
 ---
-title: "Possible Spawns"
-slug: "possible-spawns"
+title: "Possible Inspirations"
+slug: "possible-inspirations"
 type: concept
 subtype: meta
 status: published
 tags:
   - meta
   - planning
-  - parallel-switchover
+  - inspirations
 ---
 
 ```json
@@ -15,7 +15,7 @@ tags:
   "infobox": {
     "type": "concept",
     "fields": {
-      "Purpose": "Planning document for future parallel switchovers",
+      "Purpose": "Planning document for future Kempo entity inspirations",
       "Focus": "80% American, 20% International",
       "Era": "1945-1955 k.y.",
       "Status": "Working document"
@@ -24,7 +24,9 @@ tags:
 }
 ```
 
-**Possible Spawns** is a planning document tracking real-world figures and entities that may need Kempo parallel switchovers as the universe expands. This page serves as an idea bank and task list for worldbuilding.
+**Possible Inspirations** is a planning document tracking real-world figures and entities that may inspire Kempo equivalents as the universe expands. This page serves as an idea bank and task list for worldbuilding.
+
+> **Note:** Completed inspirations are stored in the database Inspiration table, managed via the admin UI.
 
 ## Priority Legend
 
@@ -453,5 +455,5 @@ Based on storytelling needs for 1950 k.y., organized by priority:
 
 ## See also
 
-- [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
 - [[master-timeline|Master Timeline]] — Chronological history
+- Admin: `/admin/world-data` → Entity edit modals → Inspirations section

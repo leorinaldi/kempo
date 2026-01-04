@@ -34,12 +34,15 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | `create-person` | Biographical articles |
 | `create-place` | Cities, states, nations |
 | `create-organization` | Institutions, companies, parties, academies |
+| `create-brand` | Brands owned by organizations |
 | `create-media` | Songs, albums, films |
 | `create-product` | Vehicles, consumer goods |
+| `create-series` | TV series |
+| `create-event` | Timeline events |
 | `create-timeline` | Decade/year timeline pages |
 | `date-review` | Audit dates after creating articles |
 | `generate-image` | Image prompt guidelines |
-| `parallel-switchover` | Real-world to Kempo mappings |
+| `inspirations` | Real-world to Kempo mappings |
 
 Skills are located at `docs/Skills/Kempopedia/<skill-name>/skill.md`
 
@@ -47,7 +50,7 @@ Skills are located at `docs/Skills/Kempopedia/<skill-name>/skill.md`
 
 | Content | Location |
 |---------|----------|
-| Article images | `web/public/media/<slug>.jpg` |
+| Article images | Vercel Blob (tracked in Image table) |
 | Simulation planning docs | `web/content/admin/*.md` |
 | Prisma schema | `web/prisma/schema.prisma` |
 | API routes | `web/src/app/api/` |

@@ -262,7 +262,7 @@ web/content/articles/
 ├── nations/
 ├── concepts/
 ├── master-timeline.md
-└── parallel-switchover.md
+└── inspirations.md
 ```
 
 ## 12. Frontmatter Format
@@ -282,7 +282,7 @@ parallel_switchover:  # Only if applicable
 tags:
   - relevant-tag
   - another-tag
-  - parallel-switchover  # if applicable
+  - inspirations  # if has real-world inspiration
 dates:
   - "Month Day, YEAR k.y."
   - "Another date k.y."
@@ -322,17 +322,18 @@ Each entry on its own line, with a blank line between entries.
 1. **Create the article** with infobox containing image placeholder:
    ```json
    "image": {
-     "url": "/media/<slug>.jpg",
+     "url": "https://...blob.vercel-storage.com/...",
      "caption": "Name, circa YEAR k.y."
    }
    ```
 
 2. **Generate the image** immediately after creating the article:
    ```bash
-   node scripts/generate-image.js <slug> "<prompt>"
+   node scripts/generate-image.js "<prompt>" --name "Name" --category "portrait"
    ```
+   The script generates the image, uploads to Vercel Blob, and creates the Image record.
 
-3. **Verify the image** was created in `/web/public/media/<slug>.jpg`
+3. **Copy the Blob URL** from script output to the article infobox
 
 4. **Review the article** with image in context
 
