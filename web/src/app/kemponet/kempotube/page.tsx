@@ -88,9 +88,24 @@ function KempoTubeContent() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isInternalFullscreen])
 
-  // Load videos from KempoTube API
+  // Load videos from KempoTube API on mount - read ky date from localStorage
   useEffect(() => {
-    fetch('/api/kempotube/videos')
+    let kyParam: string | null = null
+    try {
+      const saved = localStorage.getItem("kempo-ky-date")
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed.year && parsed.month) {
+          kyParam = `${parsed.year}-${String(parsed.month).padStart(2, "0")}`
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+
+    const url = kyParam ? `/api/kempotube/videos?ky=${kyParam}` : "/api/kempotube/videos"
+
+    fetch(url)
       .then(res => res.json())
       .then((data: Video[]) => {
         // Data already comes sorted by publishedAt desc (newest first)
@@ -110,7 +125,7 @@ function KempoTubeContent() {
         console.error('Failed to load videos:', err)
         setIsLoading(false)
       })
-  }, [searchParams])
+  }, [])
 
   const selectVideo = (video: Video) => {
     const extraParams = [

@@ -1,8 +1,13 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam } from "@/lib/ky-date-filter"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
+
     // Fetch all TV channels with their broadcasts
     const channels = await prisma.tvChannel.findMany({
       orderBy: { callSign: "asc" },
@@ -16,6 +21,7 @@ export async function GET() {
                 name: true,
                 url: true,
                 description: true,
+                kyDate: true,
                 elements: {
                   where: { role: "actor" },
                   take: 1,
@@ -44,7 +50,13 @@ export async function GET() {
       name: channel.name,
       callSign: channel.callSign || channel.name,
       videos: channel.broadcasts
-        .filter((b) => b.video.url) // Only include videos with actual files
+        .filter((b) => {
+          // Only include videos with actual files
+          if (!b.video.url) return false
+          // Filter by KY date if specified
+          if (maxDate && b.video.kyDate && b.video.kyDate > maxDate) return false
+          return true
+        })
         .map((broadcast) => {
           const firstActor = broadcast.video.elements[0]
           const actorName = firstActor?.credit ||

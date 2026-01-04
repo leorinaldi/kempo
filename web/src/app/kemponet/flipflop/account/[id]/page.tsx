@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import { useKYDate } from "@/context/KYDateContext"
 
 interface Video {
   id: string
@@ -25,12 +26,15 @@ interface Account {
 export default function FlipFlopAccountPage() {
   const params = useParams()
   const router = useRouter()
+  const { kyDate } = useKYDate()
   const [account, setAccount] = useState<Account | null>(null)
   const [loading, setLoading] = useState(true)
   const [isEmbedded, setIsEmbedded] = useState(true)
   const [bioExpanded, setBioExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isKempoNet, setIsKempoNet] = useState(false)
+
+  const [urlKyParam, setUrlKyParam] = useState<string | null>(null)
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
@@ -39,26 +43,30 @@ export default function FlipFlopAccountPage() {
     setIsMobile(mobile)
     setIsKempoNet(kempoNet)
     setIsEmbedded(mobile || kempoNet)
+    setUrlKyParam(urlParams.get("ky"))
   }, [])
 
   useEffect(() => {
-    if (params.id) {
-      fetch(`/api/flipflop/account/${params.id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.error) {
-            setAccount(null)
-          } else {
-            setAccount(data)
-          }
-          setLoading(false)
-        })
-        .catch((err) => {
-          console.error("Failed to fetch account:", err)
-          setLoading(false)
-        })
-    }
-  }, [params.id])
+    if (!params.id) return
+    // Prefer URL param (set by parent frame), fall back to context
+    const kyParam = urlKyParam || (kyDate ? `${kyDate.year}-${String(kyDate.month).padStart(2, "0")}` : null)
+    if (!kyParam) return
+
+    fetch(`/api/flipflop/account/${params.id}?ky=${kyParam}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          setAccount(null)
+        } else {
+          setAccount(data)
+        }
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error("Failed to fetch account:", err)
+        setLoading(false)
+      })
+  }, [params.id, urlKyParam, kyDate])
 
   const containerClass = isEmbedded ? "h-screen" : "fixed top-14 left-0 right-0 bottom-0"
 

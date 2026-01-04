@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam, kyDateFilter } from "@/lib/ky-date-filter"
 
 // Fisher-Yates shuffle
 function shuffle<T>(array: T[]): T[] {
@@ -11,10 +12,17 @@ function shuffle<T>(array: T[]): T[] {
   return result
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    // Fetch all audio files with their elements
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
+
+    // Fetch audio files with their elements, filtered by KY date
     const audioFiles = await prisma.audio.findMany({
+      where: {
+        ...kyDateFilter(maxDate),
+      },
       include: {
         elements: true,
       },

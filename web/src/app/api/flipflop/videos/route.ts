@@ -1,8 +1,13 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam } from "@/lib/ky-date-filter"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
+
     // Fetch FlipFlop videos with video and account data
     const flipFlopVideos = await prisma.flipFlopVideo.findMany({
       orderBy: { publishedAt: "desc" },
@@ -13,6 +18,7 @@ export async function GET() {
             name: true,
             url: true,
             description: true,
+            kyDate: true,
             elements: {
               where: { role: "actor" },
               take: 1,
@@ -42,7 +48,11 @@ export async function GET() {
 
     // Transform to include articleId from Person relation
     const items = flipFlopVideos
-      .filter((ff) => ff.video.url) // Only include videos with actual files
+      .filter((ff) => {
+        if (!ff.video.url) return false
+        if (maxDate && ff.video.kyDate && ff.video.kyDate > maxDate) return false
+        return true
+      })
       .map((ff) => {
         const firstActor = ff.video.elements[0]
         const actorName = firstActor?.credit ||

@@ -29,9 +29,23 @@ export default function RadioPage() {
   const currentVolume = volumeLevels[volumeIndex]
   const [tuneRotation, setTuneRotation] = useState(0)
 
-  // Load playlist from database
+  // Load playlist from database, filtered by KY date from localStorage
   useEffect(() => {
-    fetch('/api/radio/playlist')
+    let kyParam: string | null = null
+    try {
+      const saved = localStorage.getItem("kempo-ky-date")
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed.year && parsed.month) {
+          kyParam = `${parsed.year}-${String(parsed.month).padStart(2, "0")}`
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+
+    const url = kyParam ? `/api/radio/playlist?ky=${kyParam}` : "/api/radio/playlist"
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         setStations(data)

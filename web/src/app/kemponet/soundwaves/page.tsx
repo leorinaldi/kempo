@@ -194,9 +194,24 @@ export default function SoundWavesPage() {
     }
   }, [isPlaying])
 
-  // Fetch tracks
+  // Fetch tracks - read ky date from localStorage (same key as header uses)
   useEffect(() => {
-    fetch("/api/soundwaves/tracks")
+    let kyParam: string | null = null
+    try {
+      const saved = localStorage.getItem("kempo-ky-date")
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed.year && parsed.month) {
+          kyParam = `${parsed.year}-${String(parsed.month).padStart(2, "0")}`
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+
+    const url = kyParam ? `/api/soundwaves/tracks?ky=${kyParam}` : "/api/soundwaves/tracks"
+
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setTracks(data)

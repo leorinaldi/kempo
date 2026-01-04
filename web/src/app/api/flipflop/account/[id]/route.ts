@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam } from "@/lib/ky-date-filter"
 
 export async function GET(
   request: NextRequest,
@@ -7,6 +8,10 @@ export async function GET(
 ) {
   try {
     const { id } = await params
+
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
 
     const account = await prisma.flipFlopAccount.findUnique({
       where: { id },
@@ -19,6 +24,7 @@ export async function GET(
                 id: true,
                 name: true,
                 url: true,
+                kyDate: true,
               },
             },
           },
@@ -39,7 +45,11 @@ export async function GET(
       websiteUrl: account.websiteUrl,
       websiteName: account.websiteName,
       videos: account.videos
-        .filter((v) => v.video.url)
+        .filter((v) => {
+          if (!v.video.url) return false
+          if (maxDate && v.video.kyDate && v.video.kyDate > maxDate) return false
+          return true
+        })
         .map((v) => ({
           id: v.id,  // FlipFlopVideo ID for URLs
           name: v.video.name,

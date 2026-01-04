@@ -71,17 +71,33 @@ export default function TVPage() {
     }, 3000)
   }, [])
 
-  // Load channels from database
+  // Load channels from database, filtered by KY date from localStorage
   useEffect(() => {
-    fetch('/api/tv/playlist')
+    let kyParam: string | null = null
+    try {
+      const saved = localStorage.getItem("kempo-ky-date")
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed.year && parsed.month) {
+          kyParam = `${parsed.year}-${String(parsed.month).padStart(2, "0")}`
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+
+    const url = kyParam ? `/api/tv/playlist?ky=${kyParam}` : "/api/tv/playlist"
+    fetch(url)
       .then(res => res.json())
       .then((data: Channel[]) => {
         setChannels(data)
-        if (data.length > 0) {
+        if (data.length > 0 && data[0].videos.length > 0) {
           // Start with first channel (alphabetically by callSign)
           const shuffled = shuffleArray(data[0].videos)
           setShuffledVideos(shuffled)
           setCurrentVideoIndex(0)
+        } else {
+          setShuffledVideos([])
         }
         setIsLoading(false)
       })

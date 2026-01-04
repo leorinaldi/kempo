@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Suspense, useState, useRef } from 'react'
 import { KempoNetRedirect } from '@/components/KempoNetRedirect'
+import { KYDatePicker } from '@/components/KYDatePicker'
 
 const devices = [
   { name: 'Mobile', href: '/mobile', action: 'Play Kempo Apps' },
@@ -189,8 +190,13 @@ export default function Home() {
         >A (nearly) imaginary world.</Link>
       </div>
 
+      {/* KY Date Picker */}
+      <div className="mt-8">
+        <KYDatePicker variant="home" />
+      </div>
+
       {/* Device Rotator */}
-      <div className="mt-16 flex items-center gap-4">
+      <div className="mt-10 flex items-center gap-4">
           {/* Left Arrow - outside the box */}
           <button
             onClick={goLeft}

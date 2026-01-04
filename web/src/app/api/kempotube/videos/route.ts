@@ -1,8 +1,13 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam } from "@/lib/ky-date-filter"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
+
     // Fetch KempoTube videos with video and channel data
     const kempoTubeVideos = await prisma.kempoTubeVideo.findMany({
       orderBy: { publishedAt: "desc" },
@@ -13,6 +18,7 @@ export async function GET() {
             name: true,
             url: true,
             description: true,
+            kyDate: true,
             elements: {
               where: { role: "actor" },
               take: 1,
@@ -41,7 +47,13 @@ export async function GET() {
 
     // Transform to the format expected by the frontend
     const items = kempoTubeVideos
-      .filter((kt) => kt.video.url) // Only include videos with actual files
+      .filter((kt) => {
+        // Only include videos with actual files
+        if (!kt.video.url) return false
+        // Filter by KY date if specified
+        if (maxDate && kt.video.kyDate && kt.video.kyDate > maxDate) return false
+        return true
+      })
       .map((kt) => {
         const firstActor = kt.video.elements[0]
         const actorName = firstActor?.credit ||

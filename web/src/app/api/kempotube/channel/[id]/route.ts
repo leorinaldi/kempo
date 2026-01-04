@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam } from "@/lib/ky-date-filter"
 
 export async function GET(
   request: NextRequest,
@@ -7,6 +8,10 @@ export async function GET(
 ) {
   try {
     const { id } = await params
+
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
 
     const channel = await prisma.kempoTubeChannel.findUnique({
       where: { id },
@@ -20,6 +25,7 @@ export async function GET(
                 name: true,
                 url: true,
                 description: true,
+                kyDate: true,
               },
             },
           },
@@ -40,7 +46,11 @@ export async function GET(
       websiteUrl: channel.websiteUrl,
       websiteName: channel.websiteName,
       videos: channel.videos
-        .filter((v) => v.video.url)
+        .filter((v) => {
+          if (!v.video.url) return false
+          if (maxDate && v.video.kyDate && v.video.kyDate > maxDate) return false
+          return true
+        })
         .map((v) => ({
           id: v.id,  // KempoTubeVideo ID
           name: v.title || v.video.name,

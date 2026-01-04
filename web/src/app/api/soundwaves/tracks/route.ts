@@ -1,10 +1,15 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { parseKYDateParam, kyDateFilter } from "@/lib/ky-date-filter"
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    // Parse KY date filter from query params
+    const { searchParams } = new URL(request.url)
+    const maxDate = parseKYDateParam(searchParams.get("ky"))
+
     const audioFiles = await prisma.audio.findMany({
-      where: { type: "song" },
+      where: { type: "song", ...kyDateFilter(maxDate) },
       orderBy: { kyDate: "desc" },
       include: {
         elements: true,

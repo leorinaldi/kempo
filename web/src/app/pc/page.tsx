@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
+import { useKYDate } from "@/context/KYDateContext"
 
 // KempoNet default home page
 const DEFAULT_HOME = "/kemponet/giggle"
@@ -16,10 +17,15 @@ const kttpToPath = (kttp: string): string => {
   return DEFAULT_HOME
 }
 
-// Helper to append kemponet=1 param properly (handles existing query strings)
-const addKemponetParam = (path: string): string => {
+// Helper to append kemponet=1 and ky params properly (handles existing query strings)
+const addKemponetParam = (path: string, kyDate?: { month: number; year: number } | null): string => {
   const separator = path.includes("?") ? "&" : "?"
-  return `${path}${separator}kemponet=1`
+  let result = `${path}${separator}kemponet=1`
+  if (kyDate) {
+    const kyParam = `${kyDate.year}-${String(kyDate.month).padStart(2, "0")}`
+    result += `&ky=${kyParam}`
+  }
+  return result
 }
 
 export default function PCPage() {
@@ -32,6 +38,7 @@ export default function PCPage() {
 
 function PCContent() {
   const searchParams = useSearchParams()
+  const { kyDate } = useKYDate()
   const urlParam = searchParams.get("url")
   const initialPath = urlParam ? kttpToPath(urlParam) : null
 
@@ -739,7 +746,7 @@ function PCContent() {
                   <iframe
                     key={iframeKey}
                     ref={iframeRef}
-                    src={addKemponetParam(iframeSrc)}
+                    src={addKemponetParam(iframeSrc, kyDate)}
                     className="w-full h-full border-0"
                     style={{ background: "white" }}
                   />

@@ -54,9 +54,24 @@ export default function FlipFlopPage() {
   // When viewing directly (not in KempoNet/Mobile browser), account for the 56px header
   const containerClass = isEmbedded ? "h-screen" : "fixed top-14 left-0 right-0 bottom-0"
 
-  // Fetch videos
+  // Fetch videos on mount - read ky date from localStorage
   useEffect(() => {
-    fetch("/api/flipflop/videos")
+    let kyParam: string | null = null
+    try {
+      const saved = localStorage.getItem("kempo-ky-date")
+      if (saved) {
+        const parsed = JSON.parse(saved)
+        if (parsed.year && parsed.month) {
+          kyParam = `${parsed.year}-${String(parsed.month).padStart(2, "0")}`
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+
+    const url = kyParam ? `/api/flipflop/videos?ky=${kyParam}` : "/api/flipflop/videos"
+
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setVideos(data)
