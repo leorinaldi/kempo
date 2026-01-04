@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { getKYDateFromCookie } from "@/lib/ky-date"
 
 interface SearchResult {
   id: string
@@ -19,6 +20,15 @@ export async function GET(request: Request) {
     return NextResponse.json([])
   }
 
+  // Get viewing date from cookie for temporal filtering
+  const viewingDate = await getKYDateFromCookie()
+  // Build the date filter for articles (null publish_date = always visible)
+  let dateFilterParam: Date | null = null
+  if (viewingDate) {
+    // Create date for end of the viewing month
+    dateFilterParam = new Date(viewingDate.year, viewingDate.month - 1, 28, 23, 59, 59)
+  }
+
   try {
     // Escape special characters and format for tsquery
     // Convert spaces to & for AND matching
@@ -34,7 +44,82 @@ export async function GET(request: Request) {
     }
 
     // PostgreSQL full-text search across articles, pages, and app_search using UNION
-    const results = await prisma.$queryRaw<SearchResult[]>`
+    // Use different queries based on whether we have a date filter
+    const results = dateFilterParam
+      ? await prisma.$queryRaw<SearchResult[]>`
+      (
+        SELECT
+          id,
+          title,
+          type,
+          LEFT(content, 200) as snippet,
+          '/kemponet/kempopedia/wiki/' || id as url,
+          'kempopedia' as domain,
+          ts_rank(
+            setweight(to_tsvector('english', title), 'A') ||
+            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
+            to_tsquery('english', ${sanitizedQuery})
+          ) as rank
+        FROM articles
+        WHERE
+          status = 'published'
+          AND (publish_date IS NULL OR publish_date <= ${dateFilterParam})
+          AND (
+            to_tsvector('english', title) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+          )
+      )
+      UNION ALL
+      (
+        SELECT
+          p.id,
+          p.title,
+          'page' as type,
+          LEFT(p.content, 200) as snippet,
+          '/kemponet/' || d.name || CASE WHEN p.slug = '' THEN '' ELSE '/' || p.slug END as url,
+          d.name as domain,
+          ts_rank(
+            setweight(to_tsvector('english', p.title), 'A') ||
+            setweight(to_tsvector('english', COALESCE(p.content, '')), 'B'),
+            to_tsquery('english', ${sanitizedQuery})
+          ) as rank
+        FROM pages p
+        JOIN domains d ON p.domain_id = d.id
+        WHERE
+          p.searchable = true
+          AND (
+            to_tsvector('english', p.title) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(p.content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+          )
+      )
+      UNION ALL
+      (
+        SELECT
+          id,
+          title,
+          'app' as type,
+          excerpt as snippet,
+          path as url,
+          domain,
+          ts_rank(
+            setweight(to_tsvector('english', title), 'A') ||
+            setweight(to_tsvector('english', COALESCE(excerpt, '')), 'A') ||
+            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
+            to_tsquery('english', ${sanitizedQuery})
+          ) as rank
+        FROM app_search
+        WHERE
+          no_search = false
+          AND (
+            to_tsvector('english', title) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(excerpt, '')) @@ to_tsquery('english', ${sanitizedQuery})
+            OR to_tsvector('english', COALESCE(content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+          )
+      )
+      ORDER BY rank DESC
+      LIMIT 10
+    `
+      : await prisma.$queryRaw<SearchResult[]>`
       (
         SELECT
           id,
@@ -121,10 +206,23 @@ export async function GET(request: Request) {
     try {
       const articleResults = await prisma.article.findMany({
         where: {
-          status: "published",
-          OR: [
-            { title: { contains: query, mode: "insensitive" } },
-            { content: { contains: query, mode: "insensitive" } },
+          AND: [
+            { status: "published" },
+            {
+              OR: [
+                { title: { contains: query, mode: "insensitive" } },
+                { content: { contains: query, mode: "insensitive" } },
+              ],
+            },
+            // Date filter: show if publishDate is null OR <= viewing date
+            ...(dateFilterParam
+              ? [{
+                  OR: [
+                    { publishDate: null },
+                    { publishDate: { lte: dateFilterParam } },
+                  ],
+                }]
+              : []),
           ],
         },
         select: {

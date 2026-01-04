@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticlesByTypeAsync, getAllCategoriesAsync, isValidCategory } from '@/lib/articles'
+import { getArticlesByTypeAsOf, getAllCategoriesAsync, isValidCategory } from '@/lib/articles'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
+import { getKYDateFromCookie } from '@/lib/ky-date'
 
 // Category metadata for display
 const categoryMeta: Record<string, { label: string; description: string }> = {
@@ -47,7 +48,8 @@ export default async function CategoryPage({ params }: PageProps) {
     notFound()
   }
 
-  const articles = await getArticlesByTypeAsync(category)
+  const viewingDate = await getKYDateFromCookie()
+  const articles = await getArticlesByTypeAsOf(category, viewingDate)
   const meta = categoryMeta[category] || {
     label: category.charAt(0).toUpperCase() + category.slice(1),
     description: `Articles about ${category}s`,

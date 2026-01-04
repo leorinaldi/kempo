@@ -488,6 +488,9 @@ model Article {
   subtype            String?    // "head-of-state", "city", etc.
   status             String     @default("published") // "published", "draft"
 
+  // Temporal
+  publishDate        DateTime?  @map("publish_date") // When article first appears in k.y.
+
   // Content
   content            String     @db.Text // markdown body
   infobox            Json?      // structured infobox data
@@ -521,6 +524,7 @@ model Article {
 
   @@index([type])
   @@index([status])
+  @@index([publishDate])
   @@map("articles")
 }
 

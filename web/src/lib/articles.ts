@@ -199,9 +199,14 @@ export async function getAllArticleIdsAsync(): Promise<string[]> {
 }
 
 // Fast count query - doesn't load all articles
-export async function getArticleCountAsync(): Promise<number> {
+export async function getArticleCountAsync(
+  viewingDate?: { month: number; year: number }
+): Promise<number> {
   return prisma.article.count({
-    where: { status: 'published' },
+    where: {
+      status: 'published',
+      ...(viewingDate && { publishDate: { lte: kyDateToDate(viewingDate) } }),
+    },
   })
 }
 
@@ -223,6 +228,66 @@ export async function getAllArticlesAsync(): Promise<Article[]> {
   return dbArticles.map(a => prismaToArticle(a, linkMap))
 }
 
+// Convert {month, year} to end-of-month Date for comparison
+export function kyDateToDate(kyDate: { month: number; year: number }): Date {
+  // Use last day of month for inclusive comparison
+  return new Date(kyDate.year, kyDate.month - 1, 28, 23, 59, 59)
+}
+
+// Get article by ID, filtered by viewing date
+// Returns null if article doesn't exist OR if viewing date is before publish date
+export async function getArticleByIdAsOf(
+  id: string,
+  viewingDate?: { month: number; year: number }
+): Promise<Article | null> {
+  const dbArticle = await prisma.article.findUnique({
+    where: { id },
+  })
+
+  if (!dbArticle) return null
+
+  // Check if article is published at this viewing date
+  if (viewingDate && dbArticle.publishDate) {
+    const viewDate = kyDateToDate(viewingDate)
+    if (viewDate < dbArticle.publishDate) {
+      return null // Article doesn't exist yet at this viewing date
+    }
+  }
+
+  // Extract wikilink targets and build link map
+  const targets = extractWikilinkTargets(dbArticle.content)
+  // Also extract from infobox fields if present
+  const infobox = dbArticle.infobox as Article['infobox']
+  if (infobox?.fields) {
+    for (const value of Object.values(infobox.fields)) {
+      if (typeof value === 'string') {
+        targets.push(...extractWikilinkTargets(value))
+      } else if (Array.isArray(value)) {
+        for (const item of value) {
+          if (typeof item === 'string') {
+            targets.push(...extractWikilinkTargets(item))
+          }
+        }
+      }
+    }
+  }
+
+  const linkMap = await getArticleIdsByTitles(Array.from(new Set(targets)))
+  const article = prismaToArticle(dbArticle, linkMap)
+
+  // Process markdown to HTML
+  const processedContent = await remark()
+    .use(html, { sanitize: false })
+    .process(article.content)
+
+  return {
+    ...article,
+    htmlContent: processedContent.toString(),
+    linkMap, // For Infobox to use
+  }
+}
+
+// Original function - no date filtering (backward compatibility)
 export async function getArticleByIdAsync(id: string): Promise<Article | null> {
   const dbArticle = await prisma.article.findUnique({
     where: { id },
@@ -288,7 +353,11 @@ const typeToCategoryMap: Record<string, string> = {
   company: 'organization',
 }
 
-export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
+// Get articles by type, filtered by viewing date
+export async function getArticlesByTypeAsOf(
+  type: string,
+  viewingDate?: { month: number; year: number }
+): Promise<Article[]> {
   // Get types that map to this category
   const typesToQuery = [type]
   Object.entries(typeToCategoryMap).forEach(([articleType, category]) => {
@@ -301,6 +370,7 @@ export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
     where: {
       status: 'published',
       type: { in: typesToQuery },
+      ...(viewingDate && { publishDate: { lte: kyDateToDate(viewingDate) } }),
     },
     orderBy: { title: 'asc' },
   })
@@ -310,9 +380,20 @@ export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
   return dbArticles.map(a => prismaToArticle(a, emptyMap))
 }
 
-export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
+// Original function - no date filtering (backward compatibility)
+export async function getArticlesByTypeAsync(type: string): Promise<Article[]> {
+  return getArticlesByTypeAsOf(type)
+}
+
+// Get all categories with counts, filtered by viewing date
+export async function getAllCategoriesAsOf(
+  viewingDate?: { month: number; year: number }
+): Promise<CategoryInfo[]> {
   const articles = await prisma.article.findMany({
-    where: { status: 'published' },
+    where: {
+      status: 'published',
+      ...(viewingDate && { publishDate: { lte: kyDateToDate(viewingDate) } }),
+    },
     select: { type: true },
   })
 
@@ -341,6 +422,11 @@ export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
     .sort((a, b) => (categoryMeta[a.type]?.order || 99) - (categoryMeta[b.type]?.order || 99))
 }
 
+// Original function - no date filtering (backward compatibility)
+export async function getAllCategoriesAsync(): Promise<CategoryInfo[]> {
+  return getAllCategoriesAsOf()
+}
+
 export function isValidCategory(type: string): boolean {
   return Object.keys(categoryMeta).includes(type)
 }
@@ -367,10 +453,15 @@ export interface WikiLinkStats {
   linksByCategory: Record<string, number>
 }
 
-export async function getWikiLinkStatsAsync(): Promise<WikiLinkStats> {
+export async function getWikiLinkStatsAsync(
+  viewingDate?: { month: number; year: number }
+): Promise<WikiLinkStats> {
   // Fast query - just sum up pre-computed link counts
   const articles = await prisma.article.findMany({
-    where: { status: 'published' },
+    where: {
+      status: 'published',
+      ...(viewingDate && { publishDate: { lte: kyDateToDate(viewingDate) } }),
+    },
     select: { type: true, linkCount: true },
   })
 

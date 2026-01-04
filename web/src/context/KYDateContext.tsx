@@ -14,6 +14,14 @@ const KYDateContext = createContext<KYDateContextType | undefined>(undefined)
 
 const EARLIEST_DATE = { month: 1, year: 1948 }
 const STORAGE_KEY = 'kempo-ky-date'
+const COOKIE_NAME = 'kempo-ky-date'
+
+// Helper to set the cookie (format: "1948-06")
+function setKYDateCookie(date: { month: number; year: number }) {
+  const value = `${date.year}-${String(date.month).padStart(2, '0')}`
+  // Set cookie with 1 year expiry, accessible to all paths
+  document.cookie = `${COOKIE_NAME}=${value}; path=/; max-age=31536000; SameSite=Lax`
+}
 
 export function KYDateProvider({ children }: { children: ReactNode }) {
   const [kyDate, setKYDateState] = useState<{ month: number; year: number } | null>(null)
@@ -35,27 +43,27 @@ export function KYDateProvider({ children }: { children: ReactNode }) {
 
         // Check localStorage for saved date
         const saved = localStorage.getItem(STORAGE_KEY)
+        let dateToUse = latest
         if (saved) {
           try {
             const parsed = JSON.parse(saved)
             // Validate saved date is within range
             if (isDateInRange(parsed, EARLIEST_DATE, latest)) {
-              setKYDateState(parsed)
-            } else {
-              setKYDateState(latest)
+              dateToUse = parsed
             }
           } catch {
-            setKYDateState(latest)
+            // Use latest as fallback
           }
-        } else {
-          setKYDateState(latest)
         }
+        setKYDateState(dateToUse)
+        setKYDateCookie(dateToUse)
       } catch (error) {
         console.error('Failed to fetch KY date range:', error)
         // Fallback to a reasonable default
         const fallback = { month: 3, year: 1949 }
         setLatestDate(fallback)
         setKYDateState(fallback)
+        setKYDateCookie(fallback)
       } finally {
         setIsLoading(false)
       }
@@ -84,6 +92,7 @@ export function KYDateProvider({ children }: { children: ReactNode }) {
   const setKYDate = (date: { month: number; year: number }) => {
     setKYDateState(date)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(date))
+    setKYDateCookie(date)
   }
 
   return (

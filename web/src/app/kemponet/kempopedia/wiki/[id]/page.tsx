@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticleByIdAsync, getAllArticleIdsAsync } from '@/lib/articles'
+import { getArticleByIdAsOf, getAllArticleIdsAsync } from '@/lib/articles'
 import Infobox from '@/components/Infobox'
 import { AudioPlayer } from '@/components/AudioPlayer'
 import { VideoPlayer } from '@/components/VideoPlayer'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
+import { getKYDateFromCookie } from '@/lib/ky-date'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -17,7 +18,8 @@ export async function generateStaticParams() {
 
 export default async function ArticlePage({ params }: PageProps) {
   const { id } = await params
-  const article = await getArticleByIdAsync(id)
+  const viewingDate = await getKYDateFromCookie()
+  const article = await getArticleByIdAsOf(id, viewingDate)
 
   if (!article) {
     notFound()

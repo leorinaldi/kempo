@@ -1,13 +1,16 @@
 import Link from 'next/link'
-import { getAllCategoriesAsync, getArticleCountAsync, getWikiLinkStatsAsync } from '@/lib/articles'
+import { getAllCategoriesAsOf, getArticleCountAsync, getWikiLinkStatsAsync } from '@/lib/articles'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
+import { getKYDateFromCookie } from '@/lib/ky-date'
 
 export default async function KempopediaHome() {
+  const viewingDate = await getKYDateFromCookie()
+
   // Run queries in parallel for faster loading
   const [categories, totalArticles, linkStats] = await Promise.all([
-    getAllCategoriesAsync(),
-    getArticleCountAsync(),
-    getWikiLinkStatsAsync(),
+    getAllCategoriesAsOf(viewingDate),
+    getArticleCountAsync(viewingDate),
+    getWikiLinkStatsAsync(viewingDate),
   ])
 
   return (

@@ -1,54 +1,55 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+// Default values if settings don't exist
+const DEFAULTS = {
+  earliestMonth: 1,
+  earliestYear: 1949,
+  latestMonth: 12,
+  latestYear: 1950,
+}
+
 export async function GET() {
   try {
-    // Find the latest kyDate across all media tables
-    const [latestAudio, latestVideo, latestImage, latestAlbum] = await Promise.all([
-      prisma.audio.findFirst({
-        where: { kyDate: { not: null } },
-        orderBy: { kyDate: 'desc' },
-        select: { kyDate: true }
-      }),
-      prisma.video.findFirst({
-        where: { kyDate: { not: null } },
-        orderBy: { kyDate: 'desc' },
-        select: { kyDate: true }
-      }),
-      prisma.image.findFirst({
-        where: { kyDate: { not: null } },
-        orderBy: { kyDate: 'desc' },
-        select: { kyDate: true }
-      }),
-      prisma.album.findFirst({
-        where: { kyDate: { not: null } },
-        orderBy: { kyDate: 'desc' },
-        select: { kyDate: true }
-      })
-    ])
+    // Fetch all date range settings from the database
+    const settings = await prisma.setting.findMany({
+      where: {
+        key: {
+          in: [
+            'kyDateRangeEarliestMonth',
+            'kyDateRangeEarliestYear',
+            'kyDateRangeLatestMonth',
+            'kyDateRangeLatestYear',
+          ],
+        },
+      },
+    })
 
-    // Get the maximum date
-    const dates = [
-      latestAudio?.kyDate,
-      latestVideo?.kyDate,
-      latestImage?.kyDate,
-      latestAlbum?.kyDate
-    ].filter((d): d is Date => d !== null)
+    // Convert to a map for easy lookup
+    const settingsMap: Record<string, string> = {}
+    settings.forEach((s) => {
+      settingsMap[s.key] = s.value
+    })
 
-    let latestMonth = 3
-    let latestYear = 1949
-
-    if (dates.length > 0) {
-      const maxDate = new Date(Math.max(...dates.map(d => d.getTime())))
-      latestMonth = maxDate.getMonth() + 1 // JS months are 0-indexed
-      latestYear = maxDate.getFullYear()
-    }
+    // Parse settings or use defaults
+    const earliestMonth = settingsMap.kyDateRangeEarliestMonth
+      ? parseInt(settingsMap.kyDateRangeEarliestMonth, 10)
+      : DEFAULTS.earliestMonth
+    const earliestYear = settingsMap.kyDateRangeEarliestYear
+      ? parseInt(settingsMap.kyDateRangeEarliestYear, 10)
+      : DEFAULTS.earliestYear
+    const latestMonth = settingsMap.kyDateRangeLatestMonth
+      ? parseInt(settingsMap.kyDateRangeLatestMonth, 10)
+      : DEFAULTS.latestMonth
+    const latestYear = settingsMap.kyDateRangeLatestYear
+      ? parseInt(settingsMap.kyDateRangeLatestYear, 10)
+      : DEFAULTS.latestYear
 
     return NextResponse.json({
-      earliestMonth: 1,
-      earliestYear: 1949,
+      earliestMonth,
+      earliestYear,
       latestMonth,
-      latestYear
+      latestYear,
     })
   } catch (error) {
     console.error('Failed to get KY date range:', error)
