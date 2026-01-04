@@ -32,6 +32,7 @@ export async function GET() {
         },
         channel: {
           select: {
+            id: true,
             name: true,
           },
         },
@@ -48,13 +49,15 @@ export async function GET() {
           (firstActor?.person ? `${firstActor.person.firstName} ${firstActor.person.lastName}` : "")
 
         return {
-          id: kt.video.id,
+          id: kt.id,  // KempoTubeVideo ID for URLs
+          videoId: kt.video.id,
           name: kt.title || kt.video.name, // Use override title if set
           description: kt.video.description || "",
           url: kt.video.url,
           artist: actorName,
           artistArticleId: firstActor?.person.articleId || "",
-          channel: kt.channel.name,
+          channelId: kt.channel.id,
+          channelName: kt.channel.name,
           views: kt.views,
           featured: kt.featured,
         }

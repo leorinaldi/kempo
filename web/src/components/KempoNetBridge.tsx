@@ -57,17 +57,19 @@ export function KempoNetBridge() {
   }, [pathname, searchParams, deviceContext])
 
   // Strip external links on mount and watch for DOM changes
+  // Use a longer delay to ensure React hydration is complete
   useEffect(() => {
     if (!isKempoNet) return
 
     let isProcessing = false
+    let observer: MutationObserver | null = null
 
     const stripExternalLinks = () => {
       if (isProcessing) return
       isProcessing = true
 
       // Pause observer while we modify DOM
-      observer.disconnect()
+      observer?.disconnect()
 
       try {
         const links = Array.from(document.querySelectorAll("a[href]"))
@@ -97,24 +99,28 @@ export function KempoNetBridge() {
         })
       } finally {
         // Resume observer
-        observer.observe(document.body, { childList: true, subtree: true })
+        observer?.observe(document.body, { childList: true, subtree: true })
         isProcessing = false
       }
     }
 
-    const observer = new MutationObserver(() => {
+    observer = new MutationObserver(() => {
       stripExternalLinks()
     })
 
-    // Initial strip after a small delay to let React finish rendering
-    setTimeout(stripExternalLinks, 0)
+    // Delay initial strip to ensure React hydration is complete
+    const timeoutId = setTimeout(() => {
+      stripExternalLinks()
+      observer?.observe(document.body, {
+        childList: true,
+        subtree: true,
+      })
+    }, 100)
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    })
-
-    return () => observer.disconnect()
+    return () => {
+      clearTimeout(timeoutId)
+      observer?.disconnect()
+    }
   }, [isKempoNet])
 
   // Intercept kemponet link clicks to add context param

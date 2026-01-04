@@ -340,9 +340,14 @@ model OnlineMetadata {
 // ============ VIDEO PLATFORMS ============
 
 model KempoTubeChannel {
-  id        String   @id @default(cuid())
-  name      String   @unique              // "Kempo Clips", "Pacific Pictures"
-  createdAt DateTime @default(now()) @map("created_at")
+  id          String   @id @default(cuid())
+  name        String   @unique              // "Kempo Clips", "Pacific Pictures"
+  description String?  @db.Text            // About section
+  avatarUrl   String?  @map("avatar_url")  // Channel icon
+  bannerUrl   String?  @map("banner_url")  // YouTube-style banner
+  websiteUrl  String?  @map("website_url") // Kempopedia link
+  websiteName String?  @map("website_name")// Link display text
+  createdAt   DateTime @default(now()) @map("created_at")
 
   videos    KempoTubeVideo[]
 
@@ -350,11 +355,16 @@ model KempoTubeChannel {
 }
 
 model FlipFlopAccount {
-  id        String   @id @default(cuid())
-  name      String   @unique              // "@kempoclips", "@pacificpics"
-  personId  String?  @map("person_id")
-  person    Person?  @relation(fields: [personId], references: [id], onDelete: SetNull)
-  createdAt DateTime @default(now()) @map("created_at")
+  id                String   @id @default(cuid())
+  name              String   @unique              // "@kempoclips", "@pacificpics"
+  displayName       String?  @map("display_name") // "Kempo Clips", "Pacific Pictures"
+  bio               String?                       // Short description
+  profilePictureUrl String?  @map("profile_picture_url")
+  websiteUrl        String?  @map("website_url")  // Link to Kempopedia article
+  websiteName       String?  @map("website_name") // Display text for the link
+  personId          String?  @map("person_id")
+  person            Person?  @relation(fields: [personId], references: [id], onDelete: SetNull)
+  createdAt         DateTime @default(now()) @map("created_at")
 
   videos    FlipFlopVideo[]
 

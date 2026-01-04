@@ -32,8 +32,9 @@ export async function GET() {
         },
         account: {
           select: {
+            id: true,
             name: true,
-            personId: true,
+            displayName: true,
           },
         },
       },
@@ -49,13 +50,16 @@ export async function GET() {
           (firstActor?.person ? `${firstActor.person.firstName} ${firstActor.person.lastName}` : "")
 
         return {
-          id: ff.video.id,
+          id: ff.id,  // FlipFlopVideo ID for URLs
+          videoId: ff.video.id,
           name: ff.video.name,
           url: ff.video.url,
           description: ff.video.description,
           artist: actorName,
           artistArticleId: firstActor?.person.articleId || "",
-          account: ff.account.name,
+          accountId: ff.account.id,
+          accountName: ff.account.name,
+          accountDisplayName: ff.account.displayName,
           likes: ff.likes,
         }
       })

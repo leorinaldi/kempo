@@ -7,11 +7,14 @@ import { KempoNetBridge } from "@/components/KempoNetBridge"
 
 interface Video {
   id: string
+  videoId: string
   name: string
   description?: string
   url: string
   artist?: string
   artistArticleId?: string
+  channelId: string
+  channelName: string
 }
 
 function KempoTubeContent() {
@@ -110,17 +113,12 @@ function KempoTubeContent() {
   }, [searchParams])
 
   const selectVideo = (video: Video) => {
-    setSelectedVideo(video)
-    setIsInternalFullscreen(false)
-    setThumbState(null)
     const extraParams = [
       isKempoNet ? 'kemponet=1' : '',
       isMobile ? 'mobile=1' : '',
     ].filter(Boolean).join('&')
-    const suffix = extraParams ? `&${extraParams}` : ''
-    router.push(`/kemponet/kempotube?v=${video.id}${suffix}`, { scroll: false })
-    // Scroll to top to show the video player
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    const suffix = extraParams ? `?${extraParams}` : ''
+    router.push(`/kemponet/kempotube/watch/${video.id}${suffix}`)
   }
 
   const goBack = () => {
@@ -369,11 +367,9 @@ function VideoCard({
         <h3 className={`font-medium text-white line-clamp-2 group-hover:text-orange-400 transition-colors ${compact ? 'text-sm' : ''}`}>
           {video.name}
         </h3>
-        {video.artist && (
-          <p className={`text-gray-400 mt-0.5 ${compact ? 'text-xs' : 'text-sm'}`}>
-            {video.artist}
-          </p>
-        )}
+        <p className={`text-gray-400 mt-0.5 ${compact ? 'text-xs' : 'text-sm'}`}>
+          {video.channelName}
+        </p>
         {video.description && !compact && (
           <p className="text-sm text-gray-400 mt-1 line-clamp-2">
             {video.description}
