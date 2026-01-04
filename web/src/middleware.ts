@@ -31,9 +31,11 @@ async function isAuthRequired(baseUrl: string): Promise<boolean> {
 }
 
 export default auth(async (req) => {
-  const isLoginRoute = req.nextUrl.pathname === "/login"
-  const isApiAuthRoute = req.nextUrl.pathname.startsWith("/api/auth")
-  const isAuthRequiredRoute = req.nextUrl.pathname === "/api/auth-required"
+  const pathname = req.nextUrl.pathname
+  const isLoginRoute = pathname === "/login"
+  const isApiAuthRoute = pathname.startsWith("/api/auth")
+  const isAuthRequiredRoute = pathname === "/api/auth-required"
+  const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/api/admin")
   const isAuthenticated = !!req.auth
 
   // Allow login page, auth API routes, and auth-required check always
@@ -41,14 +43,22 @@ export default auth(async (req) => {
     return NextResponse.next()
   }
 
-  // Check if auth is required
+  // Admin routes ALWAYS require authentication
+  if (isAdminRoute) {
+    if (!isAuthenticated) {
+      return NextResponse.redirect(new URL("/login", req.url))
+    }
+    return NextResponse.next()
+  }
+
+  // For non-admin routes, check if site-wide auth is required
   const baseUrl = req.nextUrl.origin
   const authRequired = await isAuthRequired(baseUrl)
   if (!authRequired) {
     return NextResponse.next()
   }
 
-  // Protect ALL other routes - redirect to login if not authenticated
+  // Site-wide auth is required - redirect to login if not authenticated
   if (!isAuthenticated) {
     return NextResponse.redirect(new URL("/login", req.url))
   }
