@@ -85,20 +85,19 @@ function KempoTubeContent() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [isInternalFullscreen])
 
-  // Load playlist from database
+  // Load videos from KempoTube API
   useEffect(() => {
-    fetch('/api/tv/playlist')
+    fetch('/api/kempotube/videos')
       .then(res => res.json())
       .then((data: Video[]) => {
-        // Reverse to show newest first (data comes in chronological order)
-        const reversed = [...data].reverse()
-        setVideos(reversed)
+        // Data already comes sorted by publishedAt desc (newest first)
+        setVideos(data)
         setIsLoading(false)
 
         // Check for video ID in URL
         const videoId = searchParams.get('v')
         if (videoId) {
-          const video = reversed.find(v => v.id === videoId)
+          const video = data.find((v: Video) => v.id === videoId)
           if (video) {
             setSelectedVideo(video)
           }

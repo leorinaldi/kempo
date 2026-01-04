@@ -3,9 +3,9 @@ import { prisma } from "@/lib/prisma"
 
 export async function GET() {
   try {
-    // Fetch TV broadcasts ordered by position, with video data
-    const broadcasts = await prisma.tvBroadcast.findMany({
-      orderBy: { position: "asc" },
+    // Fetch KempoTube videos with video and channel data
+    const kempoTubeVideos = await prisma.kempoTubeVideo.findMany({
+      orderBy: { publishedAt: "desc" },
       include: {
         video: {
           select: {
@@ -30,38 +30,39 @@ export async function GET() {
             },
           },
         },
-        tvChannel: {
+        channel: {
           select: {
             name: true,
-            callSign: true,
           },
         },
       },
     })
 
     // Transform to the format expected by the frontend
-    const items = broadcasts
-      .filter((b) => b.video.url) // Only include videos with actual files
-      .map((broadcast) => {
-        const firstActor = broadcast.video.elements[0]
+    const items = kempoTubeVideos
+      .filter((kt) => kt.video.url) // Only include videos with actual files
+      .map((kt) => {
+        const firstActor = kt.video.elements[0]
         const actorName = firstActor?.credit ||
           firstActor?.person.stageName ||
           (firstActor?.person ? `${firstActor.person.firstName} ${firstActor.person.lastName}` : "")
 
         return {
-          id: broadcast.video.id,
-          name: broadcast.video.name,
-          description: broadcast.video.description || "",
-          url: broadcast.video.url,
+          id: kt.video.id,
+          name: kt.title || kt.video.name, // Use override title if set
+          description: kt.video.description || "",
+          url: kt.video.url,
           artist: actorName,
           artistArticleId: firstActor?.person.articleId || "",
-          channel: broadcast.tvChannel.callSign || broadcast.tvChannel.name,
+          channel: kt.channel.name,
+          views: kt.views,
+          featured: kt.featured,
         }
       })
 
     return NextResponse.json(items)
   } catch (error) {
-    console.error("Failed to fetch TV playlist:", error)
+    console.error("Failed to fetch KempoTube videos:", error)
     return NextResponse.json([])
   }
 }

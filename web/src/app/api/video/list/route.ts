@@ -16,17 +16,7 @@ export async function GET() {
         id: true,
         name: true,
         url: true,
-        artist: true,
-        artistId: true,
-        artistPerson: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            stageName: true,
-            articleId: true,
-          }
-        },
+        type: true,
         description: true,
         duration: true,
         aspectRatio: true,
@@ -35,6 +25,108 @@ export async function GET() {
         kyDate: true,
         createdAt: true,
         updatedAt: true,
+        // Genres
+        genres: {
+          select: {
+            genre: { select: { id: true, name: true, slug: true } },
+          },
+        },
+        // VideoElements (cast/crew)
+        elements: {
+          select: {
+            id: true,
+            role: true,
+            credit: true,
+            person: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                stageName: true,
+                articleId: true,
+              },
+            },
+          },
+        },
+        // Type-specific metadata
+        movieMetadata: {
+          select: {
+            id: true,
+            releaseYear: true,
+            runtime: true,
+            studio: { select: { id: true, name: true } },
+          },
+        },
+        trailerMetadata: {
+          select: {
+            id: true,
+            trailerNumber: true,
+            trailerType: { select: { id: true, name: true } },
+            forMovie: { select: { id: true, name: true } },
+            forSeries: { select: { id: true, title: true } },
+          },
+        },
+        commercialMetadata: {
+          select: {
+            id: true,
+            campaign: true,
+            airYear: true,
+            adType: { select: { id: true, name: true } },
+            brand: { select: { id: true, name: true } },
+            product: { select: { id: true, name: true } },
+            agency: { select: { id: true, name: true } },
+          },
+        },
+        tvEpisodeMetadata: {
+          select: {
+            id: true,
+            seasonNum: true,
+            episodeNum: true,
+            episodeTitle: true,
+            series: { select: { id: true, title: true } },
+          },
+        },
+        onlineMetadata: {
+          select: {
+            id: true,
+            contentType: { select: { id: true, name: true } },
+            creator: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                stageName: true,
+              },
+            },
+          },
+        },
+        // Platform assignments
+        kempoTubeVideo: {
+          select: {
+            id: true,
+            title: true,
+            views: true,
+            featured: true,
+            publishedAt: true,
+            channel: { select: { id: true, name: true } },
+          },
+        },
+        flipFlopVideo: {
+          select: {
+            id: true,
+            likes: true,
+            featured: true,
+            publishedAt: true,
+            account: { select: { id: true, name: true } },
+          },
+        },
+        tvBroadcasts: {
+          select: {
+            id: true,
+            position: true,
+            tvChannel: { select: { id: true, name: true, callSign: true } },
+          },
+        },
       },
     })
 

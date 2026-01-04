@@ -24,6 +24,8 @@ Consider whether any process documents need updating based on work done:
 
 **Only update if process or structure changed materially.** Code changes alone don't require doc updates.
 
+If uncertain whether changes are material enough to warrant doc updates, ask the user before proceeding.
+
 If a new skill should be created, propose it to the user before creating.
 
 ### 3. Project History Update

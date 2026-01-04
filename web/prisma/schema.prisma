@@ -7,6 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ============ ENUMS ============
+
+enum VideoType {
+  movie
+  trailer
+  commercial
+  tvShow
+  online
+}
+
+enum VideoRole {
+  actor
+  director
+  writer
+  producer
+}
+
 // ============ AUDIO & VIDEO MEDIA ============
 
 model Audio {
@@ -57,18 +74,31 @@ model AudioElement {
 model Video {
   id          String    @id @default(cuid())
   name        String
-  url         String    @db.Text
-  artist      String?                        // Display name (e.g., "Frank Martino")
-  artistId    String?   @map("artist_id")    // FK to Person table
-  artistPerson Person?  @relation(fields: [artistId], references: [id], onDelete: SetNull)
+  url         String?   @db.Text             // Nullable for metadata-only entries
+  type        VideoType @default(online)     // movie, trailer, commercial, tvShow, online
   description String?   @db.Text
   duration    Float?                         // Duration in seconds (auto-detected at upload)
   width       Int?                           // Pixel width (auto-detected)
   height      Int?                           // Pixel height (auto-detected)
   aspectRatio String?   @map("aspect_ratio") // "landscape" | "portrait" | "square"
-  kyDate      DateTime? @map("ky_date") // Kempo world date (e.g., 1948-12-25 in k.y.)
+  kyDate      DateTime? @map("ky_date")      // Kempo world date (e.g., 1948-12-25 in k.y.)
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  genres             VideoGenre[]
+  elements           VideoElement[]
+  movieMetadata      MovieMetadata?
+  tvEpisodeMetadata  TvEpisodeMetadata?
+  trailerMetadata    TrailerMetadata?
+  commercialMetadata CommercialMetadata?
+  onlineMetadata     OnlineMetadata?
+  trailersFor        TrailerMetadata[]   @relation("TrailerForMovie")
+
+  // Platform relations
+  kempoTubeVideo     KempoTubeVideo?
+  flipFlopVideo      FlipFlopVideo?
+  tvBroadcasts       TvBroadcast[]
 
   @@map("video")
 }
@@ -105,6 +135,286 @@ model ImageSubject {
   @@unique([imageId, itemId, itemType])
   @@index([itemId, itemType])
   @@map("image_subjects")
+}
+
+// ============ VIDEO METADATA ============
+
+model Genre {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "Western", "Film-Noir", etc.
+  slug      String   @unique              // "western", "film-noir", etc.
+  createdAt DateTime @default(now()) @map("created_at")
+
+  videos    VideoGenre[]
+  series    SeriesGenre[]
+
+  @@map("genres")
+}
+
+model VideoGenre {
+  id        String   @id @default(cuid())
+  videoId   String   @map("video_id")
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  genreId   String   @map("genre_id")
+  genre     Genre    @relation(fields: [genreId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([videoId, genreId])
+  @@index([videoId])
+  @@index([genreId])
+  @@map("video_genres")
+}
+
+model VideoElement {
+  id        String    @id @default(cuid())
+  videoId   String    @map("video_id")
+  video     Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  personId  String    @map("person_id")
+  person    Person    @relation(fields: [personId], references: [id], onDelete: Cascade)
+  role      VideoRole                      // actor, director, writer, producer
+  credit    String?                        // e.g., "as Clay Marshall"
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@unique([videoId, personId, role])
+  @@index([videoId])
+  @@index([personId])
+  @@map("video_elements")
+}
+
+model MovieMetadata {
+  id          String        @id @default(cuid())
+  videoId     String        @unique @map("video_id")
+  video       Video         @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  studioId    String?       @map("studio_id")
+  studio      Organization? @relation(fields: [studioId], references: [id], onDelete: SetNull)
+  releaseYear Int?          @map("release_year")
+  runtime     Int?                          // minutes
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@map("movie_metadata")
+}
+
+model Series {
+  id          String        @id @default(cuid())
+  title       String
+  networkId   String?       @map("network_id")
+  network     Organization? @relation(fields: [networkId], references: [id], onDelete: SetNull)
+  startYear   Int?          @map("start_year")
+  endYear     Int?          @map("end_year")
+  description String?       @db.Text
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  genres      SeriesGenre[]
+  episodes    TvEpisodeMetadata[]
+  trailers    TrailerMetadata[]
+
+  @@map("series")
+}
+
+model SeriesGenre {
+  id        String   @id @default(cuid())
+  seriesId  String   @map("series_id")
+  series    Series   @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  genreId   String   @map("genre_id")
+  genre     Genre    @relation(fields: [genreId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([seriesId, genreId])
+  @@index([seriesId])
+  @@index([genreId])
+  @@map("series_genres")
+}
+
+model TvEpisodeMetadata {
+  id           String   @id @default(cuid())
+  videoId      String   @unique @map("video_id")
+  video        Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  seriesId     String   @map("series_id")
+  series       Series   @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+  seasonNum    Int      @map("season_num")
+  episodeNum   Int      @map("episode_num")
+  episodeTitle String   @map("episode_title")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@index([seriesId])
+  @@index([seriesId, seasonNum])
+  @@map("tv_episode_metadata")
+}
+
+// --- Lookup Tables ---
+
+model TrailerType {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "Teaser", "Theatrical", etc.
+  slug      String   @unique              // "teaser", "theatrical", etc.
+  createdAt DateTime @default(now()) @map("created_at")
+
+  trailers  TrailerMetadata[]
+
+  @@map("trailer_types")
+}
+
+model AdType {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "TV Spot", "Online Ad", etc.
+  slug      String   @unique              // "tv-spot", "online-ad", etc.
+  createdAt DateTime @default(now()) @map("created_at")
+
+  commercials CommercialMetadata[]
+
+  @@map("ad_types")
+}
+
+model ContentType {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "Vlog", "Skit", etc.
+  slug      String   @unique              // "vlog", "skit", etc.
+  createdAt DateTime @default(now()) @map("created_at")
+
+  onlineVideos OnlineMetadata[]
+
+  @@map("content_types")
+}
+
+// --- Type-Specific Metadata ---
+
+model TrailerMetadata {
+  id            String       @id @default(cuid())
+  videoId       String       @unique @map("video_id")
+  video         Video        @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  forMovieId    String?      @map("for_movie_id")
+  forMovie      Video?       @relation("TrailerForMovie", fields: [forMovieId], references: [id], onDelete: SetNull)
+  forSeriesId   String?      @map("for_series_id")
+  forSeries     Series?      @relation(fields: [forSeriesId], references: [id], onDelete: SetNull)
+  trailerTypeId String       @map("trailer_type_id")
+  trailerType   TrailerType  @relation(fields: [trailerTypeId], references: [id], onDelete: Restrict)
+  trailerNumber Int?         @map("trailer_number")  // "Trailer 1", "Trailer 2", etc.
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  @@index([forMovieId])
+  @@index([forSeriesId])
+  @@map("trailer_metadata")
+}
+
+model CommercialMetadata {
+  id        String        @id @default(cuid())
+  videoId   String        @unique @map("video_id")
+  video     Video         @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  brandId   String?       @map("brand_id")
+  brand     Brand?        @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  productId String?       @map("product_id")
+  product   Product?      @relation(fields: [productId], references: [id], onDelete: SetNull)
+  agencyId  String?       @map("agency_id")
+  agency    Organization? @relation(fields: [agencyId], references: [id], onDelete: SetNull)
+  adTypeId  String        @map("ad_type_id")
+  adType    AdType        @relation(fields: [adTypeId], references: [id], onDelete: Restrict)
+  campaign  String?                         // Campaign name
+  airYear   Int?          @map("air_year")  // Year first aired
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  @@index([brandId])
+  @@index([productId])
+  @@map("commercial_metadata")
+}
+
+model OnlineMetadata {
+  id            String      @id @default(cuid())
+  videoId       String      @unique @map("video_id")
+  video         Video       @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  creatorId     String?     @map("creator_id")
+  creator       Person?     @relation(fields: [creatorId], references: [id], onDelete: SetNull)
+  contentTypeId String      @map("content_type_id")
+  contentType   ContentType @relation(fields: [contentTypeId], references: [id], onDelete: Restrict)
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  @@index([creatorId])
+  @@map("online_metadata")
+}
+
+// ============ VIDEO PLATFORMS ============
+
+model KempoTubeChannel {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "Kempo Clips", "Pacific Pictures"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  videos    KempoTubeVideo[]
+
+  @@map("kempotube_channels")
+}
+
+model FlipFlopAccount {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "@kempoclips", "@pacificpics"
+  personId  String?  @map("person_id")
+  person    Person?  @relation(fields: [personId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  videos    FlipFlopVideo[]
+
+  @@map("flipflop_accounts")
+}
+
+model TvChannel {
+  id        String   @id @default(cuid())
+  name      String   @unique              // "Kempo Broadcasting Company"
+  callSign  String?  @map("call_sign")    // "KBC", "NBN"
+  createdAt DateTime @default(now()) @map("created_at")
+
+  broadcasts TvBroadcast[]
+
+  @@map("tv_channels")
+}
+
+model KempoTubeVideo {
+  id          String           @id @default(cuid())
+  videoId     String           @unique @map("video_id")
+  video       Video            @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  channelId   String           @map("channel_id")
+  channel     KempoTubeChannel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  title       String?                          // Override video.name if needed
+  publishedAt DateTime         @default(now()) @map("published_at")
+  views       Int              @default(0)
+  featured    Boolean          @default(false)
+  createdAt   DateTime         @default(now()) @map("created_at")
+
+  @@index([channelId])
+  @@map("kempotube_videos")
+}
+
+model FlipFlopVideo {
+  id          String         @id @default(cuid())
+  videoId     String         @unique @map("video_id")
+  video       Video          @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  accountId   String         @map("account_id")
+  account     FlipFlopAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  publishedAt DateTime       @default(now()) @map("published_at")
+  likes       Int            @default(0)
+  featured    Boolean        @default(false)
+  createdAt   DateTime       @default(now()) @map("created_at")
+
+  @@index([accountId])
+  @@map("flipflop_videos")
+}
+
+model TvBroadcast {
+  id          String    @id @default(cuid())
+  videoId     String    @map("video_id")
+  video       Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  tvChannelId String    @map("tv_channel_id")
+  tvChannel   TvChannel @relation(fields: [tvChannelId], references: [id], onDelete: Cascade)
+  position    Int                              // Playlist order
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@index([tvChannelId])
+  @@index([tvChannelId, position])
+  @@map("tv_broadcasts")
 }
 
 // ============ KEMPONET DOMAINS ============
@@ -245,8 +555,10 @@ model Person {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  albums      Album[]   // Albums where this person is the primary artist
-  videos      Video[]   // Videos where this person is the artist/creator
+  albums           Album[]          // Albums where this person is the primary artist
+  videoElements    VideoElement[]   // Videos via role (actor, director, writer, producer)
+  onlineVideos     OnlineMetadata[] // Online videos created by this person
+  flipFlopAccounts FlipFlopAccount[] // FlipFlop accounts owned by this person
 
   @@map("people")
 }
@@ -264,7 +576,10 @@ model Organization {
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
   brands        Brand[]
-  albums        Album[]   // Albums released by this label
+  albums        Album[]              // Albums released by this label
+  movies        MovieMetadata[]      // Movies produced by this studio
+  seriesNetwork Series[]             // TV series aired on this network
+  commercials   CommercialMetadata[] // Commercials made by this agency
 
   @@map("organizations")
 }
@@ -295,7 +610,8 @@ model Brand {
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
 
-  products        Product[]
+  products    Product[]
+  commercials CommercialMetadata[] // Commercials featuring this brand
 
   @@map("brands")
 }
@@ -312,6 +628,8 @@ model Product {
   article         Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
   createdAt       DateTime  @default(now()) @map("created_at")
   updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  commercials CommercialMetadata[] // Commercials featuring this product
 
   @@map("products")
 }

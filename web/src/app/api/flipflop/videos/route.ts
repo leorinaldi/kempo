@@ -3,34 +3,62 @@ import { prisma } from "@/lib/prisma"
 
 export async function GET() {
   try {
-    const videos = await prisma.video.findMany({
-      where: {
-        aspectRatio: "portrait",
-      },
-      orderBy: { kyDate: "desc" },
-      select: {
-        id: true,
-        name: true,
-        url: true,
-        description: true,
-        artist: true,
-        artistPerson: {
+    // Fetch FlipFlop videos with video and account data
+    const flipFlopVideos = await prisma.flipFlopVideo.findMany({
+      orderBy: { publishedAt: "desc" },
+      include: {
+        video: {
           select: {
-            articleId: true,
-          }
+            id: true,
+            name: true,
+            url: true,
+            description: true,
+            elements: {
+              where: { role: "actor" },
+              take: 1,
+              select: {
+                person: {
+                  select: {
+                    firstName: true,
+                    lastName: true,
+                    stageName: true,
+                    articleId: true,
+                  },
+                },
+                credit: true,
+              },
+            },
+          },
+        },
+        account: {
+          select: {
+            name: true,
+            personId: true,
+          },
         },
       },
     })
 
     // Transform to include articleId from Person relation
-    const items = videos.map(video => ({
-      id: video.id,
-      name: video.name,
-      url: video.url,
-      description: video.description,
-      artist: video.artist,
-      artistArticleId: video.artistPerson?.articleId || "",
-    }))
+    const items = flipFlopVideos
+      .filter((ff) => ff.video.url) // Only include videos with actual files
+      .map((ff) => {
+        const firstActor = ff.video.elements[0]
+        const actorName = firstActor?.credit ||
+          firstActor?.person.stageName ||
+          (firstActor?.person ? `${firstActor.person.firstName} ${firstActor.person.lastName}` : "")
+
+        return {
+          id: ff.video.id,
+          name: ff.video.name,
+          url: ff.video.url,
+          description: ff.video.description,
+          artist: actorName,
+          artistArticleId: firstActor?.person.articleId || "",
+          account: ff.account.name,
+          likes: ff.likes,
+        }
+      })
 
     return NextResponse.json(items)
   } catch (error) {
