@@ -24,24 +24,17 @@ Kempo is an alternate branch of reality that diverged from our own around the la
 
 All dates in Kempo use **k.y.** (Kempo Years).
 
-## Featured Storylines
+## Content Creation Process
 
-### Hollywood Golden Age
+Real-world history serves as inspiration, not a template. A storyline begins with a theme or era—say, 1940s Hollywood—and generates an interlaced web of:
 
-The entertainment industry centers on **Pacific Pictures**, a major film studio. Key figures include Irving Lazar (Head of Production), William Garrett (Western Director), Clay Marshall (Western Star), and Vivian Sterling (Femme Fatale).
+- **People** — actors, directors, executives with their own biographies
+- **Organizations** — studios, agencies, political parties
+- **Locations** — cities, venues, landmarks
+- **Events** — film releases, awards, scandals, historical moments
+- **Media** — Kempopedia articles with images, playable songs, watchable films
 
-**Key Films:**
-- *Dust and Honor* (1939) — Clay Marshall's breakthrough
-- *Abilene Dawn* (1946) — Considered the finest Western ever made
-- *The Velvet Trap* (1946) — Noir classic starring Vivian Sterling
-
-### American Politics
-
-The political landscape features the **National Party** (Democratic parallel) and **Federal Party** (Republican parallel), with **Harold S. Kellman** (Harry S. Truman parallel) as President.
-
-### The Antelope Springs Incident
-
-In March 1949 k.y., test pilot Frank Caldwell died pursuing an unidentified object over New Mexico. The military cover-up was exposed by journalist Nathan Collier, leading to the Whitfield Committee hearings.
+Each element references others: an actor's article links to films they starred in, which link to the studio that produced them, which links to executives who ran it. Audio and video assets can appear in Radio, TV, SoundWaves, and KempoTube interfaces.
 
 ## Interfaces
 
