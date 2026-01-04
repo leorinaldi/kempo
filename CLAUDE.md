@@ -20,6 +20,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
 | Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
 | Simulation workflow | [docs/simulation-workflow.md](docs/simulation-workflow.md) |
+| Event system | [docs/event-system.md](docs/event-system.md) |
 | Database schema | [web/prisma/schema.prisma](web/prisma/schema.prisma) |
 
 ## Skills

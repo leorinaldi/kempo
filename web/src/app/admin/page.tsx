@@ -84,6 +84,30 @@ export default function AdminPage() {
             </ul>
           </Link>
 
+          {/* Events */}
+          <Link
+            href="/admin/events"
+            className="block bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">Events</h2>
+                <p className="text-sm text-gray-500">Timeline events and history</p>
+              </div>
+            </div>
+            <ul className="text-sm text-gray-600 space-y-1">
+              <li>Create events with dates</li>
+              <li>Link people and locations</li>
+              <li>Event hierarchy</li>
+              <li>Cross-classification</li>
+            </ul>
+          </Link>
+
           {/* Simulation Management */}
           <Link
             href="/admin/simulation"
@@ -114,8 +138,8 @@ export default function AdminPage() {
             className="block bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>

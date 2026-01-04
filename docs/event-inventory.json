@@ -1,0 +1,1985 @@
+{
+  "summary": {
+    "totalArticles": 187,
+    "articlesWithEvents": 57,
+    "totalEvents": 125,
+    "eventsByType": {
+      "release": 5,
+      "birth": 19,
+      "milestone": 66,
+      "war": 3,
+      "founding": 3,
+      "recording": 1,
+      "treaty": 2,
+      "marriage": 2,
+      "death": 2,
+      "appointment": 5,
+      "election": 2,
+      "retirement": 1,
+      "resignation": 2,
+      "incident": 7,
+      "discovery": 4,
+      "publication": 1
+    }
+  },
+  "themes": {
+    "Golden Age of Hollywood": [
+      "Abilene Dawn",
+      "Catherine Marlowe",
+      "Dust and Honor",
+      "Irving Lazar",
+      "James Thornton",
+      "Nathan Kagan",
+      "Pacific Pictures",
+      "Robert Langley",
+      "Samuel Kagan",
+      "Silver Screen Awards",
+      "The Royale Imperial",
+      "The Velvet Trap",
+      "Vivian Sterling",
+      "William Garrett"
+    ],
+    "The Antelope Springs Incident": [
+      "Antelope Springs, New Mexico",
+      "Frank Caldwell",
+      "Harlan Whitmore",
+      "Leonard Vance",
+      "Margaret Caldwell",
+      "Raymond Colvin",
+      "Stokes Ranch",
+      "The Antelope Springs Incident",
+      "Virgil Stokes",
+      "Whitfield Committee"
+    ],
+    "Organized Crime": [
+      "Carmine DeMarco",
+      "Enzo Ferrante",
+      "Jack Callahan",
+      "Paulie Caruso",
+      "Salvatore Conti",
+      "Savannah Fontaine",
+      "Sidney Hartman",
+      "Sol Roth"
+    ],
+    "World War II": [
+      "Charles Garrison",
+      "Douglas D. Westbrook",
+      "Frank Caldwell",
+      "Harlan Whitmore",
+      "Harold S. Kellman",
+      "Hiroshima",
+      "Japan",
+      "Nagasaki",
+      "Philippines",
+      "Potsdam Declaration",
+      "Raymond Colvin",
+      "Solemn Hope Speech"
+    ],
+    "Cold War": [
+      "Grigori Voronov",
+      "Joseph Stalin",
+      "Moscow",
+      "People's Party of the Soviet Union",
+      "Ukraine"
+    ]
+  },
+  "inventory": [
+    {
+      "articleId": "cmjd5at1v0000itxwikr97f12",
+      "articleTitle": "Abilene Dawn",
+      "articleType": "culture",
+      "tags": [
+        "film",
+        "western",
+        "1946",
+        "hollywood",
+        "clay-marshall"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "October 4, 1946 k.y.",
+          "headline": "Abilene Dawn premieres",
+          "description": "William Garrett and Clay Marshall's masterpiece, considered by many the finest Western ever made, premieres to universal acclaim",
+          "suggestedType": "release",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a1pd008bitwddb94x0yd",
+      "articleTitle": "Antelope Springs, New Mexico",
+      "articleType": "place",
+      "tags": [
+        "american",
+        "new-mexico",
+        "ufo",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd59yh6004eitwdb8it4u7k",
+      "articleTitle": "Carmine DeMarco",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "politics",
+        "italian-american",
+        "organized-crime",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd59yjj004hitwdis78dokz",
+      "articleTitle": "Catherine Marlowe",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "actress",
+        "film",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd59ylz004kitwdbim4tg5k",
+      "articleTitle": "Charles Garrison",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "military",
+        "pilot",
+        "test-pilot",
+        "world-war-ii",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "March 5, 1922 k.y.",
+          "headline": "Charles Garrison born",
+          "description": "Charles Edward Garrison is born in Myra, [[west-virginia|West Virginia]]",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1940 k.y.",
+          "headline": "Garrison enlists",
+          "description": "Enlists in the Army Air Corps as a mechanic",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "December 1942 k.y.",
+          "headline": "Garrison commissioned",
+          "description": "Commissioned as a flight officer after completing pilot training",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 1944 k.y.",
+          "headline": "Garrison becomes ace",
+          "description": "Achieves ace status with five confirmed aerial victories over Europe",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "October 1944 k.y.",
+          "headline": "Garrison shot down",
+          "description": "Shot down over France, evades capture with help of French Resistance",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "May 1945 k.y.",
+          "headline": "War ends",
+          "description": "Garrison ends WWII with 11 aerial victories",
+          "suggestedType": "war",
+          "suggestedSignificance": 10
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "Garrison becomes test pilot",
+          "description": "Selected for experimental test pilot program at Ridgecrest Army Air Field",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "October 14, 1947 k.y.",
+          "headline": "Sound barrier broken",
+          "description": "Garrison becomes the first pilot to fly faster than the speed of sound",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd59yoa004nitwdy4h1zybs",
+      "articleTitle": "Chen Zhaoming",
+      "articleType": "person",
+      "tags": [
+        "chinese",
+        "politician",
+        "revolutionary",
+        "communist",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "December 18, 1894 k.y.",
+          "headline": "Chen Zhaoming born",
+          "description": "Chen Zhaoming is born to a peasant family in Hunan Province, China",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1921 k.y.",
+          "headline": "Chen helps found Chinese People's Party",
+          "description": "Chen Zhaoming becomes a founding member of the Chinese People's Party in Shanghai",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1934 k.y.",
+          "headline": "The Great Retreat begins",
+          "description": "Chen leads the Chinese People's Party forces on the Great Retreat, a 6,000-mile march to escape Nationalist encirclement",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "October 1, 1949 k.y.",
+          "headline": "People's Republic of China proclaimed",
+          "description": "Chen Zhaoming proclaims the founding of the People's Republic of China from Tiananmen Gate in Beijing",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a25a008witwd4m3n4vfo",
+      "articleTitle": "China",
+      "articleType": "place",
+      "tags": [
+        "country",
+        "asia",
+        "communist"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "October 1, 1949 k.y.",
+          "headline": "People's Republic of China proclaimed",
+          "description": "Chen Zhaoming proclaims the founding of the People's Republic of China from Tiananmen Gate in Beijing",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd59xhv0035itwdvoq20kv3",
+      "articleTitle": "Chinese People's Party",
+      "articleType": "organization",
+      "tags": [
+        "chinese",
+        "political-party",
+        "communist",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "July 1921 k.y.",
+          "headline": "Chinese People's Party founded",
+          "description": "The Chinese People's Party is founded in Shanghai by revolutionary intellectuals including Chen Zhaoming",
+          "suggestedType": "founding",
+          "suggestedSignificance": 6
+        },
+        {
+          "source": "timelineEvent",
+          "date": "October 1, 1949 k.y.",
+          "headline": "CPP takes power",
+          "description": "The Chinese People's Party establishes the People's Republic of China under Chairman Chen Zhaoming",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a5pi00dbitwdaiy9wt1a",
+      "articleTitle": "Continental Courier",
+      "articleType": "product",
+      "tags": [
+        "american",
+        "automotive",
+        "continental-motors",
+        "economy-car",
+        "postwar",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "January 1949 k.y.",
+          "headline": "Continental Courier introduced",
+          "description": "Continental Motors introduces the Courier as its new entry-level economy sedan, featuring fresh postwar styling",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a5sg00deitwdoorwpxm7",
+      "articleTitle": "Continental Model C",
+      "articleType": "product",
+      "tags": [
+        "american",
+        "automotive",
+        "continental-motors",
+        "economy-car",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "1908 k.y.",
+          "headline": "Continental Model C introduced",
+          "description": "Continental Motors introduces the Model C, an affordable automobile designed for ordinary Americans",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1913 k.y.",
+          "headline": "Assembly line production begins",
+          "description": "Continental introduces the moving assembly line at the Lakeside Plant, revolutionizing manufacturing",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "January 5, 1914 k.y.",
+          "headline": "Five Dollar Day announced",
+          "description": "Continental Motors announces it will pay workers $5 per day, more than doubling the prevailing wage",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1927 k.y.",
+          "headline": "Model C production ends",
+          "description": "After nearly 15 million units, Continental ends production of the Model C",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd59yt5004titwdz54u79yh",
+      "articleTitle": "Dorothy Sherwood",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "entertainer",
+        "singer",
+        "radio",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "April 3, 1921 k.y.",
+          "headline": "Dorothy Sherwood born",
+          "description": "Dorothy Mae Sherwood is born in Cincinnati, Ohio",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1943 k.y.",
+          "headline": "Sherwood signs with Starlight Records",
+          "description": "After success as a big band vocalist, Dorothy Sherwood signs a solo recording contract with Starlight Records",
+          "suggestedType": "recording",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "The Dorothy Sherwood Show debuts",
+          "description": "Sherwood launches her own radio variety program, which becomes one of the most popular shows in America",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd59yw6004witwd1a2wmmbi",
+      "articleTitle": "Douglas D. Westbrook",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "military",
+        "general",
+        "world-war-i",
+        "world-war-ii",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "October 26, 1888 k.y.",
+          "headline": "Douglas Westbrook born",
+          "description": "Douglas David Westbrook is born in Ashford, Kansas to Samuel and Clara Westbrook",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1906 k.y.",
+          "headline": "Westbrook enters Vermont Army Academy",
+          "description": "Begins studies at the Vermont Army Academy as a cadet",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1910 k.y.",
+          "headline": "Westbrook graduates from Vermont Army Academy",
+          "description": "Graduates 5th in his class with distinction in tactics and engineering",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 1917 k.y.",
+          "headline": "Westbrook deploys to France",
+          "description": "Major Westbrook deploys to France as operations officer for the 35th Division",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "August 1918 k.y.",
+          "headline": "Westbrook promoted to brigadier general",
+          "description": "Promoted to brigadier general after distinguished combat leadership, becoming one of the youngest generals in the Army",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "November 1918 k.y.",
+          "headline": "Armistice ends WWI",
+          "description": "Westbrook ends the war as a decorated combat commander with multiple citations for bravery",
+          "suggestedType": "treaty",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 15, 1919 k.y.",
+          "headline": "Westbrook marries Maggie Morse",
+          "description": "Marries Margaret 'Maggie' Geneva Morse in Denver, Colorado",
+          "suggestedType": "marriage",
+          "suggestedSignificance": 3
+        },
+        {
+          "source": "timelineEvent",
+          "date": "November 1942 k.y.",
+          "headline": "Westbrook commands Operation Torch",
+          "description": "Leads the Allied invasion of French North Africa",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 1944 k.y.",
+          "headline": "Westbrook named Supreme Commander Pacific",
+          "description": "Appointed Supreme Commander of Allied Forces in the Pacific Theater",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "October 20, 1944 k.y.",
+          "headline": "'I have returned'",
+          "description": "Westbrook wades ashore at Leyte, Philippines, declaring 'People of the Philippines, I have returned!'",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "September 2, 1945 k.y.",
+          "headline": "Japan surrenders",
+          "description": "Westbrook accepts Japan's unconditional surrender aboard the USS Missouri in Tokyo Bay",
+          "suggestedType": "treaty",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd5at9s0003itxw5udtpumg",
+      "articleTitle": "Dust and Honor",
+      "articleType": "culture",
+      "tags": [
+        "film",
+        "western",
+        "1939",
+        "hollywood",
+        "clay-marshall"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "March 8, 1939 k.y.",
+          "headline": "Dust and Honor premieres",
+          "description": "William Garrett's Western masterpiece premieres, making Clay Marshall a star and earning seven Silver Screen Award nominations",
+          "suggestedType": "release",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd59z6e0058itwd990qqr1k",
+      "articleTitle": "Enzo Ferrante",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "organized-crime",
+        "italian-american",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd59z8t005bitwde20uj5mm",
+      "articleTitle": "Frank Caldwell",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "military",
+        "pilot",
+        "test-pilot",
+        "world-war-ii",
+        "ufo",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "June 30, 1920 k.y.",
+          "headline": "Frank Caldwell born",
+          "description": "Frank Kenneth Caldwell is born in Franklin, Kentucky",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1938 k.y.",
+          "headline": "Caldwell graduates high school",
+          "description": "Graduates from Louisville Male High School, enlists in Army Air Corps",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 1942 k.y.",
+          "headline": "Caldwell commissioned",
+          "description": "Commissioned as second lieutenant after completing flight training",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 6, 1944 k.y.",
+          "headline": "D-Day",
+          "description": "Caldwell flies C-47 transport missions supporting the Normandy invasion",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "August 1944 k.y.",
+          "headline": "Caldwell awarded DFC",
+          "description": "Receives Distinguished Flying Cross for heroism during Operation Dragoon",
+          "suggestedType": "war",
+          "suggestedSignificance": 10
+        },
+        {
+          "source": "timelineEvent",
+          "date": "May 1945 k.y.",
+          "headline": "War ends in Europe",
+          "description": "Caldwell ends WWII as a highly decorated pilot with over 2,000 flight hours",
+          "suggestedType": "war",
+          "suggestedSignificance": 10
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "Caldwell becomes test pilot",
+          "description": "Selected for experimental test pilot program at Ridgecrest Army Air Field",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "October 14, 1947 k.y.",
+          "headline": "Caldwell flies chase for sound barrier attempt",
+          "description": "Serves as chase pilot for Captain Charles Garrison's historic first supersonic flight at Ridgecrest",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 14, 1949 k.y.",
+          "headline": "Caldwell killed in crash",
+          "description": "Dies when his experimental aircraft crashes near Antelope Springs, New Mexico after reporting contact with an unidentified object",
+          "suggestedType": "death",
+          "suggestedSignificance": 4
+        }
+      ],
+      "potentialParents": [
+        "World War II",
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjhyxw5l0000it23rluhnyen",
+      "articleTitle": "George Keller",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "entertainer",
+        "musician",
+        "jazz",
+        "saxophonist",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "September 3, 1919 k.y.",
+          "headline": "George Keller born",
+          "description": "George William Keller is born in Chicago, Illinois",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 15, 1945 k.y.",
+          "headline": "Keller and Sherwood marry",
+          "description": "George Keller marries singer Dorothy Sherwood in Cincinnati",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd59zft005kitwd6hyvkalk",
+      "articleTitle": "Grigori Voronov",
+      "articleType": "person",
+      "tags": [
+        "soviet",
+        "politician",
+        "communist",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Cold War"
+      ]
+    },
+    {
+      "articleId": "cmjd59zi7005nitwdwbej3z2n",
+      "articleTitle": "Harlan Whitmore",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "military",
+        "general",
+        "world-war-ii",
+        "ufo",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "1896 k.y.",
+          "headline": "Harlan Whitmore born",
+          "description": "Born in Fort Worth, Texas",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1917 k.y.",
+          "headline": "Whitmore joins Army",
+          "description": "Commissioned as second lieutenant in Army Air Service",
+          "suggestedType": "appointment",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1918 k.y.",
+          "headline": "Whitmore serves in WWI",
+          "description": "Commands pursuit squadron on Western Front",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1944 k.y.",
+          "headline": "Whitmore commands bomber wing",
+          "description": "Commands B-29 bomber wing in Pacific Theater",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1947 k.y.",
+          "headline": "Whitmore promoted to brigadier general",
+          "description": "Assigned to Pentagon with oversight of classified aviation programs",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 22, 1949 k.y.",
+          "headline": "Whitmore takes control of Antelope Springs investigation",
+          "description": "Arrives at Ridgecrest and orders all materials classified",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 9
+        },
+        {
+          "source": "timelineEvent",
+          "date": "September 1949 k.y.",
+          "headline": "Whitmore testifies before Whitfield Committee",
+          "description": "Defends Air Force handling of the incident",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "World War II",
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd59zmu005titwdlfecncg7",
+      "articleTitle": "Harold S. Kellman",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "politician",
+        "head-of-state",
+        "world-war-i",
+        "world-war-ii",
+        "parallel-switchover",
+        "national-party"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "May 11, 1884 k.y.",
+          "headline": "Harold Kellman born",
+          "description": "Harold Sterling Kellman is born in Lawton, Missouri to John and Martha Kellman",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 1901 k.y.",
+          "headline": "Kellman graduates high school",
+          "description": "Graduates from Liberty High School in Liberty, Missouri",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 1917 k.y.",
+          "headline": "Kellman joins Army for WWI",
+          "description": "Helps organize the 127th Field Artillery Regiment; commissioned as First Lieutenant",
+          "suggestedType": "appointment",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "November 1918 k.y.",
+          "headline": "Kellman returns from WWI",
+          "description": "Returns home as Captain after seeing action in France",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 28, 1919 k.y.",
+          "headline": "Kellman marries Beth Crawford",
+          "description": "Marries Elizabeth 'Beth' Crawford in Liberty, Missouri",
+          "suggestedType": "marriage",
+          "suggestedSignificance": 3
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1922 k.y.",
+          "headline": "Kellman elected county judge",
+          "description": "Elected judge of Jackson County Court with backing of the Gallagher political machine",
+          "suggestedType": "election",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1934 k.y.",
+          "headline": "Kellman elected to US Senate",
+          "description": "Elected to the United States Senate representing Missouri",
+          "suggestedType": "election",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1944 k.y.",
+          "headline": "Kellman nominated for Vice President",
+          "description": "Selected as Franklin D. Roosevelt's running mate for the 1944 election",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 12, 1945 k.y.",
+          "headline": "Kellman becomes President",
+          "description": "Assumes the presidency following the death of Franklin D. Roosevelt",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd59zq4005witwd2jhj31ge",
+      "articleTitle": "Henry C. Durant",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "business",
+        "automotive",
+        "industrialist",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "July 30, 1863 k.y.",
+          "headline": "Henry C. Durant born",
+          "description": "Henry Charles Durant is born on a farm in Dearborn, Michigan",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 1903 k.y.",
+          "headline": "Continental Motors founded",
+          "description": "Durant founds Continental Motors Corporation in Detroit",
+          "suggestedType": "founding",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1908 k.y.",
+          "headline": "Model C introduced",
+          "description": "Continental introduces the Model C, which becomes America's best-selling automobile",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1913 k.y.",
+          "headline": "Assembly line introduced",
+          "description": "Durant revolutionizes manufacturing with the moving assembly line",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 7, 1947 k.y.",
+          "headline": "Henry C. Durant dies",
+          "description": "Durant dies at his Dearborn estate at age 83",
+          "suggestedType": "death",
+          "suggestedSignificance": 4
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a2m2009hitwdch119mmz",
+      "articleTitle": "Hiroshima",
+      "articleType": "place",
+      "tags": [
+        "japanese",
+        "world-war-ii"
+      ],
+      "events": [],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd59zus0062itwd2dg9jbvo",
+      "articleTitle": "Irving Lazar",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "executive",
+        "producer",
+        "film",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd59zx50065itwdip5mzwqm",
+      "articleTitle": "Jack Callahan",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "labor",
+        "organized-crime",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd59zzg0068itwd1jmibsil",
+      "articleTitle": "James Thornton",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "entertainer",
+        "director",
+        "hollywood",
+        "film-noir"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "April 3, 1899 k.y.",
+          "headline": "James Thornton born",
+          "description": "James Edward Thornton is born in San Francisco, California",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "Directs The Velvet Trap",
+          "description": "Thornton's film noir masterpiece launches Vivian Sterling to stardom and establishes him as a premier director",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1949 k.y.",
+          "headline": "Reunites with Sterling",
+          "description": "Thornton and Sterling collaborate again on Midnight Masquerade",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a2vo009titwdfqfs79p0",
+      "articleTitle": "Japan",
+      "articleType": "place",
+      "tags": [
+        "nation",
+        "asia",
+        "world-war-ii"
+      ],
+      "events": [],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd5a02k006bitwdq081yasi",
+      "articleTitle": "Joseph Carter",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "athlete",
+        "boxer",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "May 13, 1915 k.y.",
+          "headline": "Joseph Carter born",
+          "description": "Joseph Louis Carter is born in Lafayette, Alabama",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1937 k.y.",
+          "headline": "Carter wins heavyweight title",
+          "description": "Joseph Carter defeats James J. Bradford in Chicago to become World Heavyweight Champion",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "June 22, 1938 k.y.",
+          "headline": "Carter defeats Brenner",
+          "description": "In one of the most significant sporting events of the decade, Joseph Carter knocks out German boxer Klaus Brenner in the first round at Yankee Stadium",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1949 k.y.",
+          "headline": "Carter retires as champion",
+          "description": "After twelve years and 25 successful title defenses, Joseph Carter announces his retirement as undefeated heavyweight champion",
+          "suggestedType": "retirement",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a052006eitwdeqdwxwse",
+      "articleTitle": "Joseph Stalin",
+      "articleType": "person",
+      "tags": [
+        "soviet",
+        "politician",
+        "communist",
+        "historical"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Cold War"
+      ]
+    },
+    {
+      "articleId": "cmjd5a07b006hitwdak10vlrd",
+      "articleTitle": "Leonard Vance",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "scientist",
+        "physicist",
+        "astronomer",
+        "ufo",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "1908 k.y.",
+          "headline": "Leonard Vance born",
+          "description": "Born in Cleveland, Ohio",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1935 k.y.",
+          "headline": "Vance earns Ph.D.",
+          "description": "Completes doctorate in astrophysics at University of Chicago",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1943 k.y.",
+          "headline": "Vance joins radar project",
+          "description": "Recruited to MIT Radiation Laboratory to work on radar development",
+          "suggestedType": "appointment",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "Vance joins government committees",
+          "description": "Appointed to Defense Department scientific advisory panels",
+          "suggestedType": "appointment",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "September 1949 k.y.",
+          "headline": "Vance testifies before Whitfield Committee",
+          "description": "Provides expert testimony on Antelope Springs evidence",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd5a09q006kitwd46udjfcc",
+      "articleTitle": "Margaret Caldwell",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "texas",
+        "ufo",
+        "advocate"
+      ],
+      "events": [],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd5a40g00b8itwdvbgqrc8d",
+      "articleTitle": "Moscow",
+      "articleType": "place",
+      "tags": [
+        "soviet",
+        "city",
+        "capital"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Cold War"
+      ]
+    },
+    {
+      "articleId": "cmjd5a42o00bbitwdu6fiqtvb",
+      "articleTitle": "Nagasaki",
+      "articleType": "place",
+      "tags": [
+        "japanese",
+        "world-war-ii"
+      ],
+      "events": [],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd5a0c6006nitwde4qxoif3",
+      "articleTitle": "Nathan Collier",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "journalist",
+        "muckraker",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "1905 k.y.",
+          "headline": "Nathan Collier born",
+          "description": "Born in Evanston, Illinois",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1927 k.y.",
+          "headline": "Collier graduates University of Chicago",
+          "description": "Begins career as newspaper reporter",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1932 k.y.",
+          "headline": "Collier begins syndicated column",
+          "description": "'Washington Watch' launches in 50 newspapers",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1940 k.y.",
+          "headline": "Collier exposes defense contractor fraud",
+          "description": "Series leads to congressional investigation and criminal charges",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 1949 k.y.",
+          "headline": "Collier begins Antelope Springs investigation",
+          "description": "Travels to New Mexico following leads about pilot's death and debris recovery",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 9
+        },
+        {
+          "source": "timelineEvent",
+          "date": "May 1949 k.y.",
+          "headline": "'What Fell at Antelope Springs?' published",
+          "description": "Three-part exposé appears in over 200 newspapers nationwide",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 9
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a0ek006qitwd0sqkw907",
+      "articleTitle": "Nathan Kagan",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "executive",
+        "film",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd59v1o0006itwdft0ppf8g",
+      "articleTitle": "Pacific Pictures",
+      "articleType": "organization",
+      "tags": [
+        "american",
+        "entertainment",
+        "film",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a0mb006zitwdmh4qfmjw",
+      "articleTitle": "Paulie Caruso",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "organized-crime",
+        "italian-american"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd59xzy003titwda8o0zyqu",
+      "articleTitle": "People's Party of the Soviet Union",
+      "articleType": "organization",
+      "tags": [
+        "soviet",
+        "political-party",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Cold War"
+      ]
+    },
+    {
+      "articleId": "cmjd5a4jl00bwitwdw2r7n3mk",
+      "articleTitle": "Philippines",
+      "articleType": "place",
+      "tags": [
+        "nation",
+        "asia",
+        "world-war-ii"
+      ],
+      "events": [],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd59x6g002ritwdcvsh7324",
+      "articleTitle": "Potsdam Declaration",
+      "articleType": "event",
+      "tags": [
+        "diplomacy",
+        "world-war-ii"
+      ],
+      "events": [],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd5a0or0072itwdnmioi0x5",
+      "articleTitle": "Randolph Joseph Mercer",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "business-leader",
+        "media",
+        "publisher",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "April 29, 1862 k.y.",
+          "headline": "Randolph Mercer born",
+          "description": "Randolph Joseph Mercer is born in Cincinnati, Ohio",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1883 k.y.",
+          "headline": "Mercer acquires first newspaper",
+          "description": "Randolph Mercer purchases the struggling Cincinnati Globe, beginning his media empire",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1895 k.y.",
+          "headline": "Mercer enters New York market",
+          "description": "Mercer acquires the New York Standard, igniting a circulation war that defines modern tabloid journalism",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1912 k.y.",
+          "headline": "Athlete Magazine founded",
+          "description": "Mercer Publications launches Athlete Magazine, expanding beyond newspapers into periodicals",
+          "suggestedType": "founding",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": []
+    },
+    {
+      "articleId": "cmjd5a0r50075itwda9tricqo",
+      "articleTitle": "Raymond Colvin",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "military",
+        "intelligence",
+        "world-war-ii",
+        "ufo",
+        "whistleblower",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "1912 k.y.",
+          "headline": "Raymond Colvin born",
+          "description": "Born in Houma, Louisiana",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1934 k.y.",
+          "headline": "Colvin joins Army",
+          "description": "Commissioned as second lieutenant after graduating LSU",
+          "suggestedType": "appointment",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1942 k.y.",
+          "headline": "Colvin transfers to intelligence",
+          "description": "Assigned to Army Air Forces Intelligence during World War II",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1947 k.y.",
+          "headline": "Colvin assigned to Ridgecrest",
+          "description": "Posted to Ridgecrest Army Air Field as intelligence officer",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 17, 1949 k.y.",
+          "headline": "Colvin dispatched to debris site",
+          "description": "Sent to investigate debris recovery at the Stokes Ranch",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 22, 1949 k.y.",
+          "headline": "Colvin ordered silent",
+          "description": "General Whitmore orders Colvin to cease investigation and remain silent",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 1949 k.y.",
+          "headline": "Colvin resigns",
+          "description": "Submits resignation from the Air Force citing 'irreconcilable differences'",
+          "suggestedType": "resignation",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "September 1949 k.y.",
+          "headline": "Colvin testifies",
+          "description": "Testifies before the Whitfield Committee about the cover-up",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "World War II",
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd5a0vx007bitwd290fmjqs",
+      "articleTitle": "Robert Langley",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "entertainer",
+        "actor",
+        "hollywood",
+        "leading-man"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "July 17, 1912 k.y.",
+          "headline": "Robert Langley born",
+          "description": "Robert Francis Langley is born in Boston, Massachusetts",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "Stars in The Velvet Trap",
+          "description": "Langley stars opposite Vivian Sterling in the film noir classic, delivering one of his most acclaimed performances",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a118007hitwd6zv0ue2g",
+      "articleTitle": "Salvatore Conti",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "organized-crime",
+        "italian-american",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd5a13m007kitwdi64nmd0n",
+      "articleTitle": "Samuel Kagan",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "executive",
+        "film",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a163007nitwd3ut0sm1e",
+      "articleTitle": "Savannah Fontaine",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "organized-crime",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd5a18f007qitwdzufww4os",
+      "articleTitle": "Sidney Hartman",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "organized-crime",
+        "jewish-american",
+        "las-vegas",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd59w7m001mitwdbjllo4r6",
+      "articleTitle": "Silver Screen Awards",
+      "articleType": "culture",
+      "tags": [
+        "american",
+        "hollywood",
+        "film",
+        "awards"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a1b7007titwddn4ji98x",
+      "articleTitle": "Sol Roth",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "organized-crime",
+        "jewish-american",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Organized Crime"
+      ]
+    },
+    {
+      "articleId": "cmjd5atxi0009itxwbwhpnfgr",
+      "articleTitle": "Solemn Hope Speech",
+      "articleType": "event",
+      "tags": [
+        "world-war-ii",
+        "japan",
+        "surrender",
+        "douglas-westbrook",
+        "speech",
+        "1945"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "September 2, 1945 k.y.",
+          "headline": "Solemn Hope Speech delivered",
+          "description": "General Westbrook delivers his famous address following Japan's formal surrender aboard the USS Missouri",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "World War II"
+      ]
+    },
+    {
+      "articleId": "cmjd5a4y200ceitwdsb7ygogu",
+      "articleTitle": "Stokes Ranch",
+      "articleType": "place",
+      "tags": [
+        "american",
+        "new-mexico",
+        "ranch",
+        "ufo"
+      ],
+      "events": [],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd59x1q002oitwdn86f1sx1",
+      "articleTitle": "The Antelope Springs Incident",
+      "articleType": "event",
+      "tags": [
+        "american",
+        "ufo",
+        "military",
+        "conspiracy",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "March 14, 1949 k.y.",
+          "headline": "Caldwell encounters unknown object",
+          "description": "Captain Frank Caldwell, flying an experimental aircraft from Ridgecrest Army Air Field, reports visual contact with an unidentified object traveling at extreme speed",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 14, 1949 k.y.",
+          "headline": "Caldwell's aircraft crashes",
+          "description": "Caldwell's plane goes down in the New Mexico desert approximately 40 miles northeast of Antelope Springs; pilot killed on impact",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 15, 1949 k.y.",
+          "headline": "Stokes discovers debris",
+          "description": "Rancher Virgil Stokes finds unusual metallic debris scattered across a remote section of his property",
+          "suggestedType": "discovery",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 17, 1949 k.y.",
+          "headline": "Stokes reports discovery",
+          "description": "Stokes brings samples to the Antelope Springs sheriff, who contacts Ridgecrest Army Air Field",
+          "suggestedType": "discovery",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 17, 1949 k.y.",
+          "headline": "Major Colvin dispatched",
+          "description": "Major Raymond Colvin, intelligence officer at Ridgecrest, is sent to investigate the debris recovery",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 22, 1949 k.y.",
+          "headline": "Colvin connects incidents",
+          "description": "Colvin discovers that Caldwell's final radio transmissions referenced an unidentified object in the same area where Stokes found the debris",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 22, 1949 k.y.",
+          "headline": "General Whitmore orders silence",
+          "description": "Brigadier General Harlan Whitmore arrives at Ridgecrest and orders all materials classified and all personnel to cease discussion of the incidents",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "April 1949 k.y.",
+          "headline": "Colvin resigns commission",
+          "description": "Major Colvin resigns his commission, citing 'irreconcilable differences with command decisions'",
+          "suggestedType": "resignation",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "May 1949 k.y.",
+          "headline": "Collier publishes exposé",
+          "description": "Journalist Nathan Collier publishes 'What Fell at Antelope Springs?' connecting the pilot's death, the debris, and the military cover-up",
+          "suggestedType": "publication",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "September 1949 k.y.",
+          "headline": "Whitfield Committee hearings",
+          "description": "The Whitfield Committee convenes to investigate; Dr. Leonard Vance testifies as scientific consultant",
+          "suggestedType": "incident",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd5a55o00cnitwdt2kcmiob",
+      "articleTitle": "The Royale Imperial",
+      "articleType": "place",
+      "tags": [
+        "american",
+        "los-angeles",
+        "hotel",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5atj10006itxw93x16qro",
+      "articleTitle": "The Velvet Trap",
+      "articleType": "culture",
+      "tags": [
+        "film",
+        "film-noir",
+        "1946",
+        "hollywood",
+        "vivian-sterling"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "March 15, 1946 k.y.",
+          "headline": "The Velvet Trap premieres",
+          "description": "The film noir classic premieres in Los Angeles, launching Vivian Sterling to superstardom",
+          "suggestedType": "release",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd5a58300cqitwdfb5edxdo",
+      "articleTitle": "Ukraine",
+      "articleType": "place",
+      "tags": [
+        "soviet",
+        "republic"
+      ],
+      "events": [],
+      "potentialParents": [
+        "Cold War"
+      ]
+    },
+    {
+      "articleId": "cmjd5a1fu007zitwd3g4dtwji",
+      "articleTitle": "Virgil Stokes",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "rancher",
+        "new-mexico",
+        "ufo",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "1901 k.y.",
+          "headline": "Virgil Stokes born",
+          "description": "Born to a ranching family in southeastern New Mexico",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 15, 1949 k.y.",
+          "headline": "Stokes discovers debris",
+          "description": "While riding fence lines, Stokes finds unusual metallic debris scattered across his ranch",
+          "suggestedType": "discovery",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 17, 1949 k.y.",
+          "headline": "Stokes reports discovery",
+          "description": "Brings samples to the Antelope Springs sheriff; military personnel arrive within hours",
+          "suggestedType": "discovery",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "September 1949 k.y.",
+          "headline": "Stokes testifies",
+          "description": "Testifies before the Whitfield Committee about what he found",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd5a1i80082itwdu0gzz8e0",
+      "articleTitle": "Vivian Sterling",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "entertainer",
+        "actress",
+        "dancer",
+        "hollywood",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "September 12, 1922 k.y.",
+          "headline": "Vivian Sterling born",
+          "description": "Vivian Rose Castellano is born in Brooklyn, New York to Italian-American parents",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1938 k.y.",
+          "headline": "Sterling discovered at soda fountain",
+          "description": "A talent scout spots 16-year-old Vivian working at a Brooklyn drugstore and arranges a screen test",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1941 k.y.",
+          "headline": "Breakthrough in 'Dance Hall Darling'",
+          "description": "Sterling's performance as a nightclub dancer earns critical acclaim and establishes her as a rising star",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1944 k.y.",
+          "headline": "Becomes pin-up sensation",
+          "description": "Sterling's photograph becomes one of the most requested pin-ups among American servicemen during World War II",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "'The Velvet Trap' makes Sterling a star",
+          "description": "Her iconic performance as a femme fatale cements her status as Hollywood's leading sex symbol",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1949 k.y.",
+          "headline": "Rumors surface about Martino",
+          "description": "Tabloids report that Sterling has been seen dining with singer Frank Martino, sparking gossip about a possible romance",
+          "suggestedType": "milestone",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    },
+    {
+      "articleId": "cmjd59ycc0048itwd798ewbgn",
+      "articleTitle": "Whitfield Committee",
+      "articleType": "organization",
+      "tags": [
+        "american",
+        "government",
+        "congress",
+        "ufo"
+      ],
+      "events": [],
+      "potentialParents": [
+        "The Antelope Springs Incident"
+      ]
+    },
+    {
+      "articleId": "cmjd5a1my0088itwdfknxzhil",
+      "articleTitle": "William Garrett",
+      "articleType": "person",
+      "tags": [
+        "american",
+        "entertainer",
+        "director",
+        "hollywood",
+        "western",
+        "parallel-switchover"
+      ],
+      "events": [
+        {
+          "source": "timelineEvent",
+          "date": "October 17, 1892 k.y.",
+          "headline": "William Garrett born",
+          "description": "William Patrick Garrett is born in San Antonio, Texas",
+          "suggestedType": "birth",
+          "suggestedSignificance": 4
+        },
+        {
+          "source": "timelineEvent",
+          "date": "March 8, 1939 k.y.",
+          "headline": "Dust and Honor premieres",
+          "description": "Garrett's Western masterpiece makes Clay Marshall a star and earns seven Silver Screen Award nominations, revitalizing the genre",
+          "suggestedType": "release",
+          "suggestedSignificance": 5
+        },
+        {
+          "source": "timelineEvent",
+          "date": "1946 k.y.",
+          "headline": "Abilene Dawn released",
+          "description": "Garrett and Marshall reunite for another acclaimed Western",
+          "suggestedType": "release",
+          "suggestedSignificance": 5
+        }
+      ],
+      "potentialParents": [
+        "Golden Age of Hollywood"
+      ]
+    }
+  ]
+}
