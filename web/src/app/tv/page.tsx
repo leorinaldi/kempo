@@ -1,15 +1,22 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 
-interface Program {
+interface Video {
   id: string
   name: string
   description?: string
   url: string
   artist: string
   artistArticleId: string
+}
+
+interface Channel {
+  id: string
+  name: string
+  callSign: string
+  videos: Video[]
 }
 
 type VolumeLevel = "LOW" | "MED" | "HIGH"
@@ -21,31 +28,65 @@ const volumeLevels: { level: VolumeLevel; value: number; rotation: number }[] = 
 
 const INTRO_VIDEO_URL = "https://8too1xbunlfsupi8.public.blob.vercel-storage.com/kempo-media/video/kempo-tv-start.mp4"
 
+// Fisher-Yates shuffle
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
 export default function TVPage() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const introVideoRef = useRef<HTMLVideoElement>(null)
-  const [programs, setPrograms] = useState<Program[]>([])
-  const [currentProgram, setCurrentProgram] = useState(-1) // Will be set to last item
+  const [channels, setChannels] = useState<Channel[]>([])
+  const [currentChannelIndex, setCurrentChannelIndex] = useState(0)
+  const [shuffledVideos, setShuffledVideos] = useState<Video[]>([])
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const [isOn, setIsOn] = useState(false)
   const [isPlayingIntro, setIsPlayingIntro] = useState(false)
   const [volumeIndex, setVolumeIndex] = useState(1) // Start at MED
   const [isLoading, setIsLoading] = useState(true)
   const [channelRotation, setChannelRotation] = useState(0)
+  const [showChannelIndicator, setShowChannelIndicator] = useState(false)
 
   const currentVolume = volumeLevels[volumeIndex]
+  const currentChannel = channels[currentChannelIndex]
+  const currentVideo = shuffledVideos[currentVideoIndex]
 
-  // Load playlist from database
+  // Shuffle videos for a channel
+  const shuffleChannelVideos = useCallback((channel: Channel) => {
+    const shuffled = shuffleArray(channel.videos)
+    setShuffledVideos(shuffled)
+    setCurrentVideoIndex(0)
+  }, [])
+
+  // Show channel indicator then fade after delay
+  const showChannelCallSign = useCallback(() => {
+    setShowChannelIndicator(true)
+    setTimeout(() => {
+      setShowChannelIndicator(false)
+    }, 3000)
+  }, [])
+
+  // Load channels from database
   useEffect(() => {
     fetch('/api/tv/playlist')
       .then(res => res.json())
-      .then(data => {
-        setPrograms(data)
-        // Start at the last item (newest/most recent)
-        setCurrentProgram(data.length - 1)
+      .then((data: Channel[]) => {
+        setChannels(data)
+        if (data.length > 0) {
+          // Start with first channel (alphabetically by callSign)
+          const shuffled = shuffleArray(data[0].videos)
+          setShuffledVideos(shuffled)
+          setCurrentVideoIndex(0)
+        }
         setIsLoading(false)
       })
       .catch(err => {
-        console.error('Failed to load playlist:', err)
+        console.error('Failed to load channels:', err)
         setIsLoading(false)
       })
   }, [])
@@ -76,12 +117,15 @@ export default function TVPage() {
     }
   }, [isOn, isPlayingIntro])
 
-  // Auto-play when program changes (if TV is on and not playing intro)
+  // Auto-play when video changes (if TV is on and not playing intro)
+  const currentVideoId = currentVideo?.id
   useEffect(() => {
-    if (videoRef.current && isOn && !isPlayingIntro) {
+    if (videoRef.current && isOn && !isPlayingIntro && currentVideoId) {
+      // Load and play the new video
+      videoRef.current.load()
       videoRef.current.play()
     }
-  }, [currentProgram, isOn, isPlayingIntro])
+  }, [currentVideoId, isOn, isPlayingIntro])
 
   const togglePower = () => {
     if (!isOn) {
@@ -108,14 +152,27 @@ export default function TVPage() {
       videoRef.current.currentTime = 0
       videoRef.current.play()
     }
+    // Show channel indicator
+    showChannelCallSign()
   }
 
-  const cycleVolume = () => {
-    setVolumeIndex((prev) => (prev + 1) % volumeLevels.length)
+  const handleVolumeClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const clickX = e.clientX - rect.left
+    const knobWidth = rect.width
+    const isLeftSide = clickX < knobWidth * 0.4
+
+    if (isLeftSide) {
+      // Quieter (lower index, min 0)
+      setVolumeIndex((prev) => Math.max(0, prev - 1))
+    } else {
+      // Louder (higher index, max 2)
+      setVolumeIndex((prev) => Math.min(volumeLevels.length - 1, prev + 1))
+    }
   }
 
   const handleChannelClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // If playing intro, skip it and go to first program
+    // If playing intro, skip it and go to first video
     if (isPlayingIntro) {
       setIsPlayingIntro(false)
       if (introVideoRef.current) {
@@ -125,28 +182,35 @@ export default function TVPage() {
       return
     }
 
+    if (channels.length <= 1) return // No other channels to switch to
+
     const rect = e.currentTarget.getBoundingClientRect()
     const clickX = e.clientX - rect.left
     const knobWidth = rect.width
     const isLeftSide = clickX < knobWidth * 0.4
 
-    // Reverse chronological: right = go back in time (lower index), left = go forward in time (higher index)
+    // Switch to next/previous channel
+    let newChannelIndex: number
     if (isLeftSide) {
-      // Forward in time (higher index) - swing left
+      // Previous channel - swing left
       setChannelRotation(-45)
-      setCurrentProgram((prev) => (prev + 1) % programs.length)
+      newChannelIndex = (currentChannelIndex - 1 + channels.length) % channels.length
     } else {
-      // Back in time (lower index) - swing right
+      // Next channel - swing right
       setChannelRotation(45)
-      setCurrentProgram((prev) => (prev - 1 + programs.length) % programs.length)
+      newChannelIndex = (currentChannelIndex + 1) % channels.length
     }
 
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0
-      if (isOn) {
-        videoRef.current.play()
-      }
-    }
+    setCurrentChannelIndex(newChannelIndex)
+
+    // Shuffle the new channel's videos
+    const newChannel = channels[newChannelIndex]
+    const shuffled = shuffleArray(newChannel.videos)
+    setShuffledVideos(shuffled)
+    setCurrentVideoIndex(0)
+
+    // Show channel indicator
+    showChannelCallSign()
 
     setTimeout(() => {
       setChannelRotation(0)
@@ -154,16 +218,9 @@ export default function TVPage() {
   }
 
   const handleVideoEnd = () => {
-    // Auto-advance to next program (go back in time - lower index)
-    setChannelRotation(45)
-    setCurrentProgram((prev) => (prev - 1 + programs.length) % programs.length)
-
-    setTimeout(() => {
-      setChannelRotation(0)
-    }, 200)
+    // Play next video in the shuffled playlist (loops back to start)
+    setCurrentVideoIndex((prev) => (prev + 1) % shuffledVideos.length)
   }
-
-  const program = programs[currentProgram] || null
 
   const blueGlow = '0 0 20px rgba(100,150,255,1), 0 0 40px rgba(80,130,255,0.9), 0 0 60px rgba(60,120,255,0.8), 0 0 100px rgba(50,100,255,0.7), 0 0 150px rgba(40,80,255,0.5)'
 
@@ -174,7 +231,7 @@ export default function TVPage() {
     )
   }
 
-  if (programs.length === 0) {
+  if (channels.length === 0 || shuffledVideos.length === 0) {
     return (
       <div className="min-h-screen bg-black flex flex-col items-center justify-center p-4">
         <p className="text-white font-serif" style={{ textShadow: blueGlow }}>No programs scheduled</p>
@@ -216,7 +273,7 @@ export default function TVPage() {
           >
             {/* Screen */}
             <Link
-              href={!isPlayingIntro && program?.artistArticleId ? `/kemponet/kempopedia/wiki/${program.artistArticleId}` : '#'}
+              href={!isPlayingIntro && currentVideo?.artistArticleId ? `/kemponet/kempopedia/wiki/${currentVideo.artistArticleId}` : '#'}
               className="relative w-full aspect-video rounded border-2 border-gray-900 overflow-hidden block cursor-pointer"
               style={{
                 background: isOn ? '#0f172a' : '#1e293b',
@@ -245,14 +302,40 @@ export default function TVPage() {
               )}
 
               {/* Program video */}
-              {isOn && !isPlayingIntro && program && (
+              {isOn && !isPlayingIntro && currentVideo && (
                 <video
                   ref={videoRef}
-                  src={program.url}
+                  src={currentVideo.url}
                   className="w-full h-full object-contain"
                   preload="metadata"
                   onEnded={handleVideoEnd}
                 />
+              )}
+
+              {/* Channel indicator */}
+              {isOn && !isPlayingIntro && currentChannel && (
+                <div
+                  className="absolute bottom-4 left-4 pointer-events-none transition-opacity duration-500"
+                  style={{
+                    opacity: showChannelIndicator ? 0.4 : 0,
+                  }}
+                >
+                  <span
+                    className="text-2xl font-bold tracking-wider"
+                    style={{
+                      color: '#d1d5db',
+                      textShadow: `
+                        -1px -1px 0 #111,
+                        1px -1px 0 #111,
+                        -1px 1px 0 #111,
+                        1px 1px 0 #111,
+                        0 0 4px rgba(156, 163, 175, 0.8)
+                      `,
+                    }}
+                  >
+                    {currentChannel.callSign}
+                  </span>
+                </div>
               )}
 
             </Link>
@@ -293,7 +376,7 @@ export default function TVPage() {
                   style={{
                     background: '#374151',
                   }}
-                  onClick={cycleVolume}
+                  onClick={handleVolumeClick}
                 >
                   {/* Knob indicator line */}
                   <div
