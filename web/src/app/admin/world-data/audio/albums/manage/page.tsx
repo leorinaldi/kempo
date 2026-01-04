@@ -82,7 +82,7 @@ export default function ManageAlbumsPage() {
 
   const loadAlbums = async () => {
     try {
-      const res = await fetch("/api/albums/list")
+      const res = await fetch("/api/entities/albums")
       const data = await res.json()
       if (Array.isArray(data)) {
         setAlbums(data)
@@ -96,7 +96,7 @@ export default function ManageAlbumsPage() {
 
   const loadArtists = async () => {
     try {
-      const res = await fetch("/api/people/list")
+      const res = await fetch("/api/entities/people")
       const data = await res.json()
       if (Array.isArray(data)) {
         setArtists(data)
@@ -108,7 +108,7 @@ export default function ManageAlbumsPage() {
 
   const loadRecordLabels = async () => {
     try {
-      const res = await fetch("/api/organizations/list?orgType=record+label")
+      const res = await fetch("/api/entities/organizations?orgType=record+label")
       const data = await res.json()
       if (Array.isArray(data)) {
         setRecordLabels(data)
@@ -120,7 +120,7 @@ export default function ManageAlbumsPage() {
 
   const loadLinkedTracks = async (albumId: string) => {
     try {
-      const res = await fetch(`/api/albums/${albumId}/tracks`)
+      const res = await fetch(`/api/entities/albums/${albumId}/tracks`)
       const data = await res.json()
       if (Array.isArray(data)) {
         setLinkedTracks(data)
@@ -175,7 +175,7 @@ export default function ManageAlbumsPage() {
 
     // Load available articles and linked tracks
     try {
-      const articlesRes = await fetch("/api/albums/available-articles")
+      const articlesRes = await fetch("/api/entities/albums/available-articles")
       const articlesData = await articlesRes.json()
       if (Array.isArray(articlesData)) {
         // Add the album's current article if it exists and isn't already in the list
@@ -203,8 +203,8 @@ export default function ManageAlbumsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/albums/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/albums", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -250,10 +250,8 @@ export default function ManageAlbumsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/albums/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/albums/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

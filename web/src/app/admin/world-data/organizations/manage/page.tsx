@@ -106,7 +106,7 @@ export default function ManageOrganizationsPage() {
 
   const loadOrganizations = async () => {
     try {
-      const res = await fetch("/api/organizations/list")
+      const res = await fetch("/api/entities/organizations")
       const data = await res.json()
       if (Array.isArray(data)) {
         setOrganizations(data)
@@ -166,10 +166,10 @@ export default function ManageOrganizationsPage() {
     // Load available articles, inspirations, images, and brands in parallel
     try {
       const [articlesRes, inspirationsRes, imagesRes, brandsRes] = await Promise.all([
-        fetch("/api/organizations/available-articles"),
-        fetch(`/api/organizations/${org.id}/inspirations`),
-        fetch(`/api/organizations/${org.id}/images`),
-        fetch(`/api/organizations/${org.id}/brands`)
+        fetch("/api/entities/organizations/available-articles"),
+        fetch(`/api/entities/organizations/${org.id}/inspirations`),
+        fetch(`/api/entities/organizations/${org.id}/images`),
+        fetch(`/api/entities/organizations/${org.id}/brands`)
       ])
 
       const articlesData = await articlesRes.json()
@@ -212,8 +212,8 @@ export default function ManageOrganizationsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/organizations/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/organizations", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -260,10 +260,8 @@ export default function ManageOrganizationsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/organizations/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/organizations/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

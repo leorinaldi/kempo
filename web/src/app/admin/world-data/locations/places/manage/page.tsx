@@ -110,8 +110,8 @@ export default function ManagePlacesPage() {
   const loadData = async () => {
     try {
       const [placesRes, citiesRes] = await Promise.all([
-        fetch("/api/places/list"),
-        fetch("/api/cities/list")
+        fetch("/api/entities/places"),
+        fetch("/api/entities/cities")
       ])
       const placesData = await placesRes.json()
       const citiesData = await citiesRes.json()
@@ -179,10 +179,10 @@ export default function ManagePlacesPage() {
 
     try {
       const [articlesRes, inspirationsRes, imagesRes, placesInCityRes] = await Promise.all([
-        fetch("/api/places/available-articles"),
-        fetch(`/api/places/${place.id}/inspirations`),
-        fetch(`/api/places/${place.id}/images`),
-        fetch(`/api/cities/${place.cityId}/places`)
+        fetch("/api/entities/places/available-articles"),
+        fetch(`/api/entities/places/${place.id}/inspirations`),
+        fetch(`/api/entities/places/${place.id}/images`),
+        fetch(`/api/entities/cities/${place.cityId}/places`)
       ])
 
       const articlesData = await articlesRes.json()
@@ -225,8 +225,8 @@ export default function ManagePlacesPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/places/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/places", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -273,10 +273,8 @@ export default function ManagePlacesPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/places/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/places/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

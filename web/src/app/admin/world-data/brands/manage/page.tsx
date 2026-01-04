@@ -89,7 +89,7 @@ export default function ManageBrandsPage() {
 
   const loadBrands = async () => {
     try {
-      const res = await fetch("/api/brands/list")
+      const res = await fetch("/api/entities/brands")
       const data = await res.json()
       if (Array.isArray(data)) {
         setBrands(data)
@@ -103,7 +103,7 @@ export default function ManageBrandsPage() {
 
   const loadOrganizations = async () => {
     try {
-      const res = await fetch("/api/organizations/list")
+      const res = await fetch("/api/entities/organizations")
       const data = await res.json()
       if (Array.isArray(data)) {
         setOrganizations(data)
@@ -159,10 +159,10 @@ export default function ManageBrandsPage() {
 
     try {
       const [articlesRes, productsRes, inspirationsRes, imagesRes] = await Promise.all([
-        fetch("/api/brands/available-articles"),
-        fetch(`/api/brands/${brand.id}/products`),
-        fetch(`/api/brands/${brand.id}/inspirations`),
-        fetch(`/api/brands/${brand.id}/images`),
+        fetch("/api/entities/brands/available-articles"),
+        fetch(`/api/entities/brands/${brand.id}/products`),
+        fetch(`/api/entities/brands/${brand.id}/inspirations`),
+        fetch(`/api/entities/brands/${brand.id}/images`),
       ])
 
       const articlesData = await articlesRes.json()
@@ -205,8 +205,8 @@ export default function ManageBrandsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/brands/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/brands", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -252,10 +252,8 @@ export default function ManageBrandsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/brands/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/brands/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

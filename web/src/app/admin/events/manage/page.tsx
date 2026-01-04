@@ -139,7 +139,7 @@ export default function ManageEventsPage() {
 
   const loadEvents = async () => {
     try {
-      const url = filterType ? `/api/events/list?eventType=${filterType}` : "/api/events/list"
+      const url = filterType ? `/api/entities/events?eventType=${filterType}` : "/api/entities/events"
       const res = await fetch(url)
       const data = await res.json()
       if (Array.isArray(data)) {
@@ -186,10 +186,10 @@ export default function ManageEventsPage() {
     // Load related data in parallel
     const [hierarchyRes, peopleRes, locationsRes, relationsRes, allPeopleRes] = await Promise.all([
       fetch(`/api/events/hierarchy?excludeId=${event.id}`),
-      fetch(`/api/events/${event.id}/people`),
-      fetch(`/api/events/${event.id}/locations`),
-      fetch(`/api/events/${event.id}/relations`),
-      fetch("/api/people/list"),
+      fetch(`/api/entities/events/${event.id}/people`),
+      fetch(`/api/entities/events/${event.id}/locations`),
+      fetch(`/api/entities/events/${event.id}/relations`),
+      fetch("/api/entities/people"),
     ])
 
     const [hierarchy, people, locations, relations, allPeopleData] = await Promise.all([
@@ -223,8 +223,8 @@ export default function ManageEventsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/events/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/events", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -258,7 +258,7 @@ export default function ManageEventsPage() {
   const addPerson = async () => {
     if (!editModal || !newPersonId) return
     try {
-      const res = await fetch(`/api/events/${editModal.id}/people`, {
+      const res = await fetch(`/api/entities/events/${editModal.id}/people`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ personId: newPersonId, role: newPersonRole || null }),
@@ -267,7 +267,7 @@ export default function ManageEventsPage() {
         const result = await res.json()
         throw new Error(result.error)
       }
-      const peopleRes = await fetch(`/api/events/${editModal.id}/people`)
+      const peopleRes = await fetch(`/api/entities/events/${editModal.id}/people`)
       setLinkedPeople(await peopleRes.json())
       setShowPersonPicker(false)
       setNewPersonId("")
@@ -280,7 +280,7 @@ export default function ManageEventsPage() {
   const removePerson = async (personId: string) => {
     if (!editModal) return
     try {
-      await fetch(`/api/events/${editModal.id}/people`, {
+      await fetch(`/api/entities/events/${editModal.id}/people`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ personId }),
@@ -299,16 +299,16 @@ export default function ManageEventsPage() {
       let res
       switch (type) {
         case "nation":
-          res = await fetch("/api/nations/list")
+          res = await fetch("/api/entities/nations")
           break
         case "state":
-          res = await fetch("/api/states/list")
+          res = await fetch("/api/entities/states")
           break
         case "city":
-          res = await fetch("/api/cities/list")
+          res = await fetch("/api/entities/cities")
           break
         case "place":
-          res = await fetch("/api/places/list")
+          res = await fetch("/api/entities/places")
           break
         default:
           return
@@ -323,7 +323,7 @@ export default function ManageEventsPage() {
   const addLocation = async () => {
     if (!editModal || !newLocationType || !newLocationId) return
     try {
-      const res = await fetch(`/api/events/${editModal.id}/locations`, {
+      const res = await fetch(`/api/entities/events/${editModal.id}/locations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -336,7 +336,7 @@ export default function ManageEventsPage() {
         const result = await res.json()
         throw new Error(result.error)
       }
-      const locationsRes = await fetch(`/api/events/${editModal.id}/locations`)
+      const locationsRes = await fetch(`/api/entities/events/${editModal.id}/locations`)
       setLinkedLocations(await locationsRes.json())
       setShowLocationPicker(false)
       setNewLocationType("")
@@ -350,7 +350,7 @@ export default function ManageEventsPage() {
   const removeLocation = async (locationType: string, locationId: string) => {
     if (!editModal) return
     try {
-      await fetch(`/api/events/${editModal.id}/locations`, {
+      await fetch(`/api/entities/events/${editModal.id}/locations`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ locationType, locationId }),
@@ -365,7 +365,7 @@ export default function ManageEventsPage() {
   const addRelation = async () => {
     if (!editModal || !newRelatedEventId || !newRelationType) return
     try {
-      const res = await fetch(`/api/events/${editModal.id}/relations`, {
+      const res = await fetch(`/api/entities/events/${editModal.id}/relations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ relatedEventId: newRelatedEventId, relationType: newRelationType }),
@@ -374,7 +374,7 @@ export default function ManageEventsPage() {
         const result = await res.json()
         throw new Error(result.error)
       }
-      const relationsRes = await fetch(`/api/events/${editModal.id}/relations`)
+      const relationsRes = await fetch(`/api/entities/events/${editModal.id}/relations`)
       const relations = await relationsRes.json()
       setLinkedRelations({ from: relations.relationsFrom || [], to: relations.relationsTo || [] })
       setShowRelationPicker(false)
@@ -388,7 +388,7 @@ export default function ManageEventsPage() {
   const removeRelation = async (relationId: string) => {
     if (!editModal) return
     try {
-      await fetch(`/api/events/${editModal.id}/relations`, {
+      await fetch(`/api/entities/events/${editModal.id}/relations`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ relationId }),
@@ -418,10 +418,8 @@ export default function ManageEventsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/events/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/events/${deleteModal.id}`, {
+        method: "DELETE",
       })
       if (!res.ok) throw new Error("Failed to delete")
 

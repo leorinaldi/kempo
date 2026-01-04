@@ -62,7 +62,7 @@ export default function ChannelsPage() {
         fetch("/api/kempotube-channels"),
         fetch("/api/flipflop-accounts"),
         fetch("/api/tv-channels"),
-        fetch("/api/people/list"),
+        fetch("/api/entities/people"),
       ])
 
       const [kempoTubeData, flipFlopData, tvData, peopleData] = await Promise.all([

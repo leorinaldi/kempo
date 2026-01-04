@@ -36,8 +36,8 @@ export default function CreateAlbumPage() {
   useEffect(() => {
     // Fetch available articles and artists
     Promise.all([
-      fetch("/api/albums/available-articles").then((res) => res.json()),
-      fetch("/api/people/list").then((res) => res.json()),
+      fetch("/api/entities/albums/available-articles").then((res) => res.json()),
+      fetch("/api/entities/people").then((res) => res.json()),
     ])
       .then(([articlesData, peopleData]) => {
         if (Array.isArray(articlesData)) {
@@ -78,7 +78,7 @@ export default function CreateAlbumPage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/albums/create", {
+      const response = await fetch("/api/entities/albums", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

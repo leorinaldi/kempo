@@ -38,7 +38,7 @@ export default function CreateBrandPage() {
 
   const loadOrganizations = async () => {
     try {
-      const res = await fetch("/api/organizations/list")
+      const res = await fetch("/api/entities/organizations")
       const data = await res.json()
       if (Array.isArray(data)) {
         setOrganizations(data)
@@ -50,7 +50,7 @@ export default function CreateBrandPage() {
 
   const loadAvailableArticles = async () => {
     try {
-      const res = await fetch("/api/brands/available-articles")
+      const res = await fetch("/api/entities/brands/available-articles")
       const data = await res.json()
       if (Array.isArray(data)) {
         setAvailableArticles(data)
@@ -82,7 +82,7 @@ export default function CreateBrandPage() {
     setMessage(null)
 
     try {
-      const res = await fetch("/api/brands/create", {
+      const res = await fetch("/api/entities/brands", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

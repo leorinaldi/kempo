@@ -68,7 +68,7 @@ export default function CreateEventPage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/events/create", {
+      const response = await fetch("/api/entities/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

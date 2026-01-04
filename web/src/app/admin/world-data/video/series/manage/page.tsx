@@ -61,7 +61,7 @@ export default function ManageSeriesPage() {
       const [seriesRes, genresRes, networksRes] = await Promise.all([
         fetch("/api/series"),
         fetch("/api/genres"),
-        fetch("/api/organizations/list?orgType=network"),
+        fetch("/api/entities/organizations?orgType=network"),
       ])
 
       const [seriesData, genresData, networksData] = await Promise.all([

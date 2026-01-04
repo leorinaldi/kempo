@@ -101,7 +101,7 @@ export default function ManageProductsPage() {
 
   const loadProducts = async () => {
     try {
-      const res = await fetch("/api/products/list")
+      const res = await fetch("/api/entities/products")
       const data = await res.json()
       if (Array.isArray(data)) {
         setProducts(data)
@@ -115,7 +115,7 @@ export default function ManageProductsPage() {
 
   const loadBrands = async () => {
     try {
-      const res = await fetch("/api/brands/list")
+      const res = await fetch("/api/entities/brands")
       const data = await res.json()
       if (Array.isArray(data)) {
         setBrands(data)
@@ -173,9 +173,9 @@ export default function ManageProductsPage() {
 
     try {
       const [articlesRes, inspirationsRes, imagesRes] = await Promise.all([
-        fetch("/api/products/available-articles"),
-        fetch(`/api/products/${product.id}/inspirations`),
-        fetch(`/api/products/${product.id}/images`),
+        fetch("/api/entities/products/available-articles"),
+        fetch(`/api/entities/products/${product.id}/inspirations`),
+        fetch(`/api/entities/products/${product.id}/images`),
       ])
 
       const articlesData = await articlesRes.json()
@@ -213,8 +213,8 @@ export default function ManageProductsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/products/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/products", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -261,10 +261,8 @@ export default function ManageProductsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/products/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/products/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

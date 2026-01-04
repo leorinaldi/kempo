@@ -54,7 +54,7 @@ export default function CreateProductPage() {
 
   const loadBrands = async () => {
     try {
-      const res = await fetch("/api/brands/list")
+      const res = await fetch("/api/entities/brands")
       const data = await res.json()
       if (Array.isArray(data)) {
         setBrands(data)
@@ -66,7 +66,7 @@ export default function CreateProductPage() {
 
   const loadAvailableArticles = async () => {
     try {
-      const res = await fetch("/api/products/available-articles")
+      const res = await fetch("/api/entities/products/available-articles")
       const data = await res.json()
       if (Array.isArray(data)) {
         setAvailableArticles(data)
@@ -98,7 +98,7 @@ export default function CreateProductPage() {
     setMessage(null)
 
     try {
-      const res = await fetch("/api/products/create", {
+      const res = await fetch("/api/entities/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

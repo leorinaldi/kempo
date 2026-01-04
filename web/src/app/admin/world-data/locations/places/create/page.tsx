@@ -61,8 +61,8 @@ export default function CreatePlacePage() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/api/places/available-articles"),
-      fetch("/api/cities/list")
+      fetch("/api/entities/places/available-articles"),
+      fetch("/api/entities/cities")
     ])
       .then(async ([articlesRes, citiesRes]) => {
         const articlesData = await articlesRes.json()
@@ -75,7 +75,7 @@ export default function CreatePlacePage() {
 
   useEffect(() => {
     if (formData.cityId) {
-      fetch(`/api/cities/${formData.cityId}/places`)
+      fetch(`/api/entities/cities/${formData.cityId}/places`)
         .then((res) => res.json())
         .then((data) => {
           if (Array.isArray(data)) {
@@ -122,7 +122,7 @@ export default function CreatePlacePage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/places/create", {
+      const response = await fetch("/api/entities/places", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

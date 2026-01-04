@@ -97,8 +97,8 @@ export default function ManageCitiesPage() {
   const loadData = async () => {
     try {
       const [citiesRes, statesRes] = await Promise.all([
-        fetch("/api/cities/list"),
-        fetch("/api/states/list")
+        fetch("/api/entities/cities"),
+        fetch("/api/entities/states")
       ])
       const citiesData = await citiesRes.json()
       const statesData = await statesRes.json()
@@ -162,10 +162,10 @@ export default function ManageCitiesPage() {
 
     try {
       const [articlesRes, inspirationsRes, imagesRes, placesRes] = await Promise.all([
-        fetch("/api/cities/available-articles"),
-        fetch(`/api/cities/${city.id}/inspirations`),
-        fetch(`/api/cities/${city.id}/images`),
-        fetch(`/api/cities/${city.id}/places`)
+        fetch("/api/entities/cities/available-articles"),
+        fetch(`/api/entities/cities/${city.id}/inspirations`),
+        fetch(`/api/entities/cities/${city.id}/images`),
+        fetch(`/api/entities/cities/${city.id}/places`)
       ])
 
       const articlesData = await articlesRes.json()
@@ -201,8 +201,8 @@ export default function ManageCitiesPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/cities/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/cities", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -247,10 +247,8 @@ export default function ManageCitiesPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/cities/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/cities/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

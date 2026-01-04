@@ -79,7 +79,7 @@ export default function ManageNationsPage() {
 
   const loadNations = async () => {
     try {
-      const res = await fetch("/api/nations/list")
+      const res = await fetch("/api/entities/nations")
       const data = await res.json()
       if (Array.isArray(data)) {
         setNations(data)
@@ -137,10 +137,10 @@ export default function ManageNationsPage() {
 
     try {
       const [articlesRes, inspirationsRes, imagesRes, statesRes] = await Promise.all([
-        fetch("/api/nations/available-articles"),
-        fetch(`/api/nations/${nation.id}/inspirations`),
-        fetch(`/api/nations/${nation.id}/images`),
-        fetch(`/api/nations/${nation.id}/states`)
+        fetch("/api/entities/nations/available-articles"),
+        fetch(`/api/entities/nations/${nation.id}/inspirations`),
+        fetch(`/api/entities/nations/${nation.id}/images`),
+        fetch(`/api/entities/nations/${nation.id}/states`)
       ])
 
       const articlesData = await articlesRes.json()
@@ -182,8 +182,8 @@ export default function ManageNationsPage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/nations/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/nations", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -229,10 +229,8 @@ export default function ManageNationsPage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/nations/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/nations/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

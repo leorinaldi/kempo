@@ -93,7 +93,7 @@ export default function AudioManagePage() {
     reloadAudioFiles()
 
     // Load available people for element selection
-    fetch("/api/people/list")
+    fetch("/api/entities/people")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -108,7 +108,7 @@ export default function AudioManagePage() {
       .catch((err) => console.error("Failed to load people:", err))
 
     // Load available albums for element selection
-    fetch("/api/albums/list")
+    fetch("/api/entities/albums")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

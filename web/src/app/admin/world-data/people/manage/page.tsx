@@ -77,7 +77,7 @@ export default function ManagePeoplePage() {
 
   const loadPeople = async () => {
     try {
-      const res = await fetch("/api/people/list")
+      const res = await fetch("/api/entities/people")
       const data = await res.json()
       if (Array.isArray(data)) {
         setPeople(data)
@@ -137,9 +137,9 @@ export default function ManagePeoplePage() {
     // Load available articles, linked images, and inspirations in parallel
     try {
       const [articlesRes, imagesRes, inspirationsRes] = await Promise.all([
-        fetch("/api/people/available-articles"),
-        fetch(`/api/people/${person.id}/images`),
-        fetch(`/api/people/${person.id}/inspirations`)
+        fetch("/api/entities/people/available-articles"),
+        fetch(`/api/entities/people/${person.id}/images`),
+        fetch(`/api/entities/people/${person.id}/inspirations`)
       ])
 
       const articlesData = await articlesRes.json()
@@ -177,8 +177,8 @@ export default function ManagePeoplePage() {
     setEditMessage(null)
 
     try {
-      const res = await fetch("/api/people/update", {
-        method: "POST",
+      const res = await fetch("/api/entities/people", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editModal.id,
@@ -226,10 +226,8 @@ export default function ManagePeoplePage() {
     setDeleting(true)
 
     try {
-      const res = await fetch("/api/people/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: deleteModal.id }),
+      const res = await fetch(`/api/entities/people/${deleteModal.id}`, {
+        method: "DELETE",
       })
 
       if (!res.ok) {

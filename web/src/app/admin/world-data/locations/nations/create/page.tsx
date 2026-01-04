@@ -27,7 +27,7 @@ export default function CreateNationPage() {
   })
 
   useEffect(() => {
-    fetch("/api/nations/available-articles")
+    fetch("/api/entities/nations/available-articles")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -65,7 +65,7 @@ export default function CreateNationPage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/nations/create", {
+      const response = await fetch("/api/entities/nations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

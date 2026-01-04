@@ -40,7 +40,7 @@ export default function CreateSeriesPage() {
     try {
       const [genresRes, networksRes] = await Promise.all([
         fetch("/api/genres"),
-        fetch("/api/organizations/list?orgType=network"),
+        fetch("/api/entities/organizations?orgType=network"),
       ])
 
       const [genresData, networksData] = await Promise.all([

@@ -25,7 +25,7 @@ export default function EventsLandingPage() {
   useEffect(() => {
     async function loadStats() {
       try {
-        const res = await fetch("/api/events/list")
+        const res = await fetch("/api/entities/events")
         const events = await res.json()
         if (Array.isArray(events)) {
           const byType: Record<string, number> = {}

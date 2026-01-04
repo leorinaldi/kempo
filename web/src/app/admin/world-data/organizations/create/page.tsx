@@ -44,7 +44,7 @@ export default function CreateOrganizationPage() {
 
   useEffect(() => {
     // Fetch organization-type articles that aren't already linked
-    fetch("/api/organizations/available-articles")
+    fetch("/api/entities/organizations/available-articles")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -82,7 +82,7 @@ export default function CreateOrganizationPage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/organizations/create", {
+      const response = await fetch("/api/entities/organizations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

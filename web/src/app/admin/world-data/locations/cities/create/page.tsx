@@ -42,8 +42,8 @@ export default function CreateCityPage() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/api/cities/available-articles"),
-      fetch("/api/states/list")
+      fetch("/api/entities/cities/available-articles"),
+      fetch("/api/entities/states")
     ])
       .then(async ([articlesRes, statesRes]) => {
         const articlesData = await articlesRes.json()
@@ -87,7 +87,7 @@ export default function CreateCityPage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/cities/create", {
+      const response = await fetch("/api/entities/cities", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

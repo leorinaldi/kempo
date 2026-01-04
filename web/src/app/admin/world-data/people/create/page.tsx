@@ -30,7 +30,7 @@ export default function CreatePersonPage() {
 
   useEffect(() => {
     // Fetch person-type articles that aren't already linked
-    fetch("/api/people/available-articles")
+    fetch("/api/entities/people/available-articles")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -68,7 +68,7 @@ export default function CreatePersonPage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/people/create", {
+      const response = await fetch("/api/entities/people", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

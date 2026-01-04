@@ -43,8 +43,8 @@ export default function CreateStatePage() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/api/states/available-articles"),
-      fetch("/api/nations/list")
+      fetch("/api/entities/states/available-articles"),
+      fetch("/api/entities/nations")
     ])
       .then(async ([articlesRes, nationsRes]) => {
         const articlesData = await articlesRes.json()
@@ -88,7 +88,7 @@ export default function CreateStatePage() {
     setMessage(null)
 
     try {
-      const response = await fetch("/api/states/create", {
+      const response = await fetch("/api/entities/states", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
