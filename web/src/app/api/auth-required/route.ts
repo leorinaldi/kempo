@@ -6,9 +6,9 @@ import { prisma } from "@/lib/prisma"
 export async function GET() {
   try {
     const setting = await prisma.setting.findUnique({
-      where: { key: "authRequired" },
+      where: { key: "requireLogin" },
     })
-    return NextResponse.json({ required: setting?.value !== "false" })
+    return NextResponse.json({ required: setting?.value === "true" })
   } catch {
     // If DB fails, default to requiring auth
     return NextResponse.json({ required: true })
