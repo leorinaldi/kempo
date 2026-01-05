@@ -26,9 +26,6 @@ slug: "organization-name"
 type: organization
 subtype: institution | military-academy | university | political-party | government-agency
 status: published
-parallel_switchover:  # Only if applicable
-  real_world: "Real Organization Name"
-  wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - country
   - domain

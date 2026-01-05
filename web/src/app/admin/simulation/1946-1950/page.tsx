@@ -13,16 +13,9 @@ const SIMULATION_DOCUMENTS = [
     color: "blue",
   },
   {
-    slug: "spawn-registry",
-    title: "Spawn Registry",
-    description: "Completed parallel switchovers mapping real-world figures to Kempo equivalents",
-    step: "Step 1 & 10",
-    color: "green",
-  },
-  {
-    slug: "possible-spawns",
-    title: "Possible Spawns",
-    description: "Characters and entities planned for future parallel switchovers",
+    slug: "possible-inspirations",
+    title: "Possible Inspirations",
+    description: "Characters and entities planned for creation, with their real-world inspirations",
     step: "Step 2 & 4",
     color: "amber",
   },
@@ -189,11 +182,11 @@ export default function Simulation1946to1950Page() {
           <ol className="space-y-3 text-sm">
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">1</span>
-              <span><strong>Review Current State</strong> — Gap analysis using Spawn Registry</span>
+              <span><strong>Review Current State</strong> — Gap analysis using Inspirations table</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">2</span>
-              <span><strong>Research Preceding Period</strong> — Update Possible Spawns and Products/Companies/Culture</span>
+              <span><strong>Research Preceding Period</strong> — Update Possible Inspirations and Products/Companies/Culture</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">3</span>
@@ -201,7 +194,7 @@ export default function Simulation1946to1950Page() {
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">4</span>
-              <span><strong>Identify Fictional Amplifications</strong> — Add themes to Possible Spawns</span>
+              <span><strong>Identify Fictional Amplifications</strong> — Add themes to Possible Inspirations</span>
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">5</span>
@@ -225,7 +218,7 @@ export default function Simulation1946to1950Page() {
             </li>
             <li className="flex items-start gap-3">
               <span className="flex-shrink-0 w-7 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">10</span>
-              <span><strong>Execute Creation</strong> — Create articles, update Spawn Registry and Products doc</span>
+              <span><strong>Execute Creation</strong> — Create articles, update Inspirations table and Products doc</span>
             </li>
           </ol>
         </div>

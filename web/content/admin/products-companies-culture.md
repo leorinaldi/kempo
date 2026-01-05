@@ -31,7 +31,7 @@ tags:
 
 ## Purpose
 
-When characters in Kempo drive cars, smoke cigarettes, drink beer, or listen to the radio, they should interact with fictional brands that parallel the real-world dominants of the era. This document tracks what real-world entities existed and which Kempo equivalents have been created.
+When characters in Kempo drive cars, smoke cigarettes, drink beer, or listen to the radio, they should interact with fictional brands inspired by the real-world dominants of the era. This document tracks what real-world entities existed and which Kempo equivalents have been created.
 
 ---
 
@@ -76,8 +76,8 @@ The Big Three dominated American car sales:
 
 ### Kempo Vehicles Created
 
-- [[continental-model-c|Continental Model C]]: Ford Model T / Chevrolet 490 parallel
-- [[continental-courier|Continental Courier]]: 1949 Ford / Chevrolet Stylemaster parallel
+- [[continental-model-c|Continental Model C]]: Ford Model T / Chevrolet 490 inspiration
+- [[continental-courier|Continental Courier]]: 1949 Ford / Chevrolet Stylemaster inspiration
 
 ---
 
@@ -358,8 +358,7 @@ The brewing industry was dominated by Midwestern breweries:
 
 ## See Also
 
-- [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
-- [[possible-spawns|Possible Spawns]] — Characters and entities to create
+- [[possible-inspirations|Possible Inspirations]] — Characters and entities to create
 - [[character-development-plan|Character Development Plan]] — Proposed hybrid characters
-- [[continental-motors|Continental Motors]] — Example of company spawn
-- [[pacific-pictures|Pacific Pictures]] — Example of institution spawn
+- [[continental-motors|Continental Motors]] — Example of company inspiration
+- [[pacific-pictures|Pacific Pictures]] — Example of institution inspiration

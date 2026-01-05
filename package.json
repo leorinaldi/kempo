@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@prisma/client": "^6.19.1",
+    "@vercel/blob": "^2.0.0"
+  }
+}

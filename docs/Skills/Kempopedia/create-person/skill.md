@@ -26,9 +26,6 @@ slug: "full-name"
 type: person
 subtype: military-leader | politician | scientist | artist | business-leader | athlete | head-of-state
 status: published
-parallel_switchover:  # Only if applicable
-  real_world: "Real Person Name"
-  wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - nationality
   - domain

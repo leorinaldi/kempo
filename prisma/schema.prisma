@@ -191,7 +191,7 @@ enum PublicationGenre {
 
 model PublicationSeries {
   id            String                @id @default(cuid())
-  name          String                                        // "Detroit Sentinel", "Athlete Magazine"
+  name          String                                        // "Motor City News", "Athlete Magazine"
   type          PublicationType                               // Must match type of associated publications
   publisherId   String?               @map("publisher_id")
   publisher     Organization?         @relation(fields: [publisherId], references: [id], onDelete: SetNull)

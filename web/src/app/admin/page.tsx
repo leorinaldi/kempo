@@ -127,7 +127,7 @@ export default function AdminPage() {
             <ul className="text-sm text-gray-600 space-y-1">
               <li>Simulation methodology</li>
               <li>Character planning</li>
-              <li>Spawn tracking</li>
+              <li>Inspiration tracking</li>
               <li>Event reference</li>
             </ul>
           </Link>

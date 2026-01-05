@@ -286,6 +286,6 @@ How current Kempo characters could drive human drama:
 ## See Also
 
 - [[character-development-plan|Character Development Plan]] — Proposed characters
-- [[possible-spawns|Possible Spawns]] — Characters and entities to create
+- [[possible-inspirations|Possible Inspirations]] — Characters and entities to create
 - [[real-world-events|Real World Events]] — Historical events for inspiration
 - [[simulation-advancement-approach|Simulation Advancement Approach]] — Overall methodology

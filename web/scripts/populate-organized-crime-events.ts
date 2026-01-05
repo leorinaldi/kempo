@@ -85,7 +85,7 @@ async function main() {
       date: '1913-02-14',
       type: 'birth',
       sig: 3,
-      desc: 'Future corrupt labor leader born in Detroit.',
+      desc: 'Future corrupt labor leader born in Motor City.',
     },
     {
       title: 'Savannah Fontaine born',

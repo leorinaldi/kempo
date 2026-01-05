@@ -117,7 +117,7 @@
         "american",
         "new-mexico",
         "ufo",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -133,7 +133,7 @@
         "politics",
         "italian-american",
         "organized-crime",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -149,7 +149,7 @@
         "actress",
         "film",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -166,7 +166,7 @@
         "pilot",
         "test-pilot",
         "world-war-ii",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -247,7 +247,7 @@
         "politician",
         "revolutionary",
         "communist",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -314,7 +314,7 @@
         "chinese",
         "political-party",
         "communist",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -346,7 +346,7 @@
         "continental-motors",
         "economy-car",
         "postwar",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -369,7 +369,7 @@
         "automotive",
         "continental-motors",
         "economy-car",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -416,7 +416,7 @@
         "entertainer",
         "singer",
         "radio",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -456,7 +456,7 @@
         "general",
         "world-war-i",
         "world-war-ii",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -585,7 +585,7 @@
         "american",
         "organized-crime",
         "italian-american",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -603,7 +603,7 @@
         "test-pilot",
         "world-war-ii",
         "ufo",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -694,7 +694,7 @@
         "musician",
         "jazz",
         "saxophonist",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -724,7 +724,7 @@
         "soviet",
         "politician",
         "communist",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -741,7 +741,7 @@
         "general",
         "world-war-ii",
         "ufo",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -816,7 +816,7 @@
         "head-of-state",
         "world-war-i",
         "world-war-ii",
-        "parallel-switchover",
+        "inspiration",
         "national-party"
       ],
       "events": [
@@ -906,7 +906,7 @@
         "business",
         "automotive",
         "industrialist",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -921,7 +921,7 @@
           "source": "timelineEvent",
           "date": "June 1903 k.y.",
           "headline": "Continental Motors founded",
-          "description": "Durant founds Continental Motors Corporation in Detroit",
+          "description": "Durant founds Continental Motors Corporation in Motor City",
           "suggestedType": "founding",
           "suggestedSignificance": 5
         },
@@ -975,7 +975,7 @@
         "producer",
         "film",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -990,7 +990,7 @@
         "american",
         "labor",
         "organized-crime",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1060,7 +1060,7 @@
         "american",
         "athlete",
         "boxer",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1123,7 +1123,7 @@
         "physicist",
         "astronomer",
         "ufo",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1221,7 +1221,7 @@
         "american",
         "journalist",
         "muckraker",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1284,7 +1284,7 @@
         "executive",
         "film",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1300,7 +1300,7 @@
         "entertainment",
         "film",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1328,7 +1328,7 @@
       "tags": [
         "soviet",
         "political-party",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1371,7 +1371,7 @@
         "business-leader",
         "media",
         "publisher",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1420,7 +1420,7 @@
         "world-war-ii",
         "ufo",
         "whistleblower",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1534,7 +1534,7 @@
         "american",
         "organized-crime",
         "italian-american",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1550,7 +1550,7 @@
         "executive",
         "film",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1564,7 +1564,7 @@
       "tags": [
         "american",
         "organized-crime",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1580,7 +1580,7 @@
         "organized-crime",
         "jewish-american",
         "las-vegas",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1610,7 +1610,7 @@
         "american",
         "organized-crime",
         "jewish-american",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1667,7 +1667,7 @@
         "ufo",
         "military",
         "conspiracy",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1764,7 +1764,7 @@
         "los-angeles",
         "hotel",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [],
       "potentialParents": [
@@ -1818,7 +1818,7 @@
         "rancher",
         "new-mexico",
         "ufo",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1868,7 +1868,7 @@
         "actress",
         "dancer",
         "hollyvale",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {
@@ -1949,7 +1949,7 @@
         "director",
         "hollyvale",
         "western",
-        "parallel-switchover"
+        "inspiration"
       ],
       "events": [
         {

@@ -23,9 +23,6 @@ slug: "article-slug"
 type: person | place | organization | event | culture | product | concept
 subtype: specific-classification
 status: published
-parallel_switchover:  # Only if applicable
-  real_world: "Real Entity Name"
-  wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - relevant-tags
 dates:

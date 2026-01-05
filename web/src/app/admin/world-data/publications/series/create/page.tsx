@@ -175,7 +175,7 @@ export default function CreatePublicationSeriesPage() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                placeholder="e.g., Detroit Sentinel, Athlete Magazine"
+                placeholder="e.g., Motor City News, Athlete Magazine"
               />
             </div>
 

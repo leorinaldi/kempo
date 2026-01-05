@@ -66,8 +66,7 @@ export function getAdminArticleBySlug(slug: string): AdminArticle | null {
         // Check if this is a simulation admin document
         const simulationDocs = [
           'simulation-advancement-approach',
-          'spawn-registry',
-          'possible-spawns',
+          'possible-inspirations',
           'real-world-events',
           'places',
           'character-development-plan',

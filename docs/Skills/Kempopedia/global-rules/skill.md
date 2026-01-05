@@ -11,22 +11,22 @@ The Kempo universe is a living simulation. The current simulation date is the "p
 - **No "Death and legacy" sections** for living people
 - **Anachronism check**: Don't use terms/concepts that wouldn't exist yet
 
-## 2. Real People vs Parallel Switchovers
+## 2. Real People vs Kempo Inspirations
 
 **Kempo history diverged from real-world history starting in the late 1800s, with divergence increasing over time.**
 
-Use this rule to determine whether to use a real historical person or create a parallel switchover:
+Use this rule to determine whether to use a real historical person or create a Kempo inspiration:
 
 | Condition | Approach |
 |-----------|----------|
 | Died before 1950 AND no notable post-1950 events | **Keep as real person** (e.g., FDR) |
 | Did nothing notable after 1950 | **Keep as real person** |
-| Did notable things after 1950 | **Create parallel switchover** (e.g., Truman → Kellman) |
+| Did notable things after 1950 | **Create Kempo inspiration** (e.g., Truman → Kellman) |
 
 **Examples:**
 - **Franklin D. Roosevelt**: Died April 1945 → Keep as real person
-- **Harry S. Truman**: President until 1953, Korean War decisions → Parallel switchover (Harold S. Kellman)
-- **Dwight D. Eisenhower**: President 1953-1961 → Would need parallel switchover
+- **Harry S. Truman**: President until 1953, Korean War decisions → Kempo inspiration (Harold S. Kellman)
+- **Dwight D. Eisenhower**: President 1953-1961 → Would need Kempo inspiration
 
 Minor divergences (renamed towns, fictional institutions) can exist for real people's backgrounds, but the person themselves remains real if they meet the criteria above.
 
@@ -141,7 +141,7 @@ Field names appear as row labels in the right-hand panel. They should be human-r
   "Birth_date": "October 26, 1888 k.y.",
   "Birth_place": "[[Ashford, Kansas]]",
   "Founder": "[[henry-c-durant|Henry C. Durant]]",
-  "Headquarters": "[[Detroit]], [[Michigan]]"
+  "Headquarters": "[[Motor City]], [[Michigan]]"
 }
 
 // INCORRECT - Lowercase field names
@@ -234,19 +234,19 @@ When creating articles for real-world events (WWI, WWII, etc.):
 - Example: WWII article notes that President Kellman (not Truman) authorized the atomic bombs
 - Link back to relevant Kempo people/entities
 
-## 10. Parallel Switchover Completeness
+## 10. Inspiration Completeness
 
-**When creating a parallel switchover, also create related switchovers.**
+**When creating an inspiration, also create related inspirations.**
 
-If you're creating a person, also create switchovers for:
+If you're creating a person, also create inspirations for:
 - Their birthplace
 - Schools/universities they attended
 - Political parties they belonged to
 - Organizations they were part of
 - Other closely associated entities
 
-Each switchover needs:
-1. An entry in the Spawn Registry
+Each inspiration needs:
+1. An entry in the Inspirations table
 2. Its own stub article (no dead links!)
 
 ## 11. Article File Organization
@@ -276,9 +276,6 @@ slug: "article-slug"
 type: person | place | organization | event | nation | concept | company | product
 subtype: specific-classification
 status: published
-parallel_switchover:  # Only if applicable
-  real_world: "Real Entity Name"
-  wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - relevant-tag
   - another-tag
@@ -289,9 +286,9 @@ dates:
 ---
 ```
 
-## 13. Registry Entry Format
+## 13. Inspiration Entry Format
 
-Spawn Registry entries use this format:
+Inspirations are stored in the database Inspiration table with:
 
 ```markdown
 [Real World Name](https://en.wikipedia.org/wiki/...) → [[Kempo Equivalent]]
@@ -624,7 +621,7 @@ Label Article → links to → Artists, Notable releases
 - [ ] Political parties use Kempo names (National/Federal)
 - [ ] Infobox uses wikilinks for linkable fields
 - [ ] Wikilinks use correct slug with pipe syntax if needed
-- [ ] Parallel switchover registered (if applicable)
+- [ ] Inspiration registered in database (if applicable)
 - [ ] **Tables properly formatted** (blank lines, aligned columns)
 - [ ] **IMAGE GENERATED** for Person/Place/Institution types (REQUIRED)
 

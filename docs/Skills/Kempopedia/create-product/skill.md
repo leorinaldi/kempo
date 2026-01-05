@@ -6,9 +6,9 @@ Create articles for products (vehicles, consumer goods, technology).
 
 ## Special Rules for Products
 
-1. **No real-world brands in article text**: Real-world inspirations go in `parallel_switchover` only
+1. **No real-world brands in article text**: Real-world inspirations are stored in the Inspiration table
 2. **Date linking**: Only link major milestones (launch, end of production), not contextual dates
-3. **Record all inspirations**: Products are often hybrids—record all sources
+3. **Record all inspirations**: Products are often hybrids—record all sources in the Inspiration table
 
 ## Output Format
 
@@ -21,9 +21,6 @@ slug: "product-name"
 type: product
 subtype: vehicle | weapon | consumer-good | technology
 status: published
-parallel_switchover:
-  real_world: "Ford Model T / Chevrolet 490 (hybrid)"
-  wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - nationality
   - industry
@@ -44,7 +41,7 @@ tags:
     "fields": {
       "Manufacturer": "[[company-slug|Company Name]]",
       "Production": "1908–1927",
-      "Assembly": "[[Detroit]], [[Michigan]]",
+      "Assembly": "[[Motor City]], [[Michigan]]",
       "Engine": "2.9L inline-4",
       "Horsepower": "20 hp",
       "Base_price": "$850 (1908)"

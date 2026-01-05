@@ -50,7 +50,7 @@ Characters from this plan that have been created in Kempopedia:
 - **The Broadcast Conscience** → [[edward-stanton|Edward Stanton]] (Edward R. Murrow, Walter Cronkite, Eric Sevareid)
 
 **Additional Organized Crime Ecosystem** (built beyond original plan):
-- [[sol-roth|Sol Roth]] — The financial architect (Meyer Lansky parallel)
+- [[sol-roth|Sol Roth]] — The financial architect (Meyer Lansky inspiration)
 - [[enzo-ferrante|Enzo Ferrante]] — The rival boss (Vito Genovese / Albert Anastasia)
 - [[sidney-hartman|Sidney Hartman]] — Vegas casino operator
 - [[carmine-demarco|Carmine DeMarco]] — Political machine fixer
@@ -290,8 +290,7 @@ Characters should interconnect to create rich narratives:
 
 ## See Also
 
-- [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
-- [[possible-spawns|Possible Spawns]] — Additional characters and entities
+- [[possible-inspirations|Possible Inspirations]] — Additional characters and entities
 - [[real-world-events|Real World Events]] — Historical events for inspiration
 - [[human-drama-amplification|Human Drama Amplification]] — Romance, scandal, and everyday life storylines
 - [[master-timeline|Master Timeline]] — Chronological Kempo history

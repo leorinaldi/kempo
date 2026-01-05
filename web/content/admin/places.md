@@ -66,5 +66,5 @@ Notable locations, buildings, or sites referenced in storylines.
 ## See Also
 
 - [[simulation-advancement-approach|Simulation Advancement Approach]] — Overall methodology
-- [[possible-spawns|Possible Spawns]] — Character planning
+- [[possible-inspirations|Possible Inspirations]] — Character planning
 - [[products-companies-culture|Products, Companies & Culture]] — Brand and company planning

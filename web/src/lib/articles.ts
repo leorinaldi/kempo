@@ -4,18 +4,12 @@ import { prisma } from './prisma'
 import type { Article as PrismaArticle } from '@prisma/client'
 import { slugify } from './slugify'
 
-export interface ParallelSwitchover {
-  real_world: string
-  wikipedia: string
-}
-
 export interface ArticleFrontmatter {
   title: string
   id: string
   type: string
   subtype?: string
   status: string
-  parallel_switchover?: ParallelSwitchover
   tags?: string[]
   dates?: string[]
 }
@@ -215,7 +209,6 @@ function prismaToArticle(dbArticle: PrismaArticle, linkMap: ArticleLinkMap): Art
       type: dbArticle.type,
       subtype: dbArticle.subtype || undefined,
       status: dbArticle.status,
-      parallel_switchover: dbArticle.parallelSwitchover as unknown as ParallelSwitchover | undefined,
       tags: dbArticle.tags,
       dates: dbArticle.dates,
     },
@@ -308,7 +301,6 @@ export async function getArticleBySlugOrId(
       type: dbArticle.type,
       subtype: dbArticle.subtype || undefined,
       status: dbArticle.status,
-      parallel_switchover: dbArticle.parallelSwitchover as unknown as ParallelSwitchover | undefined,
       tags: dbArticle.tags,
       dates: dbArticle.dates,
     },
@@ -633,7 +625,6 @@ export async function createArticle(data: {
   infobox?: unknown
   timelineEvents?: unknown
   mediaRefs?: unknown
-  parallelSwitchover?: unknown
   tags?: string[]
   dates?: string[]
 }) {
@@ -647,7 +638,6 @@ export async function createArticle(data: {
       infobox: data.infobox as Parameters<typeof prisma.article.create>[0]['data']['infobox'],
       timelineEvents: data.timelineEvents as Parameters<typeof prisma.article.create>[0]['data']['timelineEvents'],
       mediaRefs: data.mediaRefs as Parameters<typeof prisma.article.create>[0]['data']['mediaRefs'],
-      parallelSwitchover: data.parallelSwitchover as Parameters<typeof prisma.article.create>[0]['data']['parallelSwitchover'],
       tags: data.tags,
       dates: data.dates,
       linkCount: countWikilinks(data.content),
@@ -667,7 +657,6 @@ export async function updateArticleById(
     infobox?: unknown
     timelineEvents?: unknown
     mediaRefs?: unknown
-    parallelSwitchover?: unknown
     tags?: string[]
     dates?: string[]
   }
@@ -686,7 +675,6 @@ export async function updateArticleById(
   if (data.infobox !== undefined) updateData.infobox = data.infobox as Parameters<typeof prisma.article.update>[0]['data']['infobox']
   if (data.timelineEvents !== undefined) updateData.timelineEvents = data.timelineEvents as Parameters<typeof prisma.article.update>[0]['data']['timelineEvents']
   if (data.mediaRefs !== undefined) updateData.mediaRefs = data.mediaRefs as Parameters<typeof prisma.article.update>[0]['data']['mediaRefs']
-  if (data.parallelSwitchover !== undefined) updateData.parallelSwitchover = data.parallelSwitchover as Parameters<typeof prisma.article.update>[0]['data']['parallelSwitchover']
   if (data.tags !== undefined) updateData.tags = data.tags
   if (data.dates !== undefined) updateData.dates = data.dates
 

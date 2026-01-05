@@ -17,8 +17,8 @@ Each time period has these planning documents (accessible via `/admin/simulation
 | Document | Purpose | Process Step |
 |----------|---------|--------------|
 | Simulation Advancement Approach | Overall methodology | Orchestration |
-| Spawn Registry | Completed parallel switchovers | Steps 1 & 9 |
-| Possible Spawns | Characters planned for creation | Steps 2 & 4 |
+| Inspirations | Completed real-world to Kempo mappings | Steps 1 & 9 |
+| Possible Inspirations | Characters planned for creation | Steps 2 & 4 |
 | Real World Events | Historical events for reference | Step 3 |
 | Products, Companies & Culture | Brands and cultural entities | Step 5 |
 | Human Drama Amplification | Romance, scandal, crime storylines | Step 6 |
@@ -28,16 +28,16 @@ Each time period has these planning documents (accessible via `/admin/simulation
 ## 9-Step Advancement Process
 
 ### Step 1: Review Current State
-Gap analysis using Spawn Registry. Identify what's been created and what's missing.
+Gap analysis using Inspirations table. Identify what's been created and what's missing.
 
 ### Step 2: Research Preceding Period
-Update Possible Spawns with historical figures from the period before the current simulation date.
+Update Possible Inspirations with historical figures from the period before the current simulation date.
 
 ### Step 3: Research Coming Period
 Update Real World Events for storyline inspiration based on what's about to happen.
 
 ### Step 4: Identify Fictional Amplifications
-Add themes to Possible Spawns—opportunities to amplify or diverge from real history.
+Add themes to Possible Inspirations—opportunities to amplify or diverge from real history.
 
 ### Step 5: Identify Product/Brand Needs
 Review Products, Companies & Culture for gaps. What brands and products should exist?
@@ -59,7 +59,7 @@ Tier characters by importance in development plan:
 - **Tier 3**: Background figures
 
 ### Step 9: Execute Creation
-Create articles, generate images, update Spawn Registry. Follow the article creation workflow:
+Create articles, generate images, update Inspirations table. Follow the article creation workflow:
 1. Create article with frontmatter and infobox
 2. Generate image
 3. Create stub articles for new entities

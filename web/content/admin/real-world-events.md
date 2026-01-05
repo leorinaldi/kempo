@@ -329,6 +329,5 @@ Based on real events, natural story arcs for 1950-1955 k.y.:
 
 ## See Also
 
-- [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
-- [[possible-spawns|Possible Spawns]] — Characters and entities to create
+- [[possible-inspirations|Possible Inspirations]] — Characters and entities to create
 - [[master-timeline|Master Timeline]] — Chronological Kempo history

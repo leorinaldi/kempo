@@ -74,7 +74,7 @@ Also identify:
 - Key events that shaped the period
 
 ### Output
-- Updated [[possible-spawns|Possible Spawns]] document with new candidates organized by category and priority (HIGH/MEDIUM/LOW)
+- Updated [[possible-inspirations|Possible Inspirations]] document with new candidates organized by category and priority (HIGH/MEDIUM/LOW)
 
 ---
 
@@ -107,7 +107,7 @@ Research fictional franchises, genres, and cultural phenomena from the era that 
 - Identify popular fiction genres of the era (spy novels, westerns, sci-fi, crime fiction)
 - Research which fictional elements have real-world components (real authors, real events that inspired fiction)
 - Select 2-3 entertainment/cultural themes to weave into the simulation
-- Determine which real people could be spawned to support these themes
+- Determine which real people could inspire Kempo characters to support these themes
 
 ### Examples of Amplification Themes
 - Spy fiction (real spies, intelligence agencies)
@@ -117,7 +117,7 @@ Research fictional franchises, genres, and cultural phenomena from the era that 
 - Western genre (real frontier history, real cowboy actors)
 
 ### Output
-- New sections added to [[possible-spawns|Possible Spawns]] for fictional/cultural themes
+- New sections added to [[possible-inspirations|Possible Inspirations]] for fictional/cultural themes
 - List of real-world figures who can support these storylines
 
 ---
@@ -291,7 +291,7 @@ Create characters, companies, and products following established Kempo conventio
 - Create character articles following person article schema
 - Create company/product articles as needed
 - Generate images for each character, company logo, or product
-- Update [[spawn-registry|Spawn Registry]] with new parallel switchovers
+- Update Inspirations table with new real-world to Kempo mappings
 - Update [[products-companies-culture|Products, Companies & Culture]] with new brands/companies
 - Update timeline pages with character appearances
 - Create or update related institutions, places, events
@@ -301,7 +301,7 @@ Create characters, companies, and products following established Kempo conventio
 ### Output
 - New character articles in Kempopedia
 - New company/product articles as needed
-- Updated Spawn Registry
+- Updated Inspirations table
 - Updated Products, Companies & Culture document
 - Updated timeline pages
 - Related institution/place/event articles as needed
@@ -311,7 +311,7 @@ Create characters, companies, and products following established Kempo conventio
 ## Document Summary
 
 1. Review Current State: Gap analysis, storyline inventory
-2. Research Preceding Period: [[possible-spawns|Possible Spawns]] and [[products-companies-culture|Products, Companies & Culture]] updates
+2. Research Preceding Period: [[possible-inspirations|Possible Inspirations]] and [[products-companies-culture|Products, Companies & Culture]] updates
 3. Research Coming Period: [[real-world-events|Real World Events]] document
 4. Identify Amplifications: Fictional/cultural theme sections
 5. Identify Places: [[places|Places]] gap analysis
@@ -336,8 +336,7 @@ For smaller additions (single characters, minor events), the full process is not
 
 ## See Also
 
-- [[spawn-registry|Spawn Registry]] — Completed parallel switchovers
-- [[possible-spawns|Possible Spawns]] — Characters and entities to create
+- [[possible-inspirations|Possible Inspirations]] — Characters and entities to create
 - [[real-world-events|Real World Events]] — Historical events for inspiration
 - [[places|Places]] — Geographic locations planning
 - [[products-companies-culture|Products, Companies & Culture]] — Brands, corporations, and cultural entities

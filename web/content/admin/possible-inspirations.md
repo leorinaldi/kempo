@@ -247,7 +247,7 @@ TV comedy drove the television boom. Need breakthrough comedy stars.
 ### Already Created
 - [[randolph-mercer|Randolph Mercer]] (newspaper mogul)
 - [[athlete-magazine|Athlete Magazine]]
-- [[detroit-sentinel|Detroit Sentinel]]
+- [[motor-city-news|Motor City News]]
 
 ### High Priority
 - Walter Winchell (Gossip columnist, most read in America)
@@ -280,7 +280,7 @@ TV comedy drove the television boom. Need breakthrough comedy stars.
 
 ## Cold War Espionage
 
-Real-world spies and intelligence figures that could spawn Kempo equivalents. Creates foundation for spy fiction storylines (James Bond-style).
+Real-world spies and intelligence figures that could inspire Kempo equivalents. Creates foundation for spy fiction storylines (James Bond-style).
 
 ### High Priority — American Intelligence
 - Allen Dulles (CIA Director 1953-1961, spymaster)
@@ -306,7 +306,7 @@ Real-world spies and intelligence figures that could spawn Kempo equivalents. Cr
 
 ## UFO / Flying Saucer Phenomenon
 
-The flying saucer craze was a REAL cultural phenomenon starting 1947. Real people and events can be spawned.
+The flying saucer craze was a REAL cultural phenomenon starting 1947. Real people and events can inspire Kempo equivalents.
 
 ### Already Created
 

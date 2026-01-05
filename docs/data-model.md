@@ -129,7 +129,7 @@ PublicationSeries ──→ Publication (one-to-many)
        └──→ Organization (publisher, via publisherId)
 ```
 
-**PublicationSeries** is the container (e.g., "Detroit Sentinel", "Athlete Magazine"):
+**PublicationSeries** is the container (e.g., "Motor City News", "Athlete Magazine"):
 - Has a `type` enum: `newspaper`, `magazine`, `comic`, `book`
 - Has a `frequency` enum: `daily`, `weekly`, `biweekly`, `monthly`, `quarterly`, `annual`, `irregular`
 - Links to a publisher Organization

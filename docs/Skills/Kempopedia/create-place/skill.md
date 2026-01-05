@@ -26,9 +26,6 @@ slug: "place-name"
 type: place
 subtype: nation | state | city | town | region
 status: published
-parallel_switchover:  # Only if applicable
-  real_world: "Real Place Name"
-  wikipedia: "https://en.wikipedia.org/wiki/..."
 tags:
   - country-adjective
   - state-or-region
@@ -97,7 +94,7 @@ See [generate-image](../generate-image/skill.md) for detailed examples.
 
 ## Real vs Fictional Places
 
-Most real-world places keep their names (Missouri, Japan). Use parallel switchover when:
+Most real-world places keep their names (Missouri, Japan). Create a Kempo inspiration when:
 - Creating a fictional town that parallels a real one
 - The location plays a significant role in a character's life
 
