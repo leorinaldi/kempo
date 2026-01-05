@@ -14,6 +14,8 @@ export type EntityKey =
   | "places"
   | "events"
   | "albums"
+  | "publicationSeries"
+  | "publications"
 
 export type RelationKey =
   | "images"
@@ -28,6 +30,8 @@ export type RelationKey =
   | "locations"
   | "media"
   | "relations"
+  | "publications"
+  | "elements"
 
 interface FieldValidation {
   required?: string[]
@@ -303,6 +307,73 @@ export const entityConfig: Record<EntityKey, EntityConfig> = {
       tracks: { type: "custom" }, // AudioElement join table
     },
     uniqueArticleCheck: true,
+  },
+
+  publicationSeries: {
+    model: "publicationSeries",
+    labelSingular: "publication series",
+    labelPlural: "publication series",
+    orderBy: { name: "asc" },
+    validation: {
+      required: ["name", "type"],
+      enum: { type: ["newspaper", "magazine", "comic", "book"] },
+    },
+    articleType: null,
+    articleRelationField: "publicationSeries",
+    include: {
+      article: { select: { id: true, title: true } },
+      publisher: { select: { id: true, name: true } },
+      _count: { select: { publications: true } },
+    },
+    dateFields: ["startKyDate", "endKyDate"],
+    filters: ["frequency", "type"],
+    relations: {
+      publications: { type: "children", childModel: "publication", foreignKey: "seriesId" },
+    },
+    uniqueArticleCheck: true,
+  },
+
+  publications: {
+    model: "publication",
+    labelSingular: "publication",
+    labelPlural: "publications",
+    orderBy: { kyDate: "desc" },
+    validation: {
+      required: ["title", "type"],
+      enum: {
+        type: ["newspaper", "magazine", "comic", "book"],
+        genre: [
+          "literary_fiction",
+          "historical_fiction",
+          "science_fiction_fantasy",
+          "mystery_crime_thriller",
+          "romance",
+          "horror",
+          "adventure_action",
+          "children_young_adult",
+          "biography_memoir",
+          "history_politics_society",
+          "science_nature_technology",
+          "philosophy_religion_mythology",
+          "business_economics_psychology",
+          "arts_culture",
+          "current_affairs_journalism",
+        ],
+      },
+    },
+    articleType: null,
+    articleRelationField: null, // publications don't link to articles directly
+    include: {
+      series: { select: { id: true, name: true } },
+      publisher: { select: { id: true, name: true } },
+      coverImage: { select: { id: true, url: true, name: true } },
+    },
+    dateFields: ["kyDate"],
+    filters: ["type", "seriesId"],
+    relations: {
+      elements: { type: "custom" }, // PublicationElement join table
+    },
+    uniqueArticleCheck: false,
   },
 }
 

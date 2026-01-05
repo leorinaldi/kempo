@@ -69,7 +69,7 @@ export default function MediaLandingPage() {
         {/* Manage Media Section */}
         <div className="mb-12">
           <h2 className="text-lg font-semibold text-gray-500 uppercase tracking-wide mb-6">Manage Media</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             {/* Audio Card */}
             <Link
               href="/admin/world-data/audio"
@@ -135,6 +135,30 @@ export default function MediaLandingPage() {
                 </p>
                 <div className="mt-4 flex items-center gap-2 text-blue-600 font-medium">
                   <span>Manage Images</span>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </Link>
+
+            {/* Publications Card */}
+            <Link
+              href="/admin/world-data/publications"
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow border-2 border-transparent hover:border-cyan-400 group"
+            >
+              <div className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 bg-cyan-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-cyan-200 transition-colors">
+                  <svg className="w-10 h-10 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Publications</h3>
+                <p className="text-gray-600 text-sm">
+                  Manage newspapers, magazines, comic books, and books
+                </p>
+                <div className="mt-4 flex items-center gap-2 text-cyan-600 font-medium">
+                  <span>Manage Publications</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

@@ -10,6 +10,7 @@ const devices = [
   { name: 'PC', href: '/pc', action: 'Explore KempoNet' },
   { name: 'TV', href: '/tv', action: 'Watch Kempo TV' },
   { name: 'Radio', href: '/radio', action: 'Listen to Kempo Radio' },
+  { name: 'Press', href: '/press', action: 'Read Kempo Press' },
 ]
 
 // Radio icon component
@@ -94,6 +95,62 @@ function MobileIcon() {
       />
       {/* Home Indicator */}
       <div className="w-6 h-0.5 rounded-full mx-auto mt-1 mb-0.5" style={{ background: '#374151' }} />
+    </div>
+  )
+}
+
+// Press icon component (open magazine)
+function PressIcon() {
+  return (
+    <div className="flex items-end gap-0.5">
+      {/* Left page */}
+      <div
+        className="w-12 h-16 rounded-l-sm border-2 border-r border-gray-600 relative"
+        style={{
+          background: 'linear-gradient(to right, #d4c4a8, #e8dcc8)',
+          transform: 'perspective(200px) rotateY(15deg)',
+          transformOrigin: 'right center'
+        }}
+      >
+        {/* Text lines */}
+        <div className="absolute top-2 left-1.5 right-1 space-y-1">
+          <div className="h-0.5 rounded-full" style={{ background: '#9ca3af', width: '80%' }} />
+          <div className="h-0.5 rounded-full" style={{ background: '#9ca3af', width: '90%' }} />
+          <div className="h-0.5 rounded-full" style={{ background: '#9ca3af', width: '70%' }} />
+          <div className="h-0.5 rounded-full" style={{ background: '#9ca3af', width: '85%' }} />
+          <div className="h-0.5 rounded-full" style={{ background: '#9ca3af', width: '60%' }} />
+        </div>
+        {/* Image placeholder */}
+        <div
+          className="absolute bottom-2 left-1.5 right-1 h-5 rounded-sm"
+          style={{ background: '#a8b4a8' }}
+        />
+      </div>
+      {/* Spine */}
+      <div
+        className="w-1 h-16 border-y-2 border-gray-600"
+        style={{ background: '#8b7355' }}
+      />
+      {/* Right page */}
+      <div
+        className="w-12 h-16 rounded-r-sm border-2 border-l border-gray-600 relative"
+        style={{
+          background: 'linear-gradient(to left, #d4c4a8, #e8dcc8)',
+          transform: 'perspective(200px) rotateY(-15deg)',
+          transformOrigin: 'left center'
+        }}
+      >
+        {/* Text lines */}
+        <div className="absolute top-2 left-1 right-1.5 space-y-1">
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '75%' }} />
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '88%' }} />
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '65%' }} />
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '80%' }} />
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '55%' }} />
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '70%' }} />
+          <div className="h-0.5 rounded-full ml-auto" style={{ background: '#9ca3af', width: '50%' }} />
+        </div>
+      </div>
     </div>
   )
 }
@@ -241,6 +298,7 @@ export default function Home() {
                   {currentIndex === 1 && <PCIcon />}
                   {currentIndex === 2 && <TVIcon />}
                   {currentIndex === 3 && <RadioIcon />}
+                  {currentIndex === 4 && <PressIcon />}
                 </div>
               </div>
 

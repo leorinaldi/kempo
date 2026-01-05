@@ -119,7 +119,8 @@ model Image {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  subjects    ImageSubject[]
+  subjects          ImageSubject[]
+  publicationCovers Publication[]    // Publications using this as cover image
 
   @@map("image")
 }
@@ -135,6 +136,126 @@ model ImageSubject {
   @@unique([imageId, itemId, itemType])
   @@index([itemId, itemType])
   @@map("image_subjects")
+}
+
+// ============ PUBLICATIONS ============
+
+enum PublicationType {
+  newspaper
+  magazine
+  comic
+  book
+}
+
+enum PublicationFrequency {
+  daily
+  weekly
+  biweekly
+  monthly
+  quarterly
+  annual
+  irregular
+}
+
+enum PublicationRole {
+  author
+  editor
+  columnist
+  reporter
+  illustrator
+  photographer
+  cover_artist
+  writer
+}
+
+enum PublicationGenre {
+  // Fiction (8)
+  literary_fiction              // Literary & Contemporary Fiction (includes poetry, plays, screenplays)
+  historical_fiction            // Historical Fiction
+  science_fiction_fantasy       // Science Fiction & Fantasy
+  mystery_crime_thriller        // Mystery, Crime & Thriller
+  romance                       // Romance
+  horror                        // Horror
+  adventure_action              // Adventure & Action
+  children_young_adult          // Children's & Young Adult Fiction
+
+  // Nonfiction (7)
+  biography_memoir              // Biography & Memoir
+  history_politics_society      // History, Politics & Society
+  science_nature_technology     // Science, Nature & Technology
+  philosophy_religion_mythology // Philosophy, Religion & Mythology
+  business_economics_psychology // Business, Economics & Psychology
+  arts_culture                  // Arts & Culture
+  current_affairs_journalism    // Current Affairs & Journalism
+}
+
+model PublicationSeries {
+  id            String                @id @default(cuid())
+  name          String                                        // "Detroit Sentinel", "Athlete Magazine"
+  type          PublicationType                               // Must match type of associated publications
+  publisherId   String?               @map("publisher_id")
+  publisher     Organization?         @relation(fields: [publisherId], references: [id], onDelete: SetNull)
+  frequency     PublicationFrequency?
+  startKyDate   DateTime?             @map("start_ky_date")   // First issue date in k.y.
+  endKyDate     DateTime?             @map("end_ky_date")     // Last issue (null if ongoing)
+  description   String?               @db.Text
+  articleId     String?               @unique @map("article_id")
+  article       Article?              @relation(fields: [articleId], references: [id], onDelete: SetNull)
+  createdAt     DateTime              @default(now()) @map("created_at")
+  updatedAt     DateTime              @updatedAt @map("updated_at")
+
+  publications  Publication[]
+
+  @@index([type])
+  @@map("publication_series")
+}
+
+model Publication {
+  id            String              @id @default(cuid())
+  title         String                                        // Issue title or book title
+  type          PublicationType
+  seriesId      String?             @map("series_id")
+  series        PublicationSeries?  @relation(fields: [seriesId], references: [id], onDelete: SetNull)
+  publisherId   String?             @map("publisher_id")      // Override series publisher if needed
+  publisher     Organization?       @relation(fields: [publisherId], references: [id], onDelete: SetNull)
+  kyDate        DateTime?           @map("ky_date")           // Publication date in k.y.
+  coverImageId  String?             @map("cover_image_id")
+  coverImage    Image?              @relation(fields: [coverImageId], references: [id], onDelete: SetNull)
+  pageCount     Int?                @map("page_count")
+  url           String?             @db.Text                  // PDF or readable content URL
+  description   String?             @db.Text
+
+  // Shared fields (no separate metadata tables needed)
+  genre         PublicationGenre?
+  volume        Int?                                          // Volume number
+  issueNumber   Int?                @map("issue_number")      // Issue/position in series
+  edition       String?                                       // "Morning", "Evening", "Sunday", "First Edition", etc.
+
+  createdAt     DateTime            @default(now()) @map("created_at")
+  updatedAt     DateTime            @updatedAt @map("updated_at")
+
+  elements      PublicationElement[]
+
+  @@index([seriesId])
+  @@index([type])
+  @@index([kyDate])
+  @@map("publications")
+}
+
+model PublicationElement {
+  id            String          @id @default(cuid())
+  publicationId String          @map("publication_id")
+  publication   Publication     @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  personId      String          @map("person_id")
+  person        Person          @relation(fields: [personId], references: [id], onDelete: Cascade)
+  role          PublicationRole
+  credit        String?                                       // Column name, pen name, etc.
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  @@unique([publicationId, personId, role])
+  @@index([publicationId])
+  @@index([personId])
+  @@map("publication_elements")
 }
 
 // ============ VIDEO METADATA ============
@@ -521,6 +642,7 @@ model Article {
   place              Place?
   album              Album?
   images             Image[]
+  publicationSeries  PublicationSeries?
 
   @@index([type])
   @@index([status])
@@ -569,11 +691,12 @@ model Person {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  albums           Album[]          // Albums where this person is the primary artist
-  videoElements    VideoElement[]   // Videos via role (actor, director, writer, producer)
-  onlineVideos     OnlineMetadata[] // Online videos created by this person
-  flipFlopAccounts FlipFlopAccount[] // FlipFlop accounts owned by this person
-  events           EventPerson[]    // Events this person is linked to
+  albums              Album[]              // Albums where this person is the primary artist
+  videoElements       VideoElement[]       // Videos via role (actor, director, writer, producer)
+  onlineVideos        OnlineMetadata[]     // Online videos created by this person
+  flipFlopAccounts    FlipFlopAccount[]    // FlipFlop accounts owned by this person
+  events              EventPerson[]        // Events this person is linked to
+  publicationElements PublicationElement[] // Publications via role (author, editor, etc.)
 
   @@map("people")
 }
@@ -590,11 +713,13 @@ model Organization {
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
-  brands        Brand[]
-  albums        Album[]              // Albums released by this label
-  movies        MovieMetadata[]      // Movies produced by this studio
-  seriesNetwork Series[]             // TV series aired on this network
-  commercials   CommercialMetadata[] // Commercials made by this agency
+  brands             Brand[]
+  albums             Album[]              // Albums released by this label
+  movies             MovieMetadata[]      // Movies produced by this studio
+  seriesNetwork      Series[]             // TV series aired on this network
+  commercials        CommercialMetadata[] // Commercials made by this agency
+  publicationSeries  PublicationSeries[]  // Publication series by this publisher
+  publications       Publication[]        // Individual publications by this publisher
 
   @@map("organizations")
 }

@@ -34,6 +34,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | `global-rules` | Core rules for all articles (read first) |
 | `create-person` | Biographical articles |
 | `create-place` | Cities, states, nations |
+| `create-publication` | Newspapers, magazines, books |
 | `create-organization` | Institutions, companies, parties, academies |
 | `create-brand` | Brands owned by organizations |
 | `create-media` | Songs, albums, films |

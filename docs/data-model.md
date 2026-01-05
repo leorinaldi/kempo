@@ -35,11 +35,16 @@ MEDIA (content assets)
 ├── Series ──────────────────────── TV show containers
 └── Genre ───────────────────────── classification tags
 
+PUBLICATIONS (print media)
+├── PublicationSeries ──────────── newspapers, magazines, book series
+└── Publication ────────────────── individual issues, editions, books
+
 DEVICES (home page selections)
 ├── TV ──────────────────────────── channels + broadcasts
 ├── Radio ───────────────────────── playlist of Audio
 ├── PC ──────────────────────────── KempoNet Browser desktop experience
-└── Mobile ─────────────────────── KempoNet Browser + native apps
+├── Mobile ─────────────────────── KempoNet Browser + native apps
+└── Press ─────────────────────── newspapers, magazines, books
 
 KEMPONET (online services, accessible via PC/Mobile browsers)
 ├── KempoTube ───────────────────── channels + videos (has mobile app)
@@ -112,6 +117,31 @@ Image ──→ ImageSubject (links to people, places, products, etc.)
   └──→ Article.infobox (referenced by URL)
 ```
 
+### Publications Structure
+
+```
+PublicationSeries ──→ Publication (one-to-many)
+       │                    │
+       │                    ├──→ PublicationElement (links people with roles)
+       │                    │
+       │                    └──→ Image (cover image)
+       │
+       └──→ Organization (publisher, via publisherId)
+```
+
+**PublicationSeries** is the container (e.g., "Detroit Sentinel", "Athlete Magazine"):
+- Has a `type` enum: `newspaper`, `magazine`, `comic`, `book`
+- Has a `frequency` enum: `daily`, `weekly`, `biweekly`, `monthly`, `quarterly`, `annual`, `irregular`
+- Links to a publisher Organization
+- Can link to a Kempopedia Article
+
+**Publication** is an individual issue or book:
+- Must have a `type` that matches its series (when linked to a series)
+- Has a `genre` enum with 15 options in Fiction (8) and Nonfiction (7) categories
+- Has volume, issueNumber, edition fields for periodicals
+- Links to a cover Image
+- Links to contributors via PublicationElement
+
 ### Events as Temporal Backbone
 
 Events connect everything with dates:
@@ -126,18 +156,21 @@ Event
 
 ---
 
-## Polymorphic Join Tables
+## Polymorphic & Role-Based Join Tables
 
-Four tables use a `itemType`/`itemId` pattern to link to multiple entity types:
+Several tables link entities with additional context (type, role, or both):
 
-| Table | Links From | Links To | itemType values |
-|-------|-----------|----------|-----------------|
-| `AudioElement` | Audio | Person, Album | singer, composer, lyricist, album |
-| `ImageSubject` | Image | Person, Org, Brand, Product, locations | person, organization, brand, product, nation, state, city, place |
-| `EventLocation` | Event | Nation, State, City, Place | nation, state, city, place |
-| `EventMedia` | Event | Article, Audio, Video, Image, Album | article, audio, video, image, album |
+| Table | Links From | Links To | Key Field | Values |
+|-------|-----------|----------|-----------|--------|
+| `AudioElement` | Audio | Person, Album | itemType | singer, composer, lyricist, album |
+| `VideoElement` | Video | Person | role | actor, director, writer, producer |
+| `ImageSubject` | Image | Person, Org, Brand, Product, locations | itemType | person, organization, brand, product, nation, state, city, place |
+| `PublicationElement` | Publication | Person | role | author, editor, columnist, reporter, illustrator, photographer, cover_artist, writer |
+| `EventLocation` | Event | Nation, State, City, Place | itemType | nation, state, city, place |
+| `EventMedia` | Event | Article, Audio, Video, Image, Album | itemType | article, audio, video, image, album |
 
-These avoid N separate foreign key columns by storing type + ID together.
+Polymorphic tables (itemType + itemId) avoid N separate foreign key columns.
+Role-based tables use a direct foreign key with a role enum for the relationship type.
 
 ---
 
@@ -157,6 +190,29 @@ Only one metadata table is populated per video.
 
 ---
 
+## Publication Type & Genre System
+
+**PublicationType** (applies to both PublicationSeries and Publication):
+- `newspaper` - daily/weekly news publications
+- `magazine` - periodicals covering specific topics
+- `comic` - comic books and graphic novels
+- `book` - standalone or series books
+
+**PublicationGenre** (15 options for categorizing content):
+
+| Fiction (8) | Nonfiction (7) |
+|-------------|----------------|
+| literary_fiction | biography_memoir |
+| historical_fiction | history_politics_society |
+| science_fiction_fantasy | science_nature_technology |
+| mystery_crime_thriller | philosophy_religion_mythology |
+| romance | business_economics_psychology |
+| horror | arts_culture |
+| adventure_action | current_affairs_journalism |
+| children_young_adult | |
+
+---
+
 ## Article ↔ Entity Links
 
 Most World Data entities can link to a Kempopedia article:
@@ -167,6 +223,7 @@ Most World Data entities can link to a Kempopedia article:
 - `Product.articleId` → Article
 - `Nation.articleId`, `State.articleId`, `City.articleId`, `Place.articleId` → Article
 - `Album.articleId` → Article
+- `PublicationSeries.articleId` → Article
 
 This creates bidirectional navigation: entity admin shows linked article, article infobox shows entity data.
 
@@ -178,5 +235,6 @@ This creates bidirectional navigation: entity admin shows linked article, articl
 |------------------|------------|
 | All fields and constraints | `web/prisma/schema.prisma` |
 | Entity CRUD operations | `/admin/world-data/*` |
+| Publications management | `/admin/world-data/publications` |
 | Event system details | `docs/event-system.md` |
 | Article creation rules | `docs/Skills/Kempopedia/global-rules` |
