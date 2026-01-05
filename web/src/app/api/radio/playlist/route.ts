@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { parseKYDateParam, kyDateFilter } from "@/lib/ky-date-filter"
 
+export const dynamic = "force-dynamic"
+
 // Fisher-Yates shuffle
 function shuffle<T>(array: T[]): T[] {
   const result = [...array]
