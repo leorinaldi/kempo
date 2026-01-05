@@ -101,7 +101,7 @@ async function generateImage(prompt) {
       'Authorization': `Bearer ${XAI_API_KEY}`
     },
     body: JSON.stringify({
-      model: 'grok-2-image',
+      model: 'grok-2-image-1212',
       prompt: prompt,
       n: 1,
       response_format: 'url'

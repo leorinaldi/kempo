@@ -44,6 +44,12 @@ export async function GET(request: Request) {
     }
 
     // PostgreSQL full-text search across articles, pages, and app_search using UNION
+    // Calculate each weight class separately and add them to prevent dilution:
+    //   A (title)   = 1.0
+    //   B (content) = 0.2
+    //   C (unused)  = 0.1  -- reserved for future use
+    //   D (unused)  = 0.05 -- reserved for future use
+    // 2x bonus multiplier for title matches
     // Use different queries based on whether we have a date filter
     const results = dateFilterParam
       ? await prisma.$queryRaw<SearchResult[]>`
@@ -55,11 +61,10 @@ export async function GET(request: Request) {
           LEFT(content, 200) as snippet,
           '/kemponet/kempopedia/wiki/' || id as url,
           'kempopedia' as domain,
-          ts_rank(
-            setweight(to_tsvector('english', title), 'A') ||
-            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
-            to_tsquery('english', ${sanitizedQuery})
-          ) as rank
+          (
+            ts_rank(to_tsvector('english', title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+          ) * CASE WHEN title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank
         FROM articles
         WHERE
           status = 'published'
@@ -78,11 +83,10 @@ export async function GET(request: Request) {
           LEFT(p.content, 200) as snippet,
           '/kemponet/' || d.name || CASE WHEN p.slug = '' THEN '' ELSE '/' || p.slug END as url,
           d.name as domain,
-          ts_rank(
-            setweight(to_tsvector('english', p.title), 'A') ||
-            setweight(to_tsvector('english', COALESCE(p.content, '')), 'B'),
-            to_tsquery('english', ${sanitizedQuery})
-          ) as rank
+          (
+            ts_rank(to_tsvector('english', p.title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(p.content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+          ) * CASE WHEN p.title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank
         FROM pages p
         JOIN domains d ON p.domain_id = d.id
         WHERE
@@ -101,12 +105,11 @@ export async function GET(request: Request) {
           excerpt as snippet,
           path as url,
           domain,
-          ts_rank(
-            setweight(to_tsvector('english', title), 'A') ||
-            setweight(to_tsvector('english', COALESCE(excerpt, '')), 'A') ||
-            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
-            to_tsquery('english', ${sanitizedQuery})
-          ) as rank
+          (
+            ts_rank(to_tsvector('english', title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(excerpt, '')), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+          ) * CASE WHEN title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank
         FROM app_search
         WHERE
           no_search = false
@@ -128,11 +131,10 @@ export async function GET(request: Request) {
           LEFT(content, 200) as snippet,
           '/kemponet/kempopedia/wiki/' || id as url,
           'kempopedia' as domain,
-          ts_rank(
-            setweight(to_tsvector('english', title), 'A') ||
-            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
-            to_tsquery('english', ${sanitizedQuery})
-          ) as rank
+          (
+            ts_rank(to_tsvector('english', title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+          ) * CASE WHEN title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank
         FROM articles
         WHERE
           status = 'published'
@@ -150,11 +152,10 @@ export async function GET(request: Request) {
           LEFT(p.content, 200) as snippet,
           '/kemponet/' || d.name || CASE WHEN p.slug = '' THEN '' ELSE '/' || p.slug END as url,
           d.name as domain,
-          ts_rank(
-            setweight(to_tsvector('english', p.title), 'A') ||
-            setweight(to_tsvector('english', COALESCE(p.content, '')), 'B'),
-            to_tsquery('english', ${sanitizedQuery})
-          ) as rank
+          (
+            ts_rank(to_tsvector('english', p.title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(p.content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+          ) * CASE WHEN p.title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank
         FROM pages p
         JOIN domains d ON p.domain_id = d.id
         WHERE
@@ -173,12 +174,11 @@ export async function GET(request: Request) {
           excerpt as snippet,
           path as url,
           domain,
-          ts_rank(
-            setweight(to_tsvector('english', title), 'A') ||
-            setweight(to_tsvector('english', COALESCE(excerpt, '')), 'A') ||
-            setweight(to_tsvector('english', COALESCE(content, '')), 'B'),
-            to_tsquery('english', ${sanitizedQuery})
-          ) as rank
+          (
+            ts_rank(to_tsvector('english', title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(excerpt, '')), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+            ts_rank(to_tsvector('english', COALESCE(content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+          ) * CASE WHEN title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank
         FROM app_search
         WHERE
           no_search = false

@@ -837,7 +837,7 @@ model City {
 
 model Place {
   id            String    @id @default(cuid())
-  name          String                           // "Little Italy", "The Oasis Casino"
+  name          String                           // "Little Sicily", "The Oasis Casino"
   placeType     String    @map("place_type")     // "neighborhood", "building", "landmark", "casino", "studio", "park", "restaurant"
   cityId        String    @map("city_id")
   city          City      @relation(fields: [cityId], references: [id], onDelete: Cascade)

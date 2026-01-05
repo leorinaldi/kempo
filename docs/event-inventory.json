@@ -23,7 +23,7 @@
     }
   },
   "themes": {
-    "Golden Age of Hollywood": [
+    "Golden Age of Hollyvale": [
       "Abilene Dawn",
       "Catherine Marlowe",
       "Dust and Honor",
@@ -92,7 +92,7 @@
         "film",
         "western",
         "1946",
-        "hollywood",
+        "hollyvale",
         "clay-marshall"
       ],
       "events": [
@@ -106,7 +106,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -148,12 +148,12 @@
         "american",
         "actress",
         "film",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -560,7 +560,7 @@
         "film",
         "western",
         "1939",
-        "hollywood",
+        "hollyvale",
         "clay-marshall"
       ],
       "events": [
@@ -574,7 +574,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -974,12 +974,12 @@
         "executive",
         "producer",
         "film",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1005,7 +1005,7 @@
         "american",
         "entertainer",
         "director",
-        "hollywood",
+        "hollyvale",
         "film-noir"
       ],
       "events": [
@@ -1035,7 +1035,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1283,12 +1283,12 @@
         "american",
         "executive",
         "film",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1299,12 +1299,12 @@
         "american",
         "entertainment",
         "film",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1501,7 +1501,7 @@
         "american",
         "entertainer",
         "actor",
-        "hollywood",
+        "hollyvale",
         "leading-man"
       ],
       "events": [
@@ -1523,7 +1523,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1549,12 +1549,12 @@
         "american",
         "executive",
         "film",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1593,13 +1593,13 @@
       "articleType": "culture",
       "tags": [
         "american",
-        "hollywood",
+        "hollyvale",
         "film",
         "awards"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1763,12 +1763,12 @@
         "american",
         "los-angeles",
         "hotel",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1779,7 +1779,7 @@
         "film",
         "film-noir",
         "1946",
-        "hollywood",
+        "hollyvale",
         "vivian-sterling"
       ],
       "events": [
@@ -1793,7 +1793,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1867,7 +1867,7 @@
         "entertainer",
         "actress",
         "dancer",
-        "hollywood",
+        "hollyvale",
         "parallel-switchover"
       ],
       "events": [
@@ -1907,7 +1907,7 @@
           "source": "timelineEvent",
           "date": "1946 k.y.",
           "headline": "'The Velvet Trap' makes Sterling a star",
-          "description": "Her iconic performance as a femme fatale cements her status as Hollywood's leading sex symbol",
+          "description": "Her iconic performance as a femme fatale cements her status as Hollyvale's leading sex symbol",
           "suggestedType": "milestone",
           "suggestedSignificance": 5
         },
@@ -1921,7 +1921,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     },
     {
@@ -1947,7 +1947,7 @@
         "american",
         "entertainer",
         "director",
-        "hollywood",
+        "hollyvale",
         "western",
         "parallel-switchover"
       ],
@@ -1978,7 +1978,7 @@
         }
       ],
       "potentialParents": [
-        "Golden Age of Hollywood"
+        "Golden Age of Hollyvale"
       ]
     }
   ]
