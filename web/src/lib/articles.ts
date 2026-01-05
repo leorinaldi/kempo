@@ -2,6 +2,7 @@ import { remark } from 'remark'
 import html from 'remark-html'
 import { prisma } from './prisma'
 import type { Article as PrismaArticle } from '@prisma/client'
+import { slugify } from './slugify'
 
 export interface ParallelSwitchover {
   real_world: string
@@ -19,8 +20,21 @@ export interface ArticleFrontmatter {
   dates?: string[]
 }
 
-// Title → ID lookup map type
+// Title → ID lookup map type (legacy, kept for compatibility)
 export type ArticleLinkMap = Map<string, string>
+
+// Re-export slugify from shared utility (usable on client and server)
+export { slugify } from './slugify'
+
+// Convert slug back to approximate title (for DB lookup)
+function unslugify(slug: string): string {
+  return slug.replace(/-/g, ' ')
+}
+
+// Check if a string looks like a CUID (25 chars, starts with 'c')
+function isCuid(str: string): boolean {
+  return /^c[a-z0-9]{20,}$/i.test(str)
+}
 
 export interface Article {
   id: string
@@ -77,9 +91,9 @@ function dateToTimelineLink(dateStr: string): { page: string; anchor: string } {
 
   if (yearNum < 1950) {
     const decade = Math.floor(yearNum / 10) * 10
-    return { page: `${decade}s`, anchor }
+    return { page: `${decade}s k.y.`, anchor }
   } else {
-    return { page: year, anchor }
+    return { page: `${year} k.y.`, anchor }
   }
 }
 
@@ -135,7 +149,7 @@ export async function getArticleIdsByTitles(targets: string[]): Promise<ArticleL
   return map
 }
 
-// Process wikilinks using pre-fetched ID map
+// Process wikilinks using pre-fetched ID map (legacy - kept for compatibility)
 function processWikilinks(content: string, linkMap: ArticleLinkMap): string {
   return content.replace(
     /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
@@ -162,6 +176,29 @@ function processWikilinks(content: string, linkMap: ArticleLinkMap): string {
       }
       // Fallback: mark as missing link
       return `<a href="#" class="wikilink wikilink-missing">${linkText}</a>`
+    }
+  )
+}
+
+// Process wikilinks using slug-based URLs (no DB lookup needed)
+export function processWikilinksSimple(content: string): string {
+  return content.replace(
+    /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
+    (_, target, display) => {
+      const linkText = display || target
+
+      if (isDateLink(target)) {
+        const { page, anchor } = dateToTimelineLink(target)
+        const slug = slugify(page)
+        return `<a href="/kemponet/kempopedia/wiki/${slug}#${anchor}" class="wikilink wikilink-date">${linkText}</a>`
+      }
+
+      const [pagePart, anchorPart] = target.split('#')
+      const slug = slugify(pagePart.trim())
+      const href = anchorPart
+        ? `/kemponet/kempopedia/wiki/${slug}#${anchorPart}`
+        : `/kemponet/kempopedia/wiki/${slug}`
+      return `<a href="${href}" class="wikilink">${linkText}</a>`
     }
   )
 }
@@ -196,6 +233,91 @@ export async function getAllArticleIdsAsync(): Promise<string[]> {
     select: { id: true },
   })
   return articles.map(a => a.id)
+}
+
+// Get all article slugs for static generation
+export async function getAllArticleSlugsAsync(): Promise<string[]> {
+  const articles = await prisma.article.findMany({
+    where: { status: 'published' },
+    select: { title: true },
+  })
+  return articles.map(a => slugify(a.title))
+}
+
+// Get article by slug or ID, with optional date filtering
+export async function getArticleBySlugOrId(
+  slugOrId: string,
+  viewingDate?: { month: number; year: number }
+): Promise<Article | null> {
+  let dbArticle
+
+  if (isCuid(slugOrId)) {
+    // Looks like an ID, fetch by ID
+    dbArticle = await prisma.article.findUnique({
+      where: { id: slugOrId },
+    })
+  } else {
+    // Treat as slug - first try simple unslugify (dashes to spaces)
+    const titleSearch = unslugify(slugOrId)
+    dbArticle = await prisma.article.findFirst({
+      where: {
+        title: { equals: titleSearch, mode: 'insensitive' },
+        status: 'published',
+      },
+    })
+
+    // If not found, search for article where slugified title matches
+    // This handles cases like "Portside, New Jersey" → "portside-new-jersey"
+    if (!dbArticle) {
+      const allArticles = await prisma.article.findMany({
+        where: { status: 'published' },
+        select: { id: true, title: true },
+      })
+      const match = allArticles.find(a => slugify(a.title) === slugOrId)
+      if (match) {
+        dbArticle = await prisma.article.findUnique({
+          where: { id: match.id },
+        })
+      }
+    }
+  }
+
+  if (!dbArticle) return null
+
+  // Check if article is published at this viewing date
+  if (viewingDate && dbArticle.publishDate) {
+    const viewDate = kyDateToDate(viewingDate)
+    if (viewDate < dbArticle.publishDate) {
+      return null // Article doesn't exist yet at this viewing date
+    }
+  }
+
+  // Process content with simplified wikilinks (no linkMap needed)
+  const processedContent = processWikilinksSimple(dbArticle.content)
+
+  // Process markdown to HTML
+  const htmlResult = await remark()
+    .use(html, { sanitize: false })
+    .process(processedContent)
+
+  return {
+    id: dbArticle.id,
+    frontmatter: {
+      title: dbArticle.title,
+      id: dbArticle.id,
+      type: dbArticle.type,
+      subtype: dbArticle.subtype || undefined,
+      status: dbArticle.status,
+      parallel_switchover: dbArticle.parallelSwitchover as unknown as ParallelSwitchover | undefined,
+      tags: dbArticle.tags,
+      dates: dbArticle.dates,
+    },
+    content: processedContent,
+    htmlContent: htmlResult.toString(),
+    infobox: dbArticle.infobox as Article['infobox'],
+    media: dbArticle.mediaRefs as Article['media'],
+    timelineEvents: dbArticle.timelineEvents as Article['timelineEvents'],
+  }
 }
 
 // Fast count query - doesn't load all articles

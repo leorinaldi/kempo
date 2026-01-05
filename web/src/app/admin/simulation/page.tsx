@@ -18,7 +18,7 @@ const TIME_PERIODS = [
     slug: "1946-1950",
     title: "1946-1950",
     subtitle: "Post-War America",
-    description: "Cold War begins, Hollywood golden age, organized crime networks, early television",
+    description: "Cold War begins, Hollyvale golden age, organized crime networks, early television",
     years: "1946 - 1950",
     color: "blue",
     status: "Active",

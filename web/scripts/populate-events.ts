@@ -37,7 +37,7 @@ interface Inventory {
 // Parent event mappings
 const PARENT_MAPPING: Record<string, string> = {
   'World War II': 'World War II',
-  'Golden Age of Hollywood': 'Golden Age of Hollywood',
+  'Golden Age of Hollyvale': 'Golden Age of Hollyvale',
   'The Antelope Springs Incident': 'The Antelope Springs Incident',
   'Cold War': 'Cold War',
   'Organized Crime': 'Organized Crime in America',

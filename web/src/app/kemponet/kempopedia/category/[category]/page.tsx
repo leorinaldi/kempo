@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticlesByTypeAsOf, getAllCategoriesAsync, isValidCategory } from '@/lib/articles'
+import { getArticlesByTypeAsOf, getAllCategoriesAsync, isValidCategory, slugify } from '@/lib/articles'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
 import { getKYDateFromCookie } from '@/lib/ky-date'
 
@@ -85,7 +85,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 {articles.map((article) => (
                   <li key={article.id}>
                     <Link
-                      href={`/kemponet/kempopedia/wiki/${article.id}`}
+                      href={`/kemponet/kempopedia/wiki/${slugify(article.frontmatter.title)}`}
                       className="text-wiki-link hover:underline"
                     >
                       {article.frontmatter.title}

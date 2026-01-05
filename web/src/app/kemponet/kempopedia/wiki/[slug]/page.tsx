@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getArticleByIdAsOf, getAllArticleIdsAsync } from '@/lib/articles'
+import { getArticleBySlugOrId, getAllArticleSlugsAsync, slugify } from '@/lib/articles'
 import Infobox from '@/components/Infobox'
 import { AudioPlayer } from '@/components/AudioPlayer'
 import { VideoPlayer } from '@/components/VideoPlayer'
@@ -8,24 +8,24 @@ import { KempopediaHeader } from '@/components/KempopediaHeader'
 import { getKYDateFromCookie } from '@/lib/ky-date'
 
 interface PageProps {
-  params: Promise<{ id: string }>
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
-  const ids = await getAllArticleIdsAsync()
-  return ids.map((id) => ({ id }))
+  const slugs = await getAllArticleSlugsAsync()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const { id } = await params
+  const { slug } = await params
   const viewingDate = await getKYDateFromCookie()
-  const article = await getArticleByIdAsOf(id, viewingDate)
+  const article = await getArticleBySlugOrId(slug, viewingDate)
 
   if (!article) {
     notFound()
   }
 
-  const { frontmatter, htmlContent, infobox, media, linkMap } = article
+  const { frontmatter, htmlContent, infobox, media } = article
 
   return (
     <div className="min-h-screen bg-white">
@@ -41,7 +41,6 @@ export default async function ArticlePage({ params }: PageProps) {
               type={infobox.type}
               image={infobox.image}
               fields={infobox.fields}
-              linkMap={linkMap}
             />
           )}
 

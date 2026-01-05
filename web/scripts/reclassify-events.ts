@@ -40,11 +40,11 @@ async function main() {
     { pattern: 'CPP takes power', parent: 'Cold War', exact: true },
     { pattern: 'People\'s Republic of China', parent: 'Cold War' },
 
-    // Hollywood births
-    { pattern: 'William Garrett born', parent: 'Golden Age of Hollywood', exact: true },
-    { pattern: 'James Thornton born', parent: 'Golden Age of Hollywood', exact: true },
-    { pattern: 'Vivian Sterling born', parent: 'Golden Age of Hollywood', exact: true },
-    { pattern: 'Robert Langley born', parent: 'Golden Age of Hollywood', exact: true },
+    // Hollyvale births
+    { pattern: 'William Garrett born', parent: 'Golden Age of Hollyvale', exact: true },
+    { pattern: 'James Thornton born', parent: 'Golden Age of Hollyvale', exact: true },
+    { pattern: 'Vivian Sterling born', parent: 'Golden Age of Hollyvale', exact: true },
+    { pattern: 'Robert Langley born', parent: 'Golden Age of Hollyvale', exact: true },
   ];
 
   let updated = 0;

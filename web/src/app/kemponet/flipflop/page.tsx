@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import { slugify } from "@/lib/slugify"
 
 interface Video {
   id: string  // FlipFlopVideo ID
@@ -203,13 +204,13 @@ export default function FlipFlopPage() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
-  const handleArtistClick = (artistArticleId: string) => {
+  const handleArtistClick = (artistName: string) => {
     const extraParams = [
       isKempoNet ? 'kemponet=1' : '',
       isMobile ? 'mobile=1' : '',
     ].filter(Boolean).join('&')
     const suffix = extraParams ? `?${extraParams}` : ''
-    router.push(`/kemponet/kempopedia/wiki/${artistArticleId}${suffix}`)
+    router.push(`/kemponet/kempopedia/wiki/${slugify(artistName)}${suffix}`)
   }
 
   const handleAccountClick = (accountId: string) => {

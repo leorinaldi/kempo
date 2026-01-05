@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { slugify } from "@/lib/slugify"
 
 interface Video {
   id: string
@@ -289,7 +290,7 @@ export default function TVPage() {
           >
             {/* Screen */}
             <Link
-              href={!isPlayingIntro && currentVideo?.artistArticleId ? `/kemponet/kempopedia/wiki/${currentVideo.artistArticleId}` : '#'}
+              href={!isPlayingIntro && currentVideo?.artist ? `/kemponet/kempopedia/wiki/${slugify(currentVideo.artist)}` : '#'}
               className="relative w-full aspect-video rounded border-2 border-gray-900 overflow-hidden block cursor-pointer"
               style={{
                 background: isOn ? '#0f172a' : '#1e293b',

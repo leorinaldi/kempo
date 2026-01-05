@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { useRouter } from "next/navigation"
+import { slugify } from "@/lib/slugify"
 
 interface Track {
   id: string
@@ -321,13 +322,13 @@ export default function SoundWavesPage() {
     audioRef.current.currentTime = percent * duration
   }
 
-  const handleArtistClick = (artistArticleId: string) => {
+  const handleArtistClick = (artistName: string) => {
     const extraParams = [
       isKempoNet ? 'kemponet=1' : '',
       isMobile ? 'mobile=1' : '',
     ].filter(Boolean).join('&')
     const suffix = extraParams ? `?${extraParams}` : ''
-    router.push(`/kemponet/kempopedia/wiki/${artistArticleId}${suffix}`)
+    router.push(`/kemponet/kempopedia/wiki/${slugify(artistName)}${suffix}`)
   }
 
   if (loading) {

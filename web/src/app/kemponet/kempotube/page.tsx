@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { KempoNetBridge } from "@/components/KempoNetBridge"
+import { slugify } from "@/lib/slugify"
 
 interface Video {
   id: string
@@ -241,10 +242,10 @@ function KempoTubeContent() {
               <h1 className="text-sm font-semibold text-white">
                 {selectedVideo.name}
               </h1>
-              {selectedVideo.artist && selectedVideo.artistArticleId && (
+              {selectedVideo.artist && (
                 <p className="mt-0.5 text-xs text-gray-400">
                   <Link
-                    href={`/kemponet/kempopedia/wiki/${selectedVideo.artistArticleId}`}
+                    href={`/kemponet/kempopedia/wiki/${slugify(selectedVideo.artist)}`}
                     className="hover:text-orange-400 transition-colors"
                   >
                     {selectedVideo.artist}

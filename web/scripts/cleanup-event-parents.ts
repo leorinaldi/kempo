@@ -119,7 +119,7 @@ async function main() {
   const euroCount = await prisma.event.count({ where: { parentId: european.id } });
   const pacCount = await prisma.event.count({ where: { parentId: pacific.id } });
   const asiCount = await prisma.event.count({ where: { parentId: asi.id } });
-  const hollywood = await prisma.event.findFirst({ where: { title: 'Golden Age of Hollywood' } });
+  const hollywood = await prisma.event.findFirst({ where: { title: 'Golden Age of Hollyvale' } });
   const hwCount = hollywood ? await prisma.event.count({ where: { parentId: hollywood.id } }) : 0;
 
   console.log('\nFinal parent counts:');
@@ -127,7 +127,7 @@ async function main() {
   console.log('  European Theater:', euroCount);
   console.log('  Pacific Theater:', pacCount);
   console.log('  Antelope Springs:', asiCount);
-  console.log('  Hollywood:', hwCount);
+  console.log('  Hollyvale:', hwCount);
 }
 
 main()

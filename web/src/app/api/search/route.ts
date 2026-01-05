@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getKYDateFromCookie } from "@/lib/ky-date"
+import { slugify } from "@/lib/articles"
 
 interface SearchResult {
   id: string
@@ -192,10 +193,14 @@ export async function GET(request: Request) {
       LIMIT 10
     `
 
-    // Clean up snippets - remove markdown and truncate nicely
+    // Clean up snippets and convert Kempopedia URLs to use slugs
     const cleanedResults = results.map(result => ({
       ...result,
       snippet: cleanSnippet(result.snippet, query),
+      // Convert Kempopedia article URLs to use slugified titles
+      url: result.domain === 'kempopedia'
+        ? `/kemponet/kempopedia/wiki/${slugify(result.title)}`
+        : result.url,
     }))
 
     return NextResponse.json(cleanedResults)
@@ -259,7 +264,7 @@ export async function GET(request: Request) {
         title: result.title,
         type: result.type,
         snippet: cleanSnippet(result.content.slice(0, 200), query),
-        url: `/kemponet/kempopedia/wiki/${result.id}`,
+        url: `/kemponet/kempopedia/wiki/${slugify(result.title)}`,
         domain: 'kempopedia',
         rank: 1,
       }))

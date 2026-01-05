@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
+import { slugify } from "@/lib/slugify"
 
 interface Station {
   id: string
@@ -196,7 +197,7 @@ export default function RadioPage() {
 
           {/* Display Panel */}
           <Link
-            href={isOn && station?.artistArticleId ? `/kemponet/kempopedia/wiki/${station.artistArticleId}` : '#'}
+            href={isOn && station?.artist ? `/kemponet/kempopedia/wiki/${slugify(station.artist)}` : '#'}
             className={`w-full h-14 rounded border-4 border-gray-900 mb-4 flex items-center justify-center transition-all duration-300 ${isOn ? 'cursor-pointer hover:opacity-90' : 'cursor-default'}`}
             style={{
               background: isOn ? '#e5e7eb' : '#374151',

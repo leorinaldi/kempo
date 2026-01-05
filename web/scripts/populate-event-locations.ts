@@ -61,7 +61,7 @@ async function main() {
     { keywords: ['European Theater', 'Western Front'], locationType: 'nation', locationName: 'France' },
     { keywords: ['Antelope Springs', 'Stokes', 'debris'], locationType: 'city', locationName: 'Antelope Springs' },
     { keywords: ['Ridgecrest'], locationType: 'place', locationName: 'Ridgecrest Air Force Base' },
-    { keywords: ['Hollywood', 'Pacific Pictures', 'film industry'], locationType: 'city', locationName: 'Los Angeles' },
+    { keywords: ['Hollyvale', 'Pacific Pictures', 'film industry'], locationType: 'city', locationName: 'Los Angeles' },
     { keywords: ['Leyte', 'Philippines', 'I have returned'], locationType: 'nation', locationName: 'Philippines' },
   ];
 

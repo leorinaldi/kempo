@@ -55,7 +55,7 @@ const THEME_PATTERNS: Record<string, string[]> = {
   'World War II': ['world-war-ii', 'wwii', 'ww2'],
   'The Antelope Springs Incident': ['ufo', 'antelope-springs', 'extraterrestrial'],
   'Organized Crime': ['mafia', 'organized-crime', 'crime-syndicate'],
-  'Golden Age of Hollywood': ['hollywood', 'pacific-pictures', 'film-industry'],
+  'Golden Age of Hollyvale': ['hollyvale', 'pacific-pictures', 'film-industry'],
   'Kellman Administration': ['kellman', 'president-kellman', 'kellman-administration'],
   'Space Program': ['space', 'rocket', 'nasa-equivalent'],
   'Cold War': ['cold-war', 'soviet', 'espionage'],
