@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { DeleteConfirmModal, useAdminAuth, AdminPageLayout, MessageBanner } from "@/components/admin"
@@ -86,6 +86,14 @@ const BYLINE_ROLES = [
 ]
 
 export default function ContentsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p>Loading...</p></div>}>
+      <ContentsPageInner />
+    </Suspense>
+  )
+}
+
+function ContentsPageInner() {
   const { isLoading: authLoading } = useAdminAuth()
   const searchParams = useSearchParams()
   const publicationId = searchParams.get("publicationId")
