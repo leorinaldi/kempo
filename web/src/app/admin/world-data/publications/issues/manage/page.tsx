@@ -304,6 +304,14 @@ export default function ManagePublicationsPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-3 ml-4">
+                  {(pub.type === "magazine" || pub.type === "newspaper") && (
+                    <a
+                      href={`/admin/world-data/publications/contents?publicationId=${pub.id}`}
+                      className="text-amber-600 hover:text-amber-800 text-sm"
+                    >
+                      Contents
+                    </a>
+                  )}
                   <button
                     onClick={() => openEditModal(pub)}
                     className="text-cyan-600 hover:text-cyan-800 text-sm"

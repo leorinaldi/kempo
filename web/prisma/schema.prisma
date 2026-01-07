@@ -121,6 +121,7 @@ model Image {
 
   subjects          ImageSubject[]
   publicationCovers Publication[]    // Publications using this as cover image
+  newsPubContents   NewsPubContent[] // NewsPubContent using this as hero image
 
   @@map("image")
 }
@@ -168,6 +169,26 @@ enum PublicationRole {
   writer
 }
 
+enum NewsPubContentType {
+  cover
+  table_of_contents
+  feature
+  column
+  news
+  interview
+  photo_essay
+  review
+  editorial
+  advertisement
+  back_cover
+}
+
+enum NewsPubContentRole {
+  author
+  photographer
+  illustrator
+}
+
 enum PublicationGenre {
   // Fiction (8)
   literary_fiction              // Literary & Contemporary Fiction (includes poetry, plays, screenplays)
@@ -205,6 +226,7 @@ model PublicationSeries {
   updatedAt     DateTime              @updatedAt @map("updated_at")
 
   publications  Publication[]
+  design        NewsPubDesign?
 
   @@index([type])
   @@map("publication_series")
@@ -235,6 +257,7 @@ model Publication {
   updatedAt     DateTime            @updatedAt @map("updated_at")
 
   elements      PublicationElement[]
+  contents      NewsPubContent[]
 
   @@index([seriesId])
   @@index([type])
@@ -256,6 +279,95 @@ model PublicationElement {
   @@index([publicationId])
   @@index([personId])
   @@map("publication_elements")
+}
+
+model NewsPubDesign {
+  id                String            @id @default(cuid())
+  seriesId          String            @unique @map("series_id")
+  series            PublicationSeries @relation(fields: [seriesId], references: [id], onDelete: Cascade)
+
+  // Page dimensions
+  pageAspectRatio   String?           @map("page_aspect_ratio")  // "8.5:11" magazine, "11:17" tabloid, "15:22" broadsheet
+  spreadGap         Float?            @map("spread_gap")         // Space between pages in spread view (rem)
+
+  // Typography
+  headlineFont      String?           @map("headline_font")      // "Playfair Display", "Oswald", etc.
+  bodyFont          String?           @map("body_font")          // "Source Serif Pro", "Georgia", etc.
+  bylineFont        String?           @map("byline_font")
+  baseFontSize      Float?            @map("base_font_size")     // In rem
+  headlineWeight    String?           @map("headline_weight")    // "bold", "black", "normal"
+  headlineStyle     String?           @map("headline_style")     // "uppercase", "titlecase", "normal"
+
+  // Layout defaults
+  defaultColumns    Int?              @map("default_columns")    // 1, 2, 3, 4
+  columnGap         Float?            @map("column_gap")         // Space between columns (rem)
+  marginSize        String?           @map("margin_size")        // "narrow", "normal", "wide"
+
+  // Colors
+  accentColor       String?           @map("accent_color")       // Hex color for highlights
+  backgroundColor   String?           @map("background_color")   // Page background
+  textColor         String?           @map("text_color")         // Main text color
+
+  // Style flags
+  useDropcaps       Boolean           @default(true) @map("use_dropcaps")
+  useRules          Boolean           @default(false) @map("use_rules")       // Horizontal lines between articles
+  pullquoteStyle    String?           @map("pullquote_style")    // "bordered", "italic", "large", "none"
+  headerDividers    Boolean           @default(false) @map("header_dividers") // Lines under headlines
+
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+
+  @@map("news_pub_designs")
+}
+
+model NewsPubContent {
+  id            String             @id @default(cuid())
+  publicationId String             @map("publication_id")
+  publication   Publication        @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  title         String                                          // Article headline
+  subtitle      String?            @db.Text                     // Optional deck/subhead
+  type          NewsPubContentType                              // cover, feature, column, etc.
+  content       String             @db.Text                     // Markdown body
+  sortOrder     Int                @map("sort_order")           // Reading sequence (1-based)
+
+  // Visual
+  heroImageId   String?            @map("hero_image_id")
+  heroImage     Image?             @relation(fields: [heroImageId], references: [id], onDelete: SetNull)
+  heroPosition  String?            @map("hero_position")        // top, left, right, background
+  layoutStyle   String?            @map("layout_style")         // standard, full_bleed, boxed, minimal
+
+  // Content extras
+  pullquotes    Json?                                           // Array of strings for callout quotes
+
+  // Per-article style overrides (null = use series default)
+  useDropcap    Boolean?           @map("use_dropcap")
+  columns       Int?                                            // 1, 2, 3
+  accentColor   String?            @map("accent_color")
+
+  createdAt     DateTime           @default(now()) @map("created_at")
+  updatedAt     DateTime           @updatedAt @map("updated_at")
+
+  elements      NewsPubContentElement[]
+
+  @@index([publicationId])
+  @@index([publicationId, sortOrder])
+  @@map("news_pub_contents")
+}
+
+model NewsPubContentElement {
+  id        String              @id @default(cuid())
+  contentId String              @map("content_id")
+  content   NewsPubContent      @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  personId  String              @map("person_id")
+  person    Person              @relation(fields: [personId], references: [id], onDelete: Cascade)
+  role      NewsPubContentRole                                  // author, photographer, illustrator
+  credit    String?                                             // Pen name, "Special Correspondent", etc.
+  createdAt DateTime            @default(now()) @map("created_at")
+
+  @@unique([contentId, personId, role])
+  @@index([contentId])
+  @@index([personId])
+  @@map("news_pub_content_elements")
 }
 
 // ============ VIDEO METADATA ============
@@ -694,6 +806,7 @@ model Person {
   flipFlopAccounts    FlipFlopAccount[]    // FlipFlop accounts owned by this person
   events              EventPerson[]        // Events this person is linked to
   publicationElements PublicationElement[] // Publications via role (author, editor, etc.)
+  newsPubContentElements NewsPubContentElement[] // Article bylines
 
   @@map("people")
 }
