@@ -29,7 +29,7 @@ export async function GET(
           orderBy: { sortOrder: 'asc' },
           include: {
             heroImage: {
-              select: { url: true },
+              select: { url: true, width: true, height: true },
             },
             elements: {
               include: {
@@ -105,6 +105,8 @@ export async function GET(
       content: c.content,
       sortOrder: c.sortOrder,
       heroImageUrl: c.heroImage?.url ?? null,
+      heroImageWidth: c.heroImage?.width ?? null,
+      heroImageHeight: c.heroImage?.height ?? null,
       heroPosition: c.heroPosition,
       layoutStyle: c.layoutStyle,
       pullquotes: c.pullquotes as string[] | null,
