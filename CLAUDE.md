@@ -45,14 +45,20 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | `date-review` | Audit dates after creating articles |
 | `generate-image` | Image prompt guidelines |
 | `inspirations` | Real-world to Kempo mappings |
+| `real-yearbook` | Historical research documents by year |
+| `kempo-yearbook` | Kempo universe planning documents by year |
 
-Skills are located at `docs/Skills/Kempopedia/<skill-name>/skill.md`
+Kempopedia skills are located at `docs/Skills/Kempopedia/<skill-name>/skill.md`
+
+Other skills are located at `docs/Skills/<skill-name>/skill.md`
 
 ## File Locations
 
 | Content | Location |
 |---------|----------|
 | Article images | Vercel Blob (tracked in Image table) |
+| Yearbooks (Real & Kempo) | `docs/yearbooks/` |
+| Yearbook guiding principles | [docs/yearbooks/guiding-principles.md](docs/yearbooks/guiding-principles.md) |
 | Simulation planning docs | `web/content/admin/*.md` |
 | Prisma schema | `web/prisma/schema.prisma` |
 | API routes | `web/src/app/api/` |
