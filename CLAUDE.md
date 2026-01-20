@@ -31,6 +31,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 | Skill | Purpose |
 |-------|---------|
+| `design-entity` | Plan and design new entities before article creation |
 | `global-rules` | Core rules for all articles (read first) |
 | `create-person` | Biographical articles |
 | `create-place` | Cities, states, nations |

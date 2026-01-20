@@ -249,23 +249,18 @@ Prioritize gaps by:
 
 ### Phase 4: New Creations
 
-For each prioritized gap, draft a Kempo equivalent:
+For each prioritized gap, use the **[design-entity skill](../design-entity/skill.md)** to create a Kempo equivalent.
 
-```markdown
-**[Proposed Name]**
-- **Type:** Person / Organization / Brand / Product / Event
-- **Compresses:** [Real-world inspirations being combined]
-- **The Twist:** [What makes it original/different]
-- **Backstory:** [Brief origin/history]
-- **Connections:** [Links to existing Kempo content]
-- **Research Needed:** [Name validation, trademark check, etc.]
-```
+The design-entity skill provides a structured five-phase workflow:
+1. **Discovery** — Check existing content, define compression sources
+2. **Naming** — Generate options, check for conflicts (database AND real-world)
+3. **Profile** — Draft details, document compression logic, "rhyme check"
+4. **Cluster** — Identify and create related elements (founders, sidekicks, etc.)
+5. **Documentation** — Record in yearbook with full rationale
 
-Follow the naming principles from guiding-principles.md:
-- Resonant but original
-- No trademarks
-- Avoid obvious parallels
-- Research before finalizing
+**Key principle:** Rhyme, don't copy. Names and biographies should resonate with real history without directly copying it.
+
+See the design-entity skill for the full workflow, naming approaches, and conflict-checking procedures.
 
 ### Phase 5: Synthesize Domain Stories
 
