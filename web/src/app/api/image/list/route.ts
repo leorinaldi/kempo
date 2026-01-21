@@ -19,6 +19,10 @@ export async function GET() {
         kyDate: true,
         createdAt: true,
         updatedAt: true,
+        prompt: true,
+        generationTool: true,
+        style: true,
+        previousVersionId: true,
       },
     })
 

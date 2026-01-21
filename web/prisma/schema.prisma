@@ -119,6 +119,16 @@ model Image {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
+  // Generation metadata
+  prompt           String?   @db.Text                    // Generation prompt
+  generationTool   String?   @map("generation_tool")     // "grok-2-image-1212"
+  style            String?                               // "comic_bw", "realistic", "logo", "product"
+
+  // Version history
+  previousVersionId String?  @unique @map("previous_version_id")
+  previousVersion   Image?   @relation("ImageVersionHistory", fields: [previousVersionId], references: [id], onDelete: SetNull)
+  nextVersion       Image?   @relation("ImageVersionHistory")
+
   subjects          ImageSubject[]
   publicationCovers Publication[]    // Publications using this as cover image
   newsPubContents   NewsPubContent[] // NewsPubContent using this as hero image

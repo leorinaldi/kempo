@@ -34,6 +34,10 @@ export async function POST(request: Request) {
     const articleId = formData.get("articleId") as string | null
     const widthStr = formData.get("width") as string | null
     const heightStr = formData.get("height") as string | null
+    const prompt = formData.get("prompt") as string | null
+    const generationTool = formData.get("generationTool") as string | null
+    const style = formData.get("style") as string | null
+    const previousVersionId = formData.get("previousVersionId") as string | null
 
     if (!file) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
@@ -65,6 +69,10 @@ export async function POST(request: Request) {
         shape: calculatedShape,
         category: category || null,
         articleId: articleId || null,
+        prompt: prompt || null,
+        generationTool: generationTool || null,
+        style: style || null,
+        previousVersionId: previousVersionId || null,
       },
     })
 

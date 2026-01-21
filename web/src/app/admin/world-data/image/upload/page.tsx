@@ -23,6 +23,8 @@ export default function ImageUploadPage() {
     shape: "landscape" as "landscape" | "portrait" | "square",
     category: "",
     articleId: "",
+    style: "realistic" as "realistic" | "comic_bw" | "logo" | "product",
+    prompt: "",
   })
 
   if (status === "loading") {
@@ -88,6 +90,8 @@ export default function ImageUploadPage() {
       uploadFormData.append("shape", formData.shape)
       uploadFormData.append("category", formData.category)
       uploadFormData.append("articleId", formData.articleId)
+      uploadFormData.append("style", formData.style)
+      if (formData.prompt) uploadFormData.append("prompt", formData.prompt)
       if (detectedWidth) uploadFormData.append("width", detectedWidth.toString())
       if (detectedHeight) uploadFormData.append("height", detectedHeight.toString())
 
@@ -105,7 +109,7 @@ export default function ImageUploadPage() {
       setMessage({ type: "success", text: "Image uploaded successfully!" })
       setUploadedUrl(result.url)
 
-      setFormData({ title: "", description: "", altText: "", shape: "landscape", category: "", articleId: "" })
+      setFormData({ title: "", description: "", altText: "", shape: "landscape", category: "", articleId: "", style: "realistic", prompt: "" })
       setDetectedWidth(null)
       setDetectedHeight(null)
       if (fileInputRef.current) {
@@ -222,6 +226,38 @@ export default function ImageUploadPage() {
                   <option value="other">Other</option>
                 </select>
               </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Style
+                </label>
+                <select
+                  value={formData.style}
+                  onChange={(e) => setFormData({ ...formData, style: e.target.value as "realistic" | "comic_bw" | "logo" | "product" })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="realistic">Realistic (photorealistic)</option>
+                  <option value="comic_bw">Comic B&W (legacy)</option>
+                  <option value="logo">Logo/Emblem</option>
+                  <option value="product">Product</option>
+                </select>
+              </div>
+              <div />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Generation Prompt
+              </label>
+              <textarea
+                value={formData.prompt}
+                onChange={(e) => setFormData({ ...formData, prompt: e.target.value })}
+                className="w-full border border-gray-300 rounded px-3 py-2 font-mono text-sm"
+                rows={3}
+                placeholder="The prompt used to generate this image (for AI-generated images)..."
+              />
             </div>
 
             <div>

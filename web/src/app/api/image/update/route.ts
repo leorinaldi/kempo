@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json()
-    const { id, name, description, altText, shape, category, articleId, kyDate } = body
+    const { id, name, description, altText, shape, category, articleId, kyDate, prompt, generationTool, style } = body
 
     if (!id) {
       return NextResponse.json({ error: "ID is required" }, { status: 400 })
@@ -27,6 +27,9 @@ export async function POST(request: Request) {
         category: category || null,
         articleId: articleId || null,
         kyDate: kyDate ? new Date(kyDate) : null,
+        prompt: prompt || null,
+        generationTool: generationTool || null,
+        style: style || null,
       },
     })
 

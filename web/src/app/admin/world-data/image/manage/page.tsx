@@ -17,6 +17,10 @@ interface ImageFile {
   kyDate: string | null
   createdAt: string
   updatedAt: string
+  prompt: string | null
+  generationTool: string | null
+  style: string | null
+  previousVersionId: string | null
 }
 
 interface Reference {
@@ -86,7 +90,7 @@ export default function ImageManagePage() {
 
   // Library sorting
   const [sortField, setSortField] = useState<"name" | "createdAt" | "kyDate">("createdAt")
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
 
   const stripPunctuation = (str: string) => str.replace(/^[^\w\s]+/, "").toLowerCase()
 
@@ -123,6 +127,8 @@ export default function ImageManagePage() {
     category: "",
     articleId: "",
     kyDate: "",
+    style: "" as "" | "realistic" | "comic_bw" | "logo" | "product",
+    prompt: "",
   })
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
@@ -190,6 +196,8 @@ export default function ImageManagePage() {
       category: file.category || "",
       articleId: file.articleId || "",
       kyDate: file.kyDate ? file.kyDate.split("T")[0] : "",
+      style: (file.style as "" | "realistic" | "comic_bw" | "logo" | "product") || "",
+      prompt: file.prompt || "",
     })
     setEditMessage(null)
     setLinkedSubjects([])
@@ -230,6 +238,8 @@ export default function ImageManagePage() {
           category: editData.category,
           articleId: editData.articleId,
           kyDate: editData.kyDate || null,
+          style: editData.style || null,
+          prompt: editData.prompt || null,
         }),
       })
 
@@ -355,6 +365,17 @@ export default function ImageManagePage() {
                       {file.category}
                     </span>
                   )}
+                  {file.style && (
+                    <span className={`inline-block mt-1 ml-1 text-xs px-2 py-0.5 rounded ${
+                      file.style === 'realistic' ? 'bg-green-100 text-green-700' :
+                      file.style === 'comic_bw' ? 'bg-yellow-100 text-yellow-700' :
+                      file.style === 'logo' ? 'bg-purple-100 text-purple-700' :
+                      file.style === 'product' ? 'bg-orange-100 text-orange-700' :
+                      'bg-gray-100 text-gray-700'
+                    }`}>
+                      {file.style}
+                    </span>
+                  )}
                   <div className="flex gap-2 mt-2">
                     <button
                       onClick={() => openEditModal(file)}
@@ -447,6 +468,26 @@ export default function ImageManagePage() {
                     </p>
                   </div>
                 </div>
+                {(editModal.generationTool || editModal.previousVersionId) && (
+                  <>
+                    {editModal.generationTool && (
+                      <div>
+                        <label className="block text-xs text-gray-500">Generation Tool</label>
+                        <p className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                          {editModal.generationTool}
+                        </p>
+                      </div>
+                    )}
+                    {editModal.previousVersionId && (
+                      <div>
+                        <label className="block text-xs text-gray-500">Previous Version ID</label>
+                        <p className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">
+                          {editModal.previousVersionId}
+                        </p>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
 
               {/* Editable fields */}
@@ -510,6 +551,32 @@ export default function ImageManagePage() {
                     <option value="other">Other</option>
                   </select>
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Style</label>
+                <select
+                  value={editData.style}
+                  onChange={(e) => setEditData({ ...editData, style: e.target.value as "" | "realistic" | "comic_bw" | "logo" | "product" })}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                >
+                  <option value="">-- Not Set --</option>
+                  <option value="realistic">Realistic (photorealistic)</option>
+                  <option value="comic_bw">Comic B&W (legacy)</option>
+                  <option value="logo">Logo/Emblem</option>
+                  <option value="product">Product</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Generation Prompt</label>
+                <textarea
+                  value={editData.prompt}
+                  onChange={(e) => setEditData({ ...editData, prompt: e.target.value })}
+                  className="w-full border border-gray-300 rounded px-3 py-2 font-mono text-xs"
+                  rows={3}
+                  placeholder="The prompt used to generate this image..."
+                />
               </div>
 
               <div>

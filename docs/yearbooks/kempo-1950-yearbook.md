@@ -98,9 +98,9 @@ The Championship Series was a classic: Empires vs. Scouts, Rosetti vs. Banks, Ne
 
 Boxing remained hugely popular, perfectly suited to the new medium of television. Eddie Lawson held the heavyweight title, having claimed it after Joseph "Iron Joe" Carter's retirement in 1949. Lawson was a Black champion in an era when that still mattered enormously—a skilled technician, a thinking fighter, not a brawler.
 
-In March, Lawson defended against Mickey Brennan, "The Southwark Southpaw." Brennan was 36, a three-time challenger who had never won the big one. Philadelphia loved him anyway. The fight went the distance, Lawson winning by unanimous decision. Brennan retired afterward with grace: "I gave it everything I had. Eddie's just better." The city threw him a parade.
+In March, Lawson defended against Mickey Brennan, "The Southwark Southpaw." Brennan was 36, a three-time challenger who had never won the big one. Philadelphia loved him anyway. The fight went the distance, Lawson winning by unanimous decision. Many expected Brennan to retire—he was 36, had now lost four title fights, and had nothing left to prove. Instead, he surprised everyone: "I'm not done yet. I've got one more run in me." The city roared its approval.
 
-Meanwhile, a storm was gathering. Rocco Marchetti, an Italian-American slugger from Steel City, remained undefeated—four fights in 1950, all knockouts. He was ranked the #1 contender by December. A title fight against Lawson was announced for 1951. It promises to be a collision of styles, of stories, of communities.
+Meanwhile, a storm was gathering. Rocco Marchetti, an Italian-American slugger from Steel City, remained undefeated—four fights in 1950, all knockouts. He was ranked the #1 contender by December. A rematch between Lawson and Brennan was announced for mid-1951—Brennan's fifth and likely final title shot. Marchetti would have to wait his turn, but his time was coming.
 
 Joseph Carter, the retired champion, remained visible—doing commentary, mentoring young fighters, his legend intact. The torch had passed, but he was not forgotten.
 
@@ -391,12 +391,41 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he was estab
 
 In July, he made the All-Star team. In September, he led the Cleveland Scouts to the Western League pennant. The Championship Series loss to the Empires was disappointing, but Banks earned something beyond a trophy: universal respect, even from those who once doubted him. The color line is not erased—other Black players still struggle, and social barriers remain—but Banks has proven, beyond any argument, that talent knows no color. The game has changed.
 
+### Organized Crime Exposed
+
+The year the syndicate stepped into the light.
+
+For decades, Americans had heard whispers of a national crime organization—a shadowy network of Italian and Jewish gangsters who controlled gambling, unions, and politicians. Most dismissed it as pulp fiction. In 1950, they discovered it was real.
+
+In January, Senator Russell Fletcher of Tennessee introduced a resolution to investigate organized crime in interstate commerce. By May, the Special Committee on Organized Crime—quickly dubbed "the Fletcher Committee"—was holding hearings. The witnesses told stories that seemed pulled from cheap novels: murder, bribery, a national syndicate that coordinated operations from New York to Las Vegas.
+
+At the center of it all, according to law enforcement testimony, sat Salvatore Conti—"The Diplomat." The 56-year-old businessman had never been convicted of a serious crime. He ran real estate companies and vending machine operations. But witnesses described him as the chairman of a national board of crime bosses, a man who settled disputes between warring factions and took a percentage of everything.
+
+His partner was Sol Roth—"The Accountant." The Jewish financier from Manhattan's Lower East Side had grown up alongside Conti. Where Conti handled relationships, Roth handled money. Their partnership, forged during Prohibition, now stretched from the docks of New York to the casinos of Las Vegas.
+
+The committee heard about Enzo Ferrante—"The Iron Hand"—Conti's underboss and rival. Ferrante represented the old ways: violence, intimidation, fear. The tension between Conti's diplomatic approach and Ferrante's brutality ran through every hearing. Some witnesses suggested Ferrante was waiting for his moment to seize control.
+
+In Las Vegas, Sidney Hartman managed the Lucky Sands Casino—officially for legitimate investors, actually for the syndicate. The desert town was being transformed into a gambling paradise, funded by Eastern money that the Fletcher Committee traced back to Conti and Roth.
+
+And in New York, Carmine DeMarco sat at the intersection of crime and politics. The Tammany Hall operative delivered votes for the National Party machine while serving as liaison to Conti's organization. The committee heard testimony about judges bought, police captains paid, elections fixed.
+
+The hearings were not yet televised—that would come in 1951, when the Fletcher Committee would become a national sensation. But the groundwork was laid in 1950. Americans who picked up their newspapers began to understand that organized crime was exactly that: *organized*. Not random gangsters, but a coordinated national enterprise with its own rules, its own hierarchy, its own reach into legitimate business and government.
+
+Senator Fletcher, 48, was building a national profile. Unlike Whitfield, who dealt in accusations and innuendo, Fletcher produced witnesses, documents, evidence. His hearings were methodical, even dull—but devastating. By year's end, he had subpoenaed bank records, traced money flows, and built a case that would explode into public consciousness when the cameras arrived.
+
+The syndicate watched. Conti counseled patience—attention would pass, politicians always needed money, the system would protect itself. Ferrante argued for a different approach. The tension grew.
+
+Meanwhile, the committee's investigation touched familiar figures. Frank Martino's name appeared in testimony about entertainment industry connections—his early career debts to Sol Roth, his relationship with Sidney Hartman. Jack Callahan's American Drivers Union drew scrutiny for loans from the Central States pension fund to mob-connected casinos. The lines between legitimate America and the underworld blurred wherever the committee looked.
+
+By December, the Fletcher Committee had laid bare a world most Americans had never imagined. The televised hearings of 1951 would bring it into their living rooms. But 1950 was the year the investigation began—the year the syndicate stepped, reluctantly, into the light.
+
 ---
 
 ## XII. Timeline
 
 ### January
 
+- **January 5** — Senator Russell Fletcher introduces resolution to investigate organized crime in interstate commerce.
 - **January 21** — Alden Cross convicted of perjury. The former State Department official is found guilty of lying about passing documents to Soviet agents. Sentenced to five years.
 - **January 31** — President Kellman authorizes H-bomb development, marking a new phase of the arms race.
 
@@ -407,7 +436,7 @@ In July, he made the All-Star team. In September, he led the Cleveland Scouts to
 
 ### March
 
-- **March 4** — Eddie Lawson defends heavyweight title against Mickey Brennan in Philadelphia, winning by unanimous decision after 15 rounds. Brennan retires.
+- **March 4** — Eddie Lawson defends heavyweight title against Mickey Brennan in Philadelphia, winning by unanimous decision after 15 rounds. Brennan vows to return for one more shot.
 - **March 14-15** — One-year anniversary of Antelope Springs Incident passes quietly.
 - **March 25** — Silver Screen Awards ceremony. Vivian Sterling receives Best Actress nomination.
 
@@ -419,6 +448,7 @@ In July, he made the All-Star team. In September, he led the Cleveland Scouts to
 ### May
 
 - **May 1** — Lawrence Mitchell opens first suburban Hartwell's outside Philadelphia.
+- **May 3** — Fletcher Committee officially established. Senate Special Committee on Organized Crime begins hearings.
 - **May 15** — Leonard Vance quietly leaves government research, takes teaching position.
 
 ### June

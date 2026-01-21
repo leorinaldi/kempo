@@ -1,25 +1,24 @@
 #!/usr/bin/env node
 
 /**
- * Kempopedia Image Generator
+ * Kempopedia Image Regenerator
  *
- * Generates images using Grok or Gemini API and uploads to Vercel Blob.
- * Saves prompt, generation tool, and style metadata for tracking.
+ * Regenerates an existing image with a new prompt and style.
+ * Creates a new Image record with version history linking to the original.
  *
  * Usage:
- *   node scripts/generate-image.js "<prompt>" [options]
+ *   node scripts/regenerate-image.js <image-id> [options]
  *
  * Options:
- *   --name "Image name"      Name for the image (required)
- *   --caption "Caption"      Image caption/description
- *   --category "portrait"    Category (portrait, location, product, logo, etc.)
- *   --style "realistic"      Style (realistic, comic_bw, logo, product) - default: realistic
- *   --tool "grok"            Generation tool: grok (default) or gemini
- *   --article-id "abc123"    Link to article ID
+ *   --prompt "New prompt"     Override the prompt (otherwise uses original)
+ *   --style "realistic"       Style (realistic, comic_bw, logo, product)
+ *   --tool "grok"             Generation tool: grok (default) or gemini
+ *   --update-refs             Update article references to use new image
  *
  * Examples:
- *   node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man, 1940s" --name "Harold Kellman"
- *   node scripts/generate-image.js "Photorealistic Western town main street, 1940s" --name "Abilene" --category "location" --tool gemini
+ *   node scripts/regenerate-image.js cm123abc --style realistic
+ *   node scripts/regenerate-image.js cm123abc --prompt "Photorealistic portrait..." --update-refs
+ *   node scripts/regenerate-image.js cm123abc --tool gemini --update-refs
  *
  * Environment:
  *   XAI_API_KEY              Grok API key (in .env)
@@ -64,33 +63,27 @@ const BLOB_READ_WRITE_TOKEN = process.env.BLOB_READ_WRITE_TOKEN
  */
 function parseArgs(args) {
   const result = {
+    imageId: null,
     prompt: null,
-    name: null,
-    caption: null,
-    category: null,
-    articleId: null,
-    style: 'realistic', // Default to realistic for new images
-    tool: 'grok', // Default to grok
+    style: 'realistic',
+    tool: 'grok',
+    updateRefs: false,
   }
 
   let i = 0
   while (i < args.length) {
     const arg = args[i]
 
-    if (arg === '--name' && args[i + 1]) {
-      result.name = args[++i]
-    } else if (arg === '--caption' && args[i + 1]) {
-      result.caption = args[++i]
-    } else if (arg === '--category' && args[i + 1]) {
-      result.category = args[++i]
-    } else if (arg === '--article-id' && args[i + 1]) {
-      result.articleId = args[++i]
+    if (arg === '--prompt' && args[i + 1]) {
+      result.prompt = args[++i]
     } else if (arg === '--style' && args[i + 1]) {
       result.style = args[++i]
     } else if (arg === '--tool' && args[i + 1]) {
       result.tool = args[++i].toLowerCase()
-    } else if (!arg.startsWith('--') && !result.prompt) {
-      result.prompt = arg
+    } else if (arg === '--update-refs') {
+      result.updateRefs = true
+    } else if (!arg.startsWith('--') && !result.imageId) {
+      result.imageId = arg
     }
     i++
   }
@@ -168,7 +161,6 @@ async function generateImageWithGemini(prompt) {
     const parts = candidate.content?.parts || []
     for (const part of parts) {
       if (part.inlineData && part.inlineData.mimeType?.startsWith('image/')) {
-        // Return base64 data directly
         return {
           base64: part.inlineData.data,
           mimeType: part.inlineData.mimeType,
@@ -218,108 +210,42 @@ function base64ToBuffer(base64Data) {
 }
 
 /**
- * Get shape from dimensions
- */
-function getShapeFromDimensions(width, height) {
-  if (!width || !height) return null
-  const ratio = width / height
-  if (ratio > 1.2) return "landscape"
-  if (ratio < 0.8) return "portrait"
-  return "square"
-}
-
-/**
- * Upload to Vercel Blob and create database record
- */
-async function uploadToBlob(imageBuffer, options) {
-  console.log('☁️  Uploading to Vercel Blob...')
-
-  // Dynamic import for ES modules - import from web directory
-  const { put } = await import('../web/node_modules/@vercel/blob/dist/index.js')
-  const { PrismaClient } = await import('../web/node_modules/@prisma/client/index.js')
-
-  const prisma = new PrismaClient()
-
-  try {
-    // Create database entry first to get the ID
-    const image = await prisma.image.create({
-      data: {
-        name: options.name,
-        url: "", // Temporary, will be updated after blob upload
-        description: options.caption || null,
-        altText: options.caption || null,
-        category: options.category || null,
-        articleId: options.articleId || null,
-        prompt: options.prompt || null,
-        generationTool: options.generationTool || 'grok-2-image-1212',
-        style: options.style || 'realistic',
-      },
-    })
-
-    // Upload to Vercel Blob using ID-based path
-    const blob = await put(
-      `kempo-media/image/${image.id}.jpg`,
-      imageBuffer,
-      {
-        access: "public",
-        token: BLOB_READ_WRITE_TOKEN,
-      }
-    )
-
-    // Update database with the blob URL
-    await prisma.image.update({
-      where: { id: image.id },
-      data: { url: blob.url },
-    })
-
-    console.log('✅ Uploaded successfully!')
-    console.log(`   ID: ${image.id}`)
-    console.log(`   URL: ${blob.url}`)
-
-    return {
-      id: image.id,
-      url: blob.url,
-    }
-  } finally {
-    await prisma.$disconnect()
-  }
-}
-
-/**
  * Show usage help
  */
 function showHelp() {
   console.log(`
-Kempopedia Image Generator
+Kempopedia Image Regenerator
 
 Usage:
-  node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
+  node scripts/regenerate-image.js <image-id> [options]
 
 Arguments:
-  prompt              The image generation prompt (required)
+  image-id            The ID of the existing image to regenerate (required)
 
 Options:
-  --name "Name"       Name for the image (required)
-  --caption "Text"    Image caption/description
-  --category "type"   Category: portrait, location, product, logo, etc.
+  --prompt "Prompt"   Override the generation prompt (default: use original)
   --style "style"     Style: realistic (default), comic_bw, logo, product
   --tool "grok"       Generation tool: grok (default) or gemini
-  --article-id "id"   Link to an article ID
+  --update-refs       Update article references to point to new image
 
 Tools:
   grok                Grok API (grok-2-image-1212) - default
   gemini              Google Gemini API (gemini-2.0-flash-exp)
 
-Styles:
-  realistic           Photorealistic images (default for new images)
-  comic_bw            Black and white comic book style (legacy)
-  logo                Flags, emblems, logos
-  product             Consumer goods, vehicles
-
 Examples:
-  node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man, 1940s photography style" --name "Harold Kellman"
+  # Regenerate with default realistic style
+  node scripts/regenerate-image.js cm123abc
 
-  node scripts/generate-image.js "Photorealistic photograph of a Western town main street, 1940s" --name "Abilene" --category "location" --tool gemini
+  # Regenerate with a new prompt
+  node scripts/regenerate-image.js cm123abc --prompt "Photorealistic portrait of a 50-year-old man..."
+
+  # Regenerate using Gemini and update all references
+  node scripts/regenerate-image.js cm123abc --tool gemini --update-refs
+
+Notes:
+  - Creates a NEW image record; original is preserved
+  - New image has previousVersionId pointing to original
+  - Use --update-refs to automatically update article infoboxes
 
 Environment variables (from .env files):
   XAI_API_KEY           Grok API key
@@ -374,21 +300,45 @@ async function main() {
     process.exit(1)
   }
 
-  if (!options.prompt) {
-    console.error('❌ Error: No prompt provided')
-    console.error('   Usage: node scripts/generate-image.js "<prompt>" --name "Name"')
+  if (!options.imageId) {
+    console.error('❌ Error: No image ID provided')
+    console.error('   Usage: node scripts/regenerate-image.js <image-id> [options]')
     process.exit(1)
   }
 
-  if (!options.name) {
-    console.error('❌ Error: --name is required')
-    console.error('   Usage: node scripts/generate-image.js "<prompt>" --name "Name"')
-    process.exit(1)
-  }
+  // Dynamic import for ES modules - import from web directory
+  const { put } = await import('../web/node_modules/@vercel/blob/dist/index.js')
+  const { PrismaClient } = await import('../web/node_modules/@prisma/client/index.js')
+
+  const prisma = new PrismaClient()
 
   try {
-    // Generate image
-    const genResult = await generateImage(options.prompt, options.tool)
+    // Fetch original image
+    console.log(`🔍 Fetching original image: ${options.imageId}`)
+    const original = await prisma.image.findUnique({
+      where: { id: options.imageId }
+    })
+
+    if (!original) {
+      console.error(`❌ Error: Image not found with ID: ${options.imageId}`)
+      process.exit(1)
+    }
+
+    console.log(`   Found: ${original.name}`)
+    console.log(`   Category: ${original.category || 'none'}`)
+    console.log(`   Original style: ${original.style || 'unknown'}`)
+
+    // Determine prompt to use
+    const prompt = options.prompt || original.prompt
+    if (!prompt) {
+      console.error('❌ Error: No prompt available')
+      console.error('   Original image has no stored prompt.')
+      console.error('   Please provide a prompt with --prompt "..."')
+      process.exit(1)
+    }
+
+    // Generate new image
+    const genResult = await generateImage(prompt, options.tool)
     console.log('🖼️  Image generated!')
 
     // Get image buffer (from URL or base64)
@@ -401,27 +351,118 @@ async function main() {
       throw new Error('No image data in generation result')
     }
 
-    // Upload to blob and create database record (include prompt and tool for metadata)
-    const result = await uploadToBlob(imageBuffer, {
-      ...options,
-      prompt: options.prompt,
-      generationTool: genResult.tool
+    // Upload to Vercel Blob
+    console.log('☁️  Uploading to Vercel Blob...')
+
+    // Create new database entry with version link
+    const newImage = await prisma.image.create({
+      data: {
+        name: original.name,
+        url: "", // Temporary
+        description: original.description,
+        altText: original.altText,
+        category: original.category,
+        articleId: options.updateRefs ? original.articleId : null,
+        kyDate: original.kyDate,
+        prompt: prompt,
+        generationTool: genResult.tool,
+        style: options.style,
+        previousVersionId: original.id,
+      },
     })
 
-    // Show usage instructions
+    // Upload to Vercel Blob
+    const blob = await put(
+      `kempo-media/image/${newImage.id}.jpg`,
+      imageBuffer,
+      {
+        access: "public",
+        token: BLOB_READ_WRITE_TOKEN,
+      }
+    )
+
+    // Update with blob URL
+    await prisma.image.update({
+      where: { id: newImage.id },
+      data: { url: blob.url },
+    })
+
+    console.log('✅ New image created!')
+    console.log(`   ID: ${newImage.id}`)
+    console.log(`   URL: ${blob.url}`)
+    console.log(`   Previous version: ${original.id}`)
+
+    // Update references if requested
+    if (options.updateRefs) {
+      console.log('\n🔗 Updating references...')
+
+      // Update article infobox if original had an article
+      if (original.articleId) {
+        const article = await prisma.article.findUnique({
+          where: { id: original.articleId }
+        })
+
+        if (article && article.infobox) {
+          const infobox = article.infobox
+          let updated = false
+
+          // Check if infobox has an image field with the old URL
+          if (infobox.image && infobox.image.url === original.url) {
+            infobox.image.url = blob.url
+            updated = true
+          }
+
+          if (updated) {
+            await prisma.article.update({
+              where: { id: original.articleId },
+              data: { infobox }
+            })
+            console.log(`   Updated article: ${article.title}`)
+          }
+        }
+
+        // Clear articleId from original if we're taking over
+        await prisma.image.update({
+          where: { id: original.id },
+          data: { articleId: null }
+        })
+      }
+
+      // Copy image subjects to new image
+      const subjects = await prisma.imageSubject.findMany({
+        where: { imageId: original.id }
+      })
+
+      for (const subject of subjects) {
+        await prisma.imageSubject.create({
+          data: {
+            imageId: newImage.id,
+            itemId: subject.itemId,
+            itemType: subject.itemType,
+          }
+        })
+      }
+
+      if (subjects.length > 0) {
+        console.log(`   Copied ${subjects.length} subject link(s)`)
+      }
+    }
+
     console.log(`
 📋 To use in an article infobox:
 
 "image": {
-  "url": "${result.url}",
-  "caption": "${options.caption || options.name}"
+  "url": "${blob.url}",
+  "caption": "${original.description || original.name}"
 }
 
-🔗 Admin: /admin/world-data/image/manage (to edit or link to subjects)
+🔗 Admin: /admin/world-data/image/manage (to view version history)
 `)
   } catch (error) {
     console.error('❌ Error:', error.message)
     process.exit(1)
+  } finally {
+    await prisma.$disconnect()
   }
 }
 
