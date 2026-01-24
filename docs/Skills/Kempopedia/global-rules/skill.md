@@ -13,22 +13,22 @@ The Kempo universe is a living simulation. The current simulation date is the "p
 
 ## 2. Real People vs Kempo Inspirations
 
-**Kempo history diverged from real-world history starting in the late 1800s, with divergence increasing over time.**
+**Kempo is an alternate universe. All major historical figures should have Kempo equivalents for consistency.**
 
-Use this rule to determine whether to use a real historical person or create a Kempo inspiration:
+Use this rule to determine whether to create a Kempo inspiration:
 
 | Condition | Approach |
 |-----------|----------|
-| Died before 1950 AND no notable post-1950 events | **Keep as real person** (e.g., FDR) |
-| Did nothing notable after 1950 | **Keep as real person** |
-| Did notable things after 1950 | **Create Kempo inspiration** (e.g., Truman → Kellman) |
+| Frequently referenced in Kempo content | **Create Kempo inspiration** |
+| Major historical figure (president, world leader, etc.) | **Create Kempo inspiration** |
+| Minor figure with no ongoing Kempo relevance | **May keep as real person** (rare) |
 
 **Examples:**
-- **Franklin D. Roosevelt**: Died April 1945 → Keep as real person
-- **Harry S. Truman**: President until 1953, Korean War decisions → Kempo inspiration (Harold S. Kellman)
-- **Dwight D. Eisenhower**: President 1953-1961 → Would need Kempo inspiration
+- **Franklin D. Roosevelt** → **Frederick Dennison Crawford (FDC)** - 4-term president, frequently referenced
+- **Harry S. Truman** → **Harold S. Kellman** - President, Korean War decisions
+- **Joseph Stalin** → **Joseph Volkov** - Soviet leader, frequently referenced
 
-Minor divergences (renamed towns, fictional institutions) can exist for real people's backgrounds, but the person themselves remains real if they meet the criteria above.
+The goal is a coherent alternate universe where Kempo-original names appear consistently throughout all content.
 
 ## 3. Character Reuse Before Creation (MANDATORY)
 

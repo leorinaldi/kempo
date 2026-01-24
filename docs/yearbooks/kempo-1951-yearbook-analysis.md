@@ -14,7 +14,7 @@ Based on the Real 1951 Yearbook, the major themes of the year include:
 2. **The Fletcher Crime Hearings** - Televised hearings captivate 30 million Americans
 3. **The Korean War Stalemate** - Fighting continues, armistice talks begin
 4. **Television's Triumph** - TV ownership hits 50%, new hits emerge
-5. **The Red Scare Continues** - Spy trials, McCarthyism at height
+5. **The Red Panic Continues** - Spy trials, McCarthyism at height
 6. **Baseball Drama** - Need dramatic pennant race or championship storyline
 7. **Boxing Title Change** - Rocco Marchetti vs. Eddie Lawson for the title
 
@@ -33,7 +33,7 @@ Based on the Real 1951 Yearbook, the major themes of the year include:
 
 **Set up for 1951:**
 - Korean War: Year ended in retreat after Chinese intervention. General Douglas Westbrook commands UN forces. Tension with President Kellman building.
-- Red Scare: Senator Robert Whitfield's power growing. Alden Cross convicted of perjury.
+- Red Panic: Senator Robert Whitfield's power growing. Alden Cross convicted of perjury.
 - Fletcher Committee: Established May 1950 to investigate organized crime. Televised hearings set for March 1951.
 - Boxing: Rocco Marchetti (#1 contender) vs. Eddie Lawson (champion) title fight announced for 1951.
 - Baseball: Empires won 1950 championship. Willie Banks' historic season with Scouts earned universal respect.
@@ -69,17 +69,28 @@ From the Real 1951 Yearbook:
 
 ### Gap Analysis
 
-**Critical Gaps:**
-- No Rigorio vaccine storyline advancement (set up David Salter in 1950)
-- Need price/wage update for 1951
+**Gaps Resolved:**
+- ~~No fashion rebellion storyline~~ → **Marco Valenti's T-shirt in *Summer of Passion***
+- ~~No children's culture elements~~ → **Pascal the Rascal comic, Sentinel Trains, Western toy craze**
 
-**Moderate Gaps:**
-- No fashion rebellion storyline (T-shirt as outerwear)
-- No specific suburban development storyline
+**Remaining Gaps:**
+- No Rigorio vaccine storyline advancement (set up David Salter in 1950) - continues into 1951
 
-### New Creations
+### New Creations Approved
 
-*None needed - 1950 foundation sufficient for everyday life section*
+**Sentinel Trains** (Lionel equivalent)
+- Model train company, founded early 1900s
+- THE prestige Christmas gift for boys in 1951
+- Electric model railways with elaborate track sets, miniature towns
+- Represents aspirational middle-class family hobby
+- Father and son bonding over the train set in the basement
+
+**Pascal the Rascal** (Dennis the Menace equivalent)
+- Comic strip debuting 1951
+- Mischievous little boy who drives neighbors and parents crazy
+- Creator: TBD
+- Starts in a handful of newspapers, grows throughout the year
+- Captures the chaos lurking beneath suburban perfection
 
 ### The Kempo Story
 
@@ -88,6 +99,14 @@ In 1951, the average Kempo family earns approximately $3,700 a year—up $400 fr
 Television has become central to American life. By year's end, over 50% of Kempo households own a TV set—up from just 9% two years ago. Families gather nightly to watch Bernie Kessler, Dusty Dalton's adventures, and now new programs that are reshaping how Americans spend their evenings.
 
 The suburban boom continues unabated. Lawrence Mitchell's Hartwell's opened three new suburban locations in 1950, and more follow in 1951. Young families continue flooding out of cities into new developments. The nuclear family ideal—father working, mother keeping house, children filling bedrooms—remains the expectation, even as reality proves more complicated.
+
+**Children's World:** The kids are alright—and they're obsessed with cowboys. Dusty Dalton's TV success has spawned a merchandising empire: cap guns, cowboy hats, holster sets, lunchboxes. Every boy wants to be Dusty; every parent obliges at Christmas and birthdays. The Western craze dominates the toy aisle.
+
+For the fortunate few, Christmas morning means a **Sentinel train set**—the ultimate gift. Electric locomotives pulling freight cars around elaborate track layouts, complete with miniature stations, crossing gates, and tunnels. Fathers claim they're setting it up "for the kids," but everyone knows who really plays with it. A Sentinel set in the basement is a mark of arrival in the middle class.
+
+In the funny pages, a new comic strip captures the chaos beneath suburban perfection. **"Pascal the Rascal"** debuts in 1951—a mischievous little boy who terrorizes neighbors, destroys property, and drives his parents to distraction, all with an innocent smile. Parents recognize their own children; children recognize themselves. The strip spreads from paper to paper.
+
+**Fashion Rebellion:** In movie theaters, young men watch Marco Valenti in *Summer of Passion* and see something new: the T-shirt worn as outerwear. Not an undershirt beneath a proper shirt, but the shirt itself—clinging, revealing, working-class and proud of it. Valenti's raw masculinity offers an alternative to the gray flannel conformity of corporate America. Teenage boys start wearing T-shirts to their parents' horror. A small rebellion, but a rebellion nonetheless.
 
 The Korean War casts its shadow. Sons are called to serve. Gold Star banners appear in windows. Every family knows someone affected. Yet the war also brings prosperity—defense contracts, full employment, overtime pay. The contradiction of wartime abundance and wartime grief defines the year.
 
@@ -102,7 +121,7 @@ At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his 
 **Film:**
 - Pacific Pictures (Kagan brothers, Irving Lazar)
 - Pinnacle Pictures (prestige studio)
-- Stars: Vivian Sterling (29), Clay Marshall (45), Catherine Marlowe (45)
+- Stars: Vivian Sterling (29), Clay Marshall (45), Catherine Marlowe (45), **Marco Valenti (27)**
 - Director: James Thornton
 - Silver Screen Awards (Kempo's Oscars)
 
@@ -154,20 +173,22 @@ From the Real 1951 Yearbook:
 
 ### Gap Analysis
 
-**Critical Gaps:**
-- Need *I Love Lucy* equivalent - revolutionary sitcom
-- Need *The King and I* equivalent - new Goodwin & Langford musical
-- Need *Catcher in the Rye* equivalent - major novel
+**Critical Gaps - RESOLVED:**
+- ~~Need *I Love Lucy* equivalent~~ → ***I Like Linda*** (Linda Lane + Rafael Morales)
+- ~~Need *The King and I* equivalent~~ → ***The Emperor and the Lady*** (Maxine Merrill + Thomas Ling)
+- ~~Need *Catcher in the Rye* equivalent~~ → ***The Wanderers*** (Ernest Beckford)
 
-**Moderate Gaps:**
-- No dramatic female film role equivalent (Vivien Leigh in Streetcar)
-- No Rashomon equivalent (international film milestone)
+**Moderate Gaps - RESOLVED:**
+- ~~No dramatic female film role equivalent~~ → ***Summer of Passion*** (Vivian Sterling + Marco Valenti)
+- ~~No Rashomon equivalent~~ → skip (not essential)
+- ~~No mischievous kid comic strip~~ → **Pascal the Rascal**
 
 **Strong Areas:**
 - Bernie Kessler covers "Mr. Television" role
-- Frank Martino covers crooner archetype
+- Frank Martino covers crooner archetype (+ Tony Bennett, Dean Martin)
 - Maxine Merrill + Goodwin & Langford cover Broadway
-- Walter Hendricks covers comics
+- Walter Hendricks covers gentle comics (*Bramblewood*); Pascal the Rascal covers mischief
+- Joe King Brooks covers Black crossover artist
 
 ### New Creations
 
@@ -193,9 +214,9 @@ From the Real 1951 Yearbook:
 
 ### New Creations Approved
 
-**1. "I Like Lisa" - Groundbreaking Sitcom (I Love Lucy equivalent)**
+**1. "I Like Linda" - Groundbreaking Sitcom (I Love Lucy equivalent)**
 
-- **Lisa Warren** - comedienne, physical comedy genius
+- **Linda Lane** - comedienne, physical comedy genius
   - Born 1920, Dayton, Ohio (age 31 in 1951)
   - Small-town girl who moved to New York to pursue comedy
   - Worked vaudeville circuit, radio comedy
@@ -211,10 +232,10 @@ From the Real 1951 Yearbook:
   - Charming accent, passionate about music
   - Desi Arnaz compression (different instrument, different country)
 
-- **The Show**: *I Like Lisa* premieres October 1951 on UBC
+- **The Show**: *I Like Linda* premieres October 1951 on UBC
   - Three-camera setup, filmed before live studio audience
   - Revolutionary production technique
-  - Lisa schemes to get into Rafael's nightclub act
+  - Linda schemes to get into Rafael's nightclub act
   - Highest-rated show by year's end
 
 **2. "The Emperor and the Lady" - Broadway Musical (King and I equivalent)**
@@ -240,21 +261,60 @@ From the Real 1951 Yearbook:
 - Immediate critical acclaim, bestseller
 - Considered his masterpiece
 
+**4. Joe King Brooks - Black Pianist/Vocalist (Nat King Cole equivalent)**
+
+- Born ~1919 (age 32 in 1951)
+- Black pianist and vocalist
+- Started in jazz, transitioned to pop
+- Sophisticated, elegant, smooth - crossover appeal to white audiences
+- 1951: Has a #1 hit, one of the biggest songs of the year
+- Represents the rise of Black artists in mainstream pop
+
+**5. Marco Valenti - Intense Young Actor (Marlon Brando equivalent)**
+
+- Born ~1924, New York (age 27 in 1951)
+- Italian-American, method acting style
+- Raw, intense, sexually magnetic, working-class appeal
+- Stars in *Summer of Passion* (1951) - the role that makes him a star
+- His T-shirt in the film becomes iconic - "visual shorthand for rebellion"
+- Represents a new kind of masculinity - raw and honest vs. polished and conformist
+
+**6. *Summer of Passion* - Southern Gothic Drama (A Streetcar Named Desire equivalent)**
+
+- 1951 film based on stage play
+- Southern gothic - heat, desire, madness, decay
+- Stars Marco Valenti as a brutish working-class man
+- Stars Vivian Sterling as the fragile, mentally unstable Southern belle
+- Sterling and Valenti's performances earn Silver Screen nominations
+- The film that launches Valenti and cements Sterling's status
+
+**7. "Pascal the Rascal" - Mischievous Kid Comic Strip (Dennis the Menace equivalent)**
+
+- Debuted 1951
+- Mischievous little boy who terrorizes neighbors and parents
+- Captures the chaos lurking beneath suburban perfection
+- Creator: TBD
+- Starts in a handful of newspapers, grows to national syndication
+
 ### The Kempo Story
 
-Television comes of age in 1951. The year's biggest sensation is *I Like Lisa*, which premieres on UBC in October. Lisa Warren, a 31-year-old comedienne from Dayton, Ohio, and her husband Rafael Morales, a Guatemalan-born bandleader, have created something revolutionary. Shot before a live studio audience with three cameras, the show captures spontaneous comedy in a way no previous program has achieved.
+Television comes of age in 1951. The year's biggest sensation is *I Like Linda*, which premieres on UBC in October. Linda Lane, a 31-year-old comedienne from Dayton, Ohio, and her husband Rafael Morales, a Guatemalan-born bandleader, have created something revolutionary. Shot before a live studio audience with three cameras, the show captures spontaneous comedy in a way no previous program has achieved.
 
-Lisa's physical comedy—the pratfalls, the rubber-faced expressions, the impeccable timing—makes her an instant star. Rafael's charm and his distinctive marimba-led orchestra provide the musical backbone. The premise is simple: Lisa forever schemes to break into show business, and Rafael forever tries to keep her out of the act. The chemistry between the real-life married couple is undeniable. By December, *I Like Lisa* is the highest-rated show in America.
+Linda's physical comedy—the pratfalls, the rubber-faced expressions, the impeccable timing—makes her an instant star. Rafael's charm and his distinctive marimba-led orchestra provide the musical backbone. The premise is simple: Linda forever schemes to break into show business, and Rafael forever tries to keep her out of the act. The chemistry between the real-life married couple is undeniable. By December, *I Like Linda* is the highest-rated show in America.
 
-Bernie Kessler (43) remains "Mr. Television"—his Tuesday night variety hour still draws millions. But the sitcom format that Lisa and Rafael have pioneered represents the future. Television is no longer just vaudeville with cameras; it's a new art form.
+Bernie Kessler (43) remains "Mr. Television"—his Tuesday night variety hour still draws millions. But the sitcom format that Linda and Rafael have pioneered represents the future. Television is no longer just vaudeville with cameras; it's a new art form.
 
 On Broadway, Goodwin & Langford unveil *The Emperor and the Lady* on March 29. Set in 1860s China, it tells the story of an American woman hired to tutor the Emperor's children—a clash of cultures, a meeting of minds, perhaps something more. Maxine Merrill (40), the brassy Queen of Broadway, transforms herself into a dignified yet spirited governess. The score includes instantly memorable songs. Critics rave. The show will run for years.
 
 Frank Martino (35) continues his reign as the premier crooner. His name surfaced briefly in the Fletcher crime hearings—old debts to Sol Roth, a friendship with Sidney Hartman—but his fans remain loyal. The music plays on.
 
+But Martino has competition. Joe King Brooks, a 32-year-old Black pianist and vocalist, scores the year's biggest hit. Brooks came up through jazz clubs, his fingers dancing across piano keys, his voice smooth as silk. Now he's crossed over to pop, and white audiences love him as much as Black audiences do. His sound is sophisticated, elegant—proof that talent transcends the color line, even in segregated America.
+
+In the movie theaters, *Summer of Passion* arrives like a thunderclap. The film—based on a stage play about desire and madness in the sweltering South—stars Vivian Sterling as a fragile Southern belle whose grip on reality is slipping, and a newcomer named Marco Valenti as her brutish brother-in-law. Valenti, 27, Italian-American, trained in the new "method" style, is a revelation. Where older actors project and declaim, Valenti mumbles, slouches, smolders. He wears a T-shirt like it's armor—or an invitation. Young men see him and want to be him. Young women see him and... well. Sterling matches him scene for scene, her performance a masterwork of fragility and desperation. Both will receive Silver Screen nominations. But it's Valenti's T-shirt that becomes a cultural phenomenon—teenage boys across Kempo start wearing undershirts as outerwear, to their parents' horror. Something is shifting.
+
 In bookstores, Ernest Beckford's *The Wanderers* arrives in July. The novel follows three generations of the Carver family—from Oklahoma drought to California's Central Valley, from desperate migrant labor to postwar suburban prosperity. Beckford's lean prose captures the American experience with unsparing honesty. Critics immediately recognize it as his masterpiece. It becomes a bestseller despite—or because of—its controversial frankness about poverty and exploitation.
 
-Walter Hendricks' *Bramblewood* continues its remarkable rise, now appearing in over 300 newspapers. The gentle comic strip about woodland animals has become a national institution.
+In the funny pages, two comic strips define the moment. Walter Hendricks' *Bramblewood* continues its remarkable rise, now appearing in over 300 newspapers—its gentle woodland animals offering comfort and whimsy. But a newcomer captures a different truth: *Pascal the Rascal*, debuting in 1951, follows a mischievous little boy who breaks windows, terrorizes neighbors, and drives his parents to distraction. Pascal is every child parents fear raising; he's also every child who ever felt confined by suburban perfection. The strip spreads rapidly. Together, *Bramblewood* and *Pascal the Rascal* represent the two faces of childhood in Kempo: innocence and chaos.
 
 ---
 
@@ -399,31 +459,47 @@ From the Real 1951 Yearbook:
 ### Gap Analysis
 
 **Critical Gaps:**
-- No credit card equivalent (Diners Club)
+- ~~No credit card equivalent (Diners Club)~~ → **RESOLVED: The Supper Club Card**
+- ~~No telecom company~~ → **RESOLVED: Bell Telephone and Telegraph (BT&T)**
 - No advertising agency (Mad Men era beginning)
 
 **Moderate Gaps:**
+- ~~No chemical giant~~ → **RESOLVED: Renard Chemical Company**
 - No airline/aviation company
 - No pharmaceutical company (for Rigorio vaccine storyline)
 
-### New Creations
+### New Creations Approved
 
-Proposal: **Carte Blanche Club** - first Kempo credit card
-- Founded 1950 in New York
-- Allows dining at participating restaurants without cash
-- Expanding in 1951
+**Bell Telephone and Telegraph (BT&T)** (AT&T equivalent)
+- Founded late 1800s
+- Monopoly telecom provider - controls long-distance and local service
+- Research arm: **Bell Research** (Bell Labs equivalent)
+- 1951 milestone: First corporation with 1 million stockholders
+- CEO: TBD
 
-Proposal: **Hartwell Pharmaceuticals** - spin-off or division of Hartwell Medical Institute
-- Connection to David Salter's Rigorio research
-- Representing growing pharmaceutical industry
+**Renard Chemical Company** (Du Pont equivalent)
+- Founded early 1800s (French immigrant founder, gunpowder/explosives origin)
+- Major defense contractor, consumer products division
+- Employs more chemists than universities
+- "Renard" = French for "fox"
 
-*Note: These are moderate priority - can be created later if needed*
+**The Supper Club Card** (Diners Club equivalent)
+- Founded 1950, New York
+- First credit card - "charge now, pay later"
+- 1951: Expanding beyond restaurants to hotels, travel, entertainment
+- Represents new era of consumer credit
 
 ### The Kempo Story
 
 The Kempo economy continues to boom in 1951, driven by Korean War defense contracts and consumer confidence. Continental Motors and Pioneer Automobile compete fiercely—Raymond Holbrook's 1951 Continental designs emphasize sleek chrome and tailfins, while Pioneer doubles down on engineering quality.
 
 American Steel Corporation, under Warren Prescott, runs at full capacity. Korean War demand means overtime for steelworkers and profits for shareholders. The smokestacks of Steel City never stop.
+
+Bell Telephone and Telegraph—BT&T—reaches a milestone: the first American corporation with one million stockholders. The telephone has become indispensable, though long-distance calls remain expensive. BT&T's Bell Research laboratory, tucked away in New Jersey, quietly advances technologies that will reshape the future.
+
+Renard Chemical Company, the industrial giant founded by French immigrants over a century ago, runs defense contracts and consumer products with equal efficiency. From explosives to plastics to pesticides, Renard touches every corner of American life.
+
+A new way of paying spreads among the business class: The Supper Club Card. Founded in 1950 for restaurant dining, the card now works at hotels and travel agencies. Charge now, pay later. The concept seems revolutionary—and slightly dangerous. But for executives tired of carrying cash, the little cardboard rectangle represents the future of commerce.
 
 Television advertising has transformed marketing. Companies spend unprecedented sums to reach captive audiences during Bernie Kessler's variety hour and Dusty Dalton's Western adventures. Lawrence Mitchell's Hartwell's uses TV spots to drive traffic to new suburban locations. The consumer economy accelerates.
 
@@ -494,7 +570,7 @@ Meanwhile, the American Veterans League, under Richard Tanner (43), continues it
 - Whitfield Committee (investigating communism)
 - Fletcher Committee (investigating organized crime)
 
-**Red Scare:**
+**Red Panic:**
 - Alden Cross convicted of perjury (January 1950)
 - Whitfield's power growing
 - Hollywood nervous
@@ -508,7 +584,7 @@ From the Real 1951 Yearbook:
 - MacArthur advocated expanding war into China
 - Returned to hero's welcome, addressed Congress
 - Senate hearings followed, generals contradicted MacArthur
-- Bradley: "wrong war, wrong place, wrong time, wrong enemy"
+- Bradley Omar: "a misguided conflict, at a misguided moment, with a misguided adversary"
 - Affirmed civilian control of military
 
 **The Rosenberg Trial (March-April 1951):**
@@ -518,7 +594,7 @@ From the Real 1951 Yearbook:
 
 **22nd Amendment (February 27, 1951):**
 - Presidential term limits ratified
-- Response to FDR's four terms
+- Response to FDC's four terms
 
 **McCarthy Continues:**
 - Attacked George Marshall as part of "vast conspiracy"
@@ -556,16 +632,47 @@ From the Real 1951 Yearbook:
 - Proposal: **Presidential Term Amendment** or **Executive Tenure Amendment**
 - Ratified February 1951
 - Limits presidents to two terms
-- Response to President Franklin D. Roosevelt's four terms (EXISTS in Kempo)
+- Response to President Frederick Dennison Crawford's (FDC) four terms
 
-**Proposed Decisions:**
-- [ ] Westbrook Firing: April 11, 1951 - Kellman relieves Westbrook
-- [ ] Spy Trial: **Victor and Helena Marsh** - convicted March 29, 1951
-- [ ] Constitutional Amendment: **Presidential Term Amendment** - ratified February 1951
+**Decisions Confirmed:**
+- [x] Westbrook Firing: April 11, 1951 - Kellman relieves Westbrook
+- [x] Spy Trial: **Victor and Helena Marsh** - convicted March 29, 1951
+- [x] Constitutional Amendment: **Presidential Term Amendment** - ratified February 1951
+
+### New Creations Approved
+
+**Representative Everett Flanders** (Joseph Martin equivalent)
+- House Minority Leader (Federal Party)
+- State: Vermont
+- Born ~1895 (age 56 in 1951)
+- New England University educated
+- April 5, 1951: Reads Westbrook's letter on House floor, triggering the crisis
+- Old New England stock, sympathetic to Westbrook but respects civilian control
+
+**Judge Samuel Feldman** (Irving Kaufman equivalent)
+- Federal judge
+- Born ~1905 (age 46 in 1951)
+- Presides over Marsh espionage trial (March 1951)
+- Sentences Victor and Helena Marsh to death (April 5, 1951)
+- Controversial figure: praised by anti-communists, criticized by civil libertarians
 
 ### The Kempo Story
 
-*[To be written after decisions confirmed]*
+The political drama of 1951 centers on two confrontations: civilian versus military, and the state versus accused spies.
+
+On April 5, Representative Everett Flanders of Vermont, the House Minority Leader, rises to read a letter. It is from General Douglas Westbrook, and it contradicts everything President Kellman has said about the Korean War. Westbrook wants to expand the war. Kellman wants containment. The letter makes the conflict public and unavoidable.
+
+Six days later, on April 11, Kellman relieves Westbrook of command. The constitutional principle is clear: the president commands the military, not the other way around. But millions of Americans see it differently. Westbrook returns to a hero's welcome. He addresses Congress. "Old soldiers never die," he intones, "they just fade away."
+
+But Westbrook does not fade—not immediately. Senate hearings follow. General Bradley Omar and the Joint Chiefs testify that they opposed Westbrook's strategy. The nation learns that the hero's plan might have led to World War III. By summer, Westbrook's political moment has passed. Civilian control of the military is affirmed.
+
+Meanwhile, in a federal courtroom, another drama unfolds. Victor and Helena Marsh stand accused of passing atomic secrets to the Soviet Union. The evidence is damning—decoded Soviet cables, testimony from co-conspirators, the Marshes' own lies. On March 29, they are convicted. On April 5—the same day Flanders reads Westbrook's letter—Judge Samuel Feldman sentences them to death.
+
+The case divides America. To some, the Marshes are traitors who gave Volkov the bomb. To others, Helena Marsh is a scapegoat, sentenced to die for typing her husband's notes. The execution is scheduled for 1953. Appeals will follow. The controversy will not fade.
+
+Senator Robert Whitfield exploits both crises. The Westbrook affair proves the government is soft on communism. The Marsh trial proves communists have infiltrated everywhere. His power grows. His enemies multiply. The Red Panic reaches its zenith.
+
+In February, the Presidential Term Amendment is ratified—no president may serve more than two terms. It is a rebuke to the memory of Frederick Dennison Crawford, who served four. It is also, perhaps, a statement about the limits of power in a democracy. Even beloved leaders must eventually go.
 
 ---
 
@@ -582,7 +689,7 @@ From the Real 1951 Yearbook:
 - Douglas D. Westbrook (63 per 1950 analysis - born ~1888)
 - Grigori Voronov (54) - Soviet figure
 - Chen Zhaoming - Chinese figure
-- Joseph Stalin (73)
+- Joseph Volkov (73)
 
 ### Real-World Inspiration
 
@@ -603,11 +710,27 @@ From the Real 1951 Yearbook:
 
 ### Gap Analysis
 
-**None critical** - Korean War storyline transfers directly
+**Gaps Resolved:**
+- ~~Who commands after Westbrook fired?~~ → **General Matthew Hillford**
+- ~~Who delivers "wrong war" testimony?~~ → **General Bradley Omar**
+- ~~Who leads armistice negotiations?~~ → **General Bradley Omar**
 
-### New Creations
+### New Creations Approved
 
-*None needed - use real country names (Korea, China, Japan, Soviet Union)*
+**General Matthew Hillford** (Matthew Ridgway equivalent)
+- Born ~1895 (age 56 in 1951)
+- Vermont Army Academy graduate, served WWI and WWII (airborne commander)
+- Replaces Westbrook as UN Commander, April 1951
+- Professional, competent, no grandstanding - the anti-Westbrook
+- Stabilizes front, oversees beginning of armistice talks
+
+**General Bradley Omar** (Omar Bradley equivalent)
+- Born ~1893 (age 58 in 1951)
+- Vermont Army Academy graduate, commanded troops in both World Wars
+- Chairman of the Joint Chiefs of Staff
+- Testifies at Senate hearings May-June, contradicts Westbrook
+- Delivers the famous "misguided conflict, misguided moment, misguided adversary" assessment
+- Also leads armistice negotiations at Kaesong/Panmunjom
 
 ### The Kempo Story
 
@@ -615,15 +738,17 @@ The Korean War transforms in 1951. January begins with Chinese forces pushing UN
 
 By March, UN forces under Westbrook's field commanders have recaptured Seoul. But Westbrook continues his public campaign for a wider war. He writes to Congressional leaders, gives interviews, issues ultimatums that contradict presidential policy.
 
-On April 11, Kellman relieves Westbrook of command. The nation is shocked. Westbrook returns to a hero's welcome—ticker-tape parades, an address to Congress where he declares "old soldiers never die, they just fade away." For a moment, he seems poised to challenge Kellman politically.
+On April 11, Kellman relieves Westbrook of command. The nation is shocked. **General Matthew Hillford**, a Vermont Army Academy man with a reputation for quiet competence, takes over. Where Westbrook craved headlines, Hillford seeks results. Where Westbrook demanded total victory, Hillford accepts the reality of limited war.
 
-But Senate hearings in May and June undercut him. The Joint Chiefs testify that they did not support Westbrook's strategy. General Omar Bradley's assessment becomes definitive: the MacArthur strategy would lead to "the wrong war, in the wrong place, at the wrong time, with the wrong enemy."
+Westbrook returns to a hero's welcome—ticker-tape parades, an address to Congress where he declares "old soldiers never die, they just fade away." For a moment, he seems poised to challenge Kellman politically.
 
-Meanwhile, the war continues. The Chinese Fifth Phase Offensive in April-May is blunted with catastrophic losses to the attackers. By July, the front has stabilized near the 38th parallel—roughly where it started. Armistice talks begin at Kaesong on July 10. They move to Panmunjom in October. The main sticking point: prisoners of war who refuse repatriation.
+But Senate hearings in May and June undercut him. The Joint Chiefs testify that they did not support Westbrook's strategy. **General Bradley Omar**, Chairman of the Joint Chiefs, delivers the definitive assessment: the Westbrook strategy would lead to "a misguided conflict, at a misguided moment, with a misguided adversary." The nation listens. Westbrook's star begins to fade.
+
+Meanwhile, the war continues. Under Hillford's steady command, the Chinese Fifth Phase Offensive in April-May is blunted with catastrophic losses to the attackers. By July, the front has stabilized near the 38th parallel—roughly where it started. Armistice talks begin at Kaesong on July 10, with General Bradley Omar leading the UN delegation. They move to Panmunjom in October. The main sticking point: prisoners of war who refuse repatriation.
 
 By year's end, the fighting has become a stalemate. Americans are dying for hills that serve no strategic purpose. The war cannot be won, cannot be abandoned—it can only be endured.
 
-International treaties reshape the Pacific. The peace treaty with Japan (September 8) formally ends World War II. American troops will remain on Japanese soil. The Cold War in Asia has a new configuration.
+International treaties reshape the Pacific. The peace treaty with Japan (September 8) formally ends World War II. American troops will remain on Japanese soil. The Frozen War in Asia has a new configuration.
 
 ---
 
@@ -658,12 +783,20 @@ From the Real 1951 Yearbook:
 ### Gap Analysis
 
 **Moderate Gaps:**
-- No nuclear test site equivalent storyline
-- No H-bomb development storyline
+- ~~No nuclear test site equivalent storyline~~ - use real Nevada Test Site
+- ~~No H-bomb development storyline~~ - **RESOLVED: O-bomb + Dr. Victor Novak**
 
-### New Creations
+### New Creations Approved
 
-*Nuclear storyline can follow real history with Kempo names if needed. Not critical for 1951.*
+**Dr. Victor Novak** (Edward Teller equivalent)
+- Born ~1908, Prague, Czechoslovakia (age 43 in 1951)
+- Czech-born physicist, fled Europe in late 1930s
+- Naturalized US citizen
+- Key scientist pushing for O-bomb (Oxygen bomb) development
+- March 1951: Breakthrough design makes O-bomb feasible
+- Personality: Brilliant, intense, controversial - believes O-bomb essential for American survival
+
+**Terminology:** The **O-bomb** (Oxygen bomb) is Kempo's equivalent of the hydrogen bomb - a thermonuclear weapon a thousand times more powerful than the atomic bombs used in WWII.
 
 ### The Kempo Story
 
@@ -673,7 +806,7 @@ Salter's killed-virus approach shows promise in animal trials. At Kingsley Medic
 
 In Nevada, the Atomic Energy Commission opens a new test site. Operation Ranger (January) conducts the first atmospheric tests on American soil. The mushroom clouds are visible from Las Vegas. The atomic age advances.
 
-At secret facilities, scientists work on the next generation of nuclear weapons. The hydrogen bomb—a thousand times more powerful than the Hiroshima weapon—is now theoretically possible. The arms race with the Soviet Union accelerates.
+At secret facilities, scientists work on the next generation of nuclear weapons. Dr. Victor Novak (43), a Czech-born physicist who fled Prague in the late 1930s, leads the charge. In March, Novak and his team achieve a breakthrough—a design that makes the O-bomb feasible. The Oxygen bomb, a thousand times more powerful than the Hiroshima weapon, is no longer theoretical. Novak, intense and driven, believes this weapon is essential for American survival. Not everyone agrees. But the arms race with the Soviet Union demands results, and Novak delivers.
 
 Leonard Vance (43), the former government scientist who left research in 1950, teaches physics at a small college. He says nothing about what he knows. The questions about Antelope Springs remain unanswered. The truth waits.
 
@@ -759,7 +892,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 |--------|-----|------|------------|
 | Harold Kellman | 67+ | President | Fires Westbrook, manages Korean stalemate |
 | Douglas Westbrook | 63 | General | Fired April 11, addresses Congress, fades |
-| Robert Whitfield | 49 | Senator | Red Scare continues, attacks Marshall equivalent |
+| Robert Whitfield | 49 | Senator | Red Panic continues, attacks Marshall equivalent |
 | Russell Fletcher | 49 | Senator | Crime hearings captivate nation |
 | Bernie Kessler | 43 | TV Star | Still dominant, "Mr. Television" |
 | Frank Martino | 35 | Crooner | Name surfaces in crime hearings |
@@ -895,17 +1028,17 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 - **September** - Cleveland Scouts clinch Western League pennant
 
 ### October
-- **October 15** - *I Like Lisa* premieres on UBC (Lisa Warren, Rafael Morales)
+- **October 15** - *I Like Linda* premieres on UBC (Linda Lane, Rafael Morales)
 - **October** - ULB Championship Series: Cleveland Scouts defeat **New York Empires** (4-2) - Willie Banks wins championship
 - **October 26** - **Rocco Marchetti defeats Joseph Carter** (comeback fight) - Marchetti cries afterward
 - **October 25** - Armistice talks resume at Panmunjom
 
 ### November
-- **November** - *I Like Lisa* becomes highest-rated show in America
+- **November** - *I Like Linda* becomes highest-rated show in America
 
 ### December
 - **December 20** - First nuclear-generated electricity
-- **December 31** - Year ends with Brennan as champion, Marchetti as top contender; Banks a champion; *I Like Lisa* a phenomenon
+- **December 31** - Year ends with Brennan as champion, Marchetti as top contender; Banks a champion; *I Like Linda* a phenomenon
 
 ---
 
@@ -913,7 +1046,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 
 ### Priority 1: Core Decisions - CONFIRMED
 
-- [x] **Sitcom**: *I Like Lisa* - Lisa Warren (comedienne) and Rafael Morales (Guatemalan bandleader)
+- [x] **Sitcom**: *I Like Linda* - Linda Lane (comedienne) and Rafael Morales (Guatemalan bandleader)
 - [x] **Broadway Musical**: *The Emperor and the Lady* - Goodwin & Langford, Maxine Merrill, Thomas Ling
 - [x] **Novel**: Ernest Beckford's *The Wanderers* - published July 1951
 - [x] **Spy Trial**: Victor and Helena Marsh - convicted March 29, sentenced April 5
@@ -945,7 +1078,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 
 ### Priority 2: New Characters to Create
 
-- [x] Person: **Lisa Warren** - comedienne, born 1920 Dayton Ohio
+- [x] Person: **Linda Lane** - comedienne, born 1920 Dayton Ohio
 - [x] Person: **Rafael Morales** - Guatemalan-American bandleader, born 1917
 - [x] Person: **Victor Marsh** - convicted spy (engineer, ~40)
 - [x] Person: **Helena Marsh** - convicted spy (Victor's wife, ~35)
@@ -960,12 +1093,12 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 - [ ] Event: Brennan vs. Lawson title fight (July 18, 1951)
 - [ ] Event: Marchetti vs. Carter (October 26, 1951)
 - [ ] Event: 1951 ULB Championship Series (October)
-- [ ] Event: *I Like Lisa* premiere (October 15, 1951)
+- [ ] Event: *I Like Linda* premiere (October 15, 1951)
 - [ ] Event: *The Emperor and the Lady* premiere (March 29, 1951)
 
 ### Priority 4: Media to Create
 
-- [ ] Show: *I Like Lisa* (TV sitcom)
+- [ ] Show: *I Like Linda* (TV sitcom)
 - [ ] Show: *The Emperor and the Lady* (Broadway musical)
 - [ ] Book: *The Wanderers* by Ernest Beckford
 
@@ -973,7 +1106,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 
 - [x] Verify name: Victor Marsh - CLEAR (no famous spies/politicians)
 - [x] Verify name: Helena Marsh - CLEAR (no famous actresses/politicians)
-- [x] Verify name: Lisa Warren - CLEAR (no famous 1950s comedians)
+- [x] Verify name: Linda Lane - CLEAR (no famous 1950s comedians)
 - [x] Verify name: Rafael Morales - CLEAR (no famous bandleaders)
 - [ ] Verify title: *The Wanderers* - check for conflicts
 - [x] Decide: Eddie Lawson's age/birth year - **born 1921 (age 30 in 1951)**
@@ -1014,7 +1147,7 @@ This section systematically identifies ALL entities from the Real 1951 Yearbook 
 In real 1951, Ridgway replaced MacArthur and competently stabilized the front. His professional, non-grandstanding leadership contrasted sharply with MacArthur. Without a Ridgway equivalent, our Korean War story has a gap—who commands after Westbrook is fired?
 
 **Why Bradley is Critical:**
-Bradley delivered the famous "wrong war, wrong place, wrong time, wrong enemy" line that deflated MacArthur. We reference this line in our analysis but haven't created the character who says it.
+Bradley Omar delivers the famous "misguided conflict, misguided moment, misguided adversary" line that deflates Westbrook.
 
 **Proposals:**
 
@@ -1087,7 +1220,7 @@ Telecommunications is a massive gap in our corporate landscape. In 1951, AT&T be
 | **Joseph Martin** | House Minority Leader, read MacArthur's letter | **MISSING** | HIGH |
 | **Irving Kaufman** | Judge who sentenced Rosenbergs | **MISSING** | MODERATE |
 | Truman | President | EXISTS: Harold Kellman | ✓ |
-| McCarthy | Red Scare senator | EXISTS: Robert Whitfield | ✓ |
+| McCarthy | Red Panic senator | EXISTS: Robert Whitfield | ✓ |
 | Kefauver | Crime investigator | EXISTS: Russell Fletcher | ✓ |
 
 **Proposals:**
@@ -1117,7 +1250,7 @@ Telecommunications is a massive gap in our corporate landscape. In 1951, AT&T be
 | **Tony Bennett** | Singer, "Because of You" | **MISSING** | MODERATE |
 | **Les Paul & Mary Ford** | Musicians, innovators | **MISSING** | LOW |
 | Milton Berle | Mr. Television | EXISTS: Bernie Kessler | ✓ |
-| Lucille Ball/Desi Arnaz | Sitcom stars | CREATED: Lisa Warren/Rafael Morales | ✓ |
+| Lucille Ball/Desi Arnaz | Sitcom stars | CREATED: Linda Lane/Rafael Morales | ✓ |
 | Rodgers & Hammerstein | Broadway composers | EXISTS: Goodwin & Langford | ✓ |
 
 **Music Gap Analysis:**
@@ -1239,32 +1372,32 @@ We're using a different baseball storyline (Scouts vs Empires rematch, Banks win
 
 ---
 
-### H. PRIORITY RANKING - ALL NEW ENTITIES
+### H. PRIORITY RANKING - ALL NEW ENTITIES (Updated Jan 24, 2026)
 
 **CRITICAL (Must Create):**
-1. General Marcus Ridgeway (Ridgway) - who commands after Westbrook?
-2. General Thomas Prescott (Bradley) - who delivers "wrong war" line?
-3. American Telephone Corporation - telecom is a massive gap
+1. ~~General Marcus Ridgeway (Ridgway)~~ → **APPROVED as Matthew Hillford**
+2. ~~General Thomas Prescott (Bradley)~~ → **APPROVED as Bradley Omar**
+3. ~~American Telephone Corporation~~ → **APPROVED as Bell Telephone and Telegraph (BT&T)**
 
 **HIGH:**
-4. Vice Admiral Charles Sterling (Joy) - armistice negotiations
-5. Representative Howard Clayton (Martin) - reads Westbrook letter
-6. Clarence King (Nat King Cole) - major Black musician needed
-7. Giuseppe "Joe" DiMarco (DiMaggio) - legendary player's final season
-8. Epoch Magazine (Time) - news weekly
+4. ~~Vice Admiral Charles Sterling (Joy)~~ → **SKIPPED - Bradley Omar handles armistice negotiations**
+5. ~~Representative Howard Clayton (Martin)~~ → **APPROVED as Everett Flanders**
+6. ~~Clarence King (Nat King Cole)~~ → **APPROVED as Joe King Brooks**
+7. ~~Giuseppe "Joe" DiMarco (DiMaggio)~~ → **SKIPPED - blended into Joe Rosetti**
+8. ~~Epoch Magazine (Time)~~ → **SKIPPED - Know! already combines Time + Life**
 
 **MODERATE:**
-9. Judge Samuel Feldman (Kaufman) - sentences Marshes
-10. Anthony Romano (Tony Bennett) - Italian singer
-11. Norman Godfrey (Arthur Godfrey) - TV personality
-12. Monarch Chemical Company (Du Pont)
-13. Dr. Edward Hartley (Teller) - H-bomb scientist
-14. Executive Club Card (Diners Club)
+9. ~~Judge Samuel Feldman (Kaufman)~~ → **APPROVED as Judge Samuel Feldman**
+10. ~~Anthony Romano (Tony Bennett)~~ → **SKIPPED - blended into Frank Martino**
+11. ~~Norman Godfrey (Arthur Godfrey)~~ → **SKIPPED - blended into Bernie Kessler**
+12. ~~Monarch Chemical Company (Du Pont)~~ → **APPROVED as Renard Chemical Company**
+13. ~~Dr. Edward Hartley (Teller)~~ → **APPROVED as Dr. Victor Novak** (Czech-born, O-bomb scientist)
+14. ~~Executive Club Card (Diners Club)~~ → **APPROVED as The Supper Club Card**
 
 **LOW:**
-15. Dr. Stefan Novak (Ulam)
-16. "Timmy Trouble" comic strip
-17. Alexander Langmuir equivalent (EIS)
+15. Dr. Stefan Novak (Ulam) - skip (Victor Novak covers the key scientist role)
+16. "Timmy Trouble" comic strip - skip
+17. Alexander Langmuir equivalent (EIS) - skip
 
 ---
 
@@ -1273,8 +1406,8 @@ We're using a different baseball storyline (Scouts vs Empires rematch, Banks win
 ### Session: January 20, 2026 - Decisions Made
 
 **Sitcom (I Love Lucy equivalent):**
-- [x] Create new comedian couple: **Lisa Warren** (caucasian, Ohio) and **Rafael Morales** (Guatemalan, marimba player)
-- [x] Show title: ***I Like Lisa***
+- [x] Create new comedian couple: **Linda Lane** (caucasian, Ohio) and **Rafael Morales** (Guatemalan, marimba player)
+- [x] Show title: ***I Like Linda***
 - [x] Premieres October 1951 on UBC
 
 **Broadway Musical (King and I equivalent):**
@@ -1308,7 +1441,7 @@ We're using a different baseball storyline (Scouts vs Empires rematch, Banks win
 
 **Completed this session:**
 - Created Kempo 1951 Yearbook Analysis document
-- Confirmed sitcom: *I Like Lisa* (Lisa Warren + Rafael Morales)
+- Confirmed sitcom: *I Like Linda* (Linda Lane + Rafael Morales)
 - Confirmed Broadway: *The Emperor and the Lady* (Maxine Merrill + Thomas Ling)
 - Confirmed boxing storyline: Brennan beats Lawson (July), Marchetti beats Carter (October)
 - Confirmed baseball: Scouts beat Empires 4-2, Banks wins championship
@@ -1347,3 +1480,131 @@ The Scouts (Western League) face the Empires (Eastern League) in a rematch of th
 - Rosetti's Empires seeking repeat championship
 - Scouts win in 6 games - Banks earns his ring, Rosetti gracious in defeat
 - Completes the "barrier-breaking triumph" narrative
+
+---
+
+## XVII. Character Blending / Inspiration Compressions
+
+This section documents which Kempo characters represent multiple real-world inspirations, to be updated in the Inspirations database table.
+
+### Entertainment
+
+| Kempo Character | Real-World Inspirations | Notes |
+|-----------------|------------------------|-------|
+| **Frank Martino** | Frank Sinatra, Dean Martin, Tony Bennett | Premier crooner; covers the Italian-American singer archetype broadly |
+| **Bernie Kessler** | Milton Berle, Arthur Godfrey | "Mr. Television"; one variety host covers the TV personality archetype |
+| **Linda Lane** | Lucille Ball | Physical comedy genius, sitcom pioneer |
+| **Rafael Morales** | Desi Arnaz | Latin bandleader married to comedienne; Guatemalan (marimba) instead of Cuban (drums) |
+| **Thomas Ling** | Yul Brynner, Sessue Hayakawa | Asian-American stage star; breakout role in exotic musical |
+| **Joe King Brooks** | Nat King Cole | Black pianist/vocalist with crossover appeal |
+
+### Sports
+
+| Kempo Character | Real-World Inspirations | Notes |
+|-----------------|------------------------|-------|
+| **Joe Rosetti** | Joe DiMaggio, Ted Williams, Stan Musial | "Greatest player of his generation"; covers the era's elite hitters |
+| **Willie Banks** | Jackie Robinson, Larry Doby | Barrier-breaking Black star |
+| **Mickey Brennan** | Jersey Joe Walcott | Oldest heavyweight champion; the underdog who finally wins |
+| **Rocco Marchetti** | Rocky Marciano | Undefeated power puncher |
+| **Joseph Carter** | Joe Louis | Legendary former champion; comeback fight loss |
+
+### Publications
+
+| Kempo Entity | Real-World Inspirations | Notes |
+|--------------|------------------------|-------|
+| **Know! Magazine** | Time, Life | News weekly + photo magazine combined |
+
+### Entities NOT Created (Blended Into Existing)
+
+| Skipped Entity | Would Have Been | Blended Into |
+|----------------|-----------------|--------------|
+| Giuseppe "Joe" DiMarco | Joe DiMaggio equivalent | Joe Rosetti |
+| Anthony Romano | Tony Bennett equivalent | Frank Martino |
+| Norman Godfrey | Arthur Godfrey equivalent | Bernie Kessler |
+| Epoch Magazine | Time equivalent | Know! Magazine |
+
+---
+
+## XVIII. Session Notes - January 24, 2026
+
+### Entities Approved This Session
+
+**CRITICAL:**
+1. **General Matthew Hillford** (Ridgway equivalent) - Commands after Westbrook fired
+2. **General Bradley Omar** (Omar Bradley equivalent) - Chairman Joint Chiefs, "wrong war" testimony, also leads armistice negotiations
+3. **Bell Telephone and Telegraph (BT&T)** - Telecom monopoly (AT&T equivalent), research arm is Bell Research
+
+**HIGH:**
+4. **Representative Everett Flanders** (Joseph Martin equivalent) - House Minority Leader (Federal Party, Vermont), New England University educated, reads Westbrook letter on House floor
+5. **Joe King Brooks** (Nat King Cole equivalent) - Black pianist/vocalist, born ~1919
+
+**Skipped (blended):**
+- Vice Admiral Charles Sterling → Bradley Omar handles armistice negotiations
+- Giuseppe "Joe" DiMarco → Joe Rosetti covers this archetype
+- Epoch Magazine → Know! already combines Time + Life
+- Anthony Romano → Frank Martino covers Italian-American singers
+- Norman Godfrey → Bernie Kessler covers TV variety hosts
+
+**MODERATE:**
+6. **Judge Samuel Feldman** (Irving Kaufman equivalent) - Federal judge, born ~1905, presides over Marsh trial, sentences both to death
+7. **Renard Chemical Company** (Du Pont equivalent) - French-surname industrial giant, founded early 1800s, major defense contractor
+8. **Dr. Victor Novak** (Edward Teller equivalent) - Czech-born physicist (Prague, ~1908), key O-bomb scientist, fled Europe late 1930s
+9. **The Supper Club Card** (Diners Club equivalent) - First credit card, founded 1950, expanding in 1951
+
+**EVERYDAY LIFE / ENTERTAINMENT:**
+10. **Marco Valenti** (Marlon Brando equivalent) - Italian-American method actor, born ~1924 New York, raw/intense/magnetic, T-shirt icon
+11. ***Summer of Passion*** (A Streetcar Named Desire equivalent) - 1951 Southern gothic film, stars Valenti + Vivian Sterling
+12. **Pascal the Rascal** (Dennis the Menace equivalent) - Mischievous kid comic strip, debuted 1951
+13. **Sentinel Trains** (Lionel equivalent) - Model train brand, THE prestige Christmas gift for boys
+
+### Terminology Changes
+
+- **O-bomb** (Oxygen bomb) = Kempo equivalent of the H-bomb (hydrogen bomb)
+- **Bell Research** = Kempo equivalent of Bell Labs (research arm of BT&T)
+- **Red Panic** = Kempo equivalent of the Red Scare
+- **Frozen War** = Kempo equivalent of the Cold War
+
+### Historical Figure Replacements
+
+All remaining real-world political leaders have been replaced with Kempo fictional equivalents:
+
+| Real Person | Kempo Equivalent | Notes |
+|-------------|------------------|-------|
+| Franklin D. Roosevelt (FDR) | Frederick Dennison Crawford (FDC) | 4-term president, died April 1945 |
+| Joseph Stalin | Joseph Volkov | Soviet leader, Anglo first name + Russian surname pattern |
+| Thomas Dewey | Richard Dewey | 1948 election opponent |
+| Henry Wallace | George Patterson | Progressive politician, FDC connection |
+
+Bradley Omar's quote about the Korean War changed from verbatim Omar Bradley quote to:
+> "A misguided conflict, at a misguided moment, with a misguided adversary."
+
+### Character Blending Confirmed
+
+| Kempo Character | Represents |
+|-----------------|------------|
+| Joe Rosetti | Joe DiMaggio, Ted Williams, Stan Musial |
+| Frank Martino | Frank Sinatra, Dean Martin, Tony Bennett |
+| Bernie Kessler | Milton Berle, Arthur Godfrey |
+| Know! Magazine | Time, Life |
+
+### Sections Updated This Session
+
+- [x] Section I (Everyday Life) - Added Sentinel Trains, Pascal the Rascal, Western toy craze, fashion rebellion
+- [x] Section II (Entertainment) - Added Marco Valenti, *Summer of Passion*, Pascal the Rascal
+- [x] Section IV (Business) - Added BT&T, Renard Chemical, Supper Club Card
+- [x] Section VI (Politics) - Added Everett Flanders, Judge Feldman, wrote Kempo Story
+- [x] Section VII (International Affairs) - Added Matthew Hillford, Bradley Omar, updated Kempo Story
+- [x] Section VIII (Science & Technology) - Added Dr. Victor Novak, O-bomb terminology
+
+### Completed This Session
+
+- [x] Create final Kempo 1951 Yearbook document → kempo-1951-yearbook.md
+- [x] Establish Kempo terminology (Red Panic, Frozen War, O-bomb)
+- [x] Replace all real historical figures with fictional equivalents
+- [x] Update Linda Warren → Linda Lane (period-appropriate name)
+- [x] Update Bradley Omar's quote to avoid direct Omar Bradley quote
+
+### Pending for Next Session
+
+- [ ] Add new entities to database (Person, Organization, Brand tables)
+- [ ] Update Inspirations table with character compression notes

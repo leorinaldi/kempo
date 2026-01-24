@@ -25,14 +25,25 @@ The Kempo universe is not a one-to-one mirror of reality. It is a **compressed, 
 
 ### Compression
 
-Multiple real-world counterparts often combine into a single Kempo entity.
+Multiple real-world counterparts often combine into a single Kempo entity. **Default to blending 2-4 inspirations rather than creating 1-for-1 replacements.**
 
-**Example:** Dean Martin and Frank Sinatra were two of many crooners in the 1950s. Rather than create separate Kempo versions of each, they compress into **Frank Martino** - a single figure who embodies the crooner archetype.
+**Example:** Dean Martin, Frank Sinatra, and Tony Bennett were three of many crooners in the 1950s. Rather than create separate Kempo versions of each, they compress into **Frank Martino** - a single figure who embodies the crooner archetype.
+
+**More examples of successful compression:**
+| Kempo Entity | Real-World Inspirations |
+|--------------|------------------------|
+| Frank Martino | Frank Sinatra + Dean Martin + Tony Bennett |
+| Joe Rosetti | Joe DiMaggio + Ted Williams + Stan Musial |
+| Bernie Kessler | Milton Berle + Arthur Godfrey |
+| Know! Magazine | Time + Life |
 
 This compression:
 - Keeps the universe manageable
 - Creates more impactful, memorable characters
 - Allows one entity to carry the weight of an entire cultural phenomenon
+- **Avoids a bloated cast of minor characters**
+
+**When NOT to compress:** When characters need distinct narrative roles (hero vs. rival, mentor vs. protégé) or represent meaningfully different archetypes.
 
 ### The Twist
 
@@ -58,6 +69,11 @@ The Koala name enables a new origin story (Australian tobacco ingredients) that 
 - Combining elements of real-world inspirations is acceptable (Frank + Martino)
 - Research proposed names to ensure they don't belong to famous real people in the same field
 - The name should feel like it could have existed in that time and place
+- **Research period-appropriate names**: Check what names were actually popular in the character's birth decade (e.g., "Lisa" was rare before 1960s; "Linda" was #1 in 1951)
+
+**Synonym Decomposition Technique:** When a name is too close to the inspiration, break it into components and find synonyms:
+- "Ridgway" (too close) → Ridge + Way → Hill + Ford → **Hillford**
+- This creates distance while preserving the "feel"
 
 ### For Organizations, Brands, and Products
 
@@ -65,6 +81,8 @@ The Koala name enables a new origin story (Australian tobacco ingredients) that 
 - Avoid obvious one-step parallels that other fictional universes have used
 - Create names that have their own logic and backstory potential
 - The name should evoke the right feeling without being derivative
+- **Match naming theme to entity identity**: If the inspiration is a French surname company (Du Pont), use a French surname (Renard), not an arbitrary theme (Monarch)
+- Avoid defaulting to royal/monarch/regal naming patterns unless thematically appropriate
 
 ### For Locations
 
@@ -80,6 +98,25 @@ Before finalizing any name:
 2. Check for famous real people with the name (especially in the same field)
 3. Verify the name hasn't been prominently used in other major fictional universes
 4. Confirm it feels appropriate to the era and context
+5. **Check phonetic similarity**: Names that sound too close to the inspiration are problematic even if spelled differently (Ridgeway ≈ Ridgway)
+
+---
+
+## Kempo-Specific Terminology
+
+Create unique Kempo terms for major real-world concepts. This reinforces that Kempo is a distinct universe.
+
+| Real World | Kempo Equivalent |
+|------------|------------------|
+| Red Scare | **Red Panic** |
+| Cold War | **Frozen War** |
+| H-bomb (hydrogen bomb) | **O-bomb** (oxygen bomb) |
+
+**Famous Quotes:** Paraphrase famous quotes rather than copying them verbatim. Keep the spirit, change the words.
+
+| Real Quote (Omar Bradley) | Kempo Version (Bradley Omar) |
+|---------------------------|------------------------------|
+| "Wrong war, wrong place, wrong time, wrong enemy" | "A misguided conflict, at a misguided moment, with a misguided adversary" |
 
 ---
 

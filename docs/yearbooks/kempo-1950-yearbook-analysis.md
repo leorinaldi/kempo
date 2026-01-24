@@ -10,7 +10,7 @@
 
 Based on the Real 1950 Yearbook, the major themes of the year include:
 1. **The Korean War** - Major military conflict begins, reshaping domestic and foreign policy
-2. **McCarthyism and the Red Scare** - Anti-communist hysteria reaches fever pitch
+2. **McCarthyism and the Red Panic** - Anti-communist hysteria reaches fever pitch
 3. **Television Revolution** - TV transforms American culture (9% → 50% adoption)
 4. **Suburban Dream** - Postwar suburban boom in full swing
 5. **Organized Crime Exposed** - Kefauver Committee investigations
@@ -91,7 +91,7 @@ Fashion follows strict codes. Women wear Dior's "New Look"—cinched waists, ful
 
 At work, the industrial economy hums. Continental Motors and Pioneer Automobile employ tens of thousands in Motor City. American Steel Corporation dominates Steel City's skyline with smokestacks. The **American Drivers Union**, under Jack Callahan's increasingly powerful leadership, controls trucking and freight—nothing moves in Kempo without the ADU's blessing, and Callahan's connections to less savory elements are an open secret.
 
-It is a year of prosperity and anxiety, of suburban dreams and Cold War fears. The Korean War, beginning in June, will cast a shadow over everything—reminding families that the peace they're building is fragile, that their sons might be called to fight, that the world remains dangerous despite the new ranch house and the TV in the living room.
+It is a year of prosperity and anxiety, of suburban dreams and Frozen War fears. The Korean War, beginning in June, will cast a shadow over everything—reminding families that the peace they're building is fragile, that their sons might be called to fight, that the world remains dangerous despite the new ranch house and the TV in the living room.
 
 ---
 
@@ -623,7 +623,7 @@ In 1950, over 30% of Kempo workers belong to a union, and the labor movement is 
 
 **Civil Rights:** The **National Association for Minority Rights** (NAMR, founded 1909) continues its long struggle. Willie Banks' barrier-breaking baseball season is a victory; so is every courtroom win, every lunch counter integrated, every vote cast in the face of intimidation. But progress is agonizingly slow. The organization builds its cases methodically, knowing that the path to equality runs through the courts. In 1950, the groundwork is being laid for challenges that will reshape Kempo law—but that's still years away.
 
-**Political Parties:** The **National Party** (the Democratic equivalent) holds the presidency under Harold Kellman, its coalition of urban machines, labor unions, and Southern conservatives intact but straining. The **Federal Party** (the Republican equivalent) is in opposition, its rising star Senator Robert Whitfield using the Red Scare to build a national profile. The parties define the boundaries of acceptable debate—but those boundaries are narrower in 1950 than they will be in decades to come.
+**Political Parties:** The **National Party** (the Democratic equivalent) holds the presidency under Harold Kellman, its coalition of urban machines, labor unions, and Southern conservatives intact but straining. The **Federal Party** (the Republican equivalent) is in opposition, its rising star Senator Robert Whitfield using the Red Panic to build a national profile. The parties define the boundaries of acceptable debate—but those boundaries are narrower in 1950 than they will be in decades to come.
 
 **The Whitfield Committee** (est. 1949) began investigating the Antelope Springs incident. In 1950, it pivots to a new mission: rooting out communist subversion. The committee's hearings will dominate headlines and destroy careers. Its chairman, Senator Robert Whitfield, is building something—whether a crusade for security or a vehicle for ambition, only time will tell.
 
@@ -635,9 +635,9 @@ In 1950, over 30% of Kempo workers belong to a union, and the labor movement is 
 
 **Politicians:**
 - Robert Whitfield (48) - politician, namesake of Whitfield Committee
-- Thomas Dewey (48) - politician (1948 election loser?)
+- Richard Dewey (48) - politician (1948 election loser)
 - Patrick Gallagher (72) - politician
-- Henry Wallace (62) - politician (Progressive candidate?)
+- George Patterson (62) - politician (Progressive candidate)
 - Harold Kellman (66) - appears to be President (Kellman Doctrine)
 - Carmine DeMarco (42) - Tammany Hall leader (political machine)
 
@@ -676,7 +676,7 @@ From the Real 1950 Yearbook:
 **1950 Midterm Elections:**
 - Republicans gain seats
 - Richard Nixon defeats Helen Gahagan Douglas
-- Korean War, Red Scare as issues
+- Korean War, Red Panic as issues
 
 **Assassination Attempt:**
 - November 1: Puerto Rican nationalists attempt on Truman
@@ -696,7 +696,7 @@ From the Real 1950 Yearbook:
 
 **Need to Clarify:**
 - What does the Whitfield Committee investigate? (Currently tied to Antelope Springs/UFOs)
-- Is there a separate Red Scare/communist investigation angle?
+- Is there a separate Red Panic/communist investigation angle?
 - Timeline of Kellman presidency
 
 ### New Creations
@@ -725,7 +725,7 @@ From the Real 1950 Yearbook:
 
 ### The Kempo Story
 
-**President Harold S. Kellman** enters 1950 in the sixth year of his presidency, having ascended from Vice President upon Franklin Roosevelt's death in April 1945 and won election in his own right in 1948. He is 66 years old, a National Party man from Missouri, plain-spoken and stubborn. His "Fair Deal" agenda—expanded housing, higher minimum wages, broader Social Security—has achieved partial success, but a coalition of Federal Party members and conservative National Party Southerners blocks his more ambitious proposals. National health insurance is dead. Civil rights legislation goes nowhere.
+**President Harold S. Kellman** enters 1950 in the sixth year of his presidency, having ascended from Vice President upon Frederick Dennison Crawford's (FDC) death in April 1945 and won election in his own right in 1948. He is 66 years old, a National Party man from Missouri, plain-spoken and stubborn. His "Fair Deal" agenda—expanded housing, higher minimum wages, broader Social Security—has achieved partial success, but a coalition of Federal Party members and conservative National Party Southerners blocks his more ambitious proposals. National health insurance is dead. Civil rights legislation goes nowhere.
 
 The year opens with a bombshell. On **January 21**, **Alden Cross**, a State Department official from Boston's best circles (New England University, New England Law), is convicted of perjury. The charge: lying about passing documents to Soviet agents in the late 1930s. The espionage statute of limitations has expired, but the perjury conviction is damning enough. Cross maintains his innocence, his supporters cry frame-up, but the verdict stands. The message is clear: communists have infiltrated the highest levels of government.
 
@@ -733,7 +733,7 @@ The year opens with a bombshell. On **January 21**, **Alden Cross**, a State Dep
 
 The **Whitfield Committee** expands its mandate from UFO investigations to "subversive activities." Throughout the spring, it summons witnesses—government employees, professors, writers, entertainers. Some cooperate; some invoke constitutional protections; some see their careers destroyed by accusation alone. The Hollywood blacklist grows. Loyalty oaths spread through government and industry.
 
-In **June**, the Korean War begins, and everything changes. What might have been dismissed as Red Scare hysteria now seems prescient. Communism isn't an abstraction—American boys are dying to stop its advance. Whitfield's popularity soars. Critics who called him a demagogue fall silent or join the chorus.
+In **June**, the Korean War begins, and everything changes. What might have been dismissed as Red Panic hysteria now seems prescient. Communism isn't an abstraction—American boys are dying to stop its advance. Whitfield's popularity soars. Critics who called him a demagogue fall silent or join the chorus.
 
 **President Kellman** is squeezed. He needs to prosecute the war, manage the economy, and somehow navigate between Whitfield's crusade and civil libertarians warning of excess. It's an impossible position, and Kellman—never the most agile politician—struggles.
 
@@ -756,13 +756,13 @@ Somewhere, a general named Douglas Westbrook is winning battles in Korea—and c
 - Ridgecrest Army Air Field - military base
 
 **International Events:**
-- Cold War begins (1947)
+- Frozen War begins (1947)
 - People's Republic of China proclaimed (October 1949)
 - Potsdam Declaration (article exists)
 - Solemn Hope Speech (1945) - Westbrook
 
 **Foreign Leaders:**
-- Joseph Stalin (72) - Soviet leader
+- Joseph Volkov (72) - Soviet leader
 - Chen Zhaoming (56) - Chinese leader (CPP)
 - Grigori Voronov (53) - Soviet figure
 
@@ -809,11 +809,11 @@ From the Real 1950 Yearbook:
 **Moderate Gaps:**
 - No UN equivalent
 - No specific NATO storyline
-- Limited understanding of Kempo's Cold War dynamics
+- Limited understanding of Kempo's Frozen War dynamics
 
 **Strong Areas:**
 - Westbrook provides senior military leadership
-- Cold War framework established
+- Frozen War framework established
 - China storyline exists with Chen Zhaoming
 
 ### New Creations
@@ -858,9 +858,9 @@ In late November, hundreds of thousands of Chinese "volunteers" pour across the 
 
 The year ends in anxiety. Westbrook, the hero of Inchon, is now the general who walked into a Chinese trap. His relationship with President Kellman—never warm—is souring. Westbrook believes victory is possible if Kellman will let him strike at China itself. Kellman fears a wider war, perhaps atomic war. The clash between civilian authority and military genius is building toward a confrontation.
 
-Elsewhere in the world: **Joseph Stalin** (72) rules the Soviet Union with an iron fist, the Cold War's architect. **Chen Zhaoming** (56) leads the Chinese People's Party and has now thrown China's weight into Korea. The world is divided into armed camps, and the atomic age casts its shadow over everything. The Soviets tested their bomb in 1949; now the United States authorizes development of the hydrogen bomb. The arms race accelerates.
+Elsewhere in the world: **Joseph Volkov** (72) rules the Soviet Union with an iron fist, the Frozen War's architect. **Chen Zhaoming** (56) leads the Chinese People's Party and has now thrown China's weight into Korea. The world is divided into armed camps, and the atomic age casts its shadow over everything. The Soviets tested their bomb in 1949; now the United States authorizes development of the hydrogen bomb. The arms race accelerates.
 
-The **Cold War** is no longer an abstraction. It is a shooting war in Korea, a spy war in government offices, a shadow war for the future of humanity.
+The **Frozen War** is no longer an abstraction. It is a shooting war in Korea, a spy war in government offices, a shadow war for the future of humanity.
 
 ---
 
@@ -1127,7 +1127,7 @@ Specialty magazines flourish: **Athlete Magazine** for sports fans, **Motor Age*
 ### Profiles
 
 **Harold S. Kellman (66)** — *President of the United States*
-The Missouri haberdasher who became leader of the free world. Kellman ascended to the presidency upon FDR's death in 1945 and won election in his own right in 1948, defying every poll. Plain-spoken, stubborn, and underestimated, he authorized the atomic bombs that ended WWII and now faces a new war in Korea. His Fair Deal agenda stalls against conservative opposition, and Senator Whitfield's Red Scare puts him on the defensive. The buck stops with Kellman—and in 1950, the burdens are immense.
+The Missouri haberdasher who became leader of the free world. Kellman ascended to the presidency upon FDC's death in 1945 and won election in his own right in 1948, defying every poll. Plain-spoken, stubborn, and underestimated, he authorized the atomic bombs that ended WWII and now faces a new war in Korea. His Fair Deal agenda stalls against conservative opposition, and Senator Whitfield's Red Panic puts him on the defensive. The buck stops with Kellman—and in 1950, the burdens are immense.
 
 **Robert Whitfield (48)** — *Senator, Federal Party (North Carolina)*
 The most feared man in Washington. Whitfield parlayed his investigation of the Antelope Springs incident into a crusade against communist subversion. His February speech claiming communists in the State Department launched a national hysteria. The Whitfield Committee summons witnesses, destroys careers, and dominates headlines. Is he a patriot protecting America or a demagogue exploiting fear? In 1950, the question has no easy answer—and Whitfield's power only grows.
@@ -1193,13 +1193,13 @@ On June 25, North Korea invades South Korea. President Kellman commits American 
 - **Everyday Life** — Sons called to serve, Gold Star families, rationing fears (though rationing doesn't return)
 - **Publications** — War coverage dominates Know! Magazine, Edward Stanton's nightly broadcasts
 
-**Key People:** Douglas Westbrook, Harold Kellman, Joseph Stalin, Chen Zhaoming
+**Key People:** Douglas Westbrook, Harold Kellman, Joseph Volkov, Chen Zhaoming
 
 **Seeds for Future:** Westbrook vs. Kellman conflict building toward the general's firing (1951?) and presidential ambitions.
 
 ---
 
-**2. The Red Scare / Whitfield Committee**
+**2. The Red Panic / Whitfield Committee**
 
 *Fear of communist infiltration grips the nation, fueled by a senator's crusade.*
 
@@ -1293,7 +1293,7 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 
 **February 1950**
 
-- **February 9** — **Senator Robert Whitfield delivers his "List" speech** to the American Veterans League in Capital City. He claims to possess a list of "205 known communists" working in the State Department. The number will shift in retellings, but the impact is immediate. The Red Scare has its champion.
+- **February 9** — **Senator Robert Whitfield delivers his "List" speech** to the American Veterans League in Capital City. He claims to possess a list of "205 known communists" working in the State Department. The number will shift in retellings, but the impact is immediate. The Red Panic has its champion.
 - **February 20** — **Whitfield Committee pivots to communist investigations.** Chairman Whitfield announces the committee will expand its mandate from Antelope Springs to "all forms of subversive activity."
 - **Late February** — First Hollywood figures receive subpoenas from the Whitfield Committee.
 
@@ -1369,7 +1369,7 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 
 **November 1950**
 
-- **November 7** — **Midterm elections.** Federal Party gains seats in both houses. The Korean War and Red Scare dominate. Senator Whitfield's candidates perform well.
+- **November 7** — **Midterm elections.** Federal Party gains seats in both houses. The Korean War and Red Panic dominate. Senator Whitfield's candidates perform well.
 - **November 25-28** — **CHINESE INTERVENTION.** Hundreds of thousands of Chinese troops pour across the Yalu River. UN forces are overwhelmed. The retreat begins.
 - **Late November** — The war that seemed won is now a frozen nightmare. Westbrook's forces fall back in bitter fighting.
 - **November 30** — *Bramblewood* syndication requests exceed 50 newspapers. Hendricks signs expanded distribution deal.
@@ -1382,7 +1382,7 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 - **December 15** — **Eddie Lawson vs. Rocco Marchetti title fight announced** for February 1951. The collision of styles and communities captivates sports fans.
 - **December 24** — **Kellman addresses the nation.** A somber Christmas Eve speech acknowledges the difficult situation in Korea while pledging continued resolve.
 - **December 25** — Frank Martino's *A Martino Christmas* plays in homes across America. The crooner's holiday album offers comfort in anxious times.
-- **December 31** — The year ends with UN forces in retreat, the Red Scare at full intensity, and uncertainty about what 1951 will bring. But 50% of American homes now have televisions, *Bramblewood* is a sensation, and the Empires are champions. Life goes on.
+- **December 31** — The year ends with UN forces in retreat, the Red Panic at full intensity, and uncertainty about what 1951 will bring. But 50% of American homes now have televisions, *Bramblewood* is a sensation, and the Empires are champions. Life goes on.
 
 ---
 
@@ -1426,10 +1426,10 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 - [x] ~~Event: Proxy war (Joseon/Goryeo Peninsula?) - location and details~~ → **Korean War** (real country names kept; begins June 25, 1950; Westbrook commands)
 - [x] ~~Person: Major author~~ → **Ernest Beckford** (Hemingway + Steinbeck compression)
 - [x] Vaccine researcher: **David Salter** - virologist at Hartwell Medical Institute in Steel City, racing to develop vaccine for **Rigorio** (fictional childhood paralysis disease). Born 1914 Steel City, age 36 in 1950. Son of steelworker, chose research over private practice. Methodically testing killed-virus approach. Rival: Dr. Albert Kovar at Kingsley Medical Institute (live-virus approach). Funded by National Foundation for Child Health. Success still years away but represents hope. Salk + Enders compression. Hartwell connection creates philanthropy angle with department store family.
-- [x] Red Scare / McCarthy storyline: **Senator Robert Whitfield** (EXISTS - party changed to Federal). North Carolina senator, age 48. Already famous from 1949 Antelope Springs UFO hearings. In 1950 pivots to anti-communist investigations, building on his reputation as fearless investigator. McCarran/McCarthy compression.
+- [x] Red Panic / McCarthy storyline: **Senator Robert Whitfield** (EXISTS - party changed to Federal). North Carolina senator, age 48. Already famous from 1949 Antelope Springs UFO hearings. In 1950 pivots to anti-communist investigations, building on his reputation as fearless investigator. McCarran/McCarthy compression.
 - [x] Organized crime investigation: **Senator Russell Fletcher** (Federal Party, Tennessee). Born 1902, age 48 in 1950. Introduces resolution January 5 to investigate organized crime; Fletcher Committee officially established May 3. Methodical, evidence-based approach contrasts with Whitfield's grandstanding. Hearings expose Salvatore Conti, Sol Roth, Enzo Ferrante, Sidney Hartman, Carmine DeMarco. Televised hearings in 1951 will make him a national figure. Kefauver compression.
 - [x] Hiss equivalent: **Alden Cross** - State Department official convicted of perjury January 1950. Born 1904 Boston, age 46. New England University, New England Law, rose through State Dept. Accused of passing documents to Soviets in late 1930s. Denied everything. Convicted on perjury (statute of limitations on espionage expired). His conviction fuels Whitfield's anti-communist crusade. Alger Hiss + Harry Dexter White compression. Name suggests "double-cross."
-- [x] Red Scare 1950 timeline: January - Cross convicted; February - Whitfield speech on communist infiltration; Spring - Whitfield Committee expands from UFO investigation to "subversive activities"; June - Korean War validates fears; Fall - Whitfield's power grows, loyalty oaths spread, Hollywood nervous.
+- [x] Red Panic 1950 timeline: January - Cross convicted; February - Whitfield speech on communist infiltration; Spring - Whitfield Committee expands from UFO investigation to "subversive activities"; June - Korean War validates fears; Fall - Whitfield's power grows, loyalty oaths spread, Hollywood nervous.
 - [x] Broadway leading lady: **Maxine Merrill** - Queen of the Broadway musical. Born 1912 Astoria, Queens, age 38 in 1950. No formal training, legendary natural belt. Started in vaudeville, Broadway debut 1930. Signature roles in *Annie of the West* (1946) and *Pacific Moon* (1949). Brassy, funny, unpretentious, blue humor backstage, ironclad professionalism onstage. Voice heard in back row without a microphone. Ethel Merman + Mary Martin compression.
 - [x] Broadway composer/lyricist duo: **Goodwin & Langford** - Revolutionized the book musical where songs advance the story. **Jerome Goodwin** (composer, born 1902 NYC, age 48, classically trained, Columbia, sweeping romantic melodies). **Howard Langford** (lyricist, born 1895 Pennsylvania, age 55, former journalist, literate emotionally resonant lyrics). Partnership since 1943. Hits: *Oklahoma Wind* (1943), *Prairie Carousel* (1945), *Pacific Moon* (1949, starring Maxine Merrill). Rodgers & Hammerstein compression.
 - [x] 1950 ULB Season: **New York Empires win championship** over Cleveland Scouts 4-2. Joe Rosetti wins MVP, batting title, clutch postseason. Willie Banks leads Scouts to championship series in historic barrier-breaking season, earns universal respect despite loss. Key moments: April (Opening Day), July (Banks selected to All-Star Game), September (Scouts clinch Western League), October (Championship Series).
@@ -1495,7 +1495,7 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 
 - [x] ~~Event: Proxy war outbreak (June 1950?)~~ → **Korean War begins June 25, 1950**
 - [x] ~~Event: McCarthy-speech equivalent (February 1950?)~~ → **Whitfield speech on communist infiltration (February 1950)**
-- [x] ~~Event: Alden Cross conviction~~ → **January 1950** - State Dept official convicted of perjury, fuels Red Scare
+- [x] ~~Event: Alden Cross conviction~~ → **January 1950** - State Dept official convicted of perjury, fuels Red Panic
 - [x] ~~Event: Comic strip debut~~ → ***Bramblewood* debuts (October 1950)** - Walter Hendricks' comic strip
 - [x] ~~Event: Sports integration milestone~~ → **Willie Banks' barrier-breaking season** with Cleveland Scouts
 - [x] ~~Various sports events/championships~~ → **ULB: Empires over Scouts 4-2, Rosetti MVP; Boxing: Lawson retains over Brennan, Marchetti rises**
@@ -1535,8 +1535,8 @@ All new 1950 entity names have been checked against real-world conflicts:
                            │
           ┌────────────────┼────────────────┐
           │                │                │
-    Patrick Gallagher   Henry Wallace    Thomas Dewey
-    (political ally)   (FDR connection)  (1948 opponent)
+    Patrick Gallagher   George Patterson    Richard Dewey
+    (political ally)   (FDC connection)    (1948 opponent)
           │                │
           │         Edmund Carlson
           │        (business ally)
@@ -1555,7 +1555,7 @@ All new 1950 entity names have been checked against real-world conflicts:
 
 **1950 Storylines:**
 - Kellman vs. Whitfield is the central political conflict
-- Whitfield pivots from UFO hearings to Red Scare
+- Whitfield pivots from UFO hearings to Red Panic
 - Korean War (June) complicates Kellman's presidency
 
 ---
@@ -1731,7 +1731,7 @@ Hale    Chambers Brooks         Mercer    News        Magazine
 ```
 
 **1950 Storylines:**
-- Know! Magazine covers major stories (Korea, Red Scare, culture)
+- Know! Magazine covers major stories (Korea, Red Panic, culture)
 - Eleanor Brooks' photography defines visual journalism
 - Mercer Publications represents regional/specialty press
 

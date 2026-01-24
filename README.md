@@ -13,9 +13,9 @@ A collaborative AI-human project to create the most extensive and cohesive ficti
 
 ## Vision
 
-Kempo is an alternate branch of reality that diverged from our own around the late 1800s. By the 1950s, most major people—presidents, celebrities, notorious gangsters—as well as companies and products have different names and variations from "base reality," though the themes and pace of technological progress remain similar.
+Kempo is an alternate universe—a parallel reality where familiar patterns play out through different people, institutions, and brands. Most major figures—presidents, celebrities, notorious gangsters—as well as companies and products have different names and variations from our reality, though the themes and pace of technological progress remain similar.
 
-- **Divergent history**: A branch of our reality where familiar patterns play out through different people, institutions, and brands
+- **Alternate universe**: A parallel reality where history rhymes with our own but through Kempo-original characters and entities
 - **Internal coherence**: Every element connects—history, cultures, individuals—forming a unified whole
 - **Living documentation**: The universe is recorded as it evolves, creating an ever-growing archive
 - **Day-by-day simulation**: Time moves forward in Kempo, with events unfolding and characters aging

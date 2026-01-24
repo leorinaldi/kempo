@@ -57,12 +57,14 @@ Ask:
 - If a similar entity exists, how is the new one distinct? (e.g., Clay Marshall = dramatic Western star vs. Cody Carson = family-friendly Western star)
 
 ### 1.3 Define Compression Sources
-Identify 2-3 real-world figures/entities that will inspire this creation.
+Identify 2-4 real-world figures/entities that will inspire this creation. **Default to blending multiple inspirations rather than creating 1-for-1 replacements.**
 
 For each source, note:
 - What specific elements this source contributes
 - Which aspects we're taking vs. leaving behind
 - How sources complement each other
+
+**Ask before creating:** Could an existing Kempo character absorb this role? If Joe Rosetti already represents the baseball superstar archetype, a new DiMaggio equivalent may not be needed—just blend DiMaggio into Rosetti's inspirations.
 
 **Example:**
 ```
@@ -87,11 +89,16 @@ Choose the appropriate strategy based on intent:
 | **Functional/descriptive** | Organizations, institutions, leagues | United League Baseball, American Steel Corporation |
 | **Combined elements** | Blend pieces from multiple inspirations | Frank Martino (Frank Sinatra + Dean Martin) |
 | **Era-authentic** | Name should sound plausible for character's birth year, ethnicity, social class | Research name popularity for birth decade |
+| **Synonym decomposition** | When a name is too close to the inspiration | Break into parts, find synonyms: Ridgway → Ridge+Way → Hill+Ford → Hillford |
 
 ### 2.2 Generate Name Options
 - Propose 2-4 candidates with rationale for each
 - For people: consider first name, last name, and potential nicknames
 - For organizations: consider what the name signals about the entity's identity
+- **For period characters**: Research what names were actually popular in the character's birth decade
+  - Example: "Lisa" was rare before 1960s; "Linda" was #1 in 1951
+  - Use SSA baby name data or equivalent for the era
+- **For organizations**: Match naming theme to the entity's actual identity (French surname company → French surname, not arbitrary theme)
 
 ### 2.3 Check for Conflicts
 
@@ -121,8 +128,10 @@ Search for the proposed name in relevant contexts:
 - Famous real people with same name in same profession
 - Real teams, companies, organizations with same name
 - Trademark issues for brand/product names
+- **Phonetic similarity**: Names that sound too close to the inspiration are problematic even if spelled differently (Ridgeway ≈ Ridgway)
 
 **Example:** "Philadelphia Stars" was rejected because it was a real Negro League team name.
+**Example:** "Ridgeway" was rejected for being too phonetically similar to real General Ridgway.
 
 **C. Fiction Conflicts**
 
@@ -187,8 +196,10 @@ Ask for each detail:
 - Same team name as real team (Philadelphia Stars)
 - Same company name as real company
 - Same sequence of life events in same order
+- Verbatim famous quotes (change the words, keep the spirit)
+- Naming theme doesn't match entity identity (e.g., "Monarch Chemical" for a French-surname company like Du Pont)
 
-**The Fix:** Keep the essence, change the specifics. Kansas origin instead of Salinas. Philadelphia Pennies instead of Philadelphia Stars.
+**The Fix:** Keep the essence, change the specifics. Kansas origin instead of Salinas. Philadelphia Pennies instead of Philadelphia Stars. "Misguided conflict" instead of "wrong war."
 
 ### 3.4 Iterate Based on Feedback
 
@@ -350,6 +361,25 @@ Before considering an entity design complete:
 
 **Phase 5: Documentation**
 - Added to yearbook with full details
+
+---
+
+# Kempo-Specific Terminology
+
+When designing entities or writing narratives, create unique Kempo terms for major real-world concepts.
+
+| Real World | Kempo Equivalent |
+|------------|------------------|
+| Red Scare | **Red Panic** |
+| Cold War | **Frozen War** |
+| H-bomb | **O-bomb** (Oxygen bomb) |
+| Bell Labs | **Bell Research** |
+
+**Famous Quotes:** Paraphrase famous quotes rather than copying verbatim. Keep the spirit, change the words.
+
+| Real Quote | Kempo Version |
+|------------|---------------|
+| "Wrong war, wrong place, wrong time, wrong enemy" (Omar Bradley) | "A misguided conflict, at a misguided moment, with a misguided adversary" (Bradley Omar) |
 
 ---
 

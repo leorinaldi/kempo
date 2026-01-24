@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Nineteen fifty was the year the Cold War turned hot.
+Nineteen fifty was the year the Frozen War turned hot.
 
 For five years after World War II, Americans had rebuilt their lives in anxious peace. They moved to the suburbs, bought televisions, raised families, and tried to forget the horrors they had seen or inflicted. The Soviet bomb in 1949 shattered any illusion of permanent safety, but the threat still felt abstract—a matter for diplomats and generals, not ordinary citizens going about their ordinary lives.
 
@@ -22,7 +22,7 @@ Frank Martino's voice poured from every jukebox. Vivian Sterling ascended toward
 
 And beneath it all, mysteries remained. What crashed at Antelope Springs? What did Leonard Vance know that he could not say? In the rush toward communist investigations, these questions faded from headlines—but they were not answered. The truth, whatever it was, waited.
 
-Nineteen fifty was a year of contradictions: prosperity and fear, entertainment and war, conformity and courage. It was the year the postwar dream collided with Cold War reality. What comes next, no one can say—but 1950 changed everything.
+Nineteen fifty was a year of contradictions: prosperity and fear, entertainment and war, conformity and courage. It was the year the postwar dream collided with Frozen War reality. What comes next, no one can say—but 1950 changed everything.
 
 This is the story of that year.
 
@@ -42,7 +42,7 @@ Fashion followed strict codes. Women wore Dior's "New Look"—cinched waists, fu
 
 At work, the industrial economy hummed. Continental Motors and Pioneer Automobile employed tens of thousands in Motor City. American Steel Corporation dominated Steel City's skyline with smokestacks. The American Drivers Union, under Jack Callahan's increasingly powerful leadership, controlled trucking and freight—nothing moved in Kempo without the ADU's blessing, and Callahan's connections to less savory elements were an open secret.
 
-It was a year of prosperity and anxiety, of suburban dreams and Cold War fears. The Korean War, beginning in June, cast a shadow over everything—reminding families that the peace they were building was fragile, that their sons might be called to fight, that the world remained dangerous despite the new ranch house and the TV in the living room.
+It was a year of prosperity and anxiety, of suburban dreams and Frozen War fears. The Korean War, beginning in June, cast a shadow over everything—reminding families that the peace they were building was fragile, that their sons might be called to fight, that the world remained dangerous despite the new ranch house and the TV in the living room.
 
 ---
 
@@ -154,7 +154,7 @@ The National Association for Minority Rights (NAMR, founded 1909) continued its 
 
 ### Political Parties
 
-The National Party (the majority party) held the presidency under Harold Kellman, its coalition of urban machines, labor unions, and Southern conservatives intact but straining. The Federal Party was in opposition, its rising star Senator Robert Whitfield using the Red Scare to build a national profile. The parties defined the boundaries of acceptable debate—and in 1950, those boundaries remain narrow indeed.
+The National Party (the majority party) held the presidency under Harold Kellman, its coalition of urban machines, labor unions, and Southern conservatives intact but straining. The Federal Party was in opposition, its rising star Senator Robert Whitfield using the Red Panic to build a national profile. The parties defined the boundaries of acceptable debate—and in 1950, those boundaries remain narrow indeed.
 
 ### The Whitfield Committee
 
@@ -164,7 +164,7 @@ The Whitfield Committee (established 1949) began by investigating the Antelope S
 
 ## VI. Politics
 
-President Harold S. Kellman entered 1950 in the sixth year of his presidency, having ascended from Vice President upon Franklin Roosevelt's death in April 1945 and won election in his own right in 1948. He was 66 years old, a National Party man from Missouri, plain-spoken and stubborn. His "Fair Deal" agenda—expanded housing, higher minimum wages, broader Social Security—had achieved partial success, but a coalition of Federal Party members and conservative National Party Southerners blocked his more ambitious proposals. National health insurance was dead. Civil rights legislation went nowhere.
+President Harold S. Kellman entered 1950 in the sixth year of his presidency, having ascended from Vice President upon Frederick Dennison Crawford's (FDC) death in April 1945 and won election in his own right in 1948. He was 66 years old, a National Party man from Missouri, plain-spoken and stubborn. His "Fair Deal" agenda—expanded housing, higher minimum wages, broader Social Security—had achieved partial success, but a coalition of Federal Party members and conservative National Party Southerners blocked his more ambitious proposals. National health insurance was dead. Civil rights legislation went nowhere.
 
 The year opened with a bombshell. On January 21, Alden Cross, a State Department official from Boston's best circles (New England University, New England Law), was convicted of perjury. The charge: lying about passing documents to Soviet agents in the late 1930s. The espionage statute of limitations had expired, but the perjury conviction was damning enough. Cross maintained his innocence, his supporters cried frame-up, but the verdict stood. The message was clear: communists had infiltrated the highest levels of government.
 
@@ -172,7 +172,7 @@ Senator Robert Whitfield of North Carolina seized the moment. The Federal Party 
 
 The Whitfield Committee expanded its mandate from investigations of unexplained phenomena to "subversive activities." Throughout the spring, it summoned witnesses—government employees, professors, writers, entertainers. Some cooperated; some invoked constitutional protections; some saw their careers destroyed by accusation alone. The Hollywood blacklist grew. Loyalty oaths spread through government and industry.
 
-In June, the Korean War began, and everything changed. What might have been dismissed as Red Scare hysteria now seemed prescient. Communism was not an abstraction—American boys were dying to stop its advance. Whitfield's popularity soared. Critics who called him a demagogue fell silent or joined the chorus.
+In June, the Korean War began, and everything changed. What might have been dismissed as Red Panic hysteria now seemed prescient. Communism was not an abstraction—American boys were dying to stop its advance. Whitfield's popularity soared. Critics who called him a demagogue fell silent or joined the chorus.
 
 President Kellman was squeezed. He needed to prosecute the war, manage the economy, and somehow navigate between Whitfield's crusade and civil libertarians warning of excess. It was an impossible position, and Kellman—never the most agile politician—struggled.
 
@@ -202,11 +202,11 @@ In late November, hundreds of thousands of Chinese "volunteers" poured across th
 
 The year ended in anxiety. Westbrook, the hero of Inchon, was now the general who walked into a Chinese trap. His relationship with President Kellman—never warm—was souring. Westbrook believed victory was possible if Kellman would let him strike at China itself. Kellman feared a wider war, perhaps atomic war. The clash between civilian authority and military genius looms over the new year.
 
-### The Cold War
+### The Frozen War
 
-Elsewhere in the world, Joseph Stalin (72) ruled the Soviet Union with an iron fist, the Cold War's architect. Chen Zhaoming (56) led the Chinese People's Party and had now thrown China's weight into Korea. The world was divided into armed camps, and the atomic age cast its shadow over everything. The Soviets tested their bomb in 1949; now the United States authorized development of the hydrogen bomb. The arms race accelerated.
+Elsewhere in the world, Joseph Volkov (72) ruled the Soviet Union with an iron fist, the Frozen War's architect. Chen Zhaoming (56) led the Chinese People's Party and had now thrown China's weight into Korea. The world was divided into armed camps, and the atomic age cast its shadow over everything. The Soviets tested their bomb in 1949; now the United States authorized development of the hydrogen bomb. The arms race accelerated.
 
-The Cold War was no longer an abstraction. It was a shooting war in Korea, a spy war in government offices, a shadow war for the future of humanity.
+The Frozen War was no longer an abstraction. It was a shooting war in Korea, a spy war in government offices, a shadow war for the future of humanity.
 
 ---
 
@@ -275,7 +275,7 @@ Nathan Collier (46), who broke the Antelope Springs story in 1949, continued inv
 ### Harold S. Kellman (66)
 *President of the United States*
 
-The Missouri haberdasher who became leader of the free world. Kellman ascended to the presidency upon FDR's death in 1945 and won election in his own right in 1948, defying every poll. Plain-spoken, stubborn, and underestimated, he authorized the atomic bombs that ended WWII and now faced a new war in Korea. His Fair Deal agenda stalled against conservative opposition, and Senator Whitfield's Red Scare put him on the defensive. The buck stopped with Kellman—and in 1950, the burdens were immense.
+The Missouri haberdasher who became leader of the free world. Kellman ascended to the presidency upon FDC's death in 1945 and won election in his own right in 1948, defying every poll. Plain-spoken, stubborn, and underestimated, he authorized the atomic bombs that ended WWII and now faced a new war in Korea. His Fair Deal agenda stalled against conservative opposition, and Senator Whitfield's Red Panic put him on the defensive. The buck stopped with Kellman—and in 1950, the burdens were immense.
 
 ### Robert Whitfield (48)
 *Senator, Federal Party (North Carolina)*
@@ -357,15 +357,15 @@ The year's defining event—a shooting war in Asia that transformed American soc
 
 On June 25, North Korea invaded South Korea. President Kellman committed American forces; the United Nations authorized a multinational response. General Douglas Westbrook commanded. The summer was desperate—the Pusan Perimeter held by fingernails. In September, Westbrook's Inchon landing turned the tide. UN forces pushed north, captured Pyongyang, approached the Chinese border. Then China intervened with hundreds of thousands of troops. By December, UN forces were in retreat, and the war that seemed won became a frozen nightmare.
 
-The Korean War touched everything: politics (Kellman's wartime presidency, Whitfield's enhanced credibility), business (defense contracts, steel production), everyday life (sons called to serve, Gold Star families), and the national psyche. The Cold War was no longer abstract. American boys were dying in foreign hills.
+The Korean War touched everything: politics (Kellman's wartime presidency, Whitfield's enhanced credibility), business (defense contracts, steel production), everyday life (sons called to serve, Gold Star families), and the national psyche. The Frozen War was no longer abstract. American boys were dying in foreign hills.
 
-### The Red Scare
+### The Red Panic
 
 Fear of communist infiltration gripped the nation, fueled by a senator's crusade.
 
 In January, Alden Cross was convicted of perjury—proof, to many, that communists had infiltrated the government. Senator Robert Whitfield seized the moment. His February speech claiming communists in the State Department launched a national hysteria. The Whitfield Committee summoned witnesses—government employees, professors, entertainers. Careers were destroyed by accusation alone. The Hollywood blacklist grew. Loyalty oaths spread.
 
-The Korean War's outbreak in June validated the fears. Whitfield's power soared. The November midterm elections rewarded his party. By year's end, the Red Scare was at full intensity—and its architect was more powerful than ever.
+The Korean War's outbreak in June validated the fears. Whitfield's power soared. The November midterm elections rewarded his party. By year's end, the Red Panic was at full intensity—and its architect was more powerful than ever.
 
 ### The Television Revolution
 
@@ -493,7 +493,7 @@ By December, the Fletcher Committee had laid bare a world most Americans had nev
 - **December 15** — Eddie Lawson vs. Rocco Marchetti title fight announced for February 1951.
 - **December 24** — President Kellman addresses the nation on Christmas Eve, acknowledging difficult situation in Korea.
 - **December 25** — Frank Martino's *A Martino Christmas* plays in homes across America.
-- **December 31** — The year ends with UN forces in retreat, the Red Scare at full intensity, and uncertainty about what 1951 will bring. But 50% of American homes now have televisions, *Bramblewood* is a sensation, and the Empires are champions. Life goes on.
+- **December 31** — The year ends with UN forces in retreat, the Red Panic at full intensity, and uncertainty about what 1951 will bring. But 50% of American homes now have televisions, *Bramblewood* is a sensation, and the Empires are champions. Life goes on.
 
 ---
 

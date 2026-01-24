@@ -15,15 +15,20 @@ Inspirations are stored in the database `Inspiration` table and managed via the 
 
 ## When to Create a Kempo Equivalent
 
+**Kempo is an alternate universe. All major historical figures should have Kempo equivalents for consistency.**
+
 | Condition | Approach |
 |-----------|----------|
-| Died before 1950 AND no notable post-1950 events | Keep as real person |
-| Did nothing notable after 1950 | Keep as real person |
-| Did notable things after 1950 | Create Kempo equivalent with inspiration |
+| Frequently referenced in Kempo content | Create Kempo equivalent |
+| Major historical figure (president, world leader) | Create Kempo equivalent |
+| Minor figure with no ongoing Kempo relevance | May keep as real person (rare) |
 
 **Examples:**
-- **FDR** (died April 1945) → Keep as real person
-- **Truman** (President until 1953) → Create Kempo equivalent (Harold S. Kellman)
+- **FDR** → **Frederick Dennison Crawford (FDC)** - frequently referenced 4-term president
+- **Truman** → **Harold S. Kellman** - President until 1953
+- **Stalin** → **Joseph Volkov** - frequently referenced Soviet leader
+
+The goal is a coherent alternate universe where Kempo-original names appear consistently.
 
 ## Naming Guidelines
 
