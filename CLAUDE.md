@@ -2,7 +2,9 @@
 
 **Scope:** AI assistant routing file. Points to documentation, skills, and file locations for working on this project.
 
-For project overview, storylines, interfaces, and developer setup, see [README.md](README.md).
+For strategic overview, philosophy, and content pipeline, see [Kempo Project Context.md](Kempo%20Project%20Context.md).
+
+For quick start and developer setup, see [README.md](README.md).
 
 For entity taxonomy and how data models relate, see [docs/data-model.md](docs/data-model.md).
 
@@ -44,13 +46,13 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 | Topic | Location |
 |-------|----------|
+| Project context & philosophy | [Kempo Project Context.md](Kempo%20Project%20Context.md) |
 | Data model & taxonomy | [docs/data-model.md](docs/data-model.md) |
 | Article creation rules | [docs/Skills/Kempopedia/article-global-rules](docs/Skills/Kempopedia/article-global-rules/skill.md) |
 | Entity linking guide | [docs/Skills/EntityManagement/linking-guide](docs/Skills/EntityManagement/linking-guide/skill.md) |
-| Yearbook processing plan | [docs/kempo-yearbook-processing-plan.md](docs/kempo-yearbook-processing-plan.md) |
+| Yearbook guiding principles | [docs/yearbooks/guiding-principles.md](docs/yearbooks/guiding-principles.md) |
 | KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
 | Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
-| Simulation workflow | [docs/simulation-workflow.md](docs/simulation-workflow.md) |
 | Event system | [docs/event-system.md](docs/event-system.md) |
 | Backup system | [docs/database-backup.md](docs/database-backup.md) |
 | Database schema | [web/prisma/schema.prisma](web/prisma/schema.prisma) |
@@ -120,7 +122,6 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | Article images | Vercel Blob (tracked in Image table) |
 | Yearbooks (Real & Kempo) | `docs/yearbooks/` |
 | Yearbook guiding principles | [docs/yearbooks/guiding-principles.md](docs/yearbooks/guiding-principles.md) |
-| Simulation planning docs | `web/content/admin/*.md` |
 | Prisma schema | `web/prisma/schema.prisma` |
 | API routes | `web/src/app/api/` |
 | KempoNet pages | `web/src/app/kemponet/` |

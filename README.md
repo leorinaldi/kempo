@@ -1,117 +1,33 @@
 # Kempo
 
-**Scope:** Project overview for humans. Explains what Kempo is, its storylines, interfaces, and how to set up the development environment.
+An alternate-universe simulation engine—Wikipedia, YouTube, and mobile apps for a fictional world advancing year-by-year from 1950 to 2026.
 
-For AI assistant instructions and file routing, see [CLAUDE.md](CLAUDE.md).
+For AI assistant instructions, see [CLAUDE.md](CLAUDE.md).
+For strategic overview and philosophy, see [Kempo Project Context.md](Kempo%20Project%20Context.md).
 
----
+**Live Site**: https://kempo.vercel.app (private access) — https://kempo.com coming soon
 
-A collaborative AI-human project to create the most extensive and cohesive fictional universe ever constructed.
+## Quick Start
 
-**Live Site**: https://kempo.com (private access)
-**Repository**: https://github.com/leorinaldi/kempo
-
-## Vision
-
-Kempo is an alternate universe—a parallel reality where familiar patterns play out through different people, institutions, and brands. Most major figures—presidents, celebrities, notorious gangsters—as well as companies and products have different names and variations from our reality, though the themes and pace of technological progress remain similar.
-
-- **Alternate universe**: A parallel reality where history rhymes with our own but through Kempo-original characters and entities
-- **Internal coherence**: Every element connects—history, cultures, individuals—forming a unified whole
-- **Living documentation**: The universe is recorded as it evolves, creating an ever-growing archive
-- **Day-by-day simulation**: Time moves forward in Kempo, with events unfolding and characters aging
-
-## Calendar System
-
-All dates in Kempo use **k.y.** (Kempo Years).
-
-## Content Creation Process
-
-Real-world history serves as inspiration, not a template. A storyline begins with a theme or era—say, 1940s Hollywood—and generates an interlaced web of:
-
-- **People** — actors, directors, executives with their own biographies
-- **Organizations** — studios, agencies, political parties
-- **Locations** — cities, venues, landmarks
-- **Events** — film releases, awards, scandals, historical moments
-- **Media** — Kempopedia articles with images, playable songs, watchable films
-
-Each element references others: an actor's article links to films they starred in, which link to the studio that produced them, which links to executives who ran it. Audio and video assets can appear in Radio, TV, SoundWaves, and KempoTube interfaces.
-
-## Interfaces
-
-| Interface | Description |
-|-----------|-------------|
-| **Kempopedia** | Wikipedia-style encyclopedia with 180+ articles |
-| **KempoTube** | Video browsing interface |
-| **Giggle** | Search engine for KempoNet |
-| **FlipFlop** | TikTok-style vertical video browsing |
-| **SoundWaves** | Music streaming with audio visualizer |
-| **Kempo Radio** | Radio streaming interface |
-| **Kempo TV** | Television broadcast interface |
-| **KempoNet (PC)** | 1990s-era PC computing experience |
-| **Kempo Mobile** | iPhone-style mobile experience |
-
-### Fictional Computing Universe
-
-| Real World | Kempo Equivalent |
-|------------|------------------|
-| Microsoft Windows | KempoSoft Portals |
-| Google | Giggle (owned by GiggleNet) |
-| Wikipedia | Kempopedia |
-| YouTube | KempoTube |
-| TikTok | FlipFlop |
-
-## Project Structure
-
-```
-Kempo/
-├── README.md              # This file
-├── CLAUDE.md              # AI assistant instructions
-├── docs/                  # Project documentation
-│   └── Skills/Kempopedia/ # Article creation skills
-├── scripts/               # Utility scripts (image generation)
-└── web/                   # Next.js web application
-    ├── prisma/            # Database schema
-    ├── public/            # Static assets
-    └── src/               # Application source code
+```bash
+cd web
+npm install
+npx prisma generate
+npm run dev
 ```
 
-## Developer Setup
+Open http://localhost:3000
 
-### Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS
-- **Database**: PostgreSQL (Neon) with Prisma ORM
-- **Storage**: Vercel Blob for media files
-- **Authentication**: NextAuth.js
-- **Hosting**: Vercel
+## Setup
 
 ### Prerequisites
 
 - Node.js 18+
 - PostgreSQL database (or Neon serverless)
 
-### Setup
-
-```bash
-cd web
-
-# Install dependencies
-npm install
-
-# Generate Prisma client
-npx prisma generate
-
-# Push schema to database
-npx prisma db push
-
-# Start development server
-npm run dev
-```
-
 ### Environment Variables
 
-Create `web/.env.local` with:
+Create `web/.env.local`:
 
 ```
 DATABASE_URL="postgresql://..."
@@ -120,16 +36,24 @@ NEXTAUTH_URL="http://localhost:3000"
 BLOB_READ_WRITE_TOKEN="..."
 ```
 
-For image generation, create `.env` in the root with:
+For image generation, create `.env` in root:
 
 ```
 XAI_API_KEY="..."
+GEMINI_API_KEY="..."
 ```
 
-## Content Creation
+## Tech Stack
 
-Content is created collaboratively with AI using Claude Skills. See the [docs/Skills/Kempopedia](docs/Skills/Kempopedia) folder for article creation guidelines.
+| Component | Technology |
+|-----------|------------|
+| Framework | Next.js 14 (App Router) |
+| Database | PostgreSQL (Neon) + Prisma |
+| Storage | Vercel Blob |
+| Auth | NextAuth.js |
+| Styling | Tailwind CSS |
+| Hosting | Vercel |
 
----
+## License
 
-*Kempo begins now.*
+Private repository - not for distribution.

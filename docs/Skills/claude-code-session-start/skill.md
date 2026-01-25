@@ -7,9 +7,10 @@ Run this skill when the user asks to "start session", "follow session start prot
 ### 1. Review Project Context
 
 Read these files to understand the project:
-- [CLAUDE.md](../../../CLAUDE.md) - AI routing file
-- [README.md](../../../README.md) - Project overview
-- [docs/data-model.md](../data-model.md) - Entity taxonomy and relationships
+- [CLAUDE.md](../../../CLAUDE.md) - AI routing, skills index
+- [Kempo Project Context.md](../../../Kempo%20Project%20Context.md) - Strategic overview, philosophy, architecture
+- [README.md](../../../README.md) - Quick start & setup
+- [docs/data-model.md](../../data-model.md) - Entity taxonomy and relationships
 
 ### 2. Start Dev Server
 
@@ -84,8 +85,19 @@ Note: Field is `createdAt`, not `date`.
 ### 6. Report Ready
 
 Tell the user:
-- Dev server is running at http://localhost:3000
-- ngrok URL for mobile access
-- QR code has been opened for scanning
-- Summary of recent project history
-- Login requirement is disabled (remind to re-enable when done)
+
+**Infrastructure Status:**
+- Dev server running at http://localhost:3000
+- ngrok URL for mobile access (with QR code opened)
+- Login requirement disabled (remind to re-enable when done)
+
+**Project Context Summary** (2-3 sentences based on docs reviewed):
+- What Kempo is and its current state
+- The core workflow (yearbook-to-content)
+- Current progress (which years are complete)
+
+**Recent Session History** (bullets based on ProjectHistory query):
+- Summarize the key activities from recent sessions
+- Note any work in progress or pending items
+
+Then ask: "What would you like to work on?"

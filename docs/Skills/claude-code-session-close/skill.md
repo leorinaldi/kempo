@@ -17,8 +17,9 @@ Consider whether any process documents need updating based on work done:
 
 | Document | Update if... |
 |----------|--------------|
-| `CLAUDE.md` | File locations changed, new skills added |
-| `README.md` | Project structure changed, new interfaces added |
+| `CLAUDE.md` | File locations changed, new skills added, routing changed |
+| `Kempo Project Context.md` | Philosophy evolved, new interfaces added, architecture changed, workflow updated |
+| `README.md` | Setup steps changed, tech stack changed |
 | `docs/data-model.md` | New entity types added, relationships changed, new polymorphic patterns |
 | `docs/*.md` | Workflows or patterns changed |
 | Skills | New repeatable process emerged |
