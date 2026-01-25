@@ -6,6 +6,32 @@ For project overview, storylines, interfaces, and developer setup, see [README.m
 
 For entity taxonomy and how data models relate, see [docs/data-model.md](docs/data-model.md).
 
+## Temporal System (IMPORTANT)
+
+Kempo has a **viewing date** system. Users can set a date (e.g., "June 1950") and the system shows content as it existed at that time. This affects:
+
+- **Articles**: Filtered by `publishDate`; older versions stored in `Revision` table
+- **Media** (future): Songs, videos, publications will also respect viewing date
+
+### Key Rules
+
+1. **New content**: Set `publishDate` to when the content would have been "current" in the Kempo universe
+2. **Updating existing articles**: Create a `Revision` with the OLD content BEFORE updating, so users viewing at earlier dates see the previous version
+3. **Revision.kempoDate**: String like "January 1, 1950 k.y." indicating when that version was current
+
+### Example: Article Update Workflow
+
+When adding 1950 events to an article that existed in 1949:
+```
+1. Save current content as Revision (kempoDate: "January 1, 1950 k.y.")
+2. Update article with new content
+3. Set article.publishDate to after the new events (e.g., Dec 1, 1950)
+```
+
+Result: Users viewing at June 1950 see the revision (no new events); users at Dec 1950 see current article.
+
+See [yearbook-to-content](docs/Skills/Workflows/yearbook-to-content/skill.md) for full revision workflow details.
+
 ## Session Start
 
 When asked to "start session", "follow session start protocol", or similar, follow [docs/Skills/claude-code-session-start](docs/Skills/claude-code-session-start/skill.md).
@@ -19,7 +45,9 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | Topic | Location |
 |-------|----------|
 | Data model & taxonomy | [docs/data-model.md](docs/data-model.md) |
-| Article creation rules | [docs/Skills/Kempopedia/global-rules](docs/Skills/Kempopedia/global-rules/skill.md) |
+| Article creation rules | [docs/Skills/Kempopedia/article-global-rules](docs/Skills/Kempopedia/article-global-rules/skill.md) |
+| Entity linking guide | [docs/Skills/EntityManagement/linking-guide](docs/Skills/EntityManagement/linking-guide/skill.md) |
+| Yearbook processing plan | [docs/kempo-yearbook-processing-plan.md](docs/kempo-yearbook-processing-plan.md) |
 | KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
 | Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
 | Simulation workflow | [docs/simulation-workflow.md](docs/simulation-workflow.md) |
@@ -29,29 +57,59 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 ## Skills
 
+### Kempopedia Skills (Article Creation)
+
 | Skill | Purpose |
 |-------|---------|
-| `design-entity` | Plan and design new entities before article creation |
-| `global-rules` | Core rules for all articles (read first) |
+| `article-global-rules` | Core rules for all articles (read first) |
 | `create-person` | Biographical articles |
 | `create-place` | Cities, states, nations |
-| `create-publication` | Newspapers, magazines, books |
 | `create-organization` | Institutions, companies, parties, academies |
 | `create-brand` | Brands owned by organizations |
-| `create-media` | Songs, albums, films |
 | `create-product` | Vehicles, consumer goods |
+| `create-media` | Songs, albums, films |
+| `create-publication` | Newspapers, magazines, books |
+| `create-event` | Timeline events and Event database records |
 | `create-series` | TV series |
-| `create-event` | Timeline events |
 | `create-timeline` | Decade/year timeline pages |
 | `date-review` | Audit dates after creating articles |
-| `generate-image` | Image prompt guidelines |
+| `generate-image` | Image generation with Grok/Gemini |
 | `inspirations` | Real-world to Kempo mappings |
+| `design-entity` | Plan and design new entities before article creation |
+
+### Entity Management Skills (Database Integration)
+
+| Skill | Purpose |
+|-------|---------|
+| `linking-guide` | How junction tables and relationships work |
+| `manage-person` | Full lifecycle: Person record + article + image + inspirations |
+| `manage-organization` | Full lifecycle: Organization + brands + child entities |
+| `manage-brand` | Full lifecycle: Brand + products + parent org |
+| `manage-product` | Full lifecycle: Product + brand + inspirations |
+| `manage-place` | Full lifecycle: Nation/State/City/Place hierarchy |
+| `manage-publication` | Full lifecycle: PublicationSeries + issues + contributors |
+| `manage-series` | Full lifecycle: TV Series + network + cast/crew |
+| `manage-event` | Full lifecycle: Event + timeline + relationships |
+
+### Workflow Skills (Orchestration)
+
+| Skill | Purpose |
+|-------|---------|
+| `yearbook-to-content` | Master workflow: yearbook analysis → complete content creation |
+
+### Yearbook Skills
+
+| Skill | Purpose |
+|-------|---------|
 | `real-yearbook` | Historical research documents by year |
 | `kempo-yearbook` | Kempo universe planning documents by year |
 
-Kempopedia skills are located at `docs/Skills/Kempopedia/<skill-name>/skill.md`
+### Skill Locations
 
-Other skills are located at `docs/Skills/<skill-name>/skill.md`
+- Kempopedia skills: `docs/Skills/Kempopedia/<skill-name>/skill.md`
+- Entity management skills: `docs/Skills/EntityManagement/<skill-name>/skill.md`
+- Workflow skills: `docs/Skills/Workflows/<skill-name>/skill.md`
+- Other skills: `docs/Skills/<skill-name>/skill.md`
 
 ## File Locations
 

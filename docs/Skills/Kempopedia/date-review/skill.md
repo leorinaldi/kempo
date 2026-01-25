@@ -2,7 +2,7 @@
 
 Audit an article for timeline synchronization after creation.
 
-> This is Phase 3 of the article completion process. See [global-rules](../global-rules/skill.md).
+> This is Phase 3 of the article completion process. See [article-global-rules](../article-global-rules/skill.md).
 
 ## When to Use
 

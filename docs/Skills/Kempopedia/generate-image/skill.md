@@ -4,6 +4,8 @@ Generate images for Kempopedia articles using Grok or Gemini APIs, with automati
 
 ## Usage
 
+Run from the **project root** (`/Users/leonardorinaldi/Claude/Kempo/`):
+
 ```bash
 node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 ```
@@ -185,6 +187,26 @@ This sets:
 3. Run `regenerate-image.js` with `--update-refs`
 4. Verify new image looks correct
 5. Original is preserved for reference
+
+## Naming Conventions for Batch Processing
+
+When generating multiple images for a yearbook or bulk content creation, use consistent naming to enable automatic linking to articles:
+
+| Entity Type | `--name` Format | Example |
+|-------------|-----------------|---------|
+| Person | `{Full Name}` | `--name "Dusty Dalton"` |
+| Organization | `{Name} Logo` | `--name "Pinnacle Pictures Logo"` |
+| City | `{Name} Skyline` or `{Name}` | `--name "Steel City Skyline"` |
+| Brand | `{Name} Badge` | `--name "Pioneer Badge"` |
+| TV Show | `{Name} Show` | `--name "Dusty Dalton Show"` |
+| Broadway | `{Name} Poster` | `--name "Oklahoma Wind Poster"` |
+| Comic Strip | `{Name} Comic` | `--name "Bramblewood Comic"` |
+| Store/Building | `{Name} Store` | `--name "Hartwells Store"` |
+| Emblem | `{Name} Emblem` | `--name "AVL Emblem"` |
+| Crest | `{Name} Crest` | `--name "New England University Crest"` |
+| Seal | `{Name} Seal` | `--name "Fletcher Committee Seal"` |
+
+These names enable the [yearbook-to-content](../../Workflows/yearbook-to-content/skill.md) workflow to automatically match images to articles and update infoboxes programmatically.
 
 ## Output
 

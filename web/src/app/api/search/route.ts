@@ -52,9 +52,11 @@ export async function GET(request: Request) {
     //   D (unused)  = 0.05 -- reserved for future use
     // 2x bonus multiplier for title matches
     // Use different queries based on whether we have a date filter
+    // When date filter is active, also search revisions for articles not yet at current publishDate
     const results = dateFilterParam
       ? await prisma.$queryRaw<SearchResult[]>`
       (
+        -- Articles where current version is valid at viewing date
         SELECT
           id,
           title,
@@ -74,6 +76,44 @@ export async function GET(request: Request) {
             to_tsvector('english', title) @@ to_tsquery('english', ${sanitizedQuery})
             OR to_tsvector('english', COALESCE(content, '')) @@ to_tsquery('english', ${sanitizedQuery})
           )
+      )
+      UNION ALL
+      (
+        -- Articles via revisions: where publishDate > viewing date but a revision exists
+        -- Use a subquery to get the latest revision per article that matches the date
+        SELECT
+          sub.id,
+          sub.title,
+          sub.type,
+          sub.snippet,
+          sub.url,
+          sub.domain,
+          sub.rank
+        FROM (
+          SELECT
+            a.id,
+            r.title,
+            a.type,
+            LEFT(r.content, 200) as snippet,
+            '/kemponet/kempopedia/wiki/' || a.id as url,
+            'kempopedia' as domain,
+            (
+              ts_rank(to_tsvector('english', r.title), to_tsquery('english', ${sanitizedQuery})) * 1.0 +
+              ts_rank(to_tsvector('english', COALESCE(r.content, '')), to_tsquery('english', ${sanitizedQuery})) * 0.2
+            ) * CASE WHEN r.title ILIKE '%' || ${query} || '%' THEN 2 ELSE 1 END as rank,
+            ROW_NUMBER() OVER (PARTITION BY a.id ORDER BY r.created_at DESC) as rn
+          FROM articles a
+          JOIN revisions r ON r.article_id = a.id
+          WHERE
+            a.status = 'published'
+            AND a.publish_date > ${dateFilterParam}
+            AND r.kempo_date IS NOT NULL
+            AND (
+              to_tsvector('english', r.title) @@ to_tsquery('english', ${sanitizedQuery})
+              OR to_tsvector('english', COALESCE(r.content, '')) @@ to_tsquery('english', ${sanitizedQuery})
+            )
+        ) sub
+        WHERE sub.rn = 1
       )
       UNION ALL
       (

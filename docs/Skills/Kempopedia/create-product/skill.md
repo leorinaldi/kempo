@@ -2,7 +2,7 @@
 
 Create articles for products (vehicles, consumer goods, technology).
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## Special Rules for Products
 
@@ -72,7 +72,7 @@ node scripts/generate-image.js <slug> "<prompt>"
 
 **Prompt template:**
 ```
-Comic book illustration, bold ink lines, graphic novel style. A [YEAR] American [vehicle type]. [DESIGN DESCRIPTION]. [SETTING]. Black and white.
+Photorealistic photograph of a [YEAR] [vehicle type]. [Design description, distinctive features]. Professional automotive photography, period-accurate details, [COLOR: "black and white" for pre-1955, "color" for 1955+].
 ```
 
 ## Stub Requirements
@@ -84,4 +84,4 @@ When inventing supporting entities, create stubs:
 
 ## Completion
 
-Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).
+Follow the 4-phase checklist in [article-global-rules](../article-global-rules/skill.md).

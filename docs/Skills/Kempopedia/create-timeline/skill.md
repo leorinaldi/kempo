@@ -2,7 +2,7 @@
 
 Create or update timeline pages for Kempopedia.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## Timeline Structure
 

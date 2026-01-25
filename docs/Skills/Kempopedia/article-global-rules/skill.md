@@ -1,8 +1,57 @@
-# Kempopedia Global Rules
+# Kempopedia Article Global Rules
 
 These rules apply to ALL Kempopedia article creation. Reference this skill before creating any content.
 
-## 1. Simulation Date Rule
+## 1. Database Storage Format (CRITICAL)
+
+The create-* skills show articles in a **documentation format** (frontmatter + JSON block + content). When saving to the database, these must be **parsed and stored separately**:
+
+| Skill Format | Database Field | Notes |
+|--------------|----------------|-------|
+| YAML frontmatter | `title`, `type`, `subtype`, `tags`, `dates`, `status` | Each field stored separately |
+| JSON infobox block | `infobox` (JSON column) | Store as parsed object, NOT as string |
+| Markdown content | `content` | Body text only, NO frontmatter or JSON block |
+
+### Correct Database Storage
+
+```typescript
+await prisma.article.create({
+  data: {
+    title: "Oklahoma Wind",
+    type: "culture",
+    subtype: "broadway",
+    status: "published",
+    tags: ["broadway", "musical", "1943"],
+    dates: ["March 31, 1943 k.y."],
+    publishDate: new Date("1943-12-31"),
+    infobox: {  // JSON object, not string
+      type: "show",
+      image: { url: "https://...", caption: "..." },
+      fields: { Music: "[[jerome-goodwin|Jerome Goodwin]]", ... }
+    },
+    content: "***Oklahoma Wind*** is a landmark 1943 Broadway musical..."  // NO frontmatter or JSON
+  }
+})
+```
+
+### Common Mistake (DO NOT DO THIS)
+
+```typescript
+// WRONG: Storing entire markdown file as content
+content: `---
+title: "Oklahoma Wind"
+---
+
+\`\`\`json
+{ "infobox": { ... } }
+\`\`\`
+
+***Oklahoma Wind*** is...`
+```
+
+This causes the JSON to render as visible text on the page.
+
+## 2. Simulation Date Rule
 
 The Kempo universe is a living simulation. The current simulation date is the "present day."
 
@@ -11,7 +60,46 @@ The Kempo universe is a living simulation. The current simulation date is the "p
 - **No "Death and legacy" sections** for living people
 - **Anachronism check**: Don't use terms/concepts that wouldn't exist yet
 
-## 2. Real People vs Kempo Inspirations
+## 3. Article Temporal System (publishDate & Revisions)
+
+Users can view the Kempo universe at different dates via the homepage date selector. Articles must have correct temporal metadata.
+
+### 3.1 publishDate Field
+
+Every article has a `publishDate` — the Kempo date when the article content was last updated.
+
+- **New articles**: Set `publishDate` to the end of the period covered (e.g., Dec 31, 1950 for 1950 content)
+- **Viewing behavior**: If user views at June 1950, articles with `publishDate > June 1950` check for revisions
+
+### 3.2 Updating Existing Articles (CRITICAL)
+
+When adding new events to an existing article (e.g., adding Korean War content to a person's biography):
+
+1. **Create a Revision FIRST** with the OLD content:
+   ```typescript
+   await prisma.revision.create({
+     data: {
+       articleId: article.id,
+       title: article.title,
+       content: article.content,
+       infobox: article.infobox,  // Must use full Vercel Blob URLs
+       kempoDate: "January 1, 1950 k.y."  // When old version was current
+     }
+   })
+   ```
+
+2. **Then update the article** with new content and new `publishDate`
+
+**Why?** Without a revision, users viewing at earlier dates see nothing (article returns null).
+
+### 3.3 dates Array
+
+The `dates` field is an array of all Kempo dates mentioned in the article (for search/indexing):
+- Format: `"June 25, 1950 k.y."` or `"1950 k.y."`
+- Include birth dates, event dates, founding dates, etc.
+- Update this array when adding new events
+
+## 4. Real People vs Kempo Inspirations
 
 **Kempo is an alternate universe. All major historical figures should have Kempo equivalents for consistency.**
 
@@ -30,7 +118,7 @@ Use this rule to determine whether to create a Kempo inspiration:
 
 The goal is a coherent alternate universe where Kempo-original names appear consistently throughout all content.
 
-## 3. Character Reuse Before Creation (MANDATORY)
+## 5. Character Reuse Before Creation (MANDATORY)
 
 **Before creating a new fictional person, search Kempopedia for existing characters who could fill the role.**
 
@@ -79,7 +167,7 @@ If you use an existing character in a new context:
 
 This creates bidirectional links and enriches both articles.
 
-## 4. No Dead Links Rule (MANDATORY)
+## 6. No Dead Links Rule (MANDATORY)
 
 **Every wikilink must point to an existing article. Zero tolerance for dead links.**
 
@@ -128,7 +216,7 @@ After completing any article:
 3. **Create missing stubs** immediately
 4. **Verify stubs link back** to your new article
 
-## 5. Infobox Field Naming
+## 7. Infobox Field Naming
 
 **Infobox field names must be capitalized (Title Case or Sentence case).**
 
@@ -169,7 +257,7 @@ Field names appear as row labels in the right-hand panel. They should be human-r
 | Children | | | |
 | Known_for | | | |
 
-## 6. Infobox Wikilinks
+## 8. Infobox Wikilinks
 
 **Infobox JSON fields now support wikilink syntax.**
 
@@ -199,7 +287,7 @@ Use wikilinks in infobox fields where linking makes sense:
 - Nationalities
 - Descriptive text that isn't an article title
 
-## 7. Wikilink Slug Consistency
+## 9. Wikilink Slug Consistency
 
 **Use pipe syntax when the display name differs from the slug.**
 
@@ -213,7 +301,7 @@ Slugs are lowercase with hyphens. If the display name has capitals, spaces, or m
 [[world-war-ii|World War II]]
 ```
 
-## 8. Political Parties
+## 10. Political Parties
 
 **Use Kempo political parties, not real-world ones.**
 
@@ -224,7 +312,7 @@ Slugs are lowercase with hyphens. If the display name has capitals, spaces, or m
 
 Always use the Kempo party names in articles.
 
-## 9. Real-World Event Articles
+## 11. Real-World Event Articles
 
 **Focus on Kempo-specific divergences, not full history rewrites.**
 
@@ -234,7 +322,7 @@ When creating articles for real-world events (WWI, WWII, etc.):
 - Example: WWII article notes that President Kellman (not Truman) authorized the atomic bombs
 - Link back to relevant Kempo people/entities
 
-## 10. Inspiration Completeness
+## 12. Inspiration Completeness
 
 **When creating an inspiration, also create related inspirations.**
 
@@ -249,7 +337,7 @@ Each inspiration needs:
 1. An entry in the Inspirations table
 2. Its own stub article (no dead links!)
 
-## 11. Article File Organization
+## 13. Article File Organization
 
 Articles are organized by type in subdirectories:
 
@@ -265,7 +353,7 @@ web/content/articles/
 └── inspirations.md
 ```
 
-## 12. Frontmatter Format
+## 14. Frontmatter Format
 
 Use the modern hybrid categorization format:
 
@@ -286,7 +374,7 @@ dates:
 ---
 ```
 
-## 13. Inspiration Entry Format
+## 15. Inspiration Entry Format
 
 Inspirations are stored in the database Inspiration table with:
 
@@ -302,7 +390,7 @@ Real World Name → [[Kempo Equivalent]]
 
 Each entry on its own line, with a blank line between entries.
 
-## 14. Image Generation (MANDATORY)
+## 16. Image Generation (MANDATORY)
 
 **Every article of type Person, Place, or Institution MUST have an image.**
 
@@ -336,9 +424,11 @@ Each entry on its own line, with a blank line between entries.
 
 ### Prompt Guidelines
 
-- Always end prompts with: "Comic book style drawing."
-- Use "Black and white" for pre-1955 scenes (except flags)
-- Flags are always full color against blue sky
+**Use photorealistic style for all new images.**
+
+- Use the prompt formulas in [generate-image](../generate-image/skill.md)
+- Use "black and white" for pre-1955 subjects, "color" for 1955+
+- Flags and logos are always full color
 - See type-specific skills for detailed prompt examples
 
 ### Color by Era
@@ -351,7 +441,7 @@ Each entry on its own line, with a blank line between entries.
 
 Use the current simulation date to determine color style.
 
-## 15. Second-Order Updates (MANDATORY)
+## 17. Second-Order Updates (MANDATORY)
 
 **After creating any article, you MUST update all linked pages.**
 
@@ -484,7 +574,7 @@ Before considering an article complete, verify:
 - [ ] All significant dates are added to timeline pages
 - [ ] Your article is in the "See also" of all closely related articles
 
-## 16. Table Formatting
+## 18. Table Formatting
 
 **AVOID MARKDOWN TABLES. The wiki renderer does not handle them reliably—rows often run together.**
 
@@ -522,7 +612,7 @@ If you must use a table (e.g., in this skill documentation), ensure:
 
 But for article content, **always prefer lists over tables**.
 
-## 17. Media Content (Audio/Video)
+## 19. Media Content (Audio/Video)
 
 **Media files are stored in Vercel Blob and embedded via the `media` array in article JSON.**
 
@@ -610,6 +700,77 @@ Album Article → links to → Artist, Label, individual Songs (track listing)
 Artist Article → links to → Songs, Albums (in discography)
 Label Article → links to → Artists, Notable releases
 ```
+
+---
+
+## 20. Entity-Article Linking (Database Integration)
+
+**Every Kempopedia article should be linked to a corresponding database entity.**
+
+The database tracks entities (Person, Organization, Brand, Product, places, etc.) separately from articles. This enables:
+- Structured data queries and filtering
+- Relationship tracking between entities
+- Image linking via ImageSubject
+- Inspiration (real-world parallel) tracking
+- Event system integration
+
+### 18.1 The Two-Record Pattern
+
+When creating content, you typically create TWO records:
+
+1. **Article** — The Kempopedia content (prose, infobox, media)
+2. **Entity** — The database record (structured fields, relationships)
+
+The entity's `articleId` field links them together.
+
+### 18.2 Workflow: Article First, Then Entity
+
+**Recommended order:**
+
+1. **Create the article** with content and infobox
+2. **Generate the image** and add to article infobox
+3. **Create the database entity** at `/admin/world-data/{type}`
+4. **Link the article** by selecting it in the entity form
+5. **Add inspirations** if the entity has real-world parallels
+6. **Link the image** to the entity via ImageSubject (optional but recommended)
+
+### 18.3 Entity Types and Their Admin Paths
+
+| Entity Type | Admin Path | Article Type |
+|-------------|------------|--------------|
+| Person | `/admin/world-data/people` | person |
+| Organization | `/admin/world-data/organizations` | organization |
+| Brand | `/admin/world-data/brands` | brand |
+| Product | `/admin/world-data/products` | product |
+| Nation | `/admin/world-data/locations` | place (subtype: nation) |
+| State | `/admin/world-data/locations` | place (subtype: state) |
+| City | `/admin/world-data/locations` | place (subtype: city) |
+| Place | `/admin/world-data/locations` | place |
+| Album | `/admin/world-data/albums` | culture (subtype: album) |
+| PublicationSeries | `/admin/world-data/publications` | publication |
+
+### 18.4 Linking Images to Entities
+
+After generating an image, link it to the relevant entity:
+
+1. Go to `/admin/world-data/image/manage`
+2. Find the image and click Edit
+3. The "Linked Subjects" section shows connections
+4. Use the API or admin UI to add ImageSubject links
+
+This enables queries like "show all images of Frank Martino" across the system.
+
+### 18.5 Recording Inspirations
+
+For entities based on real-world parallels:
+
+1. Go to the entity's edit form in admin
+2. Find the "Inspirations" section
+3. Add entries with:
+   - Real-world name
+   - Wikipedia URL (if available)
+
+This tracks the creative sources and helps maintain consistency.
 
 ---
 

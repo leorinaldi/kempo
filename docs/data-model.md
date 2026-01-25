@@ -237,4 +237,4 @@ This creates bidirectional navigation: entity admin shows linked article, articl
 | Entity CRUD operations | `/admin/world-data/*` |
 | Publications management | `/admin/world-data/publications` |
 | Event system details | `docs/event-system.md` |
-| Article creation rules | `docs/Skills/Kempopedia/global-rules` |
+| Article creation rules | `docs/Skills/Kempopedia/article-global-rules` |

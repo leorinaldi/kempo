@@ -7,6 +7,9 @@ import { VideoPlayer } from '@/components/VideoPlayer'
 import { KempopediaHeader } from '@/components/KempopediaHeader'
 import { getKYDateFromCookie } from '@/lib/ky-date'
 
+// Force dynamic rendering to respect viewing date from cookies
+export const dynamic = 'force-dynamic'
+
 interface PageProps {
   params: Promise<{ slug: string }>
 }

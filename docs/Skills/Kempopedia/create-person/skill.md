@@ -2,7 +2,7 @@
 
 Create a biographical article for a fictional character in the Kempo universe.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## Context
 
@@ -100,14 +100,17 @@ node scripts/generate-image.js <slug> "<prompt>"
 
 **Prompt template:**
 ```
-Image of a fictional [ROLE] in [TIME PERIOD]. [PHYSICAL DESCRIPTION]. [CLOTHING]. Black and white portrait. Comic book style drawing.
+Photorealistic portrait photograph of a [age] [ethnicity] [gender], [role/profession].
+[Physical description: expression, distinctive features].
+Wearing [period-accurate clothing].
+Professional studio lighting, [era] photography style, [COLOR: "black and white" for pre-1955, "color" for 1955+].
 ```
 
 See [generate-image](../generate-image/skill.md) for detailed prompt examples.
 
 ## Completion
 
-Follow the 4-phase checklist in [global-rules](../global-rules/skill.md):
+Follow the 4-phase checklist in [article-global-rules](../article-global-rules/skill.md):
 1. Content Quality
 2. Link Integrity (no dead links)
 3. Timeline Synchronization

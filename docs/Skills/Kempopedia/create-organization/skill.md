@@ -2,7 +2,7 @@
 
 Create an article for an organization, academy, or agency in the Kempo universe.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## Organization Subtypes
 
@@ -87,12 +87,12 @@ node scripts/generate-image.js <slug> "<prompt>"
 
 **For logos:**
 ```
-[Symbol] on a white background as a logo for [organization]. Clean graphic design. Comic book style drawing.
+[Symbol] on a white background as a logo for [organization]. Clean graphic design, professional quality.
 ```
 
 **For buildings:**
 ```
-Comic book illustration, bold ink lines, graphic novel style. [Building description] in [City]. [Architecture]. [COLOR STYLE].
+Photorealistic photograph of [building description] in [City]. [Architectural details]. Professional architectural photography, period-accurate details, [COLOR: "black and white" for pre-1955, "color" for 1955+].
 ```
 
 See [generate-image](../generate-image/skill.md) for examples.
@@ -109,4 +109,4 @@ See [generate-image](../generate-image/skill.md) for examples.
 
 ## Completion
 
-Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).
+Follow the 4-phase checklist in [article-global-rules](../article-global-rules/skill.md).

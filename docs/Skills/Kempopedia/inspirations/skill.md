@@ -2,7 +2,7 @@
 
 Create and manage real-world inspirations for Kempo entities.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## What is an Inspiration?
 

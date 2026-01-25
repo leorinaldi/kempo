@@ -2,7 +2,7 @@
 
 Create articles for songs, albums, films, or other cultural works.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## Media Types
 
@@ -117,4 +117,4 @@ When creating media articles:
 
 ## Completion
 
-Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).
+Follow the 4-phase checklist in [article-global-rules](../article-global-rules/skill.md).

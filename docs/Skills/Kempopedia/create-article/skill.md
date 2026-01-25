@@ -2,7 +2,7 @@
 
 Generic article creation for Kempopedia.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 For specific article types, use the dedicated skills:
 - [create-person](../create-person/skill.md) — Biographical articles
@@ -69,4 +69,4 @@ dates:
 
 ## Completion
 
-Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).
+Follow the 4-phase checklist in [article-global-rules](../article-global-rules/skill.md).

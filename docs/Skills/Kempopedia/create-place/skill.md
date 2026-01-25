@@ -2,7 +2,7 @@
 
 Create an article for a location in the Kempo universe.
 
-> **Required**: Read [global-rules](../global-rules/skill.md) first for mandatory rules.
+> **Required**: Read [article-global-rules](../article-global-rules/skill.md) first for mandatory rules.
 
 ## Place Types
 
@@ -82,7 +82,12 @@ node scripts/generate-image.js <slug> "<prompt>"
 
 **Prompt template:**
 ```
-Comic book illustration, bold ink lines, graphic novel style. [SCENE] in [LOCATION]. [DETAILS]. [COLOR STYLE].
+Photorealistic photograph of [scene description] in [location]. [Architectural or landscape details]. Professional photography, period-accurate details, [COLOR: "black and white" for pre-1955, "color" for 1955+].
+```
+
+**For flags (always color):**
+```
+Flag of [nation name] waving against blue sky. [Design description: colors, symbols]. Full color, crisp edges.
 ```
 
 **Color by era** (except flags, which are always color):
@@ -102,4 +107,4 @@ Example: "Lamar, Missouri" → "Lawton, Missouri"
 
 ## Completion
 
-Follow the 4-phase checklist in [global-rules](../global-rules/skill.md).
+Follow the 4-phase checklist in [article-global-rules](../article-global-rules/skill.md).

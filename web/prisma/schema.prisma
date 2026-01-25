@@ -446,6 +446,8 @@ model Series {
   startYear   Int?          @map("start_year")
   endYear     Int?          @map("end_year")
   description String?       @db.Text
+  articleId   String?       @unique @map("article_id")
+  article     Article?      @relation(fields: [articleId], references: [id], onDelete: SetNull)
   createdAt   DateTime      @default(now()) @map("created_at")
   updatedAt   DateTime      @updatedAt @map("updated_at")
 
@@ -762,6 +764,7 @@ model Article {
   album              Album?
   images             Image[]
   publicationSeries  PublicationSeries?
+  series             Series?
 
   @@index([type])
   @@index([status])

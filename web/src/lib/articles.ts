@@ -277,16 +277,48 @@ export async function getArticleBySlugOrId(
 
   if (!dbArticle) return null
 
-  // Check if article is published at this viewing date
+  // Check if we need to use a revision instead of current content
+  let contentToUse = dbArticle.content
+  let titleToUse = dbArticle.title
+  let infoboxToUse = dbArticle.infobox
+  let timelineEventsToUse = dbArticle.timelineEvents
+
   if (viewingDate && dbArticle.publishDate) {
     const viewDate = kyDateToDate(viewingDate)
     if (viewDate < dbArticle.publishDate) {
-      return null // Article doesn't exist yet at this viewing date
+      // Viewing date is before current publishDate - check for revision
+      const revisions = await prisma.revision.findMany({
+        where: { articleId: dbArticle.id },
+        orderBy: { createdAt: 'desc' },
+      })
+
+      // Find the most recent revision that was current at the viewing date
+      let matchingRevision = null
+      for (const rev of revisions) {
+        if (rev.kempoDate) {
+          const revDate = parseKempoDateString(rev.kempoDate)
+          if (revDate && revDate <= viewDate) {
+            matchingRevision = rev
+            break // Found most recent revision valid at this date
+          }
+        }
+      }
+
+      if (matchingRevision) {
+        // Use revision content instead of current
+        contentToUse = matchingRevision.content
+        titleToUse = matchingRevision.title
+        infoboxToUse = matchingRevision.infobox
+        timelineEventsToUse = matchingRevision.timelineEvents
+      } else {
+        // No revision exists for this viewing date - article doesn't exist yet
+        return null
+      }
     }
   }
 
   // Process content with simplified wikilinks (no linkMap needed)
-  const processedContent = processWikilinksSimple(dbArticle.content)
+  const processedContent = processWikilinksSimple(contentToUse)
 
   // Process markdown to HTML
   const htmlResult = await remark()
@@ -296,7 +328,7 @@ export async function getArticleBySlugOrId(
   return {
     id: dbArticle.id,
     frontmatter: {
-      title: dbArticle.title,
+      title: titleToUse,
       id: dbArticle.id,
       type: dbArticle.type,
       subtype: dbArticle.subtype || undefined,
@@ -306,9 +338,9 @@ export async function getArticleBySlugOrId(
     },
     content: processedContent,
     htmlContent: htmlResult.toString(),
-    infobox: dbArticle.infobox as Article['infobox'],
+    infobox: infoboxToUse as Article['infobox'],
     media: dbArticle.mediaRefs as Article['media'],
-    timelineEvents: dbArticle.timelineEvents as Article['timelineEvents'],
+    timelineEvents: timelineEventsToUse as Article['timelineEvents'],
   }
 }
 
@@ -348,8 +380,37 @@ export function kyDateToDate(kyDate: { month: number; year: number }): Date {
   return new Date(kyDate.year, kyDate.month - 1, 28, 23, 59, 59)
 }
 
+// Parse kempoDate string like "January 1, 1950 k.y." to Date
+function parseKempoDateString(kempoDate: string): Date | null {
+  // Match patterns like "January 1, 1950 k.y." or "January 1950 k.y."
+  const fullMatch = kempoDate.match(/(\w+)\s+(\d+),?\s+(\d+)\s*k\.y\./i)
+  const monthYearMatch = kempoDate.match(/(\w+)\s+(\d+)\s*k\.y\./i)
+
+  const monthNames: Record<string, number> = {
+    'january': 0, 'february': 1, 'march': 2, 'april': 3,
+    'may': 4, 'june': 5, 'july': 6, 'august': 7,
+    'september': 8, 'october': 9, 'november': 10, 'december': 11
+  }
+
+  if (fullMatch) {
+    const [, month, day, year] = fullMatch
+    const monthNum = monthNames[month.toLowerCase()]
+    if (monthNum !== undefined) {
+      return new Date(parseInt(year), monthNum, parseInt(day))
+    }
+  } else if (monthYearMatch) {
+    const [, month, year] = monthYearMatch
+    const monthNum = monthNames[month.toLowerCase()]
+    if (monthNum !== undefined) {
+      return new Date(parseInt(year), monthNum, 1)
+    }
+  }
+
+  return null
+}
+
 // Get article by ID, filtered by viewing date
-// Returns null if article doesn't exist OR if viewing date is before publish date
+// Returns revision content if viewing date is before current publishDate but a revision exists
 export async function getArticleByIdAsOf(
   id: string,
   viewingDate?: { month: number; year: number }
@@ -360,18 +421,50 @@ export async function getArticleByIdAsOf(
 
   if (!dbArticle) return null
 
-  // Check if article is published at this viewing date
+  // Check if we need to use a revision instead of current content
+  let contentToUse = dbArticle.content
+  let titleToUse = dbArticle.title
+  let infoboxToUse = dbArticle.infobox
+  let timelineEventsToUse = dbArticle.timelineEvents
+
   if (viewingDate && dbArticle.publishDate) {
     const viewDate = kyDateToDate(viewingDate)
     if (viewDate < dbArticle.publishDate) {
-      return null // Article doesn't exist yet at this viewing date
+      // Viewing date is before current publishDate - check for revision
+      const revisions = await prisma.revision.findMany({
+        where: { articleId: dbArticle.id },
+        orderBy: { createdAt: 'desc' },
+      })
+
+      // Find the most recent revision that was current at the viewing date
+      let matchingRevision = null
+      for (const rev of revisions) {
+        if (rev.kempoDate) {
+          const revDate = parseKempoDateString(rev.kempoDate)
+          if (revDate && revDate <= viewDate) {
+            matchingRevision = rev
+            break // Found most recent revision valid at this date
+          }
+        }
+      }
+
+      if (matchingRevision) {
+        // Use revision content instead of current
+        contentToUse = matchingRevision.content
+        titleToUse = matchingRevision.title
+        infoboxToUse = matchingRevision.infobox
+        timelineEventsToUse = matchingRevision.timelineEvents
+      } else {
+        // No revision exists for this viewing date - article doesn't exist yet
+        return null
+      }
     }
   }
 
   // Extract wikilink targets and build link map
-  const targets = extractWikilinkTargets(dbArticle.content)
+  const targets = extractWikilinkTargets(contentToUse)
   // Also extract from infobox fields if present
-  const infobox = dbArticle.infobox as Article['infobox']
+  const infobox = infoboxToUse as Article['infobox']
   if (infobox?.fields) {
     for (const value of Object.values(infobox.fields)) {
       if (typeof value === 'string') {
@@ -387,7 +480,25 @@ export async function getArticleByIdAsOf(
   }
 
   const linkMap = await getArticleIdsByTitles(Array.from(new Set(targets)))
-  const article = prismaToArticle(dbArticle, linkMap)
+
+  // Build article object with appropriate content
+  const article: Article = {
+    id: dbArticle.id,
+    frontmatter: {
+      title: titleToUse,
+      id: dbArticle.id,
+      type: dbArticle.type,
+      subtype: dbArticle.subtype || undefined,
+      status: dbArticle.status,
+      tags: dbArticle.tags,
+      dates: dbArticle.dates,
+    },
+    content: processWikilinks(contentToUse, linkMap),
+    htmlContent: '', // Will be set below
+    infobox: infoboxToUse as Article['infobox'],
+    media: dbArticle.mediaRefs as Article['media'],
+    timelineEvents: timelineEventsToUse as Article['timelineEvents'],
+  }
 
   // Process markdown to HTML
   const processedContent = await remark()

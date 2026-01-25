@@ -392,7 +392,7 @@ When designing entities or writing narratives, create unique Kempo terms for maj
 | `create-organization` | Writes the Kempopedia article for an organization |
 | `create-brand` | Writes the Kempopedia article for a brand |
 | `kempo-yearbook` | References this skill during gap-filling |
-| `global-rules` | Applies to all article creation after design is complete |
+| `article-global-rules` | Applies to all article creation after design is complete |
 | `inspirations` | Records the real-world to Kempo mappings |
 
 ---
