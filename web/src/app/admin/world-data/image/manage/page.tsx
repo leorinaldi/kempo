@@ -88,13 +88,25 @@ export default function ImageManagePage() {
   // Image files from database
   const [imageFiles, setImageFiles] = useState<ImageFile[]>([])
 
-  // Library sorting
+  // Library sorting and search
   const [sortField, setSortField] = useState<"name" | "createdAt" | "kyDate">("createdAt")
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc")
+  const [searchQuery, setSearchQuery] = useState("")
 
   const stripPunctuation = (str: string) => str.replace(/^[^\w\s]+/, "").toLowerCase()
 
-  const sortedImageFiles = [...imageFiles].sort((a, b) => {
+  // Filter by search query
+  const filteredImageFiles = imageFiles.filter((file) => {
+    if (!searchQuery.trim()) return true
+    const query = searchQuery.toLowerCase()
+    return (
+      file.name.toLowerCase().includes(query) ||
+      file.description?.toLowerCase().includes(query) ||
+      file.category?.toLowerCase().includes(query)
+    )
+  })
+
+  const sortedImageFiles = [...filteredImageFiles].sort((a, b) => {
     let comparison = 0
     if (sortField === "name") {
       comparison = stripPunctuation(a.name).localeCompare(stripPunctuation(b.name))
@@ -133,6 +145,15 @@ export default function ImageManagePage() {
   const [saving, setSaving] = useState(false)
   const [editMessage, setEditMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [linkedSubjects, setLinkedSubjects] = useState<LinkedSubject[]>([])
+
+  // Regenerate modal
+  const [regenerateModal, setRegenerateModal] = useState<ImageFile | null>(null)
+  const [regenerateTool, setRegenerateTool] = useState<"grok" | "gemini">("gemini")
+  const [regeneratePrompt, setRegeneratePrompt] = useState("")
+  const [generating, setGenerating] = useState(false)
+  const [previewData, setPreviewData] = useState<{ base64: string; mimeType: string; generationTool: string } | null>(null)
+  const [accepting, setAccepting] = useState(false)
+  const [regenerateMessage, setRegenerateMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Load image files on mount
   useEffect(() => {
@@ -217,6 +238,95 @@ export default function ImageManagePage() {
   const closeEditModal = () => {
     setEditModal(null)
     setEditMessage(null)
+  }
+
+  const openRegenerateModal = (file: ImageFile) => {
+    setRegenerateModal(file)
+    setRegenerateTool(file.generationTool?.includes("gemini") ? "gemini" : "grok")
+    setRegeneratePrompt(file.prompt || "")
+    setPreviewData(null)
+    setRegenerateMessage(null)
+  }
+
+  const closeRegenerateModal = () => {
+    setRegenerateModal(null)
+    setPreviewData(null)
+    setRegenerateMessage(null)
+  }
+
+  const generatePreview = async () => {
+    if (!regenerateModal || !regeneratePrompt.trim()) return
+
+    setGenerating(true)
+    setPreviewData(null)
+    setRegenerateMessage(null)
+
+    try {
+      const res = await fetch("/api/image/regenerate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: regeneratePrompt,
+          tool: regenerateTool,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || "Generation failed")
+      }
+
+      setPreviewData({
+        base64: data.base64,
+        mimeType: data.mimeType,
+        generationTool: data.generationTool,
+      })
+    } catch (error) {
+      setRegenerateMessage({ type: "error", text: error instanceof Error ? error.message : "Generation failed" })
+    } finally {
+      setGenerating(false)
+    }
+  }
+
+  const acceptPreview = async () => {
+    if (!regenerateModal || !previewData) return
+
+    setAccepting(true)
+    setRegenerateMessage(null)
+
+    try {
+      const res = await fetch("/api/image/regenerate/accept", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          originalImageId: regenerateModal.id,
+          base64: previewData.base64,
+          mimeType: previewData.mimeType,
+          generationTool: previewData.generationTool,
+          prompt: regeneratePrompt,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to save image")
+      }
+
+      setRegenerateMessage({ type: "success", text: "Image replaced successfully!" })
+      await reloadImageFiles()
+
+      // Close both modals after a short delay
+      setTimeout(() => {
+        closeRegenerateModal()
+        closeEditModal()
+      }, 1500)
+    } catch (error) {
+      setRegenerateMessage({ type: "error", text: error instanceof Error ? error.message : "Failed to save image" })
+    } finally {
+      setAccepting(false)
+    }
   }
 
   const saveEdit = async () => {
@@ -306,7 +416,7 @@ export default function ImageManagePage() {
     <AdminPageLayout title="Manage Images" backHref="/admin/world-data/image" color="blue">
       {/* Image Library */}
       <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Image Library</h2>
           <div className="flex items-center gap-2">
             <select
@@ -326,6 +436,22 @@ export default function ImageManagePage() {
               {sortDirection === "asc" ? "↑" : "↓"}
             </button>
           </div>
+        </div>
+
+        {/* Search bar */}
+        <div className="mb-4">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search images by name..."
+            className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+          />
+          {searchQuery && (
+            <p className="text-xs text-gray-500 mt-1">
+              Showing {sortedImageFiles.length} of {imageFiles.length} images
+            </p>
+          )}
         </div>
 
         <MessageBanner message={libraryMessage} className="mb-4" />
@@ -600,6 +726,21 @@ export default function ImageManagePage() {
               </div>
             </div>
 
+            {/* Regenerate section */}
+            {editModal.prompt && (
+              <div className="mt-6 border-t pt-4">
+                <button
+                  onClick={() => openRegenerateModal(editModal)}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+                  </svg>
+                  Regenerate Image...
+                </button>
+              </div>
+            )}
+
             {/* Linked Subjects section */}
             <div className="mt-6 border-t pt-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">Linked Subjects</h4>
@@ -778,6 +919,122 @@ export default function ImageManagePage() {
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
               >
                 {saving ? "Saving..." : "Save Changes"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Regenerate Modal */}
+      {regenerateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-bold mb-4">Regenerate Image</h3>
+
+            {regenerateMessage && (
+              <div
+                className={`mb-4 p-3 rounded ${
+                  regenerateMessage.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                }`}
+              >
+                {regenerateMessage.text}
+              </div>
+            )}
+
+            {/* Side-by-side comparison */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {/* Current image */}
+              <div className="border rounded-lg p-4">
+                <h4 className="text-sm font-medium text-gray-600 mb-2 text-center">Current</h4>
+                <div className="aspect-square bg-gray-100 rounded flex items-center justify-center overflow-hidden">
+                  <img
+                    src={regenerateModal.url}
+                    alt={regenerateModal.name}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-2 text-center truncate">{regenerateModal.name}</p>
+              </div>
+
+              {/* Preview */}
+              <div className="border rounded-lg p-4">
+                <h4 className="text-sm font-medium text-gray-600 mb-2 text-center">Preview</h4>
+                <div className="aspect-square bg-gray-100 rounded flex items-center justify-center overflow-hidden">
+                  {generating ? (
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-2"></div>
+                      <p className="text-sm text-gray-500">Generating...</p>
+                    </div>
+                  ) : previewData ? (
+                    <img
+                      src={`data:${previewData.mimeType};base64,${previewData.base64}`}
+                      alt="Preview"
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  ) : (
+                    <p className="text-sm text-gray-400">Click &quot;Generate Preview&quot; to see result</p>
+                  )}
+                </div>
+                {previewData && (
+                  <p className="text-xs text-gray-500 mt-2 text-center">
+                    Generated with {previewData.generationTool}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* Controls */}
+            <div className="space-y-4">
+              {/* Tool selector */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Generation Tool</label>
+                <select
+                  value={regenerateTool}
+                  onChange={(e) => setRegenerateTool(e.target.value as "grok" | "gemini")}
+                  className="w-full border border-gray-300 rounded px-3 py-2"
+                  disabled={generating}
+                >
+                  <option value="gemini">Gemini (gemini-2.0-flash-exp) - Best for images with text</option>
+                  <option value="grok">Grok (grok-2-image-1212) - Good for portraits, landscapes</option>
+                </select>
+              </div>
+
+              {/* Prompt editor */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Generation Prompt</label>
+                <textarea
+                  value={regeneratePrompt}
+                  onChange={(e) => setRegeneratePrompt(e.target.value)}
+                  className="w-full border border-gray-300 rounded px-3 py-2 font-mono text-sm"
+                  rows={4}
+                  disabled={generating}
+                  placeholder="Enter the prompt for image generation..."
+                />
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex gap-3 mt-6">
+              <button
+                onClick={closeRegenerateModal}
+                disabled={generating || accepting}
+                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={generatePreview}
+                disabled={generating || accepting || !regeneratePrompt.trim()}
+                className="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+              >
+                {generating ? "Generating..." : "Generate Preview"}
+              </button>
+              <button
+                onClick={acceptPreview}
+                disabled={!previewData || generating || accepting}
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded disabled:opacity-50"
+              >
+                {accepting ? "Saving..." : "Use This Image"}
               </button>
             </div>
           </div>

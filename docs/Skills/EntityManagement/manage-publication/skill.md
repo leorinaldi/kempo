@@ -59,7 +59,7 @@ Determine:
 
 ### Step 3: Create the Article
 
-Follow [create-publication](../../Kempopedia/create-publication/skill.md) to write the article.
+Follow [article-publication](../../Kempopedia/article-publication/skill.md) to write the article.
 
 **Key article elements:**
 - Infobox with type, publisher, frequency, founding date
@@ -90,17 +90,18 @@ Magazine cover for [Publication Name], [month year] issue. [Cover subject]. [Era
 
 Navigate to `/admin/world-data/publications`
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| name | Yes | Publication name |
-| type | Yes | newspaper, magazine, book, comic |
-| publisherId | Yes | Link to publisher Organization |
-| frequency | No | daily, weekly, monthly, etc. |
-| startKyDate | No | First issue date |
-| endKyDate | No | Final issue (null if ongoing) |
-| description | No | Brief description |
-| articleId | No | Link to Kempopedia article |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| name | **Required** | Publication name |
+| type | **Required** | newspaper, magazine, book, comic |
+| publisherId | Recommended | Link to publisher Organization — set when known |
+| frequency | Optional | daily, weekly, monthly, etc. |
+| startKyDate | Recommended | First issue date — include when known |
+| endKyDate | Optional | Final issue — null if ongoing |
+| description | Optional | Brief description |
+| articleId | **Required*** | Link to Kempopedia article |
+
+*Every PublicationSeries record should have a linked article. Create the article first, then link it.
 
 ### Step 6: Link the Article
 
@@ -125,20 +126,21 @@ For standalone books or notable issues:
 
 ### Step 1: Create Publication Record
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| title | Yes | Issue title or book title |
-| type | Yes | Must match series type (if in series) |
-| seriesId | No | Link to PublicationSeries |
-| publisherId | No | Publisher (can override series) |
-| kyDate | Yes | Publication date |
-| coverImageId | No | Link to cover Image |
-| pageCount | No | Number of pages |
-| genre | No | Content genre |
-| volume | No | Volume number |
-| issueNumber | No | Issue number |
-| edition | No | Edition info |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| title | **Required** | Issue title or book title |
+| type | **Required** | Must match series type (if in series) |
+| seriesId | Optional | Link to PublicationSeries — for issues in a series |
+| publisherId | Optional | Publisher — can override series publisher |
+| kyDate | Recommended | Publication date — include when known |
+| coverImageId | Optional | Link to cover Image |
+| pageCount | Optional | Number of pages |
+| url | Optional | PDF or readable content URL |
+| description | Optional | Brief description |
+| genre | Optional | Content genre |
+| volume | Optional | Volume number |
+| issueNumber | Optional | Issue number |
+| edition | Optional | Edition info (Morning, Evening, First Edition, etc.) |
 
 ### Step 2: Generate Cover Image
 

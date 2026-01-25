@@ -2,6 +2,23 @@
 
 These rules apply to ALL Kempopedia article creation. Reference this skill before creating any content.
 
+## Field Requirement Conventions
+
+All skill documentation uses these requirement levels:
+
+| Level | Meaning | Action |
+|-------|---------|--------|
+| **Required** | Must be provided — DB constraint or essential for entity | Always include |
+| **Required*** | Required for complete entity — every entity should have this | Include; asterisk explained in footnote |
+| **Recommended** | Should be provided when known — important but not enforced | Include when available |
+| **Has default** | DB provides default value — can omit if default is acceptable | Specify only to override default |
+| **Conditional** | Required only in certain contexts | See notes column |
+| **Optional** | Truly optional — include only when relevant | Include at your discretion |
+
+**Example footnote:** *Every Person record should have a linked article. Create the article first, then link it.
+
+---
+
 ## 1. Database Storage Format (CRITICAL)
 
 The create-* skills show articles in a **documentation format** (frontmatter + JSON block + content). When saving to the database, these must be **parsed and stored separately**:
@@ -29,7 +46,7 @@ await prisma.article.create({
       image: { url: "https://...", caption: "..." },
       fields: { Music: "[[jerome-goodwin|Jerome Goodwin]]", ... }
     },
-    content: "***Oklahoma Wind*** is a landmark 1943 Broadway musical..."  // NO frontmatter or JSON
+    content: "***Oklahoma Wind*** is a landmark 1943 Brightway musical..."  // NO frontmatter or JSON
   }
 })
 ```
@@ -268,7 +285,7 @@ Use wikilinks in infobox fields where linking makes sense:
 "Birth_place": "[[Lawton, Missouri]]"
 "Political_party": "[[National Party]]"
 "State": "[[Missouri]]"
-"Education": "[[Vermont Army Academy]]"
+"Education": "[[American Military Academy]]"
 
 // Non-linkable fields - plain text
 "Birth_date": "May 11, 1884 k.y."
@@ -467,7 +484,7 @@ For every article you link TO, update that article to link BACK to your new arti
 | An institution | Add your subject to "Notable alumni/members" or relevant section |
 | An event | Add your subject's involvement in that event |
 
-**Example:** If creating Douglas Westbrook who attended Vermont Army Academy, update the Vermont Army Academy article to list Westbrook as a notable graduate.
+**Example:** If creating Douglas Westbrook who attended American Military Academy, update the American Military Academy article to list Westbrook as a notable graduate.
 
 ### 15.2 Timeline Synchronization (MANDATORY)
 
@@ -803,6 +820,106 @@ For entities based on real-world parallels:
    - Wikipedia URL (if available)
 
 This tracks the creative sources and helps maintain consistency.
+
+---
+
+## 21. Fictional Content Requirements (MANDATORY)
+
+**All proper nouns in Kempo articles must be fictional, except for nations, states, and major cities.**
+
+Kempo is a coherent alternate universe. Content borrowed directly from the real world breaks immersion and creates inconsistency.
+
+### 21.1 What Must Be Fictionalized
+
+| Category | Rule | Example |
+|----------|------|---------|
+| **People** | All named individuals must be Kempo characters | Irving Lazar → Larry Swift |
+| **Universities/Schools** | Must use Kempo institutions | Columbia University → University of Philadelphia |
+| **Athletic Conferences** | Must use Kempo versions | Ivy League → Gothic League |
+| **Theater Names** | Must be Kempo venues | St. James Theatre → Imperial Theatre |
+| **Song/Show Titles** | Must be original | "Oh, What a Beautiful Mornin'" → "Golden Morning Light" |
+| **Character Names** (in shows/media) | Must be original | Curly McLain → Curly Dawson |
+| **Neighborhoods/Districts** | Must be Kempo places | Beverly Hills → Sycamore Hills |
+| **Brands/Products** | Must be Kempo entities | Use existing or create new |
+| **Awards** | Must use Kempo versions | Academy Award → Hollyvale Award |
+
+### 21.2 What Can Remain Real
+
+| Category | Rationale |
+|----------|-----------|
+| **Nations** | Too foundational to change (USA, France, Japan) |
+| **States/Provinces** | Geographic boundaries shared |
+| **Major Cities** | New York, Los Angeles, Chicago, etc. |
+| **Wars/Historical Events** | Names can match if participants are Kempo versions |
+| **General concepts** | Democracy, capitalism, jazz, etc. |
+
+### 21.3 Quotes and Lyrics
+
+**All quoted material must be original.** Never copy real-world:
+- Song lyrics
+- Famous quotes
+- Movie dialogue
+- Book passages
+
+Create Kempo-original equivalents that capture the spirit without copying.
+
+### 21.4 Approval Workflow for New Entities (CRITICAL)
+
+**Before creating a new Kempo entity, propose it for user approval.**
+
+When you encounter a real-world proper noun that needs a Kempo equivalent:
+
+1. **Identify the real-world inspiration**
+   - Name, Wikipedia link if available
+   - Brief description of what/who it is
+   - Why it appears in the current article
+
+2. **Propose a Kempo name**
+   - Suggest 2-3 options with rationale
+   - Explain naming inspiration/logic
+   - Note any existing similar entities
+
+3. **Wait for approval**
+   - User will select or suggest an alternative
+   - Do NOT create database records until approved
+
+4. **After approval, create**
+   - Entity record (Person, Organization, Place, etc.)
+   - Article with proper infobox
+   - Image if required (Person/Place/Institution)
+   - Inspiration record linking to real-world source
+
+**Example workflow:**
+
+```
+Claude: "The article mentions Beverly Hills. We need a Kempo equivalent.
+
+Real-world: Beverly Hills, California - affluent neighborhood in Los Angeles
+
+Proposed Kempo names:
+1. Sycamore Hills - evokes tree-lined estates
+2. Sterling Heights - suggests wealth
+3. Laurel Glen - botanical theme
+
+Which would you prefer?"
+
+User: "Sycamore Hills"
+
+Claude: [Now creates Place record, article, image, and inspiration]
+```
+
+### 21.5 Detecting Real-World Content
+
+When reviewing or creating articles, scan for:
+
+- **Proper nouns you don't recognize** — likely real-world
+- **Quotes in quotation marks** — verify they're original
+- **Song/show titles** — check against real discographies
+- **Character names** — verify not from real media
+- **Institution names** — check if real university/school/org
+- **Award names** — verify Kempo equivalent exists
+
+If uncertain whether something is real-world, research before including it.
 
 ---
 

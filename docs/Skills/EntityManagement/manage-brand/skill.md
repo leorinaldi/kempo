@@ -51,7 +51,7 @@ Determine:
 
 ### Step 3: Create the Article
 
-Follow [create-brand](../../Kempopedia/create-brand/skill.md) to write the article.
+Follow [article-brand](../../Kempopedia/article-brand/skill.md) to write the article.
 
 **Key article elements:**
 - Link to parent organization in infobox
@@ -74,14 +74,15 @@ Logo for [Brand Name], a [industry] brand. [Design description: colors, symbols,
 
 Navigate to `/admin/world-data/brands/create`
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| name | Yes | Brand name |
-| organizationId | Yes | Link to parent Organization |
-| dateFounded | No | When brand was established |
-| dateDiscontinued | No | When brand ended (null if active) |
-| articleId | No | Link to Kempopedia article |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| name | **Required** | Brand name |
+| organizationId | Recommended | Link to parent Organization — set when parent org is known |
+| dateFounded | Optional | When brand was established |
+| dateDiscontinued | Optional | When brand ended — null if active |
+| articleId | **Required*** | Link to Kempopedia article |
+
+*Every Brand record should have a linked article. Create the article first, then link it.
 
 ### Step 6: Link the Article
 

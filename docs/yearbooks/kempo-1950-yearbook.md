@@ -72,7 +72,7 @@ Frank Martino was the voice of the era. At 34, the crooner from Portside, New Je
 
 ### Theater
 
-On Broadway, Goodwin & Langford reigned supreme. Composer Jerome Goodwin (48) and lyricist Howard Langford (55) had revolutionized the musical—their shows weren't just entertainment but integrated works where songs advanced the story. *Oklahoma Wind* (1943) changed everything; *Prairie Carousel* (1945) deepened it; *Pacific Moon* (1949) proved they could tackle serious themes. Their leading lady was Maxine Merrill, the brassy, belting Queen of Broadway whose voice reached the back row without amplification. At 38, she was the biggest star on the Great White Way.
+On Brightway, Goodwin & Langford reigned supreme. Composer Jerome Goodwin (48) and lyricist Howard Langford (55) had revolutionized the musical—their shows weren't just entertainment but integrated works where songs advanced the story. *Oklahoma Wind* (1943) changed everything; *Prairie Carousel* (1945) deepened it; *Pacific Moon* (1949) proved they could tackle serious themes. Their leading lady was Maxine Merrill, the brassy, belting Queen of Brightway whose voice reached the back row without amplification. At 38, she was the biggest star on the Great White Way.
 
 ### Comics
 
@@ -228,7 +228,7 @@ What crashed in New Mexico in March 1949? Leonard Vance (43), the scientist who 
 
 ### Medicine
 
-At the Hartwell Medical Institute in Steel City (funded by the department store family's philanthropy), Dr. David Salter (36) raced against time to develop a vaccine for Rigorio, a childhood paralysis disease that struck terror into every parent's heart. Summers brought epidemics; iron lungs filled hospital wards; children who were running yesterday were crippled today. Salter, the son of a steelworker who chose research over a lucrative private practice, believed a killed-virus vaccine was the answer. His rival, Dr. Albert Kovar at Kingsley Medical Institute, pursued a live-virus approach. The National Foundation for Child Health funded both. Success remains elusive, but the groundwork is being laid. Parents contribute dimes to the cause, hoping for a miracle.
+At the Hartwell Medical Institute in Steel City (funded by the department store family's philanthropy), Dr. David Salter (36) raced against time to develop a vaccine for Rigorio, a childhood paralysis disease that struck terror into every parent's heart. Summers brought epidemics; iron lungs filled hospital wards; children who were running yesterday were crippled today. Salter, the son of a steelworker who chose research over a lucrative private practice, believed a killed-virus vaccine was the answer. His rival, Dr. Albert Kovar at New England University Medical School, pursued a live-virus approach. The National Foundation for Child Health funded both. Success remains elusive, but the groundwork is being laid. Parents contribute dimes to the cause, hoping for a miracle.
 
 ### Computing
 

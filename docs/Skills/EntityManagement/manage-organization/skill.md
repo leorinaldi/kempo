@@ -24,7 +24,7 @@ A fully managed Organization in Kempo has:
 | government-agency | Government body | Federal Bureau of Security |
 | military | Military branch | United States Army |
 | university | Higher education | Hartwell University |
-| institution | General institution | Vermont Army Academy |
+| institution | General institution | American Military Academy |
 | hospital | Medical facility | Motor City General |
 | religious | Religious organization | Churches |
 
@@ -52,7 +52,7 @@ Ensure these exist before creating:
 
 ### Step 3: Create the Article
 
-Follow [create-organization](../../Kempopedia/create-organization/skill.md) to write the article.
+Follow [article-organization](../../Kempopedia/article-organization/skill.md) to write the article.
 
 **Key article elements:**
 - Infobox with official name, abbreviation, founding date
@@ -86,19 +86,16 @@ Photorealistic photograph of [building description], headquarters of [Organizati
 
 Navigate to `/admin/world-data/organizations/create`
 
-**Required fields:**
-| Field | Description |
-|-------|-------------|
-| name | Official name |
-| orgType | See organization types above |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| name | **Required** | Official name |
+| orgType | **Required** | See organization types above |
+| abbreviation | Optional | Short form (UBC, FBI, etc.) |
+| dateFounded | Recommended | Founding date (k.y.) — include when known |
+| dateDissolved | Optional | End date — null if active |
+| articleId | **Required*** | Link to Kempopedia article |
 
-**Optional but recommended:**
-| Field | Description |
-|-------|-------------|
-| abbreviation | Short form (UBC, FBI, etc.) |
-| dateFounded | Founding date (k.y.) |
-| dateDissolved | End date (null if active) |
-| articleId | Link to Kempopedia article |
+*Every Organization record should have a linked article. Create the article first, then link it.
 
 ### Step 6: Link the Article
 
@@ -246,7 +243,7 @@ Link via EventMedia when the organization is subject of an event:
 | Democratic Party | National Party |
 | Republican Party | Federal Party |
 | FBI | Federal Bureau of Security |
-| West Point | Vermont Army Academy |
+| West Point | American Military Academy |
 | Harvard | Hartwell University |
 
 ## Database Schema Reference

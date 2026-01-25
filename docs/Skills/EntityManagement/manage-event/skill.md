@@ -117,16 +117,15 @@ const event = await prisma.event.create({
 });
 ```
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| title | Yes | Event name |
-| description | No | Brief description |
-| kyDateBegin | Yes | Start date |
-| kyDateEnd | No | End date (null for point events) |
-| eventType | Yes | See event types above |
-| significance | No | 1-10 scale, default 5 |
-| parentId | No | Parent event ID for hierarchy |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| title | **Required** | Event name |
+| description | Optional | Brief description |
+| kyDateBegin | **Required** | Start date |
+| kyDateEnd | Optional | End date — null for point events |
+| eventType | **Required** | See event types above |
+| significance | Has default | 1-10 scale — defaults to 5 |
+| parentId | Optional | Parent event ID — for hierarchical events |
 
 ### Step 4: Link People (EventPerson)
 
@@ -192,7 +191,7 @@ await prisma.eventRelation.create({
 
 For major events (significance 7+), create a dedicated article.
 
-Follow [create-event](../../Kempopedia/create-event/skill.md).
+Follow [article-event](../../Kempopedia/article-event/skill.md).
 
 ### Step 9: Update Related Articles
 

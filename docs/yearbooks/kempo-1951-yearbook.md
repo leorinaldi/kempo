@@ -12,7 +12,7 @@ The Red Panic reached its zenith. Victor and Helena Marsh were convicted of pass
 
 Yet this was also the year television came of age. *I Like Linda* debuted in October and became an instant phenomenon—Linda Lane's physical comedy and Rafael Morales' marimba-led orchestra captivated the nation. The Fletcher crime hearings, now televised, brought organized crime into living rooms and made 30 million Americans witnesses to the underworld. By year's end, over half of Kempo households owned a television.
 
-In the movie theaters, a newcomer named Marco Valenti smoldered in *Summer of Passion*, his T-shirt becoming a symbol of youthful rebellion. On Broadway, *The Emperor and the Lady* made Thomas Ling a star. In bookstores, Ernest Beckford's *The Wanderers* arrived as an instant classic. Joe King Brooks crossed over from jazz to pop and scored the year's biggest hit.
+In the movie theaters, a newcomer named Marco Valenti smoldered in *Summer of Passion*, his T-shirt becoming a symbol of youthful rebellion. On Brightway, *The Emperor and the Lady* made Thomas Ling a star. In bookstores, Ernest Beckford's *The Wanderers* arrived as an instant classic. Joe King Brooks crossed over from jazz to pop and scored the year's biggest hit.
 
 In sports, the Cleveland Scouts won the championship, and Willie Banks finally earned his ring—the barrier-breaking star completing his journey to universal acclaim. In boxing, 37-year-old Mickey Brennan became the oldest heavyweight champion in history, while Rocco Marchetti knocked out the legendary Joseph Carter and wept in his dressing room.
 
@@ -52,7 +52,7 @@ The Korean War casts its shadow over everything. Sons are called to serve. Gold 
 
 ### The Rigorio Crisis
 
-At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his methodical work on the Rigorio vaccine. The childhood paralysis disease claimed over 3,000 lives last year. Parents dread summer, when epidemics strike. Salter's killed-virus approach inches forward, but success remains years away. At Kingsley Medical Institute, Dr. Albert Kovar pursues a rival live-virus approach. The race continues—and every summer, children are paralyzed.
+At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his methodical work on the Rigorio vaccine. The childhood paralysis disease claimed over 3,000 lives last year. Parents dread summer, when epidemics strike. Salter's killed-virus approach inches forward, but success remains years away. At New England University Medical School, Dr. Albert Kovar pursues a rival live-virus approach. The race continues—and every summer, children are paralyzed.
 
 ---
 
@@ -68,7 +68,7 @@ Bernie Kessler (43) remains "Mr. Television"—his Tuesday night variety hour st
 
 ### Theater
 
-On Broadway, Goodwin & Langford unveil *The Emperor and the Lady* on March 29. Set in 1860s China, it tells the story of an American woman hired to tutor the Emperor's children—a clash of cultures, a meeting of minds, perhaps something more. Maxine Merrill (40), the brassy Queen of Broadway, transforms herself into a dignified yet spirited governess.
+On Brightway, Goodwin & Langford unveil *The Emperor and the Lady* on March 29. Set in 1860s China, it tells the story of an American woman hired to tutor the Emperor's children—a clash of cultures, a meeting of minds, perhaps something more. Maxine Merrill (40), the brassy Queen of Brightway, transforms herself into a dignified yet spirited governess.
 
 The revelation is Thomas Ling, a 33-year-old Chinese-American actor who shaves his head for the role of the Emperor. His commanding presence and intense eyes captivate audiences. The score includes instantly memorable songs. Critics rave. Ling wins the Tony for Best Featured Actor, and the show will run for years.
 
@@ -204,7 +204,7 @@ The Korean War transforms in 1951. January begins with Chinese forces pushing UN
 
 By March, UN forces under Westbrook's field commanders have recaptured Seoul. But Westbrook continues his public campaign for a wider war. He writes to Congressional leaders, gives interviews, issues ultimatums that contradict presidential policy.
 
-On April 11, Kellman relieves Westbrook of command. The nation is shocked. General Matthew Hillford, a Vermont Army Academy man with a reputation for quiet competence, takes over. Where Westbrook craved headlines, Hillford seeks results. Where Westbrook demanded total victory, Hillford accepts the reality of limited war.
+On April 11, Kellman relieves Westbrook of command. The nation is shocked. General Matthew Hillford, an American Military Academy man with a reputation for quiet competence, takes over. Where Westbrook craved headlines, Hillford seeks results. Where Westbrook demanded total victory, Hillford accepts the reality of limited war.
 
 Westbrook returns to a hero's welcome—ticker-tape parades, an address to Congress where he declares "old soldiers never die, they just fade away." For a moment, he seems poised to challenge Kellman politically.
 
@@ -236,7 +236,7 @@ In Nevada, the Atomic Energy Commission conducts atmospheric tests. Operation Ra
 
 At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his methodical work on the Rigorio vaccine. Summer 1951 brings another epidemic season—thousands of children paralyzed, hundreds dead. Parents keep children home from swimming pools, movie theaters, anywhere crowds gather. The iron lung has become a symbol of both terror and hope.
 
-Salter's killed-virus approach shows promise in animal trials. At Kingsley Medical Institute, Dr. Albert Kovar pursues his rival live-virus method. The race continues. Success remains years away, but 1951 brings incremental progress.
+Salter's killed-virus approach shows promise in animal trials. At New England University Medical School, Dr. Albert Kovar pursues his rival live-virus method. The race continues. Success remains years away, but 1951 brings incremental progress.
 
 ### The Antelope Springs Mystery
 
@@ -318,7 +318,7 @@ Sentenced to death for passing atomic secrets to the Soviets. Their case divided
 Delivered his masterpiece. *The Wanderers* captured three generations of American struggle with unsparing honesty. The literary lion proved he still had roar.
 
 ### Thomas Ling (33)
-*Broadway Star*
+*Brightway Star*
 
 The Chinese-American actor who shaved his head, commanded the stage, and won the Tony. *The Emperor and the Lady* made him a star.
 
@@ -364,7 +364,7 @@ Senator Russell Fletcher's crime committee, now televised, exposed organized cri
 - **March 6** — Victor and Helena Marsh trial begins
 - **March 14** — UN forces recapture Seoul
 - **March 29** — Marshes convicted of espionage conspiracy
-- **March 29** — *The Emperor and the Lady* opens on Broadway
+- **March 29** — *The Emperor and the Lady* opens on Brightway
 
 ### April
 - **April 5** — Judge Samuel Feldman sentences Marshes to death

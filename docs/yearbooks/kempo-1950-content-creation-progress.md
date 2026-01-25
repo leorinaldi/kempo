@@ -73,7 +73,7 @@
 | Name | Type | Notes | Status |
 |------|------|-------|--------|
 | New England University | university | Elite Ivy League equivalent, Boston | [x] DONE |
-| Kingsley Medical Institute | institution | Premier medical research | [x] DONE |
+| New England University Medical School | institution | Premier medical research | [x] DONE |
 | Hartwell Medical Institute | institution | In Steel City, vaccine research | [x] DONE |
 | National Foundation for Child Health | foundation | Funds vaccine research | [x] DONE |
 
@@ -118,7 +118,7 @@ Each comic strip needs:
 - PublicationElement linking creator (role: author/illustrator) - pending (needs Person record)
 - Image (comic panel style) - pending
 
-### Broadway Shows (Goodwin & Langford)
+### Brightway Shows (Goodwin & Langford)
 
 | Title | Year | Notes | Status |
 |-------|------|-------|--------|
@@ -158,9 +158,9 @@ Each comic strip needs:
 | Dusty Dalton | 38 | Western TV star | UBC (exists) | [x] DONE |
 | Walter Hendricks | 30 | Comic strip artist | None | [x] DONE |
 | Edward "Ned" Hartley (Uncle Ned) | 32 | Children's TV host | UBC (exists) | [x] DONE |
-| Jerome Goodwin | 48 | Broadway composer | None | [x] DONE |
-| Howard Langford | 55 | Broadway lyricist | None | [x] DONE |
-| Maxine Merrill | 38 | Broadway leading lady | None | [x] DONE |
+| Jerome Goodwin | 48 | Brightway composer | None | [x] DONE |
+| Howard Langford | 55 | Brightway lyricist | None | [x] DONE |
+| Maxine Merrill | 38 | Brightway leading lady | None | [x] DONE |
 
 ### Sports
 
@@ -188,7 +188,7 @@ Each comic strip needs:
 | Name | Age (1950) | Role | Dependencies | Status |
 |------|------------|------|--------------|--------|
 | David Salter | 36 | Vaccine researcher (Rigorio) | Hartwell Medical | [x] DONE |
-| Albert Kovar | ~45 | Rival vaccine researcher | Kingsley Medical | [x] DONE |
+| Albert Kovar | ~45 | Rival vaccine researcher | New England University Medical School | [x] DONE |
 
 ### Politics/Government
 
@@ -285,7 +285,7 @@ Each comic strip needs:
 - Cross-references for UBC, Motor City, Steel City
 - 30 Inspiration records for people
 - Cross-reference updates for Kellman, Whitfield, Westbrook
-- 4 Broadway show articles (Oklahoma Wind, Prairie Carousel, Pacific Moon, Annie of the West)
+- 4 Brightway show articles (Oklahoma Wind, Prairie Carousel, Pacific Moon, Annie of the West)
 - Baseball teams represented in ULB article structure
 
 **Completed (2026-01-24):**
@@ -295,7 +295,7 @@ Each comic strip needs:
   - 2 city images
   - 3 brand badges
   - 3 TV/Comic images
-  - 4 Broadway posters
+  - 4 Brightway posters
 
 **Known acceptable gaps:**
 - Baseball team individual articles (deferred - teams listed in ULB article)
@@ -309,14 +309,14 @@ Each comic strip needs:
 ### Wave 1: Foundation
 1. Cities: Steel City, Capital City
 2. Organizations: Pioneer Automobile, American Steel, Hartwell's, AVL, ULB
-3. Organizations: New England University, Kingsley Medical, Hartwell Medical, National Foundation for Child Health, Fletcher Committee
+3. Organizations: New England University, New England University Medical School, Hartwell Medical, National Foundation for Child Health, Fletcher Committee
 4. Organizations: Pinnacle Pictures
 
 ### Wave 2: Derived Entities
 5. Brands: Pioneer, Falcon, Crestwood
 6. Series: Dusty Dalton Show, Uncle Ned Show
 7. Comic: Bramblewood
-8. Broadway shows (articles only, no DB records needed)
+8. Brightway shows (articles only, no DB records needed)
 9. Baseball teams (may be represented within ULB article)
 
 ### Wave 3: Historical Figures (Deceased)
@@ -369,14 +369,14 @@ node scripts/generate-image.js "Photorealistic portrait photograph of a 30-year-
 # Uncle Ned (Edward Hartley) - Children's TV host, age 32
 node scripts/generate-image.js "Photorealistic portrait photograph of a 32-year-old white male, friendly children's television host. Warm avuncular expression, gentle eyes, wearing cardigan sweater. Professional studio lighting, 1950s photography style, black and white." --name "Uncle Ned" --category "portrait"
 
-# Jerome Goodwin - Broadway composer, age 48
-node scripts/generate-image.js "Photorealistic portrait photograph of a 48-year-old white male, distinguished Broadway composer. Intense creative expression, dark hair, wearing formal dark suit. Professional studio lighting, 1950s photography style, black and white." --name "Jerome Goodwin" --category "portrait"
+# Jerome Goodwin - Brightway composer, age 48
+node scripts/generate-image.js "Photorealistic portrait photograph of a 48-year-old white male, distinguished Brightway composer. Intense creative expression, dark hair, wearing formal dark suit. Professional studio lighting, 1950s photography style, black and white." --name "Jerome Goodwin" --category "portrait"
 
-# Howard Langford - Broadway lyricist, age 55
-node scripts/generate-image.js "Photorealistic portrait photograph of a 55-year-old white male, elegant Broadway lyricist. Refined appearance, graying temples, thoughtful expression. Wearing tweed jacket with bow tie. Professional studio lighting, 1950s photography style, black and white." --name "Howard Langford" --category "portrait"
+# Howard Langford - Brightway lyricist, age 55
+node scripts/generate-image.js "Photorealistic portrait photograph of a 55-year-old white male, elegant Brightway lyricist. Refined appearance, graying temples, thoughtful expression. Wearing tweed jacket with bow tie. Professional studio lighting, 1950s photography style, black and white." --name "Howard Langford" --category "portrait"
 
-# Maxine Merrill - Broadway leading lady, age 38
-node scripts/generate-image.js "Photorealistic portrait photograph of a 38-year-old white female, glamorous Broadway star. Beautiful, strong features, confident expression, elegant styling. Wearing evening attire with pearl earrings. Professional studio lighting, 1950s photography style, black and white." --name "Maxine Merrill" --category "portrait"
+# Maxine Merrill - Brightway leading lady, age 38
+node scripts/generate-image.js "Photorealistic portrait photograph of a 38-year-old white female, glamorous Brightway star. Beautiful, strong features, confident expression, elegant styling. Wearing evening attire with pearl earrings. Professional studio lighting, 1950s photography style, black and white." --name "Maxine Merrill" --category "portrait"
 ```
 
 ### People - Sports (5)
@@ -469,8 +469,8 @@ node scripts/generate-image.js "Professional baseball league logo for United Lea
 # New England University - University crest
 node scripts/generate-image.js "Ivy League university crest for New England University. Classical academic shield design with Latin motto, books and lamp of knowledge, founded 1636. Professional heraldic design, crimson and white." --name "New England University Crest" --category "logo" --style logo
 
-# Kingsley Medical Institute - Institution logo
-node scripts/generate-image.js "Medical research institute logo for Kingsley Medical Institute. Professional medical emblem with caduceus, scientific imagery, established 1895. Blue and white color scheme, professional design." --name "Kingsley Medical Logo" --category "logo" --style logo
+# New England University Medical School - Institution logo
+node scripts/generate-image.js "Medical research institute logo for New England University Medical School. Professional medical emblem with caduceus, scientific imagery, established 1895. Blue and white color scheme, professional design." --name "New England University Medical School Logo" --category "logo" --style logo
 
 # Hartwell Medical Institute - Institution logo
 node scripts/generate-image.js "Medical research institute logo for Hartwell Medical Institute. Professional medical emblem with microscope and flame of discovery, Steel City. Blue and gold color scheme, professional design." --name "Hartwell Medical Logo" --category "logo" --style logo
@@ -518,20 +518,20 @@ node scripts/generate-image.js "1950s children's television promotional photogra
 node scripts/generate-image.js "Comic strip panel from Bramblewood by Walter Hendricks. Gentle woodland animals (rabbit, fox, owl) in pastoral forest setting. Clean ink linework, newspaper comic strip style, 1950s. Black and white newspaper print." --name "Bramblewood Comic" --category "media"
 ```
 
-### Broadway Shows (4)
+### Brightway Shows (4)
 
 ```bash
 # Oklahoma Wind - Show poster (use Gemini for text)
-node scripts/generate-image.js "Broadway theatrical poster for Oklahoma Wind, 1943. Western prairie scene with couple, romantic musical imagery, 'OKLAHOMA WIND' title. Vintage theatrical poster art, full color." --name "Oklahoma Wind Poster" --category "media" --tool gemini
+node scripts/generate-image.js "Brightway theatrical poster for Oklahoma Wind, 1943. Western prairie scene with couple, romantic musical imagery, 'OKLAHOMA WIND' title. Vintage theatrical poster art, full color." --name "Oklahoma Wind Poster" --category "media" --tool gemini
 
 # Prairie Carousel - Show poster (use Gemini for text)
-node scripts/generate-image.js "Broadway theatrical poster for Prairie Carousel, 1945. New England coastal town scene, carnival carousel imagery, 'PRAIRIE CAROUSEL' title. Vintage theatrical poster art, full color." --name "Prairie Carousel Poster" --category "media" --tool gemini
+node scripts/generate-image.js "Brightway theatrical poster for Prairie Carousel, 1945. New England coastal town scene, carnival carousel imagery, 'PRAIRIE CAROUSEL' title. Vintage theatrical poster art, full color." --name "Prairie Carousel Poster" --category "media" --tool gemini
 
 # Annie of the West - Show poster (use Gemini for text)
-node scripts/generate-image.js "Broadway theatrical poster for Annie of the West, 1946. Wild West sharpshooter woman with rifle, Buffalo Bill show imagery, 'ANNIE OF THE WEST' title. Vintage theatrical poster art, full color." --name "Annie of the West Poster" --category "media" --tool gemini
+node scripts/generate-image.js "Brightway theatrical poster for Annie of the West, 1946. Wild West sharpshooter woman with rifle, Buffalo Bill show imagery, 'ANNIE OF THE WEST' title. Vintage theatrical poster art, full color." --name "Annie of the West Poster" --category "media" --tool gemini
 
 # Pacific Moon - Show poster (use Gemini for text)
-node scripts/generate-image.js "Broadway theatrical poster for Pacific Moon, 1949. Tropical Pacific island scene, World War II romance imagery, 'PACIFIC MOON' title. Vintage theatrical poster art, full color." --name "Pacific Moon Poster" --category "media" --tool gemini
+node scripts/generate-image.js "Brightway theatrical poster for Pacific Moon, 1949. Tropical Pacific island scene, World War II romance imagery, 'PACIFIC MOON' title. Vintage theatrical poster art, full color." --name "Pacific Moon Poster" --category "media" --tool gemini
 ```
 
 ---
@@ -548,7 +548,7 @@ node scripts/generate-image.js "Broadway theatrical poster for Pacific Moon, 194
 | Cities | 2 | [x] DONE |
 | Brands | 3 | [x] DONE |
 | TV/Comic | 3 | [x] DONE |
-| Broadway | 4 | [x] DONE |
+| Brightway | 4 | [x] DONE |
 | **Total** | **47** | **COMPLETE** |
 
 *Note: Images are stored in database and Vercel Blob. Article infoboxes need to be updated with image URLs.*

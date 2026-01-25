@@ -35,7 +35,7 @@ Ensure these exist before creating the Person:
 
 ### Step 3: Create the Article
 
-Follow [create-person](../../Kempopedia/create-person/skill.md) to write the biography.
+Follow [article-person](../../Kempopedia/article-person/skill.md) to write the biography.
 
 **Key article elements:**
 - Infobox with all relevant fields
@@ -68,22 +68,19 @@ Copy the generated URL to the article infobox.
 
 Navigate to `/admin/world-data/people/create`
 
-**Required fields:**
-| Field | Description |
-|-------|-------------|
-| firstName | First name |
-| lastName | Last name |
-| gender | male, female, other |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| firstName | **Required** | First name |
+| lastName | **Required** | Last name |
+| gender | **Required** | male, female, other |
+| middleName | Optional | Middle name(s) |
+| nickname | Optional | Common nickname (e.g., "Frank" for "Francis") |
+| stageName | Optional | Professional name (actors, musicians) |
+| dateBorn | Recommended | Birth date (k.y.) — include when known |
+| dateDied | Recommended | Death date (k.y.) — null if living |
+| articleId | **Required*** | Link to Kempopedia article |
 
-**Optional but recommended:**
-| Field | Description |
-|-------|-------------|
-| middleName | Middle name(s) |
-| nickname | Common nickname |
-| stageName | Professional name (actors, musicians) |
-| dateBorn | Birth date (k.y.) |
-| dateDied | Death date (k.y.) - null if living |
-| articleId | Link to Kempopedia article |
+*Every Person record should have a linked article. Create the article first, then link it.
 
 ### Step 6: Link the Article
 

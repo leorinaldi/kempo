@@ -25,12 +25,14 @@ node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 
 | Tool | Model | Use When |
 |------|-------|----------|
-| `grok` | grok-2-image-1212 | **Default.** Most portraits, landscapes, general images |
-| `gemini` | gemini-2.0-flash-exp | Images with text/lettering (signs, hotel names, storefronts), or as fallback when Grok produces poor results |
+| `grok` | grok-2-image-1212 | Portraits, landscapes, general images WITHOUT text |
+| `gemini` | gemini-2.0-flash-exp | **DEFAULT for images with text/words.** Signs, marquees, storefronts, any readable text |
+
+> ⚠️ **Important: Use Gemini for ANY image containing text or words.** Grok cannot reliably render readable text. This includes: neon signs, building names, theater marquees, storefronts, banners, newspapers, etc.
 
 **Guidelines:**
-- **Start with Grok** for most images (portraits, rural landscapes, generic locations)
-- **Use Gemini first** when the image involves readable text (building signs, neon signs, marquees, etc.)
+- **Use Gemini (--tool gemini)** for ANY image with readable text (signs, marquees, storefronts, building names, neon signs)
+- **Use Grok (default)** only for images without text (portraits, rural landscapes, generic locations)
 - **Switch to Gemini as fallback** if Grok produces unsatisfactory results after 1-2 attempts
 
 ### Examples
@@ -41,6 +43,9 @@ node scripts/generate-image.js "Photorealistic portrait photograph of a 55-year-
 
 # Location with signage (use Gemini for text)
 node scripts/generate-image.js "Black and white photograph of The Claridge Hotel, an elegant Art Deco luxury hotel. Grand entrance with 'THE CLARIDGE' signage, doormen in uniform. 1940s." --name "The Claridge Hotel" --category "location" --tool gemini
+
+# Theater district with neon signs (MUST use Gemini)
+node scripts/generate-image.js "Photorealistic photograph of Brightway theater district in New York City at night, 1950. Famous NYC theater street with neon marquee signs showing 'BRIGHTWAY' prominently, theater facades advertising shows, bright lights, vintage taxi cabs. Professional street photography, black and white." --name "Brightway Theater District" --category "location" --tool gemini
 
 # Realistic location without text (default: Grok)
 node scripts/generate-image.js "Photorealistic photograph of a Western frontier town main street, 1940s. Dirt road, wooden storefronts with awnings, vintage automobiles. Professional architectural photography, period-accurate details." --name "Abilene Main Street" --category "location"
@@ -223,7 +228,7 @@ When generating multiple images for a yearbook or bulk content creation, use con
 | City | `{Name} Skyline` or `{Name}` | `--name "Steel City Skyline"` |
 | Brand | `{Name} Badge` | `--name "Pioneer Badge"` |
 | TV Show | `{Name} Show` | `--name "Dusty Dalton Show"` |
-| Broadway | `{Name} Poster` | `--name "Oklahoma Wind Poster"` |
+| Brightway | `{Name} Poster` | `--name "Oklahoma Wind Poster"` |
 | Comic Strip | `{Name} Comic` | `--name "Bramblewood Comic"` |
 | Store/Building | `{Name} Store` | `--name "Hartwells Store"` |
 | Emblem | `{Name} Emblem` | `--name "AVL Emblem"` |

@@ -746,6 +746,7 @@ model Article {
   tags               String[]   // PostgreSQL array
   dates              String[]   // k.y. dates mentioned in the article
   linkCount          Int        @default(0) @map("link_count") // count of [[wikilinks]] in content
+  qualityCheckedAt   DateTime?  @map("quality_checked_at") // Real-world date when article was reviewed and approved
 
   // Timestamps
   createdAt          DateTime   @default(now()) @map("created_at")

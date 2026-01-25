@@ -42,7 +42,7 @@ Determine:
 
 ### Step 3: Create the Article
 
-Follow [create-series](../../Kempopedia/create-series/skill.md) to write the article.
+Follow [article-series](../../Kempopedia/article-series/skill.md) to write the article.
 
 **Key article elements:**
 - Infobox with network, dates, cast, creator
@@ -88,15 +88,18 @@ const series = await prisma.series.create({
 });
 ```
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| title | Yes | Series name |
-| networkId | No | Link to broadcasting Organization |
-| startYear | No | First season year |
-| endYear | No | Final season year (null if ongoing) |
-| description | No | Brief description |
-| articleId | No | Link to Kempopedia article |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| title | **Required** | Series name |
+| networkId | **Strongly Recommended** | Link to broadcasting Organization — almost all TV series air on a network. **Always set this field.** |
+| startYear | Recommended | First season year — premiere date is important |
+| endYear | Optional | Final season year — null if ongoing |
+| description | Optional | Brief description |
+| articleId | **Required*** | Link to Kempopedia article |
+
+*Every Series record should have a linked article. Create the article first, then link it.
+
+> ⚠️ **Don't forget the network!** When creating a Series record, always link it to its network Organization (e.g., UBC). This is easy to overlook but important for data integrity.
 
 ### Step 6: Link the Article
 

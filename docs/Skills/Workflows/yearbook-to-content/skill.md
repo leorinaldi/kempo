@@ -32,6 +32,8 @@ Phase 5: EVENTS & TIMELINE
 Phase 6: CROSS-REFERENCES
     ↓
 Phase 7: VERIFICATION
+    ↓
+Phase 8: QUALITY CONTROL
 ```
 
 ---
@@ -229,7 +231,7 @@ Create entities that other entities depend on.
 For each location:
 1. Check if parent exists (state for city, nation for state)
 2. Create parent first if missing
-3. Follow [manage-place](../../EntityManagement/manage-place/skill.md)
+3. Follow [manage-location](../../EntityManagement/manage-location/skill.md)
 
 **Quick workflow:**
 ```
@@ -303,7 +305,7 @@ For each publication (newspapers, magazines, books):
 ### 3.4 Comic Strips
 
 For each comic strip:
-1. Create article following [create-publication](../../Kempopedia/create-publication/skill.md) (comic strip section)
+1. Create article following [article-publication](../../Kempopedia/article-publication/skill.md) (comic strip section)
 2. Create PublicationSeries record with `type: comic`
 3. Link creator via PublicationElement (role: author or illustrator)
 4. Link article via `articleId`
@@ -314,7 +316,7 @@ For each comic strip:
 For each TV series:
 1. Verify network organization exists
 2. Follow [manage-series](../../EntityManagement/manage-series/skill.md)
-3. Create article following [create-series](../../Kempopedia/create-series/skill.md)
+3. Create article following [article-series](../../Kempopedia/article-series/skill.md)
 4. Create Series record with `articleId` link
 5. Generate promotional image or title card
 
@@ -754,6 +756,48 @@ await prisma.inspiration.create({
 
 ---
 
+## Phase 8: Quality Control
+
+**After completing all content creation and verification, run the Quality Control skill.**
+
+This phase consolidates all QC checks into a single interactive workflow.
+
+### 8.1 Invoke Quality Control Skill
+
+Announce: "Content creation complete. Running quality control checks."
+
+Then follow the [quality-control](../quality-control/skill.md) skill, which runs through:
+
+1. **Dead Links** — Find wikilinks to non-existent articles
+2. **Image URL Validation** — Verify infobox images exist in Image table
+3. **Orphaned Images** — Find unused Image records
+4. **Missing Images** — Find Person/Place/Institution articles without images
+5. **Entity-Article Linking** — Find entities without linked articles
+6. **ImageSubject Linking** — Find images not linked to entities
+7. **Inspiration Completeness** — Find entities missing inspirations
+8. **Timeline Sync** — Find date links without timeline entries
+9. **Revision Coverage** — Find articles without revisions
+10. **Fictional Content Audit** — Review for real-world proper nouns
+11. **Unsigned Articles** — Manual review of unreviewed articles (LAST)
+
+### 8.2 QC Workflow
+
+For each check:
+1. Present description to user
+2. Ask: "Run this check?" (yes/no/skip remaining)
+3. If yes, run and report findings
+4. Offer to fix issues or note for later
+5. Move to next check
+
+### 8.3 Session Complete
+
+After all QC checks:
+1. Summarize findings and fixes
+2. List any deferred issues
+3. Update tracking document with final status
+
+---
+
 ## Tracking Progress
 
 ### Option 1: Markdown Checklist
@@ -931,7 +975,7 @@ for (const row of orgsWithImages) {
 | City | `{Name} Skyline` (e.g., "Steel City Skyline") |
 | Brand | `{Name} Badge` (e.g., "Pioneer Badge") |
 | TV Show | `{Name} Show` (e.g., "Dusty Dalton Show") |
-| Broadway | `{Name} Poster` (e.g., "Oklahoma Wind Poster") |
+| Brightway | `{Name} Poster` (e.g., "Oklahoma Wind Poster") |
 | Comic | `{Name} Comic` (e.g., "Bramblewood Comic") |
 
 ### Article Creation
@@ -1033,21 +1077,21 @@ If generation fails:
 
 | Task | Skill |
 |------|-------|
-| Create person article | [create-person](../../Kempopedia/create-person/skill.md) |
+| Create person article | [article-person](../../Kempopedia/article-person/skill.md) |
 | Manage person lifecycle | [manage-person](../../EntityManagement/manage-person/skill.md) |
-| Create organization article | [create-organization](../../Kempopedia/create-organization/skill.md) |
+| Create organization article | [article-organization](../../Kempopedia/article-organization/skill.md) |
 | Manage organization lifecycle | [manage-organization](../../EntityManagement/manage-organization/skill.md) |
-| Create brand article | [create-brand](../../Kempopedia/create-brand/skill.md) |
+| Create brand article | [article-brand](../../Kempopedia/article-brand/skill.md) |
 | Manage brand lifecycle | [manage-brand](../../EntityManagement/manage-brand/skill.md) |
-| Create product article | [create-product](../../Kempopedia/create-product/skill.md) |
+| Create product article | [article-product](../../Kempopedia/article-product/skill.md) |
 | Manage product lifecycle | [manage-product](../../EntityManagement/manage-product/skill.md) |
-| Create place article | [create-place](../../Kempopedia/create-place/skill.md) |
-| Manage place lifecycle | [manage-place](../../EntityManagement/manage-place/skill.md) |
-| Create publication article | [create-publication](../../Kempopedia/create-publication/skill.md) |
+| Create place article | [article-location](../../Kempopedia/article-location/skill.md) |
+| Manage place lifecycle | [manage-location](../../EntityManagement/manage-location/skill.md) |
+| Create publication article | [article-publication](../../Kempopedia/article-publication/skill.md) |
 | Manage publication lifecycle | [manage-publication](../../EntityManagement/manage-publication/skill.md) |
-| Create TV series article | [create-series](../../Kempopedia/create-series/skill.md) |
+| Create TV series article | [article-series](../../Kempopedia/article-series/skill.md) |
 | Manage TV series lifecycle | [manage-series](../../EntityManagement/manage-series/skill.md) |
-| Create event article | [create-event](../../Kempopedia/create-event/skill.md) |
+| Create event article | [article-event](../../Kempopedia/article-event/skill.md) |
 | Manage event lifecycle | [manage-event](../../EntityManagement/manage-event/skill.md) |
 | Generate images | [generate-image](../../Kempopedia/generate-image/skill.md) |
 | Linking reference | [linking-guide](../../EntityManagement/linking-guide/skill.md) |

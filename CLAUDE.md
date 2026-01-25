@@ -57,27 +57,28 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 ## Skills
 
-### Kempopedia Skills (Article Creation)
+### Kempopedia Skills (Article Format & Content)
 
 | Skill | Purpose |
 |-------|---------|
 | `article-global-rules` | Core rules for all articles (read first) |
-| `create-person` | Biographical articles |
-| `create-place` | Cities, states, nations |
-| `create-organization` | Institutions, companies, parties, academies |
-| `create-brand` | Brands owned by organizations |
-| `create-product` | Vehicles, consumer goods |
-| `create-media` | Songs, albums, films |
-| `create-publication` | Newspapers, magazines, books |
-| `create-event` | Timeline events and Event database records |
-| `create-series` | TV series |
-| `create-timeline` | Decade/year timeline pages |
+| `article-person` | Biographical article format |
+| `article-location` | Location articles (nations, states, cities, places) |
+| `article-organization` | Organization article format |
+| `article-brand` | Brand article format |
+| `article-product` | Product article format |
+| `article-media` | Media article format (songs, albums, films) |
+| `article-publication` | Publication article format |
+| `article-event` | Event article format |
+| `article-series` | TV series article format |
+| `article-timeline` | Timeline page format |
+| `article-misc` | Miscellaneous articles that don't fit other categories |
 | `date-review` | Audit dates after creating articles |
 | `generate-image` | Image generation with Grok/Gemini |
 | `inspirations` | Real-world to Kempo mappings |
 | `design-entity` | Plan and design new entities before article creation |
 
-### Entity Management Skills (Database Integration)
+### Entity Management Skills (Full Lifecycle)
 
 | Skill | Purpose |
 |-------|---------|
@@ -86,7 +87,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | `manage-organization` | Full lifecycle: Organization + brands + child entities |
 | `manage-brand` | Full lifecycle: Brand + products + parent org |
 | `manage-product` | Full lifecycle: Product + brand + inspirations |
-| `manage-place` | Full lifecycle: Nation/State/City/Place hierarchy |
+| `manage-location` | Full lifecycle: Nation/State/City/Place hierarchy |
 | `manage-publication` | Full lifecycle: PublicationSeries + issues + contributors |
 | `manage-series` | Full lifecycle: TV Series + network + cast/crew |
 | `manage-event` | Full lifecycle: Event + timeline + relationships |
@@ -96,6 +97,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | Skill | Purpose |
 |-------|---------|
 | `yearbook-to-content` | Master workflow: yearbook analysis → complete content creation |
+| `quality-control` | Run battery of QC checks on content (dead links, images, entities, etc.) |
 
 ### Yearbook Skills
 

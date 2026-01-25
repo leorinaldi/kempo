@@ -61,7 +61,7 @@ Determine:
 
 ### Step 3: Create the Article
 
-Follow [create-product](../../Kempopedia/create-product/skill.md) to write the article.
+Follow [article-product](../../Kempopedia/article-product/skill.md) to write the article.
 
 **Key article elements:**
 - Link to manufacturer/brand in infobox
@@ -90,15 +90,16 @@ Photorealistic photograph of [Product Name], a [era] [product type]. [Design det
 
 Navigate to `/admin/world-data/products/create`
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| name | Yes | Product name |
-| productType | Yes | See product types above |
-| brandId | Yes | Link to parent Brand |
-| dateIntroduced | No | Launch date |
-| dateDiscontinued | No | End date (null if still made) |
-| articleId | No | Link to Kempopedia article |
+| Field | Requirement | Description |
+|-------|-------------|-------------|
+| name | **Required** | Product name |
+| productType | **Required** | See product types above |
+| brandId | Recommended | Link to parent Brand — set when brand is known |
+| dateIntroduced | Optional | Launch date |
+| dateDiscontinued | Optional | End date — null if still made |
+| articleId | **Required*** | Link to Kempopedia article |
+
+*Every Product record should have a linked article. Create the article first, then link it.
 
 ### Step 6: Link the Article
 

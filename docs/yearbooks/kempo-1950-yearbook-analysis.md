@@ -122,7 +122,7 @@ It is a year of prosperity and anxiety, of suburban dreams and Frozen War fears.
 
 **Radio:** UBC presumably has radio operations.
 
-**Theater:** No Broadway equivalent established.
+**Theater:** No Brightway equivalent established.
 
 ### Real-World Inspiration
 
@@ -148,7 +148,7 @@ From the Real 1950 Yearbook:
 
 **Theater:**
 - *South Pacific* won Pulitzer (Rodgers & Hammerstein)
-- Golden age of Broadway
+- Golden age of Brightway
 
 **Cultural Phenomena:**
 - *Peanuts* comic strip debuts (October 2)
@@ -160,7 +160,7 @@ From the Real 1950 Yearbook:
 **Critical Gaps:**
 - Only ONE film studio (Pacific Pictures) - need more to represent studio system *(Pinnacle Pictures approved)*
 - No children's programming personality (Howdy Doody equivalent)
-- No Broadway/theater presence
+- No Brightway/theater presence
 - No comic strip artists
 - No toy companies
 - No credit card/financial innovation
@@ -212,7 +212,7 @@ From the Real 1950 Yearbook:
 
 **Medium Priority:**
 
-5. **Broadway Producer/Impresario** (compresses Rodgers & Hammerstein)
+5. **Brightway Producer/Impresario** (compresses Rodgers & Hammerstein)
    - To be named
    - Represents theater world
 
@@ -245,7 +245,7 @@ For children, **Uncle Ned** (Edward Hartley) offers something different: a gentl
 
 **Music:** **Frank Martino** is the voice of the era. At 34, the crooner from Portside, New Jersey is at his peak—his albums for Sunbright Records define romantic longing for a generation. *In the Wee Small Hours* plays in every jukebox. His personal life (the rumored mob connections through Sol Roth and Sidney Hartman, the complicated romances) only adds to his mystique. **Harold Keane**, **Nelson Chambers**, and **George Keller** round out Sunbright's roster, but Martino is the star.
 
-**Theater:** On Broadway, **Goodwin & Langford** reign supreme. Composer **Jerome Goodwin** (48) and lyricist **Howard Langford** (55) have revolutionized the musical—their shows aren't just entertainment but integrated works where songs advance the story. *Oklahoma Wind* (1943) changed everything; *Prairie Carousel* (1945) deepened it; *Pacific Moon* (1949) proved they could tackle serious themes. Their leading lady is **Maxine Merrill**, the brassy, belting Queen of Broadway whose voice reaches the back row without amplification. At 38, she's the biggest star on the Great White Way.
+**Theater:** On Brightway, **Goodwin & Langford** reign supreme. Composer **Jerome Goodwin** (48) and lyricist **Howard Langford** (55) have revolutionized the musical—their shows aren't just entertainment but integrated works where songs advance the story. *Oklahoma Wind* (1943) changed everything; *Prairie Carousel* (1945) deepened it; *Pacific Moon* (1949) proved they could tackle serious themes. Their leading lady is **Maxine Merrill**, the brassy, belting Queen of Brightway whose voice reaches the back row without amplification. At 38, she's the biggest star on the Great White Way.
 
 **Comics:** In October, a quiet revolution begins. **Walter Hendricks**, a 30-year-old former Army illustrator from Duluth, debuts ***Bramblewood*** in seven newspapers. The strip follows young woodland animals—Thistle the anxious rabbit, Ash the guarded fox, Finn the scheming raccoon—as they navigate childhood's small heartbreaks and hopes. There are no villains, no adventure plots—just the gentle comedy and unexpected profundity of growing up. By year's end, syndication requests are flooding in. Something has struck a nerve.
 
@@ -536,7 +536,7 @@ The Korean War, beginning in June, will reshape the business landscape. Defense 
 - Whitfield Committee (f. 1949) - congressional investigation body
 
 **Education:**
-- Vermont Army Academy (f. 1802)
+- American Military Academy (f. 1802)
 - Liberty High School (f. 1870)
 - Kansas City Commercial Institute (f. 1880)
 - Midland Law School (f. 1895)
@@ -955,7 +955,7 @@ Science in 1950 is a battleground—between fear and hope, secrecy and discovery
 
 **The Antelope Springs Mystery:** What crashed in New Mexico in March 1949? **Leonard Vance** (43), the scientist who testified before the Whitfield Committee, knows something—but he's bound by secrecy oaths and fear. Nathan Collier's exposé raised questions the government refuses to answer. In 1950, the mystery fades from headlines as the Whitfield Committee pivots to communist investigations, but it hasn't been solved. The debris, wherever it is, holds secrets. And Vance carries a burden he can't share.
 
-**Medicine:** At the **Hartwell Medical Institute** in Steel City (funded by the department store family's philanthropy), **Dr. David Salter** (36) races against time to develop a vaccine for **Rigorio**, a childhood paralysis disease that strikes terror into every parent's heart. Summers bring epidemics; iron lungs fill hospital wards; children who were running yesterday are crippled today. Salter, the son of a steelworker who chose research over a lucrative private practice, believes a killed-virus vaccine is the answer. His rival, Dr. Albert Kovar at Kingsley Medical Institute, pursues a live-virus approach. The National Foundation for Child Health funds both. Success is still years away, but in 1950, the groundwork is being laid. Parents contribute dimes to the cause, hoping for a miracle.
+**Medicine:** At the **Hartwell Medical Institute** in Steel City (funded by the department store family's philanthropy), **Dr. David Salter** (36) races against time to develop a vaccine for **Rigorio**, a childhood paralysis disease that strikes terror into every parent's heart. Summers bring epidemics; iron lungs fill hospital wards; children who were running yesterday are crippled today. Salter, the son of a steelworker who chose research over a lucrative private practice, believes a killed-virus vaccine is the answer. His rival, Dr. Albert Kovar at New England University Medical School, pursues a live-virus approach. The National Foundation for Child Health funds both. Success is still years away, but in 1950, the groundwork is being laid. Parents contribute dimes to the cause, hoping for a miracle.
 
 **Computing:** Somewhere in university labs and government facilities, room-sized machines perform calculations that would take humans lifetimes. There are perhaps twenty computers in all of Kempo—massive, expensive, esoteric. Few understand their potential. But those who do sense that these machines will transform everything: business, science, warfare, society itself. The age of computing is dawning, though most citizens have no idea.
 
@@ -1118,9 +1118,9 @@ Specialty magazines flourish: **Athlete Magazine** for sports fans, **Motor Age*
 | Warren Prescott | 56 | American Steel president | Business |
 | George Crane | 75 | Pioneer Automobile founder | Business |
 | Lawrence Mitchell | 48 | Hartwell's CEO | Business |
-| Jerome Goodwin | 48 | Broadway composer | Entertainment |
-| Howard Langford | 55 | Broadway lyricist | Entertainment |
-| Maxine Merrill | 38 | Broadway leading lady | Entertainment |
+| Jerome Goodwin | 48 | Brightway composer | Entertainment |
+| Howard Langford | 55 | Brightway lyricist | Entertainment |
+| Maxine Merrill | 38 | Brightway leading lady | Entertainment |
 | Alden Cross | ~45 | Convicted spy | Politics |
 | Richard Tanner | 42 | AVL National Commander | Organizations |
 
@@ -1425,13 +1425,13 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 - [x] ~~Person: MacArthur equivalent general~~ → **EXISTS: Douglas D. Westbrook** (Eisenhower + MacArthur compression, will lead proxy war, clash with Kellman, eventually run for President)
 - [x] ~~Event: Proxy war (Joseon/Goryeo Peninsula?) - location and details~~ → **Korean War** (real country names kept; begins June 25, 1950; Westbrook commands)
 - [x] ~~Person: Major author~~ → **Ernest Beckford** (Hemingway + Steinbeck compression)
-- [x] Vaccine researcher: **David Salter** - virologist at Hartwell Medical Institute in Steel City, racing to develop vaccine for **Rigorio** (fictional childhood paralysis disease). Born 1914 Steel City, age 36 in 1950. Son of steelworker, chose research over private practice. Methodically testing killed-virus approach. Rival: Dr. Albert Kovar at Kingsley Medical Institute (live-virus approach). Funded by National Foundation for Child Health. Success still years away but represents hope. Salk + Enders compression. Hartwell connection creates philanthropy angle with department store family.
+- [x] Vaccine researcher: **David Salter** - virologist at Hartwell Medical Institute in Steel City, racing to develop vaccine for **Rigorio** (fictional childhood paralysis disease). Born 1914 Steel City, age 36 in 1950. Son of steelworker, chose research over private practice. Methodically testing killed-virus approach. Rival: Dr. Albert Kovar at New England University Medical School (live-virus approach). Funded by National Foundation for Child Health. Success still years away but represents hope. Salk + Enders compression. Hartwell connection creates philanthropy angle with department store family.
 - [x] Red Panic / McCarthy storyline: **Senator Robert Whitfield** (EXISTS - party changed to Federal). North Carolina senator, age 48. Already famous from 1949 Antelope Springs UFO hearings. In 1950 pivots to anti-communist investigations, building on his reputation as fearless investigator. McCarran/McCarthy compression.
 - [x] Organized crime investigation: **Senator Russell Fletcher** (Federal Party, Tennessee). Born 1902, age 48 in 1950. Introduces resolution January 5 to investigate organized crime; Fletcher Committee officially established May 3. Methodical, evidence-based approach contrasts with Whitfield's grandstanding. Hearings expose Salvatore Conti, Sol Roth, Enzo Ferrante, Sidney Hartman, Carmine DeMarco. Televised hearings in 1951 will make him a national figure. Kefauver compression.
 - [x] Hiss equivalent: **Alden Cross** - State Department official convicted of perjury January 1950. Born 1904 Boston, age 46. New England University, New England Law, rose through State Dept. Accused of passing documents to Soviets in late 1930s. Denied everything. Convicted on perjury (statute of limitations on espionage expired). His conviction fuels Whitfield's anti-communist crusade. Alger Hiss + Harry Dexter White compression. Name suggests "double-cross."
 - [x] Red Panic 1950 timeline: January - Cross convicted; February - Whitfield speech on communist infiltration; Spring - Whitfield Committee expands from UFO investigation to "subversive activities"; June - Korean War validates fears; Fall - Whitfield's power grows, loyalty oaths spread, Hollywood nervous.
-- [x] Broadway leading lady: **Maxine Merrill** - Queen of the Broadway musical. Born 1912 Astoria, Queens, age 38 in 1950. No formal training, legendary natural belt. Started in vaudeville, Broadway debut 1930. Signature roles in *Annie of the West* (1946) and *Pacific Moon* (1949). Brassy, funny, unpretentious, blue humor backstage, ironclad professionalism onstage. Voice heard in back row without a microphone. Ethel Merman + Mary Martin compression.
-- [x] Broadway composer/lyricist duo: **Goodwin & Langford** - Revolutionized the book musical where songs advance the story. **Jerome Goodwin** (composer, born 1902 NYC, age 48, classically trained, Columbia, sweeping romantic melodies). **Howard Langford** (lyricist, born 1895 Pennsylvania, age 55, former journalist, literate emotionally resonant lyrics). Partnership since 1943. Hits: *Oklahoma Wind* (1943), *Prairie Carousel* (1945), *Pacific Moon* (1949, starring Maxine Merrill). Rodgers & Hammerstein compression.
+- [x] Brightway leading lady: **Maxine Merrill** - Queen of the Brightway musical. Born 1912 Astoria, Queens, age 38 in 1950. No formal training, legendary natural belt. Started in vaudeville, Brightway debut 1930. Signature roles in *Annie of the West* (1946) and *Pacific Moon* (1949). Brassy, funny, unpretentious, blue humor backstage, ironclad professionalism onstage. Voice heard in back row without a microphone. Ethel Merman + Mary Martin compression.
+- [x] Brightway composer/lyricist duo: **Goodwin & Langford** - Revolutionized the book musical where songs advance the story. **Jerome Goodwin** (composer, born 1902 NYC, age 48, classically trained, Columbia, sweeping romantic melodies). **Howard Langford** (lyricist, born 1895 Pennsylvania, age 55, former journalist, literate emotionally resonant lyrics). Partnership since 1943. Hits: *Oklahoma Wind* (1943), *Prairie Carousel* (1945), *Pacific Moon* (1949, starring Maxine Merrill). Rodgers & Hammerstein compression.
 - [x] 1950 ULB Season: **New York Empires win championship** over Cleveland Scouts 4-2. Joe Rosetti wins MVP, batting title, clutch postseason. Willie Banks leads Scouts to championship series in historic barrier-breaking season, earns universal respect despite loss. Key moments: April (Opening Day), July (Banks selected to All-Star Game), September (Scouts clinch Western League), October (Championship Series).
 - [x] 1950 Boxing: **Eddie Lawson retains heavyweight title**. Defends in March against **Mickey Brennan** (veteran contender, wins by unanimous decision). Rocco Marchetti stays undefeated (4-5 fights, all KOs), ranked #1 contender by December. Lawson-Brennan rematch announced for mid-1951. Joseph Carter retired but visible (commentary, mentoring).
 - [x] Veteran boxing contender: **Mickey Brennan** - "The Southwark Southpaw." Born 1914 Philadelphia, age 36 in 1950. Record: 42-8-2, 24 KOs. Four-time title challenger, never won. Beloved underdog. Loses to Lawson by unanimous decision in March, but vows to return: "I'm not done yet. I've got one more run in me." Rematch scheduled for 1951. Jersey Joe Walcott compression.
@@ -1441,7 +1441,7 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 - [x] ~~Organization: Veterans group~~ → **American Veterans League (AVL)** (Frederick Nash / Richard Tanner)
 - [x] ~~Organization: Powerful union (Teamsters-style)~~ → **EXISTS: American Drivers Union (ADU)** (Jack Callahan)
 - [x] University: **New England University** - Elite Ivy League equivalent in Boston. Where Alden Cross received his undergraduate and law degrees (New England Law). Harvard + general New England Ivy compression. Represents East Coast establishment, old money, intellectual elite.
-- [x] Medical institution: **Kingsley Medical Institute** - Premier medical research institution. Where Dr. Albert Kovar pursues live-virus approach to Rigorio vaccine (rival to Salter's killed-virus research at Hartwell). Johns Hopkins + Mayo Clinic compression. Represents cutting-edge medical research and academic medicine.
+- [x] Medical institution: **New England University Medical School** - Premier medical research institution. Where Dr. Albert Kovar pursues live-virus approach to Rigorio vaccine (rival to Salter's killed-virus research at Hartwell). Johns Hopkins + Mayo Clinic compression. Represents cutting-edge medical research and academic medicine.
 
 ### Priority 1: Core Figures Needed
 
@@ -1476,7 +1476,7 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 **Entertainment:**
 - [x] ~~Person: Comic strip artist~~ → **Walter Hendricks** (*Bramblewood*)
 - [x] ~~Person: Children's TV host~~ → **Uncle Ned** (Edward Hartley)
-- [x] ~~Person: Broadway figure~~ → **Maxine Merrill** (leading lady) + **Goodwin & Langford** (composer/lyricist duo)
+- [x] ~~Person: Brightway figure~~ → **Maxine Merrill** (leading lady) + **Goodwin & Langford** (composer/lyricist duo)
 
 **Publications:**
 - [x] ~~Publication: Photo-journalism magazine~~ → **Know! Magazine** (exists)
@@ -1521,7 +1521,7 @@ All new 1950 entity names have been checked against real-world conflicts:
 **All Clear:**
 - Ernest Beckford, Walter Hendricks, George Crane, Andrew Dunbar, Warren Prescott, Maxine Merrill, Jerome Goodwin, Mickey Brennan, Alden Cross, David Salter, Frederick Nash, Richard Tanner, Josiah Hartwell, Theodore Hartwell, Lawrence Mitchell, Joe Rosetti, Rocco Marchetti, Willie Banks, Eddie Lawson, Russell Fletcher
 - ULB team names (Empires, Beacons, Pennies, Scouts, etc.)
-- Broadway shows (Oklahoma Wind, Prairie Carousel, Pacific Moon)
+- Brightway shows (Oklahoma Wind, Prairie Carousel, Pacific Moon)
 
 ---
 
@@ -1683,7 +1683,7 @@ All new 1950 entity names have been checked against real-world conflicts:
 **1950 Storylines:**
 - Frank Martino at peak; *In the Wee Small Hours* defining album
 - Dorothy Sherwood balances TV hosting with recording career
-- Broadway characters (Goodwin & Langford, Maxine Merrill) expand theater world
+- Brightway characters (Goodwin & Langford, Maxine Merrill) expand theater world
 
 ---
 

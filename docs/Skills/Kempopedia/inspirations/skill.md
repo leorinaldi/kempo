@@ -37,7 +37,7 @@ Create names with similar cultural feel but clearly different:
 | Category | Real World | Kempo |
 |----------|------------|-------|
 | People | Harry S. Truman | Harold S. Kellman |
-| Institutions | West Point | Vermont Army Academy |
+| Institutions | West Point | American Military Academy |
 | Political Parties | Democratic / Republican | National Party / Federal Party |
 | Companies | General Motors | Continental Motors |
 | Places | Lamar, Missouri | Lawton, Missouri |
@@ -74,9 +74,9 @@ Multiple inspirations are supported (e.g., Vivian Sterling ← Rita Hayworth / A
 ### 3. Create the Article
 
 Create a Kempopedia article for the entity using the appropriate skill:
-- `create-person` for biographical articles
-- `create-organization` for institutions
-- `create-place` for locations
+- `article-person` for biographical articles
+- `article-organization` for institutions
+- `article-location` for locations
 - etc.
 
 ## Supported Entity Types

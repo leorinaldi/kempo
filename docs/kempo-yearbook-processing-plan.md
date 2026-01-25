@@ -41,7 +41,7 @@ The database is far more sophisticated than the skills recognize:
 ### Architecture
 
 **Layer 1: Content Skills** (writing-focused)
-- Keep existing article creation skills (create-person, etc.)
+- Keep existing article creation skills (article-person, etc.)
 - Update for current image style, fix inconsistencies
 - Focus on: what makes a good article, infobox structure, prose quality
 
@@ -60,15 +60,15 @@ The database is far more sophisticated than the skills recognize:
 docs/Skills/
 ├── Kempopedia/           # Layer 1: Content/Writing
 │   ├── article-global-rules/
-│   ├── create-person/    # How to write a person article
-│   ├── create-place/     # How to write a place article
-│   ├── create-organization/
-│   ├── create-brand/     # Complete (was stub)
-│   ├── create-product/
-│   ├── create-media/
-│   ├── create-publication/ # Complete (was stub)
-│   ├── create-event/     # Complete (was stub)
-│   ├── create-series/    # Complete (was stub)
+│   ├── article-person/    # How to write a person article
+│   ├── article-location/     # How to write a place article
+│   ├── article-organization/
+│   ├── article-brand/     # Complete (was stub)
+│   ├── article-product/
+│   ├── article-media/
+│   ├── article-publication/ # Complete (was stub)
+│   ├── article-event/     # Complete (was stub)
+│   ├── article-series/    # Complete (was stub)
 │   └── ...
 ├── EntityManagement/     # Layer 2: Database/Linking
 │   ├── manage-person/    # Full lifecycle: DB + links + images
@@ -95,10 +95,10 @@ docs/Skills/
    - Clarify what happens in article vs DB
 
 2. **Complete the 4 stub skills**
-   - create-brand
-   - create-publication
-   - create-event
-   - create-series
+   - article-brand
+   - article-publication
+   - article-event
+   - article-series
    - Focus on article content
 
 3. **Create linking-guide skill**
@@ -113,7 +113,7 @@ docs/Skills/
    - manage-organization
    - manage-brand
    - manage-product
-   - manage-place (covers nation/state/city/place)
+   - manage-location (covers nation/state/city/place)
    - manage-publication (covers series + individual issues)
    - manage-event (the unused Event system)
 
@@ -194,22 +194,22 @@ Master orchestration skill with workflow:
 
 ```
 article-global-rules (foundation for all)
-    ├── create-person
-    ├── create-place
-    ├── create-organization
-    │       └── create-brand
-    │               └── create-product
-    ├── create-media
-    ├── create-publication
-    ├── create-event
-    └── create-series
+    ├── article-person
+    ├── article-location
+    ├── article-organization
+    │       └── article-brand
+    │               └── article-product
+    ├── article-media
+    ├── article-publication
+    ├── article-event
+    └── article-series
 
 linking-guide (reference for all manage-* skills)
     ├── manage-person
     ├── manage-organization
     ├── manage-brand
     ├── manage-product
-    ├── manage-place
+    ├── manage-location
     ├── manage-publication
     └── manage-event
 
@@ -255,15 +255,15 @@ yearbook-to-content (orchestrates all of the above)
 
 ### Phase 1 (COMPLETED 2026-01-24)
 - [x] Update article-global-rules (image style, entity-article linking)
-- [x] Complete create-brand skill
-- [x] Complete create-publication skill
-- [x] Complete create-event skill
-- [x] Complete create-series skill
+- [x] Complete article-brand skill
+- [x] Complete article-publication skill
+- [x] Complete article-event skill
+- [x] Complete article-series skill
 - [x] Create linking-guide skill
-- [x] Update create-person skill (realistic image prompts)
-- [x] Update create-place skill (realistic image prompts)
-- [x] Update create-organization skill (realistic image prompts)
-- [x] Update create-product skill (realistic image prompts)
+- [x] Update article-person skill (realistic image prompts)
+- [x] Update article-location skill (realistic image prompts)
+- [x] Update article-organization skill (realistic image prompts)
+- [x] Update article-product skill (realistic image prompts)
 - [x] Update CLAUDE.md with new skill references
 
 ### Phase 2 (COMPLETED 2026-01-24)
@@ -271,7 +271,7 @@ yearbook-to-content (orchestrates all of the above)
 - [x] Create manage-organization skill
 - [x] Create manage-brand skill
 - [x] Create manage-product skill
-- [x] Create manage-place skill
+- [x] Create manage-location skill
 - [x] Create manage-publication skill
 - [x] Create manage-event skill
 

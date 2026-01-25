@@ -110,7 +110,7 @@ In the funny pages, a new comic strip captures the chaos beneath suburban perfec
 
 The Korean War casts its shadow. Sons are called to serve. Gold Star banners appear in windows. Every family knows someone affected. Yet the war also brings prosperity—defense contracts, full employment, overtime pay. The contradiction of wartime abundance and wartime grief defines the year.
 
-At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his methodical work on the Rigorio vaccine. The childhood paralysis disease claimed over 3,000 lives last year. Parents dread summer, when epidemics strike. Salter's killed-virus approach inches forward, but success remains years away. At Kingsley Medical Institute, Dr. Albert Kovar pursues a rival live-virus approach. The race continues—and every summer, children are paralyzed.
+At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his methodical work on the Rigorio vaccine. The childhood paralysis disease claimed over 3,000 lives last year. Parents dread summer, when epidemics strike. Salter's killed-virus approach inches forward, but success remains years away. At New England University Medical School, Dr. Albert Kovar pursues a rival live-virus approach. The race continues—and every summer, children are paralyzed.
 
 ---
 
@@ -137,7 +137,7 @@ At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his 
 
 **Theater:**
 - Goodwin & Langford (Jerome 49, Howard 56) - composer/lyricist team
-- Maxine Merrill (39) - Broadway leading lady
+- Maxine Merrill (39) - Brightway leading lady
 - Shows: *Oklahoma Wind* (1943), *Prairie Carousel* (1945), *Pacific Moon* (1949)
 
 **Comics:**
@@ -186,7 +186,7 @@ From the Real 1951 Yearbook:
 **Strong Areas:**
 - Bernie Kessler covers "Mr. Television" role
 - Frank Martino covers crooner archetype (+ Tony Bennett, Dean Martin)
-- Maxine Merrill + Goodwin & Langford cover Broadway
+- Maxine Merrill + Goodwin & Langford cover Brightway
 - Walter Hendricks covers gentle comics (*Bramblewood*); Pascal the Rascal covers mischief
 - Joe King Brooks covers Black crossover artist
 
@@ -238,7 +238,7 @@ From the Real 1951 Yearbook:
   - Linda schemes to get into Rafael's nightclub act
   - Highest-rated show by year's end
 
-**2. "The Emperor and the Lady" - Broadway Musical (King and I equivalent)**
+**2. "The Emperor and the Lady" - Brightway Musical (King and I equivalent)**
 
 - Goodwin & Langford's new musical
 - Set in 1860s China - American woman hired to tutor the Emperor's children
@@ -246,7 +246,7 @@ From the Real 1951 Yearbook:
 - Male lead: **Thomas Ling** as the Emperor
   - Born 1918, San Francisco (age 33 in 1951)
   - Chinese-American, second-generation
-  - Trained in classical theater, worked small roles in Hollywood and Broadway
+  - Trained in classical theater, worked small roles in Hollywood and Brightway
   - Shaves head for the role; commanding presence, intense eyes
   - The role makes him a star - wins Tony for Best Featured Actor
   - Sessue Hayakawa + Yul Brynner compression
@@ -304,7 +304,7 @@ Linda's physical comedy—the pratfalls, the rubber-faced expressions, the impec
 
 Bernie Kessler (43) remains "Mr. Television"—his Tuesday night variety hour still draws millions. But the sitcom format that Linda and Rafael have pioneered represents the future. Television is no longer just vaudeville with cameras; it's a new art form.
 
-On Broadway, Goodwin & Langford unveil *The Emperor and the Lady* on March 29. Set in 1860s China, it tells the story of an American woman hired to tutor the Emperor's children—a clash of cultures, a meeting of minds, perhaps something more. Maxine Merrill (40), the brassy Queen of Broadway, transforms herself into a dignified yet spirited governess. The score includes instantly memorable songs. Critics rave. The show will run for years.
+On Brightway, Goodwin & Langford unveil *The Emperor and the Lady* on March 29. Set in 1860s China, it tells the story of an American woman hired to tutor the Emperor's children—a clash of cultures, a meeting of minds, perhaps something more. Maxine Merrill (40), the brassy Queen of Brightway, transforms herself into a dignified yet spirited governess. The score includes instantly memorable songs. Critics rave. The show will run for years.
 
 Frank Martino (35) continues his reign as the premier crooner. His name surfaced briefly in the Fletcher crime hearings—old debts to Sol Roth, a friendship with Sidney Hartman—but his fans remain loyal. The music plays on.
 
@@ -719,14 +719,14 @@ From the Real 1951 Yearbook:
 
 **General Matthew Hillford** (Matthew Ridgway equivalent)
 - Born ~1895 (age 56 in 1951)
-- Vermont Army Academy graduate, served WWI and WWII (airborne commander)
+- American Military Academy graduate, served WWI and WWII (airborne commander)
 - Replaces Westbrook as UN Commander, April 1951
 - Professional, competent, no grandstanding - the anti-Westbrook
 - Stabilizes front, oversees beginning of armistice talks
 
 **General Bradley Omar** (Omar Bradley equivalent)
 - Born ~1893 (age 58 in 1951)
-- Vermont Army Academy graduate, commanded troops in both World Wars
+- American Military Academy graduate, commanded troops in both World Wars
 - Chairman of the Joint Chiefs of Staff
 - Testifies at Senate hearings May-June, contradicts Westbrook
 - Delivers the famous "misguided conflict, misguided moment, misguided adversary" assessment
@@ -738,7 +738,7 @@ The Korean War transforms in 1951. January begins with Chinese forces pushing UN
 
 By March, UN forces under Westbrook's field commanders have recaptured Seoul. But Westbrook continues his public campaign for a wider war. He writes to Congressional leaders, gives interviews, issues ultimatums that contradict presidential policy.
 
-On April 11, Kellman relieves Westbrook of command. The nation is shocked. **General Matthew Hillford**, a Vermont Army Academy man with a reputation for quiet competence, takes over. Where Westbrook craved headlines, Hillford seeks results. Where Westbrook demanded total victory, Hillford accepts the reality of limited war.
+On April 11, Kellman relieves Westbrook of command. The nation is shocked. **General Matthew Hillford**, an American Military Academy man with a reputation for quiet competence, takes over. Where Westbrook craved headlines, Hillford seeks results. Where Westbrook demanded total victory, Hillford accepts the reality of limited war.
 
 Westbrook returns to a hero's welcome—ticker-tape parades, an address to Congress where he declares "old soldiers never die, they just fade away." For a moment, he seems poised to challenge Kellman politically.
 
@@ -758,7 +758,7 @@ International treaties reshape the Pacific. The peace treaty with Japan (Septemb
 
 **Medical:**
 - Dr. David Salter (37) - Rigorio vaccine researcher, Hartwell Medical Institute, Steel City
-- Dr. Albert Kovar - rival researcher, Kingsley Medical Institute, live-virus approach
+- Dr. Albert Kovar - rival researcher, New England University Medical School, live-virus approach
 - Rigorio - fictional childhood paralysis disease (polio equivalent)
 
 **Nuclear:**
@@ -802,7 +802,7 @@ From the Real 1951 Yearbook:
 
 At Steel City's Hartwell Medical Institute, Dr. David Salter (37) continues his methodical work on the Rigorio vaccine. Summer 1951 brings another epidemic season—thousands of children paralyzed, hundreds dead. Parents keep children home from swimming pools, movie theaters, anywhere crowds gather. The iron lung has become a symbol of both terror and hope.
 
-Salter's killed-virus approach shows promise in animal trials. At Kingsley Medical Institute, Dr. Albert Kovar pursues his rival live-virus method. The race continues. Success remains years away, but 1951 brings incremental progress.
+Salter's killed-virus approach shows promise in animal trials. At New England University Medical School, Dr. Albert Kovar pursues his rival live-virus method. The race continues. Success remains years away, but 1951 brings incremental progress.
 
 In Nevada, the Atomic Energy Commission opens a new test site. Operation Ranger (January) conducts the first atmospheric tests on American soil. The mushroom clouds are visible from Las Vegas. The atomic age advances.
 
@@ -902,8 +902,8 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 | Willie Banks | 31 | Baseball | Leads Scouts to championship |
 | Joe Rosetti | 33 | Baseball | Defends Empires' honor |
 | Joseph Carter | 45 | Boxer | Attempts comeback, loses to Marchetti |
-| Maxine Merrill | 40 | Broadway Star | Stars in *The Emperor and the Lady* |
-| Thomas Ling | 33 | Broadway Star | Breakout role in *The Emperor and the Lady* |
+| Maxine Merrill | 40 | Brightway Star | Stars in *The Emperor and the Lady* |
+| Thomas Ling | 33 | Brightway Star | Breakout role in *The Emperor and the Lady* |
 | Ernest Beckford | 52 | Author | Publishes *The Wanderers* |
 | Walter Hendricks | 31 | Cartoonist | *Bramblewood* goes national |
 
@@ -999,7 +999,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 - **March 14** - UN forces recapture Seoul (fourth time it changes hands)
 - **March 15-31** - Fletcher Committee televised hearings captivate 30 million Americans
 - **March 29** - Marshes convicted of espionage conspiracy
-- **March 29** - *The Emperor and the Lady* opens on Broadway (Goodwin & Langford, Maxine Merrill)
+- **March 29** - *The Emperor and the Lady* opens on Brightway (Goodwin & Langford, Maxine Merrill)
 - **March 29** - Silver Screen Awards ceremony (honoring 1950 films)
 
 ### April
@@ -1047,7 +1047,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 ### Priority 1: Core Decisions - CONFIRMED
 
 - [x] **Sitcom**: *I Like Linda* - Linda Lane (comedienne) and Rafael Morales (Guatemalan bandleader)
-- [x] **Broadway Musical**: *The Emperor and the Lady* - Goodwin & Langford, Maxine Merrill, Thomas Ling
+- [x] **Brightway Musical**: *The Emperor and the Lady* - Goodwin & Langford, Maxine Merrill, Thomas Ling
 - [x] **Novel**: Ernest Beckford's *The Wanderers* - published July 1951
 - [x] **Spy Trial**: Victor and Helena Marsh - convicted March 29, sentenced April 5
 - [x] **Boxing**: Brennan defeats Lawson (July), Marchetti defeats Carter (October)
@@ -1099,7 +1099,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 ### Priority 4: Media to Create
 
 - [ ] Show: *I Like Linda* (TV sitcom)
-- [ ] Show: *The Emperor and the Lady* (Broadway musical)
+- [ ] Show: *The Emperor and the Lady* (Brightway musical)
 - [ ] Book: *The Wanderers* by Ernest Beckford
 
 ### Research Completed
@@ -1251,7 +1251,7 @@ Telecommunications is a massive gap in our corporate landscape. In 1951, AT&T be
 | **Les Paul & Mary Ford** | Musicians, innovators | **MISSING** | LOW |
 | Milton Berle | Mr. Television | EXISTS: Bernie Kessler | ✓ |
 | Lucille Ball/Desi Arnaz | Sitcom stars | CREATED: Linda Lane/Rafael Morales | ✓ |
-| Rodgers & Hammerstein | Broadway composers | EXISTS: Goodwin & Langford | ✓ |
+| Rodgers & Hammerstein | Brightway composers | EXISTS: Goodwin & Langford | ✓ |
 
 **Music Gap Analysis:**
 We have Frank Martino (crooner) but the Real 1951 shows a diverse music scene:
@@ -1410,7 +1410,7 @@ We're using a different baseball storyline (Scouts vs Empires rematch, Banks win
 - [x] Show title: ***I Like Linda***
 - [x] Premieres October 1951 on UBC
 
-**Broadway Musical (King and I equivalent):**
+**Brightway Musical (King and I equivalent):**
 - [x] Title: ***The Emperor and the Lady*** (set in 1860s China)
 - [x] Stars Maxine Merrill as American governess
 - [x] Opens March 29, 1951
@@ -1442,7 +1442,7 @@ We're using a different baseball storyline (Scouts vs Empires rematch, Banks win
 **Completed this session:**
 - Created Kempo 1951 Yearbook Analysis document
 - Confirmed sitcom: *I Like Linda* (Linda Lane + Rafael Morales)
-- Confirmed Broadway: *The Emperor and the Lady* (Maxine Merrill + Thomas Ling)
+- Confirmed Brightway: *The Emperor and the Lady* (Maxine Merrill + Thomas Ling)
 - Confirmed boxing storyline: Brennan beats Lawson (July), Marchetti beats Carter (October)
 - Confirmed baseball: Scouts beat Empires 4-2, Banks wins championship
 - Confirmed spy trial: Victor and Helena Marsh

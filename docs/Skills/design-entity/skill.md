@@ -10,7 +10,7 @@ This skill guides the **planning and design phase** before creating Kempopedia a
 - Filling gaps discovered during other work
 - Expanding storylines
 
-After an entity is designed and approved using this skill, use the appropriate `create-*` skill (create-person, create-organization, etc.) to write the actual Kempopedia article.
+After an entity is designed and approved using this skill, use the appropriate `create-*` skill (article-person, article-organization, etc.) to write the actual Kempopedia article.
 
 ## Core Principle: Rhyme, Don't Copy
 
@@ -388,9 +388,9 @@ When designing entities or writing narratives, create unique Kempo terms for maj
 | Skill | Relationship |
 |-------|--------------|
 | `design-entity` (this) | Plans and designs the entity |
-| `create-person` | Writes the Kempopedia article for a person |
-| `create-organization` | Writes the Kempopedia article for an organization |
-| `create-brand` | Writes the Kempopedia article for a brand |
+| `article-person` | Writes the Kempopedia article for a person |
+| `article-organization` | Writes the Kempopedia article for an organization |
+| `article-brand` | Writes the Kempopedia article for a brand |
 | `kempo-yearbook` | References this skill during gap-filling |
 | `article-global-rules` | Applies to all article creation after design is complete |
 | `inspirations` | Records the real-world to Kempo mappings |
