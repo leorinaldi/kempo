@@ -259,72 +259,14 @@ The **Yearbook-to-Content Workflow** is the master process for building the Kemp
 
 Skills are detailed instruction documents that guide AI-assisted content creation. Located in `docs/Skills/`.
 
-**Workflow Skills** (Orchestration):
+**For the complete skills index, see [CLAUDE.md](CLAUDE.md#skills).**
 
-| Skill | Purpose |
-|-------|---------|
-| `yearbook-to-content` | Master workflow: yearbook → entities → articles → QC |
-| `quality-control` | 11-check QC battery (dead links, images, inspirations, etc.) |
-
-**Yearbook Skills** (Planning):
-
-| Skill | Purpose |
-|-------|---------|
-| `real-yearbook` | Historical research documents by year |
-| `kempo-yearbook` | Kempo universe planning documents by year |
-
-**Entity Management Skills** (Full Lifecycle — DB record + article + image + inspirations):
-
-| Skill | Purpose |
-|-------|---------|
-| `manage-person` | Person record + article + portrait + inspirations |
-| `manage-organization` | Organization + brands + child entities |
-| `manage-brand` | Brand + products + parent org |
-| `manage-product` | Product + brand + inspirations |
-| `manage-location` | Nation/State/City/Place hierarchy |
-| `manage-publication` | PublicationSeries + issues + contributors |
-| `manage-series` | TV Series + network + cast/crew |
-| `manage-event` | Event + timeline + relationships |
-| `linking-guide` | How junction tables and relationships work |
-
-**Kempopedia Skills** (Article Format):
-
-| Skill | Purpose |
-|-------|---------|
-| `article-global-rules` | Core rules for all articles (read first) |
-| `article-person` | Biographical article format |
-| `article-organization` | Organization article format |
-| `article-brand` | Brand article format |
-| `article-product` | Product article format |
-| `article-location` | Location articles (nations, states, cities, places) |
-| `article-publication` | Publication article format |
-| `article-event` | Event article format |
-| `article-series` | TV series article format |
-| `article-media` | Media article format (songs, albums, films) |
-| `article-timeline` | Timeline page format |
-| `article-misc` | Miscellaneous articles |
-
-**Supporting Skills**:
-
-| Skill | Purpose |
-|-------|---------|
-| `generate-image` | Image generation with Grok/Gemini |
-| `design-entity` | Plan new entities before creation |
-| `inspirations` | Real-world to Kempo mappings |
-| `date-review` | Audit dates after creating articles |
-
-**Session Skills**:
-
-| Skill | Purpose |
-|-------|---------|
-| `claude-code-session-start` | Dev server, ngrok tunnel, disable login, review project history |
-| `claude-code-session-close` | Commit changes, update project history, re-enable login |
-
-**Skill Locations:**
-- Workflow: `docs/Skills/Workflows/<skill-name>/skill.md`
-- Entity Management: `docs/Skills/EntityManagement/<skill-name>/skill.md`
-- Kempopedia: `docs/Skills/Kempopedia/<skill-name>/skill.md`
-- Other: `docs/Skills/<skill-name>/skill.md`
+Categories include:
+- **Workflow Skills** — Master orchestration (yearbook-to-content, quality-control)
+- **Entity Management Skills** — Full lifecycle for each entity type (DB record + article + image + inspirations)
+- **Kempopedia Skills** — Article format templates by type
+- **Supporting Skills** — Image generation, entity design, inspirations, date review
+- **Session Skills** — Dev environment setup and teardown
 
 ### Long-Term Roadmap
 
@@ -437,3 +379,4 @@ Kempo/
 | `docs/Skills/Workflows/yearbook-to-content/skill.md` | Master content workflow |
 | `docs/Skills/Workflows/quality-control/skill.md` | QC check battery |
 | `docs/Skills/Kempopedia/article-global-rules/skill.md` | Article format rules |
+| `docs/search-system.md` | Giggle search engine implementation |

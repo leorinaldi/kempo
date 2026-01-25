@@ -52,6 +52,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | Entity linking guide | [docs/Skills/EntityManagement/linking-guide](docs/Skills/EntityManagement/linking-guide/skill.md) |
 | Yearbook guiding principles | [docs/yearbooks/guiding-principles.md](docs/yearbooks/guiding-principles.md) |
 | KempoNet UI patterns | [docs/kemponet-design-patterns.md](docs/kemponet-design-patterns.md) |
+| Search system (Giggle) | [docs/search-system.md](docs/search-system.md) |
 | Mobile testing (ngrok) | [docs/mobile-testing.md](docs/mobile-testing.md) |
 | Event system | [docs/event-system.md](docs/event-system.md) |
 | Backup system | [docs/database-backup.md](docs/database-backup.md) |
@@ -59,7 +60,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 ## Skills
 
-### Kempopedia Skills (Article Format & Content)
+### Kempopedia Skills (Article Format)
 
 | Skill | Purpose |
 |-------|---------|
@@ -75,10 +76,6 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | `article-series` | TV series article format |
 | `article-timeline` | Timeline page format |
 | `article-misc` | Miscellaneous articles that don't fit other categories |
-| `date-review` | Audit dates after creating articles |
-| `generate-image` | Image generation with Grok/Gemini |
-| `inspirations` | Real-world to Kempo mappings |
-| `design-entity` | Plan and design new entities before article creation |
 
 ### Entity Management Skills (Full Lifecycle)
 
@@ -107,6 +104,22 @@ When asked to "close the session", "session close protocol", or similar, follow 
 |-------|---------|
 | `real-yearbook` | Historical research documents by year |
 | `kempo-yearbook` | Kempo universe planning documents by year |
+
+### Supporting Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `generate-image` | Image generation with Grok/Gemini |
+| `design-entity` | Plan new entities before creation |
+| `inspirations` | Real-world to Kempo mappings |
+| `date-review` | Audit dates after creating articles |
+
+### Session Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `claude-code-session-start` | Dev server, ngrok tunnel, disable login, review project history |
+| `claude-code-session-close` | Commit changes, update project history, re-enable login |
 
 ### Skill Locations
 

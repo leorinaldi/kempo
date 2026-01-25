@@ -10,7 +10,8 @@ Read these files to understand the project:
 - [CLAUDE.md](../../../CLAUDE.md) - AI routing, skills index
 - [Kempo Project Context.md](../../../Kempo%20Project%20Context.md) - Strategic overview, philosophy, architecture
 - [README.md](../../../README.md) - Quick start & setup
-- [docs/data-model.md](../../data-model.md) - Entity taxonomy and relationships
+
+Note: For entity relationship details, see [docs/data-model.md](../../data-model.md) on-demand when doing entity management work.
 
 ### 2. Start Dev Server
 
