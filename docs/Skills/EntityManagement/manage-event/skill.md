@@ -248,7 +248,20 @@ Create parent event first, then child events with `parentId`.
 1. Create EventRelation with appropriate type
 2. Update both event articles' "See also"
 
-## Timeline Integration
+## Timeline Integration (CRITICAL)
+
+**Timeline pages and related articles must link bidirectionally.** This ensures:
+- Users can navigate from timeline to detailed articles
+- Articles link back to timeline for historical context
+- The wiki forms a coherent, interconnected whole
+
+### Three-Way Linking Pattern
+
+For every significant event, establish links between:
+
+```
+Event Database Record ←→ Timeline Page ←→ Related Articles
+```
 
 ### From Event to Timeline
 
@@ -259,12 +272,35 @@ Every Event with significance 5+ should have a timeline entry:
 3. Write entry with wikilinks
 4. Link from Event article to timeline
 
-### From Timeline to Event
+### From Timeline to Articles
 
 Timeline entries for significant events should:
 1. Link to Event article (if exists)
 2. Link to related person/place articles
 3. Use consistent date format
+
+### From Articles to Timeline (MANDATORY)
+
+**Related articles must link back to timeline dates using `[[date k.y.]]` syntax.**
+
+When an event is mentioned in an article:
+1. Identify if a timeline entry exists for that date
+2. Add date link: `[[October 25, 1950 k.y.|October 25, 1950]]`
+3. Ensure the timeline has the corresponding anchor
+
+**Example:** If the Douglas Westbrook article mentions Chinese forces entering Korea, it should include:
+```markdown
+On [[October 25, 1950 k.y.|October 25, 1950]], Chinese "volunteer" forces first crossed the Yalu...
+```
+
+### Yearbook-to-Timeline Sync
+
+When processing a yearbook:
+1. **Extract all dated events** from the yearbook timeline section
+2. **Check timeline pages** — add any missing events with anchors
+3. **Check Event database** — create records for significant events (5+)
+4. **Check related articles** — add date links where events are discussed
+5. **Verify bidirectional links** — timeline links to articles, articles link to timeline
 
 ## Querying Events
 
@@ -358,6 +394,66 @@ model EventRelation {
   relationType   String // part_of, caused_by, led_to, concurrent_with, related_to
 }
 ```
+
+## Quality Control: Yearbook Sync
+
+After processing a yearbook, verify all events are properly linked:
+
+### Step 1: Compare Yearbook Timeline to Kempopedia Timeline
+
+```bash
+# Read yearbook timeline section
+# Compare against timeline page (e.g., 1950.md)
+# Identify missing entries
+```
+
+### Step 2: Add Missing Timeline Entries
+
+For each missing event from the yearbook:
+1. Add entry with proper anchor ID to timeline page
+2. Include wikilinks to related articles
+3. Use consistent date format
+
+### Step 3: Create Event Records
+
+For significant events (5+) not in database:
+```typescript
+await prisma.event.create({
+  data: {
+    title: "Event name",
+    description: "Brief description",
+    kyDateBegin: new Date("YYYY-MM-DD"),
+    eventType: "type",
+    significance: N,
+    parentId: parentEventId // if applicable
+  }
+});
+```
+
+### Step 4: Update Related Articles
+
+For each new timeline entry:
+1. Find articles that discuss this event
+2. Add date links: `[[Month Day, YYYY k.y.|Month Day, YYYY]]`
+3. Verify links resolve to timeline anchors
+
+### Step 5: Verification Checklist
+
+- [ ] All yearbook timeline events have Kempopedia timeline entries
+- [ ] All significant events (5+) have Event database records
+- [ ] All timeline entries link to relevant articles
+
+### Step 6: Run Dead Link Checker
+
+After all updates, verify no broken links were introduced:
+
+```bash
+node scripts/check-dead-links.js
+```
+
+Fix any dead links found (create stubs or correct slug format).
+- [ ] All relevant articles link back to timeline dates
+- [ ] Event hierarchy is correct (battles → wars, etc.)
 
 ## Admin Paths
 

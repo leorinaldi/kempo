@@ -178,7 +178,31 @@ This sets:
 2. Run `generate-image.js` with realistic prompt
 3. Script generates image, uploads to Vercel Blob, creates Image record with metadata
 4. Copy the Blob URL from output to article infobox
-5. Optionally link image to subjects in admin UI
+5. **Create ImageSubject link** to connect the image to the entity (person, organization, etc.)
+
+**IMPORTANT: ImageSubject Linking**
+
+After generating an image for an entity (person, place, organization), you MUST create an `ImageSubject` record. This links the image to the entity in the database, enabling:
+- Admin UI to show "linked images" for entities
+- Future image galleries and entity-based queries
+
+**Option A: Via Admin UI**
+1. Go to the entity's manage page (e.g., `/admin/world-data/people/manage`)
+2. Find the entity and check if images are linked
+3. If not, go to the Image admin and add the subject link
+
+**Option B: Via Prisma (recommended for batch operations)**
+```typescript
+await prisma.imageSubject.create({
+  data: {
+    imageId: "image-id",    // The generated image's ID
+    itemId: "entity-id",    // The Person/Organization/etc. ID
+    itemType: "person"      // "person", "organization", "place", etc.
+  }
+});
+```
+
+The generate-image script outputs the Image ID - save this to create the ImageSubject link.
 
 ### Regenerating Legacy Images
 

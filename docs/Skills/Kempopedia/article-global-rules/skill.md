@@ -301,6 +301,15 @@ Slugs are lowercase with hyphens. If the display name has capitals, spaces, or m
 [[world-war-ii|World War II]]
 ```
 
+**NEVER use empty pipe syntax:**
+```markdown
+// WRONG - empty display text
+[[Georgia|]]
+
+// CORRECT - no pipe needed if using title as-is
+[[Georgia]]
+```
+
 ## 10. Political Parties
 
 **Use Kempo political parties, not real-world ones.**
@@ -576,11 +585,28 @@ Before considering an article complete, verify:
 
 ## 18. Table Formatting
 
-**AVOID MARKDOWN TABLES. The wiki renderer does not handle them reliably—rows often run together.**
+**NEVER USE MARKDOWN TABLES IN ARTICLE CONTENT.** The wiki renderer does not handle them—rows run together into unreadable text.
+
+This is a hard rule. Markdown tables like this will NOT render correctly:
+```markdown
+<!-- DO NOT USE THIS FORMAT -->
+| Team | City | Stadium |
+|------|------|---------|
+| New York Empires | New York City | Empire Stadium |
+```
 
 ### Instead of Tables, Use:
 
-**Numbered lists** for track listings:
+**Bullet lists with parenthetical details** for multi-attribute items:
+```markdown
+### Eastern League
+
+- [[New York Empires]] ([[New York City]], Empire Stadium)
+- [[Boston Beacons]] ([[Boston]], Beacon Park)
+- [[Philadelphia Pennies]] ([[Philadelphia]], Penny Field)
+```
+
+**Numbered lists** for track listings or ordered items:
 ```markdown
 ## Track listing
 
@@ -589,7 +615,7 @@ Before considering an article complete, verify:
 3. "Third Song" – 3:52
 ```
 
-**Bullet lists** for simple key-value data:
+**Bullet lists with bold labels** for key-value data:
 ```markdown
 - **Year:** 1908
 - **Price:** $850
@@ -603,14 +629,20 @@ Before considering an article complete, verify:
 **Top speed:** 45 mph
 ```
 
-### When Tables Are Unavoidable
+### Common Patterns
 
-If you must use a table (e.g., in this skill documentation), ensure:
-1. Blank line before and after the table
-2. Consistent column widths
-3. Test rendering after saving
+| Instead of... | Use... |
+|---------------|--------|
+| Team/City/Stadium table | `- [[Team]] ([[City]], Stadium)` |
+| Person/Role table | `- [[Person]] (role)` |
+| Year/Event table | `- **Year** — Event description` |
+| Stat tables | Bullet lists or definition style |
 
-But for article content, **always prefer lists over tables**.
+*Note: The table above is for skill documentation only—never use this format in actual articles.*
+
+### No Exceptions in Article Content
+
+Tables may appear in skill documentation (like this file), but **never in Kempopedia articles**. If you're tempted to use a table, convert it to one of the list formats above.
 
 ## 19. Media Content (Audio/Video)
 
@@ -783,13 +815,14 @@ This tracks the creative sources and helps maintain consistency.
 - [ ] Infobox uses wikilinks for linkable fields
 - [ ] Wikilinks use correct slug with pipe syntax if needed
 - [ ] Inspiration registered in database (if applicable)
-- [ ] **Tables properly formatted** (blank lines, aligned columns)
+- [ ] **No markdown tables** (use bullet lists instead)
 - [ ] **IMAGE GENERATED** for Person/Place/Institution types (REQUIRED)
 
 ### Phase 2: Link Integrity (NO DEAD LINKS)
-- [ ] **Extract all wikilinks** from your article
+- [ ] **Run dead link checker**: `node scripts/check-dead-links.js`
 - [ ] **Verify each link** points to an existing article
-- [ ] **Create stubs** for any missing articles
+- [ ] **Create stubs** (with `status: 'published'`) for any missing articles
+- [ ] **Fix slug mismatches** (e.g., `harold-kellman` → `Harold S. Kellman`)
 - [ ] **Verify stubs link back** to your new article
 
 ### Phase 3: Timeline Synchronization (see [[date-review]] skill)

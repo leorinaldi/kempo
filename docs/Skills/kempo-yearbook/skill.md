@@ -286,6 +286,8 @@ Compile events into a month-by-month chronology:
 - Add new events from the domain sections
 - Ensure logical sequencing
 
+**Note:** This timeline section becomes the source of truth for what events must appear in the Kempopedia timeline page during content creation. See [yearbook-to-content](../Workflows/yearbook-to-content/skill.md) Phase 5 for the sync process.
+
 ### Phase 8: Content Creation Roadmap
 
 Consolidate all new creations into an actionable checklist:
@@ -500,3 +502,16 @@ Check:
 - **Dependencies:** Some content must be created before other content (e.g., an organization before its brands). The Roadmap should reflect this.
 
 - **Living Documents:** Both documents may be updated as new connections are discovered or as actual content is created.
+
+---
+
+## Next Steps: Content Creation
+
+Once both yearbook documents are complete:
+
+1. **Follow [yearbook-to-content](../Workflows/yearbook-to-content/skill.md)** to convert the yearbook into actual Kempo content
+2. **Critical:** The yearbook's timeline section (Section XII) must be synced to the Kempopedia timeline page during Phase 5
+3. **Verification:** All events from the yearbook timeline should appear in both:
+   - The Kempopedia timeline page (e.g., `articles/timelines/1950.md`)
+   - The Events database (for significant events, significance 5+)
+4. **Bidirectional linking:** Related articles must link back to timeline entries using date wikilinks

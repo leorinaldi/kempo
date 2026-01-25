@@ -114,14 +114,39 @@ In the Organization form:
 3. Click Edit
 4. Add ImageSubject: itemType="organization", itemId=[org's ID]
 
-### Step 8: Add Inspirations
+### Step 8: Add Inspirations (REQUIRED for fictional orgs!)
 
-If based on real-world organizations:
+**⚠️ This step is frequently missed!** Every fictional organization should have at least one real-world inspiration recorded.
 
-1. Go to the Organization's edit form
-2. Add inspiration entries:
+**Via Admin UI:**
+1. Go to the Organization's edit form (`/admin/world-data/organizations/manage`)
+2. Find the "Inspirations" section
+3. Add entries:
    - **Inspiration**: Real-world name (e.g., "General Motors")
-   - **Wikipedia URL**: Link to Wikipedia
+   - **Wikipedia URL**: Link to Wikipedia article
+
+**Via Prisma (for batch operations):**
+```typescript
+await prisma.inspiration.create({
+  data: {
+    subjectId: organization.id,
+    subjectType: "organization",
+    inspiration: "General Motors",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/General_Motors"
+  }
+});
+```
+
+**Common inspiration mappings:**
+| Kempo Organization | Real-World Inspiration(s) |
+|-------------------|---------------------------|
+| Film studios | Paramount, MGM, Warner Bros., etc. |
+| TV networks | NBC, CBS, ABC |
+| Auto companies | Ford, GM, Chrysler |
+| Record labels | Columbia, Capitol, RCA Victor |
+| Newspapers | Real city papers of that era |
+
+**Note:** Real-world organizations that appear as themselves in Kempo (e.g., actual government bodies) don't need inspirations.
 
 ### Step 9: Create Child Entities
 

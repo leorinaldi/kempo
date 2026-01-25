@@ -109,7 +109,20 @@ async function handleChildren(parentId: string, childModel: string, foreignKey: 
       // Include count of grandchildren where applicable
       ...(childModel === "state" ? { _count: { select: { cities: true } } } : {}),
       ...(childModel === "city" ? { _count: { select: { places: true } } } : {}),
-      ...(childModel === "brand" ? { _count: { select: { products: true } } } : {}),
+      // For brands, include actual products (not just count) so frontend can display product details
+      ...(childModel === "brand"
+        ? {
+            products: {
+              select: {
+                id: true,
+                name: true,
+                productType: true,
+                article: { select: { id: true } },
+              },
+              orderBy: { name: "asc" as const },
+            },
+          }
+        : {}),
     },
     orderBy: { name: "asc" },
   })

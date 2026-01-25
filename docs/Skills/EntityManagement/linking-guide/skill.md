@@ -38,10 +38,36 @@ Links images to any entity type.
 
 **Use case:** "Show all images of Frank Martino" or "Find the portrait for this Person"
 
+**⚠️ CRITICAL: This link is often forgotten!**
+
+Images link to Articles via `Image.articleId` (for displaying in infoboxes), but they ALSO need `ImageSubject` records to link to entity records (Person, Organization, etc.). Without ImageSubject:
+- Admin entity pages show "No linked images"
+- Entity-based image queries return empty results
+- Image galleries by person/place won't work
+
+**Both links are needed:**
+- `Image.articleId → Article` — Image appears in article infobox
+- `ImageSubject → Entity` — Image linked to entity for admin and queries
+
 **Creating links:**
 1. Upload/generate image via scripts or admin UI
-2. Go to `/admin/world-data/image/manage`
-3. Edit the image, add subjects in the Linked Subjects section
+2. Link to article: Set `Image.articleId` to the article
+3. **Create ImageSubject**: Link the image to the entity record
+
+**Via Prisma:**
+```typescript
+await prisma.imageSubject.create({
+  data: {
+    imageId: "image-id",
+    itemId: "entity-id",     // Person ID, Organization ID, etc.
+    itemType: "person"       // "person", "organization", "city", etc.
+  }
+});
+```
+
+**Via Admin UI:**
+1. Go to `/admin/world-data/image/manage`
+2. Edit the image, add subjects in the Linked Subjects section
 
 ### AudioElement (Polymorphic)
 

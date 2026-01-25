@@ -94,23 +94,59 @@ In the Person form:
 
 This creates the bidirectional link: Person ↔ Article
 
-### Step 7: Link the Image
+### Step 7: Link the Image (REQUIRED)
 
-Option A: Via Image Admin
-1. Go to `/admin/world-data/image/manage`
-2. Find the portrait image
-3. Click Edit
-4. Add ImageSubject: itemType="person", itemId=[person's ID]
+**CRITICAL:** This step is required for the admin UI to show linked images. Without an ImageSubject record, the person's manage page will show "No linked images" even if their article has an image in the infobox.
 
-Option B: Via API/Prisma
+The Image table links to Articles (via `articleId`), but the ImageSubject table links Images to Entities (Person, Organization, Place, etc.). Both are needed:
+- `Image.articleId` → Shows image in article
+- `ImageSubject` → Shows image in admin entity pages, enables entity-based queries
+
+**Option A: Via Admin UI**
+1. Go to `/admin/world-data/people/manage`
+2. Find the person and verify they show linked images
+3. If not, the ImageSubject needs to be created
+
+**Option B: Via Prisma (recommended)**
 ```typescript
+// First, find the image that's linked to the person's article
+const person = await prisma.person.findUnique({
+  where: { id: personId },
+  include: { article: true }
+});
+
+const image = await prisma.image.findFirst({
+  where: { articleId: person.article.id }
+});
+
+// Create the ImageSubject link
 await prisma.imageSubject.create({
   data: {
-    imageId: "image-id",
-    itemId: "person-id",
+    imageId: image.id,
+    itemId: personId,
     itemType: "person"
   }
 });
+```
+
+**Batch fix for missing links:**
+```bash
+# Check for people with images but missing ImageSubject
+node --env-file=.env.local -e "
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+prisma.\$queryRaw\`
+  SELECT p.id, CONCAT(p.first_name, ' ', p.last_name) as name
+  FROM people p
+  JOIN articles a ON a.id = p.article_id
+  JOIN image i ON i.article_id = a.id
+  WHERE NOT EXISTS (
+    SELECT 1 FROM image_subjects isub
+    WHERE isub.item_id = p.id AND isub.item_type = 'person'
+  )
+\`.then(r => console.log('Missing ImageSubject:', r.length, r))
+  .finally(() => prisma.\$disconnect());
+"
 ```
 
 ### Step 8: Add Inspirations

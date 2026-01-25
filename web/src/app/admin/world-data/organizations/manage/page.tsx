@@ -500,13 +500,13 @@ export default function ManageOrganizationsPage() {
                         ) : (
                           <span className="text-gray-800">{brand.name}</span>
                         )}
-                        {brand.products.length > 0 && (
+                        {brand.products?.length > 0 && (
                           <span className="text-gray-400 text-xs">
                             ({brand.products.length} product{brand.products.length !== 1 ? "s" : ""})
                           </span>
                         )}
                       </div>
-                      {brand.products.length > 0 && (
+                      {brand.products?.length > 0 && (
                         <div className="ml-4 mt-2 space-y-1">
                           {brand.products.map((product) => (
                             <div key={product.id} className="flex items-center gap-2 text-sm">

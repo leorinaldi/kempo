@@ -253,7 +253,19 @@ For each organization:
 3. Create org record at /admin/world-data/organizations
 4. Link article
 5. Link image via ImageSubject
-6. Add inspirations if applicable
+6. **Add inspirations** (REQUIRED for fictional entities!)
+```
+
+**⚠️ INSPIRATIONS ARE OFTEN MISSED!** Every fictional organization should have at least one real-world inspiration. Add via admin UI or Prisma:
+```typescript
+await prisma.inspiration.create({
+  data: {
+    subjectId: org.id,
+    subjectType: "organization",
+    inspiration: "Real Company Name",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/..."
+  }
+});
 ```
 
 **Priority order:**
@@ -345,13 +357,21 @@ Follow [manage-person](../../EntityManagement/manage-person/skill.md):
 1. Verify birthplace exists (create if needed)
 2. Verify key organizations exist (employers, schools)
 3. Create article with full biography
-4. Generate portrait image
-5. Create Person record at /admin/world-data/people
-6. Link article
-7. Link image via ImageSubject
-8. Add inspirations (all real-world sources)
-9. Update related articles (employers, birthplace)
+4. Generate portrait image (save the Image ID from output)
+5. Update article infobox with image URL
+6. Create Person record at /admin/world-data/people
+7. Link article to Person record
+8. **Create ImageSubject link** (image → person) - REQUIRED!
+9. **Add inspirations** (all real-world sources) - REQUIRED!
+10. Update related articles (employers, birthplace)
 ```
+
+**Steps 8-9 are critical and often missed!**
+
+- **ImageSubject**: Links image to person for admin UI display
+- **Inspirations**: Links person to real-world figures they're based on
+
+Note: Real historical figures (e.g., FDR, Stalin) who appear as themselves in Kempo don't need inspirations - they ARE the real person. Without ImageSubject, the admin UI shows "No linked images" even when the article displays an image. See [manage-person Step 7](../../EntityManagement/manage-person/skill.md) for details.
 
 ### 4.3 Person Checklist
 
@@ -368,11 +388,20 @@ For each person, verify:
 
 ## Phase 5: Events & Timeline
 
-### 5.1 Identify Timeline-Worthy Events
+### 5.1 Sync Yearbook Timeline to Kempopedia Timeline (CRITICAL)
 
-From the yearbook, identify events that need:
-- Timeline entries (prose in year page)
-- Event records (database)
+**Every dated event in the yearbook's timeline section (Section XII) should appear in the Kempopedia timeline page.**
+
+Compare the yearbook timeline against the timeline article:
+- 1950+: `web/content/kemponet/kempopedia/articles/timelines/1950.md`
+- Pre-1950: `web/content/kemponet/kempopedia/articles/timelines/1940s.md`
+
+For each yearbook event:
+1. Check if timeline page has corresponding entry
+2. If missing, add entry with proper anchor ID
+3. Include wikilinks to related articles
+
+### 5.2 Identify Significance Levels
 
 **Significance guide:**
 | Type | Significance | Timeline | Event Record |
@@ -385,19 +414,22 @@ From the yearbook, identify events that need:
 | Sports championship | 6-7 | Yes | Maybe |
 | Minor milestone | 3-4 | Maybe | No |
 
-### 5.2 Create Timeline Entries
+### 5.3 Create Timeline Entries
 
-Navigate to the year's timeline page:
-- 1950+: `articles/timelines/1950.md`
-- Pre-1950: `articles/timelines/1940s.md`
-
-For each event:
+For each event from the yearbook:
 ```markdown
 <a id="1950-10-15-ky"></a>
 **October 15, 1950 k.y.** — [[i-like-linda|*I Like Linda*]] premieres on [[ubc|UBC]], becoming an immediate sensation.
 ```
 
-### 5.3 Create Event Records (for significant events)
+**Anchor ID formats:**
+- Year only: `1950-ky`
+- Month: `1950-06-ky`
+- Full date: `1950-06-25-ky`
+
+### 5.4 Create Event Records (for significant events)
+
+For events with significance 5+, create database records.
 
 Follow [manage-event](../../EntityManagement/manage-event/skill.md):
 
@@ -409,6 +441,19 @@ Follow [manage-event](../../EntityManagement/manage-event/skill.md):
 5. Link to parent event if applicable
 6. Create standalone article if significance 7+
 ```
+
+### 5.5 Link Related Articles to Timeline (MANDATORY)
+
+**For each new timeline entry, update related articles to include date links.**
+
+Example: When adding "October 25, 1950 - Chinese forces enter Korea" to the timeline:
+1. Find articles that discuss this event (e.g., Douglas Westbrook, Korean War)
+2. Add date link: `[[October 25, 1950 k.y.|October 25, 1950]]`
+3. Verify the link resolves to the timeline anchor
+
+This creates bidirectional navigation:
+- Timeline → Articles (via wikilinks in timeline entry)
+- Articles → Timeline (via date links in article content)
 
 ---
 
@@ -483,25 +528,70 @@ For each new Place:
 - [ ] Notable residents listed
 ```
 
-### 7.2 Link Verification
+### 7.2 Events & Timeline Verification (CRITICAL)
 
-Check for broken links:
-1. Review each new article
-2. Verify all `[[wikilinks]]` resolve
-3. Create stubs for any missing links
-4. Verify timeline date links have anchors
+**Every dated event from the yearbook's timeline section must be in the Kempopedia timeline page.**
+
+```
+For the yearbook timeline (Section XII):
+- [ ] All events have corresponding Kempopedia timeline entries
+- [ ] All timeline entries have proper anchor IDs
+- [ ] All timeline entries link to related articles
+- [ ] Significant events (5+) have Event database records
+- [ ] Event hierarchy is correct (battles → wars, etc.)
+```
+
+**Verify bidirectional linking:**
+```
+For each timeline entry:
+- [ ] Related articles contain date links back to timeline
+- [ ] Date link format: [[Month Day, YYYY k.y.|Display Text]]
+- [ ] Links resolve to correct anchor IDs
+```
+
+**Quick verification:**
+```typescript
+// Count 1950 events in database
+const count = await prisma.event.count({
+  where: {
+    kyDateBegin: { gte: new Date('1950-01-01'), lte: new Date('1950-12-31') }
+  }
+});
+console.log('Events in DB for 1950:', count);
+```
+
+### 7.3 Link Verification (Run Dead Link Checker)
+
+**Run the dead link checker script to find all broken wikilinks:**
+
+```bash
+node scripts/check-dead-links.js
+```
+
+Options:
+- `--summary` — Show counts only
+- `--json` — JSON output for programmatic use
+
+**For each dead link found:**
+1. If the article should exist → create a stub with `status: 'published'`
+2. If the article won't be created soon → remove the wikilink (keep as plain text)
+3. If it's a slug mismatch → fix the link format (e.g., `harold-kellman` → `Harold S. Kellman`)
+
+**Common fixes:**
+- Lowercase slugs → Proper title case: `[[korean-war]]` → `[[Korean War]]`
+- Piped links to non-existent pages → Plain text: `[[slug|Display]]` → `Display`
+- Year links → Include "k.y.": `[[1950]]` → `[[1950 k.y.]]`
 
 ### 7.3 Image Verification
 
 For each entity requiring an image:
 1. Image exists in Vercel Blob
 2. Image record has correct metadata
-3. ImageSubject links entity to image
+3. **ImageSubject links entity to image** (CRITICAL - see below)
 4. Article infobox has correct URL (not empty `"url": ""`)
 
-**Quick verification query:**
+**Quick verification query - Articles missing images:**
 ```typescript
-// Find articles still missing images
 const missing = await prisma.article.findMany({
   where: {
     content: { contains: '"url": ""' },
@@ -511,6 +601,40 @@ const missing = await prisma.article.findMany({
 });
 console.log("Articles missing images:", missing.map(a => a.title));
 ```
+
+**CRITICAL: Verify ImageSubject links exist**
+
+Even if article infoboxes display images, you must verify that `ImageSubject` records exist linking images to entity records. Without these, admin pages show "No linked images".
+
+```typescript
+// Check for people with images but missing ImageSubject links
+const peopleMissingLinks = await prisma.$queryRaw`
+  SELECT p.id, CONCAT(p.first_name, ' ', p.last_name) as name
+  FROM people p
+  JOIN articles a ON a.id = p.article_id
+  JOIN image i ON i.article_id = a.id
+  WHERE NOT EXISTS (
+    SELECT 1 FROM image_subjects isub
+    WHERE isub.item_id = p.id AND isub.item_type = 'person'
+  )
+`;
+console.log("People missing ImageSubject links:", peopleMissingLinks.length);
+
+// Check for organizations with images but missing ImageSubject links
+const orgsMissingLinks = await prisma.$queryRaw`
+  SELECT o.id, o.name
+  FROM organizations o
+  JOIN articles a ON a.id = o.article_id
+  JOIN image i ON i.article_id = a.id
+  WHERE NOT EXISTS (
+    SELECT 1 FROM image_subjects isub
+    WHERE isub.item_id = o.id AND isub.item_type = 'organization'
+  )
+`;
+console.log("Organizations missing ImageSubject links:", orgsMissingLinks.length);
+```
+
+If any are found, create the missing ImageSubject records (see Step 4 in Batch Processing above).
 
 ### 7.4 Date Field Verification
 
@@ -540,7 +664,58 @@ For updated articles (like adding Korean War to Westbrook):
 - Update `publishDate` to after the latest events added
 - Add new dates to the `dates` array
 
-### 7.5 Final Checklist
+### 7.5 Inspiration Verification (CRITICAL)
+
+**Inspirations are frequently missed!** Run this check after creating entities:
+
+```typescript
+// Check entities missing inspirations
+async function checkMissingInspirations() {
+  const checks = [
+    { model: 'person', type: 'person', label: 'People' },
+    { model: 'organization', type: 'organization', label: 'Organizations' },
+    { model: 'brand', type: 'brand', label: 'Brands' },
+    { model: 'product', type: 'product', label: 'Products' },
+    { model: 'city', type: 'city', label: 'Cities (fictional only)' },
+  ];
+
+  for (const check of checks) {
+    const withInspirations = (await prisma.inspiration.findMany({
+      where: { subjectType: check.type },
+      select: { subjectId: true }
+    })).map(i => i.subjectId);
+
+    const missing = await prisma[check.model].findMany({
+      where: { id: { notIn: withInspirations } },
+      select: { id: true, name: true }
+    });
+
+    console.log(`${check.label}: ${missing.length} missing inspirations`);
+    if (missing.length > 0 && missing.length < 10) {
+      missing.forEach(m => console.log(`  - ${m.name}`));
+    }
+  }
+}
+```
+
+**Rules for inspirations:**
+- **Fictional entities** (all Kempo people, companies, etc.) → NEED inspirations
+- **Real places** (Philadelphia, Boston, New York) → Do NOT need inspirations (they ARE real)
+- **Kempo uses compression**: One Kempo entity often combines 2-4 real-world inspirations
+
+**Quick fix for missing inspirations:**
+```typescript
+await prisma.inspiration.create({
+  data: {
+    subjectId: entityId,
+    subjectType: "person", // or "organization", "brand", etc.
+    inspiration: "Real-World Name",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/..."
+  }
+});
+```
+
+### 7.6 Final Checklist
 
 ```
 ## [YEAR] Content Creation Complete
@@ -553,17 +728,25 @@ For updated articles (like adding Korean War to Westbrook):
 - Places created: X
 - Publications created: X
 - Events created: X
+- Timeline entries added: X
 - Images generated: X
 
 ### Verification
-- [ ] All wikilinks resolve
-- [ ] All images display correctly
-- [ ] All timeline entries have anchors
+- [ ] All wikilinks resolve (run `node scripts/check-dead-links.js`)
+- [ ] All images display correctly in articles
 - [ ] All entities have DB records
-- [ ] All inspirations recorded
+- [ ] **All entities with images have ImageSubject links** (see 7.4)
+- [ ] **All fictional entities have inspirations** (see 7.5) - OFTEN MISSED!
 - [ ] Related articles updated
 - [ ] All articles have publishDate set
 - [ ] Updated articles have dates array updated
+
+### Timeline Sync (CRITICAL)
+- [ ] ALL yearbook timeline events → Kempopedia timeline page
+- [ ] ALL timeline entries have proper anchor IDs
+- [ ] ALL significant events (5+) → Event database
+- [ ] ALL related articles link back to timeline dates
+- [ ] Event hierarchy correct (child events → parent events)
 
 ### Notes
 [Any issues encountered, decisions made, or follow-up needed]
@@ -655,10 +838,10 @@ After generating all images, run a script to update article infoboxes:
 // Link images to articles by name matching
 const recentImages = await prisma.image.findMany({
   where: { createdAt: { gte: new Date(Date.now() - 2 * 60 * 60 * 1000) } },
-  select: { name: true, url: true }
+  select: { id: true, name: true, url: true }
 });
 
-const imageMap = new Map(recentImages.map(i => [i.name.toLowerCase(), i.url]));
+const imageMap = new Map(recentImages.map(i => [i.name.toLowerCase(), { id: i.id, url: i.url }]));
 
 const articles = await prisma.article.findMany({
   where: { content: { contains: '"url": ""' } }
@@ -667,12 +850,12 @@ const articles = await prisma.article.findMany({
 for (const article of articles) {
   const title = article.title.toLowerCase();
   // Match by title or with common suffixes (logo, badge, poster, etc.)
-  const imageUrl = imageMap.get(title)
+  const imageData = imageMap.get(title)
     || imageMap.get(title + " logo")
     || imageMap.get(title + " poster");
 
-  if (imageUrl) {
-    const newContent = article.content.replace(/"url": ""/, `"url": "${imageUrl}"`);
+  if (imageData) {
+    const newContent = article.content.replace(/"url": ""/, `"url": "${imageData.url}"`);
     await prisma.article.update({
       where: { id: article.id },
       data: { content: newContent }
@@ -680,6 +863,65 @@ for (const article of articles) {
   }
 }
 ```
+
+#### Step 4: Create ImageSubject Links (CRITICAL)
+
+**This step is required!** Linking images to articles (above) updates the infobox display, but you must ALSO create `ImageSubject` records to link images to their entity records (Person, Organization, etc.).
+
+Without ImageSubject records, the admin UI will show "No linked images" for entities even when their articles display images.
+
+```typescript
+// Create ImageSubject links for people
+const peopleWithImages = await prisma.$queryRaw`
+  SELECT p.id as "personId", i.id as "imageId"
+  FROM people p
+  JOIN articles a ON a.id = p.article_id
+  JOIN image i ON i.article_id = a.id
+  WHERE NOT EXISTS (
+    SELECT 1 FROM image_subjects isub
+    WHERE isub.item_id = p.id AND isub.item_type = 'person'
+  )
+`;
+
+for (const row of peopleWithImages) {
+  await prisma.imageSubject.create({
+    data: {
+      imageId: row.imageId,
+      itemId: row.personId,
+      itemType: "person"
+    }
+  });
+}
+
+// Repeat for organizations
+const orgsWithImages = await prisma.$queryRaw`
+  SELECT o.id as "orgId", i.id as "imageId"
+  FROM organizations o
+  JOIN articles a ON a.id = o.article_id
+  JOIN image i ON i.article_id = a.id
+  WHERE NOT EXISTS (
+    SELECT 1 FROM image_subjects isub
+    WHERE isub.item_id = o.id AND isub.item_type = 'organization'
+  )
+`;
+
+for (const row of orgsWithImages) {
+  await prisma.imageSubject.create({
+    data: {
+      imageId: row.imageId,
+      itemId: row.orgId,
+      itemType: "organization"
+    }
+  });
+}
+```
+
+**Entity types for ImageSubject.itemType:**
+- `"person"` — People
+- `"organization"` — Organizations
+- `"city"` / `"state"` / `"nation"` / `"place"` — Locations
+- `"brand"` — Brands
+- `"product"` — Products
 
 **Naming conventions for auto-matching:**
 | Entity Type | Image Name Format |

@@ -123,3 +123,4 @@ When asked to "close the session", "session close protocol", or similar, follow 
 | API routes | `web/src/app/api/` |
 | KempoNet pages | `web/src/app/kemponet/` |
 | Image generation script | `scripts/generate-image.js` |
+| Dead link checker | `scripts/check-dead-links.js` |
