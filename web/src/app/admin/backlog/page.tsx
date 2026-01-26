@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface BacklogItem {
   id: string;
@@ -387,6 +388,9 @@ export default function BacklogPage() {
       <div className="bg-gray-800 border-b border-gray-700 p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
+            <Link href="/admin/project" className="text-gray-400 hover:text-white">
+              ← Back
+            </Link>
             <h1 className="text-2xl font-bold">{showArchived ? 'Archived Projects' : 'Backlog'}</h1>
             <button
               onClick={() => setShowArchived(!showArchived)}

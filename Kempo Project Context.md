@@ -201,6 +201,7 @@ The admin panel provides visibility into database content and tools for managing
 
 | Section | Route | Purpose |
 |---------|-------|---------|
+| Backlog | `/admin/backlog` | Task management with drag-and-drop prioritization |
 | Events | `/admin/events` | Create/manage timeline events, hierarchy browser |
 | App Search | `/admin/app-search` | Index React pages for Giggle, AI-generate excerpts |
 | Settings | `/admin/settings` | K.Y. date range (homepage slider bounds) |

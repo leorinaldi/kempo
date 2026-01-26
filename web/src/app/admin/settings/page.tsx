@@ -27,6 +27,7 @@ export default function SettingsPage() {
   const { data: session, status } = useSession()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [savingAuth, setSavingAuth] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   // Date range state
@@ -34,6 +35,9 @@ export default function SettingsPage() {
   const [earliestYear, setEarliestYear] = useState(1949)
   const [latestMonth, setLatestMonth] = useState(12)
   const [latestYear, setLatestYear] = useState(1950)
+
+  // Security state
+  const [authRequired, setAuthRequired] = useState(true)
 
   useEffect(() => {
     async function loadSettings() {
@@ -53,6 +57,8 @@ export default function SettingsPage() {
           if (settings.kyDateRangeLatestYear) {
             setLatestYear(parseInt(settings.kyDateRangeLatestYear, 10))
           }
+          // Load auth setting
+          setAuthRequired(settings.authRequired !== "false")
         }
       } catch (error) {
         console.error("Failed to load settings:", error)
@@ -107,6 +113,27 @@ export default function SettingsPage() {
       setMessage({ type: "error", text: "Failed to save settings. Please try again." })
     } finally {
       setSaving(false)
+    }
+  }
+
+  async function toggleAuth() {
+    setSavingAuth(true)
+    const newValue = !authRequired
+
+    try {
+      await fetch("/api/admin/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: "authRequired",
+          value: newValue ? "true" : "false",
+        }),
+      })
+      setAuthRequired(newValue)
+    } catch (err) {
+      console.error("Failed to save setting:", err)
+    } finally {
+      setSavingAuth(false)
     }
   }
 
@@ -226,7 +253,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Save Button */}
-        <div className="flex justify-end">
+        <div className="flex justify-end mb-8">
           <button
             onClick={handleSave}
             disabled={saving}
@@ -234,6 +261,52 @@ export default function SettingsPage() {
           >
             {saving ? "Saving..." : "Save Settings"}
           </button>
+        </div>
+
+        {/* Security Section */}
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">Security</h2>
+          <p className="text-sm text-gray-600 mb-6">
+            Configure authentication and access control settings.
+          </p>
+
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="font-medium text-gray-900">
+                Upfront Admin Login Requirement
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                When enabled, users must log in with Google before accessing the site.
+                Disable for testing or development.
+              </p>
+            </div>
+
+            <button
+              onClick={toggleAuth}
+              disabled={savingAuth}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                authRequired ? "bg-blue-600" : "bg-gray-300"
+              } ${savingAuth ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  authRequired ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className={`mt-4 p-3 rounded text-sm ${authRequired ? "bg-green-50 text-green-800" : "bg-yellow-50 text-yellow-800"}`}>
+            {authRequired ? (
+              <>
+                <strong>Login Required:</strong> The site is protected. Users must authenticate to access any page.
+              </>
+            ) : (
+              <>
+                <strong>Login Disabled:</strong> Anyone can access the site without logging in. Use for testing only.
+              </>
+            )}
+          </div>
         </div>
       </main>
     </div>

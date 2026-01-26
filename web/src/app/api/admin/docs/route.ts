@@ -6,7 +6,7 @@ import path from "path"
 const PROJECT_ROOT = path.resolve(process.cwd(), "..")
 
 // Files that appear at the top level
-const TOP_LEVEL_FILES = ["CLAUDE.md", "README.md"]
+const TOP_LEVEL_FILES = ["Kempo Project Context.md", "CLAUDE.md", "README.md"]
 
 // Structure for the docs folder
 interface DocItem {

@@ -44,6 +44,8 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 ## Backlog Review
 
+Task backlog at `/admin/backlog` with drag-and-drop prioritization. DB models: `BacklogProject`, `BacklogItem`.
+
 When asked to "review backlog", "what should we work on next", or after completing a task, follow [docs/Skills/backlog-review](docs/Skills/backlog-review/skill.md).
 
 ## Documentation
