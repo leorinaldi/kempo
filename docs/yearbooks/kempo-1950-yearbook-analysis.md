@@ -1083,6 +1083,511 @@ Specialty magazines flourish: **Athlete Magazine** for sports fans, **Motor Age*
 
 ---
 
+## IX-A. Key Institutional Figures
+
+### Existing Foundation
+
+**Government:**
+- President Harold S. Kellman (66) - established
+- Senator Robert Whitfield (48) - Whitfield Committee chairman, Red Panic crusader
+- General Douglas D. Westbrook (62) - Korea commander
+- No FBI Director equivalent
+- No CIA Director equivalent
+- No Secretary of State equivalent
+
+**Media Executives:**
+- UBC exists but no named network executive (equivalent to Sarnoff/Paley)
+- No studio heads/moguls named (Pacific Pictures, Pinnacle Pictures have no leadership)
+
+**Business Leaders:**
+- Warren Prescott (56) - American Steel Corporation president
+- George Crane (75) - Pioneer Automobile founder (may be retired)
+- Lawrence Mitchell (48) - Hartwell's CEO
+- No Continental Motors leadership named
+- No oil company executives
+
+**Labor Leaders:**
+- Jack Callahan (37) - American Drivers Union president (corrupt, mob-connected)
+- No AFL/CIO equivalent federation leaders
+- No other major union leaders
+
+**Religious Leaders:**
+- None established
+
+### Real-World Inspiration
+
+From the Real 1950 Yearbook (new Section IX-A):
+
+**Government:**
+- J. Edgar Hoover - FBI Director since 1924, immense power, secret files, denied mob existence, anti-communist crusader
+- Roscoe Hillenkoetter → Walter Bedell Smith - CIA Directors (transition Oct 1950)
+- Dean Acheson - Secretary of State
+
+**Media Executives:**
+- David Sarnoff (RCA/NBC) - visionary, built TV empire
+- William Paley (CBS) - programming genius, "Paley's raids" on NBC talent
+- Louis B. Mayer (MGM), Darryl F. Zanuck (Fox), Jack L. Warner (WB) - studio moguls
+
+**Labor:**
+- William Green (AFL), Philip Murray (CIO), John L. Lewis (UMW), Walter Reuther (UAW)
+
+**Religious:**
+- Cardinal Spellman, Billy Graham (rising), Bishop Fulton Sheen
+
+### Gap Analysis
+
+**CRITICAL GAPS:**
+
+| Gap | Why Critical | Priority |
+|-----|--------------|----------|
+| **FBI Director equivalent** | Central to Red Panic, connects all investigations, spans decades | HIGHEST |
+| **TV Network Executive** | UBC has no face; Sarnoff/Paley built empires | HIGH |
+| **Studio Head/Mogul** | Pacific Pictures has no Louis B. Mayer controlling stars | HIGH |
+| **Gossip Columnist** | Powers who make/break careers (see IX-C) | HIGH |
+
+**MODERATE GAPS:**
+
+| Gap | Reason |
+|-----|--------|
+| CIA Director | Less visible to public, but important for spy storylines |
+| Secretary of State | Kellman administration needs cabinet |
+| Religious Leader | Billy Graham type rising preacher |
+| Additional Union Leaders | Callahan alone; need broader labor picture |
+
+### New Creations (Proposed)
+
+**HIGHEST PRIORITY:**
+
+1. **FBI Director** (Hoover equivalent)
+   - **Compression:** J. Edgar Hoover (no real equivalent—he was unique)
+   - **Proposed Name:** Need to develop (NOT Edgar/Hoover-derivative)
+   - **Role:** FBI Director since ~1920s, immense power, secret files on politicians, anti-communist crusader, denies organized crime exists (until Kefauver/Fletcher hearings force acknowledgment)
+   - **Connections:** Would have files on Whitfield, Kellman, Sterling, Martino; would be investigating Antelope Springs; would know about Conti/Roth but do nothing
+   - **Notes:** This character should feel omnipresent but rarely seen—the spider at the center of a web
+
+2. **UBC Network Executive** (Sarnoff/Paley compression)
+   - **Compression:** David Sarnoff + William Paley
+   - **Proposed Name:** Need to develop
+   - **Role:** Built UBC from radio days, now pioneering TV, ruthless businessman, visionary
+   - **Connections:** Employs Bernie Kessler, Dorothy Sherwood, Edward Stanton; competes with other networks
+
+3. **Pacific Pictures Studio Head** (Mayer/Zanuck compression)
+   - **Compression:** Louis B. Mayer + Darryl Zanuck + Harry Cohn
+   - **Proposed Name:** Need to develop
+   - **Role:** Controls Pacific Pictures, iron grip on stars, declining power by early 1950s
+   - **Connections:** Controls Vivian Sterling's career, clashes with talent seeking independence
+   - **Notes:** Irving Lazar mentioned as "Pacific's shrewd executive" in some content—clarify if he's the mogul or just an agent
+
+**MEDIUM PRIORITY:**
+
+4. **Gossip Columnist** (Hopper/Parsons compression)
+   - See Section IX-C below
+
+5. **Rising Preacher** (Billy Graham equivalent)
+   - Moral counterpoint to scandal, rising national figure
+
+### The Kempo Story
+
+*To be written after characters are created.*
+
+---
+
+## IX-B. Consumer Brand Landscape
+
+### Existing Foundation
+
+| Category | Kempo Brand | Status |
+|----------|-------------|--------|
+| **Cigarettes** | Koala | ✓ Complete with backstory |
+| **Beer** | Feldmann | ✓ Established |
+| **Automobiles** | Continental Motors | ✓ Major brand |
+| **Automobiles** | Pioneer Automobile | ✓ Secondary brand |
+| **Department Stores** | Hartwell's | ✓ With CEO Lawrence Mitchell |
+| **Soft Drinks** | — | ✗ MISSING |
+| **Airlines** | — | ✗ MISSING |
+| **Oil Companies** | — | ✗ MISSING |
+| **TV/Appliances** | — | ✗ MISSING |
+
+### Real-World Inspiration
+
+From the Real 1950 Yearbook (new Section IX-B):
+
+**Cigarettes:** Camel (27%), Lucky Strike (23%), Chesterfield (14%), Pall Mall, Philip Morris
+**Beer:** Schlitz (#1), Budweiser, Pabst, Miller
+**Soft Drinks:** Coca-Cola (dominant), Pepsi (distant second), 7-Up, Dr Pepper
+**Automobiles:** GM (45%), Ford (25%), Chrysler (20%)
+**Airlines:** Pan Am (Juan Trippe), TWA (Howard Hughes), United, American, Eastern
+**Appliances/TV:** RCA, Zenith, Philco, GE, Westinghouse
+**Retail:** Macy's, Sears, A&P, Woolworth's
+
+### Gap Analysis
+
+**CRITICAL GAPS:**
+
+| Gap | Why Critical | Priority |
+|-----|--------------|----------|
+| **Soft Drink Brand** | Ubiquitous in daily life, diners, advertising | HIGH |
+| **Airline** | Characters travel; aviation is glamorous | HIGH |
+| **TV/Appliance Brand** | TV revolution central to 1950; need manufacturer | MEDIUM |
+
+**MODERATE GAPS:**
+
+| Gap | Reason |
+|-----|--------|
+| Oil Company | Standard Oil/Texaco type - less story-critical |
+| Second Beer Brand | Regional variety |
+| Grocery Chain | A&P equivalent |
+
+### New Creations (Proposed)
+
+**HIGH PRIORITY:**
+
+1. **Soft Drink Brand** (Coca-Cola/Pepsi compression)
+   - **Compression:** Coca-Cola + Pepsi rivalry
+   - **Naming Approach:** NOT cola-derivative; something fresh
+   - **Possibilities:** Fizzy, Spark, Zest, Jubilee...
+   - **Backstory:** Founded late 1800s, Southern origins, now national brand
+   - **Role:** Appears in diner scenes, advertising, everyday life texture
+
+2. **Airline** (Pan Am/TWA compression)
+   - **Compression:** Pan Am (international glamour) + TWA (Hughes eccentricity)
+   - **Naming Approach:** American + geographic/aspirational
+   - **Possibilities:** Atlantic Airways, Transcontinental Airlines, American Global...
+   - **Role:** How characters travel; prestige, international routes
+   - **Potential:** Eccentric airline mogul character?
+
+**MEDIUM PRIORITY:**
+
+3. **TV/Radio Manufacturer** (RCA/Zenith compression)
+   - **Role:** Makes the TV sets transforming American life
+   - **Connection:** Could be tied to UBC's corporate parent
+
+### The Kempo Story
+
+*Existing brands provide good foundation. Priority is soft drink (daily life texture) and airline (travel scenes). Other gaps can be filled as needed.*
+
+---
+
+## IX-C. Celebrity News & Human Drama
+
+### Existing Foundation
+
+**Existing Celebrity Relationships:**
+- Frank Martino - connections to mob (Sol Roth, Sidney Hartman), romantic interests unclear
+- Vivian Sterling - rising actress, Brooklyn origins, no romantic storylines established
+- Dorothy Sherwood - TV host, no romantic storylines established
+- Bernie Kessler - TV star, no personal life developed
+
+**Existing Scandals/Drama:**
+- Antelope Springs cover-up (government scandal, not celebrity)
+- Whitfield Committee accusations (political)
+- No Hollywood scandals established
+
+**Missing Character Types:**
+- No gossip columnist (Hopper/Parsons equivalent)
+- No ingenue (Debbie Reynolds type to contrast/rival Vivian Sterling)
+- No torch singer (Peggy Lee type nightclub performer)
+- No femme fatale rival
+- No Hollywood press agent/fixer
+
+### Real-World Inspiration
+
+From the Real 1950 Yearbook (new Section IX-C):
+
+**Major 1950 Scandals:**
+- Ingrid Bergman affair with Rossellini, illegitimate child, Senate denunciation, 5-year exile
+- Elizabeth Taylor marriage to Nicky Hilton (May 6), abuse, separation (Dec 14)
+
+**Celebrity Romances:**
+- Sinatra-Gardner affair (both married to others)
+- Bogart-Bacall golden couple
+
+**The Gossip Ecosystem:**
+- Hedda Hopper and Louella Parsons - combined readership 75 million, could make or break careers
+- Hopper politically vicious, anti-communist, helped exile Bergman and Chaplin
+- Studios created them but couldn't control them—"Frankenstein monsters"
+
+**Hollywood Feuds:**
+- Bette Davis vs. Joan Crawford
+- Studio heads vs. rising talent
+
+### Gap Analysis
+
+**CRITICAL GAPS:**
+
+| Gap | Why Critical | Priority |
+|-----|--------------|----------|
+| **Gossip Columnist** | Central to Hollywood power dynamics, makes/breaks careers | HIGHEST |
+| **Celebrity Romance/Scandal** | No tabloid fodder—universe feels sterile | HIGH |
+| **Ingenue Rival** | Vivian Sterling needs dramatic contrast | HIGH |
+| **Relationship Mapping** | Existing characters have no romantic/rival connections | HIGH |
+
+**What We Need to Establish:**
+1. Who is dating whom in Hollywood?
+2. Who are rivals for roles?
+3. What scandal could rock 1950 Kempo?
+4. Who is the feared gossip columnist?
+
+### New Creations (Proposed)
+
+**HIGHEST PRIORITY:**
+
+1. **Gossip Columnist** (Hopper/Parsons compression)
+   - **Compression:** Hedda Hopper (political, vicious) + Louella Parsons (sweet-seeming, powerful)
+   - **Gender:** Female (following real models)
+   - **Role:** Newspaper column read by millions, can destroy careers, knows everyone's secrets
+   - **Connections:** Has dirt on Sterling, Martino, studio heads; courted and feared
+   - **Political Angle:** Could be anti-communist like Hopper, weaponizing gossip
+   - **Naming:** Need distinctive name with punch
+
+2. **Ingenue Actress** (Debbie Reynolds/June Allyson type)
+   - **Compression:** Debbie Reynolds + Pier Angeli + June Allyson
+   - **Role:** Wholesome girl-next-door, contrast to Sterling's glamour
+   - **Potential Drama:** Love triangle with Sterling and a male star? Rivalry for roles?
+   - **Naming:** Girl-next-door American name
+
+**MEDIUM PRIORITY:**
+
+3. **Torch Singer** (Peggy Lee/Julie London type)
+   - Nightclub performer who knows everyone's secrets
+   - Works at Kempo's Ciro's/Mocambo equivalent
+
+4. **Press Agent/Fixer** (Eddie Mannix type)
+   - Covers up studio scandals
+   - Knows where bodies are buried
+
+### Proposed 1950 Celebrity Storylines
+
+Given existing characters, what drama could unfold?
+
+**Option A: Frank Martino Romance**
+- Martino is single in Kempo (unlike real Sinatra who was divorcing)
+- Could be involved with: Vivian Sterling? Torch singer? Married woman?
+- Mob connections add danger
+
+**Option B: Vivian Sterling Studio Conflict**
+- Sterling chafes against Pacific Pictures control
+- Studio head tries to arrange her personal life
+- Gossip columnist threatens exposure
+
+**Option C: Ingenue vs. Sterling Rivalry**
+- New ingenue arrives, threatens Sterling's position
+- Both pursue same role
+- Gossip columnist plays them against each other
+
+### The Kempo Story
+
+*To be developed after characters created. Priority: Gossip columnist and at least one celebrity romance/rivalry.*
+
+---
+
+## IX-D. Key Settings & Crossroads
+
+### Existing Foundation
+
+**Hotels:**
+- Claridge Hotel, New York - established luxury hotel
+- Royale Imperial, Motor City - established
+
+**Casinos:**
+- Lucky Sands Casino, Las Vegas - mentioned, mob-connected (Sidney Hartman)
+
+**Nightclubs:**
+- No specific Hollywood nightclub established (Ciro's/Mocambo equivalent)
+- No NYC nightclub (Copa equivalent)
+
+**Restaurants/Bars:**
+- No specific power-lunch spots
+- No working-class bars
+
+**Studios:**
+- Pacific Pictures - exists but no specific lot/location
+- Pinnacle Pictures - exists
+
+### Real-World Inspiration
+
+From the Real 1950 Yearbook (new Section IX-D):
+
+**Hollywood Nightclubs:**
+- Ciro's (Wilkerson) - THE place to be seen, guaranteed gossip column mentions
+- Mocambo (Morrison) - exotic birds, Latin décor, replicated on I Love Lucy
+
+**NYC Nightlife:**
+- Copacabana - Costello-connected
+- Stork Club - Winchell's Table 50
+- 21 Club - power lunches
+
+**Las Vegas (1950):**
+- Flamingo - Siegel's legacy, now Lansky-run
+- Desert Inn - opened April 1950, Moe Dalitz (Cleveland mob)
+- Thunderbird
+
+**Hollywood Hotels:**
+- Beverly Hills Hotel ("Pink Palace")
+- Chateau Marmont - privacy and scandal
+- Garden of Allah - writers/actors
+
+**Power Spots:**
+- Brown Derby - Hollywood restaurant
+- Romanoff's - Bogart's Rat Pack
+
+### Gap Analysis
+
+**CRITICAL GAPS:**
+
+| Gap | Why Critical | Priority |
+|-----|--------------|----------|
+| **Hollywood Nightclub** | Where stars are seen, mob/Hollywood mix | HIGHEST |
+| **Las Vegas Development** | Lucky Sands exists but not fleshed out | HIGH |
+
+**MODERATE GAPS:**
+
+| Gap | Reason |
+|-----|--------|
+| NYC Nightclub | Copacabana equivalent for East Coast scenes |
+| Working-Class Bar | Everyman perspective location |
+| Hollywood Restaurant | Brown Derby equivalent |
+
+### New Creations (Proposed)
+
+**HIGHEST PRIORITY:**
+
+1. **Hollywood Nightclub** (Ciro's/Mocambo compression)
+   - **Compression:** Ciro's (glamour, gossip column focus) + Mocambo (exotic, mob connections)
+   - **Naming:** Something distinctive, not too on-the-nose
+   - **Possibilities:** The Palomar, The Gardenia, The Flamingo Room (different from Vegas Flamingo)...
+   - **Owner:** Needs a character—connected to mob? Friend of stars?
+   - **Role:** Where Sterling, Martino, studio heads are seen; where gossip columnist lurks; where mob and Hollywood mix
+
+2. **Lucky Sands Casino Development**
+   - Sidney Hartman already established as operator
+   - Need: Who really owns it? (Conti? Roth?)
+   - Need: What's it like? Glamour masking dark money?
+   - Role: Vegas as escape from Hollywood, where deals happen
+
+### The Kempo Story
+
+*The Hollywood nightclub is the key missing setting. Once established, it becomes a stage for celebrity drama, mob presence, and gossip column scenes.*
+
+---
+
+## IX-E. Event Causality Chains
+
+### Existing Foundation
+
+**Established Chains:**
+
+```
+Antelope Springs Incident (June 1949)
+    ↓
+Frank Caldwell dies chasing UFO
+    ↓
+Virgil Stokes finds debris
+    ↓
+Military cover-up (Harlan Whitmore)
+    ↓
+Nathan Collier investigates and publishes
+    ↓
+Congressional pressure
+    ↓
+Whitfield Committee formed (investigating cover-up)
+    ↓
+Committee pivots to communist investigation
+    ↓
+Red Panic begins
+```
+
+**Korean War chain partially established** through Westbrook storyline.
+
+### Real-World Inspiration
+
+From the Real 1950 Yearbook (new Section IX-E):
+
+**Atomic Spy Chain:**
+```
+Klaus Fuchs confesses (Jan 24, 1950 UK)
+    ↓
+Fuchs arrested (Feb 2)
+    ↓
+Identifies courier "Raymond"
+    ↓
+FBI identifies Harry Gold
+    ↓
+Gold arrested (May 23)
+    ↓
+Implicates David Greenglass (June 15)
+    ↓
+Greenglass implicates Rosenbergs
+    ↓
+Julius arrested (July 17)
+    ↓
+Ethel arrested (Aug 11)
+    ↓
+Trial (March 1951) → Execution (June 1953)
+```
+
+**McCarthy Rise Chain:**
+```
+Soviet bomb test (Aug 1949)
+    ↓
+Hiss convicted (Jan 1950)
+    ↓
+Fuchs arrested (Feb 1950)
+    ↓
+McCarthy Wheeling speech (Feb 9)
+    ↓
+Korean War validates fears (June)
+    ↓
+Power grows through 1954
+```
+
+### Gap Analysis
+
+**The Marsh (Rosenberg) Trial exists in Kempo yearbooks, but the causality chain leading to it is incomplete:**
+
+- We have: Alden Cross convicted (Hiss equivalent)
+- We have: Marsh trial in 1951
+- We're MISSING: The spy arrest in early 1950 that started the domino effect
+
+**What's Needed:**
+A "Klaus Fuchs" event in early 1950 that:
+1. Reveals Soviet spies stole atomic/O-bomb secrets
+2. Leads to arrests of intermediaries
+3. Eventually leads to Marsh arrest
+
+### Proposed Addition
+
+**Early 1950 Spy Arrest** (Fuchs equivalent)
+
+**Event:** In February 1950, a scientist connected to the O-bomb project is arrested for passing secrets to the Soviets. (Could be British scientist arrested abroad, or American arrested domestically.)
+
+**Chain:**
+```
+[Scientist Name] arrested/confesses (Feb 1950)
+    ↓
+Identifies courier
+    ↓
+Courier arrested, names contacts
+    ↓
+Trail leads to the Marshes
+    ↓
+Marshes arrested (summer 1950)
+    ↓
+Trial (1951)
+```
+
+**Notes:**
+- This event should appear in the Kempo 1950 Yearbook timeline
+- Explains how the Marshes were caught
+- Validates Whitfield's warnings about infiltration
+- The scientist could be a brief mention, not a full character
+
+### The Kempo Story
+
+The Antelope Springs → Whitfield Committee → Red Panic chain is well-established. The gap is the atomic spy chain that leads to the Marsh trial. Adding a February 1950 spy arrest event would complete this causality and explain how the Marshes were discovered.
+
+---
+
 ## X. People of the Year
 
 ### Existing Figures (Prominent in 1950)
@@ -1507,6 +2012,48 @@ Willie Banks broke baseball's color barrier years earlier. In 1950, he's establi
 - [x] ~~**ACTION:** Update Robert Whitfield's Kempopedia article to change party from National to Federal~~ → **DONE** (infobox + 3 content references updated)
 - [x] ~~Research name availability for all new entities~~ → **DONE** (see name audit below)
 - [x] ~~Map existing character relationships that affect 1950~~ → **DONE** (see relationship map below)
+
+---
+
+### Priority 4: Texture & World-Building (NEW - from IX-A through IX-E Analysis)
+
+**Key Institutional Figures:**
+- [ ] Person: **FBI Director** (Hoover equivalent) - Most critical gap. Central to Red Panic, spans decades, connects all investigations. Need name, backstory, secret files concept.
+- [ ] Person: **UBC Network Executive** (Sarnoff/Paley compression) - Built TV empire, employs Kessler/Sherwood/Stanton
+- [ ] Person: **Pacific Pictures Studio Head** (Mayer/Zanuck/Cohn compression) - Controls Vivian Sterling's career, iron grip on stars
+- [ ] Person: **Gossip Columnist** (Hopper/Parsons compression) - Female, feared, can destroy careers, 75 million readership equivalent
+
+**Consumer Brands:**
+- [ ] Brand: **Soft Drink** (Coca-Cola/Pepsi compression) - Ubiquitous in daily life, diners, advertising
+- [ ] Brand: **Airline** (Pan Am/TWA compression) - How characters travel, glamour, potential mogul character
+- [ ] Brand: **TV/Appliance Manufacturer** (RCA/Zenith compression) - Makes the TVs transforming America
+
+**Settings & Crossroads:**
+- [ ] Location: **Hollywood Nightclub** (Ciro's/Mocambo compression) - WHERE stars are seen, mob/Hollywood mix, gossip column fodder. Needs name and owner.
+- [ ] Location: **Lucky Sands Casino Development** - Already exists, needs ownership clarified and atmosphere developed
+
+**Human Drama:**
+- [ ] Person: **Ingenue Actress** (Debbie Reynolds type) - Contrast to Sterling, potential rivalry
+- [ ] Storyline: **Celebrity Romance/Scandal** - What tabloid drama unfolds in 1950 Kempo? (Martino + someone? Sterling + someone?)
+
+**Event Causality:**
+- [ ] Event: **Atomic Spy Arrest (Feb 1950)** - Fuchs equivalent that starts the chain leading to Marsh arrests. Explains how Marshes were discovered.
+
+---
+
+### Priority Order for New Texture Items
+
+| Rank | Item | Why |
+|------|------|-----|
+| 1 | FBI Director | Connects Red Panic, organized crime, Antelope Springs—appears everywhere |
+| 2 | Gossip Columnist | Enables celebrity drama, explains Hollywood power dynamics |
+| 3 | Hollywood Nightclub | Key setting for multiple storylines |
+| 4 | Soft Drink Brand | Daily life texture, appears in many scenes |
+| 5 | Studio Head | Explains Pacific Pictures power structure |
+| 6 | Network Executive | Explains UBC power structure |
+| 7 | Ingenue Actress | Adds depth to entertainment storylines |
+| 8 | Airline | Travel scenes, potential storyline |
+| 9 | Feb 1950 Spy Arrest | Completes causality chain to Marsh trial |
 
 ---
 

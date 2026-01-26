@@ -247,6 +247,217 @@ Prioritize gaps by:
 2. **Storytelling potential** - Does this enable rich narratives?
 3. **Connection to existing content** - Does this extend what we've built?
 
+---
+
+### Phase 3-A: Cross-Reference Simulation Planning Documents
+
+**CRITICAL:** Before finalizing gaps, cross-reference against the simulation planning documents. These contain pre-planned entities and storylines that should inform the yearbook.
+
+#### 1. Check `possible-inspirations.md`
+
+Location: `web/content/admin/possible-inspirations.md`
+
+- What character inspirations are marked HIGH priority for this era?
+- Which have been created? Which are still needed?
+- Are there "Suggested Creation Order" items for this year?
+
+#### 2. Check `character-development-plan.md`
+
+Location: `web/content/admin/character-development-plan.md`
+
+- What archetypes are listed for this era (Tier 1, Tier 2, etc.)?
+- Which have been marked as CREATED?
+- Which are still pending?
+- What storyline connections are proposed?
+
+#### 3. Check `products-companies-culture.md`
+
+Location: `web/content/admin/products-companies-culture.md`
+
+- What brands/products are listed in "Priority Gaps to Fill"?
+- Which real-world brands need Kempo equivalents?
+- What's marked as HIGH vs MEDIUM vs LOW priority?
+
+#### 4. Check `human-drama-amplification.md`
+
+Location: `web/content/admin/human-drama-amplification.md`
+
+- What drama types are relevant to this year?
+- What character types enable these stories (The Ingenue, The Torch Singer, etc.)?
+- What settings/crossroads are needed?
+- What "Potential Storylines" could apply?
+
+#### 5. Check `real-world-events.md`
+
+Location: `web/content/admin/real-world-events.md`
+
+- What events are listed under "Potential Kempo Storylines" for this timeframe?
+- Are there event causality chains we should trace?
+
+---
+
+### Phase 3-B: Run Gap Checklists
+
+Work through these checklists to ensure systematic coverage:
+
+#### Character Archetype Checklist
+
+**Entertainment:**
+- [ ] Mr. Television / TV comedy star
+- [ ] TV comedy couple (sitcom pioneers)
+- [ ] Western film star
+- [ ] Western TV star
+- [ ] Movie actress (glamour/leading lady)
+- [ ] Movie actress (ingenue/girl-next-door)
+- [ ] Movie actress (rival/femme fatale type)
+- [ ] Film director (prestige)
+- [ ] Film director (genre - Western, thriller, etc.)
+- [ ] Studio head/mogul
+- [ ] Crooner/pop singer (male)
+- [ ] Female vocalist
+- [ ] Jazz musician(s)
+- [ ] Torch singer (nightclub performer)
+- [ ] Broadway star
+
+**Media & Journalism:**
+- [ ] Broadcast journalist (TV news anchor)
+- [ ] Gossip columnist
+- [ ] Investigative journalist
+- [ ] Newspaper publisher/owner
+- [ ] TV/Radio network executive
+
+**Politics & Government:**
+- [ ] FBI Director equivalent
+- [ ] CIA/Intelligence chief
+- [ ] Key cabinet members (Secretary of State, Defense)
+- [ ] Rising political figure (McCarthy type)
+- [ ] Crime-fighting Senator (Kefauver type)
+
+**Sports:**
+- [ ] Baseball hero
+- [ ] Baseball barrier-breaker (Jackie Robinson type)
+- [ ] Boxing champion
+- [ ] Boxing contender
+- [ ] Other sports figures as relevant
+
+**Crime & Underworld:**
+- [ ] Crime boss
+- [ ] Mob lieutenant
+- [ ] Mob girlfriend/moll
+- [ ] Corrupt union leader
+- [ ] Crooked cop
+- [ ] Nightclub owner (mob-connected)
+
+**Science & Military:**
+- [ ] Atomic scientist (Oppenheimer type)
+- [ ] Military general(s)
+- [ ] Test pilot/aviator
+
+**Human Drama Characters:**
+- [ ] War widow/sweetheart
+- [ ] Charismatic preacher
+- [ ] Press agent/fixer (Hollywood scandal enabler)
+- [ ] Bartender/working-class everyman
+
+#### Institutional Leader Checklist
+
+For each institution, ask "Who runs this in Kempo?"
+
+- [ ] FBI / Federal law enforcement
+- [ ] CIA / Intelligence apparatus
+- [ ] TV Networks (UBC exists - who runs it? Other networks?)
+- [ ] Movie Studios (Pacific Pictures, Pinnacle - who are the moguls?)
+- [ ] Record Labels (Sunbright - who else?)
+- [ ] Major Newspapers (NY Standard, Motor City News - who owns them?)
+- [ ] Unions (ADU has Callahan - others?)
+- [ ] Political Parties (National Party, Federal Party - key figures?)
+- [ ] Veterans Organizations (AVL - leadership?)
+- [ ] Civil Rights Organizations (NAMR - key lawyers?)
+
+#### Consumer Brand Checklist
+
+Ensure Kempo has fictional brands for everyday items:
+
+- [ ] **Cigarettes** - Koala ✓ (any others needed?)
+- [ ] **Beer** - Feldmann ✓ (regional brands?)
+- [ ] **Soft Drinks** - MISSING - need Coca-Cola/Pepsi equivalent
+- [ ] **Automobiles** - Continental ✓, Pioneer ✓ (sufficient?)
+- [ ] **Airlines** - MISSING - need Pan Am/TWA equivalent
+- [ ] **Oil Companies** - MISSING - need Standard Oil/Texaco equivalent
+- [ ] **Department Stores** - Hartwell's ✓ (others?)
+- [ ] **Appliances/TV** - MISSING - need RCA/Zenith equivalent
+- [ ] **Food Brands** - (as needed for specific scenes)
+
+#### Human Drama Checklist
+
+What tabloid-worthy stories should exist this year?
+
+- [ ] Any celebrity romances to portray?
+- [ ] Any weddings or engagements?
+- [ ] Any scandals or controversies?
+- [ ] Any divorces or breakups?
+- [ ] Any rivalries between existing characters?
+- [ ] Any mob/crime storylines?
+- [ ] Any love triangles?
+- [ ] Any career comebacks or falls from grace?
+- [ ] Any human interest stories?
+
+#### Key Settings Checklist
+
+Do we have specific named locations for key scenes?
+
+- [ ] **The Nightclub** - Where Hollywood/mob/politics mix (Ciro's equivalent)
+- [ ] **Las Vegas Casino** - Lucky Sands exists; developed enough?
+- [ ] **The Luxury Hotel** - Claridge, Royale Imperial exist; others?
+- [ ] **The Working-Class Bar** - Where regular people gather
+- [ ] **The Studio Lot** - Specific Pacific Pictures/Pinnacle locations?
+- [ ] **The Courtroom** - For trial drama
+
+---
+
+### Phase 3-C: Gender & Diversity Audit
+
+Before finalizing the gap analysis, explicitly audit:
+
+#### Women Characters
+- How many significant women appear in this year's content?
+- Are they diverse in role (not just actresses/singers)?
+- Do we have:
+  - [ ] Women in entertainment (multiple, with different types)
+  - [ ] Women in journalism/media
+  - [ ] Women connected to crime/underworld
+  - [ ] Women on the home front (war wives, mothers)
+  - [ ] Working women outside entertainment
+
+#### Working Class / Everyday People
+- Do we have perspectives beyond celebrities and powerful figures?
+- Characters who represent ordinary Americans?
+
+#### Supporting Characters
+- Do we have characters who witness events, not just make them?
+- Bartenders, assistants, neighbors who provide perspective?
+
+---
+
+### Phase 3-D: Relationship Mapping
+
+For existing characters active this year, map their relationships:
+
+```
+[Character A] ←→ [Character B]: [Relationship type]
+```
+
+Examples:
+- Frank Martino ←→ Vivian Sterling: Rumored romance? Professional connection?
+- Vivian Sterling ←→ Dorothy Sherwood: Rivals? Friends?
+- Salvatore Conti ←→ Jack Callahan: Business partners (union/mob connection)
+
+Ask:
+- What relationships should develop this year?
+- What rivalries should intensify?
+- What new connections form?
+- What relationships break down?
+
 ### Phase 4: New Creations
 
 For each prioritized gap, use the **[design-entity skill](../design-entity/skill.md)** to create a Kempo equivalent.
@@ -261,6 +472,89 @@ The design-entity skill provides a structured five-phase workflow:
 **Key principle:** Rhyme, don't copy. Names and biographies should resonate with real history without directly copying it.
 
 See the design-entity skill for the full workflow, naming approaches, and conflict-checking procedures.
+
+---
+
+### Phase 4-A: Document Connections for Each New Entity
+
+For every new entity created, document not just WHO they are but HOW they connect:
+
+#### For New People
+
+```markdown
+### [Character Name]
+
+**Compression Sources:** [2-4 real-world inspirations]
+
+**The Twist:** [What makes this character original]
+
+**Role in This Year:** [What they do/accomplish in this year's events]
+
+**Connections to Existing Characters:**
+- Works with: [List]
+- Rivals with: [List]
+- Friends/allies with: [List]
+- Romantic connections: [List]
+- Professional relationships: [List]
+
+**Connections to Existing Organizations:**
+- Employed by: [Organization]
+- Affiliated with: [Organizations]
+- Antagonist to: [Organizations]
+
+**Settings They Appear In:**
+- [Nightclub name], [Hotel name], etc.
+
+**Future Potential:**
+- Seeds for future years: [What storylines this enables]
+```
+
+#### For New Organizations/Brands
+
+```markdown
+### [Organization/Brand Name]
+
+**Compression Sources:** [Real-world equivalents]
+
+**The Twist:** [What makes this original]
+
+**Leadership:**
+- Founded by: [Person] (existing or new)
+- Run by: [Person] (existing or new)
+
+**Connections to Existing Entities:**
+- Parent organization: [If applicable]
+- Competitors: [List]
+- Partners: [List]
+- Clients/customers: [List of people who use this brand]
+
+**Role in This Year:** [What happens with this entity]
+
+**Future Potential:** [Where this leads]
+```
+
+#### For New Locations/Settings
+
+```markdown
+### [Location Name]
+
+**Inspired By:** [Real-world equivalent]
+
+**The Twist:** [What makes this original]
+
+**Who Owns/Runs It:** [Person - existing or new]
+
+**Who Frequents It:**
+- Regular patrons: [List]
+- Notable visitors: [List]
+
+**What Happens Here:**
+- Type of scenes enabled: [Deals, romances, confrontations, etc.]
+
+**Connections:**
+- Other locations nearby
+- Organizations that use this space
+```
 
 ### Phase 5: Synthesize Domain Stories
 
@@ -515,3 +809,33 @@ Once both yearbook documents are complete:
    - The Kempopedia timeline page (e.g., `articles/timelines/1950.md`)
    - The Events database (for significant events, significance 5+)
 4. **Bidirectional linking:** Related articles must link back to timeline entries using date wikilinks
+
+---
+
+## Closing the Loop: Update Simulation Planning Documents
+
+After creating yearbook content, **update the simulation planning documents** to reflect what's been done:
+
+### Update `character-development-plan.md`
+
+Mark created characters with:
+```markdown
+- ~~The Inquisitor (Joseph McCarthy, Roy Cohn)~~ → **CREATED**: [[senator-name|Senator Name]]
+```
+
+### Update `products-companies-culture.md`
+
+Mark created brands:
+```markdown
+- **Soft Drink** - ✓ CREATED: Fizzy Cola
+```
+
+### Update `possible-inspirations.md`
+
+Mark created entities and note where gaps remain.
+
+### Update `human-drama-amplification.md`
+
+If new drama types were addressed, note them as covered.
+
+This ensures future yearbook efforts know what's been done and what remains.

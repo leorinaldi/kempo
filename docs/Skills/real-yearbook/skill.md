@@ -23,6 +23,16 @@ Example queries:
 - "What was everyday life like for the average American family in 1950?"
 - "What were the major political events in the US in 1950?"
 
+**Queries for new texture sections:**
+- "Who was the FBI director in 1950 and what was he known for?"
+- "Who ran the major TV networks (NBC, CBS, ABC) in 1950?"
+- "Who were the major movie studio heads in 1950?"
+- "What were the top cigarette, beer, and soft drink brands in 1950?"
+- "What were the most famous nightclubs in Hollywood and New York in 1950?"
+- "What celebrity romances and scandals made headlines in 1950?"
+- "What was Las Vegas like in 1950 and who ran the casinos?"
+- "How did the Klaus Fuchs arrest lead to the Rosenberg case?"
+
 ## Output Location
 
 ```
@@ -261,6 +271,157 @@ What life was like for ordinary Americans.
 
 ---
 
+## IX-A. Key Institutional Figures
+
+Who ran the major institutions this year? These are the power brokers behind the headlines.
+
+### Government Agencies
+- FBI Director (J. Edgar Hoover held this role 1924-1972)
+- CIA Director (CIA founded 1947)
+- Key cabinet members (State, Defense, Treasury)
+- Other agency heads
+
+### Media Executives
+- TV network heads (NBC, CBS, ABC)
+- Movie studio chiefs (MGM, Paramount, Warner Bros., etc.)
+- Newspaper owners/publishers
+- Radio network executives
+- Record label executives
+
+### Business Titans
+- Major corporation CEOs (GM, US Steel, Standard Oil, etc.)
+- Industry leaders making news
+- Rising executives
+
+### Other Power Brokers
+- Union leaders (Teamsters, UAW, AFL, CIO)
+- Political machine bosses
+- Religious leaders (Billy Graham, Fulton Sheen, etc.)
+- Philanthropists
+
+---
+
+## IX-B. Consumer Brand Landscape
+
+What did Americans eat, drink, smoke, drive, and buy? The brands that filled daily life.
+
+### Beverages
+- **Beer:** Top brands and market share (Schlitz, Budweiser, Pabst, etc.)
+- **Soft Drinks:** Major brands (Coca-Cola, Pepsi, 7-Up, etc.)
+- **Coffee:** Popular brands
+- **Alcohol:** Whiskey, wine trends
+
+### Tobacco
+- **Cigarettes:** Top brands and market share (Camel, Lucky Strike, Chesterfield, etc.)
+- **Advertising:** Notable campaigns
+
+### Automobiles
+- **Market leaders:** Top-selling brands and models
+- **New releases:** Notable new cars this year
+- **Industry trends:** Styling, features, pricing
+
+### Airlines
+- **Major carriers:** Pan Am, TWA, United, American, Eastern
+- **Notable developments:** Routes, technology, travel trends
+
+### Household Products
+- **Appliances:** TV brands (RCA, Zenith, Philco), refrigerators, etc.
+- **Food brands:** Campbell's, Heinz, General Mills, etc.
+- **Household goods:** Detergents, soaps, cleaning products
+
+### Retail
+- **Department stores:** Major chains (Macy's, Sears, etc.)
+- **Supermarkets:** Emerging chains
+- **Mail order:** Catalogs
+
+---
+
+## IX-C. Celebrity News & Human Drama
+
+The tabloid fodder—what captured public fascination beyond hard news? These are the stories people actually talked about.
+
+### Romances & Marriages
+- Celebrity weddings
+- High-profile couples
+- Engagements and courtships
+- Interracial or controversial pairings
+
+### Scandals & Divorces
+- Public breakups
+- Cheating scandals
+- Career-ending controversies
+- Paternity suits
+- Arrests and legal troubles
+
+### Feuds & Rivalries
+- Professional competitions
+- Personal vendettas
+- Public spats
+- Studio conflicts
+
+### Human Interest Stories
+- Rags-to-riches stories
+- Tragedies that moved the nation
+- Comeback stories
+- Heroic acts
+- Underdog victories
+
+### The Gossip Ecosystem
+- Who were the powerful gossip columnists?
+- What stories dominated the tabloids?
+- What secrets were being kept/exposed?
+
+---
+
+## IX-D. Key Settings & Crossroads
+
+Specific named places where different worlds intersected. These locations serve as stages for drama.
+
+### Entertainment Venues
+- **Nightclubs:** Famous clubs where Hollywood, mob, and politics mixed (Ciro's, Mocambo, Copacabana, etc.)
+- **Hotels:** Where celebrities stayed, deals happened (Waldorf-Astoria, Ambassador, Beverly Hills Hotel, etc.)
+- **Theaters:** Landmark venues
+- **Restaurants:** Power-lunch spots, celebrity hangouts
+
+### Business & Political
+- **Corporate headquarters:** Where decisions were made
+- **Political venues:** Key meeting places
+- **Private clubs:** Where the elite gathered
+
+### Crime & Underworld
+- **Mob hangouts:** Known syndicate locations
+- **Las Vegas:** Casino developments, who owned what
+- **Notorious locations:** Crime scenes, raid targets
+
+### Everyday Crossroads
+- **Diners and bars:** Working-class gathering spots
+- **Churches:** Community centers
+- **Suburban developments:** Levittown and equivalents
+
+---
+
+## IX-E. Event Causality Chains
+
+How did major events connect to each other? Trace the dominos.
+
+For major events, document:
+- What preceded it (causes)
+- What followed from it (effects)
+- Who was involved at each stage
+
+Example format:
+```
+Klaus Fuchs arrested (Feb 1950)
+  → Fuchs implicates Harry Gold
+    → Gold implicates David Greenglass
+      → Greenglass implicates the Rosenbergs
+        → Rosenbergs arrested (June 1950)
+          → Trial (March 1951)
+            → Execution (June 1953)
+```
+
+---
+
 ## X. People of the Year
 
 Profiles of 10-20 key figures who shaped the year, drawn from across all domains:
@@ -337,9 +498,14 @@ Work through each section systematically:
 7. **International** - Query for foreign policy, military, global events
 8. **Science/Tech** - Query for breakthroughs, inventions, innovations
 9. **Publications** - Query for bestsellers, major newspapers, magazines
-10. **People** - Compile notable figures from all sections
-11. **Big Stories** - Identify 3-5 connecting narratives
-12. **Timeline** - Compile chronological event list
+10. **Key Institutional Figures** - Query for who ran FBI, CIA, studios, networks, unions
+11. **Consumer Brand Landscape** - Query for top brands in cigarettes, beer, soft drinks, airlines, cars, etc.
+12. **Celebrity News & Human Drama** - Query for celebrity romances, scandals, divorces, feuds
+13. **Key Settings & Crossroads** - Query for famous nightclubs, hotels, mob hangouts
+14. **Event Causality Chains** - Trace how major events connected to each other
+15. **People** - Compile notable figures from all sections
+16. **Big Stories** - Identify 3-5 connecting narratives
+17. **Timeline** - Compile chronological event list
 
 ### Phase 2: Writing
 
@@ -362,6 +528,13 @@ Write the Introduction LAST after all sections are complete:
 - Check for gaps or thin areas
 - Ensure cross-references between sections
 - Confirm timeline covers all domains
+
+**Texture Section Review:**
+- [ ] Institutional Figures: Do we know who ran FBI, CIA, major studios, networks?
+- [ ] Consumer Brands: Do we have top brands in each category (cigarettes, beer, soft drinks, cars, airlines)?
+- [ ] Celebrity Drama: Do we have romances, scandals, feuds documented?
+- [ ] Key Settings: Do we have specific nightclubs, hotels, venues named?
+- [ ] Causality Chains: Do we trace how major events connected?
 
 ## Style Guidelines
 

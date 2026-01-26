@@ -1002,6 +1002,44 @@ model Setting {
   @@map("settings")
 }
 
+// ============ BACKLOG ============
+
+model BacklogProject {
+  id          String    @id @default(cuid())
+  name        String                          // Project/Epic name
+  description String?   @db.Text              // Project description
+  status      String    @default("active")    // active, completed, archived
+  sortOrder   Int       @default(0) @map("sort_order")  // Display order
+  createdAt   DateTime  @default(now()) @map("created_at")
+  completedAt DateTime? @map("completed_at")
+
+  items       Backlog[]
+
+  @@index([sortOrder])
+  @@map("backlog_projects")
+}
+
+model Backlog {
+  id          String          @id @default(cuid())
+  title       String                          // Short task description
+  context     String?         @db.Text        // Detailed context and instructions
+  status      String          @default("pending")   // pending, in_progress, completed, cancelled
+  priority    String          @default("medium")    // low, medium, high, critical
+  effort      String?                         // XS, S, M, L, XL (t-shirt sizing)
+  tags        String?                         // Comma-separated tags for categorization
+  sortOrder   Int             @default(0) @map("sort_order")  // Order within project
+  projectId   String?         @map("project_id")
+  project     BacklogProject? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  createdAt   DateTime        @default(now()) @map("created_at")
+  startedAt   DateTime?       @map("started_at")    // When work began
+  completedAt DateTime?       @map("completed_at")  // When task was completed
+
+  @@index([status])
+  @@index([priority])
+  @@index([projectId, sortOrder])
+  @@map("backlog")
+}
+
 // ============ EVENTS SYSTEM ============
 
 model Event {

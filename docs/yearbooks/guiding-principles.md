@@ -299,6 +299,25 @@ The final Yearbook presents:
 
 ---
 
+## Relationship to Simulation Planning Documents
+
+The yearbook process should also reference these planning documents for pre-identified content needs:
+
+| Document | Location | Purpose |
+|----------|----------|---------|
+| `possible-inspirations.md` | `web/content/admin/` | Pre-identified real-world figures to compress into Kempo characters |
+| `character-development-plan.md` | `web/content/admin/` | Detailed character archetypes by tier (immediate, near-term, future) |
+| `products-companies-culture.md` | `web/content/admin/` | Brands, products, and cultural elements needed |
+| `human-drama-amplification.md` | `web/content/admin/` | Drama types, storylines, and settings that add texture |
+| `real-world-events.md` | `web/content/admin/` | Historical events with Kempo adaptation notes |
+
+**Integration points:**
+- During Gap Analysis, cross-reference these documents for pre-identified needs
+- After content creation, update these documents to mark what's been created
+- Use these documents to ensure consistency across yearbook efforts
+
+---
+
 ## Summary
 
 Creating a Kempo Yearbook is an act of **creative translation**. We take the raw material of real history, compress it into manageable scope, apply original twists that make it distinctly Kempo, and ensure everything connects coherently to what came before and what will come after.

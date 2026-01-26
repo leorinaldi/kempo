@@ -609,6 +609,358 @@ Comic books were enormously popular, especially with children and teenagers. Gen
 
 ---
 
+## IX-A. Key Institutional Figures
+
+### Government Agencies
+
+**J. Edgar Hoover** - FBI Director since 1924, Hoover was at the height of his power in 1950. He had transformed the FBI into a powerful national police force and was obsessively focused on the communist threat. The FBI prepared evidence leading to the Klaus Fuchs spy ring investigation and the eventual arrest of Julius and Ethel Rosenberg. Hoover maintained secret files on politicians and public figures, giving him extraordinary leverage over Washington. However, he notably denied the existence of organized crime, dismissing the Mafia as myth—a position that would become increasingly untenable as the Kefauver hearings progressed.
+
+**Roscoe H. Hillenkoetter** - Director of Central Intelligence from 1947 until October 7, 1950. The CIA's first director faced criticism for intelligence failures, including the failure to predict the Soviet atomic bomb test (August 1949) and lack of warning about North Korea's invasion (June 25, 1950). President Truman replaced him with General Walter Bedell Smith.
+
+**Walter Bedell Smith** - Became CIA Director on October 7, 1950. Known as "Beetle" Smith, he had served as Eisenhower's chief of staff during WWII. He would reorganize the CIA's operational and analytic missions into the directorate system still used today and is considered CIA's first truly effective director.
+
+**Dean Acheson** - Secretary of State, architect of Truman's containment policy. His "Perimeter Speech" in January 1950 (which some argue may have inadvertently signaled that Korea was outside America's defense perimeter) became controversial after the Korean War began.
+
+### Media Executives
+
+**David Sarnoff** - Chairman of RCA and the driving force behind NBC. Known as "Radio's Wonder Boy," Sarnoff was a visionary who had bet heavily on television. In 1950, he faced a crisis when the FCC licensed the CBS color television system over RCA's, but his engineers would develop a superior system within a year. He was the most powerful figure in broadcasting.
+
+**William S. Paley** - Chairman of CBS. Unlike the engineer Sarnoff, Paley was a programming genius who understood talent. In the late 1940s and early 1950s, he conducted "Paley's raids," luring away NBC's biggest stars. By the end of 1950, CBS was overtaking NBC as America's dominant network.
+
+**Leonard Goldenson** - President of ABC (since 1953, but rising through Paramount's theater division in 1950). ABC was the weakest of the three networks in 1950.
+
+### Movie Studio Heads
+
+**Louis B. Mayer** - Head of MGM, the most prestigious studio in Hollywood. Known for wholesome, crowd-pleasing films, Mayer was losing power by 1950 and would be forced out in 1951. He was the highest-paid executive in America for years.
+
+**Darryl F. Zanuck** - Head of 20th Century Fox. The youngest and most flamboyant of the studio moguls, known for prestige pictures and his iron control over productions.
+
+**Jack L. Warner** - Head of Warner Bros. The most combative of the moguls, Warner ran his studio with an iron fist. In the 1950s, he secretly bought out his brothers' shares to gain total control.
+
+**Harry Cohn** - Head of Columbia Pictures. Notorious for his temper and crude manner, but also for his sharp eye for talent.
+
+**Barney Balaban** - President of Paramount Pictures.
+
+### Business Leaders
+
+**Alfred P. Sloan Jr.** - Chairman of General Motors, the world's largest corporation. GM dominated the automobile market with over 50% market share.
+
+**Charles E. Wilson** - President of General Motors (would become Secretary of Defense under Eisenhower).
+
+**Crawford Greenewalt** - President of DuPont, which employed more chemists than all American universities combined.
+
+### Labor Leaders
+
+**William Green** - President of the American Federation of Labor (AFL) since 1924. He would die in 1952.
+
+**Philip Murray** - President of the Congress of Industrial Organizations (CIO). He led the steelworkers and headed the CIO during its most powerful years. He would die in 1952.
+
+**John L. Lewis** - President of the United Mine Workers (1920-1960). The legendary labor leader who founded the CIO was still a major force, though he had left the CIO in 1942.
+
+**Walter Reuther** - President of the United Automobile Workers (UAW) since 1946. The model of a reform-minded liberal trade unionist, he would become CIO president after Murray's death.
+
+**Dave Beck** - Rising power in the Teamsters union, representing the more corrupt wing of the labor movement that would later be exposed in congressional hearings.
+
+### Religious Leaders
+
+**Francis Cardinal Spellman** - Archbishop of New York, the most politically powerful Catholic leader in America. Staunchly anti-communist.
+
+**Billy Graham** - Rising evangelist whose 1949 Los Angeles crusade had made him a national figure. He was beginning his ascent to become America's most famous preacher.
+
+**Fulton J. Sheen** - Catholic bishop and radio/television personality whose show would later rival Milton Berle's in popularity.
+
+---
+
+## IX-B. Consumer Brand Landscape
+
+### Tobacco
+
+**Cigarettes** dominated American life—approximately 45% of adults smoked. Doctors appeared in advertisements, and the health risks were not yet widely accepted.
+
+**Market Share (1950):**
+- **Camel** (R.J. Reynolds) - 27% market share, #1 brand, famous for "I'd Walk a Mile for a Camel"
+- **Lucky Strike** (American Tobacco) - 23% market share, #2 brand, famous "L.S.M.F.T." slogan
+- **Chesterfield** (Liggett & Myers) - #3 brand, advertised as "milder"
+- **Pall Mall** (American Tobacco) - Rising brand with king-size format
+- **Philip Morris** - Smaller share but growing
+- **Old Gold** - Smaller regional brand
+- **Marlboro** - Less than 0.5% market share (marketed to women; would be repositioned in 1954)
+
+### Beer
+
+**Schlitz** ("The Beer That Made Milwaukee Famous") was America's #1 beer brand in 1950 with approximately 7% market share. The top 10 brewers held only 38% of the market—the industry was still fragmented with many regional breweries.
+
+**Top Brands:**
+- **Schlitz** - #1, from Milwaukee
+- **Budweiser** (Anheuser-Busch) - #2, fighting to regain the top spot
+- **Pabst Blue Ribbon** - Major national brand
+- **Miller High Life** - "The Champagne of Beers"
+- Regional brands dominated local markets
+
+### Soft Drinks
+
+**Coca-Cola** dominated the soft drink market with a 5-to-1 advantage over Pepsi. The company had aired its first television commercial on Thanksgiving Day 1950.
+
+- **Coca-Cola** - Overwhelming market leader, "The Sign of Good Taste" campaign
+- **Pepsi-Cola** - Distant second, targeting value-conscious consumers with "More Bounce to the Ounce"
+- **7-Up** - The "Uncola" alternative
+- **Dr Pepper** - Regional favorite in the South
+- **Royal Crown Cola** (RC) - Budget alternative
+
+### Automobiles
+
+The Big Three dominated:
+- **General Motors** (Chevrolet, Buick, Oldsmobile, Pontiac, Cadillac) - ~45% market share
+- **Ford** (Ford, Mercury, Lincoln) - ~25% market share
+- **Chrysler** (Chrysler, Dodge, Plymouth, DeSoto) - ~20% market share
+
+**Popular 1950 Models:**
+- Chevrolet Deluxe - $1,529
+- Ford Custom
+- Buick Roadmaster
+- Oldsmobile 88 (with "Rocket" V8 engine)
+- Cadillac Series 62
+
+Independent automakers (Nash, Hudson, Studebaker, Packard, Kaiser-Frazer) held the remaining market share but were struggling.
+
+### Airlines
+
+**Major Carriers:**
+- **Pan American World Airways** (Pan Am) - America's international flagship carrier, led by visionary Juan Trippe
+- **Trans World Airlines (TWA)** - Controlled by Howard Hughes, major competitor to Pan Am on international routes (officially renamed from Transcontinental & Western Air on May 17, 1950)
+- **United Airlines** - Major domestic carrier
+- **American Airlines** - Major domestic carrier
+- **Eastern Air Lines** - Led by Eddie Rickenbacker, major East Coast carrier
+- **Delta Air Lines** - Growing regional carrier
+
+### Household Appliances & Electronics
+
+**Television Sets:**
+- **RCA** - Market leader, backed by David Sarnoff's NBC
+- **Zenith** - Major competitor
+- **Philco** - Popular brand
+- **DuMont** - Early pioneer, fading
+- **Admiral** - Value brand
+
+A 12-inch TV cost $200-$400, roughly two months' salary for average workers.
+
+**Other Appliances:**
+- **General Electric** - Major appliance brand
+- **Westinghouse** - "You Can Be Sure If It's Westinghouse"
+- **Frigidaire** (GM subsidiary) - Leading refrigerator brand
+- **Maytag** - Washing machines
+
+### Retail
+
+**Department Stores:**
+- **Macy's** - New York flagship
+- **Sears, Roebuck and Co.** - Catalog giant moving into retail stores
+- **Montgomery Ward** - Sears competitor
+- **J.C. Penney** - Growing national chain
+- **Woolworth's** - Five-and-dime stores
+
+**Grocery:**
+- **A&P** (Great Atlantic & Pacific Tea Company) - Dominant grocery chain
+- **Kroger** - Major regional chain
+- **Safeway** - West Coast leader
+
+---
+
+## IX-C. Celebrity News & Human Drama
+
+### The Year's Biggest Scandal: Ingrid Bergman
+
+The Swedish actress Ingrid Bergman, known for her wholesome image in films like *Casablanca* and *The Bells of St. Mary's*, caused the scandal of the decade. While still married to Dr. Petter Lindstrom and with a young daughter Pia, Bergman had an affair with Italian director Roberto Rossellini during the filming of *Stromboli* in 1949.
+
+In early 1950, it was revealed that Bergman was pregnant with Rossellini's child. She gave birth to a son, Robertino, on February 2, 1950—just days after her divorce was finalized. On **March 14, 1950**, Bergman married Rossellini by proxy in Mexico.
+
+The scandal destroyed her American career:
+- **Senator Edwin C. Johnson** (D-Colorado) denounced her on the Senate floor on **March 14, 1950**, calling her "a powerful influence for evil" and a "free-love cultist"
+- She was effectively exiled from Hollywood for five years
+- Her films were pulled from theaters in some areas
+- She would not return to American filmmaking until *Anastasia* (1956), for which she won an Oscar
+
+### The Wedding of the Year: Elizabeth Taylor
+
+On **May 6, 1950**, 18-year-old Elizabeth Taylor married 23-year-old Conrad "Nicky" Hilton Jr., heir to the Hilton hotel fortune, in a lavish ceremony organized by MGM. Taylor wore a gown designed by Helen Rose (the same designer who would later create Grace Kelly's wedding dress). MGM paid for the entire wedding and used it as publicity for Taylor's film *Father of the Bride*, which opened the same month.
+
+The honeymoon in Europe quickly soured. Hilton's drinking and abusive behavior became apparent almost immediately. Taylor later wrote: "The marriage lasted for two weeks. Then came disillusionment rude and brutal."
+
+By **December 14, 1950**, Taylor announced their separation. She filed for divorce on grounds of "extreme mental cruelty" and was granted a divorce on **January 29, 1951**—just eight months after the fairy-tale wedding. MGM punished her by casting her in a B-picture.
+
+### Other Celebrity Romances & Marriages
+
+- **Frank Sinatra and Ava Gardner** - Their affair continued despite both being married to others. Sinatra's career was in decline; Gardner was ascending. They would marry in 1951 after his divorce from Nancy.
+- **Rita Hayworth and Prince Aly Khan** - Married in 1949, they had daughter Yasmin in December 1949. The marriage was already troubled by 1950.
+- **Humphrey Bogart and Lauren Bacall** - Hollywood's golden couple, married since 1945.
+- **Clark Gable** - Still mourning the 1942 death of Carole Lombard; he would marry Lady Sylvia Ashley in December 1949 (divorced 1952).
+
+### Hollywood Feuds
+
+- **Bette Davis vs. Joan Crawford** - Their legendary rivalry continued, fueled by competing for the same roles.
+- **Hedda Hopper vs. Louella Parsons** - The gossip queens continued their vicious competition for scoops, while the studios played them against each other.
+- **Louis B. Mayer** - Losing power at MGM as Dore Schary rose; he would be forced out in 1951.
+
+### Deaths and Tragedies
+
+- **Al Jolson** died on October 23, 1950, at age 64, just after returning from entertaining troops in Korea.
+- **Judy Garland** attempted suicide in June 1950, slashing her throat with a broken glass after being suspended by MGM. She survived and was released from her MGM contract.
+
+---
+
+## IX-D. Key Settings & Crossroads
+
+### Hollywood Nightclubs
+
+**Ciro's** (8433 Sunset Boulevard, West Hollywood) - Owned by William Wilkerson (who also founded *The Hollywood Reporter*), Ciro's was THE place to be seen in 1950. A baroque interior with an unadorned exterior, it attracted everyone who mattered: Frank Sinatra, Humphrey Bogart and Lauren Bacall, Dean Martin and Jerry Lewis, Marilyn Monroe, Ava Gardner. Being seen at Ciro's guaranteed mentions in Hedda Hopper and Louella Parsons's columns. Lana Turner called it her favorite haunt.
+
+**Mocambo** (8588 Sunset Boulevard) - Opened in 1941 by Charlie Morrison and Felix Young, the Mocambo was famous for its Latin American décor and glass-walled aviaries with live exotic birds. Regulars included Clark Gable, Errol Flynn, Elizabeth Taylor, Howard Hughes, and Louis B. Mayer. Frank Sinatra made his Los Angeles solo debut here. The club's main stage was replicated on *I Love Lucy* as the "Tropicana" Club—Lucille Ball and Desi Arnaz were close friends of Charlie Morrison. In the mid-1950s, Marilyn Monroe would lobby Morrison to book Ella Fitzgerald, making her the first Black performer at the Mocambo.
+
+**Cafe Trocadero** ("The Troc") - The third of the Sunset Strip's famous clubs, though it had already passed its peak by 1950.
+
+### New York Nightlife
+
+**The Copacabana** (10 East 60th Street, Manhattan) - The East Coast equivalent of Ciro's, the Copa was where stars performed and celebrities were photographed. Frank Costello was a hidden owner.
+
+**The Stork Club** (3 East 53rd Street) - Sherman Billingsley's famous club, a favorite of high society and gossip columnists. Walter Winchell held court at Table 50.
+
+**21 Club** (21 West 52nd Street) - The former speakeasy was now a respectable power-lunch spot for media executives and politicians.
+
+### Las Vegas
+
+Las Vegas was being transformed from a dusty desert town into America's gambling capital, funded largely by mob money.
+
+**The Flamingo** - Bugsy Siegel's vision, opened December 26, 1946. After Siegel was murdered in June 1947, Meyer Lansky brought in new underworld associates to run it profitably. By 1950, it was the model for Strip casinos.
+
+**The Desert Inn** - Opened April 24, 1950, developed by Moe Dalitz (Cleveland mob) and his associates. Wilbur Clark was the front man. It quickly became one of the Strip's premier properties.
+
+**The Thunderbird** - Opened September 2, 1948. Mob-connected.
+
+**El Rancho Vegas** and **Last Frontier** - Earlier Strip properties, less glamorous than the new generation.
+
+The **Kefauver Committee** came to Las Vegas on **November 15, 1950**, holding hearings at the federal building downtown, exposing the mob connections that everyone knew about but rarely discussed publicly.
+
+### Hollywood Hotels
+
+**The Beverly Hills Hotel** ("The Pink Palace") - Where deals were made and affairs conducted.
+
+**Chateau Marmont** - Where stars went for privacy (and scandal).
+
+**The Garden of Allah** - Famous bungalow hotel on Sunset Strip, home to writers and actors, though declining by 1950.
+
+### Power Lunch Spots
+
+**The Brown Derby** (multiple locations) - Hollywood's most famous restaurant, where the Cobb salad was invented.
+
+**Romanoff's** - Prince Michael Romanoff's restaurant, favorite of Bogart's "Rat Pack."
+
+**Perino's** - High-end Italian, where moguls dined.
+
+---
+
+## IX-E. Event Causality Chains
+
+### The Atomic Spy Chain (1950)
+
+The most dramatic causality chain of 1950 was the unraveling of the Soviet atomic spy network:
+
+```
+Klaus Fuchs confesses (January 24, 1950, UK)
+    ↓
+Fuchs arrested in Britain (February 2, 1950)
+    ↓
+Fuchs identifies his American courier as "Raymond"
+    ↓
+FBI identifies "Raymond" as Harry Gold
+    ↓
+Harry Gold arrested (May 23, 1950)
+    ↓
+Gold identifies David Greenglass as a source
+    (soldier at Los Alamos, wife "may have been Ruth," NYC native)
+    ↓
+David Greenglass arrested (June 15, 1950)
+    ↓
+Greenglass implicates his sister Ethel and brother-in-law Julius Rosenberg
+    ↓
+Julius Rosenberg arrested (July 17, 1950)
+    ↓
+Ethel Rosenberg arrested (August 11, 1950)
+    ↓
+[Trial: March 1951 → Execution: June 1953]
+```
+
+This chain of arrests, triggered by British intelligence and the Venona decryption project, led to the most controversial espionage case of the Cold War.
+
+### The Korean War Escalation Chain
+
+```
+North Korea invades South Korea (June 25, 1950)
+    ↓
+Truman commits U.S. forces without declaration of war (June 27)
+    ↓
+UN Security Council authorizes action (Soviet Union absent)
+    ↓
+Seoul falls to North Korea (June 28)
+    ↓
+U.S. forces retreat to Pusan Perimeter (August)
+    ↓
+MacArthur's Inchon landing reverses the war (September 15)
+    ↓
+Seoul recaptured (September 26)
+    ↓
+UN forces cross 38th parallel into North Korea (October 7)
+    ↓
+Pyongyang captured (October 19)
+    ↓
+China secretly enters North Korea (October 15-19)
+    ↓
+Chinese forces attack in massive numbers (November 26)
+    ↓
+UN forces in full retreat
+    ↓
+[Seoul falls again: January 4, 1951]
+    ↓
+[MacArthur fired: April 11, 1951]
+```
+
+### The McCarthy Rise Chain
+
+```
+Soviets test atomic bomb (August 29, 1949)
+    ↓
+Alger Hiss convicted of perjury (January 21, 1950)
+    ↓
+Klaus Fuchs arrested, confirms Soviet spies stole bomb secrets (February 2, 1950)
+    ↓
+McCarthy's Wheeling speech claims communists in State Department (February 9, 1950)
+    ↓
+McCarthy becomes national figure, media amplifies accusations
+    ↓
+Korean War begins, seeming to confirm communist threat (June 25, 1950)
+    ↓
+McCarran Internal Security Act passed over Truman's veto (September 23, 1950)
+    ↓
+[McCarthy's power grows through 1954]
+```
+
+### The Television Revolution Chain
+
+```
+TV ownership at 9% of households (early 1950)
+    ↓
+Kefauver hearings begin (May 1950)
+    ↓
+Televised hearings captivate 30 million viewers (March 1951)
+    ↓
+I Love Lucy premieres (October 1951)
+    ↓
+TV ownership reaches 50% (end of 1951)
+    ↓
+[By 1960: 90% of households have TV]
+```
+
+---
+
 ## X. People of the Year
 
 ### Harry S. Truman
