@@ -103,11 +103,15 @@ Tell the user:
 
 ### 7. Backlog Review (via MPM)
 
-Run the MPM backlog-review skill at [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) with product slug `kempo`:
+Get the backlog-review skill instructions from MPM:
+
+```bash
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts skill backlog-review kempo
+```
+
+Then follow the skill instructions:
 
 1. **Sync Phase**: Check if any backlog items need status updates based on recent session history
 2. **Prioritization Phase**: Suggest next steps with Option A (top of queue) and Option B (alternative)
-
-This uses direct database access - no need for MPM app to be running.
 
 This replaces the generic "What would you like to work on?" with concrete, prioritized suggestions based on the current backlog state.

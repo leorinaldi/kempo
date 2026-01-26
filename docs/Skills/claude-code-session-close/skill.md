@@ -6,14 +6,18 @@ Run this skill when the user says "close the session", "session close protocol",
 
 ### 1. Backlog Sync (via MPM)
 
-Run **Phase 1 only** of the MPM backlog-review skill at [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) with product slug `kempo`:
+Get the backlog-review skill instructions from MPM:
+
+```bash
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts skill backlog-review kempo
+```
+
+Then run **Phase 1 only**:
 
 1. Gather context from git commits, project history, and current conversation
-2. Fetch current backlog from MPM database
+2. Fetch current backlog: `npx tsx scripts/mpm.ts fetch kempo`
 3. Identify any tasks that should be marked complete or updated
-4. Suggest updates and apply them with user confirmation
-
-This uses direct database access - no need for MPM app to be running.
+4. Suggest updates and apply them with user confirmation: `npx tsx scripts/mpm.ts update kempo TASK_ID STATUS`
 
 **Do NOT run Phase 2** (task suggestions) since we are closing the session.
 

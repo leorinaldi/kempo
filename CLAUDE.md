@@ -44,41 +44,41 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 ## Backlog Management (via MPM)
 
-Kempo's backlog is managed in MPM (Mega Project Manager) via direct database access.
+Kempo's backlog is managed in MPM (Mega Project Manager) via the MPM CLI.
 
 - **Product Slug**: `kempo`
 
 **IMPORTANT: Two Separate Databases**
 - **Kempo database** (in `.env.local`) - For Kempo data: articles, settings, projectHistory, etc. Use Prisma.
-- **MPM database** (below) - For backlog only. Use `pg` module with the connection string below.
+- **MPM database** - For backlog only. Use the MPM CLI commands below.
 
-When asked to "review backlog", "what's next", or after completing a task, follow [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) using product slug `kempo`.
+### MPM CLI Commands
 
-### Quick Backlog Fetch
-
-Run from the `/Users/leonardorinaldi/Claude/MPM` directory (which has `pg` installed):
+All commands run from `/Users/leonardorinaldi/Claude/MPM`:
 
 ```bash
-cd /Users/leonardorinaldi/Claude/MPM && npx tsx -e "
-import pg from 'pg';
-const client = new pg.Client('postgresql://neondb_owner:npg_lQmMIGq9Jzk4@ep-empty-scene-ahjbwz2v-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require');
-(async () => {
-  await client.connect();
-  const prod = await client.query('SELECT id, name FROM products WHERE slug = \\\$1', ['kempo']);
-  if (!prod.rows[0]) { console.log('Product not found'); process.exit(1); }
-  console.log('Backlog for:', prod.rows[0].name);
-  const projects = await client.query('SELECT id, name FROM backlog_projects WHERE product_id = \\\$1 AND status != \\\$2 ORDER BY sort_order', [prod.rows[0].id, 'archived']);
-  for (const p of projects.rows) {
-    console.log('\\n## ' + p.name);
-    const tasks = await client.query('SELECT id, title, status, priority FROM backlog WHERE project_id = \\\$1 ORDER BY sort_order', [p.id]);
-    tasks.rows.forEach(t => console.log('  - [' + t.status + '] ' + t.title + ' (id:' + t.id.slice(0,8) + ')'));
-  }
-  await client.end();
-})();
-"
+# Fetch backlog
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts fetch kempo
+
+# Get skill instructions (e.g., backlog-review)
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts skill backlog-review kempo
+
+# Update task status
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts update kempo TASK_ID completed
+
+# Create new task
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts create kempo "Task title" "Project Name" medium
 ```
 
-For full reference, see [/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md).
+### Backlog Review
+
+When asked to "review backlog", "what's next", or after completing a task:
+
+```bash
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx scripts/mpm.ts skill backlog-review kempo
+```
+
+This fetches the latest backlog-review skill instructions from MPM's database with Kempo's product slug pre-filled.
 
 ## Documentation
 
