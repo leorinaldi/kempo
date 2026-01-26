@@ -44,26 +44,34 @@ When asked to "close the session", "session close protocol", or similar, follow 
 
 ## Backlog Management (via MPM)
 
-Kempo's backlog is managed centrally in **MPM** (Mega Project Manager).
+Kempo's backlog is managed in MPM (Mega Project Manager) via direct database access.
 
 - **Product Slug**: `kempo`
-- **MPM Local**: `http://localhost:3333`
-- **MPM Production**: `https://mpm-eta.vercel.app`
-- **UI**: http://localhost:3333/products/kempo
+- **MPM Database**: Direct PostgreSQL connection (no MPM app needed)
 
-When asked to "review backlog", "what should we work on next", or after completing a task, follow [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) using product slug `kempo`.
+When asked to "review backlog", "what's next", or after completing a task, follow [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) using product slug `kempo`.
 
-### Quick API Reference
+### Quick Backlog Fetch
 
 ```bash
-# Get Kempo's backlog
-curl -s "http://localhost:3333/api/backlog?productId=$(curl -s http://localhost:3333/api/products | jq -r '.[] | select(.slug == "kempo") | .id')"
-
-# Update task status
-curl -X PATCH http://localhost:3333/api/backlog -H "Content-Type: application/json" -d '{"id": "TASK_ID", "status": "completed"}'
+npx tsx -e "
+import pg from 'pg';
+const client = new pg.Client('postgresql://neondb_owner:npg_lQmMIGq9Jzk4@ep-empty-scene-ahjbwz2v-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require');
+await client.connect();
+const SLUG = 'kempo';
+const prod = await client.query('SELECT id, name FROM products WHERE slug = \$1', [SLUG]);
+if (!prod.rows[0]) { console.log('Product not found'); process.exit(1); }
+const projects = await client.query('SELECT id, name FROM backlog_projects WHERE product_id = \$1 AND status != \$2 ORDER BY sort_order', [prod.rows[0].id, 'archived']);
+for (const p of projects.rows) {
+  console.log('## ' + p.name);
+  const tasks = await client.query('SELECT title, status, priority FROM backlog WHERE project_id = \$1 ORDER BY sort_order', [p.id]);
+  tasks.rows.forEach(t => console.log('  - [' + t.status + '] ' + t.title));
+}
+await client.end();
+"
 ```
 
-For full API reference, see [/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md).
+For full reference, see [/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md).
 
 ## Documentation
 
