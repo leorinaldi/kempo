@@ -40,9 +40,11 @@ export default function ProjectManagementPage() {
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Backlog */}
-          <Link
-            href="/admin/backlog"
+          {/* Backlog (MPM) */}
+          <a
+            href="http://localhost:3333/products/kempo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="block bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
           >
             <div className="flex items-center gap-4 mb-4">
@@ -52,8 +54,8 @@ export default function ProjectManagementPage() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">Backlog</h2>
-                <p className="text-sm text-gray-500">Task management and prioritization</p>
+                <h2 className="text-lg font-semibold text-gray-900">Backlog (MPM)</h2>
+                <p className="text-sm text-gray-500">Opens in MPM - Mega Project Manager</p>
               </div>
             </div>
             <ul className="text-sm text-gray-600 space-y-1">
@@ -61,7 +63,7 @@ export default function ProjectManagementPage() {
               <li>Drag-and-drop ordering</li>
               <li>Progress tracking</li>
             </ul>
-          </Link>
+          </a>
 
           {/* Content Stats */}
           <Link
