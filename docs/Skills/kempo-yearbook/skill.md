@@ -32,6 +32,30 @@ docs/yearbooks/kempo-YYYY-yearbook.md
 
 ---
 
+## Critical Rule: Temporal Perspective
+
+**Yearbooks are written as of midnight on December 31 of their year.**
+
+This means:
+
+1. **No forward-looking references** - A 1950 yearbook must NOT reference events from 1951 or later, even if you know what happens next
+2. **Use present tense for end-of-year status** - "The Fletcher Committee hearings are planned" not "The Fletcher Committee hearings of 1951"
+3. **Causality chains end at December 31** - Do NOT include "[1951: ...]" annotations or "what 1951 will bring" language
+4. **Avoid phrases like:**
+   - "that would come in 1951"
+   - "televised hearings of 1951"
+   - "what the next year will bring"
+   - "As 1951 begins..."
+5. **Use instead:**
+   - "plans are underway for..."
+   - "hearings are scheduled"
+   - "uncertainty about the future"
+   - "As the year ends..."
+
+The yearbook captures the world as it exists at a specific moment in time. Readers viewing content at earlier dates should experience the world without spoilers for future events.
+
+---
+
 # Part 1: Creating the Yearbook Analysis
 
 The Analysis document is created first. It contains the translation process and planning.

@@ -344,6 +344,412 @@ Major newspapers—the New York Times, New York Herald Tribune, Washington Post,
 
 ---
 
+## IX-A. Key Institutional Figures
+
+### Government Agencies
+
+**J. Edgar Hoover** — FBI Director since 1924, Hoover was at the height of his power in 1951. The Rosenberg arrests and trials validated his obsession with the communist threat. Hoover kept the Venona intercepts—America's greatest counterintelligence secret—in a locked safe in his office, choosing not to inform even President Truman. He continued to deny the existence of organized crime despite mounting evidence, a position increasingly untenable after the Kefauver hearings.
+
+**Walter Bedell Smith** — Became CIA Director in October 1950, inheriting what he called a "disaster." Known as "Beetle" Smith, he had served as Eisenhower's chief of staff during WWII. In 1951, he was promoted to four-star general while reorganizing the CIA into the directorate system still used today. His institutional reforms transformed the fledgling agency—as one senior officer later observed, "If it hadn't been for Bedell, I don't think there would be a CIA today."
+
+**Dean Acheson** — Secretary of State, continued as architect of Truman's containment policy despite McCarthy's attacks. His testimony during the MacArthur hearings helped confirm civilian control of military policy.
+
+**George Marshall** — Secretary of Defense until September 1951, when he was replaced by Robert Lovett. McCarthy had attacked Marshall as part of a "conspiracy so immense," but the Senate hearings vindicated Marshall's reputation.
+
+### Media Executives
+
+**David Sarnoff** — Chairman of RCA and driving force behind NBC. In 1951, he won the color television battle when RCA's system was approved, reversing an earlier FCC decision favoring CBS. The most powerful figure in broadcasting, he saw television ownership approaching 50% of American households.
+
+**William S. Paley** — Chairman of CBS. Despite losing the color TV decision, CBS dominated programming with *I Love Lucy* (debuting October 1951) achieving record ratings. Paley's talent raids had successfully lured NBC's biggest stars, making CBS the top-rated network.
+
+**Leonard Goldenson** — Rising through ABC, which remained the weakest of the three networks but was positioning for growth.
+
+### Movie Studio Heads
+
+**Louis B. Mayer** — The biggest studio news of 1951 was Mayer's departure from MGM. After 27 years running the most prestigious studio in Hollywood, Mayer was forced to resign in August 1951 when Loew's Inc. sided with production chief Dore Schary. On his final day, executives and staff lined a red carpet to applaud his contributions. He received an honorary Oscar that year for guiding MGM "with foresight, aggressiveness and with a real desire for taste and quality." His departure marked the end of an era.
+
+**Dore Schary** — Took full control of MGM production after Mayer's ouster. His preference for "message pictures" over Mayer's family-friendly spectacles represented Hollywood's changing sensibilities.
+
+**Darryl F. Zanuck** — Continued running 20th Century Fox with iron control, though as vice president under New York-based president Spyros Skouras. Still the most feared and respected production chief in Hollywood.
+
+**Jack L. Warner** — Head of Warner Bros., continued his combative leadership style. Aggressively anti-communist, he cooperated fully with HUAC investigations.
+
+**Harry Cohn** — Head of Columbia Pictures, notorious for his temper and crude manner but sharp eye for talent.
+
+### Business Leaders
+
+**Charles E. Wilson** — President of General Motors, the world's largest corporation. GM dominated the automobile market with over 50% share and was responsible for more than 3 million American jobs through direct employment and suppliers.
+
+**Crawford Greenewalt** — President of DuPont, which employed more chemists than all American universities combined. The chemical giant's products—nylon, plastics, countless others—were transforming daily American life.
+
+**Alfred P. Sloan Jr.** — Still active as GM Chairman, the architect of the modern corporation and its divisional structure.
+
+**Thomas J. Watson Jr.** — Rising at IBM, positioning the company for the computer revolution. In 1951, the UNIVAC I was being prepared for delivery, though Watson's IBM would soon dominate the industry.
+
+### Labor Leaders
+
+**William Green** — President of the American Federation of Labor (AFL) since 1924. Union membership remained at historic highs, with over 30% of American workers organized. Green would die in 1952.
+
+**Philip Murray** — President of the Congress of Industrial Organizations (CIO) and the United Steelworkers. Led the CIO during its most powerful years. Would die in 1952.
+
+**Walter Reuther** — President of the United Automobile Workers (UAW), the model of reform-minded liberal trade unionism. Would become CIO president after Murray's death.
+
+**John L. Lewis** — President of the United Mine Workers, the legendary labor leader remained a major force though he had left the CIO in 1942.
+
+### Religious Leaders
+
+**Francis Cardinal Spellman** — Archbishop of New York, the most politically powerful Catholic leader in America. Staunchly anti-communist, he supported McCarthy and the loyalty oath movement.
+
+**Billy Graham** — The evangelist's star continued to rise after his breakthrough 1949 Los Angeles crusade. His radio broadcasts reached millions, and he was becoming America's most famous preacher.
+
+**Fulton J. Sheen** — Catholic bishop and media personality whose television show *Life Is Worth Living* would soon rival Milton Berle in ratings.
+
+---
+
+## IX-B. Consumer Brand Landscape
+
+### Tobacco
+
+Cigarette consumption continued its postwar boom—the industry sold over 400 billion cigarettes in 1951. Approximately 45% of American adults smoked. Health concerns were whispered but not yet widely accepted; doctors still appeared in advertisements.
+
+**Market Leaders (1951):**
+- **Camel** (R.J. Reynolds) — Held the #1 position by a slim margin, famous for "I'd Walk a Mile for a Camel"
+- **Lucky Strike** (American Tobacco) — Close second, with the iconic "L.S.M.F.T." (Lucky Strike Means Fine Tobacco) slogan
+- **Chesterfield** (Liggett & Myers) — Solid third place, marketed as "milder"
+- **Pall Mall** (American Tobacco) — Growing rapidly with its king-size format
+- **Philip Morris** — Smaller share but growing
+- **Marlboro** — Under 1% share, still marketed to women (the cowboy repositioning would come in 1954)
+
+The battle between Camel and Lucky Strike had raged for 25 years. As one industry observer noted in 1951: "No matter how you cut it, flavor it, toast it, pack it or glamorize it, it is basically the same product. No cigarette is any stronger than its next advertising campaign."
+
+### Beer
+
+**Schlitz** ("The Beer That Made Milwaukee Famous") remained America's #1 beer brand with approximately 7% market share. The industry was still fragmented—the top 10 brewers held only about 38% of the market.
+
+**Top Brands:**
+- **Schlitz** — #1 nationally from Milwaukee
+- **Budweiser** (Anheuser-Busch) — #2, fighting to regain the top spot
+- **Pabst Blue Ribbon** — Major national contender
+- **Miller High Life** — "The Champagne of Beers"
+- Regional breweries dominated local markets
+
+### Soft Drinks
+
+**Coca-Cola** dominated with a 5-to-1 advantage over Pepsi. Television advertising was transforming how beverages reached consumers—Coca-Cola had aired its first TV commercial on Thanksgiving Day 1950.
+
+**Top Brands:**
+- **Coca-Cola** — Overwhelming market leader
+- **Pepsi-Cola** — Distant second, targeting value-conscious consumers
+- **7-Up** — The "Uncola" alternative
+- **Dr Pepper** — Regional favorite in the South
+- **Royal Crown Cola (RC)** — Budget alternative
+
+### Automobiles
+
+The Big Three maintained their grip:
+- **General Motors** (Chevrolet, Buick, Oldsmobile, Pontiac, Cadillac) — ~45% market share
+- **Ford** (Ford, Mercury, Lincoln) — ~25% market share
+- **Chrysler** (Chrysler, Dodge, Plymouth, DeSoto) — ~20% market share
+
+**1951 Trends:**
+- Automatic transmissions spreading rapidly
+- Power steering becoming available
+- Chrome and elaborate styling at new heights
+- Korean War defense production affecting availability
+
+Independent automakers (Nash, Hudson, Studebaker, Packard, Kaiser-Frazer) struggled with the remaining 10% of market share. Kaiser-Frazer was particularly troubled.
+
+### Airlines
+
+**Major Carriers:**
+- **Pan American World Airways** (Pan Am) — International flagship, led by visionary Juan Trippe
+- **Trans World Airlines (TWA)** — Howard Hughes' airline, renamed from Transcontinental & Western Air in 1950
+- **United Airlines** — Major domestic carrier
+- **American Airlines** — Major domestic carrier
+- **Eastern Air Lines** — Led by Eddie Rickenbacker, dominant on East Coast
+- **Delta Air Lines** — Growing regional carrier
+
+Air travel remained expensive but was becoming more accessible. The jet age was still years away—propeller aircraft dominated.
+
+### Television Sets
+
+Television manufacturing boomed as ownership approached 50% of households. Prices were dropping while screen sizes increased.
+
+**Leading Manufacturers:**
+- **RCA** — Market leader, backed by David Sarnoff's NBC
+- **Zenith** — Major competitor with quality reputation
+- **Philco** — Popular mid-range brand
+- **Admiral** — Value-oriented
+- **DuMont** — Pioneer fading from prominence
+
+A 12-inch TV cost roughly $150-$300—still a major purchase equivalent to several weeks' wages for average workers.
+
+### Retail
+
+**Department Stores:**
+- **Macy's** — New York flagship and growing suburban branches
+- **Sears, Roebuck and Co.** — Catalog giant expanding into retail stores
+- **Montgomery Ward** — Sears competitor
+- **J.C. Penney** — Growing national chain
+- **Woolworth's** — Five-and-dime stores on every Main Street
+
+**Grocery:**
+- **A&P** (Great Atlantic & Pacific Tea Company) — Dominant grocery chain
+- **Kroger** — Major regional chain
+- **Safeway** — West Coast leader
+
+Supermarkets were replacing neighborhood grocers. Suburban shopping centers emerged as retail followed customers to new developments.
+
+---
+
+## IX-C. Celebrity News & Human Drama
+
+### The Wedding: Frank Sinatra and Ava Gardner
+
+The most anticipated celebrity wedding of 1951 came on **November 7** when Frank Sinatra finally married Ava Gardner in Philadelphia. Their tumultuous romance had been tabloid fodder for two years—Sinatra was still married to Nancy Barbato when their affair began, and his divorce wasn't finalized until October 1951.
+
+"Well, we finally made it," Sinatra told the judge after the ceremony. Ava, 28, wore a mauve cocktail dress and pearls. Frank, 35, was at a career low point—his voice had given out, his records weren't selling, and his Columbia contract was about to be dropped. Ava was ascending as one of Hollywood's most sought-after leading ladies.
+
+Their marriage would prove as volatile as their courtship—both had fierce tempers and tendencies toward jealousy. They would announce divorce plans in October 1953, though the final decree wouldn't come until 1957. Despite everything, they remained devoted to each other for life; Ava later called Frank "the love of my life" and he paid her medical bills decades later.
+
+### The Divorce: Elizabeth Taylor and Conrad Hilton Jr.
+
+On **January 29, 1951**, Elizabeth Taylor's fairy-tale first marriage officially ended—just eight months after her MGM-produced wedding to hotel heir Conrad "Nicky" Hilton Jr. The 18-year-old star had worn a Helen Rose gown while MGM turned the ceremony into publicity for her film *Father of the Bride*.
+
+The honeymoon in Europe quickly soured. Hilton's drinking, gambling, and abusive behavior became apparent immediately. Taylor later wrote: "The marriage lasted for two weeks. Then came disillusionment rude and brutal." She filed for divorce citing "extreme mental cruelty."
+
+### The Scandal: Joan Bennett, Walter Wanger, and the Parking Lot Shooting
+
+The year's most sensational scandal erupted on **December 13, 1951**, in a Beverly Hills parking lot.
+
+Actress Joan Bennett was sitting in her green Cadillac when two gunshots rang out. Her agent, Jennings Lang, who had just walked her to the car, dropped to the ground screaming. The gunman was Bennett's husband, film producer Walter Wanger.
+
+The backstory was Hollywood tragedy: Wanger, once earning the second-highest salary at MGM, had fallen on hard times after his 1948 film *Joan of Arc* (starring Ingrid Bergman) flopped amid Bergman's own scandal. The bank was threatening to foreclose on the Wanger home in Holmby Hills. He suspected his wife was having an affair with her agent and hired a private detective who confirmed they were spending time together in New Orleans, the Caribbean, and a Beverly Hills apartment.
+
+"I shot him because I thought he was breaking up my home," Wanger told police.
+
+One bullet grazed Lang's thigh; the other struck him in the groin. Lang survived and later fathered children and became a successful producer. Wanger pleaded temporary insanity and served only four months in prison—later producing prison-themed films including *I Want to Live!*, which won Susan Hayward an Oscar.
+
+But Joan Bennett's career never recovered. "I might as well have pulled the trigger myself," she later said. She made only five films in the decade following the shooting. The scandal would inspire Billy Wilder's 1960 comedy *The Apartment*, which won Best Picture.
+
+### The Departure: Louis B. Mayer Leaves MGM
+
+In **August 1951**, Louis B. Mayer walked out of MGM for the last time after 27 years as its head. The departure was not voluntary—the studio's parent company, Loew's Inc., sided with production chief Dore Schary in a power struggle over the studio's direction.
+
+Mayer had built MGM into "the Tiffany of studios," home to more stars than there were in the heavens. But changing tastes and declining profits led to his ouster. On his final day, a red carpet was laid from the Thalberg Building, and executives, actors, and staff lined the path to applaud him.
+
+He received an honorary Oscar that year—bittersweet recognition for a career that had peaked and ended.
+
+### Other Celebrity News
+
+**Rita Hayworth vs. Aly Khan:** The glamorous marriage that began in 1949 was crumbling. Hayworth, tired of her husband's infidelities, filed for divorce in 1951, initiating a bitter custody battle over their daughter Yasmin.
+
+**Lili St. Cyr's Bubblebath:** On **October 19, 1951**, police interrupted stripper Lili St. Cyr's famous bubblebath act at Ciro's nightclub. Mickey Rooney was in the audience when she was arrested for indecent exposure. She hired powerhouse attorney Jerry Giesler, who got her acquitted—only enhancing her notoriety.
+
+**Franchot Tone's Outburst:** The actor created a minor scandal in 1951 when he approached gossip columnist Florabel Muir at her table at Ciro's and spat in her face—demonstrating the tensions between Hollywood and the press that chronicled its every move.
+
+**Spencer Tracy and Katharine Hepburn:** Their decades-long relationship remained an open secret. Tracy, a devout Catholic, would never divorce his wife, but studio executives and the media respected the boundaries—an example of how some scandals were managed while others destroyed careers.
+
+### Deaths
+
+**Mayo Methot** — Humphrey Bogart's third wife, who had faded from the spotlight after their divorce, died in 1951 in Oregon from complications of alcoholism. Their marriage had been notoriously volatile—the press called them "the Battling Bogarts."
+
+---
+
+## IX-D. Key Settings & Crossroads
+
+### Hollywood Nightclubs
+
+**Ciro's** (8433 Sunset Boulevard) — Still THE place to be seen, though the Sunset Strip was beginning to feel competition from Las Vegas and television. The Baroque interior with pale green silk walls and American Beauty red ceilings hosted everyone who mattered: Frank Sinatra, Humphrey Bogart and Lauren Bacall, Ava Gardner, Dean Martin and Jerry Lewis, Lana Turner (who called it her favorite nightspot), Marilyn Monroe, Lucille Ball and Desi Arnaz. The 1951 incidents—Franchot Tone spitting at a gossip columnist, Lili St. Cyr's arrest—showed Ciro's remained at the center of Hollywood drama. Owner Billy Wilkerson also owned The Hollywood Reporter, giving the club direct pipeline to industry gossip.
+
+**Mocambo** (8588 Sunset Boulevard) — Famous for its Latin American décor and glass-walled aviaries with live exotic birds. Lucille Ball and Desi Arnaz were such close friends of owner Charlie Morrison that the club's stage was replicated as the "Tropicana" Club on *I Love Lucy*. Regular patrons included Clark Gable, Elizabeth Taylor, Howard Hughes, and Louis B. Mayer (while he still had a studio to run).
+
+**Café Trocadero** ("The Troc") — The third of the legendary Sunset Strip clubs, though it had passed its peak by 1951.
+
+The Sunset Strip's glory days were numbered. Unincorporated Los Angeles County territory with relaxed regulations, it had thrived in the 1940s. But Las Vegas offered legal gambling, bigger shows, and no closing time. Television kept audiences home. By mid-decade, the glitzy lounges would struggle to compete.
+
+### Las Vegas
+
+The transformation of Highway 91 into the Las Vegas Strip accelerated in 1951. What had been a dusty desert town was becoming America's gambling capital—funded largely by mob money.
+
+**The Desert Inn** (opened April 1950) — By 1951, the D.I. had become the Strip's classiest property. Moe Dalitz, former Cleveland bootlegger with ties to organized crime, had provided the financing when developer Wilbur Clark ran out of money. Frank Sinatra made his Las Vegas debut at the Desert Inn on **September 13, 1951**, beginning a lifelong association with the city.
+
+The Desert Inn also offered "Atomic Cocktails" in its Sky Room restaurant—guests could watch mushroom clouds from nuclear tests at the Nevada Test Site 65 miles away. The first atmospheric test at the site occurred January 27, 1951. Las Vegas advertised the explosions as a tourist attraction.
+
+**The Flamingo** — Bugsy Siegel's vision, operating profitably since his 1947 murder. Meyer Lansky and associates now ran it as the model for Strip casino-hotels.
+
+**The Thunderbird** (opened 1948) — Became a symbol of mob involvement when it emerged that a construction loan had been sold to Jake Lansky, Meyer's brother. Nevada Lieutenant Governor Clifford Jones was a partner. The Kefauver Committee's November 1950 Vegas hearings had exposed these connections to the nation.
+
+**El Rancho Vegas** and **Last Frontier** — Earlier Strip properties, less glamorous than the new generation but still operating.
+
+The televised Kefauver hearings tied Las Vegas to the mob in the public mind but did nothing to slow its growth. Nevada was the only state where gambling was legal. The mob's money built the casinos; the stars who performed there brought glamour and legitimacy.
+
+### New York Nightlife
+
+**The Copacabana** (10 East 60th Street) — The East Coast equivalent of Ciro's, where stars performed and celebrities were photographed. Hidden mob ownership (Frank Costello had an interest) didn't dampen its appeal to high society.
+
+**The Stork Club** (3 East 53rd Street) — Sherman Billingsley's famous establishment, favorite of high society and gossip columnists. Walter Winchell held court at Table 50, dispensing items that could make or break careers.
+
+**21 Club** (21 West 52nd Street) — The former speakeasy was now a respectable power-lunch spot for media executives, politicians, and business leaders.
+
+### Hollywood Hotels
+
+**The Beverly Hills Hotel** ("The Pink Palace") — Where deals were made and affairs conducted in private bungalows.
+
+**Chateau Marmont** — Where stars went for privacy, discretion, and sometimes scandal.
+
+**The Garden of Allah** — Famous bungalow hotel on Sunset Strip, longtime home to writers and actors, though declining by 1951.
+
+### Power Lunch Spots
+
+**The Brown Derby** (multiple locations) — Hollywood's most famous restaurant, where the Cobb salad was invented. The hat-shaped location on Wilshire was iconic.
+
+**Romanoff's** — Prince Michael Romanoff's restaurant, favorite of Humphrey Bogart and his social circle.
+
+**Perino's** — High-end Italian, where studio moguls dined in elegant surroundings.
+
+---
+
+## IX-E. Event Causality Chains
+
+### The MacArthur Firing Chain
+
+```
+MacArthur defies Truman's limited war policy (ongoing)
+    ↓
+MacArthur writes letter to Rep. Joseph Martin advocating wider war
+    ↓
+Martin reads letter on House floor (April 5, 1951)
+    ↓
+Truman fires MacArthur (April 11, 1951)
+    ↓
+MacArthur returns to hero's welcome, address to Congress (April 19)
+    ↓
+Senate hearings begin (May 3, 1951)
+    ↓
+General Omar Bradley: "wrong war, wrong place, wrong time, wrong enemy"
+    ↓
+Hearings undercut MacArthur's position (June 14 conclusion)
+    ↓
+MacArthur's presidential hopes fade
+    ↓
+Civilian control of military affirmed
+```
+
+### The Rosenberg Trial Chain
+
+```
+Klaus Fuchs arrested in Britain (February 1950)
+    ↓
+Harry Gold identified and arrested (May 1950)
+    ↓
+David Greenglass arrested (June 1950)
+    ↓
+Julius Rosenberg arrested (July 1950)
+    ↓
+Ethel Rosenberg arrested (August 1950)
+    ↓
+Trial begins (March 6, 1951)
+    ↓
+Rosenbergs convicted (March 29, 1951)
+    ↓
+Judge Kaufman sentences both to death (April 5, 1951)
+    ↓
+Appeals process begins
+    ↓
+[Execution: June 19, 1953]
+```
+
+### The Television Triumph Chain
+
+```
+TV ownership at 9% of households (1950)
+    ↓
+Kefauver crime hearings captivate 30 million viewers (March 1951)
+    ↓
+Television proves it can focus national attention
+    ↓
+I Love Lucy premieres, revolutionizes TV production (October 15, 1951)
+    ↓
+Three-camera technique, live audience becomes standard
+    ↓
+TV ownership approaches 50% by end of 1951
+    ↓
+Movie attendance begins decline
+    ↓
+Radio adapts to music/daytime focus
+    ↓
+[By 1960: 90% of households have TV]
+```
+
+### The Korean Stalemate Chain
+
+```
+Chinese Fifth Phase Offensive throws 700,000 troops at UN lines (April 1951)
+    ↓
+Battles of Imjin River and Kapyong blunt the assault (April 22-25)
+    ↓
+Chinese suffer catastrophic casualties (40,000-60,000 vs. 4,000 UN)
+    ↓
+Front stabilizes near 38th parallel (summer 1951)
+    ↓
+Armistice talks begin at Kaesong (July 10, 1951)
+    ↓
+Talks move to Panmunjom (October 1951)
+    ↓
+POW repatriation becomes main sticking point
+    ↓
+Fighting continues while talks drag on
+    ↓
+[Armistice signed: July 27, 1953]
+```
+
+### The Louis B. Mayer Downfall Chain
+
+```
+Dore Schary hired as MGM production chief (1948)
+    ↓
+Schary favors "message pictures" over Mayer's family entertainment
+    ↓
+MGM profits decline in changing Hollywood
+    ↓
+Schary-Mayer conflict intensifies
+    ↓
+Loew's Inc. (parent company) backs Schary
+    ↓
+Mayer forced to resign (August 1951)
+    ↓
+Honorary Oscar recognition (1951)
+    ↓
+End of the mogul era at MGM
+    ↓
+[Mayer dies in 1957]
+```
+
+### The Hollywood Scandal Chain (1951)
+
+```
+Ingrid Bergman affair destroys career (1950)
+    ↓
+Proves scandals can end even major stars' careers
+    ↓
+Studios increase efforts at reputation management
+    ↓
+Elizabeth Taylor divorce (January 1951) — managed by MGM, career survives
+    ↓
+Joan Bennett shooting scandal (December 1951) — too public to manage
+    ↓
+Bennett's career destroyed
+    ↓
+Frank Sinatra/Ava Gardner marriage (November 1951) — love conquers PR concerns
+    ↓
+Confidential magazine launches (1952) — new era of exposure
+    ↓
+[Studio system's control over star image begins to crack]
+```
+
+---
+
 ## X. People of the Year
 
 ### Harry S. Truman (67)

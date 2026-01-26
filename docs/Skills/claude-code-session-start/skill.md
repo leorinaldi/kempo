@@ -101,19 +101,33 @@ Tell the user:
 - Summarize the key activities from recent sessions
 - Note any work in progress or pending items
 
-### 7. Open Backlog in Browser
+### 7. Open Backlog in Browser (MPM)
 
-Open Chrome to the backlog page so the user can see it during the review:
+Open Chrome to the Kempo backlog in MPM:
 
 ```bash
-open -a "Google Chrome" "http://localhost:3000/admin/backlog"
+open -a "Google Chrome" "http://localhost:3333/products/kempo"
 ```
 
-### 8. Backlog Review
+Note: MPM must be running on port 3333. If not running, start it:
+```bash
+cd /Users/leonardorinaldi/Claude/MPM && npm run dev
+```
 
-Run the [backlog-review](../backlog-review/skill.md) skill (both phases):
+### 8. Backlog Review (via MPM)
+
+Run the MPM backlog-review skill at [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) with product slug `kempo`:
 
 1. **Sync Phase**: Check if any backlog items need status updates based on recent session history
 2. **Prioritization Phase**: Suggest next steps with Option A (top of queue) and Option B (alternative)
+
+Quick API reference:
+```bash
+# Fetch Kempo backlog
+curl -s "http://localhost:3333/api/backlog?productId=$(curl -s http://localhost:3333/api/products | jq -r '.[] | select(.slug == "kempo") | .id')"
+
+# Update task status
+curl -X PATCH http://localhost:3333/api/backlog -H "Content-Type: application/json" -d '{"id": "TASK_ID", "status": "completed"}'
+```
 
 This replaces the generic "What would you like to work on?" with concrete, prioritized suggestions based on the current backlog state.

@@ -42,11 +42,28 @@ When asked to "start session", "follow session start protocol", or similar, foll
 
 When asked to "close the session", "session close protocol", or similar, follow [docs/Skills/claude-code-session-close](docs/Skills/claude-code-session-close/skill.md).
 
-## Backlog Review
+## Backlog Management (via MPM)
 
-Task backlog at `/admin/backlog` with drag-and-drop prioritization. DB models: `BacklogProject`, `BacklogItem`.
+Kempo's backlog is managed centrally in **MPM** (Mega Project Manager).
 
-When asked to "review backlog", "what should we work on next", or after completing a task, follow [docs/Skills/backlog-review](docs/Skills/backlog-review/skill.md).
+- **Product Slug**: `kempo`
+- **MPM Local**: `http://localhost:3333`
+- **MPM Production**: `https://mpm-eta.vercel.app`
+- **UI**: http://localhost:3333/products/kempo
+
+When asked to "review backlog", "what should we work on next", or after completing a task, follow [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) using product slug `kempo`.
+
+### Quick API Reference
+
+```bash
+# Get Kempo's backlog
+curl -s "http://localhost:3333/api/backlog?productId=$(curl -s http://localhost:3333/api/products | jq -r '.[] | select(.slug == "kempo") | .id')"
+
+# Update task status
+curl -X PATCH http://localhost:3333/api/backlog -H "Content-Type: application/json" -d '{"id": "TASK_ID", "status": "completed"}'
+```
+
+For full API reference, see [/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/project-connector/skill.md).
 
 ## Documentation
 
@@ -126,7 +143,8 @@ When asked to "review backlog", "what should we work on next", or after completi
 |-------|---------|
 | `claude-code-session-start` | Dev server, ngrok tunnel, disable login, review project history |
 | `claude-code-session-close` | Commit changes, update project history, re-enable login |
-| `backlog-review` | Sync backlog with session activity, suggest next tasks |
+
+Note: Backlog review is now handled via MPM. See "Backlog Management (via MPM)" section above.
 
 ### Skill Locations
 

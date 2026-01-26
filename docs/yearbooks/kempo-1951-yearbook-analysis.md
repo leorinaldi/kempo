@@ -204,7 +204,7 @@ From the Real 1951 Yearbook:
 2. **"The King and I" equivalent** - Goodwin & Langford's next musical
    - Proposal: ***The Dogaressa*** - Set in Renaissance Venice, exotic locale
    - Stars Maxine Merrill as an American woman in a foreign court
-   - Opens March 1951, Tony Awards follow
+   - Opens March 1951, Freddie Awards follow
    - Alternative titles: *The Governor's Lady*, *Siam Moon*, *The Royal Tutor*
 
 3. **"Catcher in the Rye" equivalent** - Major literary novel
@@ -248,10 +248,10 @@ From the Real 1951 Yearbook:
   - Chinese-American, second-generation
   - Trained in classical theater, worked small roles in Hollywood and Brightway
   - Shaves head for the role; commanding presence, intense eyes
-  - The role makes him a star - wins Tony for Best Featured Actor
+  - The role makes him a star - wins Freddie for Best Featured Actor
   - Sessue Hayakawa + Yul Brynner compression
 - Opens **March 29, 1951** at the St. James Theatre
-- Tony Awards follow
+- Freddie Awards follow
 
 **3. Ernest Beckford's *The Wanderers* - Major Novel**
 
@@ -1083,6 +1083,11 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 - [x] Person: **Victor Marsh** - convicted spy (engineer, ~40)
 - [x] Person: **Helena Marsh** - convicted spy (Victor's wife, ~35)
 - [x] Person: **Thomas Ling** - Emperor in *The Emperor and the Lady*, born 1918 San Francisco
+- [x] Person: **Frederica Ashworth** - theater pioneer, National Stage Wing co-founder, 1890-1947, Freddie Awards namesake
+
+### Priority 2B: New Organizations to Create
+
+- [x] Organization: **National Stage Wing** (NSW) - nonprofit theater organization, founded 1940, presents the Freddie Awards
 
 ### Priority 3: Events to Document
 
@@ -1095,6 +1100,7 @@ Know! Magazine, under Arthur Hale (52), covers the year's major stories: the Wes
 - [ ] Event: 1951 ULB Championship Series (October)
 - [ ] Event: *I Like Linda* premiere (October 15, 1951)
 - [ ] Event: *The Emperor and the Lady* premiere (March 29, 1951)
+- [ ] Event: 1951 Freddie Awards ceremony (Thomas Ling wins Best Featured Actor)
 
 ### Priority 4: Media to Create
 
@@ -1252,6 +1258,9 @@ Telecommunications is a massive gap in our corporate landscape. In 1951, AT&T be
 | Milton Berle | Mr. Television | EXISTS: Bernie Kessler | ✓ |
 | Lucille Ball/Desi Arnaz | Sitcom stars | CREATED: Linda Lane/Rafael Morales | ✓ |
 | Rodgers & Hammerstein | Brightway composers | EXISTS: Goodwin & Langford | ✓ |
+| Tony Awards | Theater awards | CREATED: Freddie Awards | ✓ |
+| American Theatre Wing | Theater organization | CREATED: National Stage Wing | ✓ |
+| Antoinette Perry | Award namesake | CREATED: Frederica Ashworth | ✓ |
 
 **Music Gap Analysis:**
 We have Frank Martino (crooner) but the Real 1951 shows a diverse music scene:
@@ -1608,3 +1617,615 @@ Bradley Omar's quote about the Korean War changed from verbatim Omar Bradley quo
 
 - [ ] Add new entities to database (Person, Organization, Brand tables)
 - [ ] Update Inspirations table with character compression notes
+
+---
+
+## XIX. Texture Gap Analysis
+
+This section analyzes gaps in the "texture" elements that make the Kempo universe feel lived-in: institutional figures, consumer brands, celebrity drama, key settings, and event causality chains.
+
+Reference: The Real 1951 Yearbook sections IX-A through IX-E.
+
+---
+
+### A. KEY INSTITUTIONAL FIGURES
+
+The Real 1951 Yearbook documents who ran major institutions. We need Kempo equivalents.
+
+#### Government Agencies
+
+| Real Figure | Role | Kempo Status | Notes |
+|-------------|------|--------------|-------|
+| J. Edgar Hoover | FBI Director (since 1924) | ✅ **CREATED: Maxwell J. Thornton** | FIB Director since 1924 |
+| Walter Bedell Smith | CIA Director (1950-53) | ✅ **CREATED: Walter Allen Caldwell** | CIS Director since Oct 1950 |
+| Dean Acheson | Secretary of State | **NEEDED** | Containment policy architect |
+
+**Created:**
+
+1. ✅ **Maxwell J. Thornton** (Hoover equivalent)
+   - **Federal Inquiry Bureau (FIB)** Director since 1924 (27 years by 1951)
+   - Age 56 in 1951 (born 1895)
+   - Obsessed with communist threat, has files on everyone
+   - Denies existence of organized crime (contradicting Fletcher hearings evidence)
+   - Long-serving power broker who outlasts presidents
+
+2. ✅ **Walter Allen Caldwell** (Bedell Smith equivalent)
+   - **Central Intelligence Service (CIS)** Director since October 1950
+   - Age 56 in 1951 (born 1895)
+   - Former military chief of staff
+   - Reorganizing the agency into effective directorate system
+
+3. **Secretary of State** - Could use existing political figures or create new
+
+#### Media Executives
+
+| Real Figure | Role | Kempo Status | Notes |
+|-------------|------|--------------|-------|
+| David Sarnoff | RCA/NBC Chairman | EXISTS: **Walter Brennan** (UBC) | Already have TV network head |
+| William S. Paley | CBS Chairman | **COULD ADD** | Rival network (CBS equivalent) |
+
+**Assessment:** Walter Brennan at UBC covers the "network chief" archetype. Could add rival network head if needed, but not critical.
+
+#### Movie Studio Heads
+
+| Real Figure | Role | Kempo Status | Notes |
+|-------------|------|--------------|-------|
+| Louis B. Mayer | MGM head (ousted Aug 1951) | **NEEDED** | Dramatic exit from studio |
+| Dore Schary | Replaced Mayer at MGM | **COULD ADD** | "Message pictures" guy |
+| Darryl F. Zanuck | 20th Century Fox | **COULD ADD** | Iron-fisted production chief |
+| Jack L. Warner | Warner Bros. | **COULD ADD** | Combative, anti-communist |
+| Harry Cohn | Columbia | **COULD ADD** | Notorious temper |
+
+**Current Kempo Studios:**
+- Pacific Pictures (Kagan brothers, Irving Lazar) - implied major studio
+- Pinnacle Pictures - prestige studio
+
+**Gap:** We have studios but no studio heads with personalities/drama. The Louis B. Mayer departure is a major 1951 story.
+
+**Proposals:**
+
+1. **Samuel Kagan** (eldest Kagan brother) - Pacific Pictures head
+   - Age ~60 in 1951
+   - Built Pacific from nothing, immigrant success story
+   - Old guard, resisting change
+   - 1951 Drama: Conflict with younger talent, pressure from TV
+
+2. **Irving Lazar** - Pacific Pictures production chief
+   - Already exists in foundation
+   - Could be the "Schary" figure challenging the old guard
+
+**NOTE:** The Mayer ouster is a distinctly real-world 1951 story. We could:
+- Skip it (not every real event needs a parallel)
+- Create a similar power struggle at Pacific Pictures
+- Have Samuel Kagan retire/be pushed out
+
+#### Business Leaders
+
+| Real Figure | Role | Kempo Status | Notes |
+|-------------|------|--------------|-------|
+| Charles E. Wilson | GM President | **COULD ADD** | Continental Motors CEO |
+| Crawford Greenewalt | Du Pont President | EXISTS (implied): Renard Chemical exec | Need to name |
+| Alfred P. Sloan | GM Chairman | **COULD ADD** | Auto industry titan |
+
+**Current Kempo Business Figures:**
+- Raymond Holbrook - Continental Motors designer (not CEO)
+- George Crane (76) - Pioneer Automobile founder
+- Warren Prescott (57) - American Steel president
+- Lawrence Mitchell (49) - Hartwell's CEO
+- Arthur Hale (52) - Know! Magazine
+- Jack Callahan (38) - ADU president
+
+**Gap:** We need a Continental Motors CEO and Renard Chemical leadership.
+
+**Proposals:**
+
+1. **Continental Motors CEO** - Need to create
+   - Similar to Charles Wilson - will be important political figure later
+   - "What's good for Continental is good for Kempo"
+
+2. **Renard Chemical President** - Need to name
+   - Heads company that employs more chemists than universities
+
+#### Labor Leaders
+
+| Real Figure | Role | Kempo Status | Notes |
+|-------------|------|--------------|-------|
+| William Green | AFL President | **COULD ADD** | Dies 1952 |
+| Philip Murray | CIO President | **COULD ADD** | Dies 1952 |
+| Walter Reuther | UAW President | **COULD ADD** | Reform-minded |
+| John L. Lewis | UMW President | **COULD ADD** | Legendary |
+
+**Current Kempo Labor:**
+- Jack Callahan (38) - ADU president (truckers, mob connections)
+
+**Gap:** We only have corrupt union boss. Could add legitimate labor leader for contrast.
+
+**Assessment:** Not critical for 1951. Could add later.
+
+#### Religious Leaders
+
+| Real Figure | Role | Kempo Status | Notes |
+|-------------|------|--------------|-------|
+| Francis Cardinal Spellman | Archbishop of New York | **COULD ADD** | Most powerful Catholic leader |
+| Billy Graham | Evangelist | **COULD ADD** | Rising star |
+| Fulton J. Sheen | TV bishop | **COULD ADD** | Rival to Berle in ratings later |
+
+**Assessment:** Religious figures could add texture. Billy Graham equivalent could intersect with Red Panic themes.
+
+**Proposal:**
+
+1. **Reverend William Grayson** (Billy Graham equivalent)
+   - Rising evangelist
+   - Born ~1918 (age 33 in 1951)
+   - Breakthrough crusade in Los Angeles 1949
+   - Radio broadcasts reaching millions
+   - Anti-communist, aligns with Whitfield's agenda
+
+---
+
+### B. CONSUMER BRAND LANDSCAPE
+
+The Real 1951 Yearbook documents market leaders. We need Kempo equivalents.
+
+#### Tobacco
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| Camel | EXISTS: **Koala** (Whitfield Tobacco) | Already established |
+| Lucky Strike | **NEEDED** | #2 brand, rivalry potential |
+| Chesterfield | **COULD ADD** | #3 brand |
+| Pall Mall | **COULD ADD** | King-size format |
+| Marlboro | **COULD ADD** | Women's brand in 1951 |
+
+**Current Kempo:** Koala cigarettes (Whitfield Tobacco) - established as major brand.
+
+**Gap:** Only have one cigarette brand. Real market had fierce competition.
+
+**Proposals:**
+
+1. **Golden Eagle** - Second major cigarette brand
+   - "Light another Golden Eagle" slogan
+   - Rival to Koala
+   - Company: Imperial Tobacco or American Leaf
+
+**Assessment:** Could add one competitor brand. Not critical but adds texture.
+
+#### Beer
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| Schlitz | EXISTS: **Feldmann Beer** | Already established |
+| Budweiser | **COULD ADD** | Major competitor |
+| Pabst | **COULD ADD** | Regional |
+| Miller | **COULD ADD** | "Champagne of Beers" |
+
+**Current Kempo:** Feldmann Brewing Company (Feldmann Beer) - established.
+
+**Assessment:** One beer brand is fine. Could add competitor but not critical.
+
+#### Soft Drinks
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| Coca-Cola | **NEEDED** | Dominant brand |
+| Pepsi-Cola | **COULD ADD** | Challenger |
+| 7-Up | **COULD ADD** | Uncola alternative |
+
+**Gap:** No soft drink brands established.
+
+**Proposals:**
+
+1. **Crown Cola** - Dominant soft drink
+   - Founded late 1800s
+   - Secret formula, distinctive bottle
+   - Overwhelming market leader
+   - TV advertising pioneer
+
+2. **Liberty Cola** - Challenger brand
+   - Value positioning ("more for your money")
+   - Fighting for market share
+
+#### Automobiles
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| GM (Chevrolet, Buick, etc.) | EXISTS: **Continental Motors** | Multiple divisions implied |
+| Ford | **COULD ADD** | Second place |
+| Chrysler | EXISTS: **Pioneer Automobile** | "Built Better" |
+
+**Current Kempo:** Continental Motors (~45%), Pioneer Automobile (~20%), plus implied others.
+
+**Assessment:** Good coverage. Could name Continental's divisions (like GM's Chevrolet/Buick/etc.) for texture.
+
+#### Airlines
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| Pan Am | **NEEDED** | International flagship |
+| TWA | **COULD ADD** | Howard Hughes connection |
+| United | **COULD ADD** | Domestic |
+| Eastern | **COULD ADD** | Eddie Rickenbacker |
+
+**Gap:** No airline brands established.
+
+**Proposals:**
+
+1. **Trans-Continental Airways (TCA)** or **Pan-Kempo Airways**
+   - International flagship carrier
+   - Glamorous, forward-looking
+
+#### Television Sets
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| RCA | **COULD ADD** | Market leader |
+| Zenith | **COULD ADD** | Quality reputation |
+| Philco | **COULD ADD** | Popular brand |
+
+**Gap:** No TV manufacturer brands.
+
+**Proposal:** Not critical - can reference generically.
+
+#### Retail
+
+| Real Brand | Kempo Status | Notes |
+|------------|--------------|-------|
+| Macy's | **COULD ADD** | NYC flagship |
+| Sears | EXISTS (implied): **Hartwell's** covers this niche | Suburban expansion |
+| Woolworth's | **COULD ADD** | Five-and-dime |
+
+**Current Kempo:** Hartwell's - suburban expansion, department store chain.
+
+**Assessment:** Hartwell's covers the major retail role. Could add NYC flagship equivalent if needed.
+
+---
+
+### C. CELEBRITY NEWS & HUMAN DRAMA
+
+The Real 1951 Yearbook documents scandals, weddings, feuds. We need Kempo storylines.
+
+#### 1951 Real-World Events to Consider
+
+| Event | Type | Kempo Potential |
+|-------|------|-----------------|
+| Sinatra-Gardner wedding (Nov 7) | Romance | Frank Martino's love life |
+| Elizabeth Taylor divorce (Jan) | Scandal | Young actress divorce |
+| Joan Bennett/Wanger shooting (Dec 13) | Scandal | Producer shoots agent |
+| Louis B. Mayer ousted (Aug) | Industry | Studio power struggle |
+| Lili St. Cyr arrested (Oct) | Scandal | Stripper at nightclub |
+| Rita Hayworth divorce | Scandal | Star divorcing royalty/wealth |
+
+#### Existing Kempo Storylines That Touch Celebrity Drama
+
+- **Frank Martino** - Name surfaced in Fletcher hearings (mob connections)
+- **Vivian Sterling** - Major star, potential for romance/scandal
+- **Clay Marshall** - Major male star
+- **Pacific Pictures** - Could have studio drama
+
+#### Proposed Celebrity Storylines for 1951
+
+1. **Frank Martino's Love Life**
+   - Martino (35) is the Sinatra equivalent
+   - Could marry a glamorous actress in 1951
+   - Volatile romance, tabloid fodder
+   - **Proposal:** Martino marries **Vivian Sterling** (29) or another star
+   - Or: Martino's previous marriage ends, he marries someone new
+
+2. **Young Star's Troubled Marriage**
+   - Elizabeth Taylor equivalent
+   - Quick marriage, quicker divorce
+   - **Proposal:** Could use existing young actress or create new
+   - Ties to Hartwell's (wedding sponsored by department store for publicity?)
+
+3. **The Nightclub Shooting**
+   - Joan Bennett/Wanger equivalent
+   - Producer/executive shoots someone over affair
+   - Career-ending scandal
+   - **Proposal:** Could create this drama or skip
+
+4. **Studio Power Struggle**
+   - Mayer ousted from MGM equivalent
+   - Could be Pacific Pictures internal drama
+   - Old guard vs. new approach
+
+#### Assessment
+
+The Frank Martino storyline has the most natural fit - he already has mob connections and is established as a major figure. A volatile romance/marriage would add human texture.
+
+**Recommended Addition:**
+- Frank Martino marries in 1951 (turbulent romance, like Sinatra-Gardner)
+- Could be existing character (Vivian Sterling?) or new
+- Adds celebrity drama layer to existing entertainment foundation
+
+---
+
+### D. KEY SETTINGS & CROSSROADS
+
+The Real 1951 Yearbook documents nightclubs, Las Vegas, hotels. We need Kempo equivalents.
+
+#### Hollywood Nightclubs
+
+| Real Venue | Kempo Status | Notes |
+|------------|--------------|-------|
+| Ciro's | **NEEDED** | Where stars are seen |
+| Mocambo | **NEEDED** | Exotic décor, celebrities |
+| Café Trocadero | **COULD ADD** | Past its peak |
+
+**Gap:** No Hollywood nightclub settings established.
+
+**Proposals:**
+
+1. **The Palomar Club** (Ciro's equivalent)
+   - Sunset Strip, West Hollywood
+   - THE place to be seen
+   - Owner: Need to create (connects mob, Hollywood, politics)
+   - Where Frank Martino performs, Vivian Sterling is photographed
+
+2. **The Tropicana** (Mocambo equivalent)
+   - Exotic décor, Latin theme
+   - Where *I Like Linda* is set (nightclub scenes)
+   - Already referenced in Entertainment section
+
+#### Las Vegas
+
+| Real Venue | Kempo Status | Notes |
+|------------|--------------|-------|
+| Desert Inn | **NEEDED** | Mob-connected, Sinatra debut |
+| Flamingo | **NEEDED** | Bugsy Siegel's legacy |
+| Thunderbird | **COULD ADD** | Political connections |
+
+**Current Kempo:** Sidney Hartman's "Lucky Sands Casino" mentioned in Fletcher hearings.
+
+**Existing:** Lucky Sands Casino - Sidney Hartman's operation, exposed in Fletcher hearings.
+
+**Gap:** Only one Vegas property. Real Vegas had multiple competing casinos.
+
+**Proposals:**
+
+1. **The Oasis** (Desert Inn equivalent)
+   - Opened 1950, classiest property on the Strip
+   - Where Frank Martino makes his Vegas debut (September 1951)
+   - Mob-financed but legitimate front
+   - Atomic cocktails, mushroom cloud views
+
+2. **The Mirage** (Flamingo equivalent)
+   - Older property, Salvatore Conti's territory
+   - Where the bodies are buried (figuratively)
+
+**Note:** Lucky Sands could be renamed/repositioned or kept as third property.
+
+#### New York Nightlife
+
+| Real Venue | Kempo Status | Notes |
+|------------|--------------|-------|
+| Copacabana | **NEEDED** | East Coast equivalent of Ciro's |
+| Stork Club | **COULD ADD** | High society |
+| 21 Club | **COULD ADD** | Power lunch |
+
+**Gap:** No NYC nightlife settings.
+
+**Proposals:**
+
+1. **The Copa** or **The Havana Club** (Copacabana equivalent)
+   - NYC nightclub, stars perform
+   - Mob ownership (Sol Roth connection?)
+   - Where East Coast celebrities are seen
+
+#### Hollywood Hotels
+
+| Real Venue | Kempo Status | Notes |
+|------------|--------------|-------|
+| Beverly Hills Hotel | **COULD ADD** | Where deals are made |
+| Chateau Marmont | **COULD ADD** | Privacy, scandal |
+| Garden of Allah | **COULD ADD** | Writers/actors, declining |
+
+**Assessment:** Could add one iconic hotel for texture.
+
+**Proposal:**
+
+1. **The Beverly Palms Hotel** (Beverly Hills Hotel equivalent)
+   - Where deals are made
+   - Private bungalows for affairs
+
+---
+
+### E. EVENT CAUSALITY CHAINS
+
+The Real 1951 Yearbook documents how events connected. We need to map Kempo equivalents.
+
+#### Existing Chains (from Section XI - Big Stories)
+
+1. **Westbrook Firing Chain** - Matches MacArthur firing
+2. **Fletcher Hearings Chain** - Matches Kefauver hearings
+3. **Marsh Trial Chain** - Matches Rosenberg trial
+4. **Television Triumph Chain** - I Like Linda, TV adoption
+
+#### Chains to Document (Kempo-Specific)
+
+**1. The Westbrook Firing Chain**
+```
+Westbrook defies Kellman's limited war policy (ongoing)
+    ↓
+Westbrook writes letter to Rep. Everett Flanders
+    ↓
+Flanders reads letter on House floor (April 5, 1951)
+    ↓
+Kellman fires Westbrook (April 11, 1951)
+    ↓
+Westbrook returns to hero's welcome, addresses Congress (April 19)
+    ↓
+Senate hearings begin (May 3, 1951)
+    ↓
+General Bradley Omar: "misguided conflict, misguided moment, misguided adversary"
+    ↓
+Hearings conclude, Westbrook's position undercut (June 14)
+    ↓
+General Matthew Hillford takes command, stabilizes front
+    ↓
+Armistice talks begin (July 10, 1951)
+    ↓
+Civilian control of military affirmed
+```
+
+**2. The Marsh Spy Trial Chain**
+```
+Klaus Fuchs equivalent arrested (1950)
+    ↓
+Chain of arrests leads to Victor and Helena Marsh
+    ↓
+Trial begins (March 6, 1951)
+    ↓
+Marshes convicted (March 29, 1951)
+    ↓
+Judge Samuel Feldman sentences both to death (April 5, 1951)
+    ↓
+Appeals process begins
+    ↓
+[Execution scheduled: 1953]
+    ↓
+Controversy: Was Helena truly guilty?
+```
+
+**3. The Fletcher Hearings Chain**
+```
+Senator Russell Fletcher investigates organized crime (1950)
+    ↓
+Televised hearings begin (March 1951)
+    ↓
+30 million Americans watch
+    ↓
+Salvatore Conti refuses to testify (Fifth Amendment)
+    ↓
+Sol Roth's financial schemes exposed
+    ↓
+Sidney Hartman's Lucky Sands Casino connections revealed
+    ↓
+Frank Martino's name surfaces (mob debts)
+    ↓
+Jack Callahan testifies carefully, survives
+    ↓
+Organized crime exposed but not destroyed
+    ↓
+Tension grows between Conti and Ferrante
+```
+
+**4. The Television Triumph Chain**
+```
+TV ownership at ~50% (1951)
+    ↓
+Fletcher hearings demonstrate TV's power (March 1951)
+    ↓
+I Like Linda premieres (October 15, 1951)
+    ↓
+Three-camera technique revolutionizes production
+    ↓
+I Like Linda becomes highest-rated show
+    ↓
+Bernie Kessler still dominant but sitcom is the future
+    ↓
+Advertising dollars shift to TV
+    ↓
+Movie attendance begins decline
+```
+
+**5. The Boxing Championship Chain**
+```
+Mickey Brennan (37) gets fifth and final title shot
+    ↓
+July 18, 1951: Brennan defeats Eddie Lawson in Philadelphia
+    ↓
+Brennan becomes oldest heavyweight champion ever
+    ↓
+October 26, 1951: Rocco Marchetti faces idol Joseph Carter (comeback)
+    ↓
+Marchetti wins by TKO, cries in Carter's dressing room
+    ↓
+Marchetti becomes #1 contender
+    ↓
+[1952 setup: Brennan vs. Marchetti for the title]
+```
+
+**6. The Willie Banks Championship Chain**
+```
+Banks and Scouts finish 1950 as runners-up to Empires
+    ↓
+1951 season: Scouts surge in late summer
+    ↓
+September: Scouts clinch Western League pennant
+    ↓
+October: Championship Series - Scouts vs. Empires rematch
+    ↓
+Scouts defeat Empires 4-2
+    ↓
+Willie Banks earns his championship ring
+    ↓
+Barrier-breaking triumph complete
+    ↓
+Banks-Rosetti rivalry continues
+```
+
+---
+
+### F. TEXTURE PRIORITY RANKING
+
+**CRITICAL (Should Create):**
+1. ~~Hollywood nightclub setting~~ → ✅ **The Gardenia** (Los Angeles)
+2. ~~Las Vegas casino~~ → ✅ **Lucky Sands Casino** (already existed)
+3. ~~FBI Director equivalent~~ → ✅ **Maxwell J. Thornton** (FIB Director)
+4. ~~Soft drink brand~~ → ✅ **Regal Cola**
+
+**HIGH:**
+5. ~~NYC nightclub~~ → ✅ **The Havana Club** (New York City)
+6. Celebrity drama storyline (Martino wedding?) - Pending
+7. ~~Second cigarette brand~~ → ✅ **Red Arrow** (Sovereign Tobacco Company)
+8. ~~Airline~~ → ✅ **Horizon Airways**
+
+**MODERATE:**
+9. ~~CIS Director equivalent~~ → ✅ **Walter Allen Caldwell**
+10. ~~Studio head personalities~~ → ✅ **Samuel Kagan** (Pacific Pictures)
+11. ~~Evangelist~~ → ✅ **Thomas "Tommy" Fulton**
+12. ~~Hotel setting~~ → ✅ **The Beverly Palms Hotel** (Los Angeles)
+
+**LOW:**
+13. ~~Additional Vegas casinos~~ → Not needed (Lucky Sands sufficient)
+14. Additional beer brands - Pending
+15. TV manufacturer brands - Pending
+16. Labor union leaders - Pending
+
+---
+
+### G. TEXTURE SESSION NOTES
+
+*Updated January 26, 2026*
+
+**Entities Created:**
+- [x] **The Gardenia** (Hollywood nightclub) - Los Angeles
+- [x] **Lucky Sands Casino** - Las Vegas (already existed, confirmed as primary)
+- [x] **Maxwell J. Thornton** - Federal Inquiry Bureau (FIB) Director since 1924
+- [x] **Regal Cola** / **Regal Cola Company** - Soft drink brand
+- [x] **The Havana Club** (NYC nightclub) - New York City
+- [x] **Red Arrow** cigarettes / **Sovereign Tobacco Company** - Second tobacco brand
+- [x] **Horizon Airways** - Airline
+- [x] **Walter Allen Caldwell** - Central Intelligence Service (CIS) Director
+- [x] **Samuel Kagan** - Pacific Pictures head
+- [x] **Thomas "Tommy" Fulton** - Rising evangelist
+- [x] **The Beverly Palms Hotel** - Los Angeles
+- [x] **Vera Thornton** - Gossip columnist
+- [x] **Ruby Valentine** - Torch singer
+- [x] **Penny Collins** - Ingenue actress
+- [x] **Milton Crawford** - Press agent/fixer
+- [x] **Marcus Diamond** - The Gardenia owner
+- [x] **Henry Fuller** - Continental Motors CEO
+- [x] **Philippe Renard** - Renard Chemical president
+
+**Storylines to Develop:**
+- [ ] Frank Martino's 1951 romance/wedding
+- [ ] Frank Martino's Las Vegas debut at Lucky Sands (September 1951)
+
+**Event Chains Documented:**
+- [x] Westbrook Firing Chain
+- [x] Marsh Spy Trial Chain
+- [x] Fletcher Hearings Chain
+- [x] Television Triumph Chain
+- [x] Boxing Championship Chain
+- [x] Willie Banks Championship Chain

@@ -1091,8 +1091,8 @@ Specialty magazines flourish: **Athlete Magazine** for sports fans, **Motor Age*
 - President Harold S. Kellman (66) - established
 - Senator Robert Whitfield (48) - Whitfield Committee chairman, Red Panic crusader
 - General Douglas D. Westbrook (62) - Korea commander
-- No FBI Director equivalent
-- No CIA Director equivalent
+- **Maxwell J. Thornton (55)** - Federal Inquiry Bureau (FIB) Director since 1924 ✓ CREATED
+- **Walter Allen Caldwell (55)** - Central Intelligence Service (CIS) Director since Oct 1950 ✓ CREATED
 - No Secretary of State equivalent
 
 **Media Executives:**
@@ -1138,32 +1138,34 @@ From the Real 1950 Yearbook (new Section IX-A):
 
 **CRITICAL GAPS:**
 
-| Gap | Why Critical | Priority |
-|-----|--------------|----------|
-| **FBI Director equivalent** | Central to Red Panic, connects all investigations, spans decades | HIGHEST |
-| **TV Network Executive** | UBC has no face; Sarnoff/Paley built empires | HIGH |
-| **Studio Head/Mogul** | Pacific Pictures has no Louis B. Mayer controlling stars | HIGH |
-| **Gossip Columnist** | Powers who make/break careers (see IX-C) | HIGH |
+| Gap | Why Critical | Priority | Status |
+|-----|--------------|----------|--------|
+| ~~**FBI Director equivalent**~~ | Central to Red Panic, connects all investigations, spans decades | HIGHEST | ✅ **Maxwell J. Thornton** (FIB Director) |
+| **TV Network Executive** | UBC has no face; Sarnoff/Paley built empires | HIGH | Pending |
+| ~~**Studio Head/Mogul**~~ | Pacific Pictures has no Louis B. Mayer controlling stars | HIGH | ✅ **Samuel Kagan** |
+| ~~**Gossip Columnist**~~ | Powers who make/break careers (see IX-C) | HIGH | ✅ **Vera Thornton** |
 
 **MODERATE GAPS:**
 
-| Gap | Reason |
-|-----|--------|
-| CIA Director | Less visible to public, but important for spy storylines |
-| Secretary of State | Kellman administration needs cabinet |
-| Religious Leader | Billy Graham type rising preacher |
-| Additional Union Leaders | Callahan alone; need broader labor picture |
+| Gap | Reason | Status |
+|-----|--------|--------|
+| ~~CIS Director~~ | Less visible to public, but important for spy storylines | ✅ **Walter Allen Caldwell** |
+| Secretary of State | Kellman administration needs cabinet | Pending |
+| ~~Religious Leader~~ | Billy Graham type rising preacher | ✅ **Thomas "Tommy" Fulton** |
+| Additional Union Leaders | Callahan alone; need broader labor picture | Pending |
 
 ### New Creations (Proposed)
 
 **HIGHEST PRIORITY:**
 
-1. **FBI Director** (Hoover equivalent)
+1. ~~**FBI Director**~~ → ✅ **CREATED: Maxwell J. Thornton** (Federal Inquiry Bureau Director)
    - **Compression:** J. Edgar Hoover (no real equivalent—he was unique)
-   - **Proposed Name:** Need to develop (NOT Edgar/Hoover-derivative)
-   - **Role:** FBI Director since ~1920s, immense power, secret files on politicians, anti-communist crusader, denies organized crime exists (until Kefauver/Fletcher hearings force acknowledgment)
-   - **Connections:** Would have files on Whitfield, Kellman, Sterling, Martino; would be investigating Antelope Springs; would know about Conti/Roth but do nothing
-   - **Notes:** This character should feel omnipresent but rarely seen—the spider at the center of a web
+   - **Name:** Maxwell J. Thornton
+   - **Organization:** Federal Inquiry Bureau (FIB) - Director since 1924
+   - **Born:** 1895 (age 55 in 1950)
+   - **Role:** FIB Director since 1924, immense power, secret files on politicians, anti-communist crusader, denies organized crime exists (until Fletcher hearings force acknowledgment)
+   - **Connections:** Has files on Whitfield, Kellman, Sterling, Martino; investigating Antelope Springs; knows about Conti/Roth but does nothing
+   - **Notes:** Omnipresent but rarely seen—the spider at the center of a web
 
 2. **UBC Network Executive** (Sarnoff/Paley compression)
    - **Compression:** David Sarnoff + William Paley

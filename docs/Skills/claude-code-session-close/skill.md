@@ -4,18 +4,27 @@ Run this skill when the user says "close the session", "session close protocol",
 
 ## Steps
 
-### 1. Backlog Sync
+### 1. Backlog Sync (via MPM)
 
-Run **Phase 1 only** of the [backlog-review](../backlog-review/skill.md) skill:
+Run **Phase 1 only** of the MPM backlog-review skill at [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) with product slug `kempo`:
 
 1. Gather context from git commits, project history, and current conversation
-2. Fetch current backlog
+2. Fetch current backlog from MPM
 3. Identify any tasks that should be marked complete or updated
 4. Suggest updates and apply them with user confirmation
 
+Quick API reference:
+```bash
+# Fetch Kempo backlog
+curl -s "http://localhost:3333/api/backlog?productId=$(curl -s http://localhost:3333/api/products | jq -r '.[] | select(.slug == "kempo") | .id')"
+
+# Update task status
+curl -X PATCH http://localhost:3333/api/backlog -H "Content-Type: application/json" -d '{"id": "TASK_ID", "status": "completed"}'
+```
+
 **Do NOT run Phase 2** (task suggestions) since we are closing the session.
 
-This ensures the backlog accurately reflects work completed before we wrap up.
+This ensures the backlog in MPM accurately reflects work completed before we wrap up.
 
 ### 2. Session Summary
 
