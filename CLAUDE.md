@@ -42,6 +42,10 @@ When asked to "start session", "follow session start protocol", or similar, foll
 
 When asked to "close the session", "session close protocol", or similar, follow [docs/Skills/claude-code-session-close](docs/Skills/claude-code-session-close/skill.md).
 
+## Backlog Review
+
+When asked to "review backlog", "what should we work on next", or after completing a task, follow [docs/Skills/backlog-review](docs/Skills/backlog-review/skill.md).
+
 ## Documentation
 
 | Topic | Location |
@@ -120,6 +124,7 @@ When asked to "close the session", "session close protocol", or similar, follow 
 |-------|---------|
 | `claude-code-session-start` | Dev server, ngrok tunnel, disable login, review project history |
 | `claude-code-session-close` | Commit changes, update project history, re-enable login |
+| `backlog-review` | Sync backlog with session activity, suggest next tasks |
 
 ### Skill Locations
 

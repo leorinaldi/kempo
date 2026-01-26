@@ -4,14 +4,27 @@ Run this skill when the user says "close the session", "session close protocol",
 
 ## Steps
 
-### 1. Session Summary
+### 1. Backlog Sync
+
+Run **Phase 1 only** of the [backlog-review](../backlog-review/skill.md) skill:
+
+1. Gather context from git commits, project history, and current conversation
+2. Fetch current backlog
+3. Identify any tasks that should be marked complete or updated
+4. Suggest updates and apply them with user confirmation
+
+**Do NOT run Phase 2** (task suggestions) since we are closing the session.
+
+This ensures the backlog accurately reflects work completed before we wrap up.
+
+### 2. Session Summary
 
 Write a brief paragraph summarizing key accomplishments since the session started. Include:
 - Features added or bugs fixed
 - Files created, modified, or deleted
 - Any notable decisions made
 
-### 2. Documentation Review
+### 3. Documentation Review
 
 Consider whether any process documents need updating based on work done:
 
@@ -30,7 +43,7 @@ If uncertain whether changes are material enough to warrant doc updates, ask the
 
 If a new skill should be created, propose it to the user before creating.
 
-### 3. Project History Update
+### 4. Project History Update
 
 Create a new entry directly in the database (API requires admin session):
 
@@ -50,7 +63,7 @@ main().finally(() => prisma.\$disconnect());
 
 Use today's date. Keep the description concise (one sentence).
 
-### 4. Re-enable Login Requirement
+### 5. Re-enable Login Requirement
 
 Turn the security setting back on (API requires admin session):
 
@@ -74,7 +87,7 @@ Note: Model is `setting` (singular), not `settings`.
 
 This prevents unauthorized access while the site is in development.
 
-### 5. Backups
+### 6. Backups
 
 See [database-backup.md](../../database-backup.md) for full procedures.
 
@@ -112,7 +125,7 @@ main().finally(() => prisma.\$disconnect());
 
 If either shows `NEEDED`, follow the corresponding procedure in [database-backup.md](../../database-backup.md).
 
-### 6. Push to GitHub
+### 7. Push to GitHub
 
 Commit any uncommitted changes and push:
 
@@ -124,7 +137,7 @@ git -C /Users/leonardorinaldi/Claude/Kempo push
 
 Changes will auto-deploy to Vercel.
 
-### 7. Deployment Verification (Optional)
+### 8. Deployment Verification (Optional)
 
 Ask the user if they want to:
 - **Wait for deployment** - Monitor Vercel deployment status before closing localhost
@@ -132,7 +145,7 @@ Ask the user if they want to:
 
 If waiting, check deployment status at https://vercel.com/leorinaldi/kempo or use the Vercel CLI.
 
-### 8. Shut Down Local Services
+### 9. Shut Down Local Services
 
 Stop the dev server and ngrok tunnel:
 
@@ -144,10 +157,11 @@ lsof -ti:3000 | xargs kill -9
 pkill ngrok
 ```
 
-### 9. Report Complete
+### 10. Report Complete
 
 Tell the user:
-- Session summary (from step 1)
+- Backlog synced (any updates made)
+- Session summary (from step 2)
 - Any doc updates made
 - Project history entry added
 - Login requirement re-enabled

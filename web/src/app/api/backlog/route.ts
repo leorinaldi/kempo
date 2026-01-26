@@ -2,11 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
 // GET - Fetch all backlog projects and items
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url);
+    const showArchived = searchParams.get('archived') === 'true';
+
     // Get projects with their items
     const projects = await prisma.backlogProject.findMany({
-      where: { status: { not: 'archived' } },
+      where: { status: showArchived ? 'archived' : { not: 'archived' } },
       include: {
         items: {
           orderBy: { sortOrder: 'asc' },
@@ -15,8 +18,8 @@ export async function GET() {
       orderBy: { sortOrder: 'asc' },
     });
 
-    // Get unassigned items
-    const unassigned = await prisma.backlog.findMany({
+    // Get unassigned items (only for non-archived view)
+    const unassigned = showArchived ? [] : await prisma.backlog.findMany({
       where: { projectId: null },
       orderBy: [
         { priority: 'desc' },

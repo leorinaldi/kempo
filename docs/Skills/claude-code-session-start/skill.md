@@ -83,7 +83,7 @@ main().finally(() => prisma.\$disconnect());
 
 Note: Field is `createdAt`, not `date`.
 
-### 6. Report Ready
+### 6. Report Infrastructure Ready
 
 Tell the user:
 
@@ -101,4 +101,19 @@ Tell the user:
 - Summarize the key activities from recent sessions
 - Note any work in progress or pending items
 
-Then ask: "What would you like to work on?"
+### 7. Open Backlog in Browser
+
+Open Chrome to the backlog page so the user can see it during the review:
+
+```bash
+open -a "Google Chrome" "http://localhost:3000/admin/backlog"
+```
+
+### 8. Backlog Review
+
+Run the [backlog-review](../backlog-review/skill.md) skill (both phases):
+
+1. **Sync Phase**: Check if any backlog items need status updates based on recent session history
+2. **Prioritization Phase**: Suggest next steps with Option A (top of queue) and Option B (alternative)
+
+This replaces the generic "What would you like to work on?" with concrete, prioritized suggestions based on the current backlog state.

@@ -58,9 +58,11 @@ export default function BacklogPage() {
   const [addingTaskToProject, setAddingTaskToProject] = useState<string | null>(null);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [collapsedProjects, setCollapsedProjects] = useState<Set<string>>(new Set());
+  const [showArchived, setShowArchived] = useState(false);
 
   const fetchData = () => {
-    fetch('/api/backlog')
+    const url = showArchived ? '/api/backlog?archived=true' : '/api/backlog';
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         setProjects(data.projects || []);
@@ -75,7 +77,7 @@ export default function BacklogPage() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [showArchived]);
 
   const updateStatus = async (id: string, newStatus: string) => {
     try {
@@ -173,6 +175,35 @@ export default function BacklogPage() {
       }
     } catch (err) {
       console.error('Failed to update project:', err);
+    }
+  };
+
+  const archiveProject = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await fetch('/api/backlog', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, type: 'project', status: 'archived' }),
+      });
+      if (selectedProject?.id === id) setSelectedProject(null);
+      fetchData();
+    } catch (err) {
+      console.error('Failed to archive project:', err);
+    }
+  };
+
+  const restoreProject = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await fetch('/api/backlog', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, type: 'project', status: 'active' }),
+      });
+      fetchData();
+    } catch (err) {
+      console.error('Failed to restore project:', err);
     }
   };
 
@@ -355,13 +386,37 @@ export default function BacklogPage() {
       {/* Header */}
       <div className="bg-gray-800 border-b border-gray-700 p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Backlog</h1>
-          <button
-            onClick={() => setShowNewProject(true)}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium"
-          >
-            + New Project
-          </button>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-bold">{showArchived ? 'Archived Projects' : 'Backlog'}</h1>
+            <button
+              onClick={() => setShowArchived(!showArchived)}
+              className="px-3 py-1.5 rounded text-sm font-medium transition-colors bg-gray-700 hover:bg-gray-600 text-gray-300"
+            >
+              {showArchived ? (
+                <>
+                  <svg className="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Back to Backlog
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4 inline-block mr-1.5 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                  </svg>
+                  View Archive
+                </>
+              )}
+            </button>
+          </div>
+          {!showArchived && (
+            <button
+              onClick={() => setShowNewProject(true)}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-sm font-medium"
+            >
+              + New Project
+            </button>
+          )}
         </div>
       </div>
 
@@ -430,6 +485,17 @@ export default function BacklogPage() {
       <div className="max-w-7xl mx-auto p-4 flex gap-4">
         {/* Projects and Tasks List */}
         <div className="flex-1 space-y-6">
+          {/* Empty state for archive */}
+          {showArchived && projects.length === 0 && (
+            <div className="bg-gray-800 rounded-lg p-12 text-center">
+              <svg className="w-16 h-16 mx-auto text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+              </svg>
+              <h3 className="text-lg font-medium text-gray-400 mb-2">No archived projects</h3>
+              <p className="text-gray-500 text-sm">Projects you archive will appear here.</p>
+            </div>
+          )}
+
           {projects.map(project => {
             const stats = getProgressStats(project.items);
             const progressPercent = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
@@ -440,19 +506,19 @@ export default function BacklogPage() {
             return (
               <div
                 key={project.id}
-                draggable
-                onDragStart={(e) => handleDragStart(e, project.id)}
-                onDragOver={(e) => handleDragOver(e, project.id)}
-                onDragLeave={handleDragLeave}
-                onDrop={(e) => handleDrop(e, project.id)}
-                onDragEnd={handleDragEnd}
+                draggable={!showArchived}
+                onDragStart={(e) => !showArchived && handleDragStart(e, project.id)}
+                onDragOver={(e) => !showArchived && handleDragOver(e, project.id)}
+                onDragLeave={!showArchived ? handleDragLeave : undefined}
+                onDrop={(e) => !showArchived && handleDrop(e, project.id)}
+                onDragEnd={!showArchived ? handleDragEnd : undefined}
                 className={`bg-gray-800 rounded-lg overflow-hidden transition-all ${
                   isDragging ? 'opacity-50 scale-[0.98]' : ''
                 } ${isDragOver ? 'ring-2 ring-blue-500 ring-offset-2 ring-offset-gray-900' : ''}`}
               >
                 {/* Project Header */}
                 <div
-                  className="p-4 border-b border-gray-700 cursor-grab hover:bg-gray-750 active:cursor-grabbing"
+                  className={`p-4 border-b border-gray-700 hover:bg-gray-750 ${showArchived ? 'cursor-pointer' : 'cursor-grab active:cursor-grabbing'}`}
                   onClick={() => setSelectedProject(selectedProject?.id === project.id ? null : project)}
                 >
                   <div className="flex items-center justify-between">
@@ -472,11 +538,13 @@ export default function BacklogPage() {
                         </svg>
                       </button>
                       {/* Drag Handle */}
-                      <div className="text-gray-500 hover:text-gray-300 select-none">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
-                        </svg>
-                      </div>
+                      {!showArchived && (
+                        <div className="text-gray-500 hover:text-gray-300 select-none">
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
+                          </svg>
+                        </div>
+                      )}
                       <div>
                         <h2 className="text-lg font-semibold text-white">{project.name}</h2>
                         <div className="flex items-center gap-4 mt-1 text-sm text-gray-400">
@@ -489,6 +557,27 @@ export default function BacklogPage() {
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="text-2xl font-bold text-white">{Math.round(progressPercent)}%</div>
+                      {showArchived ? (
+                        <button
+                          onClick={(e) => restoreProject(project.id, e)}
+                          className="p-1.5 text-gray-400 hover:text-green-400 hover:bg-gray-700 rounded"
+                          title="Restore project"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                          </svg>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={(e) => archiveProject(project.id, e)}
+                          className="p-1.5 text-gray-500 hover:text-amber-400 hover:bg-gray-700 rounded"
+                          title="Archive project"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                          </svg>
+                        </button>
+                      )}
                       <button
                         onClick={(e) => showDeleteConfirm('project', project.id, project.name, e)}
                         className="p-1 text-gray-500 hover:text-red-400 hover:bg-gray-700 rounded"
@@ -521,14 +610,16 @@ export default function BacklogPage() {
                       return (
                         <div
                           key={item.id}
-                          draggable
-                          onDragStart={(e) => handleTaskDragStart(e, item.id)}
-                          onDragOver={(e) => handleTaskDragOver(e, item.id)}
-                          onDragLeave={handleTaskDragLeave}
-                          onDrop={(e) => handleTaskDrop(e, item.id, project.id)}
-                          onDragEnd={handleTaskDragEnd}
+                          draggable={!showArchived}
+                          onDragStart={(e) => !showArchived && handleTaskDragStart(e, item.id)}
+                          onDragOver={(e) => !showArchived && handleTaskDragOver(e, item.id)}
+                          onDragLeave={!showArchived ? handleTaskDragLeave : undefined}
+                          onDrop={(e) => !showArchived && handleTaskDrop(e, item.id, project.id)}
+                          onDragEnd={!showArchived ? handleTaskDragEnd : undefined}
                           onClick={() => setSelectedItem(item)}
-                          className={`group p-4 cursor-grab active:cursor-grabbing transition-all flex items-start gap-3 ${
+                          className={`group p-4 transition-all flex items-start gap-3 ${
+                            showArchived ? 'cursor-pointer' : 'cursor-grab active:cursor-grabbing'
+                          } ${
                             selectedItem?.id === item.id
                               ? 'bg-gray-700 ring-2 ring-inset ring-blue-500'
                               : 'hover:bg-gray-750'
@@ -537,11 +628,13 @@ export default function BacklogPage() {
                           } ${isTaskDragOver ? 'border-t-2 border-blue-500' : ''}`}
                         >
                           {/* Drag Handle */}
-                          <div className="text-gray-500 hover:text-gray-300 select-none mt-0.5">
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
-                            </svg>
-                          </div>
+                          {!showArchived && (
+                            <div className="text-gray-500 hover:text-gray-300 select-none mt-0.5">
+                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
+                              </svg>
+                            </div>
+                          )}
 
                           {/* Checkbox */}
                           <button
@@ -600,47 +693,49 @@ export default function BacklogPage() {
                       );
                     })}
 
-                  {/* Add Task */}
-                  {addingTaskToProject === project.id ? (
-                    <div className="p-4 flex items-center gap-3">
-                      <div className="w-4" /> {/* Spacer for drag handle */}
-                      <div className="w-5" /> {/* Spacer for checkbox */}
-                      <input
-                        type="text"
-                        value={newTaskTitle}
-                        onChange={(e) => setNewTaskTitle(e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') createTask(project.id);
-                          if (e.key === 'Escape') { setAddingTaskToProject(null); setNewTaskTitle(''); }
-                        }}
-                        placeholder="Task title..."
-                        className="flex-1 px-3 py-1.5 bg-gray-900 border border-gray-700 rounded text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500"
-                        autoFocus
-                      />
+                  {/* Add Task - only show for active projects */}
+                  {!showArchived && (
+                    addingTaskToProject === project.id ? (
+                      <div className="p-4 flex items-center gap-3">
+                        <div className="w-4" /> {/* Spacer for drag handle */}
+                        <div className="w-5" /> {/* Spacer for checkbox */}
+                        <input
+                          type="text"
+                          value={newTaskTitle}
+                          onChange={(e) => setNewTaskTitle(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') createTask(project.id);
+                            if (e.key === 'Escape') { setAddingTaskToProject(null); setNewTaskTitle(''); }
+                          }}
+                          placeholder="Task title..."
+                          className="flex-1 px-3 py-1.5 bg-gray-900 border border-gray-700 rounded text-white text-sm placeholder-gray-500 focus:outline-none focus:border-blue-500"
+                          autoFocus
+                        />
+                        <button
+                          onClick={() => createTask(project.id)}
+                          disabled={!newTaskTitle.trim()}
+                          className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded text-sm disabled:opacity-50"
+                        >
+                          Add
+                        </button>
+                        <button
+                          onClick={() => { setAddingTaskToProject(null); setNewTaskTitle(''); }}
+                          className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded text-sm"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
                       <button
-                        onClick={() => createTask(project.id)}
-                        disabled={!newTaskTitle.trim()}
-                        className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 rounded text-sm disabled:opacity-50"
+                        onClick={() => setAddingTaskToProject(project.id)}
+                        className="w-full p-3 text-left text-gray-500 hover:text-gray-300 hover:bg-gray-750 text-sm flex items-center gap-2"
                       >
-                        Add
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                        Add task
                       </button>
-                      <button
-                        onClick={() => { setAddingTaskToProject(null); setNewTaskTitle(''); }}
-                        className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded text-sm"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setAddingTaskToProject(project.id)}
-                      className="w-full p-3 text-left text-gray-500 hover:text-gray-300 hover:bg-gray-750 text-sm flex items-center gap-2"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
-                      Add task
-                    </button>
+                    )
                   )}
                 </div>
                 )}
