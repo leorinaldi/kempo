@@ -251,7 +251,7 @@ export default function ContentStatsPage() {
 
               // Compute cumulative if needed
               const chartData = countMode === "cumulative"
-                ? baseData.reduce((acc, point, i) => {
+                ? (baseData as Array<{ articles: number; media: number; year?: number; day?: string }>).reduce((acc, point, i) => {
                     const prev = acc[i - 1] || { articles: 0, media: 0 }
                     acc.push({
                       ...point,
@@ -259,7 +259,7 @@ export default function ContentStatsPage() {
                       media: prev.media + point.media,
                     })
                     return acc
-                  }, [] as typeof baseData)
+                  }, [] as Array<{ articles: number; media: number; year?: number; day?: string }>)
                 : baseData
 
               return (
