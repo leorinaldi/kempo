@@ -47,27 +47,34 @@ When asked to "close the session", "session close protocol", or similar, follow 
 Kempo's backlog is managed in MPM (Mega Project Manager) via direct database access.
 
 - **Product Slug**: `kempo`
-- **MPM Database**: Direct PostgreSQL connection (no MPM app needed)
+
+**IMPORTANT: Two Separate Databases**
+- **Kempo database** (in `.env.local`) - For Kempo data: articles, settings, projectHistory, etc. Use Prisma.
+- **MPM database** (below) - For backlog only. Use `pg` module with the connection string below.
 
 When asked to "review backlog", "what's next", or after completing a task, follow [/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md](/Users/leonardorinaldi/Claude/MPM/skills/backlog-review/skill.md) using product slug `kempo`.
 
 ### Quick Backlog Fetch
 
+Run from the `/Users/leonardorinaldi/Claude/MPM` directory (which has `pg` installed):
+
 ```bash
-npx tsx -e "
+cd /Users/leonardorinaldi/Claude/MPM && npx tsx -e "
 import pg from 'pg';
 const client = new pg.Client('postgresql://neondb_owner:npg_lQmMIGq9Jzk4@ep-empty-scene-ahjbwz2v-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require');
-await client.connect();
-const SLUG = 'kempo';
-const prod = await client.query('SELECT id, name FROM products WHERE slug = \$1', [SLUG]);
-if (!prod.rows[0]) { console.log('Product not found'); process.exit(1); }
-const projects = await client.query('SELECT id, name FROM backlog_projects WHERE product_id = \$1 AND status != \$2 ORDER BY sort_order', [prod.rows[0].id, 'archived']);
-for (const p of projects.rows) {
-  console.log('## ' + p.name);
-  const tasks = await client.query('SELECT title, status, priority FROM backlog WHERE project_id = \$1 ORDER BY sort_order', [p.id]);
-  tasks.rows.forEach(t => console.log('  - [' + t.status + '] ' + t.title));
-}
-await client.end();
+(async () => {
+  await client.connect();
+  const prod = await client.query('SELECT id, name FROM products WHERE slug = \\\$1', ['kempo']);
+  if (!prod.rows[0]) { console.log('Product not found'); process.exit(1); }
+  console.log('Backlog for:', prod.rows[0].name);
+  const projects = await client.query('SELECT id, name FROM backlog_projects WHERE product_id = \\\$1 AND status != \\\$2 ORDER BY sort_order', [prod.rows[0].id, 'archived']);
+  for (const p of projects.rows) {
+    console.log('\\n## ' + p.name);
+    const tasks = await client.query('SELECT id, title, status, priority FROM backlog WHERE project_id = \\\$1 ORDER BY sort_order', [p.id]);
+    tasks.rows.forEach(t => console.log('  - [' + t.status + '] ' + t.title + ' (id:' + t.id.slice(0,8) + ')'));
+  }
+  await client.end();
+})();
 "
 ```
 
