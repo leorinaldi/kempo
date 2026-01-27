@@ -19,6 +19,7 @@
  *   --tool "grok"            Generation tool: grok (default) or gemini
  *   --article-id "abc123"    Link to article ID
  *   --reference "url"        Reference image URL for character consistency (Gemini only)
+ *   --ky-date "YYYY-MM-DD"   Set kyDate for temporal filtering (e.g., "1950-06-15")
  *
  * Entity Linking:
  *   --person-id "abc123"     Link image to a Person (creates ImageSubject)
@@ -89,7 +90,8 @@ function parseArgs(args) {
     orgId: null,
     placeId: null,
     isReference: false,
-    fromPerson: null, // Person ID to look up reference image from
+    fromPersons: [], // Person IDs to look up reference images from (supports multiple)
+    kyDate: null, // Kempo world date for temporal filtering
   }
 
   let i = 0
@@ -121,7 +123,9 @@ function parseArgs(args) {
     } else if (arg === '--is-reference') {
       result.isReference = true
     } else if (arg === '--from-person' && args[i + 1]) {
-      result.fromPerson = args[++i]
+      result.fromPersons.push(args[++i])
+    } else if (arg === '--ky-date' && args[i + 1]) {
+      result.kyDate = args[++i]
     } else if (!arg.startsWith('--') && !result.prompt) {
       result.prompt = arg
     }
@@ -190,21 +194,24 @@ async function fetchImageAsBase64(url) {
  * Call the Google Gemini API to generate an image
  * Uses gemini-3-pro-image-preview for reference images (character consistency)
  * Uses gemini-2.0-flash-exp for standard generation
+ * @param {string} prompt - The image generation prompt
+ * @param {string[]} referenceImageUrls - Array of reference image URLs for character consistency
  */
-async function generateImageWithGemini(prompt, referenceImageUrl = null) {
+async function generateImageWithGemini(prompt, referenceImageUrls = []) {
   // Use the pro model for reference images, flash for standard generation
-  const model = referenceImageUrl ? 'gemini-3-pro-image-preview' : 'gemini-2.0-flash-exp'
+  const model = referenceImageUrls.length > 0 ? 'gemini-3-pro-image-preview' : 'gemini-2.0-flash-exp'
 
   console.log(`\n🎨 Generating image with Gemini API (${model})...`)
-  if (referenceImageUrl) {
-    console.log('📎 Using reference image for character consistency')
+  if (referenceImageUrls.length > 0) {
+    console.log(`📎 Using ${referenceImageUrls.length} reference image(s) for character consistency`)
   }
 
-  // Build the parts array - text prompt first, then reference image if provided
+  // Build the parts array - text prompt first, then reference images
   const parts = [{ text: prompt }]
 
-  if (referenceImageUrl) {
-    const refImage = await fetchImageAsBase64(referenceImageUrl)
+  // Add all reference images to parts array
+  for (const url of referenceImageUrls) {
+    const refImage = await fetchImageAsBase64(url)
     parts.push({
       inlineData: {
         mimeType: refImage.mimeType,
@@ -258,17 +265,20 @@ async function generateImageWithGemini(prompt, referenceImageUrl = null) {
 
 /**
  * Generate image using specified tool
+ * @param {string} prompt - The image generation prompt
+ * @param {string} tool - Generation tool: 'grok' or 'gemini'
+ * @param {string[]} referenceUrls - Array of reference image URLs for character consistency
  */
-async function generateImage(prompt, tool, referenceUrl = null) {
+async function generateImage(prompt, tool, referenceUrls = []) {
   console.log('\n📝 Prompt:', prompt.substring(0, 100) + (prompt.length > 100 ? '...' : ''))
 
-  if (referenceUrl && tool !== 'gemini') {
+  if (referenceUrls.length > 0 && tool !== 'gemini') {
     console.log('⚠️  Reference images only supported with Gemini, switching to gemini tool')
     tool = 'gemini'
   }
 
   if (tool === 'gemini') {
-    return generateImageWithGemini(prompt, referenceUrl)
+    return generateImageWithGemini(prompt, referenceUrls)
   } else {
     return generateImageWithGrok(prompt)
   }
@@ -360,6 +370,22 @@ async function getPersonReferenceImage(personId) {
 }
 
 /**
+ * Get reference images for multiple persons
+ * @param {string[]} personIds - Array of person IDs
+ * @returns {Promise<{personId: string, url: string}[]>} Array of person IDs with their reference URLs
+ */
+async function getMultiplePersonReferenceImages(personIds) {
+  const referenceUrls = []
+  for (const personId of personIds) {
+    const url = await getPersonReferenceImage(personId)
+    if (url) {
+      referenceUrls.push({ personId, url })
+    }
+  }
+  return referenceUrls
+}
+
+/**
  * Create ImageSubject links for the generated image
  */
 async function createImageSubjects(prisma, imageId, options) {
@@ -394,14 +420,18 @@ async function createImageSubjects(prisma, imageId, options) {
     })
   }
 
-  // If --from-person was used, also link to that person
-  if (options.fromPerson && options.fromPerson !== options.personId) {
-    subjects.push({
-      imageId,
-      itemId: options.fromPerson,
-      itemType: 'person',
-      isReference: false,
-    })
+  // If --from-person was used, also link to those persons
+  if (options.fromPersons && options.fromPersons.length > 0) {
+    for (const fromPersonId of options.fromPersons) {
+      if (fromPersonId !== options.personId) {
+        subjects.push({
+          imageId,
+          itemId: fromPersonId,
+          itemType: 'person',
+          isReference: false,
+        })
+      }
+    }
   }
 
   for (const subject of subjects) {
@@ -423,6 +453,16 @@ async function uploadToBlob(imageBuffer, options) {
   const prisma = new PrismaClient()
 
   try {
+    // Parse kyDate if provided
+    let kyDateValue = null
+    if (options.kyDate) {
+      kyDateValue = new Date(options.kyDate)
+      if (isNaN(kyDateValue.getTime())) {
+        console.error(`⚠️  Warning: Invalid --ky-date "${options.kyDate}", ignoring`)
+        kyDateValue = null
+      }
+    }
+
     // Create database entry first to get the ID
     const image = await prisma.image.create({
       data: {
@@ -436,6 +476,7 @@ async function uploadToBlob(imageBuffer, options) {
         prompt: options.prompt || null,
         generationTool: options.generationTool || 'grok-2-image-1212',
         style: options.style || 'realistic',
+        kyDate: kyDateValue,
       },
     })
 
@@ -458,9 +499,12 @@ async function uploadToBlob(imageBuffer, options) {
     console.log('✅ Uploaded successfully!')
     console.log(`   ID: ${image.id}`)
     console.log(`   URL: ${blob.url}`)
+    if (kyDateValue) {
+      console.log(`   kyDate: ${kyDateValue.toISOString().split('T')[0]}`)
+    }
 
     // Create ImageSubject links if any entity IDs were provided
-    if (options.personId || options.orgId || options.placeId || options.fromPerson) {
+    if (options.personId || options.orgId || options.placeId || (options.fromPersons && options.fromPersons.length > 0)) {
       await createImageSubjects(prisma, image.id, options)
     }
 
@@ -496,6 +540,7 @@ Options:
   --tool "grok"         Generation tool: grok (default) or gemini
   --article-id "id"     Link to an article ID
   --reference "url"     Reference image URL for character consistency (Gemini only)
+  --ky-date "YYYY-MM-DD" Set kyDate for temporal filtering (e.g., "1950-06-15")
 
 Entity Linking:
   --person-id "id"      Link image to a Person (creates ImageSubject record)
@@ -503,6 +548,7 @@ Entity Linking:
   --place-id "id"       Link image to a Place
   --is-reference        Mark this image as the canonical likeness for the person
   --from-person "id"    Look up person's reference image and use for consistency
+                        (can be specified multiple times for multi-person images)
 
 Tools:
   grok                  Grok API (grok-2-image-1212) - default
@@ -529,6 +575,11 @@ Character Consistency:
     an image marked as isReference=true, that image is used. Otherwise,
     their earliest image is used. Auto-switches to Gemini.
 
+  Multi-person images:
+    Use multiple --from-person flags to include multiple character references:
+    --from-person "person1-id" --from-person "person2-id"
+    All referenced persons are auto-linked via ImageSubject.
+
 Examples:
   # Basic portrait with entity linking
   node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man" \\
@@ -545,6 +596,12 @@ Examples:
   # Direct reference URL
   node scripts/generate-image.js "General Westbrook in military uniform" \\
     --name "Westbrook Portrait" --reference "https://..." --tool gemini
+
+  # Multi-person image with character consistency for both people
+  node scripts/generate-image.js "Two men in suits at a theater, 1950s, black and white" \\
+    --name "Goodwin and Langford at Theater" \\
+    --from-person "GOODWIN_ID" --from-person "LANGFORD_ID" \\
+    --purpose "action" --description "Jerome Goodwin and Howard Langford, 1950"
 
 Environment variables (from .env files):
   XAI_API_KEY           Grok API key
@@ -612,25 +669,35 @@ async function main() {
   }
 
   try {
-    // Handle --from-person: look up reference image from person
-    let referenceUrl = options.reference
-    if (options.fromPerson && !referenceUrl) {
-      referenceUrl = await getPersonReferenceImage(options.fromPerson)
-      if (referenceUrl) {
+    // Collect all reference URLs
+    let referenceUrls = []
+
+    // Handle --from-person flags: look up reference images from persons
+    if (options.fromPersons.length > 0) {
+      const refs = await getMultiplePersonReferenceImages(options.fromPersons)
+      referenceUrls = refs.map(r => r.url)
+
+      if (referenceUrls.length > 0) {
         // Auto-switch to gemini for character consistency
         if (options.tool !== 'gemini') {
           console.log('⚙️  Switching to Gemini for character consistency')
           options.tool = 'gemini'
         }
-        // Also link the new image to this person if --person-id not already set
-        if (!options.personId) {
-          options.personId = options.fromPerson
-        }
+      }
+
+      // Auto-set personId to first person if not already set
+      if (!options.personId && options.fromPersons.length > 0) {
+        options.personId = options.fromPersons[0]
       }
     }
 
+    // Also support direct --reference URL (maintain backwards compatibility)
+    if (options.reference) {
+      referenceUrls.push(options.reference)
+    }
+
     // Generate image
-    const genResult = await generateImage(options.prompt, options.tool, referenceUrl)
+    const genResult = await generateImage(options.prompt, options.tool, referenceUrls)
     console.log('🖼️  Image generated!')
 
     // Get image buffer (from URL or base64)
@@ -660,9 +727,9 @@ async function main() {
 }
 
 🔗 Admin: /admin/world-data/image/manage (to edit or link to subjects)
-${options.personId || options.fromPerson ? `
+${options.personId || options.fromPersons.length > 0 ? `
 💡 For character consistency in future images:
-   node scripts/generate-image.js "<prompt>" --from-person "${options.personId || options.fromPerson}" --name "..."
+   node scripts/generate-image.js "<prompt>" --from-person "${options.personId || options.fromPersons[0]}" --name "..."
 ` : ''}`)
   } catch (error) {
     console.error('❌ Error:', error.message)

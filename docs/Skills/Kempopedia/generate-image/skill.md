@@ -22,6 +22,7 @@ node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 | `--style "style"` | Style: realistic (default), comic_bw, logo, product |
 | `--tool "grok"` | Generation tool: grok (default) or gemini |
 | `--article-id "id"` | Link to an article ID |
+| `--ky-date "YYYY-MM-DD"` | Set kyDate for temporal filtering (e.g., "1950-06-15") |
 
 ### Entity Linking Options
 
@@ -37,7 +38,7 @@ node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 | Option | Description |
 |--------|-------------|
 | `--reference "url"` | Reference image URL for character consistency (uses Gemini) |
-| `--from-person "id"` | Look up person's reference image automatically |
+| `--from-person "id"` | Look up person's reference image automatically (can be used multiple times for multi-person images) |
 
 ## Choosing a Generation Tool
 
@@ -94,6 +95,24 @@ The `--from-person` flag:
 2. Uses it for character consistency (automatically switches to Gemini)
 3. Auto-links the new image to the same person via ImageSubject
 
+### Method 3: Multi-Person Images (Multiple References)
+
+Use multiple `--from-person` flags to generate images with consistent likenesses for multiple characters:
+
+```bash
+node scripts/generate-image.js "Two men in suits at a formal event, 1950s, black and white" \
+  --name "Goodwin and Langford at Gala" \
+  --from-person "GOODWIN_ID" \
+  --from-person "LANGFORD_ID" \
+  --purpose "action" \
+  --description "Jerome Goodwin and Howard Langford at the Ambassador's Gala, 1950"
+```
+
+This:
+1. Looks up reference images for both persons
+2. Sends all reference images to Gemini for multi-character consistency
+3. Auto-links the generated image to both persons via ImageSubject
+
 ### Setting Up Reference Images
 
 When creating a person's first image, mark it as the canonical likeness:
@@ -124,14 +143,16 @@ node scripts/generate-image.js "Photorealistic portrait photograph of a 55-year-
   --person-id "cmjd59zmu005titwdlfecncg7" \
   --purpose "profile" \
   --is-reference \
-  --description "Portrait of Harold S. Kellman, circa 1948"
+  --description "Portrait of Harold S. Kellman, circa 1948" \
+  --ky-date "1948-01-01"
 
 # Action shot with character consistency
 node scripts/generate-image.js "Photorealistic photograph of a middle-aged male politician giving a speech at a podium, American flags behind him, crowd visible. Professional press photography, 1940s, black and white." \
   --name "Kellman Speech" \
   --from-person "cmjd59zmu005titwdlfecncg7" \
   --purpose "action" \
-  --description "Harold Kellman addressing Congress, 1949"
+  --description "Harold Kellman addressing Congress, 1949" \
+  --ky-date "1949-03-15"
 
 # Location with signage (use Gemini for text)
 node scripts/generate-image.js "Black and white photograph of The Claridge Hotel, an elegant Art Deco luxury hotel. Grand entrance with 'THE CLARIDGE' signage, doormen in uniform. 1940s." \
@@ -150,6 +171,15 @@ node scripts/generate-image.js "Theatrical movie poster for Western film 'ABILEN
   --name "Abilene Dawn Poster" \
   --reference "https://blob.vercel-storage.com/clay-marshall-ref.jpg" \
   --tool gemini
+
+# Multi-person image with character consistency for both people
+node scripts/generate-image.js "Photorealistic photograph of two men in formal suits shaking hands at a business meeting, 1950s boardroom, black and white." \
+  --name "Goodwin Langford Meeting" \
+  --from-person "cmjd59zmu005titwdlfecncg7" \
+  --from-person "cmjd59zmu005titwdlfecncg8" \
+  --purpose "action" \
+  --description "Jerome Goodwin and Howard Langford at Pinnacle Pictures board meeting, 1950" \
+  --ky-date "1950-03-15"
 
 # Logo (kept as-is)
 node scripts/generate-image.js "The flag of a fictional nation waving against blue sky. Red and blue with white star. Full color, crisp edges." \
@@ -338,6 +368,40 @@ To display images in the article body (not just infobox), add to the article's `
 | `section` | The h2 heading text to place image after (or "intro" for before first h2) |
 | `position` | "left", "right", or "center" |
 | `caption` | Optional override of image description |
+
+### Temporal Filtering (kyDate)
+
+Images respect the viewing date system via the `kyDate` field:
+
+- **Images without `kyDate`**: Always shown (permissive default)
+- **Images with `kyDate`**: Only shown when `viewingDate >= kyDate`
+
+This enables time-appropriate imagery. For example, a 1955 photo won't appear when viewing at 1950.
+
+**Setting `kyDate`** (via CLI at generation time - recommended):
+
+```bash
+node scripts/generate-image.js "<prompt>" \
+  --name "Person Name" \
+  --ky-date "1950-06-15"
+```
+
+**Setting `kyDate`** (via Prisma or admin UI for existing images):
+
+```typescript
+await prisma.image.update({
+  where: { id: imageId },
+  data: { kyDate: new Date(1950, 5, 15) }  // June 15, 1950
+});
+```
+
+**Guidelines:**
+- **ALWAYS set `--ky-date` when generating images** - prevents temporal filtering gaps
+- Set `kyDate` to when the image would have been "available" in the Kempo world
+- For photos: when the photo was taken (or published, if release date matters more)
+- For portraits: typically matches the person's earliest article `publishDate`
+- For event photos: the date of the event
+- For profile images: use the person's debut in articles (check article `publishDate`)
 
 ### Manual ImageSubject Linking (legacy)
 
