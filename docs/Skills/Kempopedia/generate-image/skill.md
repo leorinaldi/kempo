@@ -15,11 +15,29 @@ node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 | Option | Description |
 |--------|-------------|
 | `--name "Name"` | Name for the image (required) |
-| `--caption "Text"` | Image caption/description |
+| `--description "Text"` | Human-readable description/caption for the image |
+| `--caption "Text"` | Alias for `--description` |
 | `--category "type"` | Category: portrait, location, product, logo, etc. |
+| `--purpose "type"` | Purpose: profile, action, event, scene |
 | `--style "style"` | Style: realistic (default), comic_bw, logo, product |
 | `--tool "grok"` | Generation tool: grok (default) or gemini |
 | `--article-id "id"` | Link to an article ID |
+
+### Entity Linking Options
+
+| Option | Description |
+|--------|-------------|
+| `--person-id "id"` | Link image to a Person (creates ImageSubject record automatically) |
+| `--org-id "id"` | Link image to an Organization |
+| `--place-id "id"` | Link image to a Place |
+| `--is-reference` | Mark as canonical likeness for character consistency |
+
+### Character Consistency Options
+
+| Option | Description |
+|--------|-------------|
+| `--reference "url"` | Reference image URL for character consistency (uses Gemini) |
+| `--from-person "id"` | Look up person's reference image automatically |
 
 ## Choosing a Generation Tool
 
@@ -34,24 +52,110 @@ node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 - **Use Gemini (--tool gemini)** for ANY image with readable text (signs, marquees, storefronts, building names, neon signs)
 - **Use Grok (default)** only for images without text (portraits, rural landscapes, generic locations)
 - **Switch to Gemini as fallback** if Grok produces unsatisfactory results after 1-2 attempts
+- **Character consistency** automatically uses Gemini (when using `--reference` or `--from-person`)
+
+## Image Purpose Types
+
+| Purpose | Description | Use For |
+|---------|-------------|---------|
+| `profile` | Standard portrait/headshot | Infobox images, auto-sets `isReference` |
+| `action` | Person doing something | Speaking, performing, working |
+| `event` | Image from a specific event | Ceremonies, meetings, performances |
+| `scene` | Scene or location shot | Establishing shots, environments |
+
+## Character Consistency
+
+Generate multiple images of the same person with consistent likeness using reference images.
+
+### Method 1: Direct Reference URL
+
+Use when you have a specific image URL to reference:
+
+```bash
+node scripts/generate-image.js "Person giving a speech at a podium, 1950s, black and white" \
+  --name "Person Speaking" \
+  --reference "https://blob.vercel-storage.com/image-url.jpg"
+```
+
+### Method 2: From Person Record (Recommended)
+
+Use when generating additional images for an existing person:
+
+```bash
+node scripts/generate-image.js "Person performing on stage, spotlight, 1950s, black and white" \
+  --name "Person Performing" \
+  --from-person "PERSON_ID" \
+  --purpose "action" \
+  --description "Person Name performing at the Palladium, 1952"
+```
+
+The `--from-person` flag:
+1. Looks up the person's reference image (marked with `isReference=true`)
+2. Uses it for character consistency (automatically switches to Gemini)
+3. Auto-links the new image to the same person via ImageSubject
+
+### Setting Up Reference Images
+
+When creating a person's first image, mark it as the canonical likeness:
+
+```bash
+node scripts/generate-image.js "Photorealistic portrait of..." \
+  --name "Person Name" \
+  --person-id "PERSON_ID" \
+  --purpose "profile" \
+  --is-reference \
+  --description "Portrait of Person Name, circa 1950"
+```
+
+The `--is-reference` flag (or `--purpose profile`) marks this image as the canonical likeness for future character consistency.
+
+### Character Consistency Workflow
+
+1. **Create profile image** with `--person-id` and `--is-reference`
+2. **Generate action shots** with `--from-person` (uses the reference automatically)
+3. **Add to articles** via infobox or inline images
 
 ### Examples
 
 ```bash
-# Realistic portrait (default: Grok)
-node scripts/generate-image.js "Photorealistic portrait photograph of a 55-year-old white male politician, dignified expression. Wearing glasses and a formal dark suit. Professional studio lighting, 1940s photography style, black and white." --name "Harold Kellman" --category "portrait"
+# Profile image with auto-linking and reference marking
+node scripts/generate-image.js "Photorealistic portrait photograph of a 55-year-old white male politician, dignified expression. Wearing glasses and a formal dark suit. Professional studio lighting, 1940s photography style, black and white." \
+  --name "Harold Kellman" \
+  --person-id "cmjd59zmu005titwdlfecncg7" \
+  --purpose "profile" \
+  --is-reference \
+  --description "Portrait of Harold S. Kellman, circa 1948"
+
+# Action shot with character consistency
+node scripts/generate-image.js "Photorealistic photograph of a middle-aged male politician giving a speech at a podium, American flags behind him, crowd visible. Professional press photography, 1940s, black and white." \
+  --name "Kellman Speech" \
+  --from-person "cmjd59zmu005titwdlfecncg7" \
+  --purpose "action" \
+  --description "Harold Kellman addressing Congress, 1949"
 
 # Location with signage (use Gemini for text)
-node scripts/generate-image.js "Black and white photograph of The Claridge Hotel, an elegant Art Deco luxury hotel. Grand entrance with 'THE CLARIDGE' signage, doormen in uniform. 1940s." --name "The Claridge Hotel" --category "location" --tool gemini
+node scripts/generate-image.js "Black and white photograph of The Claridge Hotel, an elegant Art Deco luxury hotel. Grand entrance with 'THE CLARIDGE' signage, doormen in uniform. 1940s." \
+  --name "The Claridge Hotel" \
+  --category "location" \
+  --tool gemini
 
-# Theater district with neon signs (MUST use Gemini)
-node scripts/generate-image.js "Photorealistic photograph of Brightway theater district in New York City at night, 1950. Famous NYC theater street with neon marquee signs showing 'BRIGHTWAY' prominently, theater facades advertising shows, bright lights, vintage taxi cabs. Professional street photography, black and white." --name "Brightway Theater District" --category "location" --tool gemini
+# TV show title card (use Gemini for text)
+node scripts/generate-image.js "1950s television title card for 'THE BERNIE KESSLER HOUR' variety show. Art deco styling, UBC TELEVISION logo at bottom." \
+  --name "Bernie Kessler Hour Title" \
+  --tool gemini \
+  --description "Title card for The Bernie Kessler Hour, 1950"
 
-# Realistic location without text (default: Grok)
-node scripts/generate-image.js "Photorealistic photograph of a Western frontier town main street, 1940s. Dirt road, wooden storefronts with awnings, vintage automobiles. Professional architectural photography, period-accurate details." --name "Abilene Main Street" --category "location"
+# Movie poster with character reference
+node scripts/generate-image.js "Theatrical movie poster for Western film 'ABILENE DAWN'. Starring CLAY MARSHALL. Cowboy on horseback against sunset, desert landscape. 1940s poster art style." \
+  --name "Abilene Dawn Poster" \
+  --reference "https://blob.vercel-storage.com/clay-marshall-ref.jpg" \
+  --tool gemini
 
 # Logo (kept as-is)
-node scripts/generate-image.js "The flag of a fictional nation waving against blue sky. Red and blue with white star. Full color, crisp edges." --name "Republic of Atlasia Flag" --category "logo" --style logo
+node scripts/generate-image.js "The flag of a fictional nation waving against blue sky. Red and blue with white star. Full color, crisp edges." \
+  --name "Republic of Atlasia Flag" \
+  --category "logo" \
+  --style logo
 ```
 
 ## Style Categories
@@ -177,37 +281,78 @@ This sets:
 
 ## Workflow
 
-### New Images
+### New Profile Images (with auto-linking)
 
-1. Create the article with image placeholder in infobox
-2. Run `generate-image.js` with realistic prompt
-3. Script generates image, uploads to Vercel Blob, creates Image record with metadata
-4. Copy the Blob URL from output to article infobox
-5. **Create ImageSubject link** to connect the image to the entity (person, organization, etc.)
+```bash
+node scripts/generate-image.js "Photorealistic portrait..." \
+  --name "Person Name" \
+  --person-id "PERSON_ID" \
+  --purpose "profile" \
+  --is-reference \
+  --description "Portrait of Person Name, circa 1950"
+```
 
-**IMPORTANT: ImageSubject Linking**
+This automatically:
+1. Generates the image and uploads to Vercel Blob
+2. Creates Image record with metadata
+3. Creates ImageSubject link to the person
+4. Marks it as reference image for character consistency
 
-After generating an image for an entity (person, place, organization), you MUST create an `ImageSubject` record. This links the image to the entity in the database, enabling:
-- Admin UI to show "linked images" for entities
-- Future image galleries and entity-based queries
+Then copy the Blob URL to the article infobox.
 
-**Option A: Via Admin UI**
-1. Go to the entity's manage page (e.g., `/admin/world-data/people/manage`)
-2. Find the entity and check if images are linked
-3. If not, go to the Image admin and add the subject link
+### Additional Images (with character consistency)
 
-**Option B: Via Prisma (recommended for batch operations)**
+```bash
+node scripts/generate-image.js "Person speaking at podium..." \
+  --name "Person Speaking" \
+  --from-person "PERSON_ID" \
+  --purpose "action" \
+  --description "Person Name at the 1950 convention"
+```
+
+This automatically:
+1. Looks up the person's reference image
+2. Uses Gemini for character consistency
+3. Creates ImageSubject link to the same person
+
+### Inline Images in Articles
+
+To display images in the article body (not just infobox), add to the article's `inlineImages` field:
+
+```json
+{
+  "inlineImages": [
+    {
+      "imageId": "generated-image-id",
+      "section": "Career",
+      "position": "right",
+      "caption": "Person speaking at the 1950 convention"
+    }
+  ]
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `imageId` | The generated image's ID |
+| `section` | The h2 heading text to place image after (or "intro" for before first h2) |
+| `position` | "left", "right", or "center" |
+| `caption` | Optional override of image description |
+
+### Manual ImageSubject Linking (legacy)
+
+If you didn't use `--person-id` or `--from-person`, create the link manually:
+
 ```typescript
 await prisma.imageSubject.create({
   data: {
-    imageId: "image-id",    // The generated image's ID
-    itemId: "entity-id",    // The Person/Organization/etc. ID
-    itemType: "person"      // "person", "organization", "place", etc.
+    imageId: "image-id",
+    itemId: "entity-id",
+    itemType: "person",  // "person", "organization", "place"
+    isReference: true    // if this is the canonical likeness
   }
 });
 ```
-
-The generate-image script outputs the Image ID - save this to create the ImageSubject link.
 
 ### Regenerating Legacy Images
 

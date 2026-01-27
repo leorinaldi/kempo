@@ -13,7 +13,24 @@ Read these files to understand the project:
 
 Note: For entity relationship details, see [docs/data-model.md](../../data-model.md) on-demand when doing entity management work.
 
-### 2. Start Dev Server
+### 2. Set Up Environment Variables
+
+Pull environment variables from Vercel and configure for local development:
+
+```bash
+# Ensure project is linked to "kempo" (not "web")
+vercel link --yes
+
+# Copy env vars to web directory where Next.js expects them
+cp .env.local web/.env.local
+
+# Update AUTH_URL for local development (prevents redirect to production)
+sed -i '' 's|AUTH_URL="https://kempo.vercel.app"|AUTH_URL="http://localhost:3000"|' web/.env.local
+```
+
+Note: The `vercel link` step is critical - it links to the "kempo" project which has the DATABASE_URL.
+
+### 3. Start Dev Server
 
 ```bash
 cd web && npm run dev
@@ -21,12 +38,12 @@ cd web && npm run dev
 
 Run in background so the session can continue.
 
-### 3. Disable Login Requirement
+### 4. Disable Login Requirement
 
-Use Prisma directly (admin APIs require authentication):
+Load env vars from .env.local, then use Prisma:
 
 ```bash
-cd web && DATABASE_URL="..." npx tsx -e "
+cd web && export $(grep -v '^#' .env.local | xargs) && npx tsx -e "
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 async function main() {
@@ -43,7 +60,7 @@ main().finally(() => prisma.\$disconnect());
 
 Note: Model is `setting` (singular), not `settings`.
 
-### 4. Start ngrok Tunnel
+### 5. Start ngrok Tunnel
 
 ```bash
 ngrok http 3000
@@ -60,12 +77,12 @@ qrencode -o /tmp/ngrok-qr.png -s 10 "https://YOUR-URL.ngrok-free.app"
 open /tmp/ngrok-qr.png
 ```
 
-### 5. Review Recent Project History
+### 6. Review Recent Project History
 
-Use Prisma directly (admin APIs require authentication):
+Load env vars from .env.local, then use Prisma:
 
 ```bash
-cd web && DATABASE_URL="..." npx tsx -e "
+cd web && export $(grep -v '^#' .env.local | xargs) && npx tsx -e "
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 async function main() {
@@ -83,7 +100,7 @@ main().finally(() => prisma.\$disconnect());
 
 Note: Field is `createdAt`, not `date`.
 
-### 6. Report Infrastructure Ready
+### 7. Report Infrastructure Ready
 
 Tell the user:
 
@@ -101,7 +118,7 @@ Tell the user:
 - Summarize the key activities from recent sessions
 - Note any work in progress or pending items
 
-### 7. Backlog Review (via MPM)
+### 8. Backlog Review (via MPM)
 
 Get the backlog-review skill instructions from MPM:
 
