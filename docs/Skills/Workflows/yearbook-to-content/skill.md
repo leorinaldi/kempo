@@ -359,19 +359,29 @@ Follow [manage-person](../../EntityManagement/manage-person/skill.md):
 1. Verify birthplace exists (create if needed)
 2. Verify key organizations exist (employers, schools)
 3. Create article with full biography
-4. Generate portrait image (save the Image ID from output)
-5. Update article infobox with image URL
-6. Create Person record at /admin/world-data/people
-7. Link article to Person record
-8. **Create ImageSubject link** (image → person) - REQUIRED!
-9. **Add inspirations** (all real-world sources) - REQUIRED!
-10. Update related articles (employers, birthplace)
+4. Create Person record at /admin/world-data/people
+5. Link article to Person record
+6. Generate profile image with auto-linking:
+   node scripts/generate-image.js "<prompt>" \
+     --name "Name" \
+     --person-id "PERSON_ID" \
+     --purpose "profile" \
+     --is-reference
+7. Update article infobox with image URL
+8. **Add inspirations** (all real-world sources) - REQUIRED!
+9. Update related articles (employers, birthplace)
+10. (Optional) Generate action shots for significant figures:
+    node scripts/generate-image.js "<action prompt>" \
+      --name "Name Action" \
+      --from-person "PERSON_ID" \
+      --purpose "action"
 ```
 
-**Steps 8-9 are critical and often missed!**
+**Using --person-id and --is-reference automatically creates ImageSubject links!**
 
-- **ImageSubject**: Links image to person for admin UI display
-- **Inspirations**: Links person to real-world figures they're based on
+- **--is-reference**: Marks this as the canonical likeness for character consistency
+- **--from-person**: Future images will use this likeness automatically
+- **Inspirations**: Still required - links person to real-world figures
 
 Note: Real historical figures (e.g., FDR, Stalin) who appear as themselves in Kempo don't need inspirations - they ARE the real person. Without ImageSubject, the admin UI shows "No linked images" even when the article displays an image. See [manage-person Step 7](../../EntityManagement/manage-person/skill.md) for details.
 
@@ -864,8 +874,20 @@ Run from project root:
 ```bash
 cd /path/to/Kempo
 
-# Generate portraits (Grok default)
-node scripts/generate-image.js "Photorealistic portrait..." --name "Name" --category portrait
+# Generate profile portrait with auto-linking (recommended)
+node scripts/generate-image.js "Photorealistic portrait..." \
+  --name "Name" \
+  --person-id "PERSON_ID" \
+  --purpose "profile" \
+  --is-reference \
+  --description "Portrait of Name, circa 1950"
+
+# Generate action shot with character consistency
+node scripts/generate-image.js "Name giving a speech at podium, 1950s" \
+  --name "Name Speech" \
+  --from-person "PERSON_ID" \
+  --purpose "action" \
+  --description "Name speaking at the 1950 convention"
 
 # Locations with text (Gemini)
 node scripts/generate-image.js "..." --name "Name" --category location --tool gemini
@@ -873,6 +895,13 @@ node scripts/generate-image.js "..." --name "Name" --category location --tool ge
 # Logos
 node scripts/generate-image.js "..." --name "Name" --category logo --style logo
 ```
+
+**New flags for character consistency:**
+- `--person-id "ID"` — Auto-creates ImageSubject link (skips Step 4)
+- `--is-reference` — Marks as canonical likeness for future consistency
+- `--from-person "ID"` — Uses person's reference image for likeness matching
+- `--purpose "type"` — Tags purpose: profile, action, event, scene
+- `--description "text"` — Human-readable caption
 
 #### Step 3: Link Images to Articles Programmatically
 

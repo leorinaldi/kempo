@@ -7,7 +7,7 @@ Complete lifecycle management for Person entities: database record, article, ima
 A fully managed Person in Kempo has:
 1. **Person record** — Database entry with structured fields
 2. **Article** — Kempopedia biography (linked via `articleId`)
-3. **Image** — Portrait photo (linked via `ImageSubject`)
+3. **Images** — Profile portrait + action shots (linked via `ImageSubject`)
 4. **Inspirations** — Real-world parallels (if applicable)
 5. **Relationships** — Connections to events, media, publications
 
@@ -43,11 +43,24 @@ Follow [article-person](../../Kempopedia/article-person/skill.md) to write the b
 - Timeline-worthy dates linked with `[[Date k.y.]]` syntax
 - Proper structure (Early life → Career → Personal life → Legacy)
 
-### Step 4: Generate the Image
+### Step 4: Generate the Profile Image
+
+Generate the primary profile image with auto-linking:
 
 ```bash
-node scripts/generate-image.js "<prompt>" --name "Person Name" --category "portrait"
+node scripts/generate-image.js "<prompt>" \
+  --name "Person Name" \
+  --person-id "PERSON_ID" \
+  --purpose "profile" \
+  --is-reference \
+  --description "Portrait of Person Name, circa 1950"
 ```
+
+**New Flags:**
+- `--person-id "ID"` — Auto-creates ImageSubject link (no manual step needed)
+- `--is-reference` — Marks as canonical likeness for character consistency
+- `--purpose "profile"` — Tags image purpose (profile, action, event, scene)
+- `--description "text"` — Human-readable caption for the image
 
 **Prompt formula:**
 ```
@@ -91,37 +104,24 @@ In the Person form:
 
 This creates the bidirectional link: Person ↔ Article
 
-### Step 7: Link the Image (REQUIRED)
+### Step 7: Link the Image (Auto or Manual)
 
-**CRITICAL:** This step is required for the admin UI to show linked images. Without an ImageSubject record, the person's manage page will show "No linked images" even if their article has an image in the infobox.
+**If you used `--person-id` flag:** The ImageSubject record was created automatically. Verify in admin that the person shows linked images.
+
+**If you didn't use `--person-id`:** Create the ImageSubject manually:
 
 The Image table links to Articles (via `articleId`), but the ImageSubject table links Images to Entities (Person, Organization, Place, etc.). Both are needed:
 - `Image.articleId` → Shows image in article
 - `ImageSubject` → Shows image in admin entity pages, enables entity-based queries
 
-**Option A: Via Admin UI**
-1. Go to `/admin/world-data/people/manage`
-2. Find the person and verify they show linked images
-3. If not, the ImageSubject needs to be created
-
-**Option B: Via Prisma (recommended)**
+**Via Prisma:**
 ```typescript
-// First, find the image that's linked to the person's article
-const person = await prisma.person.findUnique({
-  where: { id: personId },
-  include: { article: true }
-});
-
-const image = await prisma.image.findFirst({
-  where: { articleId: person.article.id }
-});
-
-// Create the ImageSubject link
 await prisma.imageSubject.create({
   data: {
-    imageId: image.id,
-    itemId: personId,
-    itemType: "person"
+    imageId: "image-id",
+    itemId: "person-id",
+    itemType: "person",
+    isReference: true  // Mark as canonical likeness
   }
 });
 ```
@@ -146,7 +146,53 @@ prisma.\$queryRaw\`
 "
 ```
 
-### Step 8: Add Inspirations
+### Step 8: Generate Additional Images (Optional)
+
+For significant people, generate action shots with character consistency:
+
+```bash
+# Uses the person's reference image automatically
+node scripts/generate-image.js "<action prompt>" \
+  --name "Person at Event" \
+  --from-person "PERSON_ID" \
+  --purpose "action" \
+  --description "Person Name giving a speech, 1950"
+```
+
+**Examples of action shots:**
+- Speaking at a podium
+- Performing on stage
+- Meeting with officials
+- In uniform (military, sports, etc.)
+- At significant locations
+
+The `--from-person` flag:
+1. Looks up the person's reference image (marked with `isReference=true`)
+2. Uses it for character consistency (auto-switches to Gemini)
+3. Auto-links the new image to the same person
+
+**Inline Images in Articles:**
+
+To show images in the article body (not just infobox), add to the article's `inlineImages` field:
+
+```json
+{
+  "inlineImages": [
+    {
+      "imageId": "generated-image-id",
+      "section": "Career",
+      "position": "right",
+      "caption": "Marshall speaking at the 1950 convention"
+    }
+  ]
+}
+```
+
+- `section`: The h2 heading text to place image after (or "intro" for before first h2)
+- `position`: "left", "right", or "center"
+- `caption`: Optional override of image description
+
+### Step 9: Add Inspirations (if applicable)
 
 If the person is based on real-world figures:
 
@@ -158,7 +204,7 @@ If the person is based on real-world figures:
 
 **Multiple inspirations:** Kempo uses compression (2-4 real → 1 Kempo), so add all relevant sources.
 
-### Step 9: Create Event Links (if applicable)
+### Step 10: Create Event Links (if applicable)
 
 For significant life events, create Event records:
 
@@ -184,13 +230,16 @@ await prisma.eventPerson.create({
 
 **Other events:** elections, inaugurations, deaths, major achievements
 
-### Step 10: Verify Completeness
+### Step 11: Verify Completeness
 
 Run through this checklist:
 
 - [ ] Person record exists with all relevant fields
 - [ ] Article exists and is linked via `articleId`
-- [ ] Image exists and is linked via `ImageSubject`
+- [ ] Profile image exists and is linked via `ImageSubject`
+- [ ] Profile image has `isReference: true` for character consistency
+- [ ] Additional action shots generated (for significant figures)
+- [ ] Inline images configured in article (if using action shots)
 - [ ] Inspirations recorded (if applicable)
 - [ ] Birth/death events created (for significant figures)
 - [ ] Article wikilinks all resolve (no dead links)

@@ -30,6 +30,15 @@ function isCuid(str: string): boolean {
   return /^c[a-z0-9]{20,}$/i.test(str)
 }
 
+export interface InlineImage {
+  imageId: string
+  url: string
+  alt: string
+  section: string // Which section to insert after (h2 heading text, or "intro" for before first h2)
+  position: 'left' | 'right' | 'center'
+  caption?: string
+}
+
 export interface Article {
   id: string
   frontmatter: ArticleFrontmatter
@@ -40,6 +49,7 @@ export interface Article {
     image?: { url: string; caption: string }
     fields: Record<string, unknown>
   }
+  inlineImages?: InlineImage[]
   media?: Array<{
     type: 'audio' | 'video'
     url: string
@@ -325,6 +335,15 @@ export async function getArticleBySlugOrId(
     .use(html, { sanitize: false })
     .process(processedContent)
 
+  // Fetch inline images
+  const inlineImagesConfig = (dbArticle as unknown as { inlineImages?: unknown }).inlineImages as Array<{
+    imageId: string
+    section: string
+    position: string
+    caption?: string
+  }> | null
+  const inlineImages = await fetchInlineImages(inlineImagesConfig)
+
   return {
     id: dbArticle.id,
     frontmatter: {
@@ -339,6 +358,7 @@ export async function getArticleBySlugOrId(
     content: processedContent,
     htmlContent: htmlResult.toString(),
     infobox: infoboxToUse as Article['infobox'],
+    inlineImages: inlineImages.length > 0 ? inlineImages : undefined,
     media: dbArticle.mediaRefs as Article['media'],
     timelineEvents: timelineEventsToUse as Article['timelineEvents'],
   }
@@ -381,6 +401,38 @@ export function kyDateToDate(kyDate: { month: number; year: number }): Date {
 }
 
 // Parse kempoDate string like "January 1, 1950 k.y." to Date
+// Fetch inline images for an article from the database
+async function fetchInlineImages(
+  inlineImagesConfig: Array<{ imageId: string; section: string; position: string; caption?: string }> | null | undefined
+): Promise<InlineImage[]> {
+  if (!inlineImagesConfig || inlineImagesConfig.length === 0) {
+    return []
+  }
+
+  const imageIds = inlineImagesConfig.map(img => img.imageId)
+  const images = await prisma.image.findMany({
+    where: { id: { in: imageIds } },
+    select: { id: true, url: true, description: true, altText: true, name: true },
+  })
+
+  const imageMap = new Map(images.map(img => [img.id, img]))
+
+  return inlineImagesConfig
+    .map(config => {
+      const image = imageMap.get(config.imageId)
+      if (!image) return null
+      return {
+        imageId: config.imageId,
+        url: image.url,
+        alt: image.altText || image.name || 'Image',
+        section: config.section,
+        position: config.position as 'left' | 'right' | 'center',
+        caption: config.caption || image.description || undefined,
+      }
+    })
+    .filter((img): img is InlineImage => img !== null)
+}
+
 function parseKempoDateString(kempoDate: string): Date | null {
   // Match patterns like "January 1, 1950 k.y." or "January 1950 k.y."
   const fullMatch = kempoDate.match(/(\w+)\s+(\d+),?\s+(\d+)\s*k\.y\./i)

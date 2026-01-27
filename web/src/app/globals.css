@@ -133,3 +133,43 @@ body {
   cursor: pointer;
   border: none;
 }
+
+/* Inline Article Images - Wiki-style */
+.article-image {
+  @apply border border-wiki-border bg-wiki-infobox text-sm mb-4;
+  display: table;
+  padding: 4px;
+}
+
+.article-image-right {
+  @apply float-right clear-right ml-4 mr-0;
+}
+
+.article-image-left {
+  @apply float-left clear-left mr-4 ml-0;
+}
+
+.article-image-center {
+  @apply mx-auto float-none clear-both;
+}
+
+/* Mobile: stack images, don't float */
+@media (max-width: 639px) {
+  .article-image-left,
+  .article-image-right {
+    @apply float-none mx-auto mb-4;
+  }
+}
+
+.article-image-link {
+  display: block;
+}
+
+.article-image-img {
+  @apply max-w-full h-auto block;
+}
+
+.article-image-caption {
+  @apply text-center text-xs text-gray-600 pt-2;
+  max-width: 100%;
+}

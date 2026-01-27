@@ -107,12 +107,13 @@ model Image {
   id          String    @id @default(cuid())
   name        String                         // e.g. "Clay Marshall portrait"
   url         String    @db.Text             // Vercel Blob URL
-  description String?   @db.Text             // Caption
+  description String?   @db.Text             // Caption/description (human-readable, not generation prompt)
   altText     String?   @map("alt_text")     // Accessibility text
   width       Int?                           // Pixel width (auto-detected)
   height      Int?                           // Pixel height (auto-detected)
   shape       String?                        // "portrait" | "landscape" | "square"
   category    String?                        // "portrait", "location", "product", "logo", etc.
+  purpose     String?                        // "profile" | "action" | "event" | "scene"
   articleId   String?   @map("article_id")   // Associated Kempopedia article
   article     Article?  @relation(fields: [articleId], references: [id], onDelete: SetNull)
   kyDate      DateTime? @map("ky_date")      // When "taken" in Kempo world
@@ -137,12 +138,13 @@ model Image {
 }
 
 model ImageSubject {
-  id        String   @id @default(cuid())
-  imageId   String   @map("image_id")
-  image     Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
-  itemId    String   @map("item_id")    // ID of the person, place, etc.
-  itemType  String   @map("item_type")  // "person", "place", etc.
-  createdAt DateTime @default(now()) @map("created_at")
+  id          String   @id @default(cuid())
+  imageId     String   @map("image_id")
+  image       Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  itemId      String   @map("item_id")    // ID of the person, place, etc.
+  itemType    String   @map("item_type")  // "person", "place", etc.
+  isReference Boolean  @default(false) @map("is_reference")  // Canonical likeness for character consistency
+  createdAt   DateTime @default(now()) @map("created_at")
 
   @@unique([imageId, itemId, itemType])
   @@index([itemId, itemType])
@@ -739,6 +741,7 @@ model Article {
   // Content
   content            String     @db.Text // markdown body
   infobox            Json?      // structured infobox data
+  inlineImages       Json?      @map("inline_images") // array of {imageId, section, position, caption}
   timelineEvents     Json?      @map("timeline_events") // array of {date, headline, description}
   mediaRefs          Json?      @map("media_refs") // array of audio/video references
 

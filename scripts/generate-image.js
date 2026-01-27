@@ -11,15 +11,26 @@
  *
  * Options:
  *   --name "Image name"      Name for the image (required)
- *   --caption "Caption"      Image caption/description
+ *   --description "Desc"     Human-readable description/caption for the image
+ *   --caption "Caption"      Alias for --description
  *   --category "portrait"    Category (portrait, location, product, logo, etc.)
+ *   --purpose "profile"      Purpose: profile, action, event, scene
  *   --style "realistic"      Style (realistic, comic_bw, logo, product) - default: realistic
  *   --tool "grok"            Generation tool: grok (default) or gemini
  *   --article-id "abc123"    Link to article ID
+ *   --reference "url"        Reference image URL for character consistency (Gemini only)
+ *
+ * Entity Linking:
+ *   --person-id "abc123"     Link image to a Person (creates ImageSubject)
+ *   --org-id "abc123"        Link image to an Organization
+ *   --place-id "abc123"      Link image to a Place
+ *   --is-reference           Mark this image as the canonical likeness for character consistency
+ *   --from-person "abc123"   Look up person's reference image and use it for character consistency
  *
  * Examples:
- *   node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man, 1940s" --name "Harold Kellman"
+ *   node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man, 1940s" --name "Harold Kellman" --person-id "abc123" --is-reference
  *   node scripts/generate-image.js "Photorealistic Western town main street, 1940s" --name "Abilene" --category "location" --tool gemini
+ *   node scripts/generate-image.js "Clay Marshall giving a speech" --name "Marshall Speech" --from-person "abc123" --purpose "action"
  *
  * Environment:
  *   XAI_API_KEY              Grok API key (in .env)
@@ -66,11 +77,19 @@ function parseArgs(args) {
   const result = {
     prompt: null,
     name: null,
-    caption: null,
+    description: null,
     category: null,
+    purpose: null,
     articleId: null,
     style: 'realistic', // Default to realistic for new images
     tool: 'grok', // Default to grok
+    reference: null, // Reference image URL for character consistency
+    // Entity linking
+    personId: null,
+    orgId: null,
+    placeId: null,
+    isReference: false,
+    fromPerson: null, // Person ID to look up reference image from
   }
 
   let i = 0
@@ -79,16 +98,30 @@ function parseArgs(args) {
 
     if (arg === '--name' && args[i + 1]) {
       result.name = args[++i]
-    } else if (arg === '--caption' && args[i + 1]) {
-      result.caption = args[++i]
+    } else if ((arg === '--description' || arg === '--caption') && args[i + 1]) {
+      result.description = args[++i]
     } else if (arg === '--category' && args[i + 1]) {
       result.category = args[++i]
+    } else if (arg === '--purpose' && args[i + 1]) {
+      result.purpose = args[++i]
     } else if (arg === '--article-id' && args[i + 1]) {
       result.articleId = args[++i]
     } else if (arg === '--style' && args[i + 1]) {
       result.style = args[++i]
     } else if (arg === '--tool' && args[i + 1]) {
       result.tool = args[++i].toLowerCase()
+    } else if (arg === '--reference' && args[i + 1]) {
+      result.reference = args[++i]
+    } else if (arg === '--person-id' && args[i + 1]) {
+      result.personId = args[++i]
+    } else if (arg === '--org-id' && args[i + 1]) {
+      result.orgId = args[++i]
+    } else if (arg === '--place-id' && args[i + 1]) {
+      result.placeId = args[++i]
+    } else if (arg === '--is-reference') {
+      result.isReference = true
+    } else if (arg === '--from-person' && args[i + 1]) {
+      result.fromPerson = args[++i]
     } else if (!arg.startsWith('--') && !result.prompt) {
       result.prompt = arg
     }
@@ -133,13 +166,55 @@ async function generateImageWithGrok(prompt) {
 }
 
 /**
- * Call the Google Gemini API to generate an image
+ * Fetch an image from URL and return as base64
  */
-async function generateImageWithGemini(prompt) {
-  console.log('\n🎨 Generating image with Gemini API...')
+async function fetchImageAsBase64(url) {
+  console.log('📥 Fetching reference image...')
+
+  const response = await fetch(url)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch reference image: ${response.status}`)
+  }
+
+  const buffer = Buffer.from(await response.arrayBuffer())
+  const base64 = buffer.toString('base64')
+
+  // Determine mime type from URL or content-type header
+  const contentType = response.headers.get('content-type') || 'image/jpeg'
+  const mimeType = contentType.split(';')[0].trim()
+
+  return { base64, mimeType }
+}
+
+/**
+ * Call the Google Gemini API to generate an image
+ * Uses gemini-3-pro-image-preview for reference images (character consistency)
+ * Uses gemini-2.0-flash-exp for standard generation
+ */
+async function generateImageWithGemini(prompt, referenceImageUrl = null) {
+  // Use the pro model for reference images, flash for standard generation
+  const model = referenceImageUrl ? 'gemini-3-pro-image-preview' : 'gemini-2.0-flash-exp'
+
+  console.log(`\n🎨 Generating image with Gemini API (${model})...`)
+  if (referenceImageUrl) {
+    console.log('📎 Using reference image for character consistency')
+  }
+
+  // Build the parts array - text prompt first, then reference image if provided
+  const parts = [{ text: prompt }]
+
+  if (referenceImageUrl) {
+    const refImage = await fetchImageAsBase64(referenceImageUrl)
+    parts.push({
+      inlineData: {
+        mimeType: refImage.mimeType,
+        data: refImage.base64
+      }
+    })
+  }
 
   const response = await fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
+    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
     {
       method: 'POST',
       headers: {
@@ -147,7 +222,7 @@ async function generateImageWithGemini(prompt) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
+        contents: [{ parts }],
         generationConfig: {
           responseModalities: ['TEXT', 'IMAGE']
         }
@@ -172,7 +247,7 @@ async function generateImageWithGemini(prompt) {
         return {
           base64: part.inlineData.data,
           mimeType: part.inlineData.mimeType,
-          tool: 'gemini-2.0-flash-exp'
+          tool: model
         }
       }
     }
@@ -184,11 +259,16 @@ async function generateImageWithGemini(prompt) {
 /**
  * Generate image using specified tool
  */
-async function generateImage(prompt, tool) {
+async function generateImage(prompt, tool, referenceUrl = null) {
   console.log('\n📝 Prompt:', prompt.substring(0, 100) + (prompt.length > 100 ? '...' : ''))
 
+  if (referenceUrl && tool !== 'gemini') {
+    console.log('⚠️  Reference images only supported with Gemini, switching to gemini tool')
+    tool = 'gemini'
+  }
+
   if (tool === 'gemini') {
-    return generateImageWithGemini(prompt)
+    return generateImageWithGemini(prompt, referenceUrl)
   } else {
     return generateImageWithGrok(prompt)
   }
@@ -229,6 +309,108 @@ function getShapeFromDimensions(width, height) {
 }
 
 /**
+ * Look up a person's reference image URL
+ */
+async function getPersonReferenceImage(personId) {
+  const { PrismaClient } = await import('../web/node_modules/@prisma/client/index.js')
+  const prisma = new PrismaClient()
+
+  try {
+    // Find the reference image for this person
+    const imageSubject = await prisma.imageSubject.findFirst({
+      where: {
+        itemId: personId,
+        itemType: 'person',
+        isReference: true,
+      },
+      include: {
+        image: true,
+      },
+    })
+
+    if (imageSubject?.image?.url) {
+      console.log(`📎 Found reference image for person: ${imageSubject.image.name}`)
+      return imageSubject.image.url
+    }
+
+    // If no reference image, try to find any image for this person
+    const anyImage = await prisma.imageSubject.findFirst({
+      where: {
+        itemId: personId,
+        itemType: 'person',
+      },
+      include: {
+        image: true,
+      },
+      orderBy: {
+        createdAt: 'asc', // Oldest first (likely the original profile)
+      },
+    })
+
+    if (anyImage?.image?.url) {
+      console.log(`📎 Using earliest image for person (no reference marked): ${anyImage.image.name}`)
+      return anyImage.image.url
+    }
+
+    console.log(`⚠️  No existing images found for person ${personId}`)
+    return null
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
+/**
+ * Create ImageSubject links for the generated image
+ */
+async function createImageSubjects(prisma, imageId, options) {
+  const subjects = []
+
+  if (options.personId) {
+    // Auto-set isReference for profile images
+    const isRef = options.isReference || options.purpose === 'profile'
+    subjects.push({
+      imageId,
+      itemId: options.personId,
+      itemType: 'person',
+      isReference: isRef,
+    })
+  }
+
+  if (options.orgId) {
+    subjects.push({
+      imageId,
+      itemId: options.orgId,
+      itemType: 'organization',
+      isReference: false,
+    })
+  }
+
+  if (options.placeId) {
+    subjects.push({
+      imageId,
+      itemId: options.placeId,
+      itemType: 'place',
+      isReference: false,
+    })
+  }
+
+  // If --from-person was used, also link to that person
+  if (options.fromPerson && options.fromPerson !== options.personId) {
+    subjects.push({
+      imageId,
+      itemId: options.fromPerson,
+      itemType: 'person',
+      isReference: false,
+    })
+  }
+
+  for (const subject of subjects) {
+    await prisma.imageSubject.create({ data: subject })
+    console.log(`   🔗 Linked to ${subject.itemType}: ${subject.itemId}${subject.isReference ? ' (reference)' : ''}`)
+  }
+}
+
+/**
  * Upload to Vercel Blob and create database record
  */
 async function uploadToBlob(imageBuffer, options) {
@@ -246,9 +428,10 @@ async function uploadToBlob(imageBuffer, options) {
       data: {
         name: options.name,
         url: "", // Temporary, will be updated after blob upload
-        description: options.caption || null,
-        altText: options.caption || null,
+        description: options.description || null,
+        altText: options.description || options.name,
         category: options.category || null,
+        purpose: options.purpose || null,
         articleId: options.articleId || null,
         prompt: options.prompt || null,
         generationTool: options.generationTool || 'grok-2-image-1212',
@@ -276,6 +459,11 @@ async function uploadToBlob(imageBuffer, options) {
     console.log(`   ID: ${image.id}`)
     console.log(`   URL: ${blob.url}`)
 
+    // Create ImageSubject links if any entity IDs were provided
+    if (options.personId || options.orgId || options.placeId || options.fromPerson) {
+      await createImageSubjects(prisma, image.id, options)
+    }
+
     return {
       id: image.id,
       url: blob.url,
@@ -296,30 +484,67 @@ Usage:
   node scripts/generate-image.js "<prompt>" --name "Image Name" [options]
 
 Arguments:
-  prompt              The image generation prompt (required)
+  prompt                The image generation prompt (required)
 
 Options:
-  --name "Name"       Name for the image (required)
-  --caption "Text"    Image caption/description
-  --category "type"   Category: portrait, location, product, logo, etc.
-  --style "style"     Style: realistic (default), comic_bw, logo, product
-  --tool "grok"       Generation tool: grok (default) or gemini
-  --article-id "id"   Link to an article ID
+  --name "Name"         Name for the image (required)
+  --description "Text"  Human-readable description/caption for the image
+  --caption "Text"      Alias for --description
+  --category "type"     Category: portrait, location, product, logo, etc.
+  --purpose "type"      Purpose: profile, action, event, scene
+  --style "style"       Style: realistic (default), comic_bw, logo, product
+  --tool "grok"         Generation tool: grok (default) or gemini
+  --article-id "id"     Link to an article ID
+  --reference "url"     Reference image URL for character consistency (Gemini only)
+
+Entity Linking:
+  --person-id "id"      Link image to a Person (creates ImageSubject record)
+  --org-id "id"         Link image to an Organization
+  --place-id "id"       Link image to a Place
+  --is-reference        Mark this image as the canonical likeness for the person
+  --from-person "id"    Look up person's reference image and use for consistency
 
 Tools:
-  grok                Grok API (grok-2-image-1212) - default
-  gemini              Google Gemini API (gemini-2.0-flash-exp)
+  grok                  Grok API (grok-2-image-1212) - default
+  gemini                Google Gemini API (gemini-2.0-flash-exp or gemini-3-pro-image-preview with --reference)
+
+Purposes:
+  profile               Standard portrait/headshot for infobox (auto-sets isReference)
+  action                Person doing something (speaking, performing, etc.)
+  event                 Image from a specific event
+  scene                 Scene or location shot
 
 Styles:
-  realistic           Photorealistic images (default for new images)
-  comic_bw            Black and white comic book style (legacy)
-  logo                Flags, emblems, logos
-  product             Consumer goods, vehicles
+  realistic             Photorealistic images (default for new images)
+  comic_bw              Black and white comic book style (legacy)
+  logo                  Flags, emblems, logos
+  product               Consumer goods, vehicles
+
+Character Consistency:
+  Option 1: --reference "url"
+    Pass a reference image URL directly. Uses Gemini 3 Pro model.
+
+  Option 2: --from-person "id"
+    Look up the person's reference image automatically. If the person has
+    an image marked as isReference=true, that image is used. Otherwise,
+    their earliest image is used. Auto-switches to Gemini.
 
 Examples:
-  node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man, 1940s photography style" --name "Harold Kellman"
+  # Basic portrait with entity linking
+  node scripts/generate-image.js "Photorealistic portrait of a 50-year-old man" \\
+    --name "Harold Kellman" --person-id "abc123" --purpose "profile" --is-reference
 
-  node scripts/generate-image.js "Photorealistic photograph of a Western town main street, 1940s" --name "Abilene" --category "location" --tool gemini
+  # Action shot with character consistency from existing person
+  node scripts/generate-image.js "Clay Marshall giving a speech at a podium, 1950s" \\
+    --name "Marshall Speech" --from-person "abc123" --purpose "action"
+
+  # Location image
+  node scripts/generate-image.js "Western town main street, 1940s" \\
+    --name "Abilene" --category "location" --place-id "xyz789" --tool gemini
+
+  # Direct reference URL
+  node scripts/generate-image.js "General Westbrook in military uniform" \\
+    --name "Westbrook Portrait" --reference "https://..." --tool gemini
 
 Environment variables (from .env files):
   XAI_API_KEY           Grok API key
@@ -387,8 +612,25 @@ async function main() {
   }
 
   try {
+    // Handle --from-person: look up reference image from person
+    let referenceUrl = options.reference
+    if (options.fromPerson && !referenceUrl) {
+      referenceUrl = await getPersonReferenceImage(options.fromPerson)
+      if (referenceUrl) {
+        // Auto-switch to gemini for character consistency
+        if (options.tool !== 'gemini') {
+          console.log('⚙️  Switching to Gemini for character consistency')
+          options.tool = 'gemini'
+        }
+        // Also link the new image to this person if --person-id not already set
+        if (!options.personId) {
+          options.personId = options.fromPerson
+        }
+      }
+    }
+
     // Generate image
-    const genResult = await generateImage(options.prompt, options.tool)
+    const genResult = await generateImage(options.prompt, options.tool, referenceUrl)
     console.log('🖼️  Image generated!')
 
     // Get image buffer (from URL or base64)
@@ -414,11 +656,14 @@ async function main() {
 
 "image": {
   "url": "${result.url}",
-  "caption": "${options.caption || options.name}"
+  "caption": "${options.description || options.name}"
 }
 
 🔗 Admin: /admin/world-data/image/manage (to edit or link to subjects)
-`)
+${options.personId || options.fromPerson ? `
+💡 For character consistency in future images:
+   node scripts/generate-image.js "<prompt>" --from-person "${options.personId || options.fromPerson}" --name "..."
+` : ''}`)
   } catch (error) {
     console.error('❌ Error:', error.message)
     process.exit(1)
